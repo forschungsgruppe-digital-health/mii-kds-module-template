@@ -1,0 +1,10 @@
+# Code owners are automatically requested for review on every pull request.
+# Why a catch-all: the repo is small; one default owner keeps reviews simple
+# until the structure (input/, scripts/, .github/workflows/) justifies
+# per-path owners.
+* @msusky
+
+# TODO(human): should ownership move to a GitHub team (e.g.
+# @forschungsgruppe-digital-health/<team-name>) instead of the individual
+# @msusky? A team survives personnel changes and vacations; an individual
+# owner blocks reviews when unavailable. If yes, which team?
