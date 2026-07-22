@@ -1,0 +1,18 @@
+<!-- MII branding override for the fhir2.base.template footer fragment.
+     Unlike header/css, the base footer fragment is NOT an empty placeholder: it
+     renders "Links: Table of Contents | QA Report [| feedback dashboards]".
+     This override preserves that base content byte-for-byte (first three lines
+     below, copied from fhir2.base.template@4c20cf6 includes/fragment-footer.html)
+     and only APPENDS the MII links. It is included inside
+     <span style="color: var(--footer-highlight-text-color)"> in fragment-pageend.html.
+     Gate B - derived suggestion. TODO(human): confirm or replace logo + palette before any release.
+     Language handling: link labels are bare URLs (language-neutral); only the
+     imprint TARGET switches on include.lang, because the MII website has separate
+     German (/de/impressum) and English (/en/legal-notice) imprint pages
+     (both verified HTTP 200 on 2026-07-22). -->
+          {{site.data.stringsBase[include.lang]['Links']}}: <a style="color: var(--footer-hyperlink-text-color)" href="{{site.data.info.assets}}toc.html">{{site.data.stringsBase[include.lang]['TableOfContents']}}</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" href="../qa.html">{{site.data.stringsBase[include.lang]['QAReport']}}</a>
+                 {% for feedbacklink in site.data.features.feedback %}{% if feedbacklink.dashboard %} | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="{{feedbacklink.dashboard.url}}">{{feedbacklink.dashboard.label}}</a>{% endif %}{% endfor %}
+{% if include.lang == 'de' %}{% assign miiimprint = 'https://www.medizininformatik-initiative.de/de/impressum' %}{% else %}{% assign miiimprint = 'https://www.medizininformatik-initiative.de/en/legal-notice' %}{% endif %}
+                 | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="https://www.medizininformatik-initiative.de/">medizininformatik-initiative.de</a>
+                 | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="{{miiimprint}}">{{ miiimprint | remove: 'https://www.' }}</a>
