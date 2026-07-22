@@ -36,15 +36,15 @@ updates:
       day: monday
     target-branch: dev
 
-  # Dev container base image. The .devcontainer/ directory is added by a
-  # parallel task; until it exists, Dependabot reports a non-fatal
-  # "directory not found" error for this entry in the Dependabot logs and
-  # continues with the other entries — safe to ship ahead of the directory.
-  # Note: the docker ecosystem reads Dockerfiles; if the dev container is
-  # defined image-only in devcontainer.json (no Dockerfile), switch this
-  # entry to `package-ecosystem: devcontainers` instead.
-  - package-ecosystem: docker
-    directory: "/.devcontainer"
+  # Dev container (.devcontainer/devcontainer.json). It is image-only — no
+  # Dockerfile — so the `docker` ecosystem (which reads Dockerfiles) would
+  # find nothing; the `devcontainers` ecosystem is the right one. It updates
+  # the pinned FEATURE versions in devcontainer.json. It does NOT bump the
+  # digest-pinned base image or the tool pins in postCreateCommand — those
+  # are bumped manually; the weekly base-image security scan (layer C) is
+  # the signal. See docs/MAINTENANCE.md.
+  - package-ecosystem: devcontainers
+    directory: "/"
     schedule:
       interval: weekly
       day: monday

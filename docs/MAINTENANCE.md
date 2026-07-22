@@ -21,9 +21,9 @@ reports the module's drift without any adaptation.
 
 | Layer | What it watches | When | Where results land | Switch |
 |---|---|---|---|---|
-| **A — Dependabot** (`.github/dependabot.yml`) | GitHub Actions pins; a root npm manifest (when present); dev container Docker image | weekly, Monday | update PRs targeting `dev`; Dependabot alerts under **Security → Dependabot** | config-file presence + repo Dependabot settings (no `vars.*` toggle — Dependabot is not a gated job) |
+| **A — Dependabot** (`.github/dependabot.yml`) | GitHub Actions pins; a root npm manifest (when present); dev container **feature** versions (`devcontainers` ecosystem — the dev container is image-only, so there is no Dockerfile for the `docker` ecosystem to read) | weekly, Monday | update PRs targeting `dev`; Dependabot alerts under **Security → Dependabot** | config-file presence + repo Dependabot settings (no `vars.*` toggle — Dependabot is not a gated job) |
 | **B — Version checker** (`.github/workflows/dependency-check.yml` + `scripts/check-updates.mjs`) | `de.medizininformatikinitiative.template` (from `ig.ini`), `fhir2.base.template` (transitive; local only when vendored), IG Publisher, SUSHI, Jekyll (from the build workflow env), the FHIR package dependencies (from `sushi-config.yaml`) | Monday 06:00 UTC + manual dispatch | one continuously-updated tracking issue **"Dependency status \<YYYYWww\>"** (label `dependencies`) + a `drift-report` workflow artifact | `vars.ENABLE_DEPENDENCY_CHECK` (ON by default) |
-| **C — Security scan** (`.github/workflows/security-scan.yml`) | known vulnerabilities (OSV database), misconfigurations, committed secrets — via OSV-Scanner + Trivy `fs` (dev-container image scan ready as a commented job) | Monday 07:00 UTC + every PR to `dev` + manual dispatch | **Security → Code scanning** (SARIF categories `osv-scanner`, `trivy-fs`) | `vars.ENABLE_SECURITY_SCAN` (ON by default) |
+| **C — Security scan** (`.github/workflows/security-scan.yml`) | known vulnerabilities (OSV database), misconfigurations, committed secrets — via OSV-Scanner + Trivy `fs`; plus Trivy `image` over the dev container's digest-pinned base image (OS/base-image vulnerabilities the other scans miss) | Monday 07:00 UTC + every PR to `dev` + manual dispatch | **Security → Code scanning** (SARIF categories `osv-scanner`, `trivy-fs`, `trivy-image`) | `vars.ENABLE_SECURITY_SCAN` (ON by default) |
 
 A disabled workflow still triggers but its jobs show as **skipped** — that is
 expected, not an error.
@@ -40,6 +40,7 @@ in sync:
 | FHIR package dependencies (`de.basisprofil.r4`, `de.medizininformatikinitiative.kerndatensatz.meta`, `hl7.fhir.uv.crmi`, `hl7.fhir.uv.xver-r5.r4`, …) | `sushi-config.yaml` → `dependencies:` block |
 | IG Publisher / SUSHI / Jekyll | `env:` values (`PUBLISHER_VERSION`, `SUSHI_VERSION`, `JEKYLL_VERSION`) in the CI build workflow |
 | GitHub Actions | commit-SHA pins in `.github/workflows/*.yml` (with `# vX.Y.Z` comments) |
+| Dev container (base-image digest, feature versions, SUSHI/Jekyll installs) | `.devcontainer/devcontainer.json` — features come as Dependabot PRs; the image digest and the `postCreateCommand` tool pins are bumped manually |
 
 Until a pin's file lands, the tracking issue shows a `pin not found` row — a
 reminder, not an error. Two more expected row states:
@@ -69,6 +70,17 @@ staying on the latest reviewed release is the only systematic mitigation.
 A green Security tab therefore does *not* mean "the FHIR toolchain is known
 to be safe" — it means "no known vulnerability in the scannable ecosystems".
 This limit applies equally to every module created from this template.
+
+Two further dev-container limits, stated plainly:
+
+- The `trivy-image` job scans the **pinned base image**, not a fully built dev
+  container: feature layers and the `postCreateCommand` installs (SUSHI,
+  Jekyll) are not in the scanned image. Their manifests are covered by the
+  fs/OSV scans and layer B.
+- **Nothing auto-bumps the base-image digest.** Dependabot's `devcontainers`
+  ecosystem updates feature versions only. A `trivy-image` finding against the
+  base image is the signal to bump the digest manually (resolve the new digest
+  for the tag, update `devcontainer.json`, PR to `dev`).
 
 ## Ground rules
 
