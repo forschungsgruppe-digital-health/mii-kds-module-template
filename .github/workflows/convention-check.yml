@@ -1,0 +1,86 @@
+# =============================================================================
+# convention-check.yml — THE single convention checker (spec §2.7 / §4.2)
+#
+# Purpose:   Runs the hard MII KDS module-metadata contract mechanically
+#            (packageId / id / name / title / canonical / CalVer version / no
+#            floating pins — Section 1 of
+#            skills/wiki-consistency-check/references/check-matrix.md) via
+#            tools/convention-check.mjs, and runs that checker's own unit tests.
+#            This is the ONLY metadata linter — do not add a second one. The
+#            advisory wiki-drift findings (Section 2 of the check matrix) are a
+#            human/agent job via the wiki-consistency-check skill and are never
+#            failed here.
+#
+# Triggers:  push + pull_request to dev / main / release/** ; workflow_dispatch.
+#
+# Toggle:    vars.ENABLE_CONVENTION_CHECK — ON by default; set the repository
+#            variable to 'false' to make the job skip without editing YAML
+#            (§2.13). A skipped job is expected, not an error.
+#
+# Placeholder-aware, branch-sensitive severity:
+#   - On normal branches (dev, feature/*), a {{PLACEHOLDER}} value is treated
+#     as "parameterized — pattern checked" and PASSES. This keeps THIS template
+#     scaffold (whose sushi-config is all placeholders) green.
+#   - On a release branch (release/**), or via workflow_dispatch strict=true,
+#     the check runs in --release mode: an unresolved {{PLACEHOLDER}} is a
+#     FAILURE — a module must not release with placeholders. The template repo
+#     never has a release/** branch, so it is never checked strictly.
+#
+# Human-gated steps: none. This job only reports; it fixes nothing.
+# =============================================================================
+name: convention-check
+
+on:
+  push:
+    branches: [dev, main, "release/**"]
+  pull_request:
+    branches: [dev, main, "release/**"]
+  workflow_dispatch:
+    inputs:
+      strict:
+        description: "Run in release (strict) mode: unresolved placeholders fail"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  convention-check:
+    if: ${{ vars.ENABLE_CONVENTION_CHECK != 'false' }} # toggle: ON by default (§2.13)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
+
+      - name: Test the convention checker
+        run: node --test tools/convention-check.test.mjs
+
+      - name: Decide strict (release) mode
+        id: mode
+        shell: bash
+        env:
+          REF: ${{ github.ref }}
+          HEAD_REF: ${{ github.head_ref }}
+          DISPATCH_STRICT: ${{ github.event.inputs.strict }}
+        run: |
+          set -euo pipefail
+          strict=""
+          if [[ "${REF}" == refs/heads/release/* ]] \
+            || [[ "${HEAD_REF}" == release/* ]] \
+            || [[ "${DISPATCH_STRICT}" == "true" ]]; then
+            strict="--release"
+            echo "Release branch or strict dispatch → hard-failing on unresolved placeholders."
+          else
+            echo "Non-release branch → placeholders are accepted as parameterized."
+          fi
+          echo "strict=${strict}" >> "${GITHUB_OUTPUT}"
+
+      - name: Run the module-metadata contract check
+        run: node tools/convention-check.mjs ${{ steps.mode.outputs.strict }}
