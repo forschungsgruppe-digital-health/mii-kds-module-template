@@ -1,0 +1,379 @@
+# IG build + GitHub Pages branch preview (§2.8, Appendix A.9).
+#
+# Purpose:   On every push to a non-release branch, run SUSHI + the HL7 IG
+#            Publisher and deploy the rendered IG to the gh-pages branch under
+#            branches/<branch>/, so a reviewer sees the real result without a
+#            local build. The site ROOT and version-like paths stay reserved
+#            for the formal -go-publish output (go-publish.yml); a preview never
+#            overwrites them. A stale-preview sweeper (cleanup-gh-pages.yml)
+#            removes previews of deleted branches (keyed on the .branch-name
+#            marker each preview drops here).
+#
+# PROPAGATION (§2.8): this workflow — unlike Release Please — is MEANT to
+#            propagate to modules created from this template. A module maintainer
+#            wants dev/feature previews too, and kerndatensatz-basis proves
+#            modules use exactly this model. The first-run bootstrap KEEPS this
+#            file (and cleanup-gh-pages.yml); it strips only the template's own
+#            release automation.
+#
+# Triggers:  push to every branch except main / gh-pages / fsh-generated, plus
+#            manual workflow_dispatch (rebuild one branch's preview). main and
+#            tags are reserved for formal publication and are NOT previewed here.
+#
+# Toggle:    vars.ENABLE_PREVIEW (§2.13) — ON by default. Set the repo variable
+#            to 'false' to skip the whole workflow (jobs show as "skipped", not
+#            failed).
+#
+# Pages two modes (vars.PAGES_ACTIONS_ENABLED):
+#            - unset / not 'true' (default): the preview is served by "Deploy
+#              from a branch → gh-pages" (Settings → Pages). This workflow only
+#              git-pushes the output to gh-pages/branches/<branch>/.
+#            - 'true': additionally upload the whole gh-pages tree as a Pages
+#              artifact and run the deploy job (Settings → Pages → GitHub
+#              Actions). Set PAGES_ACTIONS_ENABLED=true ONLY after switching
+#              Settings → Pages to "GitHub Actions" (mirrors go-publish.yml).
+#
+# Terminology (§2.10): the IG Publisher build prefers the MII terminology server
+#            (SU-TermServ) through a client-certificate nginx proxy when the repo
+#            secrets SU_TERMSERV_CLIENT_CERT / _KEY / _CERT_PASSWORD are set, and
+#            otherwise falls back to the public HL7 server https://tx.fhir.org
+#            with a ::notice. The build must not hard-fail without the cert;
+#            some MII-specific value sets may then not fully expand (a QA note).
+#
+# TEMPLATE-REPO SELF-CHECK (this repo only — a created module skips it):
+#            sushi-config.yaml here still carries {{PLACEHOLDER}} values and
+#            ig.ini still carries the B3 TODO template line, so the repo is not
+#            buildable as-is. The "Template-repo self-check substitution" step is
+#            gated to github.repository == the template repo and, in a WORKSPACE
+#            COPY that is NEVER committed, sed-substitutes documented demo values
+#            (MODULE_SLUG=demo, …) into sushi-config.yaml and MODULE_SLUG into
+#            ig.ini so a real build can run. While ig.ini's template line is
+#            still the B3 TODO placeholder the build DEGRADES to a SUSHI-only
+#            check with a clear ::notice (no IG Publisher, no preview deploy).
+#            Once B3 wires a buildable template into ig.ini, the full build +
+#            preview run automatically — no change to this file. In a created
+#            module every placeholder is already replaced and this whole step is
+#            a no-op (it never runs, the repo name differs).
+#
+# Fixed versions (§0.2): every Action is pinned to a commit SHA (# vX.Y.Z); the
+#            IG Publisher jar (2.2.11) and SUSHI (3.20.0) are pinned to the exact
+#            versions go-publish.yml uses, the jar additionally by SHA-256. The
+#            scheduled dependency check proposes bumps.
+#
+# Human-gated: none. PAGES_ACTIONS_ENABLED is the only extra authorization and
+#            it gates the Actions-based Pages deploy path, not the preview build.
+name: IG build and preview
+
+on:
+  push:
+    branches:
+      - "**"
+      - "!main"
+      - "!gh-pages"
+      - "!fsh-generated"
+  workflow_dispatch:
+
+permissions:
+  contents: write # push previews to the gh-pages branch
+  pages: write # PAGES_ACTIONS_ENABLED deploy path
+  id-token: write # deploy-pages OIDC
+  pull-requests: write # upsert the preview-URL PR comment
+  issues: write # PR comments go through the issues API
+
+concurrency:
+  # Serialize every writer of the gh-pages branch (previews, cleanup, and the
+  # formal go-publish share this group) so they never race. Queue, never cancel.
+  group: gh-pages-writes
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: ${{ vars.ENABLE_PREVIEW != 'false' }} # toggle: ON by default (§2.13)
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    outputs:
+      mode: ${{ steps.build.outputs.mode }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+
+      - name: Template-repo self-check substitution (workspace only, never committed)
+        if: ${{ github.repository == 'forschungsgruppe-digital-health/mii-kds-module-template' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          # WHY: this repo ships {{PLACEHOLDER}} values so a module author starts
+          # from a documented scaffold. To let CI still prove the pipeline builds,
+          # substitute the documented demo values into WORKSPACE copies only. The
+          # workflow never commits source, so nothing here reaches the repo. In a
+          # created module the placeholders are gone and this step does not run.
+          subst() { # $1=file  (stdin: KEY|VALUE lines)
+            local file="$1" key val esc
+            while IFS='|' read -r key val; do
+              [ -z "${key}" ] && continue
+              esc="$(printf '%s' "${val}" | sed -e 's/[&/\]/\\&/g')"
+              sed -i "s/{{${key}}}/${esc}/g" "${file}"
+            done
+          }
+          # Demo values are derived from the placeholder table B2 documented at the
+          # top of sushi-config.yaml. MODULE_SLUG=demo drives id/packageId/canonical.
+          subst sushi-config.yaml <<'PLACEHOLDERS'
+          MODULE_SLUG|demo
+          MODULE_NAME|Demo
+          MODULE_TITLE|Demo Module
+          MODULE_DESCRIPTION|Demo module used only to CI-validate this template repository; replace every value when creating a real module.
+          CALVER_VERSION|2026.0.0
+          CALVER_YEAR|2026
+          RELEASE_DATE|2026-01-01
+          COPYRIGHT_START_YEAR|2026
+          APPROVAL_DATE|2026-01-01
+          MODULE_AUTHOR_EMAIL|noreply@example.org
+          TOPIC_NCI_CODE|C15607
+          PLACEHOLDERS
+          # ig.ini's `ig =` line references ImplementationGuide-mii-ig-{{MODULE_SLUG}}.json;
+          # substitute MODULE_SLUG so the full build (post-B3) finds the IG resource.
+          # The `template =` line is left untouched — while it is the B3 TODO the
+          # build below degrades to a SUSHI-only check.
+          subst ig.ini <<'PLACEHOLDERS'
+          MODULE_SLUG|demo
+          PLACEHOLDERS
+          # Guard: no ACTIVE (non-comment) placeholder may survive in sushi-config.yaml.
+          if grep -vE '^[[:space:]]*#' sushi-config.yaml | grep -q '{{[A-Za-z_]*}}'; then
+            echo "::error::A demo value is missing from the self-check substitution table — an active {{PLACEHOLDER}} survives in sushi-config.yaml."
+            grep -nvE '^[[:space:]]*#' sushi-config.yaml | grep '{{[A-Za-z_]*}}'
+            exit 1
+          fi
+          echo "::notice::Template-repo self-check: substituted demo placeholders into WORKSPACE copies of sushi-config.yaml + ig.ini (never committed). A created module replaces the placeholders for real and skips this step."
+
+      - name: SUSHI compile and decide build mode
+        id: build
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --global fsh-sushi@3.20.0
+          sushi .
+          test -d fsh-generated/resources
+          # A full IG Publisher build needs a buildable IG template in ig.ini.
+          # While ig.ini still carries the B3 TODO placeholder we cannot build,
+          # so degrade to a SUSHI-only check. Runtime detection means no edit to
+          # this file is needed once B3 wires a real template.
+          tmpl_line="$(grep -E '^[[:space:]]*template[[:space:]]*=' ig.ini || true)"
+          if printf '%s' "${tmpl_line}" | grep -q 'TODO'; then
+            echo "mode=sushi-only" >> "${GITHUB_OUTPUT}"
+            echo "::notice::ig.ini still carries the B3 TODO template placeholder — running a SUSHI-only check. The IG Publisher build and the Pages preview are skipped until B3 wires a buildable IG template. This degrade path is expected on the template repo until B3 lands; a created module references a real template and runs the full build + preview."
+          else
+            echo "mode=full" >> "${GITHUB_OUTPUT}"
+            echo "IG template reference present — running the full IG Publisher build + preview."
+          fi
+
+      - name: Install Graphviz
+        if: ${{ steps.build.outputs.mode == 'full' }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y graphviz
+
+      - name: Select terminology server (SU-TermServ if cert present, else HL7)
+        id: tx
+        if: ${{ steps.build.outputs.mode == 'full' }}
+        shell: bash
+        env:
+          SU_TERMSERV_CLIENT_CERT: ${{ secrets.SU_TERMSERV_CLIENT_CERT }}
+          SU_TERMSERV_CLIENT_KEY: ${{ secrets.SU_TERMSERV_CLIENT_KEY }}
+          SU_TERMSERV_CLIENT_CERT_PASSWORD: ${{ secrets.SU_TERMSERV_CLIENT_CERT_PASSWORD }}
+        run: |
+          set -euo pipefail
+          # Prefer the MII terminology server (SU-TermServ) through a client-cert
+          # nginx proxy; otherwise fall back to the public HL7 server. The build
+          # must not hard-fail without the certificate (§2.10).
+          if [[ -n "${SU_TERMSERV_CLIENT_CERT}" ]] && [[ -n "${SU_TERMSERV_CLIENT_KEY}" ]] && [[ -n "${SU_TERMSERV_CLIENT_CERT_PASSWORD}" ]]; then
+            nginx_dir="${RUNNER_TEMP}/nginx"
+            mkdir -p "${nginx_dir}/certs"
+            # nginx.conf pinned by commit SHA (fixed versions; same ref go-publish.yml uses).
+            curl --fail --location --silent --show-error \
+              "https://raw.githubusercontent.com/medizininformatik-initiative/kerndatensatz-meta/1db2e534704d92e5ee0cde663ce3e7ccd8825fa7/.github/workflows/nginx.conf" \
+              --output "${nginx_dir}/nginx.conf"
+            printf '%s' "${SU_TERMSERV_CLIENT_CERT}" | base64 --decode > "${nginx_dir}/certs/client-cert.pem"
+            printf '%s' "${SU_TERMSERV_CLIENT_KEY}" | base64 --decode > "${nginx_dir}/certs/client-key-encrypted.key"
+            openssl rsa \
+              -in "${nginx_dir}/certs/client-key-encrypted.key" \
+              -out "${nginx_dir}/certs/client-key.key" \
+              -passin env:SU_TERMSERV_CLIENT_CERT_PASSWORD
+            chmod 600 "${nginx_dir}/certs/"*
+            docker run --detach --name preview-nginx \
+              --volume "${nginx_dir}/nginx.conf:/etc/nginx/nginx.conf:ro" \
+              --volume "${nginx_dir}/certs:/etc/nginx/certs:ro" \
+              --publish 8090:80 \
+              nginx:1.30.4-alpine@sha256:97d490c12ba55b4946b01546d1c3ed324e8d41ab1c9fcb2a616aa470620e5b46
+            ready=false
+            for _ in {1..15}; do
+              if curl --head --silent --fail http://127.0.0.1:8090 >/dev/null; then ready=true; break; fi
+              sleep 2
+            done
+            if [[ "${ready}" != "true" ]]; then docker logs preview-nginx; exit 1; fi
+            echo "tx=http://127.0.0.1:8090/fhir" >> "${GITHUB_OUTPUT}"
+            echo "Terminology: SU-TermServ via client-certificate proxy" >> "${GITHUB_STEP_SUMMARY}"
+          else
+            echo "tx=https://tx.fhir.org" >> "${GITHUB_OUTPUT}"
+            echo "::notice::No SU-TermServ client certificate configured — falling back to the public HL7 terminology server https://tx.fhir.org. Some MII-specific value sets may not fully expand (a QA note, not a failure)."
+            echo "Terminology: public HL7 fallback (https://tx.fhir.org)" >> "${GITHUB_STEP_SUMMARY}"
+          fi
+
+      - name: Build IG (SUSHI already ran) with the pinned IG Publisher
+        if: ${{ steps.build.outputs.mode == 'full' }}
+        shell: bash
+        env:
+          TX_URL: ${{ steps.tx.outputs.tx }}
+        run: |
+          set -euo pipefail
+          # IG Publisher pinned + checksum-verified (fixed versions; same jar as go-publish.yml).
+          publisher_url="https://github.com/HL7/fhir-ig-publisher/releases/download/2.2.11/publisher.jar"
+          curl --fail --location --silent --show-error "${publisher_url}" --output "${RUNNER_TEMP}/publisher.jar"
+          echo "a981af86bca3f3a22ee15b9d4ee3c97d63219b7a14e49d0a525e10bbfc71a911  ${RUNNER_TEMP}/publisher.jar" | sha256sum --check
+          java -Xmx6g -jar "${RUNNER_TEMP}/publisher.jar" -ig ig.ini -tx "${TX_URL}"
+          test -s output/index.html
+          jq empty output/qa.json
+
+      - name: Stop terminology proxy
+        if: ${{ always() && steps.build.outputs.mode == 'full' }}
+        shell: bash
+        run: docker rm --force preview-nginx >/dev/null 2>&1 || true
+
+      - name: Publish preview to gh-pages/branches/<branch>/
+        if: ${{ steps.build.outputs.mode == 'full' && github.ref_name != 'main' && github.ref_name != 'gh-pages' }}
+        shell: bash
+        env:
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ github.ref_name }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAGES_ACTIONS_ENABLED: ${{ vars.PAGES_ACTIONS_ENABLED }}
+          GIT_AUTHOR_NAME: "github-actions[bot]"
+          GIT_AUTHOR_EMAIL: "41898282+github-actions[bot]@users.noreply.github.com"
+        run: |
+          set -euo pipefail
+          remote_url="https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO}.git"
+          rm -rf gh-pages
+          if git ls-remote --heads "${remote_url}" gh-pages | grep -q "."; then
+            git clone --depth 1 --branch gh-pages "${remote_url}" gh-pages
+          else
+            # First preview ever: orphan-init gh-pages with a .nojekyll marker so
+            # Pages serves the IG output verbatim (no Jekyll re-processing).
+            git clone "${remote_url}" gh-pages
+            cd gh-pages
+            git config user.name "${GIT_AUTHOR_NAME}"
+            git config user.email "${GIT_AUTHOR_EMAIL}"
+            git checkout --orphan gh-pages
+            git rm -rf . >/dev/null 2>&1 || true
+            touch .nojekyll
+            git add .nojekyll
+            git commit -m "chore: initialize gh-pages"
+            git push --set-upstream origin gh-pages
+            cd ..
+          fi
+          # The root and version-like paths are reserved for formal -go-publish
+          # output; every CI preview lives below branches/<branch>/.
+          touch gh-pages/.nojekyll
+          branch_dir="gh-pages/branches/${BRANCH}"
+          rm -rf "${branch_dir}"
+          mkdir -p "${branch_dir}"
+          cp -R "output/." "${branch_dir}/"
+          # Marker consumed by cleanup-gh-pages.yml to detect deleted branches.
+          echo "${BRANCH}" > "${branch_dir}/.branch-name"
+          cd gh-pages
+          if [[ "${PAGES_ACTIONS_ENABLED}" == "true" ]]; then
+            bytes="$(du --bytes --summarize --exclude=.git . | cut -f1)"
+            supported_max_bytes="1000000000"
+            if (( bytes > supported_max_bytes )); then
+              echo "::warning::The staged Pages site is ${bytes} bytes, above GitHub Pages' ${supported_max_bytes}-byte officially supported maximum. Publication will continue, but Pages does not guarantee deployments above 1 GB."
+            fi
+          fi
+          git config user.name "${GIT_AUTHOR_NAME}"
+          git config user.email "${GIT_AUTHOR_EMAIL}"
+          git add --all
+          if git diff --cached --quiet; then
+            echo "No preview changes to publish for ${BRANCH}."
+            exit 0
+          fi
+          git commit -m "chore: preview ${BRANCH}"
+          git push origin gh-pages
+
+      - name: Preview URL
+        if: ${{ steps.build.outputs.mode == 'full' && github.ref_name != 'main' && github.ref_name != 'gh-pages' }}
+        shell: bash
+        run: |
+          echo "Preview: https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/branches/${GITHUB_REF_NAME}/" >> "${GITHUB_STEP_SUMMARY}"
+
+      # ── PAGES_ACTIONS_ENABLED mode only: also publish via the Pages Actions
+      # pipeline (Settings → Pages → GitHub Actions). Mirrors go-publish.yml's
+      # tar + github-pages artifact + deploy-pages pairing (verified pins).
+      - name: Package gh-pages tree as a Pages artifact
+        if: ${{ steps.build.outputs.mode == 'full' && github.ref_name != 'main' && github.ref_name != 'gh-pages' && vars.PAGES_ACTIONS_ENABLED == 'true' }}
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: gh-pages
+
+  deploy:
+    name: Deploy GitHub Pages (Actions mode)
+    if: ${{ vars.ENABLE_PREVIEW != 'false' && needs.build.outputs.mode == 'full' && github.ref_name != 'main' && github.ref_name != 'gh-pages' && vars.PAGES_ACTIONS_ENABLED == 'true' }}
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: read
+      id-token: write
+      pages: write
+    steps:
+      - name: Deploy Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+
+  announce:
+    name: Report preview URL
+    # Separate from the build job (which touches the terminology secrets) so the
+    # literal repository URL is never masked in the summary or the PR comment.
+    if: ${{ vars.ENABLE_PREVIEW != 'false' && needs.build.outputs.mode == 'full' && github.ref_name != 'main' && github.ref_name != 'gh-pages' }}
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Upsert the preview-URL PR comment
+        id: preview_comment
+        continue-on-error: true
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const branch = process.env.BRANCH_NAME;
+            const marker = '<!-- ig-preview-url -->';
+            const url = `https://${owner}.github.io/${repo}/branches/${branch}/`;
+            const body = `${marker}\n### IG preview\n[Open the rendered IG for branch \`${branch}\`](${url})`;
+            const { data: prs } = await github.rest.pulls.list({ owner, repo, state: 'open', per_page: 100 });
+            const pr = prs.find(p => p.head && p.head.ref === branch);
+            if (!pr) { core.info(`No open PR for branch ${branch}; skipping PR comment.`); return; }
+            const { data: comments } = await github.rest.issues.listComments({ owner, repo, issue_number: pr.number, per_page: 100 });
+            const existing = comments.find(c => typeof c.body === 'string' && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+              core.info(`Updated preview-URL comment on PR #${pr.number}`);
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number: pr.number, body });
+              core.info(`Created preview-URL comment on PR #${pr.number}`);
+            }
+      - name: Warn when the PR comment could not be updated
+        if: ${{ steps.preview_comment.outcome == 'failure' }}
+        shell: bash
+        run: echo "::warning::The preview was deployed, but the PR comment could not be updated. The preview URL is in the build job summary."
