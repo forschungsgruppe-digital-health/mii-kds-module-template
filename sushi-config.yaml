@@ -258,9 +258,17 @@ pages:
     changes.md:
       title: Changelog
 
-  # File name derives from `id` above (basis: ImplementationGuide-mii-ig-base.md).
-  ImplementationGuide-mii-ig-{{MODULE_SLUG}}.md:
-    title: MII ImplementationGuide Resource
+  # NOTE: the IG Publisher AUTO-GENERATES the ImplementationGuide resource page
+  # (ImplementationGuide-<id>.html) and adds it to the artifact list without an
+  # entry here. basis lists it only because basis ships a hand-authored intro at
+  # input/pagecontent/ImplementationGuide-mii-ig-base.md. This template does NOT
+  # list it: an explicit `pages:` entry REQUIRES a matching source file, and the
+  # file name would carry the {{MODULE_SLUG}} placeholder — which the CI
+  # self-check substitutes only in this file and ig.ini, never in pagecontent
+  # file names, so the build would fail with "missing source file
+  # ImplementationGuide-mii-ig-<slug>.md". To add a custom intro, create
+  # input/pagecontent/ImplementationGuide-mii-ig-<your-slug>.md AND re-add the
+  # entry with your concrete slug.
 
   translationinfo.md:
     title: Translation Information
