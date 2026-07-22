@@ -258,9 +258,17 @@ pages:
     changes.md:
       title: Changelog
 
-  # File name derives from `id` above (basis: ImplementationGuide-mii-ig-base.md).
-  ImplementationGuide-mii-ig-{{MODULE_SLUG}}.md:
-    title: MII ImplementationGuide Resource
+  # NOTE: the IG Publisher AUTO-GENERATES the ImplementationGuide resource page
+  # (ImplementationGuide-<id>.html) and adds it to the artifact list without an
+  # entry here. basis lists it only because basis ships a hand-authored intro at
+  # input/pagecontent/ImplementationGuide-mii-ig-base.md. This template does NOT
+  # list it: an explicit `pages:` entry REQUIRES a matching source file, and the
+  # file name would carry the {{MODULE_SLUG}} placeholder — which the CI
+  # self-check substitutes only in this file and ig.ini, never in pagecontent
+  # file names, so the build would fail with "missing source file
+  # ImplementationGuide-mii-ig-<slug>.md". To add a custom intro, create
+  # input/pagecontent/ImplementationGuide-mii-ig-<your-slug>.md AND re-add the
+  # entry with your concrete slug.
 
   translationinfo.md:
     title: Translation Information
@@ -341,10 +349,44 @@ parameters:
 # │ input/includes. To use a provided input/includes/menu.xml file, delete the "menu"              │
 # │ property below.                                                                                │
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
-# Basis idiom: the menu property stays commented out and the module maintains
-# input/includes/menu.xml directly (needed for the language-switching header).
-#menu:
-#  Home: index.html
+# Menu handling — DELIBERATE deviation from the basis idiom.
+# Basis keeps this commented and hand-maintains input/includes/menu.xml PLUS a
+# per-language input/translations/<lang>/includes/menu.xml. For a bilingual IG
+# that manual route requires an en/menu.xml, and its absence makes the IG
+# Publisher abort with "Could not locate the included file 'en/menu.xml'".
+# Using the `menu:` PROPERTY instead lets SUSHI generate menu.xml and the IG
+# Publisher auto-generate the per-language variants — the approach the
+# ig-template-mii-kds self-test uses and the least error-prone for a template.
+# (Menu labels themselves are not translated by the toolchain — see
+# docs/recipes/add-translation.md in ig-template-mii-kds — so they stay as
+# written here; to hand-maintain a bilingual menu instead, delete this property
+# and ship input/includes/menu.xml + input/translations/en/includes/menu.xml.)
+# The IG Publisher supports only one sub-menu level.
+menu:
+  Home: index.html
+  Guidance:
+    Guidance: guidance.html
+    Guidance for Researchers: researcher-guidance.html
+    Guidance for Implementers: implementer-guidance.html
+    Datasets and Descriptions: datasets-and-descriptions.html
+    UML Diagrams: uml-diagrams.html
+  Conformance:
+    Conformance: conformance.html
+    General Requirements: general-requirements.html
+    Must Support: must-support.html
+    Handling Missing Data: missing-data.html
+  Artifacts:
+    Profiles and Extensions: profiles-and-extensions.html
+    Terminology: terminology.html
+    Capability Statements: capability-statements.html
+    Search Parameters and Operations: search-parameters-and-operations.html
+    Logical Models: logical-models.html
+    Examples: examples.html
+  Downloads: downloads.html
+  Versioning:
+    Versioning: version-history.html
+    Changelog: changes.html
+  Metadata: metadata.html
 #
 # ╭──────────────────────────────────────────SUSHI flags───────────────────────────────────────────╮
 # │  The flags below configure aspects of how SUSHI processes FSH.                                 │
