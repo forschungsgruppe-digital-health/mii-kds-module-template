@@ -1,0 +1,120 @@
+# Security scan (monitoring layer C — known vulnerabilities in the TOOLING
+# ecosystems: npm/gem manifests, GitHub Actions, OS packages, plus IaC
+# misconfigurations and committed secrets).
+#
+# Purpose:   OSV-Scanner + Trivy (filesystem mode) over the repo; findings are
+#            uploaded as SARIF to the repository Security tab (Code scanning),
+#            categories "osv-scanner" and "trivy-fs". A module created from
+#            this template inherits this workflow unchanged
+#            (see docs/MAINTENANCE.md).
+# Triggers:  schedule (Mondays 07:00 UTC) + pull_request targeting dev +
+#            workflow_dispatch.
+# Toggle:    vars.ENABLE_SECURITY_SCAN — ON by default; set the repo variable
+#            to 'false' to skip both jobs (shown as "skipped", not failed).
+# Human-gated: triaging every finding (fix vs. documented accepted risk) —
+#            see docs/recipes/triage-a-vulnerability-alert.md. Nothing here
+#            changes code or dependencies.
+#
+# HONEST COVERAGE LIMIT (docs/MAINTENANCE.md): these scanners do NOT cover
+# FHIR content packages or the IG Publisher jar (not in vulnerability
+# databases). For those, the dependency version check (layer B) is the
+# available safeguard.
+name: Security scan
+
+on:
+  schedule:
+    - cron: "0 7 * * 1" # Mondays 07:00 UTC
+  pull_request:
+    branches: [dev]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write # upload SARIF to the Security tab
+  actions: read # required by codeql-action/upload-sarif on private repos
+
+jobs:
+  osv:
+    if: ${{ vars.ENABLE_SECURITY_SCAN != 'false' }} # toggle: ON by default (§2.13)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # Direct-use scanner action. Note: it lives in the osv-scanner-action/
+      # SUBDIRECTORY of google/osv-scanner-action (the repo-root action.yml has
+      # no runnable definition — verified upstream at v2.3.8).
+      - name: OSV-Scanner
+        uses: google/osv-scanner-action/osv-scanner-action@9a498708959aeaef5ef730655706c5a1df1edbc2 # v2.3.8
+        # osv-scanner exits non-zero when it finds vulnerabilities (1) or when
+        # the repo has no scannable package sources yet (128). Neither must
+        # block the SARIF upload, so the step tolerates failure.
+        continue-on-error: true
+        with:
+          scan-args: |-
+            --recursive
+            --format=sarif
+            --output=osv.sarif
+            ./
+
+      - name: Upload OSV SARIF
+        if: ${{ always() && hashFiles('osv.sarif') != '' }}
+        uses: github/codeql-action/upload-sarif@e0647621c2984b5ed2f768cb892365bf2a616ad1 # v4.37.2
+        with:
+          sarif_file: osv.sarif
+          category: osv-scanner
+
+  trivy:
+    if: ${{ vars.ENABLE_SECURITY_SCAN != 'false' }} # toggle: ON by default (§2.13)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Trivy filesystem scan
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: fs
+          scanners: vuln,misconfig,secret
+          format: sarif
+          output: trivy.sarif
+
+      - name: Upload Trivy SARIF
+        if: ${{ always() && hashFiles('trivy.sarif') != '' }}
+        uses: github/codeql-action/upload-sarif@e0647621c2984b5ed2f768cb892365bf2a616ad1 # v4.37.2
+        with:
+          sarif_file: trivy.sarif
+          category: trivy-fs
+
+  # ---------------------------------------------------------------------------
+  # Dev container image scan — enable once .devcontainer/ builds an image from
+  # a Dockerfile. Scanning the BUILT image catches base-image and OS package
+  # vulnerabilities that fs-mode and OSV scans miss (they only read files in
+  # the repo). Uncomment, keeping the same toggle and SHA pins:
+  #
+  # trivy-image:
+  #   if: ${{ vars.ENABLE_SECURITY_SCAN != 'false' }} # toggle: ON by default (§2.13)
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+  #
+  #     - name: Build the dev container image
+  #       run: docker build -t devcontainer-scan:local .devcontainer
+  #
+  #     - name: Trivy image scan
+  #       uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+  #       with:
+  #         scan-type: image
+  #         image-ref: devcontainer-scan:local
+  #         format: sarif
+  #         output: trivy-image.sarif
+  #
+  #     - name: Upload Trivy image SARIF
+  #       if: ${{ always() && hashFiles('trivy-image.sarif') != '' }}
+  #       uses: github/codeql-action/upload-sarif@e0647621c2984b5ed2f768cb892365bf2a616ad1 # v4.37.2
+  #       with:
+  #         sarif_file: trivy-image.sarif
+  #         category: trivy-image
+  #
+  # If the dev container is image-only (devcontainer.json without a
+  # Dockerfile), skip the build step and set image-ref to that base image —
+  # or use the devcontainers/ci action to build the effective image first.
+  # ---------------------------------------------------------------------------
