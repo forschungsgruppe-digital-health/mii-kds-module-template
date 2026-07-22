@@ -1,0 +1,62 @@
+# ig-translate — harvest configuration: adopt an existing English translation
+#
+# For sources that already publish an English rendering next to German (for
+# example MII KDS Person: https://simplifier.net/MII-Basismodul-Person-2024 or
+# https://github.com/medizininformatik-initiative/kerndatensatzmodul-person).
+# Instead of re-translating, the existing English texts are extracted and mapped
+# into the target files the IG Publisher expects (see translate-spec.md).
+#
+# This is a TEMPLATE — copy it per module and fill it in. The values here are
+# examples/placeholders.
+
+apiVersion: ig-translate/v1
+kind: HarvestConfig
+
+module:
+  id: mii-ig-person                 # IG id of the target module (sushi-config: id)
+  default_lang: de
+  target_lang: en
+
+# --- (A) Narrative pages from a parallel, already-rendered English guide -------
+narratives:
+  enabled: true
+  source_kind: rendered-guide       # rendered-guide | none
+  # Base URL of the rendered English IG (or a local path to its source):
+  en_rendered_ig_url: "https://example.org/fhir/person/en/"   # TODO: real English guide URL
+  # Map source English page -> target file (input/pagecontent/<name>-en.md).
+  # Left: path/slug of the English page in the source; right: target page.
+  page_map:
+    index:        index            # -> input/pagecontent/index-en.md
+    use-cases:    use-cases
+    data-sets:    data-sets
+    conformance:  conformance
+    context:      context
+    references:   references
+  # Note: adapt internal links/anchors to the NEW artifact ids of the target IG;
+  # do not translate FHIR identifiers/code values; cite every adopted page.
+
+# --- (B) Resource texts from the source's FSH/conformance ---------------------
+resources:
+  enabled: true
+  # Where the English texts come from:
+  #   fsh-translation-extensions : ^short/^definition carry a translation extension
+  #                                (http://hl7.org/fhir/StructureDefinition/translation)
+  #   designations               : CodeSystem/ValueSet concepts with an en designation
+  #   parallel-fsh               : a separate English FSH/resource branch
+  source_kind: fsh-translation-extensions
+  source_repo: "https://github.com/medizininformatik-initiative/kerndatensatzmodul-person"  # TODO
+  source_ref: "main"
+  # Only these types render as a supplement (Publisher restriction):
+  supported_types: [StructureDefinition, CodeSystem, Questionnaire]
+  # Output format of the generated supplements:
+  output_format: po                 # po | xliff | json
+  # Optional: explicit source-resource -> target-id map (otherwise id-equal).
+  id_map: {}
+
+# --- Guardrails (do not change) -----------------------------------------------
+guardrails:
+  german_leading: true              # German stays leading/binding
+  never_modify_source_text: true    # additive adoption, German source unchanged
+  keep_fhir_identifiers: true       # do not translate name/id/codes/canonicals
+  mark_unverified: "TODO:REVIEW"    # mark uncited/machine content
+  human_review_gate: true           # a bilingual human must sign off the language
