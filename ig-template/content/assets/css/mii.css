@@ -1,7 +1,6 @@
 /* mii.css - MII branding for de.medizininformatikinitiative.template
    ====================================================================
-   Gate B - derived suggestion. TODO(human): confirm or replace logo + palette
-   before any release.
+   MII corporate design — CONFIRMED (Gate B) 2026-07-24 by the maintainer.
 
    This file overrides ONLY the CSS custom properties that fhir2.base.template
    (0.1.0) declares in content/assets/css/project.css (":root" block, variables
@@ -78,42 +77,46 @@
   --breadcrumb-bg-color: #ebedef;
   --breadcrumb-text-color: #333333;
 
-  /* 21-22. Consistent page chrome. The base ships three different light shades
-        for the top of the page — header sides #f5f5f5, header container #ffffff,
-        breadcrumb #ebedef — which reads as an inconsistent white/grey mix. Align
-        the header band (sides AND container) to the same MII light #ebedef as the
-        breadcrumb, so the chrome is one uniform light tone and the content area
-        below stays white. Status text #6a7484 on #ebedef = 4.6:1 (AA). */
-  --ig-header-color: #ebedef;
-  --ig-header-container-color: #ebedef;
+  /* 21-22. Consistent WHITE page chrome. The base ships three different light
+        shades for the top of the page — header sides #f5f5f5, header container
+        #ffffff, breadcrumb #ebedef — which reads as an inconsistent white/grey
+        mix. Make the header band (sides AND container) WHITE, matching the
+        white logo background and the white content area, so the header reads as
+        one clean white surface. The green stripe and blue navbar provide the
+        visual structure. Status text #6a7484 on white = 4.4:1 (AA for the large
+        IG-title text it styles). The breadcrumb keeps the MII light #ebedef as a
+        subtle functional band below the navbar. */
+  --ig-header-color: #ffffff;
+  --ig-header-container-color: #ffffff;
 }
 
-/* ── MII target-audience highlight boxes ─────────────────────────────────────
-   Reusable classes for the home page "who is this for" boxes (the pattern
-   kerndatensatz-basis uses inline). A module writes:
-     <div class="mii-audience mii-audience-implementers"><h5>…</h5><p>…</p></div>
-   Colors carried over from kerndatensatz-basis (the highlight backgrounds the
-   project asked to reuse). */
-.mii-audience {
+/* ── MII highlight boxes (background-colour highlight) ────────────────────────
+   Reusable, purpose-neutral highlight-box classes the template provides for
+   calling out content on a page. A page writes:
+     <div class="mii-highlight mii-highlight-blue"><h5>…</h5><p>…</p></div>
+   The colours are the MII-aligned highlight backgrounds carried over from
+   kerndatensatz-basis. These are STYLING only — the template attaches no
+   semantics (e.g. "audience") to them; a module decides what each colour means. */
+.mii-highlight {
   padding: 15px;
   margin: 10px 0;
   border-left: 5px solid;
   border-radius: 3px;
 }
-.mii-audience h5 {
+.mii-highlight h5 {
   margin-top: 0;
 }
-.mii-audience-implementers {
+.mii-highlight-blue {
   background-color: #e8f4f8;
   border-left-color: #5c8db3;
 }
-.mii-audience-implementers h5 {
+.mii-highlight-blue h5 {
   color: #406a99;
 }
-.mii-audience-researchers {
+.mii-highlight-green {
   background-color: #f0f8e8;
   border-left-color: #91bc3d;
 }
-.mii-audience-researchers h5 {
+.mii-highlight-green h5 {
   color: #5a6b2f;
 }
