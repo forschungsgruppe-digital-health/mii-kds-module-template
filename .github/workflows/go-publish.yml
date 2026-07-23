@@ -134,13 +134,13 @@ jobs:
 
     steps:
       - name: Checkout publication automation
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           path: automation
           persist-credentials: false
 
       - name: Checkout tagged IG source
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ inputs.release_ref }}
           fetch-depth: 0
@@ -148,7 +148,7 @@ jobs:
           persist-credentials: false
 
       - name: Checkout existing Pages tree
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: gh-pages
           fetch-depth: 1
@@ -156,7 +156,7 @@ jobs:
           persist-credentials: false
 
       - name: Checkout pinned history templates
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: HL7/fhir-ig-history-template
           # master, resolved 2026-07-22; bumped by the dependency check.
@@ -165,7 +165,7 @@ jobs:
           persist-credentials: false
 
       - name: Checkout pinned web templates
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: HL7/fhir-web-templates
           # main, resolved 2026-07-22; bumped by the dependency check.
@@ -174,7 +174,7 @@ jobs:
           persist-credentials: false
 
       - name: Checkout current FHIR IG registry
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           # Deliberately unpinned (default branch): the registry handoff patch
           # must be generated against the LIVE registry — it is publication
@@ -184,7 +184,7 @@ jobs:
           persist-credentials: false
 
       - name: Checkout pinned terminology proxy configuration
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: medizininformatik-initiative/kerndatensatz-meta
           # master, resolved 2026-07-22; bumped by the dependency check.
@@ -380,13 +380,13 @@ jobs:
           } >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Set up Java
-        uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4.8.0
+        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95 # v5.6.0
         with:
           distribution: temurin
           java-version: "17"
 
       - name: Set up Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "22"
 
@@ -897,7 +897,7 @@ jobs:
           cp "${RUNNER_TEMP}/go-publish.log" "${RUNNER_TEMP}/publication-process.log"
 
       - name: Upload exact publication candidate
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: github-pages
           path: ${{ runner.temp }}/artifact.tar
@@ -905,7 +905,7 @@ jobs:
           retention-days: 7
 
       - name: Upload publication review material
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: publication-review
           path: |
@@ -935,7 +935,7 @@ jobs:
 
     steps:
       - name: Download publication candidate
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: github-pages
           path: candidate
@@ -949,7 +949,7 @@ jobs:
           echo "${ARTIFACT_SHA256}  candidate/artifact.tar" | sha256sum --check
 
       - name: Checkout current gh-pages branch
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: gh-pages
           fetch-depth: 1
@@ -996,7 +996,7 @@ jobs:
           echo "commit_sha=$(git -C site rev-parse HEAD)" >> "${GITHUB_OUTPUT}"
 
       - name: Configure GitHub Pages
-        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
 
   deploy:
     name: Deploy GitHub Pages
@@ -1017,7 +1017,7 @@ jobs:
     steps:
       - name: Deploy exact Pages artifact
         id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
 
       - name: Verify Pages publication
         shell: bash
