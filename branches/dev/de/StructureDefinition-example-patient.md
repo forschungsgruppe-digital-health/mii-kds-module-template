@@ -75,7 +75,7 @@ Mandatory: 2 elements
   "name" : "ExamplePatient",
   "title" : "Beispiel-Patient (Vorlage)",
   "status" : "active",
-  "date" : "2026-07-23T23:38:47+00:00",
+  "date" : "2026-07-23T23:49:49+00:00",
   "publisher" : "Medical Informatics Initiative (MII)",
   "contact" : [{
     "name" : "Medical Informatics Initiative (MII)",
