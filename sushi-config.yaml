@@ -213,6 +213,9 @@ dependencies:
 # This page tree is kerndatensatz-basis's standard MII module page set. Every
 # entry needs a matching file in input/pagecontent/ (starter pages are a
 # separate scaffolding step); trim entries your module does not need.
+# CANONICAL STRUCTURE (mirror — Option B): this page set MIRRORS the IG template's
+# structure/pages.yaml. Re-sync per docs/recipes/sync-structure.md; keep every
+# entry backed by an input/pagecontent/<name>.md.
 pages:
   index.md:
     title: Home
@@ -362,6 +365,12 @@ parameters:
 # written here; to hand-maintain a bilingual menu instead, delete this property
 # and ship input/includes/menu.xml + input/translations/en/includes/menu.xml.)
 # The IG Publisher supports only one sub-menu level.
+# ── CANONICAL STRUCTURE (mirror — Option B) ──────────────────────────────────
+# This menu MIRRORS the canonical MII module structure owned by the IG template
+# ig-template-mii-kds (structure/menu.yaml). Do not diverge from it — re-sync
+# when the template's structure changes (docs/recipes/sync-structure.md). The
+# page CONTENT under input/pagecontent/ is yours; the STRUCTURE (which pages, the
+# menu) is the template's.
 menu:
   Home: index.html
   Guidance:
