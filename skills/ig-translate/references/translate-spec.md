@@ -46,14 +46,15 @@ There is no supplement mechanism in the current Publisher. Leave these out on
 purpose; do not "simulate" them with wrongly named `.po` files (they would only
 be ignored). Add them here once a future Publisher supports them.
 
-## 3. Narrative pages (future-proof, do not render yet)
+## 3. Narrative pages (these DO render translated)
 
-**Convention** (HL7 ig-guidance, "depends on template / ToDo"): one language
-variant per source page, as a sibling file:
+**Convention** (as used by the HL7 reference `FHIR/multi-lang-test-ig`): the
+translated page goes in the translation-source folder, under `pagecontent/`,
+with the **same file name** as the default-language page:
 
 ```
-input/pagecontent/<name>.md        # German (leading)
-input/pagecontent/<name>-en.md     # English translation (future-proof)
+input/pagecontent/<name>.md                    # German (leading / default)
+input/translations/en/pagecontent/<name>.md    # English — renders on /en/<name>.html
 ```
 
 Content rules:
@@ -63,9 +64,10 @@ Content rules:
 - Leave embedded HTML/image references unchanged.
 - Add a `TODO:REVIEW` header line on machine translation.
 
-> Behaviour today: the Publisher does **not** (yet) read `*-en.md`; `/en/` pages
-> stay German with the standard note. The files are prepared and render
-> automatically once the Publisher/template enable page translation.
+> Behaviour today (verified IG Publisher 2.2.11): `/en/<name>.html` renders the
+> translated page. A page with no translation file falls back to the German
+> source. Do NOT use a `<name>-en.md` sibling in `input/pagecontent/` — the
+> toolchain would treat it as a separate page, not a translation.
 
 ## 4. Configuration parameters (`sushi-config.yaml`)
 

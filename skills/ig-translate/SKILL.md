@@ -43,20 +43,23 @@ template package's `ig-translate` skill. Stay here for a module's content.
 
 ## What the current toolchain renders (verified)
 
-Empirically checked with IG Publisher 2.2.7 **and** 2.2.8 + `fhir2.base.template`
-(carried over from the sample IG's verification):
+Re-verified with **IG Publisher 2.2.11** + `fhir2.base.template` 0.1.0 on the
+template package's self-test (2026-07). The earlier sample-IG table was WRONG
+about narrative pages: it used a `*-<lang>.md` sibling, which the toolchain reads
+as a separate page, not a translation. The correct location is a
+translation-source folder, as the HL7 reference
+[`FHIR/multi-lang-test-ig`](https://github.com/FHIR/multi-lang-test-ig) uses:
 
-| Content | Translatable today? | Mechanism |
-|---------|---------------------|-----------|
-| Resource texts of **StructureDefinition, CodeSystem, Questionnaire** (element `definition`, `description`, designations) | **Yes, renders** | Translation supplement `input/translations/<lang>/<Type>-<id>.{po\|xliff\|json}` |
-| **ValueSet**, **ImplementationGuide** title/description, **menu** | **No** | Not supported as a supplement by the Publisher (ignored) |
-| **Narrative pages** (`input/pagecontent/*.md`) | **Not yet** | The `*-<lang>.md` sibling-file convention is documented (HL7 ig-guidance: "ToDo, depends on template") but not yet read by the Publisher/template |
+| Content | Translatable? | Mechanism (file path) |
+|---------|---------------|-----------------------|
+| **Narrative pages** (`input/pagecontent/<name>.md`) | **Yes, renders** | `input/translations/<lang>/pagecontent/<same-filename>` — the whole page renders in `<lang>` on `/<lang>/`. No file → falls back to the default-language source. |
+| Resource texts of **StructureDefinition, CodeSystem, Questionnaire** (`description`, designations, element `definition`) | **Yes, renders** | Supplement `input/translations/<lang>/<Type>-<id>.{po\|xliff\|json}` |
+| **Menu** (`input/includes/menu.xml`) | **Yes** | `input/translations/<lang>/includes/menu.xml` |
+| **ValueSet**, some **ImplementationGuide** title fields, `concept.display`/`concept.definition` | **Partial / No** | Not applied from a plain `.po` supplement on this toolchain |
 
-Consequence: the `/en/` page tree still shows narrative pages in German with the
-note "There is no translation page available …" — that is **expected** (German
-leading). Translated element texts do appear on the artifact pages under `/en/`.
-Page translations are still produced in the correct scheme (future-proof) so
-they render automatically once the toolchain implements the feature.
+Consequence: place the English rendering of `input/pagecontent/<name>.md` at
+`input/translations/en/pagecontent/<name>.md` and `/en/<name>.html` renders in
+English. Do NOT use a `<name>-<lang>.md` sibling in `input/pagecontent/`.
 
 > Treat this table as ground truth. **Re-verify it whenever the pinned IG
 > Publisher or base template version changes**, and update the table here and in
@@ -67,8 +70,8 @@ they render automatically once the toolchain implements the feature.
 - **German stays leading/binding.** English is a translation aid, never the
   normative text.
 - **Never change the source.** Translations are added under
-  `input/translations/` (or as `*-en.md` siblings); the German
-  `pagecontent`/FSH stay untouched.
+  `input/translations/<lang>/` (pages under `.../pagecontent/`, resources as
+  `.po` supplements); the German `pagecontent`/FSH stay untouched.
 - **FHIR identifiers stay English** (`name`/`id`/codes) — do not "translate"
   them.
 - **No fact invention.** Mark every machine translation `TODO:REVIEW`; a
