@@ -27,8 +27,15 @@ Diese Spezifikation beschreibt die FHIR-Repräsentation des Kerndatensatz-(KDS-)
 
 Dieser Implementierungsleitfaden richtet sich an:
 
-* **Implementierende** in Datenintegrationszentren (DIZ), Software-Entwickelnde und System-Architekt:innen, die FHIR-basierte Lösungen umsetzen (→ siehe [Profile und Extensions](profiles-and-extensions.md) und [Logische Modelle](logical-models.md)).
-* **Forschende**, die MII-Daten für wissenschaftliche Zwecke nutzen (→ siehe [Anleitung für Forschende](researcher-guidance.md)).
+##### Implementierende
+
+Datenintegrationszentren (DIZ), Software-Entwickelnde und System-Architekt:innen, die FHIR-basierte Lösungen umsetzen.
+ → siehe [Profile und Extensions](profiles-and-extensions.md) und [Logische Modelle](logical-models.md).
+
+##### Forschende
+
+Wissenschaftler:innen, die MII-Daten für die medizinische Forschung nutzen.
+ → siehe [Anleitung für Forschende](researcher-guidance.md).
 
 ### Inhalt dieses Leitfadens
 

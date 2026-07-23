@@ -58,7 +58,16 @@
      Gate B - derived suggestion. TODO(human): confirm or replace logo + palette before any release.
      Language handling: only the asset and its descriptive alt text switch on
      include.lang (the pattern kerndatensatz-basis uses); no translatable UI
-     strings are hard-coded. -->
+     strings are hard-coded.
+     Two logos, mirroring kerndatensatz-basis: the HL7 FHIR logo (links to the
+     FHIR spec) in #family-nav, and the MII logo in #project-nav. fhir-logo-www.png
+     is shipped by fhir2.base.template (content/assets/images/), so it resolves
+     from the inherited assets without shipping it here. -->
+<div id="family-nav">
+  <a no-external="true" id="family-logo" href="https://hl7.org/fhir">
+    <img src="assets/images/fhir-logo-www.png" alt="HL7 FHIR" height="50"/>
+  </a>
+</div>
 <div id="project-nav">
   <a no-external="true" id="project-logo" href="https://www.medizininformatik-initiative.de/">
 
@@ -71,7 +80,7 @@
         <div id="ig-status">
           <p><span style="font-size:12pt;font-weight:bold">MII Implementation Guide Module Template</span>
             <br/>
-            <span style="display:inline-block;"><a name="l99">​</a>2026.0.0 - 
+            <span style="display:inline-block;"><a name="l107">​</a>2026.0.0 - 
 
 
 
@@ -329,21 +338,21 @@ technischen Artefakte siehe <a href="profiles-and-extensions.html">Profile und E
               <!-- MII branding override for the fhir2.base.template footer fragment.
      Unlike header/css, the base footer fragment is NOT an empty placeholder: it
      renders "Links: Table of Contents | QA Report [| feedback dashboards]".
-     This override preserves that base content byte-for-byte (first three lines
-     below, copied from fhir2.base.template@4c20cf6 includes/fragment-footer.html)
-     and only APPENDS the MII links. It is included inside
-     <span style="color: var(--footer-highlight-text-color)"> in fragment-pageend.html.
-     Gate B - derived suggestion. TODO(human): confirm or replace logo + palette before any release.
-     Language handling: link labels are bare URLs (language-neutral); only the
-     imprint TARGET switches on include.lang, because the MII website has separate
-     German (/de/impressum) and English (/en/legal-notice) imprint pages
-     (both verified HTTP 200 on 2026-07-22). -->
-          : <a style="color: var(--footer-hyperlink-text-color)" href="toc.html"></a> |
-                 <a style="color: var(--footer-hyperlink-text-color)" href="../qa.html"></a>
-                 
+     The base uses site.data.stringsBase[include.lang][...] for the labels, but
+     fhir2.base.template 0.1.0 ships NO German UI-string catalog, so on the German
+     (default) pages those labels render BLANK. This override therefore hard-codes
+     language-aware labels (de/en) so the footer shows real text in both languages,
+     preserves the base links (TOC, QA, feedback dashboards), and appends the MII
+     information links.
+     Gate B - derived suggestion. TODO(human): confirm or replace before any release.
+     Imprint: the MII website has separate German (/de/impressum) and English
+     (/en/legal-notice) imprint pages (both verified HTTP 200 on 2026-07-22). -->
 
+          Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Inhaltsverzeichnis</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" href="../qa.html">QA-Bericht</a>
+                 
                  | <a style="color: var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/" target="_blank">medizininformatik-initiative.de</a>
-                 | <a style="color: var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/de/impressum" target="_blank">medizininformatik-initiative.de/de/impressum</a>
+                 | <a style="color: var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/de/impressum" target="_blank">Impressum</a>
 
           </span>
         </p>

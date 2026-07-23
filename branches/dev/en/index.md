@@ -25,8 +25,15 @@ This specification describes the FHIR representation of the Core Dataset (CDS) m
 
 ### Target audience
 
-* **Implementers** in Data Integration Centers (DIC), software developers and system architects building FHIR-based solutions (→ see [Profiles and Extensions](profiles-and-extensions.md) and [Logical Models](logical-models.md)).
-* **Researchers** using MII data for research (→ see [Guidance for Researchers](researcher-guidance.md)).
+##### Implementers
+
+Data Integration Centers (DIC), software developers and system architects building FHIR-based solutions.
+ → see [Profiles and Extensions](profiles-and-extensions.md) and [Logical Models](logical-models.md).
+
+##### Researchers
+
+Scientists using MII data for medical research.
+ → see [Guidance for Researchers](researcher-guidance.md).
 
 ### Contents
 
