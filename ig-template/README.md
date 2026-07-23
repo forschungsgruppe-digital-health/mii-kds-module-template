@@ -1,10 +1,10 @@
 # `ig-template/` — vendored IG template (bring-up only)
 
 This folder is a **vendored bring-up copy of
-`de.medizininformatikinitiative.template@ab82b65d0781bb1be60727a3047ec05e68f7f896`**
+`de.medizininformatikinitiative.template@178fca67fe81e7eebc9e733f6e900e97df3254b2`**
 — the MII IG-Publisher template package, copied from the `dev` branch of
 [`forschungsgruppe-digital-health/ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds)
-at commit `ab82b65d0781bb1be60727a3047ec05e68f7f896` (package version `0.1.0`,
+at commit `178fca67fe81e7eebc9e733f6e900e97df3254b2` (package version `0.1.0`,
 in development). It carries the Medizininformatik-Initiative (MII) branding
 (header, footer, CSS, logo) that the built IG renders.
 

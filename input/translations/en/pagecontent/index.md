@@ -21,12 +21,17 @@ standardized secondary use of routine clinical data for medical research.
 
 ### Target audience
 
-- **Implementers** in Data Integration Centers (DIC), software developers and
-  system architects building FHIR-based solutions
-  (→ see [Profiles and Extensions](profiles-and-extensions.html) and
-  [Logical Models](logical-models.html)).
-- **Researchers** using MII data for research
-  (→ see [Guidance for Researchers](researcher-guidance.html)).
+<div class="mii-audience mii-audience-implementers">
+<h5>Implementers</h5>
+<p>Data Integration Centers (DIC), software developers and system architects building FHIR-based solutions.<br/>
+→ see <a href="profiles-and-extensions.html">Profiles and Extensions</a> and <a href="logical-models.html">Logical Models</a>.</p>
+</div>
+
+<div class="mii-audience mii-audience-researchers">
+<h5>Researchers</h5>
+<p>Scientists using MII data for medical research.<br/>
+→ see <a href="researcher-guidance.html">Guidance for Researchers</a>.</p>
+</div>
 
 ### Contents
 

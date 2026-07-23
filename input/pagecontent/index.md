@@ -31,12 +31,17 @@ Routinedaten für die medizinische Forschung.
 
 Dieser Implementierungsleitfaden richtet sich an:
 
-- **Implementierende** in Datenintegrationszentren (DIZ), Software-Entwickelnde
-  und System-Architekt:innen, die FHIR-basierte Lösungen umsetzen
-  (→ siehe [Profile und Extensions](profiles-and-extensions.html) und
-  [Logische Modelle](logical-models.html)).
-- **Forschende**, die MII-Daten für wissenschaftliche Zwecke nutzen
-  (→ siehe [Anleitung für Forschende](researcher-guidance.html)).
+<div class="mii-audience mii-audience-implementers">
+<h5>Implementierende</h5>
+<p>Datenintegrationszentren (DIZ), Software-Entwickelnde und System-Architekt:innen, die FHIR-basierte Lösungen umsetzen.<br/>
+→ siehe <a href="profiles-and-extensions.html">Profile und Extensions</a> und <a href="logical-models.html">Logische Modelle</a>.</p>
+</div>
+
+<div class="mii-audience mii-audience-researchers">
+<h5>Forschende</h5>
+<p>Wissenschaftler:innen, die MII-Daten für die medizinische Forschung nutzen.<br/>
+→ siehe <a href="researcher-guidance.html">Anleitung für Forschende</a>.</p>
+</div>
 
 ### Inhalt dieses Leitfadens
 
