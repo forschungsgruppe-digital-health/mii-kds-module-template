@@ -140,7 +140,10 @@ jobs:
           # rendered IG is the module template itself — NOT a "demo" (this scaffold
           # is a starting point for a new MII KDS module IG, or a migration target
           # for an existing Simplifier MII IG). MODULE_SLUG drives id/packageId/canonical.
-          subst sushi-config.yaml <<'PLACEHOLDERS'
+          # The SAME table is applied to sushi-config.yaml, ig.ini AND the narrative
+          # pages (input/pagecontent + input/translations) so the rendered self-check
+          # preview shows real text, not literal {{PLACEHOLDER}} markers.
+          cat > "${RUNNER_TEMP}/placeholders.txt" <<'PLACEHOLDERS'
           MODULE_SLUG|template
           MODULE_NAME|Template
           MODULE_TITLE|Module Template
@@ -152,21 +155,25 @@ jobs:
           APPROVAL_DATE|2026-01-01
           MODULE_AUTHOR_EMAIL|noreply@example.org
           TOPIC_NCI_CODE|C15607
+          GITHUB_ORG|forschungsgruppe-digital-health
+          REPO_NAME|mii-kds-module-template
           PLACEHOLDERS
-          # ig.ini's `ig =` line references ImplementationGuide-mii-ig-{{MODULE_SLUG}}.json;
-          # substitute MODULE_SLUG so the full build (post-B3) finds the IG resource.
-          # The `template =` line is left untouched — while it is the B3 TODO the
-          # build below degrades to a SUSHI-only check.
-          subst ig.ini <<'PLACEHOLDERS'
-          MODULE_SLUG|template
-          PLACEHOLDERS
+          # sushi-config.yaml + ig.ini (ig.ini's `ig =` line references
+          # ImplementationGuide-mii-ig-{{MODULE_SLUG}}.json; the `template =` line is
+          # left untouched — while it is the B3 TODO the build degrades to SUSHI-only).
+          subst sushi-config.yaml < "${RUNNER_TEMP}/placeholders.txt"
+          subst ig.ini < "${RUNNER_TEMP}/placeholders.txt"
+          # narrative pages (both languages), if present
+          find input/pagecontent input/translations -type f \( -name '*.md' -o -name '*.xml' \) 2>/dev/null | while read -r page; do
+            subst "${page}" < "${RUNNER_TEMP}/placeholders.txt"
+          done
           # Guard: no ACTIVE (non-comment) placeholder may survive in sushi-config.yaml.
           if grep -vE '^[[:space:]]*#' sushi-config.yaml | grep -q '{{[A-Za-z_]*}}'; then
-            echo "::error::A demo value is missing from the self-check substitution table — an active {{PLACEHOLDER}} survives in sushi-config.yaml."
+            echo "::error::A self-check value is missing from the substitution table — an active {{PLACEHOLDER}} survives in sushi-config.yaml."
             grep -nvE '^[[:space:]]*#' sushi-config.yaml | grep '{{[A-Za-z_]*}}'
             exit 1
           fi
-          echo "::notice::Template-repo self-check: substituted demo placeholders into WORKSPACE copies of sushi-config.yaml + ig.ini (never committed). A created module replaces the placeholders for real and skips this step."
+          echo "::notice::Template-repo self-check: substituted self-check placeholders into WORKSPACE copies of sushi-config.yaml, ig.ini and the narrative pages (never committed). A created module replaces the placeholders for real and skips this step."
 
       - name: SUSHI compile and decide build mode
         id: build

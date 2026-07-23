@@ -1,7 +1,10 @@
 <!-- markdownlint-disable MD041 -->
-> **Vorlagen-Platzhalter.** Ersetzen Sie diesen Text durch den Inhalt Ihres
-> Moduls. (Template placeholder — replace with your module's content.)
+Diese Seite führt die Beispielinstanzen des Moduls **{{MODULE_TITLE}}** auf. Die
+Vorlage enthält das synthetische Beispiel
+[Max Mustermann-Testpatient](Patient-ExamplePatientInstance.html).
 
-### Beispiele
+{:.bg-warning}
+**Nur synthetische Daten** — niemals echte oder realistisch wirkende
+Patientendaten in Beispielen verwenden.
 
-Beispielinstanzen des Moduls. Die Vorlage enthält das synthetische Beispiel [Max Mustermann-Testpatient](Patient-ExamplePatientInstance.html).
+> [TODO: Ergänzen Sie aussagekräftige Beispielinstanzen zu Ihren Profilen.]
