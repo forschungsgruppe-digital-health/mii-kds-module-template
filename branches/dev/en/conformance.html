@@ -263,19 +263,31 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <p style="border:var(--translation-box-border);background-color:var(--translation-background-color);padding: 5px 5px 5px 5px;">
 
-This page includes translations from the original source language in which the guide was authored.  Information on these translations and instructions on how to provide feedback on the translations can be found [here](translationinfo.html).
+There is no translation page available for the current page, so it has been rendered in the default language
 
 </p>
 
   <!-- markdownlint-disable MD041 -->
+  <!-- Übersichtsseite "Konformität". Die Unterseiten sind der MII-Standardsatz. -->
+
+<p>Dieser Abschnitt definiert die Konformitätsanforderungen für Systeme, die die
+Profile des Moduls <strong>Module Template</strong> umsetzen.</p>
+
+<ul>
+  <li><strong><a href="general-requirements.html">Allgemeine Anforderungen</a></strong> — gemeinsame
+Anforderungen an alle MII-Akteure (Konformitäts-Verben SHALL/SHOULD/MAY,
+Verwendung von Codes, RESTful-API-Anforderungen).</li>
+  <li><strong><a href="must-support.html">Must-Support</a></strong> — Bedeutung und Erwartungen an
+Must-Support-Elemente für Server und Clients.</li>
+  <li><strong><a href="missing-data.html">Umgang mit fehlenden Daten</a></strong> — Kodierung fehlender oder
+unbekannter Werte in konformen Ressourcen.</li>
+</ul>
+
 <blockquote>
-  <p><strong>Template placeholder.</strong> Replace this with your module's content. This is the
-recommended English supplement of the German default page.</p>
+  <p>[TODO: Ergänzen Sie modul-spezifische Konformitätsaussagen. In den
+Narrativ-Seiten werden Sätze mit <strong>SHALL/SHOULD/MAY</strong> automatisch als
+Konformitätsaussagen erfasst.]</p>
 </blockquote>
-
-<h3 id="conformance">Conformance</h3>
-
-<p>Overview of the conformance rules: <a href="general-requirements.html">General Requirements</a>, <a href="must-support.html">Must Support</a> and <a href="missing-data.html">Handling Missing Data</a>.</p>
 
 
 
@@ -302,7 +314,7 @@ recommended English supplement of the German default page.</p>
 
           IG &copy; 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Thu, Jul 23, 2026 11:08+0000">2026-07-23</span>
+          Generated <span title="Thu, Jul 23, 2026 11:42+0000">2026-07-23</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
               <!-- MII branding override for the fhir2.base.template footer fragment.

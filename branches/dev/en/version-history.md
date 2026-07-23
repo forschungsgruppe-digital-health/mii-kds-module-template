@@ -5,11 +5,11 @@
 
 ## Versioning
 
- This page includes translations from the original source language in which the guide was authored. Information on these translations and instructions on how to provide feedback on the translations can be found [here](translationinfo.html). 
+ There is no translation page available for the current page, so it has been rendered in the default language 
 
-> **Template placeholder.** Replace this with your module's content. This is the recommended English supplement of the German default page.
+### Versionierung
 
-### Versioning
+Das Modul **Module Template** wird nach dem MII-Schema **CalVer** (`JJJJ.n.n`, z. B. `2026.0.0`) versioniert — siehe die [MII Module Release Workflow](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow). Die [Änderungshistorie](changes.md) listet die Änderungen je Version.
 
-The module is versioned with the MII CalVer scheme (YYYY.n.n). The [Changelog](changes.md) lists the changes per version.
+> [TODO: Beschreiben Sie ggf. die Versionierungs-Policy Ihres Moduls.]
 

@@ -297,47 +297,118 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
     <p>  <!-- white space is critical inside of capture --></p>
-<div>
-  <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown. -->
-</div>
-
-  <!-- markdownlint-disable MD041 -->
-<blockquote>
-  <p><strong>Vorlagen-Hinweis / template note.</strong> Diese Seite ist ein <strong>Platzhalter</strong> aus
-der Modul-Vorlage. Ersetzen Sie den Inhalt durch die Beschreibung Ihres
-MII-KDS-Moduls. (Delete this note and write your module's home page.)</p>
-</blockquote>
-
-<p>#</p>
-
-<p>Willkommen im Implementation Guide des MII-Kerndatensatz-Moduls
-<em>**</em>. Dieser Guide beschreibt die FHIR-Profile, Terminologien
-und Konformitätsregeln des Moduls.</p>
-
-<p>Die <strong>Standardsprache dieses Guides ist Deutsch</strong>; eine englische Übersetzung
-ist als zweite Sprache empfohlen und wird — soweit vorhanden — über den
-Sprachumschalter oben rechts angeboten (siehe
-<a href="translationinfo.html">Übersetzungsinformationen</a>).</p>
-
-<h2 id="was-sie-hier-finden">Was Sie hier finden</h2>
-
-<ul>
-  <li><strong><a href="guidance.html">Anleitung</a></strong> — Einstieg für Forschende und Implementierende.</li>
-  <li><strong><a href="conformance.html">Konformität</a></strong> — verbindliche Anforderungen, Must-Support
-und der Umgang mit fehlenden Daten.</li>
-  <li><strong><a href="profiles-and-extensions.html">Profile und Extensions</a></strong> — die FHIR-Profile
-des Moduls. Die Vorlage enthält ein einziges, minimales
-<a href="StructureDefinition-example-patient.html">Beispielprofil</a>; ersetzen Sie es
-durch Ihre eigenen Profile.</li>
-  <li><strong><a href="terminology.html">Terminologie</a></strong> und <strong><a href="examples.html">Beispiele</a></strong>.</li>
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#einleitung" id="markdown-toc-einleitung">Einleitung</a></li>
+  <li><a href="#zielgruppe" id="markdown-toc-zielgruppe">Zielgruppe</a></li>
+  <li><a href="#inhalt-dieses-leitfadens" id="markdown-toc-inhalt-dieses-leitfadens">Inhalt dieses Leitfadens</a></li>
+  <li><a href="#impressum" id="markdown-toc-impressum">Impressum</a></li>
+  <li><a href="#ansprechpartner" id="markdown-toc-ansprechpartner">Ansprechpartner</a></li>
+  <li><a href="#autorinnen-in-alphabetischer-reihenfolge" id="markdown-toc-autorinnen-in-alphabetischer-reihenfolge">Autor:innen (in alphabetischer Reihenfolge)</a></li>
+  <li><a href="#copyright-hinweis--nutzungshinweise" id="markdown-toc-copyright-hinweis--nutzungshinweise">Copyright-Hinweis / Nutzungshinweise</a></li>
 </ul>
 
+</div>
+  <!-- markdownlint-disable MD041 -->
+  <!-- HOME PAGE — this follows the standard MII module IG structure (derived from the
+  MII IG template and kerndatensatz-basis). Replace the  placeholders and
+  the bracketed [TODO ...] prompts with your module's real content, then delete
+  these HTML comments. Keep the section headings — a reviewer expects them.
+  The English rendering of this page lives at
+  input/translations/en/pagecontent/index.md (see docs/recipes/add-translation.md). -->
+
+<h3 id="einleitung">Einleitung</h3>
+
+<p>Diese Spezifikation beschreibt die FHIR-Repräsentation des
+Kerndatensatz-(KDS-)Moduls <strong>Module Template</strong> der Medizininformatik-Initiative
+(MII). Sie beschreibt die Anwendungsfälle des Moduls sowie die zugehörigen
+FHIR-Profile, Extensions und Terminologie-Ressourcen in ihrer verbindlichen
+Form. Der MII-Kerndatensatz dient der standardisierten Nutzung klinischer
+Routinedaten für die medizinische Forschung.</p>
+
 <blockquote>
-  <p><strong>Why this page ships with content:</strong> a created module must render a non-empty
-IG on its first build. Every page in this starter set is a stub you overwrite;
-they exist so the navigation, the language switcher and the QA report all work
-from day one.</p>
+  <p>[TODO: Beschreiben Sie in ein bis zwei Sätzen den fachlichen Gegenstand Ihres
+Moduls — welche Daten es abdeckt und wofür sie genutzt werden.]</p>
 </blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>Veröffentlichung</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Datum</td>
+      <td>2026-01-01</td>
+    </tr>
+    <tr>
+      <td>Version</td>
+      <td>2026.0.0 (CalVer <code class="language-plaintext highlighter-rouge">JJJJ.n.n</code>)</td>
+    </tr>
+    <tr>
+      <td>Status</td>
+      <td>active</td>
+    </tr>
+    <tr>
+      <td>Realm</td>
+      <td>DE</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="zielgruppe">Zielgruppe</h3>
+
+<p>Dieser Implementierungsleitfaden richtet sich an:</p>
+
+<ul>
+  <li><strong>Implementierende</strong> in Datenintegrationszentren (DIZ), Software-Entwickelnde
+und System-Architekt:innen, die FHIR-basierte Lösungen umsetzen
+(→ siehe <a href="profiles-and-extensions.html">Profile und Extensions</a> und
+<a href="logical-models.html">Logische Modelle</a>).</li>
+  <li><strong>Forschende</strong>, die MII-Daten für wissenschaftliche Zwecke nutzen
+(→ siehe <a href="researcher-guidance.html">Anleitung für Forschende</a>).</li>
+</ul>
+
+<h3 id="inhalt-dieses-leitfadens">Inhalt dieses Leitfadens</h3>
+
+<ul>
+  <li><strong><a href="guidance.html">Anleitung</a></strong> — Einstieg und fachliche Hinweise.</li>
+  <li><strong><a href="conformance.html">Konformität</a></strong> — verbindliche Anforderungen, Must-Support
+und der Umgang mit fehlenden Daten.</li>
+  <li><strong><a href="profiles-and-extensions.html">Profile und Extensions</a></strong> und
+<strong><a href="terminology.html">Terminologie</a></strong> — die technischen Artefakte.</li>
+  <li><strong><a href="examples.html">Beispiele</a></strong> — Beispielinstanzen.</li>
+</ul>
+
+<h3 id="impressum">Impressum</h3>
+
+<p>Dieser Leitfaden ist im Rahmen der Medizininformatik-Initiative erstellt worden
+und unterliegt per Governance-Prozess dem Abstimmungsverfahren des
+Interoperabilitätsforums und der Technischen Komitees von HL7 Deutschland e. V.</p>
+
+<h3 id="ansprechpartner">Ansprechpartner</h3>
+
+<p>Fragen zu dieser Publikation können im HL7-FHIR-Zulip
+<a href="https://chat.fhir.org">chat.fhir.org</a> im Stream <code class="language-plaintext highlighter-rouge">german/mi-initiative</code> gestellt
+werden. Anmerkungen und Kritik werden als <em>Issues</em> auf
+<a href="https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues">GitHub</a> entgegengenommen.</p>
+
+<blockquote>
+  <p>[TODO: Nennen Sie die fachlichen Ansprechpartner:innen Ihres Moduls.]</p>
+</blockquote>
+
+<h3 id="autorinnen-in-alphabetischer-reihenfolge">Autor:innen (in alphabetischer Reihenfolge)</h3>
+
+<blockquote>
+  <p>[TODO: Listen Sie die Autor:innen des Moduls mit Institution auf.]</p>
+</blockquote>
+
+<h3 id="copyright-hinweis--nutzungshinweise">Copyright-Hinweis / Nutzungshinweise</h3>
+
+<p>&copy; 2026+ — dieses Werk ist lizenziert unter der
+<a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Namensnennung 4.0 International Lizenz (CC BY 4.0)</a>.</p>
 
 
 

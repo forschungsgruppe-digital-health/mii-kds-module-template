@@ -257,25 +257,45 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
     <p>  <!-- white space is critical inside of capture --></p>
-<div>
-  <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown. -->
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#pflicht-elemente-min--1" id="markdown-toc-pflicht-elemente-min--1">Pflicht-Elemente (min = 1)</a></li>
+  <li><a href="#must-support-elemente" id="markdown-toc-must-support-elemente">Must-Support-Elemente</a></li>
+</ul>
+
 </div>
-
-<p style="border:var(--translation-box-border);background-color:var(--translation-background-color);padding: 5px 5px 5px 5px;">
-
-There is no translation page available for the current page, so it has been rendered in the default language
-
-</p>
-
   <!-- markdownlint-disable MD041 -->
+  <!-- Must-Support-Definition. Der MII-Standardtext ist unten als Ausgangspunkt
+     vorformuliert; passen Sie ihn NUR an, wenn Ihr Modul abweicht. -->
+
+<p>Für das Abfragen und Lesen von MII-Profilen ist <em>Must Support</em> auf einem
+Datenelement wie folgt zu interpretieren.</p>
+
+<h3 id="pflicht-elemente-min--1">Pflicht-Elemente (min = 1)</h3>
+
+<p>Pflicht-Elemente haben eine Mindest-Kardinalität von 1. Die Daten werden immer
+erwartet. Sind sie ausnahmsweise nicht vorhanden, gilt der Abschnitt
+<a href="missing-data.html">Umgang mit fehlenden Daten</a>.</p>
+
+<h3 id="must-support-elemente">Must-Support-Elemente</h3>
+
+<p>Als <em>Must Support</em> (MS) markierte Elemente MÜSSEN von konformen Systemen
+unterstützt werden. Es wird zwischen datenliefernden Systemen (Server, z. B. die
+FHIR-API eines DIZ) und datenempfangenden Systemen (Client) unterschieden.</p>
+
+<h4 id="erwartung-an-server">Erwartung an Server</h4>
+
+<p>Der Server <strong>SHALL</strong> ein Must-Support-Element befüllen können, sofern die Daten
+lokal verfügbar sind, es speichern und auf Anfrage bereitstellen können.</p>
+
+<h4 id="erwartung-an-clients">Erwartung an Clients</h4>
+
+<p>Der Client <strong>SHALL</strong> das Element verarbeiten (anzeigen/speichern/weiterverarbeiten)
+können.</p>
+
 <blockquote>
-  <p><strong>Vorlagen-Platzhalter.</strong> Ersetzen Sie diesen Text durch den Inhalt Ihres
-Moduls. (Template placeholder — replace with your module's content.)</p>
+  <p>[TODO: Nur ergänzen, falls Ihr Modul zusätzliche Must-Support-Regeln definiert.]</p>
 </blockquote>
-
-<h3 id="must-support">Must-Support</h3>
-
-<p>Erläutern Sie die Bedeutung des Must-Support-Flags für dieses Modul.</p>
 
 
 
@@ -302,7 +322,7 @@ Moduls. (Template placeholder — replace with your module's content.)</p>
 
           IG &copy; 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Thu, Jul 23, 2026 11:08+0000">2026-07-23</span>
+          Generated <span title="Thu, Jul 23, 2026 11:42+0000">2026-07-23</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
               <!-- MII branding override for the fhir2.base.template footer fragment.

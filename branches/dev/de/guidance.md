@@ -5,9 +5,21 @@
 
 ## Guidance
 
-> **Vorlagen-Platzhalter.** Ersetzen Sie diesen Text durch den Inhalt Ihres Moduls. (Template placeholder — replace with your module's content.)
+Dieser Abschnitt bündelt die fachlichen Hinweise zur Umsetzung und Nutzung des Moduls **Module Template**.
 
-### Anleitung
+### Allgemeine Umsetzungshinweise
 
-Übersichtsseite der Anleitung. Verlinken Sie hier die [Anleitung für Forschende](researcher-guidance.md) und die [Anleitung für Implementierende](implementer-guidance.md).
+* **[Datensätze und Beschreibungen](datasets-and-descriptions.md)** — ausführliche Beschreibung der Datenelemente / logischen Modelle des Moduls.
+* **[UML-Diagramme](uml-diagrams.md)** — visuelle Darstellung der Datenmodelle und ihrer Beziehungen.
+
+### Zielgruppenspezifische Hinweise
+
+* **[Anleitung für Forschende](researcher-guidance.md)** — für Forschende, die Moduldaten nutzen.
+* **[Anleitung für Implementierende](implementer-guidance.md)** — technische Hinweise für DIZ-Implementierende.
+
+> [TODO: Ergänzen Sie modul-spezifische Hinweise, die für alle Zielgruppen relevant sind — z. B. den fachlichen Geltungsbereich oder Abgrenzungen.]
+
+-------
+
+Für Konformitätsanforderungen siehe [Konformität](conformance.md); für die technischen Artefakte siehe [Profile und Extensions](profiles-and-extensions.md).
 

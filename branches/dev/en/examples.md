@@ -5,11 +5,11 @@
 
 ## Examples
 
- This page includes translations from the original source language in which the guide was authored. Information on these translations and instructions on how to provide feedback on the translations can be found [here](translationinfo.html). 
+ There is no translation page available for the current page, so it has been rendered in the default language 
 
-> **Template placeholder.** Replace this with your module's content. This is the recommended English supplement of the German default page.
+Diese Seite führt die Beispielinstanzen des Moduls **Module Template** auf. Die Vorlage enthält das synthetische Beispiel [Max Mustermann-Testpatient](Patient-ExamplePatientInstance.md).
 
-### Examples
+**Nur synthetische Daten** — niemals echte oder realistisch wirkende Patientendaten in Beispielen verwenden.
 
-Example instances of the module. The template ships the synthetic example [Max Mustermann-Testpatient](Patient-ExamplePatientInstance.md).
+> [TODO: Ergänzen Sie aussagekräftige Beispielinstanzen zu Ihren Profilen.]
 

@@ -257,19 +257,46 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
     <p>  <!-- white space is critical inside of capture --></p>
-<div>
-  <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown. -->
-</div>
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#allgemeine-umsetzungshinweise" id="markdown-toc-allgemeine-umsetzungshinweise">Allgemeine Umsetzungshinweise</a></li>
+  <li><a href="#zielgruppenspezifische-hinweise" id="markdown-toc-zielgruppenspezifische-hinweise">Zielgruppenspezifische Hinweise</a></li>
+</ul>
 
+</div>
   <!-- markdownlint-disable MD041 -->
+  <!-- Übersichtsseite "Anleitung". Ersetzen Sie die [TODO]-Hinweise; die
+     Unterseiten-Struktur folgt dem MII-Standard (vgl. kerndatensatz-basis). -->
+
+<p>Dieser Abschnitt bündelt die fachlichen Hinweise zur Umsetzung und Nutzung des
+Moduls <strong>Module Template</strong>.</p>
+
+<h3 id="allgemeine-umsetzungshinweise">Allgemeine Umsetzungshinweise</h3>
+
+<ul>
+  <li><strong><a href="datasets-and-descriptions.html">Datensätze und Beschreibungen</a></strong> —
+ausführliche Beschreibung der Datenelemente / logischen Modelle des Moduls.</li>
+  <li><strong><a href="uml-diagrams.html">UML-Diagramme</a></strong> — visuelle Darstellung der Datenmodelle
+und ihrer Beziehungen.</li>
+</ul>
+
+<h3 id="zielgruppenspezifische-hinweise">Zielgruppenspezifische Hinweise</h3>
+
+<ul>
+  <li><strong><a href="researcher-guidance.html">Anleitung für Forschende</a></strong> — für Forschende, die
+Moduldaten nutzen.</li>
+  <li><strong><a href="implementer-guidance.html">Anleitung für Implementierende</a></strong> — technische
+Hinweise für DIZ-Implementierende.</li>
+</ul>
+
 <blockquote>
-  <p><strong>Vorlagen-Platzhalter.</strong> Ersetzen Sie diesen Text durch den Inhalt Ihres
-Moduls. (Template placeholder — replace with your module's content.)</p>
+  <p>[TODO: Ergänzen Sie modul-spezifische Hinweise, die für alle Zielgruppen
+relevant sind — z. B. den fachlichen Geltungsbereich oder Abgrenzungen.]</p>
 </blockquote>
 
-<h3 id="anleitung">Anleitung</h3>
-
-<p>Übersichtsseite der Anleitung. Verlinken Sie hier die <a href="researcher-guidance.html">Anleitung für Forschende</a> und die <a href="implementer-guidance.html">Anleitung für Implementierende</a>.</p>
+<hr/>
+<p>Für Konformitätsanforderungen siehe <a href="conformance.html">Konformität</a>; für die
+technischen Artefakte siehe <a href="profiles-and-extensions.html">Profile und Extensions</a>.</p>
 
 
 

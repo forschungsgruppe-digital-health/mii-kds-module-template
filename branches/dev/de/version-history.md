@@ -5,9 +5,9 @@
 
 ## Versioning
 
-> **Vorlagen-Platzhalter.** Ersetzen Sie diesen Text durch den Inhalt Ihres Moduls. (Template placeholder — replace with your module's content.)
-
 ### Versionierung
 
-Das Modul wird nach dem MII-CalVer-Schema (JJJJ.n.n) versioniert. Die [Änderungshistorie](changes.md) listet die Änderungen je Version.
+Das Modul **Module Template** wird nach dem MII-Schema **CalVer** (`JJJJ.n.n`, z. B. `2026.0.0`) versioniert — siehe die [MII Module Release Workflow](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow). Die [Änderungshistorie](changes.md) listet die Änderungen je Version.
+
+> [TODO: Beschreiben Sie ggf. die Versionierungs-Policy Ihres Moduls.]
 

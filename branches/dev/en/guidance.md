@@ -5,11 +5,21 @@
 
 ## Guidance
 
- This page includes translations from the original source language in which the guide was authored. Information on these translations and instructions on how to provide feedback on the translations can be found [here](translationinfo.html). 
+Dieser Abschnitt bündelt die fachlichen Hinweise zur Umsetzung und Nutzung des Moduls **Module Template**.
 
-> **Template placeholder.** Replace this with your module's content. This is the recommended English supplement of the German default page.
+### Allgemeine Umsetzungshinweise
 
-### Guidance
+* **[Datensätze und Beschreibungen](datasets-and-descriptions.md)** — ausführliche Beschreibung der Datenelemente / logischen Modelle des Moduls.
+* **[UML-Diagramme](uml-diagrams.md)** — visuelle Darstellung der Datenmodelle und ihrer Beziehungen.
 
-Guidance overview. Link the [Guidance for Researchers](researcher-guidance.md) and [Guidance for Implementers](implementer-guidance.md) here.
+### Zielgruppenspezifische Hinweise
+
+* **[Anleitung für Forschende](researcher-guidance.md)** — für Forschende, die Moduldaten nutzen.
+* **[Anleitung für Implementierende](implementer-guidance.md)** — technische Hinweise für DIZ-Implementierende.
+
+> [TODO: Ergänzen Sie modul-spezifische Hinweise, die für alle Zielgruppen relevant sind — z. B. den fachlichen Geltungsbereich oder Abgrenzungen.]
+
+-------
+
+Für Konformitätsanforderungen siehe [Konformität](conformance.md); für die technischen Artefakte siehe [Profile und Extensions](profiles-and-extensions.md).
 

@@ -299,25 +299,110 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
     <p>  <!-- white space is critical inside of capture --></p>
-<div>
-  <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown. -->
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#target-audience" id="markdown-toc-target-audience">Target audience</a></li>
+  <li><a href="#contents" id="markdown-toc-contents">Contents</a></li>
+  <li><a href="#imprint" id="markdown-toc-imprint">Imprint</a></li>
+  <li><a href="#contact" id="markdown-toc-contact">Contact</a></li>
+  <li><a href="#authors-in-alphabetical-order" id="markdown-toc-authors-in-alphabetical-order">Authors (in alphabetical order)</a></li>
+  <li><a href="#copyright--terms-of-use" id="markdown-toc-copyright--terms-of-use">Copyright / terms of use</a></li>
+</ul>
+
 </div>
-
-<p style="border:var(--translation-box-border);background-color:var(--translation-background-color);padding: 5px 5px 5px 5px;">
-
-This page includes translations from the original source language in which the guide was authored.  Information on these translations and instructions on how to provide feedback on the translations can be found [here](translationinfo.html).
-
-</p>
-
   <!-- markdownlint-disable MD041 -->
+  <!-- English rendering of input/pagecontent/index.md. Keep in step with it. -->
+
+<h3 id="introduction">Introduction</h3>
+
+<p>This specification describes the FHIR representation of the Core Dataset (CDS)
+module <strong>Module Template</strong> of the Medical Informatics Initiative (MII). It
+covers the module's use cases and the associated FHIR profiles, extensions and
+terminology resources in their normative form. The MII Core Dataset enables the
+standardized secondary use of routine clinical data for medical research.</p>
+
 <blockquote>
-  <p><strong>Template placeholder.</strong> Replace this with your module's content. This is the
-recommended English supplement of the German default page.</p>
+  <p>[TODO: In one or two sentences, describe what your module covers and what the
+data is used for.]</p>
 </blockquote>
 
-<h3 id="home">Home</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Publication</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Date</td>
+      <td>2026-01-01</td>
+    </tr>
+    <tr>
+      <td>Version</td>
+      <td>2026.0.0 (CalVer <code class="language-plaintext highlighter-rouge">YYYY.n.n</code>)</td>
+    </tr>
+    <tr>
+      <td>Status</td>
+      <td>active</td>
+    </tr>
+    <tr>
+      <td>Realm</td>
+      <td>DE</td>
+    </tr>
+  </tbody>
+</table>
 
-<p>Welcome to the Implementation Guide of the MII Core Dataset module <em>**</em>. The default language of this guide is German; English is the recommended second language, offered via the language switcher where a supplement exists. Start with the <a href="guidance.html">Guidance</a> and <a href="conformance.html">Conformance</a> pages.</p>
+<h3 id="target-audience">Target audience</h3>
+
+<ul>
+  <li><strong>Implementers</strong> in Data Integration Centers (DIC), software developers and
+system architects building FHIR-based solutions
+(→ see <a href="profiles-and-extensions.html">Profiles and Extensions</a> and
+<a href="logical-models.html">Logical Models</a>).</li>
+  <li><strong>Researchers</strong> using MII data for research
+(→ see <a href="researcher-guidance.html">Guidance for Researchers</a>).</li>
+</ul>
+
+<h3 id="contents">Contents</h3>
+
+<ul>
+  <li><strong><a href="guidance.html">Guidance</a></strong> — getting started and domain notes.</li>
+  <li><strong><a href="conformance.html">Conformance</a></strong> — normative requirements, Must-Support and
+handling missing data.</li>
+  <li><strong><a href="profiles-and-extensions.html">Profiles and Extensions</a></strong> and
+<strong><a href="terminology.html">Terminology</a></strong> — the technical artifacts.</li>
+  <li><strong><a href="examples.html">Examples</a></strong> — example instances.</li>
+</ul>
+
+<h3 id="imprint">Imprint</h3>
+
+<p>This guide was created within the Medical Informatics Initiative and is subject,
+by its governance process, to the coordination procedure of the Interoperability
+Forum and the technical committees of HL7 Germany.</p>
+
+<h3 id="contact">Contact</h3>
+
+<p>Questions about this publication can be asked on the HL7 FHIR Zulip
+<a href="https://chat.fhir.org">chat.fhir.org</a> in the <code class="language-plaintext highlighter-rouge">german/mi-initiative</code> stream.
+Comments and issues are welcome as <em>Issues</em> on
+<a href="https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues">GitHub</a>.</p>
+
+<blockquote>
+  <p>[TODO: Name your module's domain contacts.]</p>
+</blockquote>
+
+<h3 id="authors-in-alphabetical-order">Authors (in alphabetical order)</h3>
+
+<blockquote>
+  <p>[TODO: List the module's authors with their institution.]</p>
+</blockquote>
+
+<h3 id="copyright--terms-of-use">Copyright / terms of use</h3>
+
+<p>&copy; 2026+ — this work is licensed under the
+<a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License (CC BY 4.0)</a>.</p>
 
 
 
@@ -344,7 +429,7 @@ recommended English supplement of the German default page.</p>
 
           IG &copy; 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Thu, Jul 23, 2026 11:08+0000">2026-07-23</span>
+          Generated <span title="Thu, Jul 23, 2026 11:42+0000">2026-07-23</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
               <!-- MII branding override for the fhir2.base.template footer fragment.

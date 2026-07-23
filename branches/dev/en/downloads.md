@@ -5,11 +5,11 @@
 
 ## Downloads
 
- This page includes translations from the original source language in which the guide was authored. Information on these translations and instructions on how to provide feedback on the translations can be found [here](translationinfo.html). 
-
-> **Template placeholder.** Replace this with your module's content. This is the recommended English supplement of the German default page.
+ There is no translation page available for the current page, so it has been rendered in the default language 
 
 ### Downloads
 
-Link the module's FHIR package and other downloadable artifacts here.
+Herunterladbare Artefakte des Moduls **Module Template**: das FHIR-Paket sowie die maschinenlesbaren Definitionen. Der IG-Publisher verlinkt das NPM-Paket und die Definitionen automatisch.
+
+> [TODO: Ergänzen Sie ggf. weitere Downloads (z. B. Beispielbundles).]
 

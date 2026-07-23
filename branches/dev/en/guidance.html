@@ -257,25 +257,46 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
     <p>  <!-- white space is critical inside of capture --></p>
-<div>
-  <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown. -->
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#allgemeine-umsetzungshinweise" id="markdown-toc-allgemeine-umsetzungshinweise">Allgemeine Umsetzungshinweise</a></li>
+  <li><a href="#zielgruppenspezifische-hinweise" id="markdown-toc-zielgruppenspezifische-hinweise">Zielgruppenspezifische Hinweise</a></li>
+</ul>
+
 </div>
-
-<p style="border:var(--translation-box-border);background-color:var(--translation-background-color);padding: 5px 5px 5px 5px;">
-
-This page includes translations from the original source language in which the guide was authored.  Information on these translations and instructions on how to provide feedback on the translations can be found [here](translationinfo.html).
-
-</p>
-
   <!-- markdownlint-disable MD041 -->
+  <!-- Übersichtsseite "Anleitung". Ersetzen Sie die [TODO]-Hinweise; die
+     Unterseiten-Struktur folgt dem MII-Standard (vgl. kerndatensatz-basis). -->
+
+<p>Dieser Abschnitt bündelt die fachlichen Hinweise zur Umsetzung und Nutzung des
+Moduls <strong>Module Template</strong>.</p>
+
+<h3 id="allgemeine-umsetzungshinweise">Allgemeine Umsetzungshinweise</h3>
+
+<ul>
+  <li><strong><a href="datasets-and-descriptions.html">Datensätze und Beschreibungen</a></strong> —
+ausführliche Beschreibung der Datenelemente / logischen Modelle des Moduls.</li>
+  <li><strong><a href="uml-diagrams.html">UML-Diagramme</a></strong> — visuelle Darstellung der Datenmodelle
+und ihrer Beziehungen.</li>
+</ul>
+
+<h3 id="zielgruppenspezifische-hinweise">Zielgruppenspezifische Hinweise</h3>
+
+<ul>
+  <li><strong><a href="researcher-guidance.html">Anleitung für Forschende</a></strong> — für Forschende, die
+Moduldaten nutzen.</li>
+  <li><strong><a href="implementer-guidance.html">Anleitung für Implementierende</a></strong> — technische
+Hinweise für DIZ-Implementierende.</li>
+</ul>
+
 <blockquote>
-  <p><strong>Template placeholder.</strong> Replace this with your module's content. This is the
-recommended English supplement of the German default page.</p>
+  <p>[TODO: Ergänzen Sie modul-spezifische Hinweise, die für alle Zielgruppen
+relevant sind — z. B. den fachlichen Geltungsbereich oder Abgrenzungen.]</p>
 </blockquote>
 
-<h3 id="guidance">Guidance</h3>
-
-<p>Guidance overview. Link the <a href="researcher-guidance.html">Guidance for Researchers</a> and <a href="implementer-guidance.html">Guidance for Implementers</a> here.</p>
+<hr/>
+<p>Für Konformitätsanforderungen siehe <a href="conformance.html">Konformität</a>; für die
+technischen Artefakte siehe <a href="profiles-and-extensions.html">Profile und Extensions</a>.</p>
 
 
 
@@ -302,7 +323,7 @@ recommended English supplement of the German default page.</p>
 
           IG &copy; 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Thu, Jul 23, 2026 11:08+0000">2026-07-23</span>
+          Generated <span title="Thu, Jul 23, 2026 11:42+0000">2026-07-23</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
               <!-- MII branding override for the fhir2.base.template footer fragment.

@@ -4,7 +4,7 @@ MII_IG_Template : Validation Results
 err = 1, warn = 9, info = 107
 $--
 Generated $--. FHIR version $-- for de.medizininformatikinitiative.kerndatensatz.template#$-- (canonical = https://www.medizininformatik-initiative.de/fhir/modul-template)
- Build Errors : 70 / 5 / 0
+ Build Errors : 74 / 5 / 0
  /home/runner/work/mii-kds-module-template/mii-kds-module-template/fsh-generated/resources/ImplementationGuide-mii-ig-template : 1 / 4 / 42
  /home/runner/work/mii-kds-module-template/mii-kds-module-template/fsh-generated/resources/Patient-ExamplePatientInstance : 0 / 0 / 1
  /home/runner/work/mii-kds-module-template/mii-kds-module-template/fsh-generated/resources/StructureDefinition-example-patient : 0 / 0 / 70
@@ -39,11 +39,13 @@ ERROR: de/metadata.html#/html/body/div/div/div/p/span/img at Line 81, column 4: 
 ERROR: de/missing-data.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
 ERROR: de/must-support.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
 ERROR: de/profiles-and-extensions.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/profiles-and-extensions.html#/html/body/div/div/div/div/div/p/a at Line 272, column 101: The link '../docs/recipes/add-a-profile.md' for "add-a-profile Rezept" cannot be resolved
 ERROR: de/researcher-guidance.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
 ERROR: de/search-parameters-and-operations.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
 ERROR: de/terminology.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
 ERROR: de/toc.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
 ERROR: de/translationinfo.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/translationinfo.html#/html/body/div/div/div/div/div/p/a at Line 277, column 2: The link '../docs/recipes/add-translation.md' for "add-translation Rezept" cannot be resolved
 ERROR: de/uml-diagrams.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
 ERROR: de/version-history.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
 ERROR: en/Patient-ExamplePatientInstance.change.history.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
@@ -74,11 +76,13 @@ ERROR: en/metadata.html#/html/body/div/div/div/p/span/img at Line 81, column 4: 
 ERROR: en/missing-data.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
 ERROR: en/must-support.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
 ERROR: en/profiles-and-extensions.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/profiles-and-extensions.html#/html/body/div/div/div/div/div/p/a at Line 278, column 101: The link '../docs/recipes/add-a-profile.md' for "add-a-profile Rezept" cannot be resolved
 ERROR: en/researcher-guidance.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
 ERROR: en/search-parameters-and-operations.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
 ERROR: en/terminology.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
 ERROR: en/toc.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
 ERROR: en/translationinfo.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/translationinfo.html#/html/body/div/div/div/div/div/p/a at Line 283, column 2: The link '../docs/recipes/add-translation.md' for "add-translation Rezept" cannot be resolved
 ERROR: en/uml-diagrams.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
 ERROR: en/version-history.html#/html/body/div/div/div/p/span/img at Line 81, column 4: The image source 'assets/images/deu.svg' cannot be resolved
 WARNING: 1: An HTML fragment from the set [ip-statements.xhtml, ip-statements.xhtml] is not included anywhere in the produced implementation guide

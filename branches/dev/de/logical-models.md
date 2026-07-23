@@ -5,9 +5,9 @@
 
 ## Logical Models
 
-> **Vorlagen-Platzhalter.** Ersetzen Sie diesen Text durch den Inhalt Ihres Moduls. (Template placeholder — replace with your module's content.)
-
 ### Logische Modelle
 
-Logische Datenmodelle des Moduls, falls vorhanden.
+Die logischen Datenmodelle des Moduls **Module Template** beschreiben den fachlichen Datensatz unabhängig von der konkreten FHIR-Repräsentation.
+
+> [TODO: Fügen Sie die logischen Modelle ein, oder entfernen Sie diese Seite.]
 

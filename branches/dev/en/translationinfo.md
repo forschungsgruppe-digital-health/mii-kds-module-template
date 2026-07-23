@@ -7,9 +7,11 @@
 
  There is no translation page available for the current page, so it has been rendered in the default language 
 
-> **Vorlagen-Platzhalter.** Ersetzen Sie diesen Text durch den Inhalt Ihres Moduls. (Template placeholder — replace with your module's content.)
-
 ### Übersetzungsinformationen
 
-Dieser Guide ist deutschsprachig (Standard); Englisch ist die empfohlene zweite Sprache. Übersetzungs-Ergänzungen liegen unter `input/translations/en/`.
+Dieser Leitfaden ist **deutschsprachig** (Standardsprache); **Englisch** ist die empfohlene zweite Sprache. Über den Sprachumschalter oben rechts wechseln Sie zwischen `/de/` und `/en/`.
+
+Übersetzte Seiten liegen unter `input/translations/en/pagecontent/` (gleicher Dateiname wie die deutsche Seite); Ressourcen-Übersetzungen als `.po`-Dateien unter `input/translations/en/`. Details: [add-translation Rezept](../docs/recipes/add-translation.md).
+
+> [TODO: Vermerken Sie, welche Teile des Moduls bereits ins Englische übersetzt sind.]
 

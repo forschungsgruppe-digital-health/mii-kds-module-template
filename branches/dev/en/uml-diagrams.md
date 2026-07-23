@@ -8,9 +8,9 @@
 
  There is no translation page available for the current page, so it has been rendered in the default language 
 
-> **Vorlagen-Platzhalter.** Ersetzen Sie diesen Text durch den Inhalt Ihres Moduls. (Template placeholder — replace with your module's content.)
-
 ### UML-Diagramme
 
-Optionale UML-Übersichten des Moduls. Quellen liegen in `input/images-source/`.
+UML-Übersichten der Datenmodelle des Moduls **Module Template** und ihrer Beziehungen. Editierbare Quellen (z. B. PlantUML) gehören nach `input/images-source/`, die gerenderten Bilder nach `input/images/`.
+
+> [TODO: Fügen Sie die UML-Diagramme Ihres Moduls ein, oder entfernen Sie diese Seite, wenn keine vorhanden sind.]
 

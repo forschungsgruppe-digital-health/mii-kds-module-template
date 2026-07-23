@@ -10,20 +10,48 @@
 | **:https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template | **:2026.0.0 |
 | Active | **:MII_IG_Template |
 
-> **Vorlagen-Hinweis / template note.** Diese Seite ist ein **Platzhalter** aus der Modul-Vorlage. Ersetzen Sie den Inhalt durch die Beschreibung Ihres MII-KDS-Moduls. (Delete this note and write your module's home page.)
+### Einleitung
 
-#
+Diese Spezifikation beschreibt die FHIR-Repräsentation des Kerndatensatz-(KDS-)Moduls **Module Template** der Medizininformatik-Initiative (MII). Sie beschreibt die Anwendungsfälle des Moduls sowie die zugehörigen FHIR-Profile, Extensions und Terminologie-Ressourcen in ihrer verbindlichen Form. Der MII-Kerndatensatz dient der standardisierten Nutzung klinischer Routinedaten für die medizinische Forschung.
 
-Willkommen im Implementation Guide des MII-Kerndatensatz-Moduls ******. Dieser Guide beschreibt die FHIR-Profile, Terminologien und Konformitätsregeln des Moduls.
+> [TODO: Beschreiben Sie in ein bis zwei Sätzen den fachlichen Gegenstand Ihres Moduls — welche Daten es abdeckt und wofür sie genutzt werden.]
 
-Die **Standardsprache dieses Guides ist Deutsch**; eine englische Übersetzung ist als zweite Sprache empfohlen und wird — soweit vorhanden — über den Sprachumschalter oben rechts angeboten (siehe [Übersetzungsinformationen](translationinfo.md)).
+| | |
+| :--- | :--- |
+| Datum | 2026-01-01 |
+| Version | 2026.0.0 (CalVer`JJJJ.n.n`) |
+| Status | active |
+| Realm | DE |
 
-## Was Sie hier finden
+### Zielgruppe
 
-* **[Anleitung](guidance.md)** — Einstieg für Forschende und Implementierende.
+Dieser Implementierungsleitfaden richtet sich an:
+
+* **Implementierende** in Datenintegrationszentren (DIZ), Software-Entwickelnde und System-Architekt:innen, die FHIR-basierte Lösungen umsetzen (→ siehe [Profile und Extensions](profiles-and-extensions.md) und [Logische Modelle](logical-models.md)).
+* **Forschende**, die MII-Daten für wissenschaftliche Zwecke nutzen (→ siehe [Anleitung für Forschende](researcher-guidance.md)).
+
+### Inhalt dieses Leitfadens
+
+* **[Anleitung](guidance.md)** — Einstieg und fachliche Hinweise.
 * **[Konformität](conformance.md)** — verbindliche Anforderungen, Must-Support und der Umgang mit fehlenden Daten.
-* **[Profile und Extensions](profiles-and-extensions.md)** — die FHIR-Profile des Moduls. Die Vorlage enthält ein einziges, minimales [Beispielprofil](StructureDefinition-example-patient.md); ersetzen Sie es durch Ihre eigenen Profile.
-* **[Terminologie](terminology.md)** und **[Beispiele](examples.md)**.
+* **[Profile und Extensions](profiles-and-extensions.md)** und **[Terminologie](terminology.md)** — die technischen Artefakte.
+* **[Beispiele](examples.md)** — Beispielinstanzen.
 
-> **Why this page ships with content:** a created module must render a non-empty IG on its first build. Every page in this starter set is a stub you overwrite; they exist so the navigation, the language switcher and the QA report all work from day one.
+### Impressum
+
+Dieser Leitfaden ist im Rahmen der Medizininformatik-Initiative erstellt worden und unterliegt per Governance-Prozess dem Abstimmungsverfahren des Interoperabilitätsforums und der Technischen Komitees von HL7 Deutschland e. V.
+
+### Ansprechpartner
+
+Fragen zu dieser Publikation können im HL7-FHIR-Zulip [chat.fhir.org](https://chat.fhir.org) im Stream `german/mi-initiative` gestellt werden. Anmerkungen und Kritik werden als **Issues** auf [GitHub](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues) entgegengenommen.
+
+> [TODO: Nennen Sie die fachlichen Ansprechpartner:innen Ihres Moduls.]
+
+### Autor:innen (in alphabetischer Reihenfolge)
+
+> [TODO: Listen Sie die Autor:innen des Moduls mit Institution auf.]
+
+### Copyright-Hinweis / Nutzungshinweise
+
+© 2026+ — dieses Werk ist lizenziert unter der [Creative Commons Namensnennung 4.0 International Lizenz (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
 

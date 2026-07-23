@@ -268,14 +268,32 @@ There is no translation page available for the current page, so it has been rend
 </p>
 
   <!-- markdownlint-disable MD041 -->
+  <!-- Umgang mit fehlenden Daten. Der MII-Standardansatz (FHIR-konform, an IPS
+     angelehnt) ist vorformuliert. -->
+
+<h3 id="fehlende-daten">Fehlende Daten</h3>
+
+<p>Dieser Abschnitt beschreibt den Umgang mit fehlenden Daten in den Ressourcen des
+Moduls <strong>Module Template</strong>. Die Regeln folgen der
+<a href="https://hl7.org/fhir/R4/extensibility.html#Special-Case">FHIR-Kernspezifikation</a>
+und dem <a href="https://hl7.org/fhir/uv/ips/Empty-Sections-and-Missing-Data.html">International Patient Summary (IPS)</a>.</p>
+
+<h4 id="elemente-mit-mindest-kardinalität--0">Elemente mit Mindest-Kardinalität = 0</h4>
+
+<p><strong>Regel:</strong> Liegt für ein Element mit min = 0 (auch Must-Support) kein Wert vor,
+<strong>SHALL</strong> das Element aus der Ressource weggelassen werden.</p>
+
+<h4 id="pflicht-elemente-mindest-kardinalität--0">Pflicht-Elemente (Mindest-Kardinalität &gt; 0)</h4>
+
+<p><strong>Regel:</strong> Ein Pflicht-Element <strong>SHALL</strong> vorhanden sein, auch wenn kein Wert
+vorliegt. Für nicht-kodierte Elemente wird die
+<a href="http://hl7.org/fhir/StructureDefinition/data-absent-reason">Data-Absent-Reason-Extension</a>
+verwendet; für kodierte Elemente ein entsprechender NullFlavor-Code
+(z. B. <code class="language-plaintext highlighter-rouge">unknown</code>).</p>
+
 <blockquote>
-  <p><strong>Vorlagen-Platzhalter.</strong> Ersetzen Sie diesen Text durch den Inhalt Ihres
-Moduls. (Template placeholder — replace with your module's content.)</p>
+  <p>[TODO: Nur ergänzen, falls Ihr Modul modul-spezifische Sonderfälle hat.]</p>
 </blockquote>
-
-<h3 id="umgang-mit-fehlenden-daten">Umgang mit fehlenden Daten</h3>
-
-<p>Beschreiben Sie, wie fehlende bzw. unbekannte Werte kodiert werden.</p>
 
 
 
@@ -302,7 +320,7 @@ Moduls. (Template placeholder — replace with your module's content.)</p>
 
           IG &copy; 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Thu, Jul 23, 2026 11:08+0000">2026-07-23</span>
+          Generated <span title="Thu, Jul 23, 2026 11:42+0000">2026-07-23</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
               <!-- MII branding override for the fhir2.base.template footer fragment.

@@ -8,9 +8,9 @@
 
  There is no translation page available for the current page, so it has been rendered in the default language 
 
-> **Vorlagen-Platzhalter.** Ersetzen Sie diesen Text durch den Inhalt Ihres Moduls. (Template placeholder — replace with your module's content.)
-
 ### Anleitung für Implementierende
 
-Beschreiben Sie, wie Systeme die Profile dieses Moduls technisch umsetzen.
+Technische Hinweise für DIZ-Implementierende zur Umsetzung der Profile des Moduls **Module Template** (ETL aus Primärsystemen, FHIR-API, Validierung).
+
+> [TODO: Beschreiben Sie die technischen Umsetzungsschritte für Ihr Modul.]
 

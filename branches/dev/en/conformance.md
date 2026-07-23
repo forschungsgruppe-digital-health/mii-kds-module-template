@@ -5,11 +5,13 @@
 
 ## Conformance
 
- This page includes translations from the original source language in which the guide was authored. Information on these translations and instructions on how to provide feedback on the translations can be found [here](translationinfo.html). 
+ There is no translation page available for the current page, so it has been rendered in the default language 
 
-> **Template placeholder.** Replace this with your module's content. This is the recommended English supplement of the German default page.
+Dieser Abschnitt definiert die Konformitätsanforderungen für Systeme, die die Profile des Moduls **Module Template** umsetzen.
 
-### Conformance
+* **[Allgemeine Anforderungen](general-requirements.md)** — gemeinsame Anforderungen an alle MII-Akteure (Konformitäts-Verben SHALL/SHOULD/MAY, Verwendung von Codes, RESTful-API-Anforderungen).
+* **[Must-Support](must-support.md)** — Bedeutung und Erwartungen an Must-Support-Elemente für Server und Clients.
+* **[Umgang mit fehlenden Daten](missing-data.md)** — Kodierung fehlender oder unbekannter Werte in konformen Ressourcen.
 
-Overview of the conformance rules: [General Requirements](general-requirements.md), [Must Support](must-support.md) and [Handling Missing Data](missing-data.md).
+> [TODO: Ergänzen Sie modul-spezifische Konformitätsaussagen. In den Narrativ-Seiten werden Sätze mit **SHALL/SHOULD/MAY** automatisch als Konformitätsaussagen erfasst.]
 

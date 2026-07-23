@@ -10,11 +10,46 @@
 | *Official URL*:https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template | *Version*:2026.0.0 |
 | Active as of 2026-01-01 | *Computable Name*:MII_IG_Template |
 
- This page includes translations from the original source language in which the guide was authored. Information on these translations and instructions on how to provide feedback on the translations can be found [here](translationinfo.html). 
+### Introduction
 
-> **Template placeholder.** Replace this with your module's content. This is the recommended English supplement of the German default page.
+This specification describes the FHIR representation of the Core Dataset (CDS) module **Module Template** of the Medical Informatics Initiative (MII). It covers the module's use cases and the associated FHIR profiles, extensions and terminology resources in their normative form. The MII Core Dataset enables the standardized secondary use of routine clinical data for medical research.
 
-### Home
+> [TODO: In one or two sentences, describe what your module covers and what the data is used for.]
 
-Welcome to the Implementation Guide of the MII Core Dataset module ******. The default language of this guide is German; English is the recommended second language, offered via the language switcher where a supplement exists. Start with the [Guidance](guidance.md) and [Conformance](conformance.md) pages.
+| | |
+| :--- | :--- |
+| Date | 2026-01-01 |
+| Version | 2026.0.0 (CalVer`YYYY.n.n`) |
+| Status | active |
+| Realm | DE |
+
+### Target audience
+
+* **Implementers** in Data Integration Centers (DIC), software developers and system architects building FHIR-based solutions (→ see [Profiles and Extensions](profiles-and-extensions.md) and [Logical Models](logical-models.md)).
+* **Researchers** using MII data for research (→ see [Guidance for Researchers](researcher-guidance.md)).
+
+### Contents
+
+* **[Guidance](guidance.md)** — getting started and domain notes.
+* **[Conformance](conformance.md)** — normative requirements, Must-Support and handling missing data.
+* **[Profiles and Extensions](profiles-and-extensions.md)** and **[Terminology](terminology.md)** — the technical artifacts.
+* **[Examples](examples.md)** — example instances.
+
+### Imprint
+
+This guide was created within the Medical Informatics Initiative and is subject, by its governance process, to the coordination procedure of the Interoperability Forum and the technical committees of HL7 Germany.
+
+### Contact
+
+Questions about this publication can be asked on the HL7 FHIR Zulip [chat.fhir.org](https://chat.fhir.org) in the `german/mi-initiative` stream. Comments and issues are welcome as **Issues** on [GitHub](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues).
+
+> [TODO: Name your module's domain contacts.]
+
+### Authors (in alphabetical order)
+
+> [TODO: List the module's authors with their institution.]
+
+### Copyright / terms of use
+
+© 2026+ — this work is licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
 

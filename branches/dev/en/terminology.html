@@ -268,14 +268,29 @@ There is no translation page available for the current page, so it has been rend
 </p>
 
   <!-- markdownlint-disable MD041 -->
+  <!-- Terminologie-Seite. Der IG-Publisher listet ValueSets/CodeSystems auf den
+     Artefakt-Seiten automatisch; hier stehen die MII-Hinweise dazu. -->
+
+<p>Diese Seite beschreibt die im Modul <strong>Module Template</strong> verwendeten ValueSets
+und CodeSystems. Allgemeine Hinweise zur Verwendung von Codes: siehe
+<a href="http://hl7.org/fhir/R4/terminologies.html">FHIR Terminology</a>.</p>
+
+<p class="bg-info"><strong>Wichtig:</strong> CodeSystem-Ressourcen externer Terminologien (z. B. ICD-10-GM, OPS,
+SNOMED CT) werden in diesem Modul <strong>nicht</strong> publiziert, sondern über den
+MII-Terminologieserver (SU-TermServ) bezogen:
+<a href="https://mii-termserv.de/">https://mii-termserv.de/</a>.</p>
+
+<p class="bg-info"><strong>Expansionen:</strong> ValueSet-Expansionen MÜSSEN zur Validierung über einen
+FHIR-Terminologieserver erzeugt werden. Dieser Build nutzt SU-TermServ, sofern
+das Client-Zertifikat konfiguriert ist, sonst den öffentlichen HL7-Server
+<code class="language-plaintext highlighter-rouge">tx.fhir.org</code> (dann expandieren einige MII-spezifische ValueSets ggf. nicht
+vollständig).</p>
+
 <blockquote>
-  <p><strong>Vorlagen-Platzhalter.</strong> Ersetzen Sie diesen Text durch den Inhalt Ihres
-Moduls. (Template placeholder — replace with your module's content.)</p>
+  <p>[TODO: Falls Ihr Modul SNOMED CT nutzt, geben Sie die verwendete Edition/Version
+an. Listen Sie die modul-eigenen ValueSets/CodeSystems auf oder verweisen Sie
+auf die automatisch erzeugte Artefakt-Liste.]</p>
 </blockquote>
-
-<h3 id="terminologie">Terminologie</h3>
-
-<p>Die vom Modul verwendeten CodeSysteme und ValueSets.</p>
 
 
 
@@ -302,7 +317,7 @@ Moduls. (Template placeholder — replace with your module's content.)</p>
 
           IG &copy; 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Thu, Jul 23, 2026 11:08+0000">2026-07-23</span>
+          Generated <span title="Thu, Jul 23, 2026 11:42+0000">2026-07-23</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
               <!-- MII branding override for the fhir2.base.template footer fragment.
