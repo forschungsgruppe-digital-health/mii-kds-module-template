@@ -1,0 +1,23 @@
+# English translation supplement for the starter example profile.
+#
+# Demonstrates a translation the IG Publisher renders: the `description` of a
+# StructureDefinition (a resource type in the toolchain's translatable set —
+# StructureDefinition / CodeSystem / Questionnaire). On the /en/ profile page the
+# description below appears in English; on /de/ it stays German.
+#
+# Naming (mandatory): input/translations/<lang>/<ResourceType>-<id>.po, wired via
+# the `translation-sources` parameter in sushi-config.yaml. A wrong name is
+# silently IGNORED by the Publisher.
+#
+# The msgid MUST match, byte for byte, the German source in
+# fsh-generated/resources/StructureDefinition-example-patient.json (regenerate
+# with `sushi .` and copy the exact string). msgstr is the English rendering.
+#
+# SCOPE NOTE (verified on IG Publisher 2.2.11 — see docs/recipes/add-translation.md
+# in ig-template-mii-kds): a plain `.po` supplement applies to the resource-level
+# `description`/`title`-adjacent narrative fields the toolchain supports, but NOT
+# to every element-level string. Keep only entries that actually render.
+
+#: StructureDefinition.description
+msgid "Minimales Beispielprofil, das nur mit der Vorlage ausgeliefert wird, damit ein neu erstelltes Modul sofort eine gerenderte IG erzeugt. Kein MII-Artefakt — ersetzen Sie es durch die Profile Ihres Moduls."
+msgstr "Minimal example profile shipped only with the template so that a newly created module immediately renders an IG. Not an MII artifact — replace it with your module's profiles."

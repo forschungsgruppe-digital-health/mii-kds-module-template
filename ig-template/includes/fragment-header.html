@@ -1,0 +1,25 @@
+<!-- MII branding override for the fhir2.base.template header placeholder
+     (base ships includes/fragment-header.html as a single comment; it is included
+     inside "#segment-header > .container", before the #ig-status block).
+     MII corporate design confirmed (Gate B, 2026-07-24).
+     Language handling: only the asset and its descriptive alt text switch on
+     include.lang (the pattern kerndatensatz-basis uses); no translatable UI
+     strings are hard-coded.
+     Two logos, mirroring kerndatensatz-basis: the HL7 FHIR logo (links to the
+     FHIR spec) in #family-nav, and the MII logo in #project-nav. fhir-logo-www.png
+     is shipped by fhir2.base.template (content/assets/images/), so it resolves
+     from the inherited assets without shipping it here. -->
+<div id="family-nav">
+  <a id="family-logo" no-external="true" href="https://hl7.org/fhir">
+    <img height="50" alt="HL7 FHIR" src="{{site.data.info.assets}}assets/images/fhir-logo-www.png"/>
+  </a>
+</div>
+<div id="project-nav">
+  <a id="project-logo" no-external="true" href="https://www.medizininformatik-initiative.de/">
+{% if include.lang == 'de' %}
+    <img height="50" alt="Medizininformatik-Initiative (MII)" src="{{site.data.info.assets}}assets/images/mii-logo.png"/>
+{% else %}
+    <img height="50" alt="Medical Informatics Initiative (MII)" src="{{site.data.info.assets}}assets/images/mii-logo-en.png"/>
+{% endif %}
+  </a>
+</div>

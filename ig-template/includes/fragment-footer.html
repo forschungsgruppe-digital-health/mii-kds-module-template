@@ -1,0 +1,18 @@
+<!-- MII branding override for the fhir2.base.template footer fragment.
+     Unlike header/css, the base footer fragment is NOT an empty placeholder: it
+     renders "Links: Table of Contents | QA Report [| feedback dashboards]".
+     The base uses site.data.stringsBase[include.lang][...] for the labels, but
+     fhir2.base.template 0.1.0 ships NO German UI-string catalog, so on the German
+     (default) pages those labels render BLANK. This override therefore hard-codes
+     language-aware labels (de/en) so the footer shows real text in both languages,
+     preserves the base links (TOC, QA, feedback dashboards), and appends the MII
+     information links.
+     MII corporate design confirmed (Gate B, 2026-07-24).
+     Imprint: the MII website has separate German (/de/impressum) and English
+     (/en/legal-notice) imprint pages (both verified HTTP 200 on 2026-07-22). -->
+{% if include.lang == 'de' %}{% assign lbl_links = 'Links' %}{% assign lbl_toc = 'Inhaltsverzeichnis' %}{% assign lbl_qa = 'QA-Bericht' %}{% assign miiimprint = 'https://www.medizininformatik-initiative.de/de/impressum' %}{% assign lbl_imprint = 'Impressum' %}{% else %}{% assign lbl_links = 'Links' %}{% assign lbl_toc = 'Table of Contents' %}{% assign lbl_qa = 'QA Report' %}{% assign miiimprint = 'https://www.medizininformatik-initiative.de/en/legal-notice' %}{% assign lbl_imprint = 'Legal notice' %}{% endif %}
+          {{ lbl_links }}: <a style="color: var(--footer-hyperlink-text-color)" href="{{site.data.info.assets}}toc.html">{{ lbl_toc }}</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" href="../qa.html">{{ lbl_qa }}</a>
+                 {% for feedbacklink in site.data.features.feedback %}{% if feedbacklink.dashboard %} | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="{{feedbacklink.dashboard.url}}">{{feedbacklink.dashboard.label}}</a>{% endif %}{% endfor %}
+                 | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="https://www.medizininformatik-initiative.de/">medizininformatik-initiative.de</a>
+                 | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="{{ miiimprint }}">{{ lbl_imprint }}</a>
