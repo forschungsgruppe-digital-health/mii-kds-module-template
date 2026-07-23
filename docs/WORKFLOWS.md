@@ -91,3 +91,12 @@ Notes:
 > **Why one page with two layers:** post-2026 a new maintainer must be able to tell,
 > in one read, whether a given workflow maintains the template or ships in a module —
 > or the automation becomes an unowned black box.
+
+## Secrets & enabling the gated features
+
+A module builds and previews without secrets. To enable the optional gated
+features — SU-TermServ terminology (Gate F, for both the build and the reusable
+validation) and the Zulip release announcement (Gate G) — see
+[docs/SECRETS.md](SECRETS.md) for the exact `gh secret set` commands (including
+why the SU-TermServ cert is set under both `SU_TERMSERV_CLIENT_*` and
+`CDS_DEV_CLIENT_*` names). The workflows are already wired.
