@@ -1,0 +1,40 @@
+# de.medizininformatikinitiative.kerndatensatz.template#2026.0.0: MII Implementation Guide Module Template(de)
+
+## Pages
+
+* [Home](de/index.md)
+* [Translation Information](de/translationinfo.md)
+* [Logical Models](de/logical-models.md)
+* [UML Diagrams](de/uml-diagrams.md)
+* [General Requirements](de/general-requirements.md)
+* [Conformance](de/conformance.md)
+* [Changelog](de/changes.md)
+* [Versioning](de/version-history.md)
+* [Profiles and Extensions](de/profiles-and-extensions.md)
+* [Downloads](de/downloads.md)
+* [Artifacts Summary](de/artifacts.md)
+* [Guidance for Implementers](de/implementer-guidance.md)
+* [Capability Statements](de/capability-statements.md)
+* [Search Parameters and Operations](de/search-parameters-and-operations.md)
+* [Examples](de/examples.md)
+* [Handling Missing Data](de/missing-data.md)
+* [Must Support](de/must-support.md)
+* [Metadata Overview](de/metadata.md)
+* [Datasets and Descriptions](de/datasets-and-descriptions.md)
+* [Guidance](de/guidance.md)
+* [Guidance for Researchers](de/researcher-guidance.md)
+* [Terminology](de/terminology.md)
+
+## Resources
+
+### Resource Profiles
+
+* [Beispiel-Patient (Vorlage)](de/StructureDefinition-example-patient.md)
+
+### ImplementationGuides
+
+* [MII Implementation Guide Module Template](de/ImplementationGuide-mii-ig-template.md)
+
+### Examples
+
+* [ExamplePatientInstance (Patient)](de/Patient-ExamplePatientInstance.md)
