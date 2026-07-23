@@ -1,0 +1,206 @@
+MII_IG_Template : Validation Results
+=========================================
+
+err = 1, warn = 9, info = 107
+IG Publisher Version: 2.2.11
+Generated Thu Jul 23 23:47:51 UTC 2026. FHIR version 4.0.1 for de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 (canonical = https://www.medizininformatik-initiative.de/fhir/modul-template)
+ Build Errors : 74 / 5 / 0
+ /home/runner/work/mii-kds-module-template/mii-kds-module-template/fsh-generated/resources/ImplementationGuide-mii-ig-template : 1 / 4 / 42
+ /home/runner/work/mii-kds-module-template/mii-kds-module-template/fsh-generated/resources/Patient-ExamplePatientInstance : 0 / 0 / 1
+ /home/runner/work/mii-kds-module-template/mii-kds-module-template/fsh-generated/resources/StructureDefinition-example-patient : 0 / 0 / 70
+</table>
+== n/a ==
+WARNING: ImplementationGuide.id: The Implementation Guide Resource id should be de.medizininformatikinitiative.kerndatensatz.template
+ERROR: de/Patient-ExamplePatientInstance.change.history.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/Patient-ExamplePatientInstance.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/Patient-ExamplePatientInstance.json.html#/html/body/div/div/div/p/span/img at Line 93, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/Patient-ExamplePatientInstance.xml.html#/html/body/div/div/div/p/span/img at Line 93, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/StructureDefinition-example-patient-definitions.html#/html/body/div/div/div/p/span/img at Line 91, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/StructureDefinition-example-patient-examples.html#/html/body/div/div/div/p/span/img at Line 91, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/StructureDefinition-example-patient-mappings.html#/html/body/div/div/div/p/span/img at Line 91, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/StructureDefinition-example-patient-testing.html#/html/body/div/div/div/p/span/img at Line 91, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/StructureDefinition-example-patient.html#/html/body/div/div/div/p/span/img at Line 91, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/StructureDefinition-example-patient.profile.history.html#/html/div/div/div/p/span/img at Line 91, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/StructureDefinition-example-patient.profile.json.html#/html/body/div/div/div/p/span/img at Line 95, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/StructureDefinition-example-patient.profile.xml.html#/html/body/div/div/div/p/span/img at Line 95, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/artifacts.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/capability-statements.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/changes.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/conformance.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/datasets-and-descriptions.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/downloads.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/examples.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/general-requirements.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/guidance.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/implementer-guidance.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/index.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/logical-models.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/metadata.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/missing-data.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/must-support.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/profiles-and-extensions.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/profiles-and-extensions.html#/html/body/div/div/div/div/div/p/a at Line 281, column 101: The link '../docs/recipes/add-a-profile.md' for "add-a-profile Rezept" cannot be resolved
+ERROR: de/researcher-guidance.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/search-parameters-and-operations.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/terminology.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/toc.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/translationinfo.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/translationinfo.html#/html/body/div/div/div/div/div/p/a at Line 286, column 2: The link '../docs/recipes/add-translation.md' for "add-translation Rezept" cannot be resolved
+ERROR: de/uml-diagrams.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: de/version-history.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/Patient-ExamplePatientInstance.change.history.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/Patient-ExamplePatientInstance.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/Patient-ExamplePatientInstance.json.html#/html/body/div/div/div/p/span/img at Line 93, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/Patient-ExamplePatientInstance.xml.html#/html/body/div/div/div/p/span/img at Line 93, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/StructureDefinition-example-patient-definitions.html#/html/body/div/div/div/p/span/img at Line 91, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/StructureDefinition-example-patient-examples.html#/html/body/div/div/div/p/span/img at Line 91, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/StructureDefinition-example-patient-mappings.html#/html/body/div/div/div/p/span/img at Line 91, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/StructureDefinition-example-patient-testing.html#/html/body/div/div/div/p/span/img at Line 91, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/StructureDefinition-example-patient.html#/html/body/div/div/div/p/span/img at Line 91, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/StructureDefinition-example-patient.profile.history.html#/html/div/div/div/p/span/img at Line 91, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/StructureDefinition-example-patient.profile.json.html#/html/body/div/div/div/p/span/img at Line 95, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/StructureDefinition-example-patient.profile.xml.html#/html/body/div/div/div/p/span/img at Line 95, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/artifacts.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/capability-statements.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/changes.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/conformance.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/datasets-and-descriptions.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/downloads.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/examples.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/general-requirements.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/guidance.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/implementer-guidance.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/index.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/logical-models.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/metadata.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/missing-data.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/must-support.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/profiles-and-extensions.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/profiles-and-extensions.html#/html/body/div/div/div/div/div/p/a at Line 287, column 101: The link '../docs/recipes/add-a-profile.md' for "add-a-profile Rezept" cannot be resolved
+ERROR: en/researcher-guidance.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/search-parameters-and-operations.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/terminology.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/toc.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/translationinfo.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/translationinfo.html#/html/body/div/div/div/div/div/p/a at Line 292, column 2: The link '../docs/recipes/add-translation.md' for "add-translation Rezept" cannot be resolved
+ERROR: en/uml-diagrams.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+ERROR: en/version-history.html#/html/body/div/div/div/p/span/img at Line 90, column 4: The image source 'assets/images/deu.svg' cannot be resolved
+WARNING: 1: An HTML fragment from the set [ip-statements.xhtml, ip-statements.xhtml] is not included anywhere in the produced implementation guide
+WARNING: 2: An HTML fragment from the set [cross-version-analysis.xhtml, cross-version-analysis-inline.xhtml, cross-version-analysis.xhtml, cross-version-analysis-inline.xhtml] is not included anywhere in the produced implementation guide
+WARNING: 3: An HTML fragment from the set [dependency-table.xhtml, dependency-table-short.xhtml, dependency-table-nontech.xhtml, dependency-table.xhtml, dependency-table-short.xhtml, dependency-table-nontech.xhtml] is not included anywhere in the produced implementation guide
+WARNING: 4: An HTML fragment from the set [globals-table.xhtml, globals-table.xhtml] is not included anywhere in the produced implementation guide
+== fsh-generated/resources/ImplementationGuide-mii-ig-template.json ==
+INFORMATION: ImplementationGuide.meta.profile[0]: Pinned the version of http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide to 2.0.0
+INFORMATION: ImplementationGuide.meta.profile[1]: Pinned the version of http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishableimplementationguide to 2.0.0
+INFORMATION: ImplementationGuide.meta.profile[2]: Pinned the version of http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide to 2.0.0
+INFORMATION: ImplementationGuide.definition.resource[1].profile[0]: Pinned the version of https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient to 2026.0.0
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[3].value.ofType(CodeableConcept).coding[0].display: There are no valid display names found for the code http://terminology.hl7.org/CodeSystem/artifact-version-policy-codes#package for language(s) 'de'. The display is 'Package' which is a valid display for the default language
+ERROR: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[3].value.ofType(CodeableConcept).coding[0].code: Unbekannter Code package in http://terminology.hl7.org/CodeSystem/artifact-version-policy-codes Version 5.2.0
+WARNING: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[4].extension[2].value.ofType(uri): URL-Wert 'https://www.medizininformatik-initiative.de/fhir/modul-template' löst nicht auf
+WARNING: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[15].value.ofType(CodeableConcept).coding[0].code: Unknown Code 'C15607' in the CodeSystem 'http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl' version 'null' - note that the code system is labeled as a fragment, so the code may be valid in some other fragment
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.jurisdiction[0].coding[0].display: There are no valid display names found for the code urn:iso:std:iso:3166#DE for language(s) 'de'. The display is 'Germany' which is a valid display for the default language
+WARNING: ImplementationGuide/mii-ig-template: ImplementationGuide.dependsOn[2].uri: Canonical URL 'http://fhir.org/packages/de.basisprofil.r4/ImplementationGuide/de.basisprofil.r4' kann nicht aufgelöst werden
+WARNING: ImplementationGuide/mii-ig-template: ImplementationGuide.dependsOn[2]: The canonical URL http://fhir.org/packages/de.basisprofil.r4/ImplementationGuide/de.basisprofil.r4 doesn't point to an actual ImplementationGuide resource
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[0]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[4]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[5]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[6]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[7]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[8]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[9]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[10]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[11]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[13]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[14]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[15]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[3]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishableimplementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[4]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishableimplementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[12]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishableimplementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[0]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[1]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[2]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[3]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[4]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[5]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[6]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[7]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[8]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[9]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[10]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[11]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[12]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[13]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[14]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0 überein.
+INFORMATION: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[15]: Dieses Element stimmt mit keinem bekannten Slicedefined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0 überein.
+INFORMATION: Resource: The resource ImplementationGuide/mii-ig-template could usefully have an OID assigned (OIDs are easy to assign - see https://build.fhir.org/ig/FHIR/fhir-tools-ig/CodeSystem-ig-parameters.html#ig-parameters-auto-oid-root)
+== fsh-generated/resources/Patient-ExamplePatientInstance.json ==
+== fsh-generated/resources/StructureDefinition-example-patient.json ==
+INFORMATION: StructureDefinition.baseDefinition: Pinned the version of http://hl7.org/fhir/StructureDefinition/Patient to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[0].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/DomainResource to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[0].constraint[1].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/DomainResource to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[0].constraint[2].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/DomainResource to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[0].constraint[3].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/DomainResource to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[0].constraint[4].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/DomainResource to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[2].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[3].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[4].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[4].binding.extension[0].value[x]: Pinned the version of http://hl7.org/fhir/ValueSet/all-languages to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[5].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[7].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[7].constraint[1].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Extension to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[8].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[8].constraint[1].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Extension to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[9].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[10].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[11].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[13].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[13].constraint[1].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Extension to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[14].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[15].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[16].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[17].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[18].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[19].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[20].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[21].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[22].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[23].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[24].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[25].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[26].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[27].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[28].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[29].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[29].constraint[1].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Patient to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[31].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[31].constraint[1].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Extension to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[32].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[32].constraint[1].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Extension to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[33].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[34].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[35].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[36].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[37].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[38].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[39].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[40].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[42].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[42].constraint[1].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Extension to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[43].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[43].constraint[1].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Extension to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[44].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[44].binding.extension[0].value[x]: Pinned the version of http://hl7.org/fhir/ValueSet/all-languages to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[45].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[46].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[47].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[48].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[50].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[50].constraint[1].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Extension to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[51].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[51].constraint[1].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Extension to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[52].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition.snapshot.element[53].constraint[0].source: Pinned the version of http://hl7.org/fhir/StructureDefinition/Element to 4.0.1
+INFORMATION: StructureDefinition/example-patient: StructureDefinition.jurisdiction[0].coding[0].display: There are no valid display names found for the code urn:iso:std:iso:3166#DE for language(s) 'de'. The display is 'Germany' which is a valid display for the default language
+INFORMATION: StructureDefinition/example-patient: StructureDefinition.snapshot.element[4].binding.extension[0]: The extension http://hl7.org/fhir/StructureDefinition/elementdefinition-maxValueSet|5.3.0 is deprecated with the note: 'Use additionalBinding extension or element instead'
+INFORMATION: Resource: The resource StructureDefinition/example-patient could usefully have an OID assigned (OIDs are easy to assign - see https://build.fhir.org/ig/FHIR/fhir-tools-ig/CodeSystem-ig-parameters.html#ig-parameters-auto-oid-root)
+INFORMATION: StructureDefinition.description: Unused 'en' translation 'Minimales Beispielprofil, das nur mit der Vorlage ausgeliefert wird, damit ein neu erstelltes Modul sofort eine gerenderte IG erzeugt. Kein MII-Artefakt — ersetzen Sie es durch die Profile Ihres Moduls.' -> 'Minimal example profile shipped only with the template so that a newly created module immediately renders an IG. Not an MII artifact — replace it with your module's profiles.'
