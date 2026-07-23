@@ -3,7 +3,7 @@
 <Patient xmlns="http://hl7.org/fhir">
   <id value="ExamplePatientInstance"/>
   <meta>
-    <profile value="https://www.medizininformatik-initiative.de/fhir/modul-demo/StructureDefinition/example-patient"/>
+    <profile value="https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient"/>
   </meta>
   <language value="en"/>
   <text>

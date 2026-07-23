@@ -2,7 +2,7 @@
   "resourceType" : "Patient",
   "id" : "ExamplePatientInstance",
   "meta" : {
-    "profile" : ["https://www.medizininformatik-initiative.de/fhir/modul-demo/StructureDefinition/example-patient"]
+    "profile" : ["https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient"]
   },
   "language" : "en",
   "text" : {

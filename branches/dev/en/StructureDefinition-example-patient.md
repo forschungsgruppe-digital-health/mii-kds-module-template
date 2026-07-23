@@ -1,4 +1,4 @@
-# Beispiel-Patient (Vorlage) - MII Implementation Guide Demo Module v2026.0.0
+# Beispiel-Patient (Vorlage) - MII Implementation Guide Module Template v2026.0.0
 
 * [**Table of Contents**](toc.md)
 * [**Artifacts Summary**](artifacts.md)
@@ -8,7 +8,7 @@
 
 | | |
 | :--- | :--- |
-| *Official URL*:https://www.medizininformatik-initiative.de/fhir/modul-demo/StructureDefinition/example-patient | *Version*:2026.0.0 |
+| *Official URL*:https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient | *Version*:2026.0.0 |
 | Active as of 2026-07-23 | *Computable Name*:ExamplePatient |
 
  
@@ -18,7 +18,7 @@ Minimales Beispielprofil, das nur mit der Vorlage ausgeliefert wird, damit ein n
 
 * Examples for this Profile: [Patient/ExamplePatientInstance](Patient-ExamplePatientInstance.md)
 
-You can also check for [usages in the FHIR IG Statistics](https://packages2.fhir.org/xig/resource/de.medizininformatikinitiative.kerndatensatz.demo|current/StructureDefinition/StructureDefinition-example-patient.json)
+You can also check for [usages in the FHIR IG Statistics](https://packages2.fhir.org/xig/resource/de.medizininformatikinitiative.kerndatensatz.template|current/StructureDefinition/StructureDefinition-example-patient.json)
 
 ### Formal Views of Profile Content
 
@@ -36,12 +36,12 @@ Other representations of profile: [CSV](../StructureDefinition-example-patient.c
 {
   "resourceType" : "StructureDefinition",
   "id" : "example-patient",
-  "url" : "https://www.medizininformatik-initiative.de/fhir/modul-demo/StructureDefinition/example-patient",
+  "url" : "https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient",
   "version" : "2026.0.0",
   "name" : "ExamplePatient",
   "title" : "Beispiel-Patient (Vorlage)",
   "status" : "active",
-  "date" : "2026-07-23T04:55:59+00:00",
+  "date" : "2026-07-23T09:11:57+00:00",
   "publisher" : "Medical Informatics Initiative (MII)",
   "contact" : [{
     "name" : "Medical Informatics Initiative (MII)",

@@ -1,4 +1,4 @@
-# Artifacts Summary - MII Implementation Guide Demo Module v2026.0.0
+# Artifacts Summary - MII Implementation Guide Module Template v2026.0.0
 
 * [**Table of Contents**](toc.md)
 * **Artifacts Summary**

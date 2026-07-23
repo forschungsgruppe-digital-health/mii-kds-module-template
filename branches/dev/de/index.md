@@ -1,4 +1,4 @@
-# Home - MII Implementation Guide Demo Module v2026.0.0
+# Home - MII Implementation Guide Module Template v2026.0.0
 
 * [**Table of Contents**](toc.md)
 * **Home**
@@ -7,8 +7,8 @@
 
 | | |
 | :--- | :--- |
-| **:https://www.medizininformatik-initiative.de/fhir/modul-demo/ImplementationGuide/mii-ig-demo | **:2026.0.0 |
-| Active | **:MII_IG_Demo |
+| **:https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template | **:2026.0.0 |
+| Active | **:MII_IG_Template |
 
 > **Vorlagen-Hinweis / template note.** Diese Seite ist ein **Platzhalter** aus der Modul-Vorlage. Ersetzen Sie den Inhalt durch die Beschreibung Ihres MII-KDS-Moduls. (Delete this note and write your module's home page.)
 

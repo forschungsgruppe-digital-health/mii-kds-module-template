@@ -1,5 +1,5 @@
 {
-  "package": "de.medizininformatikinitiative.kerndatensatz.demo",
+  "package": "de.medizininformatikinitiative.kerndatensatz.template",
   "version": "2026.0.0",
   "fhirVersion": "4.0.1",
   "jurisdiction": "DE",
@@ -7,7 +7,7 @@
   "profiles": {
     "Patient": [
       {
-        "url": "https://www.medizininformatik-initiative.de/fhir/modul-demo/StructureDefinition/example-patient",
+        "url": "https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient",
         "title": "Beispiel-Patient (Vorlage)"
       }
     ]

@@ -1,4 +1,4 @@
-# Capability Statements - MII Implementation Guide Demo Module v2026.0.0
+# Capability Statements - MII Implementation Guide Module Template v2026.0.0
 
 * [**Table of Contents**](toc.md)
 * **Capability Statements**

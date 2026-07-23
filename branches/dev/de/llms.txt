@@ -1,4 +1,4 @@
-# de.medizininformatikinitiative.kerndatensatz.demo#2026.0.0: MII Implementation Guide Demo Module(de)
+# de.medizininformatikinitiative.kerndatensatz.template#2026.0.0: MII Implementation Guide Module Template(de)
 
 ## Pages
 
@@ -33,7 +33,7 @@
 
 ### ImplementationGuides
 
-* [MII Implementation Guide Demo Module](ImplementationGuide-mii-ig-demo.md)
+* [MII Implementation Guide Module Template](ImplementationGuide-mii-ig-template.md)
 
 ### Examples
 

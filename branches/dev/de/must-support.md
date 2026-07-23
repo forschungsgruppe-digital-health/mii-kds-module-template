@@ -1,4 +1,4 @@
-# Must Support - MII Implementation Guide Demo Module v2026.0.0
+# Must Support - MII Implementation Guide Module Template v2026.0.0
 
 * [**Table of Contents**](toc.md)
 * [**Conformance**](conformance.md)

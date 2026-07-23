@@ -1,4 +1,4 @@
-# Beispiel: Max Mustermann-Testpatient - MII Implementation Guide Demo Module v2026.0.0
+# Beispiel: Max Mustermann-Testpatient - MII Implementation Guide Module Template v2026.0.0
 
 * [**Table of Contents**](toc.md)
 * [**Artifacts Summary**](artifacts.md)
@@ -27,7 +27,7 @@ Max Mustermann-Testpatient Male, DoB: 1990-01-01
   "resourceType" : "Patient",
   "id" : "ExamplePatientInstance",
   "meta" : {
-    "profile" : ["https://www.medizininformatik-initiative.de/fhir/modul-demo/StructureDefinition/example-patient"]
+    "profile" : ["https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient"]
   },
   "name" : [{
     "family" : "Mustermann-Testpatient",

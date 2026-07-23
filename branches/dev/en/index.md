@@ -1,4 +1,4 @@
-# Home - MII Implementation Guide Demo Module v2026.0.0
+# Home - MII Implementation Guide Module Template v2026.0.0
 
 * [**Table of Contents**](toc.md)
 * **Home**
@@ -7,8 +7,8 @@
 
 | | |
 | :--- | :--- |
-| *Official URL*:https://www.medizininformatik-initiative.de/fhir/modul-demo/ImplementationGuide/mii-ig-demo | *Version*:2026.0.0 |
-| Active as of 2026-01-01 | *Computable Name*:MII_IG_Demo |
+| *Official URL*:https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template | *Version*:2026.0.0 |
+| Active as of 2026-01-01 | *Computable Name*:MII_IG_Template |
 
  This page includes translations from the original source language in which the guide was authored. Information on these translations and instructions on how to provide feedback on the translations can be found [here](translationinfo.html). 
 
