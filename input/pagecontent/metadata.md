@@ -1,7 +1,6 @@
 <!-- markdownlint-disable MD041 -->
-> **Vorlagen-Platzhalter.** Ersetzen Sie diesen Text durch den Inhalt Ihres
-> Moduls. (Template placeholder — replace with your module's content.)
-
 ### Metadaten-Übersicht
 
-Automatisch erzeugte Übersicht der IG-Metadaten (CRMI).
+Automatisch erzeugte Übersicht der IG-Metadaten (CRMI: shareable/publishable/computable) des Moduls **{{MODULE_TITLE}}**.
+
+> [TODO: In der Regel keine manuelle Bearbeitung nötig.]
