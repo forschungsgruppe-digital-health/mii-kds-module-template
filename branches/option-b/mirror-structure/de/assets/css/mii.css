@@ -1,0 +1,80 @@
+/* mii.css - MII branding for de.medizininformatikinitiative.template
+   ====================================================================
+   Gate B - derived suggestion. TODO(human): confirm or replace logo + palette
+   before any release.
+
+   This file overrides ONLY the CSS custom properties that fhir2.base.template
+   (0.1.0) declares in content/assets/css/project.css (":root" block, variables
+   1-32). No base rules are re-declared, so a later branding change stays a
+   one-file edit and base-template updates keep working. It is linked by
+   includes/fragment-css.html AFTER project.css, so this :root block wins the
+   cascade at equal specificity.
+
+   Every value is derived from an MII source - see docs/DESIGN.md for the full
+   palette table (exact source per color) and the WCAG contrast calculations.
+   Sources, short form (retrieved 2026-07-22):
+   - "logo"  = dominant pixel colors of the official MII logo
+               (medizininformatik-initiative.de/themes/custom/mii/assets/img/Logo_MII_270px_Hoehe_de.png)
+   - "site"  = medizininformatik-initiative.de theme CSS
+               (/themes/custom/mii/css/base.css and component.css)
+   Base variables NOT listed here keep their fhir2.base.template defaults
+   (publish box, TOC box, STU note, header backgrounds, dragon, translation box):
+   those are IG-Publisher semantic signals, not brand surfaces. */
+
+:root {
+  /* 1. IG title/status text: MII slate (site menu-link color #6a7484;
+        4.33:1 on the base #f5f5f5 header background - AA for the large/bold
+        title text it styles) */
+  --ig-status-text-color: #6a7484;
+
+  /* 2. Navbar: MII logo blue (dominant blue #3473aa of the logo dots;
+        white text on it = 5.03:1, AA) */
+  --navbar-bg-color: #3473aa;
+
+  /* 5. Decorative 8px top stripe: MII accent green (site section-border
+        green #9abc31; carries no text) */
+  --stripe-bg-color: #9abc31;
+
+  /* 6-8. Menu buttons: hover = site primary button blue #5773a2 (white on it
+        = 4.80:1, AA); active = MII slate-dark #6a7484 (white on it = 4.73:1,
+        AA); button text white instead of base #e6e6e6 (which is only 4.03:1
+        on our navbar blue) */
+  --btn-hover-color: #5773a2;
+  --btn-active-color: #6a7484;
+  --btn-text-color: #ffffff;
+
+  /* 9-12. Selected/hovered dropdown-item gradient: site blue -> logo blue
+        (both sourced; white item text is >= 4.80:1 on both ends, AA).
+        The -alpha variants feed the base's legacy IE DXImageTransform filter
+        and use its #AARRGGBB order (see base project.css vars 11-12). */
+  --btn-gradient-start-color: #5773a2;
+  --btn-gradient-end-color: #3473aa;
+  --btn-gradient-start-color-alpha: #ff5773a2;
+  --btn-gradient-end-color-alpha: #ff3473aa;
+
+  /* 13-14. Hyperlinks: the MII website's own link color #5773a2 (a{color} in
+        its base.css; 4.80:1 on white, AA); hover shifts to logo blue #3473aa
+        (5.03:1 on white, AA) */
+  --link-color: #5773a2;
+  --link-hover-color: #3473aa;
+
+  /* 3-4. Footer: outer band = MII slate #7a8495 (the site footer's
+        background-color AND the logo wordmark color; no text sits on it);
+        inner container (which carries the text) = slate-dark #6a7484 so the
+        white footer text reaches 4.73:1 (AA) - white on the site's own
+        #7a8495 would only be 3.78:1 */
+  --footer-bg-color: #7a8495;
+  --footer-container-bg-color: #6a7484;
+
+  /* 25-26. Footer links + highlight: white, like the MII site footer
+        (4.73:1 on #6a7484, AA). Note: this makes footer links the same color
+        as surrounding footer text - see the accessibility notes in
+        docs/DESIGN.md (WCAG 1.4.1). */
+  --footer-hyperlink-text-color: #ffffff;
+  --footer-highlight-text-color: #ffffff;
+
+  /* 27-28. Breadcrumb: site light background #ebedef with site body-text
+        color #333333 (10.77:1, AAA) */
+  --breadcrumb-bg-color: #ebedef;
+  --breadcrumb-text-color: #333333;
+}
