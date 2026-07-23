@@ -134,13 +134,17 @@ jobs:
               sed -i "s/{{${key}}}/${esc}/g" "${file}"
             done
           }
-          # Demo values are derived from the placeholder table B2 documented at the
-          # top of sushi-config.yaml. MODULE_SLUG=demo drives id/packageId/canonical.
+          # Self-check values are derived from the placeholder table B2 documented at
+          # the top of sushi-config.yaml. These stand in only so the template repo's
+          # OWN CI can prove the pipeline builds; a real module replaces them. The
+          # rendered IG is the module template itself — NOT a "demo" (this scaffold
+          # is a starting point for a new MII KDS module IG, or a migration target
+          # for an existing Simplifier MII IG). MODULE_SLUG drives id/packageId/canonical.
           subst sushi-config.yaml <<'PLACEHOLDERS'
-          MODULE_SLUG|demo
-          MODULE_NAME|Demo
-          MODULE_TITLE|Demo Module
-          MODULE_DESCRIPTION|Demo module used only to CI-validate this template repository; replace every value when creating a real module.
+          MODULE_SLUG|template
+          MODULE_NAME|Template
+          MODULE_TITLE|Module Template
+          MODULE_DESCRIPTION|Self-check build of the mii-kds-module-template scaffold. This repository is a template for creating a new MII KDS module Implementation Guide, or a migration target for an existing Simplifier MII IG. Every value here is a placeholder — replace them all when you create a real module.
           CALVER_VERSION|2026.0.0
           CALVER_YEAR|2026
           RELEASE_DATE|2026-01-01
@@ -154,7 +158,7 @@ jobs:
           # The `template =` line is left untouched — while it is the B3 TODO the
           # build below degrades to a SUSHI-only check.
           subst ig.ini <<'PLACEHOLDERS'
-          MODULE_SLUG|demo
+          MODULE_SLUG|template
           PLACEHOLDERS
           # Guard: no ACTIVE (non-comment) placeholder may survive in sushi-config.yaml.
           if grep -vE '^[[:space:]]*#' sushi-config.yaml | grep -q '{{[A-Za-z_]*}}'; then
