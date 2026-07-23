@@ -20,7 +20,37 @@ MII IG template package
 
 ## Quickstart
 
-> TODO: completed by the docs task (B11).
+From zero to a rendered module IG in ten steps. Full detail is in
+[docs/recipes/create-a-new-module.md](docs/recipes/create-a-new-module.md); the
+important warning is right below this list, read it first.
+
+1. Click **"Use this template" → Create a new repository**. **Tick "Include all
+   branches"** (see the warning below), pick your module name.
+2. Clone your new repo and open it in the dev container (VS Code → **"Reopen in
+   Container"**) — it installs Java, Node, SUSHI, Jekyll, Graphviz for you.
+   ([details](docs/recipes/first-build-in-devcontainer.md))
+3. If you did **not** tick "Include all branches", run the **first-run bootstrap**
+   now: `bash tools/first-run-bootstrap.sh --apply`
+   ([details](docs/recipes/first-run-setup.md)). It creates `dev`, protects the
+   branches, and removes the template-maintenance files (Release Please etc.).
+4. Replace every `{{PLACEHOLDER}}` in `sushi-config.yaml` (each is documented in a
+   comment) with your module's values — slug, name, title, CalVer version, etc.
+5. Set the `ig.ini` template line: keep `template = #ig-template` (vendored) for
+   now; switch to the published package later
+   ([recipe](docs/recipes/switch-template-to-published.md)).
+6. Write your first profile in `input/fsh/` (the repo ships one example to copy)
+   ([recipe](docs/recipes/add-a-profile.md)); replace the German starter pages in
+   `input/pagecontent/` with your content.
+7. Build: `sushi . && curl -L -o publisher.jar https://github.com/HL7/fhir-ig-publisher/releases/download/2.2.11/publisher.jar && java -jar publisher.jar -ig ig.ini` — read `output/qa.html`.
+8. Or just push a `feature/*` branch: CI builds the IG and posts a **preview URL**
+   on the PR.
+9. Merge changes into `dev` via PR; when ready, promote `dev → main`.
+10. Release with **CalVer** via the MII Module Release Workflow
+    ([recipe](docs/recipes/cut-a-release.md)) — **not** Release Please.
+
+New to the words above? Start with the [Glossary](docs/GLOSSARY.md) and
+[Concepts](docs/CONCEPTS.md). To understand the CI and the two release layers, read
+[docs/WORKFLOWS.md](docs/WORKFLOWS.md).
 
 > **⚠️ Before you click "Use this template" — read this.**
 > GitHub's *Use this template* button copies **only the default branch
