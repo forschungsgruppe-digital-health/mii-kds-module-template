@@ -18,6 +18,12 @@ MII IG template package
 > build reproducible and lets a module adopt a new template release with a
 > one-line, reviewable change — a bundled copy would silently drift.
 
+> **Status: PROTOTYPE.** This module template and the IG template it consumes are
+> prototypes pending discussion in the MII Taskforce Kerndatensatz. They are
+> released and fully usable, but the IG template is deliberately **not** registered
+> in `FHIR/ig-registry` and the repos must not be moved to another organisation
+> until that is explicitly decided — see [docs/PROJECT-STATUS.md](docs/PROJECT-STATUS.md).
+
 ## Quickstart
 
 From zero to a rendered module IG in ten steps. Full detail is in
