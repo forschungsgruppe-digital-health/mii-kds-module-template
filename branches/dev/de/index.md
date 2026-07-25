@@ -7,8 +7,8 @@
 
 | | |
 | :--- | :--- |
-| **:https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template | **:2026.0.0 |
-| Active | **:MII_IG_Template |
+| *Offizielle URL*:https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template | *Version*:2026.0.0 |
+| Active Stand: 2026-01-01 | *Maschinenlesbarer Name*:MII_IG_Template |
 
 ### Einleitung
 

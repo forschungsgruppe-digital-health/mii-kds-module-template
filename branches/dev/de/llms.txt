@@ -12,7 +12,7 @@
 * [Versioning](version-history.md)
 * [Profiles and Extensions](profiles-and-extensions.md)
 * [Downloads](downloads.md)
-* [Artifacts Summary](artifacts.md)
+* [Artefaktübersicht](artifacts.md)
 * [Guidance for Implementers](implementer-guidance.md)
 * [Capability Statements](capability-statements.md)
 * [Search Parameters and Operations](search-parameters-and-operations.md)

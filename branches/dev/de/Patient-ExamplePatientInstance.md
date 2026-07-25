@@ -1,10 +1,10 @@
 # Beispiel: Max Mustermann-Testpatient - MII Implementation Guide Module Template v2026.0.0
 
 * [**Table of Contents**](toc.md)
-* [**Artifacts Summary**](artifacts.md)
+* [**Artefaktübersicht**](artifacts.md)
 * **Beispiel: Max Mustermann-Testpatient**
 
-##  Patient: Beispiel: Max Mustermann-Testpatient
+## Beispiel Patient: Beispiel: Max Mustermann-Testpatient
 
 -------
 

@@ -9,7 +9,7 @@
 | | |
 | :--- | :--- |
 | *Official URL*:https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient | *Version*:2026.0.0 |
-| Active as of 2026-07-23 | *Computable Name*:ExamplePatient |
+| Active as of 2026-07-25 | *Computable Name*:ExamplePatient |
 
  
 Minimales Beispielprofil, das nur mit der Vorlage ausgeliefert wird, damit ein neu erstelltes Modul sofort eine gerenderte IG erzeugt. Kein MII-Artefakt — ersetzen Sie es durch die Profile Ihres Moduls. 
@@ -41,7 +41,7 @@ Other representations of profile: [CSV](../StructureDefinition-example-patient.c
   "name" : "ExamplePatient",
   "title" : "Beispiel-Patient (Vorlage)",
   "status" : "active",
-  "date" : "2026-07-23T23:49:49+00:00",
+  "date" : "2026-07-25T22:17:48+00:00",
   "publisher" : "Medical Informatics Initiative (MII)",
   "contact" : [{
     "name" : "Medical Informatics Initiative (MII)",

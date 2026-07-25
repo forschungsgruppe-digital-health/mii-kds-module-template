@@ -1,15 +1,15 @@
 # Beispiel-Patient (Vorlage) - MII Implementation Guide Module Template v2026.0.0
 
 * [**Table of Contents**](toc.md)
-* [**Artifacts Summary**](artifacts.md)
+* [**Artefaktübersicht**](artifacts.md)
 * **Beispiel-Patient (Vorlage)**
 
-## : Beispiel-Patient (Vorlage) 
+## Ressourcenprofil: Beispiel-Patient (Vorlage) 
 
 | | |
 | :--- | :--- |
-| **:https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient | **:2026.0.0 |
-| Active | **:ExamplePatient |
+| *Offizielle URL*:https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient | *Version*:2026.0.0 |
+| Active Stand: 2026-07-25 | *Maschinenlesbarer Name*:ExamplePatient |
 
  
 Minimales Beispielprofil, das nur mit der Vorlage ausgeliefert wird, damit ein neu erstelltes Modul sofort eine gerenderte IG erzeugt. Kein MII-Artefakt — ersetzen Sie es durch die Profile Ihres Moduls. 
@@ -20,38 +20,50 @@ Minimales Beispielprofil, das nur mit der Vorlage ausgeliefert wird, damit ein n
 
 You can also check for [usages in the FHIR IG Statistics](https://packages2.fhir.org/xig/resource/de.medizininformatikinitiative.kerndatensatz.template|current/StructureDefinition/StructureDefinition-example-patient.json)
 
-### 
+### Formale Ansichten des Profilinhalts
 
- . 
+ [Beschreibung von Profilen, Differentials, Snapshots und deren Repräsentationen](http://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#structure-definitions). 
 
-*   
-*   
-*   
-*   
-*   
+*  [Schlüsselelemente-Tabelle](#tabs-key) 
+*  [Differential-Tabelle](#tabs-diff) 
+*  [Snapshot-Tabelle](#tabs-snap) 
+*  [Statistiken/Referenzen](#tabs-summ) 
+*  [Alle](#tabs-all) 
+
+#### Terminology Bindings
+
+#### Constraints
+
+Diese Struktur ist abgeleitet von [Patient](http://hl7.org/fhir/R4/patient.html) 
 
 #### Terminology Bindings
 
 #### Constraints
 
-#### Terminology Bindings
-
-#### Constraints
+Diese Struktur ist abgeleitet von [Patient](http://hl7.org/fhir/R4/patient.html) 
 
 ** Summary **
 
 Mandatory: 2 elements
  Must-Support: 4 elements
 
-#### Terminology Bindings
-
-#### Constraints
-
- **View** 
+ **Schlüsselelemente-Ansicht** 
 
 #### Terminology Bindings
 
 #### Constraints
+
+ **Differential-Ansicht** 
+
+Diese Struktur ist abgeleitet von [Patient](http://hl7.org/fhir/R4/patient.html) 
+
+ **Snapshot-AnsichtView** 
+
+#### Terminology Bindings
+
+#### Constraints
+
+Diese Struktur ist abgeleitet von [Patient](http://hl7.org/fhir/R4/patient.html) 
 
 ** Summary **
 
@@ -60,7 +72,7 @@ Mandatory: 2 elements
 
  
 
- ,  
+Weitere Repräsentationen des Profils: [CSV](../StructureDefinition-example-patient.csv), [Excel](../StructureDefinition-example-patient.xlsx), [Schematron](../StructureDefinition-example-patient.sch) 
 
 
 
@@ -75,7 +87,7 @@ Mandatory: 2 elements
   "name" : "ExamplePatient",
   "title" : "Beispiel-Patient (Vorlage)",
   "status" : "active",
-  "date" : "2026-07-23T23:49:49+00:00",
+  "date" : "2026-07-25T22:17:48+00:00",
   "publisher" : "Medical Informatics Initiative (MII)",
   "contact" : [{
     "name" : "Medical Informatics Initiative (MII)",
