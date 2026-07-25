@@ -102,7 +102,7 @@ jobs:
       is_module: ${{ steps.detect.outputs.is_module }}
     steps:
       - name: Check out the repository
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Detect unreplaced template placeholders
         id: detect
         shell: bash
@@ -131,24 +131,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the tagged commit
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Pin the kerndatensatz-meta reusable assets (nginx proxy config)
         # Only needed for the SU-TermServ proxy; pinned like go-publish.yml.
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: medizininformatik-initiative/kerndatensatz-meta
           ref: 1db2e534704d92e5ee0cde663ce3e7ccd8825fa7
           path: kerndatensatz-meta
 
       - name: Set up Java (temurin 17)
-        uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4.8.0
+        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95 # v5.6.0
         with:
           distribution: temurin
           java-version: "17"
 
       - name: Set up Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "22"
 
@@ -251,7 +251,7 @@ jobs:
           } >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Upload the build (package + QA report)
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: module-release-build
           path: |
@@ -287,7 +287,7 @@ jobs:
           echo "version=${version}" >> "${GITHUB_OUTPUT}"
 
       - name: Create the draft GitHub Release
-        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2.6.2
+        uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # v3.0.2
         with:
           name: "${{ steps.prep.outputs.version }}"
           draft: true
@@ -354,7 +354,7 @@ jobs:
     steps:
       - name: Announce the release on the MII Zulip (skipped if no key)
         if: ${{ env.ZULIP_API_KEY != '' }}
-        uses: zulip/github-actions-zulip/send-message@e4c8f27c732ba9bd98ac6be0583096dea82feea5 # v1.0.2
+        uses: zulip/github-actions-zulip/send-message@f675f2b4eb2a95fae974215476dcb7ad8dfeff6b # v2.0.2
         with:
           api-key: ${{ env.ZULIP_API_KEY }}
           email: "kds-github-bot@mii.zulipchat.com"

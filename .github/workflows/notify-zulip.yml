@@ -53,7 +53,7 @@ jobs:
     steps:
       - name: Notify MII Zulip (skipped if no key)
         if: ${{ env.ZULIP_API_KEY != '' }}
-        uses: zulip/github-actions-zulip/send-message@e4c8f27c732ba9bd98ac6be0583096dea82feea5 # v1.0.2
+        uses: zulip/github-actions-zulip/send-message@f675f2b4eb2a95fae974215476dcb7ad8dfeff6b # v2.0.2
         with:
           api-key: ${{ env.ZULIP_API_KEY }}
           email: "kds-github-bot@mii.zulipchat.com"
@@ -79,7 +79,7 @@ jobs:
     steps:
       - name: Notify public FHIR Zulip german/mi-initiative (human-enabled)
         if: ${{ env.FHIR_ZULIP_API_KEY != '' }}
-        uses: zulip/github-actions-zulip/send-message@e4c8f27c732ba9bd98ac6be0583096dea82feea5 # v1.0.2
+        uses: zulip/github-actions-zulip/send-message@f675f2b4eb2a95fae974215476dcb7ad8dfeff6b # v2.0.2
         with:
           api-key: ${{ env.FHIR_ZULIP_API_KEY }}
           # TODO(human): replace with the email address of the bot account you
