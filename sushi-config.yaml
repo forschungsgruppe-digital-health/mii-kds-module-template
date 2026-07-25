@@ -349,44 +349,20 @@ parameters:
 # │ input/includes. To use a provided input/includes/menu.xml file, delete the "menu"              │
 # │ property below.                                                                                │
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
-# Menu handling — DELIBERATE deviation from the basis idiom.
-# Basis keeps this commented and hand-maintains input/includes/menu.xml PLUS a
-# per-language input/translations/<lang>/includes/menu.xml. For a bilingual IG
-# that manual route requires an en/menu.xml, and its absence makes the IG
-# Publisher abort with "Could not locate the included file 'en/menu.xml'".
-# Using the `menu:` PROPERTY instead lets SUSHI generate menu.xml and the IG
-# Publisher auto-generate the per-language variants — the approach the
-# ig-template-mii-kds self-test uses and the least error-prone for a template.
-# (Menu labels themselves are not translated by the toolchain — see
-# docs/recipes/add-translation.md in ig-template-mii-kds — so they stay as
-# written here; to hand-maintain a bilingual menu instead, delete this property
-# and ship input/includes/menu.xml + input/translations/en/includes/menu.xml.)
-# The IG Publisher supports only one sub-menu level.
-menu:
-  Home: index.html
-  Guidance:
-    Guidance: guidance.html
-    Guidance for Researchers: researcher-guidance.html
-    Guidance for Implementers: implementer-guidance.html
-    Datasets and Descriptions: datasets-and-descriptions.html
-    UML Diagrams: uml-diagrams.html
-  Conformance:
-    Conformance: conformance.html
-    General Requirements: general-requirements.html
-    Must Support: must-support.html
-    Handling Missing Data: missing-data.html
-  Artifacts:
-    Profiles and Extensions: profiles-and-extensions.html
-    Terminology: terminology.html
-    Capability Statements: capability-statements.html
-    Search Parameters and Operations: search-parameters-and-operations.html
-    Logical Models: logical-models.html
-    Examples: examples.html
-  Downloads: downloads.html
-  Versioning:
-    Versioning: version-history.html
-    Changelog: changes.html
-  Metadata: metadata.html
+# ── MENU (translatable — maintained as menu.xml, NOT the `menu:` property) ────
+# The menu lives in input/includes/menu.xml (German = the default language) with
+# a per-language translation at input/translations/en/includes/menu.xml. That is
+# the mechanism the HL7 reference IG FHIR/multi-lang-test-ig uses and the ONLY
+# way to get a TRANSLATED menu.
+#
+# Do NOT re-add a `menu:` property here: SUSHI would generate a competing
+# fsh-generated/includes/menu.xml whose labels cannot be translated, so the
+# navigation would stay in one language on every rendered language.
+#
+# Editing rules: keep href targets identical across languages, translate only the
+# labels, give dropdown parents a REAL page (href="#" fails the template's menu
+# QA), and remember only one sub-menu level is supported. When you add or remove
+# a page, update BOTH menu files and the `pages:` tree above.
 #
 # ╭──────────────────────────────────────────SUSHI flags───────────────────────────────────────────╮
 # │  The flags below configure aspects of how SUSHI processes FSH.                                 │

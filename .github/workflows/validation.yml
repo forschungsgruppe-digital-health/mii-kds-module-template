@@ -39,12 +39,13 @@
 #              - SIMPLIFIER_USERNAME / SIMPLIFIER_PASSWORD  (dotnet QC login)
 #              - CDS_DEV_CLIENT_CERT / CDS_DEV_CLIENT_KEY /
 #                CDS_DEV_CLIENT_CERT_PASSWORD  (Java validator → SU-TermServ)
-#            > Why the CDS_DEV_* names: the Java reusable workflow reads exactly
-#            these (the MII convention). They differ from this repo's BUILD-time
-#            terminology secrets SU_TERMSERV_CLIENT_* used by ig-publisher.yml /
-#            go-publish.yml (§2.10). See the TODO(human) in the PR body about
-#            reconciling the two secret names.
-#
+#            > RESOLVED: the Java job now MAPS this repo's canonical
+#            > SU_TERMSERV_CLIENT_CERT / _KEY / _PASSWORD onto the upstream
+#            > CDS_DEV_CLIENT_* names at the call site, so the SU-TermServ
+#            > certificate is stored ONCE under one name for the whole repo
+#            > (ig-publisher.yml, go-publish.yml and validation all use it).
+#            > SIMPLIFIER_USERNAME / SIMPLIFIER_PASSWORD have no local equivalent
+#            > and stay inherited.
 # Human-gated: none here; supplying the validation secrets is the human step.
 name: FHIR validation
 
@@ -85,7 +86,19 @@ jobs:
       JAVA_VALIDATOR_VERSION: ${{ vars.JAVA_VALIDATOR_VERSION || '6.5.7' }}
       VALIDATION_REPORT_FILTERS: |
         filename | messageId | detailsWildcard | location
-    secrets: inherit
+    # Secret-name reconciliation: the MII reusable workflow declares
+    # CDS_DEV_CLIENT_CERT / _KEY / _CERT_PASSWORD (all required), but THIS repo's
+    # canonical name for the same SU-TermServ client certificate is
+    # SU_TERMSERV_CLIENT_CERT / _KEY / _PASSWORD (used by ig-publisher.yml and
+    # go-publish.yml, §2.10). Mapping them explicitly here means a maintainer sets
+    # the certificate ONCE, under one name, for the whole repository — instead of
+    # storing the same cert twice under two different secret names.
+    # If your organisation already provisions CDS_DEV_CLIENT_* centrally, replace
+    # this block with `secrets: inherit`.
+    secrets:
+      CDS_DEV_CLIENT_CERT: ${{ secrets.SU_TERMSERV_CLIENT_CERT }}
+      CDS_DEV_CLIENT_KEY: ${{ secrets.SU_TERMSERV_CLIENT_KEY }}
+      CDS_DEV_CLIENT_CERT_PASSWORD: ${{ secrets.SU_TERMSERV_CLIENT_PASSWORD }}
 
   template-repo-notice:
     name: Validation skipped on the template repo

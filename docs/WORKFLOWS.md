@@ -53,6 +53,7 @@ Everything below **propagates** to a module (the bootstrap keeps it). This is ho
 | `go-publish.yml` | `workflow_dispatch` **only** | Production `-go-publish`; `publish:false` = full dry run by default | published IG | — | **always human-triggered (Gate E)** |
 | `dependency-check.yml` | schedule (Mon 06:00 UTC); `workflow_dispatch` | Version drift (IG Publisher, SUSHI, Jekyll, both templates, FHIR deps) → tracking issue/PR | `dependencies` issue/PR | `ENABLE_DEPENDENCY_CHECK` (ON) | proposals only |
 | `security-scan.yml` | schedule (Mon 07:00 UTC); PR to `dev`; `workflow_dispatch` | OSV + Trivy (fs + dev-container image) | SARIF in Security tab | `ENABLE_SECURITY_SCAN` (ON) | no |
+| `sync-ig-template.yml` | schedule (Mon 05:00 UTC); `workflow_dispatch`; PR to `dev` (check only) | Keeps the vendored `ig-template/` in step with `ig-template-mii-kds@dev`; opens a PR on drift, fails a PR whose mirror is stale | sync PR | `ENABLE_TEMPLATE_SYNC` (ON) | never auto-merges |
 
 Notes:
 - **Terminology** is auto-selected, not a toggle: builds use **SU-TermServ** when the
@@ -73,6 +74,7 @@ Notes:
 | Convention check | `ENABLE_CONVENTION_CHECK` | ON |
 | Dependency check | `ENABLE_DEPENDENCY_CHECK` | ON |
 | Security scan | `ENABLE_SECURITY_SCAN` | ON |
+| Vendored template sync | `ENABLE_TEMPLATE_SYNC` | ON |
 | Module release (CalVer) | `ENABLE_MODULE_RELEASE` | ON |
 | Release Please (template only) | `ENABLE_RELEASE_PLEASE` | ON |
 | MII Zulip announcement | `ENABLE_ZULIP_ANNOUNCE` | ON |

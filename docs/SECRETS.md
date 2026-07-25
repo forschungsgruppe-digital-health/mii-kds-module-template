@@ -32,21 +32,20 @@ printf '%s' 'THE_KEY_PASSWORD'     | gh secret set SU_TERMSERV_CLIENT_PASSWORD -
 ```
 
 **2. The MII reusable validation workflow** (`validation.yml`, the Java validator)
-reads `CDS_DEV_CLIENT_*` — the names that external workflow hard-codes. Set the
-**same** certificate again under these names:
+declares the secret names `CDS_DEV_CLIENT_CERT` / `_KEY` / `_CERT_PASSWORD` (the
+`kerndatensatz-basis` convention). **You do not need to set those** — this repo
+maps its own `SU_TERMSERV_CLIENT_*` secrets onto them at the call site in
+`validation.yml`, so the certificate above is the only copy you store.
 
-```sh
-base64 -i client-cert.pem          | gh secret set CDS_DEV_CLIENT_CERT          --repo <owner>/<module-repo>
-base64 -i client-key-encrypted.key | gh secret set CDS_DEV_CLIENT_KEY           --repo <owner>/<module-repo>
-printf '%s' 'THE_KEY_PASSWORD'     | gh secret set CDS_DEV_CLIENT_CERT_PASSWORD --repo <owner>/<module-repo>
-```
-
-> **Why two names for one certificate:** the terminology consumer in this
-> template's own workflows uses `SU_TERMSERV_CLIENT_*` (spec §2.10); the MII
-> reusable validation workflow is external and pinned, and reads `CDS_DEV_CLIENT_*`
-> (the `kerndatensatz-basis` convention). They are the same SU-TermServ cert. Both
-> are optional — without them, the build uses the `tx.fhir.org` fallback and the
-> reusable validation runs without SU-TermServ.
+> **Why the mapping instead of two copies:** the same SU-TermServ client
+> certificate is needed by this repo's own build (`ig-publisher.yml`,
+> `go-publish.yml`, spec §2.10) and by the external, pinned MII reusable
+> workflow, which hard-codes different names. Mapping them at the call site keeps
+> **one certificate under one secret name** for the whole repository. If your
+> organisation already provisions `CDS_DEV_CLIENT_*` centrally, replace that
+> block in `validation.yml` with `secrets: inherit` instead.
+> The certificate is optional either way: without it the build uses the
+> `tx.fhir.org` fallback and validation runs without SU-TermServ.
 
 The `.NET` Simplifier QC job (also part of `validation.yml`) additionally reads:
 
