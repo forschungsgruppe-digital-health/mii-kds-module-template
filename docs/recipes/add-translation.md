@@ -157,7 +157,9 @@ sushi .
    `Generated <date>`.
 3. A translated page renders in German on `/de/`; an untranslated one falls back
    to the English source.
-4. A translated resource's `description` is German on `/de/`, English on `/en/`.
+4. A translated resource's `description` is German on that resource's own `/de/`
+   page, English on `/en/`. The artifacts index and the table of contents keep
+   the default-language (English) title and description in **both** trees.
 
 The build must stay green (QA errors = 0).
 

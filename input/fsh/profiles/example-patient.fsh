@@ -20,6 +20,14 @@
 // the same mechanism kerndatensatz-basis uses for conformance-resource content.
 // (The narrative PAGES are translated differently, under input/translations/de/.)
 //
+// What that actually RENDERS (observed on the built /de/ tree, publisher 2.2.11):
+// the German `^description` appears only on the artifact's OWN page; the German
+// `^title` does not appear anywhere, and the artifacts index and table of
+// contents keep the English title and description. The extension is still worth
+// carrying — it ships the German text inside the package for consumers — but do
+// not expect the German site to be fully German. See
+// docs/recipes/add-translation.md §4.
+//
 // The `insert` block below is the shared metadata every MII conformance resource
 // carries — see input/fsh/rulesets/README.md. Copy it verbatim onto each new
 // profile; that is what keeps a module's artifacts consistent with each other and
