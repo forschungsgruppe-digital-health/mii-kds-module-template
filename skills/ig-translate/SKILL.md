@@ -17,7 +17,7 @@ Manages the English translation *supplements* of a concrete module IG and puts
 them exactly where the IG Publisher expects them. German is the leading
 language; English is the recommended second rendering.
 
-> **Adapted from the FGDH sample IG.** Carried over from the `ig-translate`
+> **Adapted from the MII KDS sample IG.** Carried over from the `ig-translate`
 > skill of
 > [`mii-kds-sample-ig-inoffiziell`](https://github.com/medizininformatik-initiative/mii-kds-sample-ig-inoffiziell)
 > (CC-BY-4.0), refocused on the **module** side.

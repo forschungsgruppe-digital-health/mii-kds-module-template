@@ -47,7 +47,7 @@ reminder, not an error. Two more expected row states:
 
 - **`not yet published`** on `de.medizininformatikinitiative.template`: the
   checker looks on `packages.fhir.org` first and falls back to the template
-  repo's GitHub releases; until Repo A's first release reaches either, this
+  repo's GitHub releases; until the template's first release reaches either, this
   row cannot compare versions. It resolves itself once the package is
   published.
 - **`transitive — bump via the template pin`** on `fhir2.base.template`: this

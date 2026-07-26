@@ -18,7 +18,7 @@ it, is it clean, how mature is it) and for the **objective comparison of
 several IGs**. It is strictly read-only: it never builds, changes, or publishes
 anything.
 
-> **Carried over from the FGDH sample IG.** This skill is adapted from the
+> **Carried over from the MII KDS sample IG.** This skill is adapted from the
 > `ig-analyze` skill of
 > [`mii-kds-sample-ig-inoffiziell`](https://github.com/medizininformatik-initiative/mii-kds-sample-ig-inoffiziell)
 > (CC-BY-4.0). The framing here is general QA and module comparison — not

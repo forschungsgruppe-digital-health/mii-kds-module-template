@@ -31,7 +31,7 @@ scaffold** — it additionally implements the hard Section-1a assertions
 mechanically and placeholder-aware via
 [`../../tools/convention-check.mjs`](../../tools/convention-check.mjs) (which the
 template package repo does not carry, having no `{{PLACEHOLDER}}` values). It is
-adapted from the skill of the same name in the FGDH sample IG
+adapted from the skill of the same name in the MII KDS sample IG
 ([`mii-kds-sample-ig-inoffiziell`](https://github.com/medizininformatik-initiative/mii-kds-sample-ig-inoffiziell),
 CC-BY-4.0).
 
