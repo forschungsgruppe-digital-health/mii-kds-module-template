@@ -5,17 +5,18 @@
 
 ## Conformance
 
- There is no translation page available for the current page, so it has been rendered in the default language 
+### Conformance
 
-### Konformität
+This section defines the conformance requirements for systems implementing the profiles of the **Module Template** module.
 
-Dieser Abschnitt definiert die Konformitätsanforderungen für Systeme, die die Profile des Moduls **Module Template** umsetzen.
+* **[General Requirements](general-requirements.md)** — the conformance verbs (SHALL/SHOULD/MAY per RFC-2119), claiming conformance, using codes in the profiles, and the expectations on the FHIR RESTful API.
+* **[Must Support](must-support.md)** — what **Must Support** means for data-providing and data-consuming systems.
+* **[Handling Missing Data](missing-data.md)** — how missing or unknown values are represented.
+* **[Security and Privacy](security-and-privacy.md)** — the security and data-protection considerations of this module.
 
-* **[Allgemeine Anforderungen](general-requirements.md)** — die Konformitäts-Verben (MUSS/SOLLTE/KANN nach RFC-2119) und die allgemeinen, modulweiten Anforderungen.
-* **[Must-Support](must-support.md)** — was **Must Support** für daten-erzeugende und daten-verarbeitende Systeme bedeutet.
-* **[Umgang mit fehlenden Daten](missing-data.md)** — wie fehlende oder unbekannte Werte kodiert werden.
+The binding rules are those of the [MII meta wiki](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance); the pages of this section reproduce them.
 
-Verbindlich sind die Festlegungen des [MII-Meta-Wikis](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance); die Seiten dieses Abschnitts geben sie wieder.
+For implementation guidance see the [Guidance](guidance.md) section; for the technical artifacts see the [Artifacts](artifacts.md) section.
 
-> [TODO: Ergänzen Sie modul-spezifische Konformitätsaussagen.Hinweis zur Erfassung: Konformitätsaussagen werden **nicht** automatisch erkannt. Der IG-Publisher sammelt nur Sätze, die ausdrücklich markiert sind — `§<seite>-<n>:Der Server MUSS …§` — und erzeugt daraus eine Übersichtstabelle an der Stelle eines Absatzes, der ausschließlich `§§§` enthält. Solange keine Sätze markiert sind, gibt es keine Übersicht. Ob dieses Verfahren für einen deutschsprachigen Leitfaden übernommen wird, ist noch nicht entschieden — siehe die Hinweise in `docs/ig-best-practices-checklist.md`.]
+> [TODO: Add the conformance statements that are specific to your module.Note on collecting them: conformance statements are **not** detected automatically. The IG Publisher only collects sentences that are explicitly marked — `§<page>-<n>:Servers SHALL …§` — and renders a summary table where a paragraph contains nothing but `§§§`. As long as no sentence is marked, there is no summary table. `kerndatensatz-basis` uses this mechanism; whether this template adopts it is still open, because the "Expectation" column is derived from the English keywords SHALL/SHOULD/MAY and the German translation of a page uses MUSS/SOLLTE/KANN — see the open decisions in `docs/ig-best-practices-checklist.md`. Verify with a real IG-Publisher build before shipping either way.]
 

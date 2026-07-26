@@ -5,21 +5,21 @@
 
 ## Guidance
 
-Dieser Abschnitt bündelt die fachlichen Hinweise zur Umsetzung und Nutzung des Moduls **Module Template**.
+This section collects the domain guidance for implementing and using the **Module Template** module.
 
-### Allgemeine Umsetzungshinweise
+### General Implementation Guidance
 
-* **[Datensätze und Beschreibungen](datasets-and-descriptions.md)** — ausführliche Beschreibung der Datenelemente / logischen Modelle des Moduls.
-* **[UML-Diagramme](uml-diagrams.md)** — visuelle Darstellung der Datenmodelle und ihrer Beziehungen.
+* **[Datasets and Descriptions](datasets-and-descriptions.md)** — detailed description of the module's data elements / logical models.
+* **[UML Diagrams](uml-diagrams.md)** — visual representation of the data models and their relationships.
 
-### Zielgruppenspezifische Hinweise
+### Audience-Specific Guidance
 
-* **[Anleitung für Forschende](researcher-guidance.md)** — für Forschende, die Moduldaten nutzen.
-* **[Anleitung für Implementierende](implementer-guidance.md)** — technische Hinweise für DIZ-Implementierende.
+* **[Guidance for Researchers](researcher-guidance.md)** — for researchers using the module's data.
+* **[Guidance for Implementers](implementer-guidance.md)** — technical guidance for DIC implementers.
 
-> [TODO: Ergänzen Sie modul-spezifische Hinweise, die für alle Zielgruppen relevant sind — z. B. den fachlichen Geltungsbereich oder Abgrenzungen.]
+> [TODO: Add the module-specific guidance that is relevant to all audiences — e.g. the domain scope or its delimitations.]
 
 -------
 
-Für Konformitätsanforderungen siehe [Konformität](conformance.md); für die technischen Artefakte siehe [Profile und Extensions](profiles-and-extensions.md).
+For conformance requirements see [Conformance](conformance.md); for the technical artifacts see [Profiles and Extensions](profiles-and-extensions.md).
 

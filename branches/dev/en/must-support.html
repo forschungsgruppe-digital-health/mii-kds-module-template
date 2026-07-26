@@ -228,72 +228,209 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown.-->
 </div>
 
-<p style="border:var(--translation-box-border);background-color:var(--translation-background-color);padding: 5px 5px 5px 5px;">
-
-There is no translation page available for the current page, so it has been rendered in the default language
-
-</p>
-
 <!-- markdownlint-disable MD041 -->
-<!-- Must-Support. Der Text folgt der verbindlichen MII-Definition (Quelle:
-     MII-Meta-Wiki "Conformance", Abschnitt "Must Support (MS)"). Ändern Sie ihn
-     NUR, wenn Ihr Modul begründet abweicht — die Erwartungen an daten-erzeugende
-     und daten-verarbeitende Systeme sind MII-weit einheitlich. -->
+<!-- Default-language (English) page. Ported from kerndatensatz-basis
+     input/pagecontent/must-support.md (branch main); the definition and the
+     server/client expectations follow the MII meta wiki page "Conformance",
+     section "Must Support (MS)"
+     (https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance).
+     German mirror: input/translations/de/pagecontent/must-support.md — both
+     files must say the same thing.
+     The expectations below are MII-wide and identical for every module. Change
+     them ONLY if your module deviates for a documented reason. -->
 
-<h3 id="must-support">Must-Support</h3>
+<h3 id="must-support">Must Support</h3>
+
+<p>For querying and reading this module's profiles, <em>Must Support</em> on any profile
+data element <strong>SHALL</strong> be interpreted as described on this page.</p>
 
 <h4 id="definition">Definition</h4>
 
-<p>Elemente einer FHIR-Ressource können in einem Profil als <strong>obligatorisch</strong> oder
-als <a href="http://hl7.org/fhir/R4/profiling.html#mustsupport"><strong>Must Support</strong></a>
-gekennzeichnet werden.</p>
+<p>Elements of a FHIR resource can be marked in a profile as <strong>mandatory</strong> or as
+<a href="http://hl7.org/fhir/R4/profiling.html#mustsupport"><strong>Must Support</strong></a>.</p>
 
 <ul>
-  <li><strong>Obligatorische Elemente</strong> sind Elemente mit Mindestkardinalität <code class="language-plaintext highlighter-rouge">1</code>
-(z. B. <code class="language-plaintext highlighter-rouge">1..1</code>, <code class="language-plaintext highlighter-rouge">1..*</code>). Diese MÜSSEN grundsätzlich vorhanden sein. In
-Ausnahmefällen können die Werte fehlen — in diesem Fall MUSS die Abwesenheit
-dokumentiert werden, etwa über die <code class="language-plaintext highlighter-rouge">Data-Absent-Reason</code>-Extension (siehe
-<a href="missing-data.html">Umgang mit fehlenden Daten</a>).</li>
-  <li><strong>Must Support (MS)</strong> bedeutet, dass Systeme dieses Element unterstützen
-MÜSSEN, auch wenn die Kardinalität <code class="language-plaintext highlighter-rouge">0..*</code> lautet. <strong>Unterstützen</strong> heißt:
-Systeme MÜSSEN in der Lage sein, das Element zu befüllen, zu speichern,
-anzuzeigen und korrekt zu verarbeiten.</li>
+  <li><strong>Mandatory elements</strong> are elements with a minimum cardinality of <code class="language-plaintext highlighter-rouge">1</code>
+(e.g. <code class="language-plaintext highlighter-rouge">1..1</code>, <code class="language-plaintext highlighter-rouge">1..*</code>). They <strong>SHALL</strong> always be present. In exceptional cases
+the value may be missing — the absence <strong>SHALL</strong> then be documented, for
+example with the <code class="language-plaintext highlighter-rouge">Data-Absent-Reason</code> extension (see
+<a href="missing-data.html">Handling Missing Data</a>).</li>
+  <li><strong>Must Support (MS)</strong> means that systems <strong>SHALL</strong> support the element even
+where its cardinality is <code class="language-plaintext highlighter-rouge">0..*</code>. <em>Support</em> means: systems <strong>SHALL</strong> be capable
+of populating, storing, displaying and correctly processing the element.</li>
 </ul>
 
-<p>Must-Support ist damit <strong>nicht</strong> dasselbe wie Kardinalität: ein Element kann
-<code class="language-plaintext highlighter-rouge">0..1</code> sein und trotzdem Must-Support — die Daten dürfen fehlen, die Fähigkeit,
-sie zu verarbeiten, darf nicht.</p>
+<p>Must Support is therefore <strong>not</strong> the same as cardinality: an element can be
+<code class="language-plaintext highlighter-rouge">0..1</code> and still be Must Support — the data may be absent, the ability to handle
+it may not.</p>
 
-<h4 id="anforderungen-an-daten-erzeugende-systeme">Anforderungen an daten-erzeugende Systeme</h4>
+<p>A distinction is made between data-providing systems (senders/servers) and
+data-consuming systems (recipients/clients). In the MII infrastructure the FHIR
+API of a Data Integration Centre (DIZ) is the data-providing system that answers
+requests.</p>
 
-<p><em>(z. B. die FHIR-API eines Datenintegrationszentrums)</em></p>
+<h4 id="expectations-for-data-providing-systems">Expectations for data-providing systems</h4>
 
-<p>Ein konformes daten-erzeugendes System MUSS:</p>
+<p><em>(for example the FHIR API of a Data Integration Centre)</em></p>
+
+<p>A conformant data-providing system <strong>SHALL</strong> be capable of:</p>
 
 <ul>
-  <li>ein MS-Element mit Daten füllen, sofern diese lokal verfügbar sind (z. B. über
-ETL aus dem Primärsystem),</li>
-  <li>das MS-Element in der Ressource speichern können,</li>
-  <li>das MS-Element auf Anfrage (z. B. bei einer Feasibility-Query) bereitstellen.</li>
+  <li>populating a Must Support element with data where that data is locally
+available (e.g. via ETL from the primary systems),</li>
+  <li>storing the element in the resource,</li>
+  <li>making it retrievable on request (e.g. for a feasibility query).</li>
 </ul>
 
-<h4 id="anforderungen-an-daten-verarbeitende-systeme">Anforderungen an daten-verarbeitende Systeme</h4>
+<h4 id="expectations-for-data-consuming-systems">Expectations for data-consuming systems</h4>
 
-<p><em>(z. B. anfragende Anwendungen)</em></p>
+<p><em>(for example requesting applications)</em></p>
 
-<p>Ein konformes daten-verarbeitendes System MUSS:</p>
+<p>A conformant data-consuming system <strong>SHALL</strong> be capable of:</p>
 
 <ul>
-  <li>MS-Elemente dem Benutzer korrekt anzeigen,</li>
-  <li>die Werte für Berechnungen oder Weiterverarbeitung berücksichtigen können,</li>
-  <li>Ressourceninstanzen mit MS-Elementen fehlerfrei verarbeiten, ohne dass Fehler
-oder Abbrüche entstehen.</li>
+  <li>displaying Must Support elements correctly to the user,</li>
+  <li>taking their values into account for calculations or further processing,</li>
+  <li>processing resource instances containing Must Support elements without errors
+or aborts.</li>
+</ul>
+
+<h4 id="must-support-and-missing-data">Must Support and missing data</h4>
+
+<ul>
+  <li>Where no information is present for a data element and the reason for its
+absence is unknown, servers <strong>SHALL NOT</strong> include the element in the returned
+resource instance.</li>
+  <li>Clients <strong>SHALL</strong> interpret a missing data element in a resource instance as
+"not present in the server's system".</li>
+  <li>Where information is missing and the server knows the precise reason, it
+<strong>SHOULD</strong> convey that reason as described in
+<a href="missing-data.html">Handling Missing Data</a>.</li>
+</ul>
+
+<h4 id="how-must-support-is-shown-in-the-rendered-tables">How Must Support is shown in the rendered tables</h4>
+
+<p>Each profile page shows several formal views of the profile content as a tree,
+under the tabs <em>Differential Table</em>, <em>Key Elements Table</em> and <em>Snapshot Table</em>.</p>
+
+<p>In these views:</p>
+
+<ul>
+  <li>elements whose cardinality in the column "Card." starts with <code class="language-plaintext highlighter-rouge">1</code> (e.g. <code class="language-plaintext highlighter-rouge">1..1</code>)
+are <strong>mandatory</strong>;</li>
+  <li>elements flagged Must Support carry a red
+<span style="padding-left: 3px; padding-right: 3px; color: white; background-color: red" title="This element must be supported">S</span>
+marker.</li>
+</ul>
+
+<p>The following sub-sections state what the flag means for the different kinds of
+element.</p>
+
+<h4 id="must-support--primitive-elements">Must Support — primitive elements</h4>
+
+<p>Primitive elements are single elements carrying a primitive value. For a Must
+Support primitive element the server <strong>SHALL</strong> be capable of providing the
+element value, and the client <strong>SHALL</strong> be capable of processing it.</p>
+
+<p>For example, if <code class="language-plaintext highlighter-rouge">Patient.birthDate</code> is flagged Must Support:</p>
+
+<ul>
+  <li>servers <strong>SHALL</strong> be capable of providing a value in <code class="language-plaintext highlighter-rouge">Patient.birthDate</code>,</li>
+  <li>clients <strong>SHALL</strong> be capable of processing the value in <code class="language-plaintext highlighter-rouge">Patient.birthDate</code>.</li>
+</ul>
+
+<h4 id="must-support--complex-elements">Must Support — complex elements</h4>
+
+<p>Complex elements are composed of primitive and further complex elements. For a
+complex element flagged Must Support the server <strong>SHALL</strong> be capable of
+providing those sub-element values that are themselves flagged Must Support; if
+no sub-element is flagged, the server <strong>SHALL</strong> be capable of providing at least
+one sub-element value. The client <strong>SHALL</strong> be capable of processing the Must
+Support sub-element values. Where sub-elements of a complex element are flagged
+Must Support, supporting those sub-elements fulfils the expectation on the
+parent element.</p>
+
+<p>For example, if <code class="language-plaintext highlighter-rouge">Patient.name</code> is flagged Must Support and its sub-elements
+<code class="language-plaintext highlighter-rouge">family</code> and <code class="language-plaintext highlighter-rouge">given</code> are as well:</p>
+
+<ul>
+  <li>servers <strong>SHALL</strong> be capable of providing values in <code class="language-plaintext highlighter-rouge">Patient.name.family</code> and
+<code class="language-plaintext highlighter-rouge">Patient.name.given</code>,</li>
+  <li>clients <strong>SHALL</strong> be capable of processing those values.</li>
+</ul>
+
+<p>Conversely, if a sub-element is flagged Must Support but its parent is not,
+there is <em>no</em> expectation to support the parent as such. Where the parent
+element is present in the structure without being flagged, servers <strong>SHALL</strong>
+nevertheless support the flagged sub-element(s).</p>
+
+<h4 id="must-support--references">Must Support — references</h4>
+
+<p>Where a Must Support reference element has a single target profile, that target
+profile <strong>SHALL</strong> be supported.</p>
+
+<p>For example, if <code class="language-plaintext highlighter-rouge">Condition.subject</code> references this module's Patient profile and
+is flagged Must Support:</p>
+
+<ul>
+  <li>servers <strong>SHALL</strong> be capable of providing a <code class="language-plaintext highlighter-rouge">Condition.subject</code> with a valid
+reference to that profile,</li>
+  <li>clients <strong>SHALL</strong> be capable of processing such a reference.</li>
+</ul>
+
+<p>Where a Must Support reference element has several target profiles and none of
+them is flagged Must Support, <em>at least one</em> target profile <strong>SHALL</strong> be
+supported.</p>
+
+<h4 id="must-support--choice-of-data-types">Must Support — choice of data types</h4>
+
+<p>For Must Support choice elements (<code class="language-plaintext highlighter-rouge">value[x]</code> and similar) the server <strong>SHALL</strong>
+support the datatypes flagged Must Support, and the client <strong>SHALL</strong> be capable
+of processing all datatypes flagged Must Support.</p>
+
+<p>For example, if <code class="language-plaintext highlighter-rouge">Observation.value[x]</code> has several Must Support datatypes:</p>
+
+<ul>
+  <li>servers <strong>SHALL</strong> be capable of populating the flagged datatypes (e.g.
+<code class="language-plaintext highlighter-rouge">valueQuantity</code>, <code class="language-plaintext highlighter-rouge">valueCodeableConcept</code>, <code class="language-plaintext highlighter-rouge">valueString</code>),</li>
+  <li>clients <strong>SHALL</strong> be capable of processing all flagged datatypes,</li>
+  <li>systems <strong>MAY</strong> support further choices, but are not required to.</li>
+</ul>
+
+<h4 id="must-support--slices">Must Support — slices</h4>
+
+<p>FHIR profiles use <a href="http://hl7.org/fhir/R4/profiling.html#slicing">slicing</a> to
+constrain repeating elements. The element carrying the slicing discriminator
+(the "slicer") may be flagged Must Support, but each slice <strong>SHALL</strong> be flagged
+explicitly for the Must Support expectation to apply to it. For Must Support
+slices the server <strong>SHALL</strong> be capable of providing data conforming to the
+explicitly flagged slices, and the client <strong>SHALL</strong> be capable of processing
+such data.</p>
+
+<p>For example, if <code class="language-plaintext highlighter-rouge">identifier</code> is a Must Support slicer defining slices for
+several identifier types, only the explicitly flagged slices are required:</p>
+
+<ul>
+  <li>servers <strong>SHALL</strong> be capable of providing identifiers conforming to the Must
+Support slices,</li>
+  <li>clients <strong>SHALL</strong> be capable of processing them,</li>
+  <li>systems <strong>MAY</strong> support further slices, but are not required to.</li>
 </ul>
 
 <blockquote>
-  <p>[TODO: Nur ergänzen, falls Ihr Modul zusätzliche oder abweichende
-Must-Support-Regeln definiert — und die Abweichung begründen.]</p>
+  <p>[TODO: Only add anything here if YOUR module defines additional or deviating
+Must Support rules — and state the reason for the deviation. Delete this
+prompt afterwards.]</p>
 </blockquote>
+
+<h4 id="see-also">See also</h4>
+
+<ul>
+  <li><a href="general-requirements.html">General Requirements</a> — requirements common to all
+actors and profiles.</li>
+  <li><a href="missing-data.html">Handling Missing Data</a> — representing absent values.</li>
+  <li><a href="conformance.html">Conformance</a> — overview of the conformance requirements.</li>
+</ul>
 
 
 
@@ -320,7 +457,7 @@ Must-Support-Regeln definiert — und die Abweichung begründen.]</p>
 
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Sun, Jul 26, 2026 10:49+0000">2026-07-26</span>
+          Generated <span title="Sun, Jul 26, 2026 11:56+0000">2026-07-26</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.

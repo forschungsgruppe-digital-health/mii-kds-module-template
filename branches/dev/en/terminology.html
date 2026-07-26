@@ -228,35 +228,31 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown.-->
 </div>
 
-<p style="border:var(--translation-box-border);background-color:var(--translation-background-color);padding: 5px 5px 5px 5px;">
-
-There is no translation page available for the current page, so it has been rendered in the default language
-
-</p>
-
 <!-- markdownlint-disable MD041 -->
-<!-- Terminologie-Seite. Der IG-Publisher listet ValueSets/CodeSystems auf den
-     Artefakt-Seiten automatisch; hier stehen die MII-Hinweise dazu. -->
+<!-- Source: kerndatensatz-basis input/pagecontent/terminology.md; SNOMED CT
+     version policy from the meta wiki page "Terminology Version Policy".
+     Terminology page. The IG Publisher lists ValueSets/CodeSystems on the
+     artifact pages automatically; this page carries the MII notes on them.
+     German mirror: input/translations/de/pagecontent/terminology.md. -->
 
-<p>Diese Seite beschreibt die im Modul <strong>Module Template</strong> verwendeten ValueSets
-und CodeSystems. Allgemeine Hinweise zur Verwendung von Codes: siehe
+<p>This page describes the ValueSets and CodeSystems used in the
+<strong>Module Template</strong> module. For general guidance on using codes, see
 <a href="http://hl7.org/fhir/R4/terminologies.html">FHIR Terminology</a>.</p>
 
-<p class="bg-info"><strong>Wichtig:</strong> CodeSystem-Ressourcen externer Terminologien (z. B. ICD-10-GM, OPS,
-SNOMED CT) werden in diesem Modul <strong>nicht</strong> publiziert, sondern über den
-MII-Terminologieserver (SU-TermServ) bezogen:
+<p class="bg-info"><strong>Important:</strong> CodeSystem resources of external terminologies (e.g. ICD-10-GM,
+OPS, SNOMED CT) are <strong>not</strong> published in this module; they are obtained from the
+MII terminology service (SU-TermServ):
 <a href="https://mii-termserv.de/">https://mii-termserv.de/</a>.</p>
 
-<p class="bg-info"><strong>Expansionen:</strong> ValueSet-Expansionen MÜSSEN zur Validierung über einen
-FHIR-Terminologieserver erzeugt werden. Dieser Build nutzt SU-TermServ, sofern
-das Client-Zertifikat konfiguriert ist, sonst den öffentlichen HL7-Server
-<code class="language-plaintext highlighter-rouge">tx.fhir.org</code> (dann expandieren einige MII-spezifische ValueSets ggf. nicht
-vollständig).</p>
+<p class="bg-info"><strong>Expansions:</strong> ValueSet expansions MUST be created via a FHIR terminology
+server for validation purposes. This build uses SU-TermServ if the client
+certificate is configured, otherwise the public HL7 server <code class="language-plaintext highlighter-rouge">tx.fhir.org</code> (in
+which case some MII-specific ValueSets may not expand completely).</p>
 
 <blockquote>
-  <p>[TODO: Falls Ihr Modul SNOMED CT nutzt, geben Sie die verwendete Edition/Version
-an. Listen Sie die modul-eigenen ValueSets/CodeSystems auf oder verweisen Sie
-auf die automatisch erzeugte Artefakt-Liste.]</p>
+  <p>[TODO: If your module uses SNOMED CT, state the edition/version used. List the
+module's own ValueSets/CodeSystems, or refer to the automatically generated
+artifact list.]</p>
 </blockquote>
 
 
@@ -284,7 +280,7 @@ auf die automatisch erzeugte Artefakt-Liste.]</p>
 
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Sun, Jul 26, 2026 10:49+0000">2026-07-26</span>
+          Generated <span title="Sun, Jul 26, 2026 11:56+0000">2026-07-26</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.

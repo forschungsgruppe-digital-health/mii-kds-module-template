@@ -58,7 +58,7 @@ Dieser Leitfaden ist im Rahmen der Medizininformatik-Initiative erstellt worden 
 
 ### Ansprechpartner
 
-Fragen zu dieser Publikation können im HL7-FHIR-Zulip [chat.fhir.org](https://chat.fhir.org) im Stream `german/mi-initiative` gestellt werden. Anmerkungen und Kritik werden als **Issues** auf [GitHub](https://github.com/medizininformatik-initiative/mii-kds-module-template/issues) entgegengenommen.
+Fragen zu dieser Publikation können im HL7-FHIR-Zulip [chat.fhir.org](https://chat.fhir.org) im Stream `german/mi-initiative` oder im MII-Zulip [mii.zulipchat.com](https://mii.zulipchat.com/) im Stream `MII-Kerndatensatz` gestellt werden. Anmerkungen und Kritik werden als **Issues** auf [GitHub](https://github.com/medizininformatik-initiative/mii-kds-module-template/issues) entgegengenommen.
 
 > [TODO: Nennen Sie die fachlichen Ansprechpartner:innen Ihres Moduls.]
 
@@ -66,7 +66,18 @@ Fragen zu dieser Publikation können im HL7-FHIR-Zulip [chat.fhir.org](https://c
 
 > [TODO: Listen Sie die Autor:innen des Moduls mit Institution auf.]
 
-### Copyright-Hinweis / Nutzungshinweise
+### Urheberrecht und Lizenz
 
-© 2026+ — dieses Werk ist lizenziert unter der [Creative Commons Namensnennung 4.0 International Lizenz (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
+© 2026+ TMF e. V., Charlottenstraße 42, 10117 Berlin
+
+Dieses Werk ist lizenziert unter der [Creative Commons Namensnennung 4.0 International Lizenz (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.de).
+
+Für die Nutzungsrechte der zugrunde liegenden FHIR-Technologie siehe die FHIR-Basisspezifikation.
+
+Einige der verwendeten Codesysteme werden von anderen Organisationen veröffentlicht und gepflegt; es gilt das Urheberrecht der jeweiligen Herausgeber.
+
+### Haftungsausschluss
+
+* Der Inhalt dieses Dokuments ist öffentlich. Bitte beachten Sie, dass Teile dieses Dokuments auf FHIR Version R4 basieren, dessen Urheberrecht bei HL7 International liegt.
+* Obwohl diese Publikation mit größter Sorgfalt erstellt wurde, können die Autor:innen keine Haftung für direkte oder indirekte Schäden übernehmen, die aus dem Inhalt dieser Spezifikation entstehen könnten.
 

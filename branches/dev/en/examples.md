@@ -5,11 +5,9 @@
 
 ## Examples
 
- There is no translation page available for the current page, so it has been rendered in the default language 
+This page lists the example instances of the **Module Template** module. The template ships the synthetic example [Max Mustermann-Testpatient](Patient-ExamplePatientInstance.md).
 
-Diese Seite führt die Beispielinstanzen des Moduls **Module Template** auf. Die Vorlage enthält das synthetische Beispiel [Max Mustermann-Testpatient](Patient-ExamplePatientInstance.md).
+**Synthetic data only** — never use real or realistic-looking patient data in examples.
 
-**Nur synthetische Daten** — niemals echte oder realistisch wirkende Patientendaten in Beispielen verwenden.
-
-> [TODO: Ergänzen Sie aussagekräftige Beispielinstanzen zu Ihren Profilen.]
+> [TODO: Add meaningful example instances for your profiles.]
 

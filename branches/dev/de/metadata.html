@@ -235,14 +235,489 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown.-->
 </div>
 
+<p style="border:var(--translation-box-border);background-color:var(--translation-background-color);padding: 5px 5px 5px 5px;">
+
+Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfaden verfasst wurde.  Informationen zu diesen Übersetzungen und Anweisungen zum Abgeben von Feedback zu den Übersetzungen finden Sie [hier](translationinfo.html).
+
+</p>
+
 <!-- markdownlint-disable MD041 -->
+<!-- Deutsche Übersetzung der Standardsprachseite input/pagecontent/metadata.md
+     — beide Dateien müssen dasselbe aussagen. Quelle: kerndatensatz-basis
+     input/pagecontent/metadata.md (Branch main), reduziert auf das, was dieses
+     Gerüst in sushi-config.yaml tatsächlich deklariert.
+
+     Diese Seite wird VON HAND gepflegt. Nichts daran wird erzeugt: der
+     IG-Publisher rendert die Artefaktseiten, schreibt aber diesen Fließtext
+     nicht. Sobald sushi-config.yaml ein CRMI-Profil, eine artifact-*-Extension
+     oder einen Manifest-Parameter gewinnt oder verliert, sind die Tabellen unten
+     in BEIDEN Sprachen nachzuziehen. -->
+
 <h3 id="metadaten-übersicht">Metadaten-Übersicht</h3>
 
-<p>Automatisch erzeugte Übersicht der IG-Metadaten (CRMI: shareable/publishable/computable) des Moduls <strong>Module Template</strong>.</p>
+<p>Diese Seite beschreibt die maschinenlesbaren Metadaten des Moduls
+<strong>Module Template</strong>. Sie existieren, damit die Artefakte dieses Leitfadens
+auffindbar, bewertbar, validierbar, zitierbar, steuerbar und
+wiederverwendbar sind — für Menschen wie für Software.</p>
+
+<p>Das Metadatenmodell folgt dem
+<a href="https://hl7.org/fhir/uv/crmi/STU2/en/index.html">Canonical Resource Management Infrastructure Implementation Guide</a>
+(CRMI). CRMI beschreibt, wie Wissensartefakte über ihren gesamten
+Lebenszyklus hinweg konsistent ausgetauscht werden — von der Autorenschaft über
+Veröffentlichung und Verteilung bis zur Implementierung. Dieser Leitfaden
+verwendet die CRMI-Profile, -Extensions und -Manifest-Mechanismen, die für die
+Veröffentlichung eines MII-Kerndatensatz-Moduls als versionierter
+FHIR-Implementierungsleitfaden nützlich sind.</p>
+
+<p>Das Vorgehen ist vorläufig: Es hält den derzeit genutzten CRMI-Ansatz fest und
+kann angepasst werden, wenn CRMI reift, sich der MII-Veröffentlichungsprozess
+weiterentwickelt und die FAIR-Bewertung von FHIR-Leitfäden konkreter wird.</p>
+
+<h4 id="geltungsbereich">Geltungsbereich</h4>
+
+<p>CRMI-Metadaten beschreiben die FHIR-Spezifikationsartefakte selbst. Sie sind
+überwiegend beschreibend und ändern die klinischen oder technischen
+Konformitätsanforderungen der Profile, ValueSets, CodeSysteme, logischen
+Modelle, CapabilityStatements und Beispiele <strong>nicht</strong>. Eine Ausnahme sind die
+Manifest-Parameter: Sie dokumentieren und stützen den Veröffentlichungs- und
+Validierungskontext — Terminologie-Expansion und kanonische Versions-Pinnung —
+und können damit die erzeugte Ausgabe und die Validierungsergebnisse
+beeinflussen.</p>
+
+<p>Die Metadaten sind in den erzeugten FHIR-Ressourcen einsehbar, insbesondere in
+den JSON- und XML-Darstellungen, die von jeder Artefaktseite verlinkt sind, sowie
+im <a href="downloads.html">herunterladbaren Paket</a>.</p>
+
+<h4 id="abdeckung-des-crmi-artefaktmanagements">Abdeckung des CRMI-Artefaktmanagements</h4>
+
+<p>CRMI gliedert das Artefaktmanagement in Lebenszyklus-Phasen und begleitende
+Aspekte. Dieser Leitfaden setzt nicht jede CRMI-Fähigkeit um, sondern die Teile,
+die für die Veröffentlichung eines MII-Moduls unmittelbar nützlich sind.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>CRMI-Bereich</th>
+      <th>In diesem Leitfaden genutzt</th>
+      <th>Zweck</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://hl7.org/fhir/uv/crmi/STU2/en/artifact-lifecycle.html">Artefakt-Lebenszyklus</a></td>
+      <td>Shareable- und Publishable-ImplementationGuide-Profile; <code class="language-plaintext highlighter-rouge">status</code>; <code class="language-plaintext highlighter-rouge">version</code>; <code class="language-plaintext highlighter-rouge">resource-approvalDate</code>; <code class="language-plaintext highlighter-rouge">resource-effectivePeriod</code>; Beitragenden-Extensions</td>
+      <td>Verortet die Artefakte in Autorenschaft, Release, Veröffentlichung und Pflege.</td>
+    </tr>
+    <tr>
+      <td><a href="https://hl7.org/fhir/uv/crmi/STU2/en/version-manifest.html">Versions-Manifest</a></td>
+      <td><code class="language-plaintext highlighter-rouge">package-source</code>; kanonische Versions-Pinnung (<code class="language-plaintext highlighter-rouge">pin-canonicals: pin-all</code>); <em>optional</em> <code class="language-plaintext highlighter-rouge">CRMIManifestParameters</code> + <code class="language-plaintext highlighter-rouge">cqf-expansionParameters</code></td>
+      <td>Ermöglicht reproduzierbare Terminologie-Expansion und stabile Auflösung kanonischer Versionen.</td>
+    </tr>
+    <tr>
+      <td><a href="https://hl7.org/fhir/uv/crmi/STU2/en/artifact-conventions.html">Artefakt-Konventionen</a></td>
+      <td>Kanonische URLs; Gleichlauf von Paket- und Ressourcen-Version; <code class="language-plaintext highlighter-rouge">artifact-versionAlgorithm</code>; <code class="language-plaintext highlighter-rouge">artifact-versionPolicy</code></td>
+      <td>Richtet den Leitfaden an den Konventionen für kanonische Ressourcen aus.</td>
+    </tr>
+    <tr>
+      <td><a href="https://hl7.org/fhir/uv/crmi/STU2/en/packaging.html">Paketierung</a></td>
+      <td>FHIR-Paket; <code class="language-plaintext highlighter-rouge">ImplementationGuide.packageId</code>; Paketversion; <code class="language-plaintext highlighter-rouge">package-source</code></td>
+      <td>Verbindet die Artefakte mit dem Paket, in dem sie erstellt, getestet, veröffentlicht und verteilt werden.</td>
+    </tr>
+    <tr>
+      <td><a href="https://hl7.org/fhir/uv/crmi/STU2/en/publishing.html">Veröffentlichung</a></td>
+      <td>Publishable-Profil; Beitragenden-Extensions; <code class="language-plaintext highlighter-rouge">resource-approvalDate</code>; <code class="language-plaintext highlighter-rouge">resource-effectivePeriod</code>; <code class="language-plaintext highlighter-rouge">artifact-purpose</code>; <code class="language-plaintext highlighter-rouge">artifact-usage</code>; <em>optional</em> <code class="language-plaintext highlighter-rouge">artifact-relatedArtifact</code></td>
+      <td>Ergänzt Vertrauen, Governance, Veröffentlichungskontext und lesbare Zweckangaben.</td>
+    </tr>
+    <tr>
+      <td><a href="https://hl7.org/fhir/uv/crmi/STU2/en/distribution.html">Verteilung</a></td>
+      <td>Veröffentlichte Seiten; JSON-/XML-Ressourcen; Paket-Download</td>
+      <td>Unterstützt Abruf und Werkzeugnutzung im FHIR-Publikations-Ökosystem. CRMI-Repository-Operationen sind nicht umgesetzt.</td>
+    </tr>
+    <tr>
+      <td><a href="https://hl7.org/fhir/uv/crmi/STU2/en/artifact-signing.html">Signierung</a></td>
+      <td>Nicht umgesetzt</td>
+      <td>Mögliche künftige Erweiterung für Integrität, Authentizität und Nachweisbarkeit veröffentlichter Artefakte.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Dieser Leitfaden definiert keine <code class="language-plaintext highlighter-rouge">CRMIManifestLibrary</code>, keine
+CRMI-Repository-Operationen wie <code class="language-plaintext highlighter-rouge">$package</code> oder <code class="language-plaintext highlighter-rouge">$data-requirements</code>, keine
+Veröffentlichung über ein Knowledge Artifact Repository, keine
+Syndication-Feeds und keine Artefakt-Signierung. Das kann künftige Arbeit am
+Release-Workflow aufgreifen.</p>
+
+<h4 id="von-diesem-leitfaden-deklarierte-crmi-metadaten">Von diesem Leitfaden deklarierte CRMI-Metadaten</h4>
+
+<p>Die folgenden CRMI-Metadaten werden in
+<a href="https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/sushi-config.yaml"><code class="language-plaintext highlighter-rouge">sushi-config.yaml</code></a>
+gesetzt und landen in der erzeugten <code class="language-plaintext highlighter-rouge">ImplementationGuide</code>-Ressource.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metadaten-Artefakt</th>
+      <th>CRMI-Bereich</th>
+      <th>Ort in diesem Leitfaden</th>
+      <th>Rolle im Artefaktmanagement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://hl7.org/fhir/uv/crmi/STU2/en/StructureDefinition-crmi-shareableimplementationguide.html">CRMI Shareable ImplementationGuide</a><br /><a href="https://hl7.org/fhir/uv/crmi/STU2/en/StructureDefinition-crmi-publishableimplementationguide.html">CRMI Publishable ImplementationGuide</a><br /><a href="https://hl7.org/fhir/uv/crmi/STU2/en/StructureDefinition-crmi-implementationguide.html">CRMI ImplementationGuide</a></td>
+      <td>Lebenszyklus; Veröffentlichung; Paketierung</td>
+      <td><code class="language-plaintext highlighter-rouge">ImplementationGuide.meta.profile</code></td>
+      <td>Erzwingt den Mindestsatz an ImplementationGuide-Metadaten und ergänzt die Metadaten, die nach der Veröffentlichung für Verteilung, Repository-Aufnahme, Nutzung und Implementierung nötig sind.</td>
+    </tr>
+    <tr>
+      <td><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-cqf-knowledgeCapability.html">CQF Knowledge Capability</a></td>
+      <td>Lebenszyklus; Artefakt-Konventionen</td>
+      <td><code class="language-plaintext highlighter-rouge">ImplementationGuide.extension</code> (<code class="language-plaintext highlighter-rouge">shareable</code>, <code class="language-plaintext highlighter-rouge">publishable</code>)</td>
+      <td>Deklariert die Wissens-Fähigkeit des Artefakts bei Ressourcen ohne eigenes <code class="language-plaintext highlighter-rouge">knowledgeCapability</code>-Element.</td>
+    </tr>
+    <tr>
+      <td><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-purpose.html">Artifact Purpose</a></td>
+      <td>Veröffentlichung; Verteilung</td>
+      <td><code class="language-plaintext highlighter-rouge">ImplementationGuide.extension</code></td>
+      <td>Benennt, warum das Artefakt gebraucht wird und warum es so gestaltet ist.</td>
+    </tr>
+    <tr>
+      <td><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-usage.html">Artifact Usage</a></td>
+      <td>Veröffentlichung; Implementierung</td>
+      <td><code class="language-plaintext highlighter-rouge">ImplementationGuide.extension</code></td>
+      <td>Benennt, wie das Artefakt innerhalb der MII-Kerndatensatz-Spezifikation zu nutzen ist.</td>
+    </tr>
+    <tr>
+      <td><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-topic.html">Artifact Topic</a></td>
+      <td>Veröffentlichung; Verteilung</td>
+      <td><code class="language-plaintext highlighter-rouge">ImplementationGuide.extension</code>, codiert mit dem NCI-Thesaurus</td>
+      <td>Ergänzt inhaltliche Themen für Filterung, Suche und Gruppierung.</td>
+    </tr>
+    <tr>
+      <td><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-versionAlgorithm.html">Artifact Version Algorithm</a></td>
+      <td>Artefakt-Konventionen; Versionierung</td>
+      <td><code class="language-plaintext highlighter-rouge">ImplementationGuide.extension</code> (<code class="language-plaintext highlighter-rouge">semver</code>)</td>
+      <td>Deklariert, wie Versionen verglichen werden, um die aktuellere zu bestimmen.</td>
+    </tr>
+    <tr>
+      <td><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-versionPolicy.html">Artifact Version Policy</a></td>
+      <td>Lebenszyklus; Versionierung</td>
+      <td><code class="language-plaintext highlighter-rouge">ImplementationGuide.extension</code> (<code class="language-plaintext highlighter-rouge">package</code>)</td>
+      <td>Deklariert, dass Artefakt-Versionen mit der Paketversion geführt werden — ein Release kann ein Artefakt hochzählen, dessen Inhalt sich nicht geändert hat.</td>
+    </tr>
+    <tr>
+      <td><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-package-source.html">Package Source</a></td>
+      <td>Versions-Manifest; Paketierung; Verteilung</td>
+      <td><code class="language-plaintext highlighter-rouge">ImplementationGuide.extension</code> (packageId, version, uri)</td>
+      <td>Deklariert das Paket, in dem ein Artefakt definiert ist, damit Auswertungsumgebungen Namensräume und Abhängigkeiten im vorgesehenen Kontext auflösen.</td>
+    </tr>
+    <tr>
+      <td><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-resource-approvalDate.html">Resource Approval Date</a></td>
+      <td>Lebenszyklus; Veröffentlichung; Governance</td>
+      <td><code class="language-plaintext highlighter-rouge">ImplementationGuide.extension</code> (<code class="language-plaintext highlighter-rouge">2026-01-01</code>)</td>
+      <td>Hält fest, wann der Herausgeber den Inhalt offiziell zur Nutzung freigegeben hat.</td>
+    </tr>
+    <tr>
+      <td><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-resource-effectivePeriod.html">Resource Effective Period</a></td>
+      <td>Lebenszyklus; Veröffentlichung; Implementierung</td>
+      <td><code class="language-plaintext highlighter-rouge">ImplementationGuide.extension</code> (Beginn <code class="language-plaintext highlighter-rouge">2026</code>)</td>
+      <td>Hält fest, für welchen Zeitraum der Inhalt gelten soll oder gegolten hat.</td>
+    </tr>
+    <tr>
+      <td><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-author.html">Artifact Author</a><br /><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-editor.html">Artifact Editor</a><br /><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-reviewer.html">Artifact Reviewer</a><br /><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-endorser.html">Artifact Endorser</a></td>
+      <td>Veröffentlichung; Governance; Provenienz</td>
+      <td><code class="language-plaintext highlighter-rouge">ImplementationGuide.extension</code></td>
+      <td>Hält Autorenschaft, die für die innere Stimmigkeit verantwortliche Redaktion, die Reviewer und die offiziell befürwortenden Gremien fest. Bei einem MII-Modul sind Redaktion, Reviewer und befürwortende Gremien die MII-Governance-Gremien.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In diesem Gerüst nicht aktiviert, aber als auskommentierte Blöcke in
+<code class="language-plaintext highlighter-rouge">sushi-config.yaml</code> vorbereitet:</p>
+
+<ul>
+  <li><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-relatedArtifact.html">Artifact Related Artifact</a>
+— eine Literaturangabe zum Modul.</li>
+  <li><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-cqf-expansionParameters.html">CQF Expansion Parameters</a>
+zusammen mit einer
+<a href="https://hl7.org/fhir/uv/crmi/STU2/en/StructureDefinition-crmi-manifestparameters.html">CRMI-Manifest-Parameters</a>-Ressource
+und den Parametern <code class="language-plaintext highlighter-rouge">path-expansion-params</code> / <code class="language-plaintext highlighter-rouge">pin-manifest</code>.</li>
+</ul>
 
 <blockquote>
-  <p>[TODO: In der Regel keine manuelle Bearbeitung nötig.]</p>
+  <p>[TODO: Aktivieren Sie die für Ihr Modul nötigen Blöcke und ziehen Sie die
+Tabellen oben nach. Wenn Ihr Modul die CRMI-Shareable-/Publishable-Profile
+zusätzlich auf seine eigenen StructureDefinitions, CapabilityStatements,
+CodeSysteme und ValueSets anwendet — das Idiom aus <code class="language-plaintext highlighter-rouge">kerndatensatz-basis</code> ist
+ein gemeinsames <code class="language-plaintext highlighter-rouge">RuleSet</code> in <code class="language-plaintext highlighter-rouge">input/fsh/rulesets/crmi.fsh</code> —, ergänzen Sie die
+entsprechenden Zeilen.]</p>
 </blockquote>
+
+<h5 id="codesystem-supplements">CodeSystem-Supplements</h5>
+
+<p>Veröffentlicht ein Modul CodeSystem-Supplements, ist zu beachten: Das
+CRMI-Profil <em>ShareableCodeSystem</em> verlangt <code class="language-plaintext highlighter-rouge">CodeSystem.caseSensitive</code>, während
+die FHIR-Validierung warnt, dass ein Supplement <code class="language-plaintext highlighter-rouge">caseSensitive</code> nicht erneut
+angeben sollte, weil das dem ergänzten CodeSystem widersprechen könnte.
+<a href="https://github.com/medizininformatik-initiative/kerndatensatz-basis">kerndatensatz-basis</a>
+beansprucht deshalb bei Supplements nur das <em>Publishable</em>-CRMI-Profil und lässt
+das Shareable-Profil weg.</p>
+
+<h4 id="versionierung-und-paket-provenienz">Versionierung und Paket-Provenienz</h4>
+
+<p>Das menschenlesbare Versionsschema beschreibt die Seite
+<a href="version-history.html">Versionierung</a>. Dieser Abschnitt beschreibt, wie diese
+Politik als CRMI-Metadaten ausgedrückt wird.</p>
+
+<p>Das Modul verwendet die Kalender-Versionierung in der SemVer-kompatiblen
+numerischen Form <code class="language-plaintext highlighter-rouge">JJJJ.MINOR.PATCH[-label]</code>, derzeit <code class="language-plaintext highlighter-rouge">2026.0.0</code>. Das
+Kalenderjahr dient als CRMI-<code class="language-plaintext highlighter-rouge">&lt;major&gt;</code>-Komponente; <code class="language-plaintext highlighter-rouge">MINOR</code> und <code class="language-plaintext highlighter-rouge">PATCH</code> behalten
+ihre übliche additive bzw. korrigierende Bedeutung. Stabile Versionen lassen
+sich damit über den deklarierten Versionsalgorithmus <code class="language-plaintext highlighter-rouge">semver</code> vergleichen. Labels
+tragen Vorab- oder Build-Informationen; gemäß CRMI-/FHIR-Konvention wird zwischen
+Labels keine Reihenfolge abgeleitet.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>CRMI-Konformitätsanforderung</th>
+      <th>Umsetzung in diesem Leitfaden</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://hl7.org/fhir/uv/crmi/STU2/en/artifact-lifecycle.html#conformance-requirement-3-3">Anforderung 3.3: Artefakt-Versionierung</a></td>
+      <td>Artefakte tragen eine <code class="language-plaintext highlighter-rouge">version</code> in der Form <code class="language-plaintext highlighter-rouge">&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;[-&lt;label&gt;]</code> mit dem Jahr als Major-Komponente. <code class="language-plaintext highlighter-rouge">artifact-versionAlgorithm</code> deklariert den Vergleich per <code class="language-plaintext highlighter-rouge">semver</code>.</td>
+    </tr>
+    <tr>
+      <td><a href="https://hl7.org/fhir/uv/crmi/STU2/en/artifact-lifecycle.html#conformance-requirement-3-4">Anforderung 3.4: Versionierungs-Politik</a></td>
+      <td><code class="language-plaintext highlighter-rouge">artifact-versionPolicy</code> ist <code class="language-plaintext highlighter-rouge">package</code>: Artefakt-Versionen werden als Version des Pakets geführt, in dem sie erscheinen — ein Release kann daher ein inhaltlich unverändertes Artefakt hochzählen.</td>
+    </tr>
+    <tr>
+      <td><a href="https://hl7.org/fhir/uv/crmi/STU2/en/artifact-lifecycle.html#conformance-requirement-3-5">Anforderung 3.5: Versionierung von Artefakt-Sammlungen</a></td>
+      <td>Artefakte entstehen als Teil der Leitfaden-/Paket-Sammlung und teilen deren Version.</td>
+    </tr>
+    <tr>
+      <td><a href="https://hl7.org/fhir/uv/crmi/STU2/en/artifact-lifecycle.html#conformance-requirement-3-6">Anforderung 3.6: Paket-Quelle des Artefakts</a></td>
+      <td><code class="language-plaintext highlighter-rouge">package-source</code> hält Paket-Id, Paketversion und Paket-Quell-URI fest.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">resource-effectivePeriod</code> ergänzt dies um den vorgesehenen
+Geltungszeitraum. Version, Versionsalgorithmus, Versionspolitik, Paketquelle und
+Geltungszeitraum zusammen erlauben Lesenden und Werkzeugen die Entscheidung, ob
+ein Artefakt zum erwarteten Release gehört und ob seine Metadaten zur
+implementierten Version passen.</p>
+
+<h4 id="manifest-und-reproduzierbarkeit">Manifest und Reproduzierbarkeit</h4>
+
+<p>Kanonische Referenzen werden im gebauten Paket gepinnt (<code class="language-plaintext highlighter-rouge">pin-canonicals:
+pin-all</code> in <code class="language-plaintext highlighter-rouge">sushi-config.yaml</code>); das ist eine CRMI-Erwartung und macht die
+Ausgabe stabil.</p>
+
+<p>Ein Modul, das zusätzlich eine reproduzierbare Terminologie-Expansion will,
+ergänzt eine CRMI-Manifest-Parameters-Ressource — das Idiom aus
+<code class="language-plaintext highlighter-rouge">kerndatensatz-basis</code> ist <code class="language-plaintext highlighter-rouge">Parameters/mii-param-&lt;slug&gt;-manifest</code> —, verlinkt sie
+über <code class="language-plaintext highlighter-rouge">cqf-expansionParameters</code> aus dem <code class="language-plaintext highlighter-rouge">ImplementationGuide</code> und weist den
+Publisher mit <code class="language-plaintext highlighter-rouge">path-expansion-params</code> und <code class="language-plaintext highlighter-rouge">pin-manifest</code> darauf hin. Lesende wie
+Werkzeuge haben dann eine stabile Stelle, an der die Parameter für Expansion und
+Paket-Pinnung einsehbar sind.</p>
+
+<blockquote>
+  <p>[TODO: Ergänzen Sie das Manifest Ihres Moduls (siehe die auskommentierten
+Blöcke in <code class="language-plaintext highlighter-rouge">sushi-config.yaml</code>) und verlinken Sie hier die erzeugte
+<code class="language-plaintext highlighter-rouge">Parameters</code>-Seite — oder halten Sie ausdrücklich fest, dass dieses Modul
+keine Expansions-Parameter pinnt.]</p>
+</blockquote>
+
+<h4 id="bezug-zu-fair">Bezug zu FAIR</h4>
+
+<p>Die <a href="https://www.go-fair.org/fair-principles/">FAIR-Prinzipien</a> beschreiben
+Ziele dafür, digitale Objekte auffindbar (Findable), zugänglich (Accessible),
+interoperabel (Interoperable) und wiederverwendbar (Reusable) zu machen. Dieser
+Abschnitt ist eine informative Selbsteinschätzung, wie die CRMI-Metadaten dieses
+Leitfadens eine FAIR-konforme Veröffentlichung von FHIR-Spezifikationsartefakten
+unterstützen.</p>
+
+<p>Die Tabelle übernimmt die Indikator-Struktur der HL7-Seite
+<a href="https://hl7.org/fhir/uv/fhir-for-fair/RDAMetrics.html">FAIR Data Maturity Indicators and priority</a>
+(FHIR-for-FAIR), die auf dem RDA FAIR Data Maturity Model beruht, und führt die
+Indikatoren der Priorität <strong>Essential</strong> auf.
+<a href="https://hl7.org/fhir/uv/fhir-for-fair/metadata.html">FHIR-for-FAIR Metadata and Data</a>
+betont, dass ein FAIR-Objekt auf verschiedenen Granularitätsebenen existiert und
+die Grenze zwischen Metadaten und Daten kontextabhängig ist. Die Tabelle
+unterscheidet daher zwischen den Metadaten dieses Leitfadens und seiner
+Konformitätsartefakte, den mitgelieferten Beispieldaten und den von
+Implementierungen ausgetauschten produktiven klinischen Daten. Für die eigenen
+Artefakte und Beispiele kann der Leitfaden die Indikatoren adressieren; für
+produktive Daten <em>unterstützt</em> er sie, erfüllt werden müssen sie von den
+implementierenden Systemen, Repositorien und Governance-Prozessen.</p>
+
+<p>Die mitgelieferten Beispielinstanzen zeigen FAIR-relevante FHIR-Strukturen für
+Testdaten. Sie sind keine produktiven klinischen Daten und werden nicht als
+dauerhaft identifizierter FAIR-Datensatz behauptet.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Prinzip</th>
+      <th>Indikator</th>
+      <th>FAIR-Data-Maturity-Indikator</th>
+      <th>Adressiert durch</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>F1</td>
+      <td>RDA-F1-01M</td>
+      <td>Metadaten sind über einen persistenten Identifikator identifiziert</td>
+      <td>Kanonische <code class="language-plaintext highlighter-rouge">url</code>-Werte, die Paket-Id <code class="language-plaintext highlighter-rouge">de.medizininformatikinitiative.kerndatensatz.template</code>, die Paketversion und <code class="language-plaintext highlighter-rouge">package-source</code>. Die Persistenz hängt von der Veröffentlichungs-Governance ab.</td>
+    </tr>
+    <tr>
+      <td>F1</td>
+      <td>RDA-F1-01D</td>
+      <td>Daten sind über einen persistenten Identifikator identifiziert</td>
+      <td>Bei den Beispielen: <code class="language-plaintext highlighter-rouge">Resource.id</code>, <code class="language-plaintext highlighter-rouge">Bundle.identifier</code>, <code class="language-plaintext highlighter-rouge">identifier</code>-Elemente und <code class="language-plaintext highlighter-rouge">Bundle.entry.fullUrl</code> zeigen das Muster, sind aber keine persistenten Daten-PIDs. Produktive Daten benötigen persistente fachliche Identifikatoren aus den implementierenden Systemen.</td>
+    </tr>
+    <tr>
+      <td>F1</td>
+      <td>RDA-F1-02M</td>
+      <td>Metadaten sind über einen global eindeutigen Identifikator identifiziert</td>
+      <td>Global gültige kanonische <code class="language-plaintext highlighter-rouge">url</code>-Werte und die Paket-Id innerhalb der kontrollierten MII-Namensräume.</td>
+    </tr>
+    <tr>
+      <td>F1</td>
+      <td>RDA-F1-02D</td>
+      <td>Daten sind über einen global eindeutigen Identifikator identifiziert</td>
+      <td>Bei den Beispielen: <code class="language-plaintext highlighter-rouge">identifier.system</code> + <code class="language-plaintext highlighter-rouge">identifier.value</code> zeigen die global eindeutige Identifikation. Produktiv hängt sie von kontrollierten Namensräumen und lokaler Governance ab.</td>
+    </tr>
+    <tr>
+      <td>F2</td>
+      <td>RDA-F2-01M</td>
+      <td>Reichhaltige Metadaten ermöglichen das Auffinden</td>
+      <td>CRMI-Shareable-/Publishable-Profile, <code class="language-plaintext highlighter-rouge">purpose</code>, <code class="language-plaintext highlighter-rouge">artifact-usage</code>, <code class="language-plaintext highlighter-rouge">artifact-topic</code>, <code class="language-plaintext highlighter-rouge">resource-approvalDate</code>, <code class="language-plaintext highlighter-rouge">resource-effectivePeriod</code>, Beitragende und <code class="language-plaintext highlighter-rouge">package-source</code>.</td>
+    </tr>
+    <tr>
+      <td>F3</td>
+      <td>RDA-F3-01M</td>
+      <td>Metadaten enthalten den Identifikator der Daten</td>
+      <td>Artefakt-Metadaten und Artefakt-Identifikatoren stehen gemeinsam in denselben FHIR-Ressourcen und im Paket.</td>
+    </tr>
+    <tr>
+      <td>F4</td>
+      <td>RDA-F4-01M</td>
+      <td>Metadaten können geerntet und indexiert werden</td>
+      <td>Veröffentlichte Artefaktseiten, kanonische <code class="language-plaintext highlighter-rouge">url</code>-Werte, JSON-/XML-Darstellungen, das herunterladbare FHIR-Paket und <code class="language-plaintext highlighter-rouge">artifact-topic</code>. Das Ernten hängt von Publikationsseite und Paket-Registry ab.</td>
+    </tr>
+    <tr>
+      <td>A1</td>
+      <td>RDA-A1-02M</td>
+      <td>Metadaten sind manuell zugänglich</td>
+      <td>Menschenlesbare Leitfaden- und Artefaktseiten.</td>
+    </tr>
+    <tr>
+      <td>A1</td>
+      <td>RDA-A1-02D</td>
+      <td>Daten sind manuell zugänglich</td>
+      <td>Beispielseiten sowie erzeugtes JSON/XML. Produktiv hängt der Zugang von den implementierenden Systemen und lokalen Richtlinien ab.</td>
+    </tr>
+    <tr>
+      <td>A1</td>
+      <td>RDA-A1-03M</td>
+      <td>Der Metadaten-Identifikator löst auf einen Metadatensatz auf</td>
+      <td>Kanonische <code class="language-plaintext highlighter-rouge">url</code>-Werte lösen auf veröffentlichte Artefaktseiten mit Verweisen auf JSON und XML auf, abhängig von der Veröffentlichungs-Governance.</td>
+    </tr>
+    <tr>
+      <td>A1</td>
+      <td>RDA-A1-03D</td>
+      <td>Der Daten-Identifikator löst auf ein digitales Objekt auf</td>
+      <td>Beispielseiten und herunterladbares JSON/XML. Beispiel-Identifikatoren sind keine dauerhaft auflösenden Daten-PIDs.</td>
+    </tr>
+    <tr>
+      <td>A1</td>
+      <td>RDA-A1-04M</td>
+      <td>Metadaten sind über ein standardisiertes Protokoll zugänglich</td>
+      <td>Leitfaden- und Artefaktseiten über HTTPS, erzeugte Ressourcen als FHIR-JSON/XML, Verteilung als FHIR-Paket im NPM-Format.</td>
+    </tr>
+    <tr>
+      <td>A1</td>
+      <td>RDA-A1-04D</td>
+      <td>Daten sind über ein standardisiertes Protokoll zugänglich</td>
+      <td>Beispiele als FHIR-JSON/XML über HTTPS und über das Paket. Produktiv über konforme FHIR-REST-Server nach lokalen Richtlinien.</td>
+    </tr>
+    <tr>
+      <td>A1.1</td>
+      <td>RDA-A1.1-01M</td>
+      <td>Metadaten sind über ein frei zugängliches Protokoll erreichbar</td>
+      <td>Öffentlicher HTTPS-Zugang zu Seiten, erzeugten Artefakten und Paket.</td>
+    </tr>
+    <tr>
+      <td>A2</td>
+      <td>RDA-A2-01M</td>
+      <td>Metadaten bleiben verfügbar, auch wenn die Daten es nicht mehr sind</td>
+      <td>Versionierte Veröffentlichung, herunterladbares Paket, Versionshistorie und kanonische Artefakte. Langfristige Zusagen hängen von der Veröffentlichungs-Governance ab.</td>
+    </tr>
+    <tr>
+      <td>R1</td>
+      <td>RDA-R1-01M</td>
+      <td>Eine Vielzahl zutreffender, relevanter Attribute ermöglicht die Nachnutzung</td>
+      <td>CRMI-Profile, <code class="language-plaintext highlighter-rouge">purpose</code>, <code class="language-plaintext highlighter-rouge">artifact-usage</code>, <code class="language-plaintext highlighter-rouge">artifact-topic</code>, <code class="language-plaintext highlighter-rouge">resource-approvalDate</code>, <code class="language-plaintext highlighter-rouge">resource-effectivePeriod</code>, <code class="language-plaintext highlighter-rouge">artifact-versionPolicy</code>, <code class="language-plaintext highlighter-rouge">package-source</code> und Beitragende.</td>
+    </tr>
+    <tr>
+      <td>R1.1</td>
+      <td>RDA-R1.1-01M</td>
+      <td>Metadaten enthalten Lizenzinformationen</td>
+      <td>Die Lizenz <code class="language-plaintext highlighter-rouge">CC-BY-4.0</code> auf Leitfaden-Ebene, der Copyright-Hinweis und die Paket-Metadaten. Nutzungsbedingungen produktiver klinischer Daten kommen von den Datenhaltenden.</td>
+    </tr>
+    <tr>
+      <td>R1.3</td>
+      <td>RDA-R1.3-01M</td>
+      <td>Metadaten entsprechen einem Community-Standard</td>
+      <td>FHIR R4, die CRMI-Profile, die MII-Veröffentlichungskonventionen und die Metadaten kanonischer Ressourcen.</td>
+    </tr>
+    <tr>
+      <td>R1.3</td>
+      <td>RDA-R1.3-01D</td>
+      <td>Daten entsprechen einem Community-Standard</td>
+      <td>Die Beispiele deklarieren die Profile dieses Moduls. Produktiv muss die Konformität gegen Profile, Bindings und CapabilityStatement-Erwartungen validiert werden.</td>
+    </tr>
+    <tr>
+      <td>R1.3</td>
+      <td>RDA-R1.3-02M</td>
+      <td>Metadaten sind gemäß einem Community-Standard maschinenverständlich</td>
+      <td>CRMI-konforme FHIR-Metadaten als JSON/XML und als FHIR-Paket im NPM-Format des IG-Publisher-Ökosystems.</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>[TODO: Die Tabelle führt die Indikatoren der Priorität <em>Essential</em> auf. Wenn
+Ihr Modul die vollständige Selbsteinschätzung will, ergänzen Sie die
+Indikatoren der Prioritäten <em>Important</em> und <em>Useful</em> — <code class="language-plaintext highlighter-rouge">kerndatensatz-basis</code>
+führt die vollständige Tabelle.]</p>
+</blockquote>
+
+<h4 id="praktische-nutzung">Praktische Nutzung</h4>
+
+<p>Implementierende können diese Metadaten nutzen, um</p>
+
+<ul>
+  <li>zu prüfen, ob ein Artefakt zum erwarteten Paket und zur erwarteten Version
+gehört,</li>
+  <li>den Governance-Stand eines Artefakts an Freigabedatum, Beitragenden,
+Reviewern und befürwortenden Gremien zu erkennen,</li>
+  <li>die vorgesehene Nutzung über <code class="language-plaintext highlighter-rouge">purpose</code> und <code class="language-plaintext highlighter-rouge">artifact-usage</code> zu verstehen,</li>
+  <li>Artefakte nach Thema und Ressourcen-Kategorie zu finden,</li>
+  <li>Entscheidungen zu Terminologie-Expansion und kanonischer Pinnung
+nachzuvollziehen,</li>
+  <li>das Paket in Werkzeuge einzubinden, die kanonische FHIR-Ressourcen verarbeiten.</li>
+</ul>
+
+<p>Für die meisten Lesenden sind die menschenlesbaren Artefaktseiten der
+einfachste Einstieg. Für die automatisierte Verarbeitung tragen das
+<a href="downloads.html">herunterladbare Paket</a> und die JSON-Darstellungen der erzeugten
+Ressourcen die vollständigen maschinenlesbaren Metadaten.</p>
 
 
 
@@ -269,7 +744,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Sun, Jul 26, 2026 10:49+0000">2026-07-26</span>
+          Erstellt <span title="Sun, Jul 26, 2026 11:56+0000">2026-07-26</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.

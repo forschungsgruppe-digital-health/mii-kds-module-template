@@ -225,45 +225,53 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown. -->
 </div>
 
-<p style="border:var(--translation-box-border);background-color:var(--translation-background-color);padding: 5px 5px 5px 5px;">
-
-There is no translation page available for the current page, so it has been rendered in the default language
-
-</p>
-
   <!-- markdownlint-disable MD041 -->
-  <!-- Übersichtsseite "Konformität". Die Unterseiten sind der MII-Standardsatz
-     (Quelle: MII-Meta-Wiki "Conformance"). -->
+  <!-- Default-language (English) page. Overview of the Conformance section; the
+     sub-page set is the MII standard set (source: MII meta wiki page
+     "Conformance",
+     https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance;
+     structure as in kerndatensatz-basis input/pagecontent/conformance.md).
+     German mirror: input/translations/de/pagecontent/conformance.md — both files
+     must say the same thing, and both must list the same sub-pages as the two
+     menu files. -->
 
-<h3 id="konformität">Konformität</h3>
+<h3 id="conformance">Conformance</h3>
 
-<p>Dieser Abschnitt definiert die Konformitätsanforderungen für Systeme, die die
-Profile des Moduls <strong>Module Template</strong> umsetzen.</p>
+<p>This section defines the conformance requirements for systems implementing the
+profiles of the <strong>Module Template</strong> module.</p>
 
 <ul>
-  <li><strong><a href="general-requirements.html">Allgemeine Anforderungen</a></strong> — die
-Konformitäts-Verben (MUSS/SOLLTE/KANN nach RFC-2119) und die allgemeinen,
-modulweiten Anforderungen.</li>
-  <li><strong><a href="must-support.html">Must-Support</a></strong> — was <em>Must Support</em> für
-daten-erzeugende und daten-verarbeitende Systeme bedeutet.</li>
-  <li><strong><a href="missing-data.html">Umgang mit fehlenden Daten</a></strong> — wie fehlende oder
-unbekannte Werte kodiert werden.</li>
+  <li><strong><a href="general-requirements.html">General Requirements</a></strong> — the conformance verbs
+(SHALL/SHOULD/MAY per RFC-2119), claiming conformance, using codes in the
+profiles, and the expectations on the FHIR RESTful API.</li>
+  <li><strong><a href="must-support.html">Must Support</a></strong> — what <em>Must Support</em> means for
+data-providing and data-consuming systems.</li>
+  <li><strong><a href="missing-data.html">Handling Missing Data</a></strong> — how missing or unknown values
+are represented.</li>
+  <li><strong><a href="security-and-privacy.html">Security and Privacy</a></strong> — the security and
+data-protection considerations of this module.</li>
 </ul>
 
-<p>Verbindlich sind die Festlegungen des
-<a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">MII-Meta-Wikis</a>;
-die Seiten dieses Abschnitts geben sie wieder.</p>
+<p>The binding rules are those of the
+<a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">MII meta wiki</a>;
+the pages of this section reproduce them.</p>
+
+<p>For implementation guidance see the <a href="guidance.html">Guidance</a> section; for the
+technical artifacts see the <a href="artifacts.html">Artifacts</a> section.</p>
 
 <blockquote>
-  <p>[TODO: Ergänzen Sie modul-spezifische Konformitätsaussagen.</p>
+  <p>[TODO: Add the conformance statements that are specific to your module.</p>
 
-  <p>Hinweis zur Erfassung: Konformitätsaussagen werden <strong>nicht</strong> automatisch
-erkannt. Der IG-Publisher sammelt nur Sätze, die ausdrücklich markiert sind —
-<code class="language-plaintext highlighter-rouge"><span class="fhir-conformance">&lt;seite&gt;-&lt;n&gt;:Der Server MUSS …</span></code> — und erzeugt daraus eine Übersichtstabelle
-an der Stelle eines Absatzes, der ausschließlich <code class="language-plaintext highlighter-rouge"><span class="fhir-conformance"></span><span class="fhir-conformance"></span></code> enthält. Solange keine
-Sätze markiert sind, gibt es keine Übersicht. Ob dieses Verfahren für einen
-deutschsprachigen Leitfaden übernommen wird, ist noch nicht entschieden — siehe
-die Hinweise in <code class="language-plaintext highlighter-rouge">docs/ig-best-practices-checklist.md</code>.]</p>
+  <p>Note on collecting them: conformance statements are <strong>not</strong> detected
+automatically. The IG Publisher only collects sentences that are explicitly
+marked — <code class="language-plaintext highlighter-rouge"><span class="fhir-conformance">&lt;page&gt;-&lt;n&gt;:Servers SHALL …</span></code> — and renders a summary table where a
+paragraph contains nothing but <code class="language-plaintext highlighter-rouge"><span class="fhir-conformance"></span><span class="fhir-conformance"></span></code>. As long as no sentence is marked, there
+is no summary table. <code class="language-plaintext highlighter-rouge">kerndatensatz-basis</code> uses this mechanism; whether this
+template adopts it is still open, because the "Expectation" column is derived
+from the English keywords SHALL/SHOULD/MAY and the German translation of a
+page uses MUSS/SOLLTE/KANN — see the open decisions in
+<code class="language-plaintext highlighter-rouge">docs/ig-best-practices-checklist.md</code>. Verify with a real IG-Publisher build
+before shipping either way.]</p>
 </blockquote>
 
 
@@ -291,7 +299,7 @@ die Hinweise in <code class="language-plaintext highlighter-rouge">docs/ig-best-
 
           IG &copy; 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Sun, Jul 26, 2026 10:49+0000">2026-07-26</span>
+          Generated <span title="Sun, Jul 26, 2026 11:56+0000">2026-07-26</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
               <!-- MII branding override for the fhir2.base.template footer fragment.

@@ -3,14 +3,14 @@
 <ImplementationGuide xmlns="http://hl7.org/fhir">
   <id value="mii-ig-template"/>
   <meta>
-    <profile value="http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide|2.0.0"/>
-    <profile value="http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishableimplementationguide|2.0.0"/>
-    <profile value="http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0"/>
+    <profile value="http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide"/>
+    <profile value="http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishableimplementationguide"/>
+    <profile value="http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide"/>
   </meta>
-  <language value="de"/>
+  <language value="en"/>
   <text>
-    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><div xml:lang="de" lang="de"><hr/><p><b>German</b></p><hr/><p class="res-header-id"><b>Generated Narrative: ImplementationGuide mii-ig-template</b></p><a name="mii-ig-template"> </a><a name="hcmii-ig-template"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Language: de</p><p style="margin-bottom: 0px">Profiles: <a href="http://hl7.org/fhir/uv/crmi/STU2/StructureDefinition-crmi-shareableimplementationguide.html">CRMI Shareable ImplementationGuide</a> version: 2.0.0, <a href="http://hl7.org/fhir/uv/crmi/STU2/StructureDefinition-crmi-publishableimplementationguide.html">CRMI Publishable ImplementationGuide</a> version: 2.0.0, <a href="http://hl7.org/fhir/uv/crmi/STU2/StructureDefinition-crmi-implementationguide.html">CRMI ImplementationGuide</a> version: 2.0.0</p></div><h2>MII_IG_Template</h2><p>The official URL for this implementation guide is: </p><pre>https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template</pre><div><p>Self-check build of the mii-kds-module-template scaffold. This repository is a template for creating a new MII KDS module Implementation Guide, or a migration target for an existing Simplifier MII IG. Every value here is a placeholder — replace them all when you create a real module.</p>
-</div></div><div xml:lang="en" lang="en"><hr/><p><b>English</b></p><hr/><p class="res-header-id"><b>Generated Narrative: ImplementationGuide mii-ig-template</b></p><a name="en-mii-ig-template"> </a><a name="en-hcmii-ig-template"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Language: de</p><p style="margin-bottom: 0px">Profiles: <a href="http://hl7.org/fhir/uv/crmi/STU2/StructureDefinition-crmi-shareableimplementationguide.html">CRMI Shareable ImplementationGuide</a> version: 2.0.0, <a href="http://hl7.org/fhir/uv/crmi/STU2/StructureDefinition-crmi-publishableimplementationguide.html">CRMI Publishable ImplementationGuide</a> version: 2.0.0, <a href="http://hl7.org/fhir/uv/crmi/STU2/StructureDefinition-crmi-implementationguide.html">CRMI ImplementationGuide</a> version: 2.0.0</p></div><h2>MII_IG_Template</h2><p>The official URL for this implementation guide is: </p><pre>https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template</pre><div><p>Self-check build of the mii-kds-module-template scaffold. This repository is a template for creating a new MII KDS module Implementation Guide, or a migration target for an existing Simplifier MII IG. Every value here is a placeholder — replace them all when you create a real module.</p>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><div xml:lang="en" lang="en"><hr/><p><b>English</b></p><hr/><p class="res-header-id"><b>Generated Narrative: ImplementationGuide mii-ig-template</b></p><a name="mii-ig-template"> </a><a name="hcmii-ig-template"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Language: en</p><p style="margin-bottom: 0px">Profiles: <a href="http://hl7.org/fhir/uv/crmi/STU2/StructureDefinition-crmi-shareableimplementationguide.html">CRMI Shareable ImplementationGuide</a>, <a href="http://hl7.org/fhir/uv/crmi/STU2/StructureDefinition-crmi-publishableimplementationguide.html">CRMI Publishable ImplementationGuide</a>, <a href="http://hl7.org/fhir/uv/crmi/STU2/StructureDefinition-crmi-implementationguide.html">CRMI ImplementationGuide</a></p></div><h2>MII_IG_Template</h2><p>The official URL for this implementation guide is: </p><pre>https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template</pre><div><p>Self-check build of the mii-kds-module-template scaffold. This repository is a template for creating a new MII KDS module Implementation Guide, or a migration target for an existing Simplifier MII IG. Every value here is a placeholder — replace them all when you create a real module.</p>
+</div></div><div xml:lang="de" lang="de"><hr/><p><b>German</b></p><hr/><p class="res-header-id"><b>Generated Narrative: ImplementationGuide mii-ig-template</b></p><a name="de-mii-ig-template"> </a><a name="de-hcmii-ig-template"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Language: en</p><p style="margin-bottom: 0px">Profiles: <a href="http://hl7.org/fhir/uv/crmi/STU2/StructureDefinition-crmi-shareableimplementationguide.html">CRMI Shareable ImplementationGuide</a>, <a href="http://hl7.org/fhir/uv/crmi/STU2/StructureDefinition-crmi-publishableimplementationguide.html">CRMI Publishable ImplementationGuide</a>, <a href="http://hl7.org/fhir/uv/crmi/STU2/StructureDefinition-crmi-implementationguide.html">CRMI ImplementationGuide</a></p></div><h2>MII_IG_Template</h2><p>The official URL for this implementation guide is: </p><pre>https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template</pre><div><p>Self-check build of the mii-kds-module-template scaffold. This repository is a template for creating a new MII KDS module Implementation Guide, or a migration target for an existing Simplifier MII IG. Every value here is a placeholder — replace them all when you create a real module.</p>
 </div></div></div>
   </text>
   <extension url="http://hl7.org/fhir/StructureDefinition/resource-approvalDate">
@@ -95,6 +95,11 @@
         <value value="https://www.medizininformatik-initiative.de/en/collaboration/national-steering-committee"/>
       </telecom>
     </valueContactDetail>
+  </extension>
+  <extension url="http://hl7.org/fhir/StructureDefinition/cqf-expansionParameters">
+    <valueReference>
+      <reference value="Parameters/mii-param-template-manifest"/>
+    </valueReference>
   </extension>
   <extension url="http://hl7.org/fhir/StructureDefinition/artifact-versionAlgorithm">
     <valueCoding>
@@ -200,7 +205,7 @@
         <valueString value="i18n-default-lang"/>
       </extension>
       <extension url="value">
-        <valueString value="de"/>
+        <valueString value="en"/>
       </extension>
     </extension>
     <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-parameter">
@@ -208,7 +213,7 @@
         <valueString value="i18n-lang"/>
       </extension>
       <extension url="value">
-        <valueString value="en"/>
+        <valueString value="de"/>
       </extension>
     </extension>
     <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-parameter">
@@ -216,7 +221,7 @@
         <valueString value="translation-sources"/>
       </extension>
       <extension url="value">
-        <valueString value="input/translations/en"/>
+        <valueString value="input/translations/de"/>
       </extension>
     </extension>
     <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-parameter">
@@ -297,6 +302,22 @@
       </extension>
       <extension url="value">
         <valueString value="pin-all"/>
+      </extension>
+    </extension>
+    <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-parameter">
+      <extension url="code">
+        <valueString value="path-expansion-params"/>
+      </extension>
+      <extension url="value">
+        <valueString value="../../input/resources/Parameters-expansion-manifest.json"/>
+      </extension>
+    </extension>
+    <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-parameter">
+      <extension url="code">
+        <valueString value="pin-manifest"/>
+      </extension>
+      <extension url="value">
+        <valueString value="mii-param-template-manifest"/>
       </extension>
     </extension>
     <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-parameter">
@@ -515,6 +536,11 @@
         <valueString value="false"/>
       </extension>
     </extension>
+    <extension url="http://hl7.org/fhir/tools/StructureDefinition/expansion-parameters">
+      <valueReference>
+        <reference value="Parameters/expansion-parameters"/>
+      </valueReference>
+    </extension>
     <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-internal-dependency">
       <valueCode value="hl7.fhir.uv.tools.r4#1.1.2"/>
     </extension>
@@ -539,7 +565,7 @@
         <valueCode value="i18n-default-lang"/>
       </extension>
       <extension url="value">
-        <valueString value="de"/>
+        <valueString value="en"/>
       </extension>
     </extension>
     <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-parameter">
@@ -547,7 +573,7 @@
         <valueCode value="i18n-lang"/>
       </extension>
       <extension url="value">
-        <valueString value="en"/>
+        <valueString value="de"/>
       </extension>
     </extension>
     <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-parameter">
@@ -555,7 +581,7 @@
         <valueCode value="translation-sources"/>
       </extension>
       <extension url="value">
-        <valueString value="input/translations/en"/>
+        <valueString value="input/translations/de"/>
       </extension>
     </extension>
     <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-parameter">
@@ -636,6 +662,22 @@
       </extension>
       <extension url="value">
         <valueString value="pin-all"/>
+      </extension>
+    </extension>
+    <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-parameter">
+      <extension url="code">
+        <valueCode value="path-expansion-params"/>
+      </extension>
+      <extension url="value">
+        <valueString value="../../input/resources/Parameters-expansion-manifest.json"/>
+      </extension>
+    </extension>
+    <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-parameter">
+      <extension url="code">
+        <valueCode value="pin-manifest"/>
+      </extension>
+      <extension url="value">
+        <valueString value="mii-param-template-manifest"/>
       </extension>
     </extension>
     <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-parameter">
@@ -861,8 +903,8 @@
       <reference>
         <reference value="StructureDefinition/example-patient"/>
       </reference>
-      <name value="Beispiel-Patient (Vorlage)"/>
-      <description value="Minimales Beispielprofil, das nur mit der Vorlage ausgeliefert wird, damit ein neu erstelltes Modul sofort eine gerenderte IG erzeugt. Kein MII-Artefakt — ersetzen Sie es durch die Profile Ihres Moduls."/>
+      <name value="Example Patient — template starter"/>
+      <description value="Minimal example profile shipped with the template so that a newly created module renders a complete IG immediately. Not an MII artifact — replace it with your module's profiles."/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>
@@ -872,9 +914,19 @@
       <reference>
         <reference value="Patient/ExamplePatientInstance"/>
       </reference>
-      <name value="Beispiel: Max Mustermann-Testpatient"/>
-      <description value="Synthetisches Beispiel für das Beispiel-Patient-Profil. Rein künstliche Daten."/>
-      <exampleCanonical value="https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient|2026.0.0"/>
+      <name value="Example: Max Mustermann-Testpatient"/>
+      <description value="Synthetic example for the Example Patient profile. Entirely artificial data."/>
+      <exampleCanonical value="https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="Parameters"/>
+      </extension>
+      <reference>
+        <reference value="Parameters/mii-param-template-manifest"/>
+      </reference>
+      <name value="mii-param-template-manifest"/>
+      <exampleBoolean value="false"/>
     </resource>
     <page>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-page-name">

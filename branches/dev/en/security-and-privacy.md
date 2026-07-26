@@ -6,8 +6,6 @@
 
 ## Security and Privacy
 
- This page includes translations from the original source language in which the guide was authored. Information on these translations and instructions on how to provide feedback on the translations can be found [here](translationinfo.html). 
-
 ### Security and Privacy
 
 This section addresses security and privacy experts. It explains which attacks and risks were considered for the **Module Template** module and which countermeasures apply.

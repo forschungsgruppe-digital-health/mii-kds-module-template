@@ -235,13 +235,29 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown.-->
 </div>
 
+<p style="border:var(--translation-box-border);background-color:var(--translation-background-color);padding: 5px 5px 5px 5px;">
+
+Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfaden verfasst wurde.  Informationen zu diesen Übersetzungen und Anweisungen zum Abgeben von Feedback zu den Übersetzungen finden Sie [hier](translationinfo.html).
+
+</p>
+
 <!-- markdownlint-disable MD041 -->
-<!-- Must-Support. Der Text folgt der verbindlichen MII-Definition (Quelle:
-     MII-Meta-Wiki "Conformance", Abschnitt "Must Support (MS)"). Ändern Sie ihn
-     NUR, wenn Ihr Modul begründet abweicht — die Erwartungen an daten-erzeugende
-     und daten-verarbeitende Systeme sind MII-weit einheitlich. -->
+<!-- Deutsche Übersetzung der Standardsprachseite
+     input/pagecontent/must-support.md — beide Dateien müssen dasselbe aussagen.
+     Definition und die Erwartungen an daten-erzeugende bzw. daten-verarbeitende
+     Systeme folgen wörtlich der verbindlichen MII-Definition (Quelle:
+     MII-Meta-Wiki "Conformance", Abschnitt "Must Support (MS)",
+     https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance);
+     die Abschnitte zu Darstellung, primitiven/komplexen Elementen, Referenzen,
+     Datentyp-Auswahl und Slices stammen aus kerndatensatz-basis
+     input/pagecontent/must-support.md (Branch main).
+     Ändern Sie den Text NUR, wenn Ihr Modul begründet abweicht — die Erwartungen
+     sind MII-weit einheitlich. -->
 
 <h3 id="must-support">Must-Support</h3>
+
+<p>Beim Abfragen und Lesen der Profile dieses Moduls MUSS <em>Must Support</em> für jedes
+Profil-Datenelement so ausgelegt werden, wie auf dieser Seite beschrieben.</p>
 
 <h4 id="definition">Definition</h4>
 
@@ -264,6 +280,11 @@ anzuzeigen und korrekt zu verarbeiten.</li>
 <p>Must-Support ist damit <strong>nicht</strong> dasselbe wie Kardinalität: ein Element kann
 <code class="language-plaintext highlighter-rouge">0..1</code> sein und trotzdem Must-Support — die Daten dürfen fehlen, die Fähigkeit,
 sie zu verarbeiten, darf nicht.</p>
+
+<p>Unterschieden werden daten-erzeugende Systeme (Sender/Server) und
+daten-verarbeitende Systeme (Empfänger/Clients). In der MII-Infrastruktur ist
+die FHIR-API eines Datenintegrationszentrums (DIZ) das daten-erzeugende System,
+das Anfragen beantwortet.</p>
 
 <h4 id="anforderungen-an-daten-erzeugende-systeme">Anforderungen an daten-erzeugende Systeme</h4>
 
@@ -291,10 +312,144 @@ ETL aus dem Primärsystem),</li>
 oder Abbrüche entstehen.</li>
 </ul>
 
+<h4 id="must-support-und-fehlende-daten">Must-Support und fehlende Daten</h4>
+
+<ul>
+  <li>Liegt zu einem Datenelement keine Information vor und ist der Grund für das
+Fehlen unbekannt, DÜRFEN Server das Element in der zurückgegebenen
+Ressourceninstanz NICHT aufführen.</li>
+  <li>Clients MÜSSEN ein fehlendes Datenelement in einer Ressourceninstanz so
+interpretieren, dass die Daten im System des Servers nicht vorhanden sind.</li>
+  <li>Kennt der Server den genauen Grund für das Fehlen, SOLLTE er ihn gemäß
+<a href="missing-data.html">Umgang mit fehlenden Daten</a> mitteilen.</li>
+</ul>
+
+<h4 id="darstellung-in-den-gerenderten-tabellen">Darstellung in den gerenderten Tabellen</h4>
+
+<p>Auf jeder Profilseite werden mehrere formale Ansichten des Profilinhalts als
+Baum dargestellt, unter den Reitern <em>Differential Table</em>, <em>Key Elements Table</em>
+und <em>Snapshot Table</em>.</p>
+
+<p>In diesen Ansichten gilt:</p>
+
+<ul>
+  <li>Elemente, deren Kardinalität in der Spalte „Card." mit <code class="language-plaintext highlighter-rouge">1</code> beginnt
+(z. B. <code class="language-plaintext highlighter-rouge">1..1</code>), sind <strong>obligatorisch</strong>;</li>
+  <li>als Must Support gekennzeichnete Elemente tragen ein rotes
+<span style="padding-left: 3px; padding-right: 3px; color: white; background-color: red" title="Dieses Element muss unterstützt werden">S</span>.</li>
+</ul>
+
+<p>Die folgenden Abschnitte beschreiben, was die Kennzeichnung für die
+verschiedenen Element-Arten bedeutet.</p>
+
+<h4 id="must-support--primitive-elemente">Must-Support — primitive Elemente</h4>
+
+<p>Primitive Elemente sind einzelne Elemente mit einem primitiven Wert. Bei einem
+primitiven Must-Support-Element MUSS der Server den Elementwert bereitstellen
+können und der Client ihn verarbeiten können.</p>
+
+<p>Ist beispielsweise <code class="language-plaintext highlighter-rouge">Patient.birthDate</code> als Must Support gekennzeichnet:</p>
+
+<ul>
+  <li>MÜSSEN Server einen Wert in <code class="language-plaintext highlighter-rouge">Patient.birthDate</code> bereitstellen können,</li>
+  <li>MÜSSEN Clients den Wert in <code class="language-plaintext highlighter-rouge">Patient.birthDate</code> verarbeiten können.</li>
+</ul>
+
+<h4 id="must-support--komplexe-elemente">Must-Support — komplexe Elemente</h4>
+
+<p>Komplexe Elemente bestehen aus primitiven und weiteren komplexen Elementen. Bei
+einem als Must Support gekennzeichneten komplexen Element MUSS der Server
+diejenigen Unterelement-Werte bereitstellen können, die selbst als Must Support
+gekennzeichnet sind; ist kein Unterelement gekennzeichnet, MUSS der Server
+mindestens einen Unterelement-Wert bereitstellen können. Der Client MUSS die
+Must-Support-Unterelement-Werte verarbeiten können. Sind Unterelemente eines
+komplexen Elements als Must Support gekennzeichnet, so wird die Erwartung an das
+übergeordnete Element durch die Unterstützung dieser Unterelemente erfüllt.</p>
+
+<p>Ist beispielsweise <code class="language-plaintext highlighter-rouge">Patient.name</code> als Must Support gekennzeichnet und sind es
+seine Unterelemente <code class="language-plaintext highlighter-rouge">family</code> und <code class="language-plaintext highlighter-rouge">given</code> ebenfalls:</p>
+
+<ul>
+  <li>MÜSSEN Server Werte in <code class="language-plaintext highlighter-rouge">Patient.name.family</code> und <code class="language-plaintext highlighter-rouge">Patient.name.given</code>
+bereitstellen können,</li>
+  <li>MÜSSEN Clients diese Werte verarbeiten können.</li>
+</ul>
+
+<p>Ist umgekehrt ein Unterelement als Must Support gekennzeichnet, das
+übergeordnete Element aber nicht, besteht <em>keine</em> Erwartung, das übergeordnete
+Element als solches zu unterstützen. Ist das übergeordnete Element in der
+Struktur vorhanden, ohne selbst gekennzeichnet zu sein, MÜSSEN Server dennoch
+die gekennzeichneten Unterelemente unterstützen.</p>
+
+<h4 id="must-support--referenzen">Must-Support — Referenzen</h4>
+
+<p>Hat ein Must-Support-Referenzelement genau ein Zielprofil, MUSS dieses
+Zielprofil unterstützt werden.</p>
+
+<p>Referenziert beispielsweise <code class="language-plaintext highlighter-rouge">Condition.subject</code> das Patient-Profil dieses Moduls
+und ist als Must Support gekennzeichnet:</p>
+
+<ul>
+  <li>MÜSSEN Server ein <code class="language-plaintext highlighter-rouge">Condition.subject</code> mit einer gültigen Referenz auf dieses
+Profil bereitstellen können,</li>
+  <li>MÜSSEN Clients eine solche Referenz verarbeiten können.</li>
+</ul>
+
+<p>Hat ein Must-Support-Referenzelement mehrere Zielprofile und ist keines davon
+als Must Support gekennzeichnet, MUSS <em>mindestens ein</em> Zielprofil unterstützt
+werden.</p>
+
+<h4 id="must-support--auswahl-von-datentypen">Must-Support — Auswahl von Datentypen</h4>
+
+<p>Bei Must-Support-Auswahlelementen (<code class="language-plaintext highlighter-rouge">value[x]</code> und ähnliche) MUSS der Server die
+als Must Support gekennzeichneten Datentypen unterstützen, und der Client MUSS
+alle als Must Support gekennzeichneten Datentypen verarbeiten können.</p>
+
+<p>Hat beispielsweise <code class="language-plaintext highlighter-rouge">Observation.value[x]</code> mehrere Must-Support-Datentypen:</p>
+
+<ul>
+  <li>MÜSSEN Server die gekennzeichneten Datentypen befüllen können (z. B.
+<code class="language-plaintext highlighter-rouge">valueQuantity</code>, <code class="language-plaintext highlighter-rouge">valueCodeableConcept</code>, <code class="language-plaintext highlighter-rouge">valueString</code>),</li>
+  <li>MÜSSEN Clients alle gekennzeichneten Datentypen verarbeiten können,</li>
+  <li>KÖNNEN Systeme weitere Auswahlmöglichkeiten unterstützen, ohne dass dies
+gefordert ist.</li>
+</ul>
+
+<h4 id="must-support--slices">Must-Support — Slices</h4>
+
+<p>FHIR-Profile nutzen <a href="http://hl7.org/fhir/R4/profiling.html#slicing">Slicing</a>, um
+wiederholbare Elemente einzuschränken. Das Element mit dem Slicing-Diskriminator
+(der „Slicer") kann als Must Support gekennzeichnet sein; damit die
+Must-Support-Erwartung für einen Slice gilt, MUSS dieser Slice jedoch
+ausdrücklich gekennzeichnet sein. Bei Must-Support-Slices MUSS der Server Daten
+bereitstellen können, die den ausdrücklich gekennzeichneten Slices entsprechen,
+und der Client MUSS solche Daten verarbeiten können.</p>
+
+<p>Ist beispielsweise <code class="language-plaintext highlighter-rouge">identifier</code> ein Must-Support-Slicer mit Slices für mehrere
+Identifier-Arten, sind nur die ausdrücklich gekennzeichneten Slices gefordert:</p>
+
+<ul>
+  <li>MÜSSEN Server Identifier bereitstellen können, die den
+Must-Support-Slices entsprechen,</li>
+  <li>MÜSSEN Clients diese verarbeiten können,</li>
+  <li>KÖNNEN Systeme weitere Slices unterstützen, ohne dass dies gefordert ist.</li>
+</ul>
+
 <blockquote>
   <p>[TODO: Nur ergänzen, falls Ihr Modul zusätzliche oder abweichende
-Must-Support-Regeln definiert — und die Abweichung begründen.]</p>
+Must-Support-Regeln definiert — und die Abweichung begründen. Löschen Sie
+diesen Hinweis anschließend.]</p>
 </blockquote>
+
+<h4 id="siehe-auch">Siehe auch</h4>
+
+<ul>
+  <li><a href="general-requirements.html">Allgemeine Anforderungen</a> — die für alle Akteure
+und Profile geltenden Anforderungen.</li>
+  <li><a href="missing-data.html">Umgang mit fehlenden Daten</a> — Darstellung fehlender Werte.</li>
+  <li><a href="conformance.html">Konformität</a> — Überblick über die
+Konformitätsanforderungen.</li>
+</ul>
 
 
 
@@ -321,7 +476,7 @@ Must-Support-Regeln definiert — und die Abweichung begründen.]</p>
 
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Sun, Jul 26, 2026 10:49+0000">2026-07-26</span>
+          Erstellt <span title="Sun, Jul 26, 2026 11:56+0000">2026-07-26</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.

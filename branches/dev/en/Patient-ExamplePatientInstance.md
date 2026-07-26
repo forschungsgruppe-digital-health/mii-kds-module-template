@@ -1,10 +1,10 @@
-# Beispiel: Max Mustermann-Testpatient - MII Implementation Guide Module Template v2026.0.0
+# Example: Max Mustermann-Testpatient - MII Implementation Guide Module Template v2026.0.0
 
 * [**Table of Contents**](toc.md)
 * [**Artifacts Summary**](artifacts.md)
-* **Beispiel: Max Mustermann-Testpatient**
+* **Example: Max Mustermann-Testpatient**
 
-## Example Patient: Beispiel: Max Mustermann-Testpatient
+## Example Patient: Example: Max Mustermann-Testpatient
 
 -------
 
@@ -12,7 +12,9 @@
 
 -------
 
-Profile: [Beispiel-Patient (Vorlage)](StructureDefinition-example-patient.md)
+Profile: [Example Patient — template starter](StructureDefinition-example-patient.md) version: 2026.0.0
+
+Security Label: [test health data (Details: ActReason code HTEST = 'test health data')](http://terminology.hl7.org/7.2.0/CodeSystem-v3-ActReason.html)
 
 Max Mustermann-Testpatient Male, DoB: 1990-01-01
 
@@ -27,7 +29,27 @@ Max Mustermann-Testpatient Male, DoB: 1990-01-01
   "resourceType" : "Patient",
   "id" : "ExamplePatientInstance",
   "meta" : {
-    "profile" : ["https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient"]
+    "extension" : [{
+      "extension" : [{
+        "url" : "packageId",
+        "valueId" : "de.medizininformatikinitiative.kerndatensatz.template"
+      },
+      {
+        "url" : "version",
+        "valueString" : "2026.0.0"
+      },
+      {
+        "url" : "uri",
+        "valueUri" : "https://www.medizininformatik-initiative.de/fhir/modul-template"
+      }],
+      "url" : "http://hl7.org/fhir/StructureDefinition/package-source"
+    }],
+    "profile" : ["https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient|2026.0.0"],
+    "security" : [{
+      "system" : "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+      "code" : "HTEST",
+      "display" : "test health data"
+    }]
   },
   "name" : [{
     "family" : "Mustermann-Testpatient",

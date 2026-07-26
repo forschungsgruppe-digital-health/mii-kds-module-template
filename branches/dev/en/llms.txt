@@ -30,11 +30,15 @@
 
 ### Resource Profiles
 
-* [Beispiel-Patient (Vorlage)](StructureDefinition-example-patient.md)
+* [Example Patient — template starter](StructureDefinition-example-patient.md)
 
 ### ImplementationGuides
 
 * [MII Implementation Guide Module Template](ImplementationGuide-mii-ig-template.md)
+
+### Parameters
+
+* [mii-param-template-manifest](Parameters-mii-param-template-manifest.md)
 
 ### Examples
 

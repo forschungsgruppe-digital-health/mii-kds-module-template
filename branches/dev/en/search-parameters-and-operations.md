@@ -5,11 +5,9 @@
 
 ## Search Parameters and Operations
 
- There is no translation page available for the current page, so it has been rendered in the default language 
+### Search Parameters and Operations
 
-### Suchparameter und Operationen
+Module-specific FHIR search parameters and operations of the **Module Template** module, where defined.
 
-Modul-spezifische FHIR-Suchparameter und Operationen des Moduls **Module Template**, sofern vorhanden.
-
-> [TODO: Listen Sie die Suchparameter/Operationen auf, oder entfernen Sie diese Seite, wenn keine definiert sind.]
+> [TODO: List the search parameters/operations, or delete this page if none are defined.]
 

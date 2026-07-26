@@ -235,28 +235,72 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown.-->
 </div>
 
+<p style="border:var(--translation-box-border);background-color:var(--translation-background-color);padding: 5px 5px 5px 5px;">
+
+Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfaden verfasst wurde.  Informationen zu diesen Übersetzungen und Anweisungen zum Abgeben von Feedback zu den Übersetzungen finden Sie [hier](translationinfo.html).
+
+</p>
+
 <!-- markdownlint-disable MD041 -->
+<!-- Deutsche Übersetzung der Standardsprachseite input/pagecontent/changes.md
+     — beide Dateien müssen dasselbe aussagen. Struktur aus kerndatensatz-basis
+     input/pagecontent/changes.md (Branch main) — ein Abschnitt je Version,
+     neueste zuerst — und aus der MII-Release-Notes-Vorlage
+     (kerndatensatz-meta/implementation-guides/MedizininformatikInitiative-ImplementationGuide-Template/
+     MII-IG-Modul--Modul/Release-notes.page.md), die "Keep a Changelog" vorgibt.
+
+     Pflegeregel: Für jedes Release oben einen neuen Abschnitt
+     `#### Version <x>` ergänzen, in BEIDEN Sprachen, als Teil des
+     Release-Pull-Requests. Einen veröffentlichten Abschnitt danach nicht mehr
+     ändern. -->
+
 <h3 id="änderungshistorie">Änderungshistorie</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Version</th>
-      <th>Datum</th>
-      <th>Änderungen</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>2026.0.0</td>
-      <td>2026-01-01</td>
-      <td>Erstveröffentlichung.</td>
-    </tr>
-  </tbody>
-</table>
+<p>Diese Seite hält die Änderungen zwischen den veröffentlichten Versionen des
+Moduls <strong>Module Template</strong> fest, die neueste Version zuerst. Sie folgt
+<a href="https://keepachangelog.com/de/1.1.0/">Keep a Changelog</a> und dem
+MII-CalVer-Schema, das die Seite <a href="version-history.html">Versionierung</a>
+beschreibt.</p>
+
+<p>Jede Version erhält einen eigenen Abschnitt mit dem Release-Datum und den nach
+Kategorien gruppierten Änderungen:</p>
+
+<ul>
+  <li><strong>Hinzugefügt</strong> — neue Profile, Extensions, ValueSets, Suchparameter, Seiten.</li>
+  <li><strong>Geändert</strong> — geänderte Einschränkungen, Bindings, Hinweise oder
+Dokumentation.</li>
+  <li><strong>Abgekündigt</strong> — Artefakte, die noch existieren, aber nicht mehr genutzt
+werden sollen.</li>
+  <li><strong>Entfernt</strong> — zurückgezogene Artefakte.</li>
+  <li><strong>Behoben</strong> — Korrekturen von Fehlern.</li>
+  <li><strong>Sicherheit</strong> — Änderungen mit Auswirkung auf Sicherheit oder Datenschutz.</li>
+</ul>
+
+<p>Kategorien ohne Inhalt werden weggelassen. Geht eine Änderung auf ein Issue oder
+einen Pull-Request zurück, wird darauf verlinkt.</p>
+
+<hr />
+
+<h4 id="version-202600">Version 2026.0.0</h4>
+
+<p><strong>Datum:</strong> 2026-01-01</p>
+
+<h5 id="hinzugefügt">Hinzugefügt</h5>
+
+<ul>
+  <li>Erstveröffentlichung des Moduls <strong>Module Template</strong>.</li>
+</ul>
 
 <blockquote>
-  <p>[TODO: Ergänzen Sie für jede veröffentlichte Version eine Zeile.]</p>
+  <p>[TODO: Ersetzen Sie diesen Abschnitt durch die echten Einträge Ihres ersten
+Releases und ergänzen Sie für jede weitere Version oben einen neuen Abschnitt.
+Bei einem Modul mit mehreren Teilbereichen gruppiert <code class="language-plaintext highlighter-rouge">kerndatensatz-basis</code> die
+Einträge einer Version thematisch (etwa <em>Dokumentation</em>,
+<em>Terminologie-Aktualisierungen</em> und je eine Überschrift pro Teilmodul) und
+stellt jedem Stichpunkt <strong>Hinzugefügt:</strong> / <strong>Geändert:</strong> / <strong>Entfernt:</strong>
+voran — nutzen Sie die für Ihr Modul passende der beiden Gruppierungen,
+bleiben Sie dabei aber über alle Versionen hinweg und in beiden Sprachen
+einheitlich.]</p>
 </blockquote>
 
 
@@ -284,7 +328,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Sun, Jul 26, 2026 10:49+0000">2026-07-26</span>
+          Erstellt <span title="Sun, Jul 26, 2026 11:56+0000">2026-07-26</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.

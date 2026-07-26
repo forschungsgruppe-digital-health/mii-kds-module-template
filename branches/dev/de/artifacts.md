@@ -5,6 +5,8 @@
 
 ## Artefaktübersicht
 
+ There is no translation page available for the current page, so it has been rendered in the default language 
+
 Diese Seite bietet eine Liste der FHIR-Artefakte, die in diesem Implementierungsleitfaden definiert sind.
 
 ### Strukturen: Ressourcenprofile 
@@ -13,7 +15,7 @@ Diese definieren Einschränkungen für FHIR-Ressourcen für Systeme, die mit dem
 
 | | |
 | :--- | :--- |
-| [ Beispiel-Patient (Vorlage)  ](StructureDefinition-example-patient.md) | Minimales Beispielprofil, das nur mit der Vorlage ausgeliefert wird, damit ein neu erstelltes Modul sofort eine gerenderte IG erzeugt. Kein MII-Artefakt — ersetzen Sie es durch die Profile Ihres Moduls. |
+| [ Example Patient — template starter  ](StructureDefinition-example-patient.md) | Minimal example profile shipped with the template so that a newly created module renders a complete IG immediately. Not an MII artifact — replace it with your module's profiles. |
 
 ### Beispiel: Beispielinstanzen 
 
@@ -21,5 +23,13 @@ Dies sind Beispielinstanzen, die zeigen, wie Daten aussehen könnten, die von Sy
 
 | | |
 | :--- | :--- |
-| [ Beispiel: Max Mustermann-Testpatient  ](Patient-ExamplePatientInstance.md) | Synthetisches Beispiel für das Beispiel-Patient-Profil. Rein künstliche Daten. |
+| [ Example: Max Mustermann-Testpatient  ](Patient-ExamplePatientInstance.md) | Synthetic example for the Example Patient profile. Entirely artificial data. |
+
+### Sonstige 
+
+Dies sind Ressourcen, die in diesem Implementierungsleitfaden verwendet werden, die in keine der anderen Kategorien passen.
+
+| |
+| :--- |
+| [ mii-param-template-manifest  ](Parameters-mii-param-template-manifest.md) |
 

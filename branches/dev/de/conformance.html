@@ -232,9 +232,20 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown. -->
 </div>
 
+<p style="border:var(--translation-box-border);background-color:var(--translation-background-color);padding: 5px 5px 5px 5px;">
+
+Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfaden verfasst wurde.  Informationen zu diesen Übersetzungen und Anweisungen zum Abgeben von Feedback zu den Übersetzungen finden Sie [hier](translationinfo.html).
+
+</p>
+
   <!-- markdownlint-disable MD041 -->
-  <!-- Übersichtsseite "Konformität". Die Unterseiten sind der MII-Standardsatz
-     (Quelle: MII-Meta-Wiki "Conformance"). -->
+  <!-- Deutsche Übersetzung der Standardsprachseite
+     input/pagecontent/conformance.md — beide Dateien müssen dasselbe aussagen
+     und dieselben Unterseiten aufführen wie die beiden Menü-Dateien.
+     Die Unterseiten sind der MII-Standardsatz (Quelle: MII-Meta-Wiki
+     "Conformance",
+     https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance;
+     Aufbau wie kerndatensatz-basis input/pagecontent/conformance.md). -->
 
 <h3 id="konformität">Konformität</h3>
 
@@ -243,28 +254,38 @@ Profile des Moduls <strong>Module Template</strong> umsetzen.</p>
 
 <ul>
   <li><strong><a href="general-requirements.html">Allgemeine Anforderungen</a></strong> — die
-Konformitäts-Verben (MUSS/SOLLTE/KANN nach RFC-2119) und die allgemeinen,
-modulweiten Anforderungen.</li>
+Konformitäts-Verben (MUSS/SOLLTE/KANN nach RFC-2119), das Beanspruchen von
+Konformität, die Verwendung von Codes in den Profilen und die Erwartungen an
+die FHIR-RESTful-API.</li>
   <li><strong><a href="must-support.html">Must-Support</a></strong> — was <em>Must Support</em> für
 daten-erzeugende und daten-verarbeitende Systeme bedeutet.</li>
   <li><strong><a href="missing-data.html">Umgang mit fehlenden Daten</a></strong> — wie fehlende oder
 unbekannte Werte kodiert werden.</li>
+  <li><strong><a href="security-and-privacy.html">Sicherheit und Datenschutz</a></strong> — die
+Sicherheits- und Datenschutzbetrachtungen dieses Moduls.</li>
 </ul>
 
 <p>Verbindlich sind die Festlegungen des
 <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">MII-Meta-Wikis</a>;
 die Seiten dieses Abschnitts geben sie wieder.</p>
 
+<p>Hinweise zur Umsetzung stehen im Abschnitt <a href="guidance.html">Anleitung</a>, die
+technischen Artefakte im Abschnitt <a href="artifacts.html">Artefakte</a>.</p>
+
 <blockquote>
   <p>[TODO: Ergänzen Sie modul-spezifische Konformitätsaussagen.</p>
 
   <p>Hinweis zur Erfassung: Konformitätsaussagen werden <strong>nicht</strong> automatisch
 erkannt. Der IG-Publisher sammelt nur Sätze, die ausdrücklich markiert sind —
-<code class="language-plaintext highlighter-rouge"><span class="fhir-conformance">&lt;seite&gt;-&lt;n&gt;:Der Server MUSS …</span></code> — und erzeugt daraus eine Übersichtstabelle
+<code class="language-plaintext highlighter-rouge"><span class="fhir-conformance">&lt;seite&gt;-&lt;n&gt;:Server MÜSSEN …</span></code> — und erzeugt daraus eine Übersichtstabelle
 an der Stelle eines Absatzes, der ausschließlich <code class="language-plaintext highlighter-rouge"><span class="fhir-conformance"></span><span class="fhir-conformance"></span></code> enthält. Solange keine
-Sätze markiert sind, gibt es keine Übersicht. Ob dieses Verfahren für einen
-deutschsprachigen Leitfaden übernommen wird, ist noch nicht entschieden — siehe
-die Hinweise in <code class="language-plaintext highlighter-rouge">docs/ig-best-practices-checklist.md</code>.]</p>
+Sätze markiert sind, gibt es keine Übersicht. <code class="language-plaintext highlighter-rouge">kerndatensatz-basis</code> nutzt
+dieses Verfahren; ob diese Vorlage es übernimmt, ist noch offen, weil die
+Spalte „Expectation" aus den englischen Schlüsselworten SHALL/SHOULD/MAY
+abgeleitet wird, die deutsche Fassung einer Seite aber MUSS/SOLLTE/KANN
+verwendet — siehe die offenen Entscheidungen in
+<code class="language-plaintext highlighter-rouge">docs/ig-best-practices-checklist.md</code>. Prüfen Sie das vor der
+Veröffentlichung mit einem echten IG-Publisher-Build.]</p>
 </blockquote>
 
 
@@ -292,7 +313,7 @@ die Hinweise in <code class="language-plaintext highlighter-rouge">docs/ig-best-
 
           IG &copy; 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Sun, Jul 26, 2026 10:49+0000">2026-07-26</span>
+          Erstellt <span title="Sun, Jul 26, 2026 11:56+0000">2026-07-26</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
               <!-- MII branding override for the fhir2.base.template footer fragment.

@@ -235,41 +235,108 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown.-->
 </div>
 
+<p style="border:var(--translation-box-border);background-color:var(--translation-background-color);padding: 5px 5px 5px 5px;">
+
+Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfaden verfasst wurde.  Informationen zu diesen Übersetzungen und Anweisungen zum Abgeben von Feedback zu den Übersetzungen finden Sie [hier](translationinfo.html).
+
+</p>
+
 <!-- markdownlint-disable MD041 -->
-<!-- Umgang mit fehlenden Daten. Der Text folgt der verbindlichen MII-Regelung
-     (Quelle: MII-Meta-Wiki "Conformance", Abschnitt "Fehlende Daten"). Die
-     Fallunterscheidung nach Binding-Stärke ist normativ — bitte nicht kürzen. -->
+<!-- Deutsche Übersetzung der Standardsprachseite
+     input/pagecontent/missing-data.md — beide Dateien müssen dasselbe aussagen.
+     Die Fallunterscheidung nach Binding-Stärke ist normativ und folgt wörtlich
+     der MII-Regelung (Quelle: MII-Meta-Wiki "Conformance", Abschnitt "Fehlende
+     Daten",
+     https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance)
+     — bitte nicht kürzen. Einordnung, Beispiele und Querverweise stammen aus
+     kerndatensatz-basis input/pagecontent/missing-data.md (Branch main).
+
+     HINWEIS ZU DEN KONFORMITÄTS-VERBEN: Das deutsche Wiki formuliert den Fall
+     „example / preferred / extensible" mit SOLLTE/SOLL, die englische Fassung
+     der MII in kerndatensatz-basis mit SHALL. Jede Sprachfassung übernimmt hier
+     die Formulierung ihrer Quelle wörtlich. Eine Vereinheitlichung ist eine
+     MII-weite Entscheidung, keine modul-eigene — bitte hier nicht „korrigieren". -->
 
 <h3 id="umgang-mit-fehlenden-daten">Umgang mit fehlenden Daten</h3>
 
 <p>Es gibt Situationen, in denen Informationen zu einem Datenelement fehlen und das
-Quellsystem den Grund für das Fehlen nicht kennt. Es gelten die folgenden
-Regeln.</p>
+Quellsystem den Grund für das Fehlen nicht kennt.</p>
 
-<h4 id="grundregeln">Grundregeln</h4>
+<p>Diese Seite legt fest, wie ein konformes System solche Fälle in den Ressourcen
+des Moduls <strong>Module Template</strong> darstellt. Die Regeln stimmen mit der
+<a href="https://hl7.org/fhir/R4/extensibility.html#Special-Case">FHIR-Kernspezifikation</a>
+überein und sind konsistent mit der internationalen Praxis, wie sie die
+<a href="https://hl7.org/fhir/uv/ips/Empty-Sections-and-Missing-Data.html">International Patient Summary (IPS)</a>
+definiert.</p>
 
-<ul>
-  <li>Liegt dem Quellsystem <strong>keine Dateninstanz</strong> für ein Element mit
-Mindestkardinalität <code class="language-plaintext highlighter-rouge">0</code> vor (einschließlich der mit <em>Must Support</em>
-gekennzeichneten Elemente), MUSS das Datenelement in der Ressource
-<strong>ausgelassen</strong> werden.</li>
-  <li>Handelt es sich um ein <strong>obligatorisches Element</strong> (Mindestkardinalität <code class="language-plaintext highlighter-rouge">1..</code>),
-MUSS es <strong>vorhanden sein</strong>, auch wenn das Quellsystem keine Daten hat. Wie der
-fehlende Wert dargestellt wird, hängt vom Datenelement ab:</li>
-</ul>
+<p>Allgemeine Hinweise zu Must-Support-Elementen stehen auf der Seite
+<a href="must-support.html">Must-Support</a>, die Konformitätserwartungen und Regeln für
+codierte Elemente auf der Seite
+<a href="general-requirements.html">Allgemeine Anforderungen</a>.</p>
 
-<h4 id="nicht-codierte-datenelemente">Nicht-codierte Datenelemente</h4>
+<h4 id="elemente-mit-mindestkardinalität-0">Elemente mit Mindestkardinalität 0</h4>
 
-<p>Es MUSS die Extension
+<p><strong>Regel:</strong> Liegt dem Quellsystem <strong>keine Dateninstanz</strong> für ein Element mit
+Mindestkardinalität <code class="language-plaintext highlighter-rouge">0</code> vor — einschließlich der mit
+<a href="must-support.html"><em>Must Support</em></a> gekennzeichneten Elemente —, MUSS das
+Datenelement in der Ressource <strong>ausgelassen</strong> werden.</p>
+
+<p>Das gilt für codierte wie für nicht-codierte Elemente gleichermaßen. Das Element
+wird schlicht nicht in die Ressourceninstanz aufgenommen.</p>
+
+<h4 id="obligatorische-elemente-mindestkardinalität--0">Obligatorische Elemente (Mindestkardinalität &gt; 0)</h4>
+
+<p><strong>Regel:</strong> Handelt es sich um ein <strong>obligatorisches Element</strong>
+(Mindestkardinalität <code class="language-plaintext highlighter-rouge">1..</code>), MUSS es <strong>vorhanden sein</strong>, auch wenn das
+Quellsystem keine Daten hat oder den Grund für das Fehlen nicht kennt.</p>
+
+<p>Wie der fehlende Wert dargestellt wird, hängt davon ab, ob das Element codiert
+ist oder nicht.</p>
+
+<h5 id="nicht-codierte-datenelemente">Nicht-codierte Datenelemente</h5>
+
+<p>Bei nicht-codierten Datenelementen (z. B. <code class="language-plaintext highlighter-rouge">string</code>, <code class="language-plaintext highlighter-rouge">HumanName</code>, <code class="language-plaintext highlighter-rouge">Address</code>) MUSS
+die Extension
 <a href="http://hl7.org/fhir/R4/extension-data-absent-reason.html"><code class="language-plaintext highlighter-rouge">Data-Absent-Reason</code></a>
 am Datentyp mit dem Code <code class="language-plaintext highlighter-rouge">unknown</code> verwendet werden.</p>
 
-<h4 id="codierte-datenelemente-mit-valueset-binding-example-preferred-oder-extensible">Codierte Datenelemente mit ValueSet-Binding „example", „preferred" oder „extensible"</h4>
+<p><strong>Code:</strong> <code class="language-plaintext highlighter-rouge">unknown</code> — der Wert wird erwartet, ist aber nicht bekannt.</p>
 
-<ul>
-  <li>Enthält das Quellsystem <strong>nur Freitext</strong>, SOLLTE ausschließlich das
-Textelement (<code class="language-plaintext highlighter-rouge">CodeableConcept.text</code>) genutzt werden.</li>
-  <li>Sind weder Text noch codierte Daten vorhanden:
+<p><strong>Beispiel:</strong> eine Patient-Ressource, deren Familienname nicht verfügbar ist:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"resourceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Patient"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example-missing-name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"extension"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://hl7.org/fhir/StructureDefinition/data-absent-reason"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"valueCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"birthDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1990-01-01"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h5 id="codierte-datenelemente">Codierte Datenelemente</h5>
+
+<p>Bei codierten Datenelementen hängt das Vorgehen von der Binding-Stärke des
+Elements ab.</p>
+
+<h6 id="binding-stärke-example-preferred-oder-extensible">Binding-Stärke „example", „preferred" oder „extensible"</h6>
+
+<p>Für Elemente mit <code class="language-plaintext highlighter-rouge">example</code>-, <code class="language-plaintext highlighter-rouge">preferred</code>- oder <code class="language-plaintext highlighter-rouge">extensible</code>-Binding (Datentypen
+<code class="language-plaintext highlighter-rouge">CodeableConcept</code> oder <code class="language-plaintext highlighter-rouge">Coding</code>):</p>
+
+<ol>
+  <li><strong>Enthält das Quellsystem nur Freitext</strong>, SOLLTE ausschließlich das
+Textelement (<code class="language-plaintext highlighter-rouge">CodeableConcept.text</code>) genutzt werden. Bei <code class="language-plaintext highlighter-rouge">Coding</code>-Datentypen
+werden reine Textdaten im Element <code class="language-plaintext highlighter-rouge">display</code> dargestellt.</li>
+  <li><strong>Sind weder Text noch codierte Daten vorhanden:</strong>
     <ul>
       <li>enthält das ValueSet einen „unbekannt"-Code, SOLL dieser verwendet werden;</li>
       <li>andernfalls SOLL der Code <code class="language-plaintext highlighter-rouge">unknown</code> aus dem CodeSystem
@@ -277,19 +344,65 @@ Textelement (<code class="language-plaintext highlighter-rouge">CodeableConcept.
 genutzt werden.</li>
     </ul>
   </li>
-</ul>
+</ol>
 
-<h4 id="codierte-datenelemente-mit-valueset-binding-required">Codierte Datenelemente mit ValueSet-Binding „required"</h4>
+<p><strong>Beispiel:</strong> eine Condition-Ressource, deren obligatorischer Wert
+<code class="language-plaintext highlighter-rouge">Condition.code</code> unbekannt ist:</p>
 
-<ul>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"resourceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Condition"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example-unknown-code"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"clinicalStatus"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"coding"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://terminology.hl7.org/CodeSystem/condition-clinical"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"coding"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://hl7.org/fhir/CodeSystem/data-absent-reason"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"subject"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Patient/example"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h6 id="binding-stärke-required">Binding-Stärke „required"</h6>
+
+<p>Für Elemente mit <code class="language-plaintext highlighter-rouge">required</code>-Binding (Datentypen <code class="language-plaintext highlighter-rouge">CodeableConcept</code>, <code class="language-plaintext highlighter-rouge">Coding</code> oder
+<code class="language-plaintext highlighter-rouge">code</code>):</p>
+
+<ol>
   <li>Enthält das ValueSet einen „unbekannt"-Code, MUSS dieser verwendet werden.</li>
   <li>Andernfalls MUSS ein Konzept aus dem ValueSet verwendet werden — die Instanz
 wäre sonst <strong>nicht konform</strong>.</li>
-</ul>
+</ol>
 
 <blockquote>
-  <p>[TODO: Nur ergänzen, falls Ihr Modul modul-spezifische Sonderfälle hat.]</p>
+  <p>[TODO: Nur ergänzen, falls Ihr Modul modul-spezifische Sonderfälle hat — etwa
+ein Element, dessen ValueSet einen eigenen „unbekannt"-Code mitbringt, oder
+eine Datenkategorie, für die das Modul eine abweichende Darstellung vorgibt.
+Löschen Sie diesen Hinweis anschließend.]</p>
 </blockquote>
+
+<h4 id="siehe-auch">Siehe auch</h4>
+
+<ul>
+  <li><a href="must-support.html">Must-Support</a> — die Erwartungen an Server und Clients bei
+Must-Support-Elementen.</li>
+  <li><a href="general-requirements.html">Allgemeine Anforderungen</a> — Verwendung von Codes
+in den Profilen und Beanspruchen von Konformität.</li>
+  <li><a href="http://hl7.org/fhir/R4/conformance-rules.html#missing">FHIR-R4-Konformitätsregeln</a>
+— die Vorgaben der Kernspezifikation zu fehlenden Daten.</li>
+</ul>
 
 
 
@@ -316,7 +429,7 @@ wäre sonst <strong>nicht konform</strong>.</li>
 
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Sun, Jul 26, 2026 10:49+0000">2026-07-26</span>
+          Erstellt <span title="Sun, Jul 26, 2026 11:56+0000">2026-07-26</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.

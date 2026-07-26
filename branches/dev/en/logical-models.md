@@ -5,11 +5,9 @@
 
 ## Logical Models
 
- There is no translation page available for the current page, so it has been rendered in the default language 
+### Logical Models
 
-### Logische Modelle
+The logical data models of the **Module Template** module describe the domain dataset independently of its concrete FHIR representation.
 
-Die logischen Datenmodelle des Moduls **Module Template** beschreiben den fachlichen Datensatz unabhängig von der konkreten FHIR-Repräsentation.
-
-> [TODO: Fügen Sie die logischen Modelle ein, oder entfernen Sie diese Seite.]
+> [TODO: Add the logical models, or delete this page.]
 

@@ -56,7 +56,7 @@ This guide was created within the Medical Informatics Initiative and is subject,
 
 ### Contact
 
-Questions about this publication can be asked on the HL7 FHIR Zulip [chat.fhir.org](https://chat.fhir.org) in the `german/mi-initiative` stream. Comments and issues are welcome as **Issues** on [GitHub](https://github.com/medizininformatik-initiative/mii-kds-module-template/issues).
+Questions about this publication can be asked on the HL7 FHIR Zulip [chat.fhir.org](https://chat.fhir.org) in the `german/mi-initiative` stream, or on the MII Zulip [mii.zulipchat.com](https://mii.zulipchat.com/) in the `MII-Kerndatensatz` stream. Comments and issues are welcome as **Issues** on [GitHub](https://github.com/medizininformatik-initiative/mii-kds-module-template/issues).
 
 > [TODO: Name your module's domain contacts.]
 
@@ -64,7 +64,18 @@ Questions about this publication can be asked on the HL7 FHIR Zulip [chat.fhir.o
 
 > [TODO: List the module's authors with their institution.]
 
-### Copyright / terms of use
+### Copyright and License
 
-© 2026+ — this work is licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
+© 2026+ TMF e. V., Charlottenstraße 42, 10117 Berlin
+
+This work is licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
+
+For the usage rights of the underlying FHIR technology, see the FHIR base specification.
+
+Some of the code systems used are published and maintained by other organizations; the copyright of the respective publishers applies.
+
+### Disclaimer
+
+* The content of this document is public. Please note that parts of this document are based on FHIR version R4, which is copyrighted by HL7 International.
+* Although this publication was prepared with the greatest care, the authors cannot accept any liability for direct or indirect damage that may arise from the content of this specification.
 

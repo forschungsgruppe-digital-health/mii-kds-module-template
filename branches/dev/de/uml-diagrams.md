@@ -6,6 +6,8 @@
 
 ## UML Diagrams
 
+ Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfaden verfasst wurde. Informationen zu diesen Übersetzungen und Anweisungen zum Abgeben von Feedback zu den Übersetzungen finden Sie [hier](translationinfo.html). 
+
 ### UML-Diagramme
 
 UML-Übersichten der Datenmodelle des Moduls **Module Template** und ihrer Beziehungen. Editierbare Quellen (z. B. PlantUML) gehören nach `input/images-source/`, die gerenderten Bilder nach `input/images/`.

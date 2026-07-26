@@ -5,13 +5,11 @@
 
 ## Terminology
 
- There is no translation page available for the current page, so it has been rendered in the default language 
+This page describes the ValueSets and CodeSystems used in the **Module Template** module. For general guidance on using codes, see [FHIR Terminology](http://hl7.org/fhir/R4/terminologies.html).
 
-Diese Seite beschreibt die im Modul **Module Template** verwendeten ValueSets und CodeSystems. Allgemeine Hinweise zur Verwendung von Codes: siehe [FHIR Terminology](http://hl7.org/fhir/R4/terminologies.html).
+**Important:** CodeSystem resources of external terminologies (e.g. ICD-10-GM, OPS, SNOMED CT) are **not** published in this module; they are obtained from the MII terminology service (SU-TermServ): [https://mii-termserv.de/](https://mii-termserv.de/).
 
-**Wichtig:** CodeSystem-Ressourcen externer Terminologien (z. B. ICD-10-GM, OPS, SNOMED CT) werden in diesem Modul **nicht** publiziert, sondern über den MII-Terminologieserver (SU-TermServ) bezogen: [https://mii-termserv.de/](https://mii-termserv.de/).
+**Expansions:** ValueSet expansions MUST be created via a FHIR terminology server for validation purposes. This build uses SU-TermServ if the client certificate is configured, otherwise the public HL7 server `tx.fhir.org` (in which case some MII-specific ValueSets may not expand completely).
 
-**Expansionen:** ValueSet-Expansionen MÜSSEN zur Validierung über einen FHIR-Terminologieserver erzeugt werden. Dieser Build nutzt SU-TermServ, sofern das Client-Zertifikat konfiguriert ist, sonst den öffentlichen HL7-Server `tx.fhir.org` (dann expandieren einige MII-spezifische ValueSets ggf. nicht vollständig).
-
-> [TODO: Falls Ihr Modul SNOMED CT nutzt, geben Sie die verwendete Edition/Version an. Listen Sie die modul-eigenen ValueSets/CodeSystems auf oder verweisen Sie auf die automatisch erzeugte Artefakt-Liste.]
+> [TODO: If your module uses SNOMED CT, state the edition/version used. List the module's own ValueSets/CodeSystems, or refer to the automatically generated artifact list.]
 

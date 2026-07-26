@@ -6,11 +6,9 @@
 
 ## Guidance for Researchers
 
- There is no translation page available for the current page, so it has been rendered in the default language 
+### Guidance for Researchers
 
-### Anleitung für Forschende
+Guidance for researchers using the data of the **Module Template** module for research purposes — e.g. which data elements are relevant to which research questions, and how they are to be interpreted.
 
-Hinweise für Forschende, die die Daten des Moduls **Module Template** für Forschungszwecke nutzen — z. B. welche Datenelemente für welche Fragestellungen relevant sind und wie sie interpretiert werden.
-
-> [TODO: Beschreiben Sie die forschungsrelevanten Aspekte des Moduls.]
+> [TODO: Describe the research-relevant aspects of your module.]
 

@@ -228,34 +228,33 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown.-->
 </div>
 
-<p style="border:var(--translation-box-border);background-color:var(--translation-background-color);padding: 5px 5px 5px 5px;">
-
-There is no translation page available for the current page, so it has been rendered in the default language
-
-</p>
-
 <!-- markdownlint-disable MD041 -->
-<!-- Allgemeine Anforderungen. Die Verb-Tabelle unten ist MII-Standard (Quelle:
-     MII-Meta-Wiki "Conformance") und gilt unverändert für JEDES Modul — bitte
-     nicht kürzen oder umformulieren. Ergänzen Sie darunter die Anforderungen
-     Ihres Moduls. -->
+<!-- Default-language (English) page. Ported from kerndatensatz-basis
+     input/pagecontent/general-requirements.md (branch main) and the MII meta wiki
+     page "Conformance" (https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance),
+     from which the conformance-verb table is taken verbatim.
+     German mirror: input/translations/de/pagecontent/general-requirements.md —
+     both files must say the same thing.
+     The verb table and the MII-wide rules below apply UNCHANGED to every module.
+     Do not shorten or reword them; add your module's own requirements underneath. -->
 
-<h3 id="allgemeine-anforderungen">Allgemeine Anforderungen</h3>
+<h3 id="general-requirements">General Requirements</h3>
 
-<p>Dieser Abschnitt beschreibt die für das gesamte Modul <strong>Module Template</strong>
-geltenden Anforderungen.</p>
+<p>This page documents the requirements that apply to the whole
+<strong>Module Template</strong> module and to every MII actor implementing it.</p>
 
-<h4 id="anforderungsdokumentation">Anforderungsdokumentation</h4>
+<h4 id="documenting-requirements">Documenting requirements</h4>
 
-<p>Anforderungen in dieser Spezifikation werden durch folgende in Großbuchstaben
-geschriebene Schlüsselworte (Conformance verbs) auf Basis von
-<a href="https://datatracker.ietf.org/doc/html/rfc2119">RFC-2119</a> gekennzeichnet:</p>
+<p>Requirements in this specification are indicated by the following keywords
+written in capital letters, based on
+<a href="https://datatracker.ietf.org/doc/html/rfc2119">RFC-2119</a> and the FHIR
+<a href="http://hl7.org/fhir/R4/conformance-rules.html#conflang">conformance language</a>:</p>
 
 <table>
   <thead>
     <tr>
-      <th>Deutsch</th>
-      <th>Englisch</th>
+      <th>German</th>
+      <th>English</th>
     </tr>
   </thead>
   <tbody>
@@ -290,18 +289,241 @@ geschriebene Schlüsselworte (Conformance verbs) auf Basis von
   </tbody>
 </table>
 
-<h4 id="beanspruchen-von-konformität">Beanspruchen von Konformität</h4>
+<p>The German column is the wording used in the German rendering of this guide; the
+English column is the RFC-2119 keyword it corresponds to. The two are equivalent
+— a requirement does not change its strength by being read in the other
+language.</p>
 
-<p>Ein System beansprucht Konformität zu diesem Modul, indem es die Profile dieses
-Implementierungsleitfadens erfüllt. Die Erwartungen an einzelne Elemente sind in
-<a href="must-support.html">Must-Support</a> beschrieben, der Umgang mit fehlenden Werten
-in <a href="missing-data.html">Umgang mit fehlenden Daten</a>.</p>
+<h4 id="mii-conformance-artifacts">MII conformance artifacts</h4>
+
+<ul>
+  <li>The <a href="profiles-and-extensions.html">Profiles and Extensions</a> page lists the
+profiles defined by this module. Their
+<a href="http://hl7.org/fhir/R4/structuredefinition.html">StructureDefinitions</a> define
+the <em>minimum</em> elements, extensions, vocabularies and ValueSets that <strong>SHALL</strong>
+be present, and constrain how the elements are used.</li>
+  <li>Profile elements carry <em>mandatory</em> and <em>Must Support</em> requirements. Mandatory
+elements have a minimum cardinality of 1 (min=1). The
+<a href="must-support.html">Must Support</a> page defines what servers and clients are
+expected to do with them and how the flags are rendered.</li>
+  <li>The <a href="capability-statements.html">Capability Statements</a> page states the
+RESTful transactions, supported profiles and search parameters expected of a
+conformant server. Profiles carry the structural constraints, terminology
+bindings and invariants; the CapabilityStatements carry the interaction
+expectations. Implementers need both.</li>
+</ul>
+
+<h4 id="standards-and-alignment">Standards and alignment</h4>
+
+<p>The MII core dataset specifications build, wherever possible, on international
+standards and terminologies. The following are of particular relevance across
+modules:</p>
+
+<ul>
+  <li><strong><a href="http://hl7.org/fhir/uv/ips/">International Patient Summary (IPS)</a></strong> —
+international standard for patient summaries.</li>
+  <li><strong><a href="https://ig.fhir.de/basisprofile-de/">German base profiles (Basisprofil DE R4)</a></strong>
+— adaptation to the conditions of the German healthcare system.</li>
+  <li><strong><a href="https://simplifier.net/organization/kassenrztlichebundesvereinigungkbv">KBV FHIR specifications</a></strong>
+— compatibility with the specifications of the National Association of
+Statutory Health Insurance Physicians.</li>
+  <li><strong><a href="https://simplifier.net/organization/gematik">gematik FHIR specifications</a></strong>
+— compatibility with the gematik specifications.</li>
+  <li><strong><a href="https://fachportal.gematik.de/informationen-fuer/isik">ISiK (Informationssysteme im Krankenhaus)</a></strong>
+— reference specification for hospital information systems.</li>
+</ul>
+
+<p>Where this module adapts a profile away from one of these specifications, the
+reason is given in prose on the profile page.</p>
 
 <blockquote>
-  <p>[TODO: Ergänzen Sie modul-spezifische allgemeine Anforderungen — etwa
-Anforderungen an die FHIR-RESTful-API, an Suchparameter oder an die
-Verwendung von Codes in Ihren Profilen.]</p>
+  <p>[TODO: Name the standards and specifications YOUR module actually aligns with
+(they should match the <code class="language-plaintext highlighter-rouge">dependencies</code> in <code class="language-plaintext highlighter-rouge">sushi-config.yaml</code>), and delete the
+entries above that do not apply.]</p>
 </blockquote>
+
+<h4 id="claiming-conformance">Claiming conformance</h4>
+
+<p>A system claims conformance to this module by fulfilling the module's profiles.
+Two levels are distinguished.</p>
+
+<h5 id="profile-support">Profile support</h5>
+
+<p>Systems may deploy and support one or more of this module's profiles to
+represent clinical information, using the profile's content model without
+implementing the associated interactions.</p>
+
+<ul>
+  <li>Servers <strong>SHALL</strong> be able to populate all profile data elements that are
+mandatory or flagged as <em>Must Support</em> in that profile's StructureDefinition.</li>
+  <li>Servers <strong>SHOULD</strong> declare support for a profile by including its official
+URL in <code class="language-plaintext highlighter-rouge">CapabilityStatement.rest.resource.supportedProfile</code>. The official
+("canonical") URL of each profile is shown on its profile page.</li>
+</ul>
+
+<h5 id="profile-support-and-interaction-support">Profile support and interaction support</h5>
+
+<p>Systems may support one or more profiles <em>and</em> the RESTful interactions defined
+for the corresponding resources.</p>
+
+<ul>
+  <li>A conformant server <strong>SHALL</strong> be able to populate all profile data elements
+that are mandatory and/or flagged as <em>Must Support</em>.</li>
+  <li>A conformant server <strong>SHOULD</strong> declare conformance with the applicable
+CapabilityStatement by including its official URL in
+<code class="language-plaintext highlighter-rouge">CapabilityStatement.instantiates</code>.</li>
+  <li>A conformant server <strong>SHALL</strong> state the full capability details of the
+CapabilityStatement it claims to implement.</li>
+  <li>A conformant server claiming interaction support <strong>SHALL</strong> declare support for
+the profile by including its official URL in
+<code class="language-plaintext highlighter-rouge">CapabilityStatement.rest.resource.supportedProfile</code>.</li>
+  <li>A conformant server claiming interaction support <strong>SHALL</strong> declare support for
+that profile's FHIR RESTful transactions.</li>
+</ul>
+
+<h4 id="using-codes-in-profiles">Using codes in profiles</h4>
+
+<p>The rules below summarise the requirements that
+<a href="http://hl7.org/fhir/R4/terminologies.html">FHIR terminology</a> places on coded
+elements (<code class="language-plaintext highlighter-rouge">CodeableConcept</code>, <code class="language-plaintext highlighter-rouge">Coding</code> and <code class="language-plaintext highlighter-rouge">code</code> datatypes).</p>
+
+<h5 id="required-bindings">Required bindings</h5>
+
+<p>A <a href="http://hl7.org/fhir/R4/terminologies.html#required">required binding</a> to a
+ValueSet means that one of the codes from that ValueSet <strong>SHALL</strong> be used. For
+<code class="language-plaintext highlighter-rouge">CodeableConcept</code>, which permits several codings plus a text element, the rule
+applies to <em>at least one</em> of the codings — text alone is <em>not</em> valid.</p>
+
+<ul>
+  <li>Servers <strong>SHALL</strong> provide at least one code from the bound ValueSet;
+additional codes from other systems <strong>MAY</strong> be provided.</li>
+  <li>Clients <strong>SHALL</strong> be capable of processing the codes of the bound ValueSet.</li>
+</ul>
+
+<h5 id="extensible-bindings">Extensible bindings</h5>
+
+<p>An <a href="http://hl7.org/fhir/R4/terminologies.html#extensible">extensible binding</a>
+means that one of the codes from the ValueSet <strong>SHALL</strong> be used if a suitable
+concept exists there. If none exists, alternative code(s) may be provided. For
+<code class="language-plaintext highlighter-rouge">CodeableConcept</code> the rule again applies to <em>at least one</em> of the codings; if
+only text is available and it has no conceptual overlap with the bound values,
+text alone may be used.</p>
+
+<ul>
+  <li>Servers <strong>SHALL</strong> provide a code from the bound ValueSet <em>if the concept
+exists</em> there, an alternative code <em>if it does not</em>, or text if only text is
+available.</li>
+  <li>Clients <strong>SHALL</strong> be capable of processing codes of the bound ValueSet,
+alternative codes, and text.</li>
+</ul>
+
+<h5 id="several-codings-in-one-codeableconcept">Several codings in one CodeableConcept</h5>
+
+<p>Alternative codes may be supplied in addition to the codes of a required or
+extensible ValueSet ("additional codings"). They may be equivalent to, or
+narrower than, the standard concept.</p>
+
+<p>The following illustrates a diagnosis carrying both an ICD-10-GM code and a
+SNOMED CT code for international interoperability:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"coding"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://fhir.de/CodeSystem/bfarm/icd-10-gm"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E11.90"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Diabetes mellitus, Typ 2, ohne Komplikationen"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://snomed.info/sct"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"44054006"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Diabetes mellitus type 2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h4 id="missing-data">Missing data</h4>
+
+<p>There are situations in which no information is available for a data element and
+the source system does not know why. The
+<a href="missing-data.html">Handling Missing Data</a> page defines how this is represented.</p>
+
+<h4 id="fhir-restful-search-api">FHIR RESTful search API</h4>
+
+<p>For all search interactions supported by this guide:</p>
+
+<ul>
+  <li>Servers <strong>SHALL</strong> support <code class="language-plaintext highlighter-rouge">POST</code>-based search.</li>
+  <li>Servers <strong>SHALL</strong> support <code class="language-plaintext highlighter-rouge">GET</code>-based search.</li>
+</ul>
+
+<p>For the individual search parameter types:</p>
+
+<ul>
+  <li><strong>Token</strong> — <a href="http://hl7.org/fhir/R4/search.html#token">how to search by token</a>
+    <ul>
+      <li>Clients <strong>SHALL</strong> supply at least a code value and <strong>MAY</strong> supply system and
+code.</li>
+      <li>Servers <strong>SHALL</strong> support both code-only and system+code searches.</li>
+    </ul>
+  </li>
+  <li><strong>Reference</strong> — <a href="http://hl7.org/fhir/R4/search.html#reference">how to search by reference</a>
+    <ul>
+      <li>Clients <strong>SHALL</strong> supply at least an id value and <strong>MAY</strong> supply type and
+id.</li>
+      <li>Servers <strong>SHALL</strong> support both id-only and type+id searches.</li>
+    </ul>
+  </li>
+  <li><strong>Date</strong> — <a href="http://hl7.org/fhir/R4/search.html#date">how to search by date</a>
+    <ul>
+      <li>Clients <strong>SHALL</strong> supply values precise to the <em>day</em> for elements of type
+<code class="language-plaintext highlighter-rouge">date</code>, and to the <em>second including time offset</em> for elements of type
+<code class="language-plaintext highlighter-rouge">dateTime</code>.</li>
+      <li>Servers <strong>SHALL</strong> support values of that precision.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="modifier-elements">Modifier elements</h4>
+
+<p>A <a href="http://hl7.org/fhir/R4/conformance-rules.html#isModifier">modifier element</a>
+changes the meaning of the element that contains it. Not every modifier element
+is mandatory or <em>Must Support</em>, and there is no blanket requirement to support
+them. For modifier elements that <em>are</em> mandatory or <em>Must Support</em>, servers and
+clients <strong>SHALL</strong> be able to process them.</p>
+
+<p>Clients must be aware of <em>unexpected</em> modifier elements in received data: they
+can change the meaning of the data and, if mishandled, lead to errors or even
+security problems. Unless a client can establish that it processes such an
+element safely, rejecting the instance is usually the only safe response.</p>
+
+<p>Modifier elements that are frequently <em>not</em> flagged Must Support include:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">modifierExtension</code> element present on every profile,</li>
+  <li><code class="language-plaintext highlighter-rouge">Observation.valueQuantity.comparator</code>,</li>
+  <li><code class="language-plaintext highlighter-rouge">Patient.active</code>.</li>
+</ul>
+
+<p>Implementers <strong>SHOULD</strong> read the profile pages carefully to see which elements
+are modifiers and how they affect the interpretation of a resource.</p>
+
+<blockquote>
+  <p>[TODO: Add the general requirements that are specific to YOUR module — for
+example additional expectations on the FHIR RESTful API, on search parameters,
+or on the use of codes in your profiles. Delete this prompt afterwards.]</p>
+</blockquote>
+
+<h4 id="see-also">See also</h4>
+
+<ul>
+  <li><a href="must-support.html">Must Support</a> — detailed Must Support expectations.</li>
+  <li><a href="missing-data.html">Handling Missing Data</a> — representing absent values.</li>
+  <li><a href="capability-statements.html">Capability Statements</a> — server and client
+capability requirements.</li>
+  <li><a href="security-and-privacy.html">Security and Privacy</a> — module-specific security
+and data-protection considerations.</li>
+</ul>
 
 
 
@@ -328,7 +550,7 @@ Verwendung von Codes in Ihren Profilen.]</p>
 
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Sun, Jul 26, 2026 10:49+0000">2026-07-26</span>
+          Generated <span title="Sun, Jul 26, 2026 11:56+0000">2026-07-26</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.

@@ -6,6 +6,8 @@
 
 ## Datasets and Descriptions
 
+ Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfaden verfasst wurde. Informationen zu diesen Übersetzungen und Anweisungen zum Abgeben von Feedback zu den Übersetzungen finden Sie [hier](translationinfo.html). 
+
 ### Datensätze und Beschreibungen
 
 Ausführliche Beschreibung der Datenelemente des Moduls **Module Template** und ihrer Zuordnung zu den logischen Modellen.

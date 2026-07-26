@@ -6,11 +6,9 @@
 
 ## Guidance for Implementers
 
- There is no translation page available for the current page, so it has been rendered in the default language 
+### Guidance for Implementers
 
-### Anleitung für Implementierende
+Technical guidance for DIC implementers on implementing the profiles of the **Module Template** module (ETL from primary systems, FHIR API, validation).
 
-Technische Hinweise für DIZ-Implementierende zur Umsetzung der Profile des Moduls **Module Template** (ETL aus Primärsystemen, FHIR-API, Validierung).
-
-> [TODO: Beschreiben Sie die technischen Umsetzungsschritte für Ihr Modul.]
+> [TODO: Describe the technical implementation steps for your module.]
 
