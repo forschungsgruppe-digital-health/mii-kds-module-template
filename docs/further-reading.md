@@ -58,4 +58,4 @@ is authoritative; when it and this repo disagree, the wiki wins.
 - HL7 FHIR community Zulip — <https://chat.fhir.org>, stream `german/mi-initiative`.
 - MII Zulip — <https://mii.zulipchat.com/>, stream `MII-Kerndatensatz`.
 
-See also [SUPPORT via the README](../README.md#where-to-get-help).
+See also [Getting help in the README](../README.md#getting-help).
