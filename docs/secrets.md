@@ -25,22 +25,65 @@ The certificate is used by **two independent consumers**, which read it under
 **1. The IG build / preview / go-publish** (this template's workflows) read
 `SU_TERMSERV_CLIENT_*`. Values are **base64-encoded** (decoded with `base64 -d`):
 
+### What kind of certificate is required
+
+SU-TermServ authenticates clients with **mutual TLS**. Verified against the live
+server on 2026-07-26 (`openssl s_client` to `ontoserver.mii-termserv.de:443`):
+
+- The server **requests** a client certificate and advertises the CAs it accepts.
+- That list includes the **German academic PKI** — DFN-Verein (Global Issuing CA,
+  Community Issuing/Root CA 2022), **GÉANT** (OV/EV/Personal, and
+  `GEANT S/MIME RSA 1` / `GEANT TLS RSA 1` via HARICA), Sectigo/USERTrust,
+  T-TeleSec — **and SU-TermServ's own CA** (`ca.mii-termserv.de`,
+  `intermediate.ca.mii-termserv.de`).
+- The certificate needs the **`TLS Web Client Authentication`** extended key
+  usage.
+- Without a client certificate the endpoint answers **HTTP 400**.
+
+So a DFN/GÉANT institutional or function certificate works, as does one issued by
+the SU-TermServ itself. Being issued by an accepted CA is necessary but not
+automatically sufficient — the SU-TermServ still governs access; request it from
+them (access is granted to entities in Germany).
+
+> **Prefer a function/service certificate over a personal one.** A personal
+> certificate identifies an individual and can usually also sign or encrypt their
+> mail; its private key in CI secrets is an identity risk, and access breaks when
+> that person leaves. Use a certificate issued for the service.
+
 ### Recommended: use the helper script
 
-It validates the material **before** uploading anything — that the certificate is
-a readable PEM and not expired, that the key decrypts with your password, and
-that certificate and key belong together (matching modulus). Those mistakes
-otherwise surface as an opaque TLS failure deep inside a CI run.
+`tools/set-su-termserv-secrets.sh` validates everything **before** uploading, and
+can prove the certificate against the live server first.
 
 ```sh
-tools/set-su-termserv-secrets.sh --cert client-cert.pem --key client-key.pem \
-  --repo <owner>/<your-module-repo>
-# dry run — validate locally, upload nothing:
-tools/set-su-termserv-secrets.sh --cert client-cert.pem --key client-key.pem --check-only
+D=/path/to/certificate
+R=<owner>/<your-module-repo>
+
+# 1. Prove it works — validates locally AND does a real mTLS call. Uploads nothing.
+tools/set-su-termserv-secrets.sh --p12 "$D/cert.p12" --password-file "$D/pw.txt" \
+  --test --check-only
+
+# 2. Upload
+tools/set-su-termserv-secrets.sh --p12 "$D/cert.p12" --password-file "$D/pw.txt" \
+  --repo "$R"
 ```
 
-The key password is prompted interactively, so it never lands in your shell
-history or the process list.
+It accepts either a **PKCS#12 bundle** (`--p12`, the usual delivery format) or
+separate PEM files (`--cert` + `--key`, key encrypted). Omit `--password-file` to
+be prompted instead, so the password never reaches your shell history. It checks:
+certificate readable and not expired (warning under 30 days), `clientAuth` EKU
+present, key decrypts, and **certificate and key match** — then, with `--test`,
+that the live server returns HTTP 200.
+
+A successful run looks like:
+
+```text
+== 1. Certificate ==   subject=… issuer=… notAfter=…
+   Extended Key Usage: includes TLS Web Client Authentication (required for mTLS)
+== 2. Private key ==   Key decrypts with the given password.
+== 3. Certificate and key belong together ==   Modulus matches.
+== 4. Live check ==    HTTP 200 — the server accepted the certificate …
+```
 
 ### Or set the three secrets by hand
 
@@ -48,65 +91,34 @@ The two files are **base64-encoded, single-line**; the key must be the
 **encrypted** PEM (the workflow decrypts it with
 `openssl rsa -passin env:SU_TERMSERV_CLIENT_PASSWORD`).
 
+From a PKCS#12 bundle:
+
 ```sh
+export PWV="$(tr -d '\r\n' < pw.txt)"          # never echoed
+openssl pkcs12 -in cert.p12 -clcerts -nokeys -passin env:PWV | openssl x509 -out cert.pem
+openssl pkcs12 -in cert.p12 -nocerts -passin env:PWV -passout env:PWV -out key-enc.pem
+
 R=<owner>/<your-module-repo>
-base64 < client-cert.pem | tr -d '\n' | gh secret set SU_TERMSERV_CLIENT_CERT     --repo "$R"
-base64 < client-key.pem  | tr -d '\n' | gh secret set SU_TERMSERV_CLIENT_KEY      --repo "$R"
-printf '%s' 'THE_KEY_PASSWORD'         | gh secret set SU_TERMSERV_CLIENT_PASSWORD --repo "$R"
+base64 < cert.pem    | tr -d '\n' | gh secret set SU_TERMSERV_CLIENT_CERT     --repo "$R"
+base64 < key-enc.pem | tr -d '\n' | gh secret set SU_TERMSERV_CLIENT_KEY      --repo "$R"
+printf '%s' "$PWV"                 | gh secret set SU_TERMSERV_CLIENT_PASSWORD --repo "$R"
+rm -f cert.pem key-enc.pem; unset PWV
 ```
 
-> **Why single-line base64:** the workflow runs `echo "$SECRET" | base64 -d`.
-> macOS `base64` wraps at 76 characters by default, which breaks that — hence
-> `tr -d '\n'` (GNU `base64 -w0` is equivalent).
+Three traps that each cost a failed CI run — all handled by the helper script:
 
-**2. The MII reusable validation workflow** (`validation.yml`, the Java validator)
-declares the secret names `CDS_DEV_CLIENT_CERT` / `_KEY` / `_CERT_PASSWORD` (the
-`kerndatensatz-basis` convention). **You do not need to set those** — this repo
-maps its own `SU_TERMSERV_CLIENT_*` secrets onto them at the call site in
-`validation.yml`, so the certificate above is the only copy you store.
+| Trap | Symptom | Fix |
+| --- | --- | --- |
+| Multi-line base64 | The workflow's `echo "$SECRET" \| base64 -d` produces garbage | `tr -d '\n'` (GNU: `base64 -w0`) — macOS wraps at 76 chars |
+| `-passin file:` **and** `-passout file:` on the same one-line file | `Error reading password from BIO` | Use `env:` for both — OpenSSL reads the *next* line for the second `file:` |
+| A PKCS#12 with several key bags | Handshake fails with a key/cert mismatch | Extract the key whose **modulus matches the certificate** |
 
-> **Why the mapping instead of two copies:** the same SU-TermServ client
-> certificate is needed by this repo's own build (`ig-publisher.yml`,
-> `go-publish.yml`, spec §2.10) and by the external, pinned MII reusable
-> workflow, which hard-codes different names. Mapping them at the call site keeps
-> **one certificate under one secret name** for the whole repository. If your
-> organisation already provisions `CDS_DEV_CLIENT_*` centrally, replace that
-> block in `validation.yml` with `secrets: inherit` instead.
-> The certificate is optional either way: without it the build uses the
-> `tx.fhir.org` fallback and validation runs without SU-TermServ.
+### Rotating or revoking
 
-The `.NET` Simplifier QC job (also part of `validation.yml`) additionally reads:
-
-```sh
-printf '%s' 'SIMPLIFIER_USER' | gh secret set SIMPLIFIER_USERNAME --repo <owner>/<module-repo>
-printf '%s' 'SIMPLIFIER_PASS' | gh secret set SIMPLIFIER_PASSWORD --repo <owner>/<module-repo>
-```
-
-## Gate G — Zulip release announcement (optional)
-
-On a **CalVer** module release, `module-release.yml` announces to the **MII Zulip**
-(`mii.zulipchat.com`, stream `MII-Kerndatensatz`, topic *Releases* — distinct from
-the template repos' *Template Releases*). It skips with a `::notice` if absent.
-
-```sh
-printf '%s' 'THE_MII_ZULIP_BOT_API_KEY' | gh secret set ZULIP_API_KEY --repo <owner>/<module-repo>
-```
-
-Bot account: `kds-github-bot@mii.zulipchat.com` by default; override it with the
-`MII_ZULIP_BOT_EMAIL` variable if your bot differs.
-
-The **public** FHIR Zulip (`chat.fhir.org`, stream `german/mi-initiative`) stays
-off unless you set **all three**:
-
-```sh
-gh variable set ANNOUNCE_PUBLIC_ZULIP  --body 'true'                       --repo <owner>/<repo>
-gh variable set FHIR_ZULIP_BOT_EMAIL   --body 'your-bot@chat.fhir.org'     --repo <owner>/<repo>
-printf '%s' 'THE_CHAT_FHIR_ORG_BOT_API_KEY' | gh secret set FHIR_ZULIP_API_KEY --repo <owner>/<repo>
-```
-
-If the key or the bot address is missing, the job **skips with a notice** instead
-of posting with an invalid sender. **No workflow file has to be edited to enable
-either channel.**
+Re-run the helper with the new certificate — `gh secret set` overwrites. To turn
+the integration off again, delete the three secrets; the build falls back to
+`tx.fhir.org` on the next run with a `::notice`. Note the expiry date: an expired
+certificate fails the handshake, so rotate before `notAfter`.
 
 ## Verifying a gate after you enable it
 
