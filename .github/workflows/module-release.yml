@@ -60,7 +60,9 @@
 # Fixed versions (§0.2): every action is pinned to a commit SHA; the IG
 #   Publisher jar, SUSHI, Jekyll, the nginx image, and the kerndatensatz-meta
 #   ref are pinned by exact version + SHA-256/commit — identical to
-#   go-publish.yml. The scheduled dependency check proposes bumps.
+#   go-publish.yml. The scheduled dependency check proposes bumps for the
+#   toolchain pins in the env: block below; the nginx digest and the
+#   kerndatensatz-meta ref are re-resolved by hand (it does not watch them).
 # =============================================================================
 name: Module release (CalVer)
 

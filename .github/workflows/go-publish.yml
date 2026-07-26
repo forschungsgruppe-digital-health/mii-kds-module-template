@@ -36,8 +36,14 @@
 # Fixed versions: every action, tool, and support repository below is pinned
 #   (commit SHA / exact version + SHA-256). Deliberate deviation from basis,
 #   which resolves the current Publisher/SUSHI/Jekyll at run time — this
-#   repo's policy is reproducibility-first; the scheduled dependency check
-#   proposes bumps. Exception: FHIR/ig-registry is checked out at its moving
+#   repo's policy is reproducibility-first. The scheduled dependency check
+#   proposes bumps for the TOOLCHAIN pins in the env: block below (IG
+#   Publisher, SUSHI, Jekyll) and for the FHIR package dependencies; it does
+#   NOT watch the three support repositories checked out further down
+#   (HL7/fhir-ig-history-template, HL7/fhir-web-templates,
+#   kerndatensatz-meta). Re-resolve those by hand when preparing a release —
+#   the comment at each pin records when it was last resolved.
+#   Exception: FHIR/ig-registry is checked out at its moving
 #   default branch on purpose — the registry handoff patch must be generated
 #   against the LIVE registry data; it is publication input for a human PR,
 #   not a build dependency.
@@ -159,7 +165,8 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: HL7/fhir-ig-history-template
-          # master, resolved 2026-07-22; bumped by the dependency check.
+          # master, resolved manually 2026-07-22 (NOT watched by the
+          # dependency check — see the Fixed-versions note in the header).
           ref: 8a90b35a2d839cc463eaf3d1c04a02ea60abb998
           path: publication/history
           persist-credentials: false
@@ -168,7 +175,8 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: HL7/fhir-web-templates
-          # main, resolved 2026-07-22; bumped by the dependency check.
+          # main, resolved manually 2026-07-22 (NOT watched by the
+          # dependency check — see the Fixed-versions note in the header).
           ref: 8991c4afe5cb8f1e439c4280863c3d0513430df1
           path: publication/web-templates
           persist-credentials: false
@@ -187,7 +195,8 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: medizininformatik-initiative/kerndatensatz-meta
-          # master, resolved 2026-07-22; bumped by the dependency check.
+          # master, resolved manually 2026-07-22 (NOT watched by the
+          # dependency check — see the Fixed-versions note in the header).
           ref: 1db2e534704d92e5ee0cde663ce3e7ccd8825fa7
           path: publication/kerndatensatz-meta
           persist-credentials: false

@@ -150,7 +150,13 @@ test("pins the publication toolchain (deviation from basis's runtime resolution)
   ]) {
     const index = workflow.indexOf(pinned);
     assert.ok(index >= 0, `${pinned} missing`);
-    const block = workflow.slice(index, index + 200);
+    // Slice to the next step, not a fixed byte count — the comment above a
+    // pin explains its bump cadence and may grow.
+    const nextStep = workflow.indexOf("\n      - name:", index);
+    const block = workflow.slice(
+      index,
+      nextStep >= 0 ? nextStep : workflow.length,
+    );
     assert.match(block, /ref: [0-9a-f]{40}/, `${pinned} is not SHA-pinned`);
   }
   // Every action is pinned to a commit SHA.
