@@ -3,11 +3,22 @@
 # │ parameterized from medizininformatik-initiative/kerndatensatz-basis (main).        │
 # │ The file does NOT build until every {{...}} placeholder is replaced.               │
 # │                                                                                    │
-# │ Placeholders used in this repository (here and in ig.ini,                          │
-# │ publication-request.json, .github/workflows/go-publish.yml):                       │
+# │ All 19 placeholders this repository uses are listed below. ACTIVE ones sit on      │
+# │ lines the build reads today — leaving one unreplaced ships a bogus artifact.       │
+# │ OPTIONAL ones sit inside commented-out blocks and matter only once you enable      │
+# │ that block.                                                                        │
 # │                                                                                    │
+# │ They occur in: this file, ig.ini, publication-request.json, the workflows under    │
+# │ .github/workflows/, the narrative pages (input/pagecontent, input/translations),   │
+# │ the FSH sources (input/fsh, incl. the rulesets library), input/resources and       │
+# │ tests/.                                                                            │
+# │                                                                                    │
+# │ ── ACTIVE ────────────────────────────────────────────────────────────────         │
 # │   {{MODULE_SLUG}}         lowercase module short name, e.g. `base`, `person`,      │
-# │                           `icu`. Drives packageId, id, and the canonical.          │
+# │                           `icu`. Drives packageId, id, and the canonical. It is    │
+# │                           also part of a FILE NAME — input/resources/Parameters-   │
+# │                           mii-param-{{MODULE_SLUG}}-manifest.json — so rename      │
+# │                           the file, not just its contents.                         │
 # │   {{MODULE_NAME}}         CamelCase computable name part, e.g. `Base` →            │
 # │                           name: MII_IG_Base.                                       │
 # │   {{MODULE_TITLE}}        human-readable title part, e.g.                          │
@@ -15,17 +26,36 @@
 # │                           Guide Core Dataset Base.                                 │
 # │   {{MODULE_DESCRIPTION}}  one-sentence English description of the module.          │
 # │   {{CALVER_VERSION}}      MII CalVer YYYY.n.n, e.g. 2026.0.1 (NOT SemVer;          │
-# │                           see the MII Module Release Workflow).                    │
+# │                           see the MII Module Release Workflow). Also pins the      │
+# │                           versioned canonicals in input/fsh/rulesets/.             │
 # │   {{CALVER_YEAR}}         the release sequence year, e.g. 2026.                    │
 # │   {{RELEASE_DATE}}        ISO date YYYY-MM-DD; go-publish.yml requires it to       │
 # │                           equal the publication date.                              │
-# │   {{COPYRIGHT_START_YEAR}} first copyright year, e.g. 2019.                        │
+# │   {{COPYRIGHT_START_YEAR}}  first copyright year, e.g. 2019.                       │
 # │   {{APPROVAL_DATE}}       ISO date the MII governance approved the release.        │
 # │   {{MODULE_AUTHOR_EMAIL}} contact email of the module author.                      │
-# │   {{GITHUB_ORG}} / {{REPO_NAME}}  (used in publication-request.json and            │
-# │                           go-publish.yml) the org/repo hosting this module;        │
-# │                           GitHub Pages under the creating org is the               │
-# │                           publication website.                                     │
+# │   {{TOPIC_NCI_CODE}}      NCI Thesaurus code for the module's topic, e.g.          │
+# │                           C15607 (basis also uses C154624, C25218, C16960,         │
+# │                           C25190, C81239, C25717). Read by the artifact-topic      │
+# │                           extension below AND by every profile via                 │
+# │                           `insert CRMIArtifactTopic(...)`. There is no sensible    │
+# │                           default: an unreplaced value ships a bogus code.         │
+# │   {{GITHUB_ORG}} / {{REPO_NAME}}  (publication-request.json, go-publish.yml)       │
+# │                           the org/repo hosting this module; GitHub Pages under     │
+# │                           the creating org is the publication website.             │
+# │   {{RELEASE_DESCRIPTION}} (publication-request.json) one-line description of the   │
+# │                           release being published.                                 │
+# │   {{REGISTRY_DESCRIPTION}}  (publication-request.json) the description shown in    │
+# │                           the FHIR IG registry entry.                              │
+# │                                                                                    │
+# │ ── OPTIONAL (inside commented-out blocks — replace only if you enable them) ──     │
+# │   {{SPECIAL_URL_1}}       one entry of the `special-url` list: a canonical this    │
+# │                           IG defines that does NOT start with the module           │
+# │                           canonical. Regenerate the list per                       │
+# │                           docs/recipes/regenerate-special-url.md.                  │
+# │   {{CITATION_TEXT}}       artifact-relatedArtifact — the module's literature       │
+# │   {{CITATION_URL}}        citation, its URL, and its publication date              │
+# │   {{CITATION_PUBLICATION_DATE}}  (ISO YYYY-MM-DD).                                 │
 # ╰────────────────────────────────────────────────────────────────────────────────────╯
 # ╭─────────────────────────Commonly Used ImplementationGuide Properties───────────────────────────╮
 # │  The properties below are used to create the ImplementationGuide resource. The most commonly   │
@@ -151,13 +181,16 @@ extension:
   #         valueDate: "{{CITATION_PUBLICATION_DATE}}"
   #       - url: http://hl7.org/fhir/StructureDefinition/cqf-publicationStatus
   #         valueCode: active
-  # OPTIONAL until the module defines its expansion-parameters manifest
-  # (a Parameters resource in input/fsh/parameters/ + a JSON copy in
-  # input/resources/, basis idiom: Parameters/mii-param-<slug>-manifest).
-  # Uncomment together with path-expansion-params / pin-manifest below:
-  # - url: http://hl7.org/fhir/StructureDefinition/cqf-expansionParameters
-  #   valueReference:
-  #     reference: Parameters/mii-param-{{MODULE_SLUG}}-manifest
+  # The module's expansion-parameters manifest — the pinned code system versions
+  # every ValueSet in this IG is expanded against (MII meta wiki, "Terminology
+  # Version Policy"). Shipped at
+  # input/resources/Parameters-mii-param-{{MODULE_SLUG}}-manifest.json; see
+  # input/resources/README.md for the CalVer → SNOMED CT release table and for
+  # how to rename the file. Active together with path-expansion-params /
+  # pin-manifest below — all three must name the same resource.
+  - url: http://hl7.org/fhir/StructureDefinition/cqf-expansionParameters
+    valueReference:
+      reference: Parameters/mii-param-{{MODULE_SLUG}}-manifest
   # Basis records `semver` here even though MII module versions are CalVer
   # YYYY.n.n (which parses as three numeric fields). Kept as in basis — do not
   # "correct" it without an MII-wide decision.
@@ -319,11 +352,14 @@ parameters:
   # Pin every canonical reference in the built package (CRMI requirement;
   # exactly as basis).
   pin-canonicals: pin-all
-  # OPTIONAL until the module defines its expansion-parameters manifest —
-  # uncomment together with the cqf-expansionParameters extension above
-  # (basis: input/resources/Parameters-mii-param-base-manifest.json):
-  # path-expansion-params: '../../input/resources/Parameters-mii-param-{{MODULE_SLUG}}-manifest.json'
-  # pin-manifest: 'mii-param-{{MODULE_SLUG}}-manifest'
+  # Where the IG Publisher reads the pinned code system versions from, and which
+  # manifest's pins are written into the built package. The path is relative to
+  # the publisher's working directory, hence the '../../' (basis:
+  # input/resources/Parameters-mii-param-base-manifest.json). Keep both in sync
+  # with the cqf-expansionParameters extension above and with the file in
+  # input/resources/ — see input/resources/README.md.
+  path-expansion-params: '../../input/resources/Parameters-mii-param-{{MODULE_SLUG}}-manifest.json'
+  pin-manifest: 'mii-param-{{MODULE_SLUG}}-manifest'
   suppress-mappings:
     - http://hl7.org/v3
     - http://hl7.org/v3/cda
@@ -336,8 +372,12 @@ parameters:
   # your module per docs/recipes/regenerate-special-url.md, then uncomment:
   # special-url:
   #   - {{SPECIAL_URL_1}}
-  # OPTIONAL until the module adds FHIR validation test cases under
-  # tests/profiles/ (basis idiom):
+  # FHIR validation test cases (basis idiom). A minimal working harness ships in
+  # tests/profiles/ — see tests/README.md. It stays COMMENTED OUT in the template
+  # repo: the fixtures' canonicals still carry {{MODULE_SLUG}}, which the CI
+  # self-check substitution does not reach (it rewrites sushi-config.yaml, ig.ini
+  # and the narrative pages only). Replace the placeholders in tests/profiles/,
+  # then uncomment:
   # profile-test-cases: tests/profiles/profiles.json
 
 #   excludettl: true
