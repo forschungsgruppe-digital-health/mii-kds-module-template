@@ -124,10 +124,17 @@ does it.
 
 Normative sentences in the English (default) pages are wrapped in
 `§<page>-<n>:…§`, and `conformance.md` ends with a paragraph containing only
-`§§§`, which the IG Publisher replaces with an *Id | Expectation | Rule* table.
+`§§§`, which the IG Publisher replaces with a table of the collected statements.
 The German mirror carries **no** markers and instead notes that the list is
-available in the English rendering — the *Expectation* column is derived from the
-English keywords SHALL/SHOULD/MAY, so a German statement would not classify.
+available in the English rendering.
+
+> **On the expectation column:** the rendered table shows an expectation
+> (`SHALL`, `SHOULD`, `MAY`) next to each statement, apparently read from the
+> English keyword in the sentence. That is *observed behaviour of the build, not
+> documented in HL7's* [ig-guidance](https://build.fhir.org/ig/FHIR/ig-guidance/conformance-statements.html),
+> which describes the markers and the table but names no expectation column. We
+> have not tested whether a German-marked statement classifies. English-only
+> markers avoid the question rather than answer it.
 
 Statements are a **curated set** of real obligations, not every sentence that
 happens to contain a bold verb. When you add one, give it the next free id on

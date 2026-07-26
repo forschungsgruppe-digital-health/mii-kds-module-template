@@ -2,10 +2,12 @@
 <!-- Deutsche Übersetzung der Standardsprachseite
      input/pagecontent/conformance.md — beide Dateien müssen dasselbe aussagen
      und dieselben Unterseiten aufführen wie die beiden Menü-Dateien.
-     Die Unterseiten sind der MII-Standardsatz (Quelle: MII-Meta-Wiki
-     "Conformance",
+     Die ERSTEN DREI Unterseiten sind der MII-Standardsatz (Quelle:
+     MII-Meta-Wiki "Conformance",
      https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance;
-     Aufbau wie kerndatensatz-basis input/pagecontent/conformance.md). -->
+     Aufbau wie kerndatensatz-basis input/pagecontent/conformance.md).
+     "Sicherheit und Datenschutz" ist eine Ergänzung dieser Vorlage gemäß den
+     HL7-IG-Best-Practices — siehe docs/ig-best-practices-checklist.md. -->
 
 ### Konformität
 
@@ -33,21 +35,16 @@ technischen Artefakte im Abschnitt [Artefakte](artifacts.html).
 > [TODO: Ergänzen Sie modul-spezifische Konformitätsaussagen.
 >
 > Hinweis zur Erfassung: Konformitätsaussagen werden **nicht** automatisch
-> erkannt. Der IG-Publisher sammelt nur Sätze, die ausdrücklich markiert sind —
-> `§<seite>-<n>:Server MÜSSEN …§` — und erzeugt daraus eine Übersichtstabelle
-> an der Stelle eines Absatzes, der ausschließlich `§§§` enthält. Solange keine
-> Sätze markiert sind, gibt es keine Übersicht. `kerndatensatz-basis` nutzt
-> dieses Verfahren; ob diese Vorlage es übernimmt, ist noch offen, weil die
-> Spalte „Expectation" aus den englischen Schlüsselworten SHALL/SHOULD/MAY
-> abgeleitet wird, die deutsche Fassung einer Seite aber MUSS/SOLLTE/KANN
-> verwendet — siehe die offenen Entscheidungen in
-> `docs/ig-best-practices-checklist.md`. Prüfen Sie das vor der
-> Veröffentlichung mit einem echten IG-Publisher-Build.]
+> erkannt. Jeder normative Satz der englischen Seiten wird ausdrücklich
+> markiert — eine Id, ein Doppelpunkt und der Satz, begrenzt durch
+> Paragraphenzeichen — und daraus erzeugt der IG-Publisher die Übersichtstabelle
+> am Ende der englischen Fassung dieser Seite. Die Syntax steht im Original in
+> `input/pagecontent/general-requirements.md`. Diese deutsche Fassung trägt
+> bewusst keine Markierungen.]
 
 ---
 
 {:.bg-info}
 **Hinweis:** Eine Liste der Konformitätsaussagen ist in der englischen Fassung
-dieses Implementierungsleitfadens verfügbar. Die Aussagen werden aus den
-englischen Originalseiten erzeugt, weil der IG-Publisher die Erwartungsstufe aus
-den englischen Schlüsselworten (SHALL/SHOULD/MAY) ableitet.
+dieses Implementierungsleitfadens verfügbar. Die Aussagen sind ausschließlich
+auf den englischen Originalseiten markiert und werden nur dort erzeugt.
