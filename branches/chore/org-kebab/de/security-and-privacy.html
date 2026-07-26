@@ -3,7 +3,7 @@
 <html xml:lang="de" xmlns="http://www.w3.org/1999/xhtml" lang="de" dir="ltr">
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <title>Search Parameters and Operations - MII Implementation Guide Module Template v2026.0.0</title>
+    <title>Security and Privacy - MII Implementation Guide Module Template v2026.0.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -47,8 +47,8 @@
 	  <script src="assets/js/prism.js"></script>
     <script src="assets/js/mermaid.js" type="text/javascript"></script>
     <script src="assets/js/mermaid-init.js" type="text/javascript"></script>
-    <style type="text/css">h2{--heading-prefix:"5"}
-    h3,h4,h5,h6{--heading-prefix:"5"}</style>
+    <style type="text/css">h2{--heading-prefix:"3.4"}
+    h3,h4,h5,h6{--heading-prefix:"3.4"}</style>
     <div id="segment-header" class="segment">    <!-- segment-header -->
       <div class="container">    <!-- container -->
 
@@ -176,7 +176,7 @@
  	<div style="display: none;position: absolute;right: 0;z-index: 100;background-image: url(assets/images/icon_arrow_up.png);background-position: 133px 3px;" id="flaglist" class="flaglist">
     <div><img src="assets/images/lang-de.png" alt="flag de" class="flag"/>Deutsch</div>
 
-    <div><a href="../en/search-parameters-and-operations.html"><img src="assets/images/lang-en.png" alt="flag en" class="flag"/>English</a></div>
+    <div><a href="../en/security-and-privacy.html"><img src="assets/images/lang-en.png" alt="flag en" class="flag"/>English</a></div>
 
   </div>
 </div>
@@ -192,7 +192,7 @@
     <div id="segment-breadcrumb" class="segment">    <!-- segment-breadcrumb -->
       <div class="container">    <!-- container -->
         <ul class="breadcrumb">
-          <li><a href="toc.html"><b>Table of Contents</b></a></li><li><b>Search Parameters and Operations</b></li>
+          <li><a href="toc.html"><b>Table of Contents</b></a></li><li><a href="conformance.html"><b>Conformance</b></a></li><li><b>Security and Privacy</b></li>
 
         </ul>
       </div>    <!-- /container -->
@@ -213,7 +213,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 </style>
 <div class="col-12">
     <!-- ReleaseHeader --><p id="publish-box">MII Implementation Guide Module Template - Local Development build (v2026.0.0) built by the FHIR (HL7&reg; FHIR&reg; Standard) Build Tools. See the <a href="https://www.medizininformatik-initiative.de/fhir/modul-template/history.html">Directory of published versions</a></p>  <!-- EndReleaseHeader -->
-  <h2>Search Parameters and Operations</h2>
+  <h2>Security and Privacy</h2>
   
 
 
@@ -233,12 +233,60 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 </div>
 
   <!-- markdownlint-disable MD041 -->
-<h3 id="suchparameter-und-operationen">Suchparameter und Operationen</h3>
+  <!-- Sicherheit & Datenschutz. Diese Seite ist von den HL7-Best-Practices für
+     Implementation Guides ausdrücklich gefordert ("Security and Privacy
+     Considerations"). Sie richtet sich an Sicherheits- und
+     Datenschutz-Fachleute. Ersetzen Sie die [TODO]-Hinweise durch die Aussagen
+     Ihres Moduls; entfernen Sie die Seite NICHT. -->
 
-<p>Modul-spezifische FHIR-Suchparameter und Operationen des Moduls <strong>Module Template</strong>, sofern vorhanden.</p>
+<h3 id="sicherheit-und-datenschutz">Sicherheit und Datenschutz</h3>
+
+<p>Dieser Abschnitt richtet sich an Sicherheits- und Datenschutz-Fachleute. Er
+beschreibt, welche Angriffe und Risiken für das Modul <strong>Module Template</strong>
+betrachtet wurden und welche Gegenmaßnahmen vorgesehen sind.</p>
+
+<p>Grundlagen und allgemeine Anforderungen stehen in der FHIR-Kernspezifikation:
+<a href="https://build.fhir.org/secpriv-module.html">Security &amp; Privacy Module</a> und die
+<a href="https://build.fhir.org/security.html">Security-Checkliste</a>. Dieser Abschnitt
+wiederholt sie nicht, sondern nennt nur die <strong>modul-spezifischen</strong> Aspekte.</p>
+
+<h4 id="datenschutzgrundsätze">Datenschutzgrundsätze</h4>
+
+<p>Für die Verarbeitung personenbezogener Daten gelten Transparenz, Zweckbindung,
+Datenminimierung, Richtigkeit, Speicherbegrenzung und Integrität/Vertraulichkeit
+(DSGVO Art. 5). Im MII-Kontext erfolgt die Nutzung auf Basis der
+MII-Broad-Consent-Regelungen.</p>
 
 <blockquote>
-  <p>[TODO: Listen Sie die Suchparameter/Operationen auf, oder entfernen Sie diese Seite, wenn keine definiert sind.]</p>
+  <p>[TODO: Beschreiben Sie, welche Datenkategorien Ihr Modul führt und welche
+Zweckbindung bzw. Rechtsgrundlage im MII-Kontext gilt.]</p>
+</blockquote>
+
+<h4 id="sicherheitsbetrachtung">Sicherheitsbetrachtung</h4>
+
+<p>Sicherheit ist Risikomanagement bezüglich Vertraulichkeit, Integrität und
+Verfügbarkeit.</p>
+
+<blockquote>
+  <p>[TODO: Nennen Sie die betrachteten Angriffe/Risiken und die Gegenmaßnahmen —
+z. B. Zugriffsschutz der FHIR-API, Pseudonymisierung, Transportverschlüsselung,
+Protokollierung.]</p>
+</blockquote>
+
+<h4 id="modul-spezifische-konformitätsanforderungen">Modul-spezifische Konformitätsanforderungen</h4>
+
+<blockquote>
+  <p>[TODO: Falls Ihr Modul sicherheits- oder datenschutzbezogene
+SHALL/SHOULD/MAY-Anforderungen definiert, führen Sie sie hier auf und benennen
+Sie, welchem Risiko sie begegnen.]</p>
+</blockquote>
+
+<h4 id="verbleibende-risiken">Verbleibende Risiken</h4>
+
+<blockquote>
+  <p>[TODO: Nennen Sie Risiken, die NICHT durch diese Spezifikation adressiert
+werden und daher im Systemdesign, im Betrieb oder per Policy behandelt werden
+müssen.]</p>
 </blockquote>
 
 

@@ -961,6 +961,14 @@
           <title value="Handling Missing Data"/>
           <generation value="markdown"/>
         </page>
+        <page>
+          <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-page-name">
+            <valueUrl value="security-and-privacy.html"/>
+          </extension>
+          <nameUrl value="security-and-privacy.html"/>
+          <title value="Security and Privacy"/>
+          <generation value="markdown"/>
+        </page>
       </page>
       <page>
         <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-page-name">

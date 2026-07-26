@@ -44,6 +44,14 @@ Wissenschaftler:innen, die MII-Daten für die medizinische Forschung nutzen.
 * **[Profile und Extensions](profiles-and-extensions.md)** und **[Terminologie](terminology.md)** — die technischen Artefakte.
 * **[Beispiele](examples.md)** — Beispielinstanzen.
 
+### Verwandte Leitfäden
+
+Dieses Modul ist Teil des MII-Kerndatensatzes; die weiteren KDS-Module und ihre Abhängigkeiten sind unter [medizininformatik-initiative.de](https://www.medizininformatik-initiative.de/) beschrieben.
+
+> [TODO: Nennen Sie die formalen Abhängigkeiten (siehe `dependencies` in `sushi-config.yaml`) und verwandte Leitfäden Ihres Moduls.]
+
+Weitere FHIR-Implementierungsleitfäden finden Sie im offiziellen **[FHIR IG Registry](https://fhir.org/guides/registry/)** (Quelle: [`FHIR/ig-registry`](https://github.com/FHIR/ig-registry)).
+
 ### Impressum
 
 Dieser Leitfaden ist im Rahmen der Medizininformatik-Initiative erstellt worden und unterliegt per Governance-Prozess dem Abstimmungsverfahren des Interoperabilitätsforums und der Technischen Komitees von HL7 Deutschland e. V.
