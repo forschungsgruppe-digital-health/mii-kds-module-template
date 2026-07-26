@@ -28,8 +28,19 @@
    `sushi-config.yaml` is where you start, not where you finish: its header lists
    all 19 placeholders and the files each occurs in. Update `ig.ini`'s `ig =`
    line to match your `id`, then `publication-request.json`,
-   `.github/workflows/`, `qc/custom.rules.yaml`, the pages and the FSH sources.
-   Finish with `grep -rn '{{' .` — outside `docs/` it must come back empty.
+   `.github/workflows/go-publish.yml`, `qc/custom.rules.yaml`, `tests/`, the
+   pages and the FSH sources. Finish by sweeping the build inputs for leftovers:
+
+   ```sh
+   grep -rnE --exclude=README.md '\{\{[A-Z_]+\}\}' \
+     sushi-config.yaml ig.ini publication-request.json qc input tests \
+     .github/workflows/go-publish.yml
+   ```
+
+   It must come back empty. Do **not** grep the whole tree: `{{ }}` is also
+   Liquid syntax in `ig-template/`, `${{ }}` is GitHub-Actions syntax in every
+   workflow, and the docs, the `README.md` files and several comments name
+   `{{PLACEHOLDER}}` as prose. None of those is a value to replace.
 4. **Template reference.** Leave `ig.ini` at `template = #ig-template` (the vendored
    copy) until the MII template package is published; then follow
    [switch-template-to-published.md](switch-template-to-published.md).

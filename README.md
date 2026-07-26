@@ -28,9 +28,10 @@ which this scaffold references (and keeps up to date automatically).
    → [details](docs/recipes/first-build-in-devcontainer.md)
 4. **Fill in your module's values** — start in `sushi-config.yaml`, whose header
    lists all 19 placeholders and the files each one occurs in, then work through
-   `ig.ini`, `publication-request.json`, `.github/workflows/`,
-   `qc/custom.rules.yaml`, the pages and the FSH sources. Finish with
-   `grep -rn '{{' .` — outside `docs/` it must come back empty.
+   `ig.ini`, `publication-request.json`, `.github/workflows/go-publish.yml`,
+   `qc/custom.rules.yaml`, `tests/`, the pages and the FSH sources.
+   [Create a new module](docs/recipes/create-a-new-module.md) step 3 ends with
+   the `grep` that proves you missed none.
 5. **Write a profile** in `input/fsh/` (an example is included to copy) and
    replace the English starter pages in `input/pagecontent/` (and their German
    counterparts in `input/translations/de/pagecontent/`).

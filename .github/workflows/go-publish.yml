@@ -403,7 +403,7 @@ jobs:
         shell: bash
         # The `*.test.mjs` glob covers the publication SCRIPTS only. The
         # scaffold contract (scripts/*.template-test.mjs) asserts un-replaced
-        # {{PLACEHOLDER}} values and would fail in every created module — the
+        # placeholder values and would fail in every created module — the
         # only place this workflow is meant to run — so it stays out of this
         # glob and is checked by convention-check.yml instead.
         run: node --test automation/scripts/*.test.mjs
