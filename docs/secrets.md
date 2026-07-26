@@ -19,11 +19,17 @@ server `tx.fhir.org` by default. To use the **MII SU-TermServ**
 ICD-10-GM, OPS, …), supply the client certificate. It is client-certificate-gated
 and granted only to entities in Germany.
 
-The certificate is used by **two independent consumers**, which read it under
-**different secret names** — set the SAME certificate under BOTH sets of names:
+Store the certificate **once**, under `SU_TERMSERV_CLIENT_CERT`,
+`SU_TERMSERV_CLIENT_KEY` and `SU_TERMSERV_CLIENT_PASSWORD`. The two files are
+**base64-encoded** (the workflows decode them with `base64 -d`).
 
-**1. The IG build / preview / go-publish** (this template's workflows) read
-`SU_TERMSERV_CLIENT_*`. Values are **base64-encoded** (decoded with `base64 -d`):
+The preview build (`ig-publisher.yml`), the CalVer release build
+(`module-release.yml`) and formal publication (`go-publish.yml`) read those
+names directly. The fourth consumer, the MII reusable validation workflow,
+declares its own `CDS_DEV_CLIENT_CERT` / `_KEY` / `_CERT_PASSWORD` inputs;
+`validation.yml` maps this repo's names onto them at the call site (the
+`secrets:` block of its `java-validation` job). So one set of secrets serves
+all four — you never store the certificate twice.
 
 ### What kind of certificate is required
 
@@ -120,6 +126,22 @@ the integration off again, delete the three secrets; the build falls back to
 `tx.fhir.org` on the next run with a `::notice`. Note the expiry date: an expired
 certificate fails the handshake, so rotate before `notAfter`.
 
+## Simplifier login (the .NET validation job)
+
+`validation.yml` calls the MII reusable `ci_dotnet_validation.yml` with
+`secrets: inherit`; its Simplifier Quality-Control step signs in to
+[Simplifier](https://simplifier.net) with two repository secrets:
+
+```sh
+R=<owner>/<your-module-repo>
+gh secret set SIMPLIFIER_USERNAME --repo "$R"   # value on stdin
+gh secret set SIMPLIFIER_PASSWORD --repo "$R"
+```
+
+They have no local equivalent, so they are inherited rather than mapped. Note
+that the .NET validator is configured to always pass — if the sign-in fails,
+the job is still green and only its **log** says so.
+
 ## Verifying a gate after you enable it
 
 Both gates are *wired and fall back safely*, but until the credential exists the
@@ -146,6 +168,7 @@ delivered message or the explicit skip notice naming what is missing.
 | `ENABLE_PREVIEW` | on | IG build + preview + cleanup |
 | `ENABLE_VALIDATION` | on | MII reusable validation |
 | `ENABLE_CONVENTION_CHECK` | on | metadata-contract + wiki-drift check |
+| `ENABLE_TEMPLATE_SYNC` | on | vendored `ig-template/` sync + the PR-time drift check |
 | `ENABLE_MODULE_RELEASE` | on | CalVer release workflow |
 | `ENABLE_ZULIP_ANNOUNCE` | on | MII Zulip announcement |
 | `ANNOUNCE_PUBLIC_ZULIP` | off | public FHIR Zulip announcement |
@@ -154,6 +177,12 @@ delivered message or the explicit skip notice naming what is missing.
 | `ENABLE_DEPENDENCY_CHECK` | on | weekly version-drift check |
 | `ENABLE_SECURITY_SCAN` | on | OSV + Trivy |
 | `PAGES_ACTIONS_ENABLED` | (gh-pages push mode) | switch preview deploy to the Actions Pages path |
+
+The [§2.13 toggle summary](workflows.md#the-213-toggle-summary) lists one more,
+`ENABLE_RELEASE_PLEASE`. It belongs to the template repository only — the
+first-run bootstrap deletes `release-please.yml`, so it has no effect in a
+module. `IG_TEMPLATE_REPO_URL` is a plain variable, not a toggle; see
+[recipes/first-run-setup.md](recipes/first-run-setup.md) step 5.
 
 Production publication (`go-publish.yml`) always stays a **manual, gated**
 `workflow_dispatch` with `publish:false` (dry run) by default — never automatic.
