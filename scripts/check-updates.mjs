@@ -18,7 +18,7 @@
 //
 // This implementation is kept aligned with the sibling template repo
 // (medizininformatik-initiative/ig-template-mii-kds, same file) and with
-// the FGDH sample IG's tools/check-updates.py; Repo B extends the watch list
+// the sample IG's tools/check-updates.py; this repo extends the watch list
 // with de.medizininformatikinitiative.template and a fixed set of FHIR
 // package dependencies.
 //
@@ -95,7 +95,7 @@ export function parseWorkflowEnvPin(yamlText, key) {
 
 /**
  * Parse the `dependencies:` block of a sushi-config.yaml into { id: version }.
- * Taken over from the FGDH sample IG's tools/check-updates.py: only pinned
+ * Taken over from the MII KDS sample IG's tools/check-updates.py: only pinned
  * (version starts with a digit), non-commented entries count; the block ends
  * at the first non-indented line.
  */
@@ -249,7 +249,7 @@ async function fetchJson(url, { github = false, allow404 = false } = {}) {
   const headers = { "user-agent": "mii-kds-module-template-update-check" };
   if (github && GITHUB_TOKEN) {
     // Authenticated GitHub API calls avoid the anonymous rate limit
-    // (lesson from the FGDH sample IG checker).
+    // (lesson from the MII KDS sample IG checker).
     headers.authorization = `Bearer ${GITHUB_TOKEN}`;
     headers.accept = "application/vnd.github+json";
   }
@@ -301,7 +301,7 @@ const upstream = {
         "https://raw.githubusercontent.com/HL7/ig-template-base2/main/package-list.json",
       ),
     ),
-  // The module template (Repo A): packages.fhir.org once published, else the
+  // The MII IG template: packages.fhir.org once published, else the
   // template repo's GitHub releases, else "not yet published" (graceful).
   templatePkg: async () => {
     const pkgMeta = await fetchJson(`https://packages.fhir.org/${TEMPLATE_PKG_ID}`, {
@@ -350,7 +350,7 @@ function readTemplatePin() {
 }
 
 /**
- * fhir2.base.template is pinned INSIDE the template package (Repo A's
+ * fhir2.base.template is pinned INSIDE the template package (the IG template's
  * package/package.json), i.e. transitively for this repo. Only a vendored
  * bring-up copy (ig-template/) carries a local pin to read.
  */
@@ -416,7 +416,7 @@ export async function collectRows() {
     });
   }
 
-  // The module template (Repo A) — the highest-value pin to watch here.
+  // The MII IG template — the highest-value pin to watch here.
   const templatePin = readTemplatePin();
   const templateResolved = (await lookup(upstream.templatePkg)) ?? {
     latest: null,
@@ -444,7 +444,7 @@ export async function collectRows() {
     link: LINKS.template,
   });
 
-  // The base template underneath Repo A's template. Pinned transitively (in
+  // The base template underneath the MII IG template. Pinned transitively (in
   // the template package); only a vendored bring-up copy has a local pin.
   const basePinned = readBaseTemplatePin();
   const baseLatest = await lookup(upstream.base2);
@@ -502,7 +502,7 @@ export function renderReport(rows) {
     "",
     "> `pin not found` rows are expected until the file/workflow that carries",
     "> the pin has landed; they are a reminder, not an error. `not yet",
-    "> published` on the template package is expected until Repo A's first",
+    "> published` on the template package is expected until the IG template's first",
     "> release reaches a registry.",
     "",
   ].join("\n");

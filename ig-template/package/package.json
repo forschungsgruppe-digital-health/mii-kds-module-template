@@ -3,7 +3,7 @@
   "type": "fhir.template",
   "license": "CC0-1.0",
   "description": "MII IG template for Medizininformatik-Initiative KDS module Implementation Guides, derived from fhir2.base.template. fhir2.base.template is deliberately pinned to the fixed release 0.1.0 (never #current) for long-term reproducibility; version bumps arrive as reviewable PRs via the scheduled dependency checker.",
-  "author": "Forschungsgruppe Digital Health, TU Dresden",
+  "author": "Medizininformatik-Initiative (MII)",
   "canonical": "https://github.com/medizininformatik-initiative/ig-template-mii-kds",
   "base": "fhir2.base.template",
   "dependencies": {

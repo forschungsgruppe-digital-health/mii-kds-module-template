@@ -19,10 +19,10 @@ MII-branded FHIR Implementation Guide.
 
 The **look** of the IG comes from a separate template package,
 [`de.medizininformatikinitiative.template`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)
-(Repo A). This scaffold references it in `ig.ini`:
+This scaffold references it in `ig.ini`:
 
 - **Vendored (bring-up):** a copy lives in `ig-template/`, referenced as
-  `template = #ig-template`. Used until Repo A has a published release.
+  `template = #ig-template`. Used until the template package has a published release.
 - **Published (normal):** `template = de.medizininformatikinitiative.template#<version>`.
   Switch with [recipes/switch-template-to-published.md](recipes/switch-template-to-published.md).
 
