@@ -1,9 +1,57 @@
 <!-- markdownlint-disable MD041 -->
+<!-- Deutsche Übersetzung der Standardsprachseite
+     input/pagecontent/version-history.md — beide Dateien müssen dasselbe
+     aussagen. Quelle: kerndatensatz-basis input/pagecontent/version-history.md
+     (Branch main); der Release-Prozess ist die Seite "Module Release Workflow"
+     des MII-Meta-Wikis
+     (https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow). -->
+
 ### Versionierung
 
-Das Modul **{{MODULE_TITLE}}** wird nach dem MII-Schema **CalVer** (`JJJJ.n.n`,
-z. B. `2026.0.0`) versioniert — siehe die
-[MII Module Release Workflow](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow).
-Die [Änderungshistorie](changes.html) listet die Änderungen je Version.
+#### Versionsschema
 
-> [TODO: Beschreiben Sie ggf. die Versionierungs-Policy Ihres Moduls.]
+Das Modul **{{MODULE_TITLE}}** folgt dem MII-Schema der Kalender-Versionierung
+(CalVer) in einer SemVer-kompatiblen numerischen Form:
+
+* Format **`JJJJ.MINOR.PATCH[-label]`** — die aktuelle Version ist
+  `{{CALVER_VERSION}}`;
+* **`JJJJ`** — das Jahr, in dem der Leitfaden gilt und genutzt werden soll; es
+  tritt an die Stelle der Major-Version;
+* **`MINOR`** — wird für nicht brechende Ergänzungen und Präzisierungen erhöht;
+* **`PATCH`** — wird für Korrekturen und Fehlerbehebungen erhöht;
+* **`label`** — optionales Vorab- oder Build-Label, z. B. `draft`, `ballot` oder
+  `cibuild`.
+
+#### Versionen vergleichen
+
+Stabile Releases lassen sich vergleichen, indem die numerischen Bestandteile als
+SemVer-artiges `<major>.<minor>.<patch>` gelesen werden, mit dem Kalenderjahr
+als Major-Komponente: `2026.1.0` ist neuer als `2026.0.3`. Labels kennzeichnen
+den Vorab- oder Build-Status; zwischen Labels wird keine Reihenfolge abgeleitet.
+
+#### Artefakt-Versionen
+
+Alle veröffentlichten FHIR-Artefakte im Paket tragen dieselbe Version wie der
+Leitfaden und sein Paket. Ein Artefakt kann daher beim Release eine neue Version
+erhalten, obwohl es selbst unverändert geblieben ist. Die maschinenlesbaren
+Metadaten, die Versionsalgorithmus, Versionierungs-Politik, Paketquelle und
+Manifest-Parameter deklarieren, beschreibt die Seite
+[Metadaten-Übersicht](metadata.html).
+
+#### Release-Prozess
+
+Releases folgen dem
+[MII Module Release Workflow](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow):
+Die Version wird im Release-Branch angehoben, der Changelog-Eintrag geschrieben,
+die Validierungs-Workflows laufen auf dem Release-Pull-Request, und nach dem
+Merge wird das Release getaggt.
+
+#### Versionshistorie und Änderungen
+
+* **[Änderungshistorie](changes.html)** — die Änderungen jeder veröffentlichten
+  Version.
+
+> [TODO: Falls Ihr Modul über das MII-Schema hinaus eine eigene
+> Versionierungs-Politik hat — etwa einen Unterstützungszeitraum für ältere
+> Versionen oder eine Abkündigungs-Politik für Profile —, beschreiben Sie sie
+> hier. Löschen Sie diesen Hinweis anschließend.]
