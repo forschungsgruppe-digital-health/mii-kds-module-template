@@ -28,11 +28,15 @@ cd "$(dirname "$0")/.." || exit 1
 # below was an actual defect in this repo.
 PATTERNS='german[^.]{0,30}\b(default|leading|authoritative|binding)\b
 german[^A-Za-z]{0,6}(is|stays|remains|as)?[^A-Za-z]{0,6}(the[^A-Za-z]{0,6})?(source|original)\b
+german[^.]{0,25}\bthe (source|original)\b
 falls back to german
 leave it german
 german-led\b
+german starter page
 \bde-default\b
+back to en-default
 deutsch \(standardsprache\)
+i18n-lang:[^]]{0,20}\ben\b
 input/translations/en\b'
 
 # Reviewed exceptions: "<path>|<substring of the offending line>".

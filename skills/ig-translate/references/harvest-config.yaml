@@ -25,7 +25,7 @@ narratives:
   de_rendered_ig_url: "https://example.org/fhir/person/de/"   # TODO: real German guide URL
   # Map source German page -> target file
   # (input/translations/de/pagecontent/<name>.md).
-  # Left: path/slug of the German page in the source; right: target page.
+  # Left: path/slug of the German page in the harvested guide; right: target.
   page_map:
     index:        index            # -> input/translations/de/pagecontent/index.md
     use-cases:    use-cases
