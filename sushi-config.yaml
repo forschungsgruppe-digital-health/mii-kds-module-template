@@ -298,11 +298,11 @@ parameters:
   # Basis is en-default with de translations. This template is de-default with
   # en as the recommended second language (project decision — do not "correct"
   # it back). Translation supplements live under input/translations/en/.
-  i18n-default-lang: de # Default language
+  i18n-default-lang: en # Default language
   i18n-lang:
-    - en # Additional languages
+    - de # Additional languages
   translation-sources:
-    - input/translations/en # Path to English translations
+    - input/translations/de # Path to German translations
   excludexml: false
   excludejson: false
   excludettl: true
