@@ -32,8 +32,11 @@ Please, previews its own demo build, and monitors its own dependencies.
 | `notify-zulip.yml` | `release: published` | Announces the template release to the MII Zulip (topic *Template Releases*) | `ENABLE_ZULIP_ANNOUNCE` (ON) · `ANNOUNCE_PUBLIC_ZULIP` (OFF) | **REMOVED by bootstrap** |
 
 Also removed by the bootstrap: `release-please-config.json`,
-`.release-please-manifest.json`, the template `CHANGELOG.md`,
-`docs/recipes/first-run-setup.md`, and `scripts/first-run-bootstrap.sh` itself.
+`.release-please-manifest.json` and the template `CHANGELOG.md`. The bootstrap
+script and its recipe are **not** removed — a module's docs link to both. The
+authoritative list is the `REMOVE=` line in `scripts/first-run-bootstrap.sh`,
+which the dry run prints; see
+[first-run-setup.md](recipes/first-run-setup.md).
 
 > **Why these go:** they version and announce *the template*. A module must not carry
 > SemVer automation that fights its own CalVer release process.

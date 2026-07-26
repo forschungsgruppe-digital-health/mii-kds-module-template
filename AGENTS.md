@@ -112,6 +112,9 @@ A new module needs the one-time first-run bootstrap
 ([`docs/recipes/first-run-setup.md`](docs/recipes/first-run-setup.md)): it
 creates `dev` from `main`, applies branch protection, and removes the
 files that would conflict with a module (Release Please + the template's SemVer
-announcement + this bootstrap machinery). The preview, validation, monitoring,
-convention-check, and module-release workflows plus the skills **stay** — a
-module wants them.
+announcement + the template `CHANGELOG`). The preview, validation, monitoring,
+convention-check, and module-release workflows, the skills, and the bootstrap
+with its recipe **stay** — a module wants them. The authoritative removal list
+is the `REMOVE=` line in
+[`scripts/first-run-bootstrap.sh`](scripts/first-run-bootstrap.sh); the dry run
+prints it.

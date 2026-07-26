@@ -61,8 +61,9 @@ When you create a module, the bootstrap **keeps** everything a module needs to l
 (the preview build, the CalVer release workflow, validation, the convention check,
 dependency + security monitoring, the agent skills, the starter content) and
 **removes** only the files that maintain *this template repo itself* (Release Please
-config/workflow, the template's release announcement, the template `CHANGELOG`, the
-first-run tooling once used).
+config/workflow, the template's release announcement, and the template
+`CHANGELOG`). The first-run tooling itself stays, so the recipe a module links
+to still resolves.
 
 > **Why previews propagate but Release Please does not:** a branch preview is a
 > per-repo development aid every module wants; Release Please is a versioning

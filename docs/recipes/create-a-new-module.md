@@ -13,12 +13,19 @@
 2. **Run the first-run bootstrap — always.** In a clone, run
    `bash scripts/first-run-bootstrap.sh` (dry run — shows what it will do), then
    `bash scripts/first-run-bootstrap.sh --apply`. It creates `dev`, applies branch
-   protection, and **removes** the template's own release automation (Release Please config
-   + workflow, the release announcement, the template `CHANGELOG`, and the bootstrap
-   itself). If you ticked "Include all branches" it simply skips creating `dev`; the
-   removals and the branch protection still have to happen. See
-   [first-run-setup.md](first-run-setup.md). Confirm afterwards:
-   `grep -ri release-please .github` returns nothing.
+   protection, and **removes** the template's own release automation (the Release
+   Please config and workflow, the release announcement, and the template
+   `CHANGELOG`). The bootstrap and this recipe stay. If you ticked "Include all
+   branches" it simply skips creating `dev`; the removals and the branch
+   protection still have to happen. See
+   [first-run-setup.md](first-run-setup.md). Confirm afterwards that
+   all five removed paths are gone — this must print nothing:
+
+   ```sh
+   ls release-please-config.json .release-please-manifest.json CHANGELOG.md \
+     .github/workflows/release-please.yml .github/workflows/notify-zulip.yml \
+     2>/dev/null
+   ```
 3. **Fill the placeholders.** Open `sushi-config.yaml` and replace every `{{…}}`
    (each is documented inline). The key ones:
    - `{{MODULE_SLUG}}` — lowercase short name (`person`), drives packageId/id/canonical.

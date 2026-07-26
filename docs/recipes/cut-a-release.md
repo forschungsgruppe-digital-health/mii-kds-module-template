@@ -33,7 +33,7 @@ dry-run publication ready for a human to promote. **No SemVer tag, no Release Pl
 | Symptom | Cause | Fix |
 | --- | --- | --- |
 | Workflow did not trigger | Tag does not match `vYYYY.n.n` | Use the CalVer tag pattern |
-| A SemVer release PR appeared | Release Please was not removed | Run the first-run bootstrap; `grep -ri release-please` must be clean |
+| A SemVer release PR appeared | Release Please was not removed | Run the first-run bootstrap; `release-please-config.json` and `.github/workflows/release-please.yml` must be gone |
 | `go-publish` published for real unexpectedly | `publish:true` was set | Keep it `false`; only a human sets it true, once, deliberately |
 | Zulip not posted | `ZULIP_API_KEY` absent | Expected — the job skips with a notice; add the secret to enable |
 

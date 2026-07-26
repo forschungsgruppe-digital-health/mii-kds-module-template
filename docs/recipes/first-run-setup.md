@@ -89,15 +89,14 @@ Read the output. It prints, in order:
   - `.github/workflows/notify-zulip.yml` — announces the *template's* SemVer
     releases (your module announces its own CalVer releases instead).
   - `CHANGELOG.md` — only if present (the template's SemVer changelog).
-  - `docs/recipes/first-run-setup.md` and `scripts/first-run-bootstrap.sh` — this
-    recipe and the bootstrap itself; only meaningful before the module exists.
 - **Post-bootstrap checklist** — the manual steps below.
 
 > **Why a dry-run first:** you see exactly what will change before anything
-> happens. The removal list is the single source of truth — if it ever tried to
-> touch module content or the workflows a module keeps (previews, validation,
-> monitoring, the convention check, the module release workflow, the skills),
-> the script hard-aborts.
+> happens. The `REMOVE=` line in `scripts/first-run-bootstrap.sh` is the single
+> source of truth for that list, and the bullets above are its transcript — if
+> it ever tried to touch module content or the workflows a module keeps
+> (previews, validation, monitoring, the convention check, the module release
+> workflow, the skills), the script hard-aborts.
 
 ### 3. Apply it
 
@@ -165,8 +164,10 @@ The bootstrap printed it; the essentials:
 
 - `main` and `dev` both exist and are protected (Settings → Branches shows the
   rules).
-- The Release Please files, `notify-zulip.yml`, and the bootstrap machinery are
-  gone; the preview, validation, monitoring, convention-check, module-release
+- The Release Please files (`release-please.yml`, `release-please-config.json`,
+  `.release-please-manifest.json`), `notify-zulip.yml` and the template
+  `CHANGELOG.md` are gone; this recipe, `scripts/first-run-bootstrap.sh`, the
+  preview, validation, monitoring, convention-check and module-release
   workflows and the `skills/` are still there.
 - `node scripts/convention-check.mjs` runs green (placeholders count as
   "parameterized" until you resolve them).

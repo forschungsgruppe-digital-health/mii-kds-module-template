@@ -9,8 +9,10 @@
 #       protection to both (needs `gh` authenticated with admin on the repo);
 #   (b) removes the template's own release automation, which must NOT live in a module
 #       (the Release Please automation + the template's SemVer release
-#       announcement + this bootstrap machinery), using a deterministic,
-#       reversible `git rm` with a NEVER-protect list;
+#       announcement + the template CHANGELOG), using a deterministic,
+#       reversible `git rm` with a NEVER-protect list. This script and
+#       docs/recipes/first-run-setup.md are NOT removed — they are on the NEVER
+#       list, because a created module's docs link to both;
 #   (c) prints a post-bootstrap checklist (placeholders, Pages, secrets).
 #
 # Safety model:
@@ -21,8 +23,8 @@
 #   - A NEVER-protect list hard-aborts if any removal target ever collides with
 #     module content, build input, or PROPAGATED tooling — a safety net
 #     against an edited list.
-#   - The whole body is wrapped in main() so bash has parsed the entire script
-#     before execution; the script can therefore safely remove ITSELF.
+#   - The whole body is wrapped in main() so the `local` declarations below are
+#     scoped, and so bash has parsed the entire script before any removal runs.
 # Bash 3.2 compatible (no mapfile/associative arrays).
 set -u
 
