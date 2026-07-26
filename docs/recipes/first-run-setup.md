@@ -136,6 +136,22 @@ The bootstrap printed it; the essentials:
    server and does not fail.
 4. **Release announcements (optional):** add `ZULIP_API_KEY` to announce your
    module's CalVer releases to the MII Zulip.
+5. **Vendored IG template (while the template repos have not moved):** set the
+   repository variable `IG_TEMPLATE_REPO_URL` to the clone URL of
+   `ig-template-mii-kds`, so `sync-ig-template.yml` keeps your `ig-template/`
+   mirror current:
+
+   ```sh
+   gh variable set IG_TEMPLATE_REPO_URL --repo <owner>/<your-module-repo> \
+     --body "https://github.com/<owner>/ig-template-mii-kds.git"
+   ```
+
+   Without it the workflow probes the built-in target-organisation URL and, if
+   that is not reachable, **skips with a notice instead of failing** — your
+   first PR stays green either way. Delete the variable once the repositories
+   live in the target organisation, or delete the whole workflow once `ig.ini`
+   uses the published template package
+   ([switch-template-to-published.md](switch-template-to-published.md)).
 
 ---
 

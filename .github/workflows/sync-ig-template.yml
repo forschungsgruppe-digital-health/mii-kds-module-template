@@ -9,6 +9,14 @@
 #            pull_request (drift CHECK only — never writes on a PR).
 # Toggle:    vars.ENABLE_TEMPLATE_SYNC — ON by default; set the repo variable to
 #            'false' to disable (jobs then skip, which is expected, not an error).
+# Variable:  vars.IG_TEMPLATE_REPO_URL — the clone URL of ig-template-mii-kds
+#            while the repositories are not yet in the target organisation. It
+#            is OPTIONAL: tools/resolve-ig-template-source.sh probes the URL (the
+#            variable, else the built-in target-org default) and, when it is not
+#            reachable, the job emits a ::notice and skips instead of failing —
+#            so a freshly created module is never born with a red PR check.
+#            docs/recipes/first-run-setup.md step 5 has the `gh variable set`
+#            command.
 # Gated:     never auto-merges. Drift always lands as a reviewable PR.
 #
 # NOTE for a created module: keep this workflow while the template is consumed as
@@ -44,7 +52,14 @@ jobs:
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           persist-credentials: false
+      - name: Resolve the template source
+        id: source
+        env:
+          SRC_REPO: ${{ vars.IG_TEMPLATE_REPO_URL }}
+        run: bash tools/resolve-ig-template-source.sh
+
       - name: Check the vendored template against ig-template-mii-kds@dev
+        if: ${{ steps.source.outputs.reachable == 'true' }}
         env:
           # Override the template source while the repos are not yet in the
           # target organisation (unset once they are).
@@ -60,11 +75,18 @@ jobs:
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           persist-credentials: false
+      - name: Resolve the template source
+        id: source
+        env:
+          SRC_REPO: ${{ vars.IG_TEMPLATE_REPO_URL }}
+        run: bash tools/resolve-ig-template-source.sh
       - name: Re-vendor the template from ig-template-mii-kds@dev
+        if: ${{ steps.source.outputs.reachable == 'true' }}
         env:
           SRC_REPO: ${{ vars.IG_TEMPLATE_REPO_URL }}
         run: bash tools/sync-ig-template.sh --ref dev
       - name: Open a PR if the mirror changed
+        if: ${{ steps.source.outputs.reachable == 'true' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
