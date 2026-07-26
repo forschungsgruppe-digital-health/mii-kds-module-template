@@ -149,7 +149,7 @@ The bootstrap printed it; the essentials:
 - `node tools/convention-check.mjs` runs green (placeholders count as
   "parameterized" until you resolve them).
 
-## Common errors and fixes
+## Common errors & fixes
 
 | Symptom | Cause | Fix |
 | --- | --- | --- |

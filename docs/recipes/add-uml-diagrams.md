@@ -3,6 +3,9 @@
 **Goal.** Add a diagram that explains your module's structure, in a way that is
 still maintainable in five years.
 
+**Prerequisites.** A module that builds ([create a new module](create-a-new-module.md)),
+and Graphviz for PlantUML rendering — the dev container has it.
+
 ## Where files go
 
 ```text

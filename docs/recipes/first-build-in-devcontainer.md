@@ -1,8 +1,6 @@
 # Recipe: first build in the dev container
 
-## Goal
-
-Go from "I want to author an MII KDS module" to a first local IG build — with
+**Goal.** Go from "I want to author an MII KDS module" to a first local IG build — with
 a working, fully equipped FHIR toolchain (Java 17, Node 22, SUSHI,
 Ruby/Jekyll, Graphviz) — without installing any of those tools on your own
 machine. Everything runs inside a container that VS Code builds for you.
@@ -21,9 +19,8 @@ machine. Everything runs inside a container that VS Code builds for you.
 > environment and fail in the other. The pins are kept byte-for-byte aligned
 > and are bumped in both repos in the same sweep.
 
-## Prerequisites
-
-You need exactly three things on your machine:
+**Prerequisites.** Three things on your machine — plus `git` and network
+access (the first build downloads the base image and tools):
 
 1. **Docker** — [Docker Desktop](https://www.docker.com/products/docker-desktop/)
    (Windows/macOS) or any Docker engine (Linux). Must be running.
@@ -31,9 +28,6 @@ You need exactly three things on your machine:
 3. The VS Code extension **Dev Containers**
    (`ms-vscode-remote.remote-containers`). Install it from the Extensions
    view in VS Code.
-
-You also need `git` and network access (the first build downloads the base
-image and tools).
 
 ## Steps
 
@@ -152,7 +146,7 @@ image and tools).
   they are merged, pushing your branch gives you the same build in CI plus a
   Pages preview under `branches/<branch>/`.
 
-## Common errors and fixes
+## Common errors & fixes
 
 | Symptom | Cause | Fix |
 |---|---|---|

@@ -4,12 +4,15 @@
 navigation **menu**, the **footer / base UI chrome**, the **narrative content**,
 and the **conformance resources**.
 
+**Prerequisites.** A module that builds ([create a new module](create-a-new-module.md)).
+The four layers are independent — translate only the ones you need.
+
 **Language policy.** This module is **English-default with a German translation**,
 the same model as kerndatensatz-basis: English is the default rendering
 language (`i18n-default-lang: en`), German
-the recommended second rendering (`i18n-lang: [en]`, sources under
+the recommended second rendering (`i18n-lang: [de]`, sources under
 `input/translations/de`). Everything below works the same for a further language
-— replace `en` with that language code and add it to `i18n-lang`.
+— replace `de` with that language code and add it to `i18n-lang`.
 
 > **Why translation is *additive*:** you never edit the German source to
 > translate it. Each language gets its own file beside the source, and a part
@@ -18,7 +21,7 @@ the recommended second rendering (`i18n-lang: [en]`, sources under
 
 ---
 
-## 0. The four layers at a glance
+## The four layers at a glance
 
 Your IG's visible text comes from four places, each with its **own** mechanism:
 
@@ -31,7 +34,9 @@ Your IG's visible text comes from four places, each with its **own** mechanism:
 
 ---
 
-## 1. Narrative content (pages)
+## Steps
+
+### 1. Narrative content (pages)
 
 Put the translated page under `pagecontent/` in the translation-source folder,
 with the **same file name** as the German page:
@@ -55,7 +60,7 @@ input/translations/de/pagecontent/index.md     # German — renders on /de/
 
 ---
 
-## 2. Menu
+### 2. Menu
 
 This module maintains its menu as **files**, one per language:
 
@@ -79,7 +84,7 @@ Rules:
 
 ---
 
-## 3. Base UI chrome (footer, buttons, boilerplate) — inherited
+### 3. Base UI chrome (footer, buttons, boilerplate) — inherited
 
 The footer's `Links` / table-of-contents / QA-report labels, the copyright line,
 `Package … based on FHIR …`, `Generated <date>` and the page-navigation buttons
@@ -99,7 +104,7 @@ around it here.
 
 ---
 
-## 4. Conformance resources (profiles, code systems, questionnaires)
+### 4. Conformance resources (profiles, code systems, questionnaires)
 
 For each resource whose text you want in English, add one supplement named
 exactly `<ResourceType>-<id>.po`:
@@ -137,7 +142,7 @@ msgstr "Minimal example profile …"
 
 ---
 
-## 5. Build and check
+### 5. Build and check
 
 ```sh
 sushi .
@@ -157,7 +162,13 @@ The build must stay green (QA errors = 0).
 
 ---
 
-## 6. Common errors
+## Expected result
+
+Both renderings are complete: `/en/` and `/de/` each show their own menu, pages
+and resource text, the footer labels are filled in, and the language switcher
+moves between them.
+
+## Common errors & fixes
 
 | Symptom | Cause | Fix |
 |---|---|---|
