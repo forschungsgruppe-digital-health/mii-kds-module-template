@@ -36,7 +36,7 @@ permissions:
 
 jobs:
   osv:
-    if: ${{ vars.ENABLE_SECURITY_SCAN != 'false' }} # toggle: ON by default (§2.13)
+    if: ${{ vars.ENABLE_SECURITY_SCAN != 'false' }} # toggle: ON by default
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -65,7 +65,7 @@ jobs:
           category: osv-scanner
 
   trivy:
-    if: ${{ vars.ENABLE_SECURITY_SCAN != 'false' }} # toggle: ON by default (§2.13)
+    if: ${{ vars.ENABLE_SECURITY_SCAN != 'false' }} # toggle: ON by default
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -92,7 +92,7 @@ jobs:
   # feature layers and postCreateCommand installs (SUSHI, Jekyll) are not
   # included; their manifests are covered by the fs/OSV jobs above.
   trivy-image:
-    if: ${{ vars.ENABLE_SECURITY_SCAN != 'false' }} # toggle: ON by default (§2.13)
+    if: ${{ vars.ENABLE_SECURITY_SCAN != 'false' }} # toggle: ON by default
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

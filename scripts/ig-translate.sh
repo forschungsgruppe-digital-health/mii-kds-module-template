@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
-# ig-translate — helper for translating a German-led module IG. Deterministically
-# determines the target files the IG PUBLISHER EXPECTS for translations and
-# validates the naming/placement conventions. It does NOT translate itself (an
-# agent/human does that) and creates nothing without being asked.
+# ig-translate — helper for translating an English-default module IG.
+# Deterministically determines the target files the IG PUBLISHER EXPECTS for
+# translations and validates the naming/placement conventions. It does NOT
+# translate itself (an agent/human does that) and creates nothing without being
+# asked.
 #
-#   tools/ig-translate.sh --scan en        # show the target path per page/resource
-#   tools/ig-translate.sh --validate en    # check existing translation files
+#   scripts/ig-translate.sh --scan de        # show the target path per page/resource
+#   scripts/ig-translate.sh --validate de    # check existing translation files
 #
 # Verified: translation supplements render only for StructureDefinition,
-# CodeSystem, Questionnaire (Publisher restriction). Narrative page files
-# (<name>-<lang>.md) are not read yet, but are placed future-proof.
+# CodeSystem, Questionnaire (Publisher restriction). A narrative page is
+# translated by mirroring input/pagecontent/<name>.md into
+# input/translations/<lang>/pagecontent/<name>.md — the SAME file name; a
+# <name>-<lang>.md sibling is rendered as a separate page, not as a translation.
 # Bash 3.2 compatible.
 set -u
 cd "$(dirname "$0")/.." || exit 1
@@ -17,8 +20,8 @@ cd "$(dirname "$0")/.." || exit 1
 MODE=""
 LANG_CODE=""
 case "${1:-}" in
-  --scan) MODE=scan; LANG_CODE="${2:-en}";;
-  --validate) MODE=validate; LANG_CODE="${2:-en}";;
+  --scan) MODE=scan; LANG_CODE="${2:-de}";;
+  --validate) MODE=validate; LANG_CODE="${2:-de}";;
   *) echo "Usage: $0 --scan <lang> | --validate <lang>" >&2; exit 2;;
 esac
 
@@ -43,13 +46,12 @@ PY
 echo "== ig-translate --$MODE $LANG_CODE =="
 
 if [ "$MODE" = scan ]; then
-  echo "-- Narrative pages (future-proof: not rendered yet) --"
+  echo "-- Narrative pages --"
   if [ -d input/pagecontent ]; then
     for p in input/pagecontent/*.md; do
       [ -e "$p" ] || continue
-      case "$p" in *-"$LANG_CODE".md) continue;; esac          # skip the translation itself
       base="$(basename "$p" .md)"
-      tgt="input/pagecontent/${base}-${LANG_CODE}.md"
+      tgt="$TSRC/pagecontent/${base}.md"
       [ -e "$tgt" ] && st="[present]" || st="[missing]"
       echo "   $p -> $tgt $st"
     done
@@ -66,7 +68,7 @@ if [ "$MODE" = scan ]; then
     esac
   done
   echo
-  echo "Note: a supplement's msgid = the exact German source text from $GEN/<Type>-<id>.json."
+  echo "Note: a supplement's msgid = the exact English source text from $GEN/<Type>-<id>.json."
   exit 0
 fi
 
@@ -88,13 +90,15 @@ if [ -d "$TSRC" ]; then
 else
   echo "   (no directory $TSRC)"
 fi
-echo "-- checking existing page translations --"
-if [ -d input/pagecontent ]; then
-  for f in input/pagecontent/*-"$LANG_CODE".md; do
+echo "-- checking existing page translations ($TSRC/pagecontent) --"
+if [ -d "$TSRC/pagecontent" ]; then
+  for f in "$TSRC"/pagecontent/*.md; do
     [ -e "$f" ] || continue
-    bn="$(basename "$f")"; src="input/pagecontent/${bn%-"$LANG_CODE".md}.md"
-    if [ -f "$src" ]; then echo "   [OK]   $bn"; else echo "   [WARN] $bn — no German source page $src"; fail=1; fi
+    bn="$(basename "$f")"; src="input/pagecontent/$bn"
+    if [ -f "$src" ]; then echo "   [OK]   $bn"; else echo "   [WARN] $bn — no English source page $src"; fail=1; fi
   done
+else
+  echo "   (no directory $TSRC/pagecontent)"
 fi
 echo
 [ "$fail" = 0 ] && echo "Validation: no findings." || echo "Validation: findings present (see [WARN])."

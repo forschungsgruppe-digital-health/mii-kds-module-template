@@ -59,9 +59,16 @@ profilübergreifend in einer Tabelle sichten wollen:
 
 Die `ImplementationGuide`-Ressource trägt die technischen Details dieser
 Veröffentlichung einschließlich ihrer Abhängigkeiten und
-Veröffentlichungsparameter:
+Veröffentlichungsparameter.
 
-* [ImplementationGuide-Ressource](ImplementationGuide-mii-ig-{{MODULE_SLUG}}.html)
+> [TODO: Diese Vorlage liefert keine Seite für diese Ressource aus, hier ist
+> also noch nichts zu verlinken. `kerndatensatz-basis` veröffentlicht eine
+> solche Seite als `input/pagecontent/ImplementationGuide-mii-ig-base.md`,
+> eingetragen unter `pages:` in `sushi-config.yaml`. Legen Sie das Gegenstück
+> für Ihr Modul in beiden Sprachen an und verlinken Sie es hier. Der Dateiname
+> muss Ihren Slug wörtlich enthalten: ein `pages:`-Dateiname kann keinen
+> Platzhalter tragen, weil die Platzhalter-Ersetzung Dateiinhalte ersetzt, nicht
+> Dateinamen.]
 
 #### Versionshistorie
 

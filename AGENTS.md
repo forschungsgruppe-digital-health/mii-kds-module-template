@@ -21,7 +21,7 @@ does not contain it. See [`README.md`](README.md) for the full picture.
   on `main`) — it is tooling.
 - **A module created from it** releases with **CalVer `YYYY.n.n`** via the MII
   Module Release Workflow. The first-run bootstrap
-  ([`tools/first-run-bootstrap.sh`](tools/first-run-bootstrap.sh)) removes this
+  ([`scripts/first-run-bootstrap.sh`](scripts/first-run-bootstrap.sh)) removes this
   repo's Release Please files from a new module so the two never mix.
 
 ## Branching and pull-request rules
@@ -54,7 +54,14 @@ Author identity is the configured human committer.
   label in anything built (dependencies, the IG template pin, tool versions).
   The convention check enforces this; the dependency check proposes bumps.
 - **The single convention checker** is `wiki-consistency-check` +
-  `tools/convention-check.mjs` (placeholder-aware). Do not add a second linter.
+  `scripts/convention-check.mjs` (placeholder-aware). Do not add a second
+  metadata linter. `convention-check.yml` also runs `scripts/language-model-check.sh`
+  — a separate concern (see below), not a second metadata linter.
+- **English is the IG's default language, German the translation**
+  (`i18n-default-lang: en`, sources under `input/translations/de/`) — the same
+  model as `kerndatensatz-basis`, so "deviates from basis" is never true. Prose
+  asserting the reverse fails `scripts/language-model-check.sh` in CI — fix the
+  prose, never the guard.
 - Do not change canonical URLs of published artifacts.
 - Checker/analysis skills are report-only: they propose, humans decide; no
   auto-merge; any change is a PR targeting `dev`.
@@ -69,14 +76,14 @@ source of truth; consult them before doing the corresponding task by hand.
 - [`skills/wiki-consistency-check/`](skills/wiki-consistency-check/SKILL.md)
   — **the single convention checker**: repo ↔ MII meta wiki drift plus the hard
   module-metadata contract; placeholder-aware; report-only, PRs target `dev`.
-  Mechanized by [`tools/convention-check.mjs`](tools/convention-check.mjs).
+  Mechanized by [`scripts/convention-check.mjs`](scripts/convention-check.mjs).
 - [`skills/ig-analyze/`](skills/ig-analyze/SKILL.md) — read-only measurement of
   a module IG (statistics, content hygiene) and objective comparison of several
-  IGs. Backed by [`tools/ig-stats.py`](tools/ig-stats.py).
+  IGs. Backed by [`scripts/ig-stats.py`](scripts/ig-stats.py).
 - [`skills/ig-translate/`](skills/ig-translate/SKILL.md) — the module-facing
-  de→en translation workflow (translate/harvest), placing supplements where the
+  en→de translation workflow (translate/harvest), placing supplements where the
   IG Publisher expects them. Backed by
-  [`tools/ig-translate.sh`](tools/ig-translate.sh). The template-side language
+  [`scripts/ig-translate.sh`](scripts/ig-translate.sh). The template-side language
   *mechanism/policy* lives in `ig-template-mii-kds`.
 
 ### Discovery paths (symlinks, not copies)

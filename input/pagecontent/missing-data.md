@@ -104,7 +104,7 @@ For elements with an `example`, `preferred` or `extensible` binding
   "code": {
     "coding": [
       {
-        "system": "http://hl7.org/fhir/CodeSystem/data-absent-reason",
+        "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
         "code": "unknown",
         "display": "Unknown"
       }

@@ -16,10 +16,10 @@ page content. The IG template (`ig-template-mii-kds`) is **presentation-only**
 
 - The `pages:` block in `sushi-config.yaml` and the menu files are owned and
   edited by the module. Add, remove, or rename pages freely for your module.
-- The **menu** is maintained as `input/includes/menu.xml` (German, the default
-  language) plus a translation at `input/translations/de/includes/menu.xml` (German) —
-  not via the `menu:` property, which cannot be translated. Update both files
-  and the `pages:` tree together.
+- The **menu** is maintained as `input/includes/menu.xml` (English, the default
+  language) plus a German translation at
+  `input/translations/de/includes/menu.xml` — not via the `menu:` property,
+  which cannot be translated. Update both files and the `pages:` tree together.
 - The IG template carries no `structure/` folder and no page set.
 - There is no structure-sync step.
 

@@ -1,9 +1,11 @@
 <!-- markdownlint-disable MD041 -->
-<!-- Default-language (English) page. Overview of the Conformance section; the
-     sub-page set is the MII standard set (source: MII meta wiki page
+<!-- Default-language (English) page. Overview of the Conformance section. The
+     FIRST THREE sub-pages are the MII standard set (source: MII meta wiki page
      "Conformance",
      https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance;
      structure as in kerndatensatz-basis input/pagecontent/conformance.md).
+     "Security and Privacy" is an addition of this template per HL7 IG best
+     practice — see docs/ig-best-practices-checklist.md.
      German mirror: input/translations/de/pagecontent/conformance.md — both files
      must say the same thing, and both must list the same sub-pages as the two
      menu files. -->
@@ -32,23 +34,20 @@ technical artifacts see the [Artifacts](artifacts.html) section.
 
 > [TODO: Add the conformance statements that are specific to your module.
 >
-> Note on collecting them: conformance statements are **not** detected
-> automatically. The IG Publisher only collects sentences that are explicitly
-> marked — `§<page>-<n>:Servers SHALL …§` — and renders a summary table where a
-> paragraph contains nothing but `§§§`. As long as no sentence is marked, there
-> is no summary table. `kerndatensatz-basis` uses this mechanism; whether this
-> template adopts it is still open, because the "Expectation" column is derived
-> from the English keywords SHALL/SHOULD/MAY and the German translation of a
-> page uses MUSS/SOLLTE/KANN — see the open decisions in
-> `docs/ig-best-practices-checklist.md`. Verify with a real IG-Publisher build
-> before shipping either way.]
+> How the list below is produced: conformance statements are **not** detected
+> automatically. Every normative sentence on the English pages is wrapped in an
+> explicit marker — an id, a colon and the statement text, delimited by section
+> signs — and the table at the end of this page is generated from those markers.
+> `input/pagecontent/general-requirements.md` shows the syntax in place: copy a
+> marked sentence from there and give yours the next free id on its page. The
+> German mirror deliberately carries no markers; the list is produced from the
+> English pages only.]
 
 ---
 
 ### List of Conformance Statements
 
-The table below lists every conformance statement (a sentence marked with
-`§id:…§` in the narrative pages) together with its expectation and a link back
-to where it is stated.
+The table below lists every marked conformance statement of this guide together
+with its expectation and a link back to where it is stated.
 
 §§§

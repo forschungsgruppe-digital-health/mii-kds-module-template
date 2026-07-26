@@ -6,7 +6,7 @@
 // deliberately minimal FHIR profile: it only constrains cardinalities and marks
 // a few elements as Must-Support, and it binds to NO external value set, so it
 // validates without a terminology server and builds cleanly on the tx.fhir.org
-// fallback (spec §2.10). Delete it once your own profiles exist.
+// fallback. Delete it once your own profiles exist.
 //
 // Naming: the MII convention is MII_PR_<Module>_<Name> (see input/fsh/README.md
 // and the meta-wiki page "Namenskonventionen für FHIR-Ressourcen in der MII").
@@ -19,6 +19,14 @@
 // additively as a de-DE `translation` extension via the `Translation` RuleSet —
 // the same mechanism kerndatensatz-basis uses for conformance-resource content.
 // (The narrative PAGES are translated differently, under input/translations/de/.)
+//
+// What that actually RENDERS (observed on the built /de/ tree, publisher 2.2.11):
+// the German `^description` appears only on the artifact's OWN page; the German
+// `^title` does not appear anywhere, and the artifacts index and table of
+// contents keep the English title and description. The extension is still worth
+// carrying — it ships the German text inside the package for consumers — but do
+// not expect the German site to be fully German. See
+// docs/recipes/add-translation.md §4.
 //
 // The `insert` block below is the shared metadata every MII conformance resource
 // carries — see input/fsh/rulesets/README.md. Copy it verbatim onto each new

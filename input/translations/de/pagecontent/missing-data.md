@@ -117,7 +117,7 @@ Für Elemente mit `example`-, `preferred`- oder `extensible`-Binding (Datentypen
   "code": {
     "coding": [
       {
-        "system": "http://hl7.org/fhir/CodeSystem/data-absent-reason",
+        "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
         "code": "unknown",
         "display": "Unknown"
       }

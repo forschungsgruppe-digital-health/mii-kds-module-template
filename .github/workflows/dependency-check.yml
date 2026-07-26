@@ -8,8 +8,11 @@
 #            label: dependencies). Proposes only — never bumps anything itself.
 #            A module created from this template inherits this workflow
 #            unchanged (see docs/maintenance.md).
-# Triggers:  schedule (Mondays 06:00 UTC) + workflow_dispatch
-#            (input "mode": notify = tracking issue [default] | pr = sketch below).
+# Triggers:  schedule (Mondays 06:00 UTC) + workflow_dispatch. There is no
+#            "mode" input: only the tracking-issue path exists. A PR-per-drift
+#            path is sketched at the bottom of this file; add the input, the
+#            steps and the `contents: write` / `pull-requests: write`
+#            permissions together when it is implemented.
 # Toggle:    vars.ENABLE_DEPENDENCY_CHECK — ON by default; set the repo variable
 #            to 'false' to skip the job (it then shows as "skipped", not failed).
 # Human-gated: every proposed bump. A human reviews the changelog, updates the
@@ -22,17 +25,9 @@ on:
   schedule:
     - cron: "0 6 * * 1" # Mondays 06:00 UTC
   workflow_dispatch:
-    inputs:
-      mode:
-        description: "notify (tracking issue) or pr (one PR per drift)"
-        type: choice
-        options: [notify, pr]
-        default: notify
 
 permissions:
-  contents: write # pr mode (sketch below) needs to push branches
-  issues: write # notify mode upserts the tracking issue
-  pull-requests: write
+  issues: write # upsert the tracking issue — the only write this job performs
 
 concurrency:
   group: dependency-check
@@ -40,7 +35,7 @@ concurrency:
 
 jobs:
   check:
-    if: ${{ vars.ENABLE_DEPENDENCY_CHECK != 'false' }} # toggle: ON by default (§2.13)
+    if: ${{ vars.ENABLE_DEPENDENCY_CHECK != 'false' }} # toggle: ON by default
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -64,8 +59,7 @@ jobs:
           name: drift-report
           path: drift.md
 
-      - name: Upsert tracking issue (notify mode)
-        if: ${{ (github.event.inputs.mode || 'notify') == 'notify' }}
+      - name: Upsert tracking issue
         env:
           GH_TOKEN: ${{ github.token }}
         # One open, continuously-updated issue instead of many stale ones:
@@ -87,8 +81,9 @@ jobs:
           fi
 
       # ---------------------------------------------------------------------
-      # PR mode (opt-in via the "mode" dispatch input) — implementation sketch:
-      # for each drifted artifact, create a branch off dev, apply the
+      # PR mode — NOT IMPLEMENTED, sketch only. To add it: reinstate a `mode`
+      # dispatch input, grant `contents: write` + `pull-requests: write`, and
+      # for each drifted artifact create a branch off dev, apply the
       # single-line pin bump (for the IG Publisher also download the jar and
       # recompute its SHA-256 next to the version — never one without the
       # other), and open ONE PR per artifact targeting dev with the changelog

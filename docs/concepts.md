@@ -69,6 +69,11 @@ first-run tooling once used).
 > authority that would conflict with the module's CalVer process. Different purpose,
 > different fate.
 
+The **page set and the menu** propagate too, and they stay the module's to edit —
+the IG template supplies presentation only. See
+[page-structure.md](page-structure.md) for that boundary and why it was drawn
+there.
+
 ## 6. Registries, publication and governance
 
 A finished module is published as a FHIR package and a website (GitHub Pages under

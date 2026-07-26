@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # set-su-termserv-secrets.sh — install the SU-TermServ client certificate as
-# repository secrets (Gate F), validating it locally first.
+# repository secrets, validating it locally first.
 #
 # WHY THIS EXISTS
 #   The build routes terminology to the MII terminology server (SU-TermServ) when
@@ -15,10 +15,10 @@
 #
 # USAGE
 #   # from a PKCS#12 bundle (.p12/.pfx — how certificates are usually delivered)
-#   tools/set-su-termserv-secrets.sh --p12 cert.p12 [--password-file pw.txt] [--repo owner/repo]
+#   scripts/set-su-termserv-secrets.sh --p12 cert.p12 [--password-file pw.txt] [--repo owner/repo]
 #
 #   # from separate PEM files (key must be the ENCRYPTED PEM)
-#   tools/set-su-termserv-secrets.sh --cert cert.pem --key key-enc.pem [--repo owner/repo]
+#   scripts/set-su-termserv-secrets.sh --cert cert.pem --key key-enc.pem [--repo owner/repo]
 #
 #   Options:
 #     --check-only     validate locally, upload nothing
@@ -158,7 +158,7 @@ base64 < "${KEY}"  | tr -d '\n' | gh secret set SU_TERMSERV_CLIENT_KEY  "${REPO_
 printf '%s' "${PWV}" | gh secret set SU_TERMSERV_CLIENT_PASSWORD "${REPO_ARGS[@]}"
 
 echo
-echo "Done — Gate F is configured."
+echo "Done — the SU-TermServ credential is configured."
 echo "Verify in CI: push any branch and read the terminology step's log."
 echo "  enabled  -> 'SU-TermServ client certificate present — starting a local client-cert nginx proxy'"
 echo "  fallback -> 'No SU-TermServ credential — falling back to the public HL7 terminology server'"

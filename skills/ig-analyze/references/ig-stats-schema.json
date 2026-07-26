@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://example.org/fhir/kds-sample/ig-stats-schema.json",
   "title": "ig-stats",
-  "description": "Maschinenlesbare Statistik eines FHIR-IG (Ausgabe von tools/ig-stats.py analyze). Build-only-Felder sind im statischen Modus null. Ab 1.1: Detail-/Provenienz-Arrays (artifacts_detail, narrative.files, directives.occurrences, quality.qc_rules, i18n.*_files) + artifacts.total = nur publizierte Artefakte (RuleSets/Invarianten/Mappings separat).",
+  "description": "Maschinenlesbare Statistik eines FHIR-IG (Ausgabe von scripts/ig-stats.py analyze). Build-only-Felder sind im statischen Modus null. Ab 1.1: Detail-/Provenienz-Arrays (artifacts_detail, narrative.files, directives.occurrences, quality.qc_rules, i18n.*_files) + artifacts.total = nur publizierte Artefakte (RuleSets/Invarianten/Mappings separat).",
   "type": "object",
   "required": ["schemaVersion", "tool", "mode", "analyzed", "identity", "artifacts"],
   "additionalProperties": true,

@@ -11,7 +11,7 @@
 #   truth, and CI fails/opens a PR when it drifts.
 #
 # USAGE
-#   tools/sync-ig-template.sh [--ref <git-ref>] [--check]
+#   scripts/sync-ig-template.sh [--ref <git-ref>] [--check]
 #     --ref <git-ref>  branch/tag/SHA of ig-template-mii-kds to vendor (default: dev)
 #     --check          do not write; exit 1 if ig-template/ differs from the source
 #
@@ -72,10 +72,10 @@ overwritten by the next sync.
 The template package is not published to a FHIR package registry yet, so
 \`ig.ini\` references it as a local folder (\`template = #ig-template\`). To make
 sure the IG always builds against the CURRENT template during development, the
-mirror is refreshed by \`tools/sync-ig-template.sh\`:
+mirror is refreshed by \`scripts/sync-ig-template.sh\`:
 
-- \`tools/sync-ig-template.sh\` — re-vendor from \`dev\` (default).
-- \`tools/sync-ig-template.sh --check\` — fail if the mirror has drifted (run in CI).
+- \`scripts/sync-ig-template.sh\` — re-vendor from \`dev\` (default).
+- \`scripts/sync-ig-template.sh --check\` — fail if the mirror has drifted (run in CI).
 - \`.github/workflows/sync-ig-template.yml\` — scheduled + manual; opens a PR when
   the template repo has moved on.
 
@@ -91,7 +91,7 @@ if [ "${CHECK_ONLY}" = "true" ]; then
   fi
   echo "::error::ig-template/ has DRIFTED from ${SRC_REPO}@${REF} (${src_sha})."
   diff -r --exclude=README.md "${tmp}/new" "${repo_root}/ig-template" | head -40 || true
-  echo "Run tools/sync-ig-template.sh to refresh it."
+  echo "Run scripts/sync-ig-template.sh to refresh it."
   exit 1
 fi
 

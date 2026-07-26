@@ -6,7 +6,7 @@
 // Version Policy").
 //
 // It ships as HAND-AUTHORED JSON at
-//   input/resources/Parameters-mii-param-{{MODULE_SLUG}}-manifest.json
+//   input/resources/Parameters-expansion-manifest.json
 // which is what sushi-config.yaml's `path-expansion-params` and `pin-manifest`
 // point at. This FSH is the same resource, kept COMMENTED OUT exactly as basis
 // keeps it: enabling it would make SUSHI emit a second Parameters resource with

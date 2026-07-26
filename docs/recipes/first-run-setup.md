@@ -68,7 +68,7 @@ cd <your-module-repo>
 ### 2. Dry-run the bootstrap (this changes nothing)
 
 ```bash
-tools/first-run-bootstrap.sh
+scripts/first-run-bootstrap.sh
 ```
 
 Read the output. It prints, in order:
@@ -83,7 +83,7 @@ Read the output. It prints, in order:
   - `.github/workflows/notify-zulip.yml` — announces the *template's* SemVer
     releases (your module announces its own CalVer releases instead).
   - `CHANGELOG.md` — only if present (the template's SemVer changelog).
-  - `docs/recipes/first-run-setup.md` and `tools/first-run-bootstrap.sh` — this
+  - `docs/recipes/first-run-setup.md` and `scripts/first-run-bootstrap.sh` — this
     recipe and the bootstrap itself; only meaningful before the module exists.
 - **Post-bootstrap checklist** — the manual steps below.
 
@@ -96,7 +96,7 @@ Read the output. It prints, in order:
 ### 3. Apply it
 
 ```bash
-tools/first-run-bootstrap.sh --apply
+scripts/first-run-bootstrap.sh --apply
 ```
 
 This creates `dev`, applies branch protection, and **stages** the file removals
@@ -114,7 +114,7 @@ Open a pull request into `dev` and merge it.
 > **Reviews on a solo project:** by default the bootstrap requires **1**
 > approval on `main` and **0** on `dev`, so you can merge your own work into
 > `dev`. If you are the only maintainer and want to merge into `main` without a
-> second person, run `tools/first-run-bootstrap.sh --apply --main-reviews 0`.
+> second person, run `scripts/first-run-bootstrap.sh --apply --main-reviews 0`.
 
 > **Undo a removal** before committing: `git restore --staged --worktree <path>`.
 
@@ -126,16 +126,32 @@ The bootstrap printed it; the essentials:
    lists every placeholder and what it means), then `ig.ini` (the module slug
    **and** the pinned `template = de.medizininformatikinitiative.template#<version>`),
    then `publication-request.json` and `.github/workflows/go-publish.yml`. Run
-   `node tools/convention-check.mjs` — it must stay green.
+   `node scripts/convention-check.mjs` — it must stay green.
 2. **Enable GitHub Pages:** Settings → Pages → Build and deployment →
    **"GitHub Actions"**. Then set the repository variable
    `PAGES_ACTIONS_ENABLED=true`.
 3. **Terminology (optional):** add `SU_TERMSERV_CLIENT_CERT` /
-   `SU_TERMSERV_CLIENT_KEY` / `SU_TERMSERV_CLIENT_CERT_PASSWORD` to build against
+   `SU_TERMSERV_CLIENT_KEY` / `SU_TERMSERV_CLIENT_PASSWORD` to build against
    the MII SU-TermServ; without them the build falls back to the public HL7
    server and does not fail.
 4. **Release announcements (optional):** add `ZULIP_API_KEY` to announce your
    module's CalVer releases to the MII Zulip.
+5. **Vendored IG template (while the template repos have not moved):** set the
+   repository variable `IG_TEMPLATE_REPO_URL` to the clone URL of
+   `ig-template-mii-kds`, so `sync-ig-template.yml` keeps your `ig-template/`
+   mirror current:
+
+   ```sh
+   gh variable set IG_TEMPLATE_REPO_URL --repo <owner>/<your-module-repo> \
+     --body "https://github.com/<owner>/ig-template-mii-kds.git"
+   ```
+
+   Without it the workflow probes the built-in target-organisation URL and, if
+   that is not reachable, **skips with a notice instead of failing** — your
+   first PR stays green either way. Delete the variable once the repositories
+   live in the target organisation, or delete the whole workflow once `ig.ini`
+   uses the published template package
+   ([switch-template-to-published.md](switch-template-to-published.md)).
 
 ---
 
@@ -146,7 +162,7 @@ The bootstrap printed it; the essentials:
 - The Release Please files, `notify-zulip.yml`, and the bootstrap machinery are
   gone; the preview, validation, monitoring, convention-check, module-release
   workflows and the `skills/` are still there.
-- `node tools/convention-check.mjs` runs green (placeholders count as
+- `node scripts/convention-check.mjs` runs green (placeholders count as
   "parameterized" until you resolve them).
 
 ## Common errors & fixes

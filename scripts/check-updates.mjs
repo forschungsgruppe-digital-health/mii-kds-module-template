@@ -18,7 +18,7 @@
 //
 // This implementation is kept aligned with the sibling template repo
 // (medizininformatik-initiative/ig-template-mii-kds, same file) and with
-// the sample IG's tools/check-updates.py; this repo extends the watch list
+// the sample IG's scripts/check-updates.py; this repo extends the watch list
 // with de.medizininformatikinitiative.template and a fixed set of FHIR
 // package dependencies.
 //
@@ -95,7 +95,7 @@ export function parseWorkflowEnvPin(yamlText, key) {
 
 /**
  * Parse the `dependencies:` block of a sushi-config.yaml into { id: version }.
- * Taken over from the MII KDS sample IG's tools/check-updates.py: only pinned
+ * Taken over from the MII KDS sample IG's scripts/check-updates.py: only pinned
  * (version starts with a digit), non-commented entries count; the block ends
  * at the first non-indented line.
  */
@@ -262,7 +262,7 @@ async function fetchJson(url, { github = false, allow404 = false } = {}) {
 const TEMPLATE_PKG_ID = "de.medizininformatikinitiative.template";
 const TEMPLATE_REPO = "medizininformatik-initiative/ig-template-mii-kds";
 
-// The FIXED FHIR package watch list (§2.5): these always get a row, even
+// The FIXED FHIR package watch list: these always get a row, even
 // before sushi-config.yaml has landed. Extra pins found in sushi-config.yaml
 // are watched on top.
 const WATCHED_FHIR_DEPS = [

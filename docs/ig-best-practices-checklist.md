@@ -32,11 +32,11 @@ scaffold gives you the place and a prompt) · ➖ not applicable.
 | Has a downloads page | ✅ | `downloads.md` |
 | Has one or more pages defining the normative content | ✅ | the Conformance section (4 pages) |
 | **Security and Privacy Considerations section** | ✅ | `security-and-privacy.md` — ships with the required structure (privacy principles, security considerations, module conformance requirements, residual risks); **fill the `[TODO]` blocks** 📝 |
-| Index page starts with an accessible explanation of the IG's purpose | ✅ / 📝 | `index.md` opens with *Einleitung* + *Zielgruppe*; replace the `[TODO]` with your module's purpose in lay terms |
+| Index page starts with an accessible explanation of the IG's purpose | ✅ / 📝 | `index.md` opens with *Introduction* + *Target audience*; replace the `[TODO]` with your module's purpose in lay terms |
 | Explains what `mustSupport` means for this IG | ✅ | `must-support.md` ships the MII-standard server/client expectations |
 | Explains prerequisite knowledge (FHIR basics, SHALL/SHOULD/MAY, the domain) | ✅ | `general-requirements.md` (conformance verbs) + `docs/glossary.md`; link further reading from `guidance.md` 📝 |
-| Says how to engage with the community — durable for 5+ years | ✅ | `index.md` → *Ansprechpartner*: `chat.fhir.org` stream `german/mi-initiative` + the repo's GitHub issues |
-| Explains the relationship to other guides **and references the IG registry** | ✅ / 📝 | `index.md` → *Verwandte Leitfäden* links the [FHIR IG Registry](https://fhir.org/guides/registry/); add your module's formal dependencies |
+| Says how to engage with the community — durable for 5+ years | ✅ | `index.md` → *Contact*: `chat.fhir.org` stream `german/mi-initiative` + the repo's GitHub issues |
+| Explains the relationship to other guides **and references the IG registry** | ✅ / 📝 | `index.md` → *Related guides* links the [FHIR IG Registry](https://fhir.org/guides/registry/); add your module's formal dependencies |
 | Prefer single larger pages over many tiny ones | 📝 | The page set is the MII-standard structure; keep related content together rather than splitting further |
 | Good anchor names on pages | 📝 | Use explicit headings; the Publisher generates version-specific anchors otherwise |
 
@@ -83,11 +83,11 @@ scaffold gives you the place and a prompt) · ➖ not applicable.
 | Check | State | Evidence / what to do |
 |---|---|---|
 | A dedicated section aimed at security/privacy experts | ✅ | `security-and-privacy.md` |
-| Names the attacks considered and the countermeasures | 📝 | Fill the *Sicherheitsbetrachtung* block |
+| Names the attacks considered and the countermeasures | 📝 | Fill the *Security considerations* block |
 | Covers privacy principles (transparency, purpose limitation, minimisation, …) | ✅ / 📝 | Section present with GDPR Art. 5 framing; add your data categories and legal basis |
 | References the FHIR core security & privacy material rather than repeating it | ✅ | Links [secpriv-module](https://build.fhir.org/secpriv-module.html) and the [security checklist](https://build.fhir.org/security.html) |
 | Lists module-specific security conformance requirements | 📝 | Fill the corresponding block |
-| States residual risks left to system design/deployment/policy | 📝 | Fill the *Verbleibende Risiken* block |
+| States residual risks left to system design/deployment/policy | 📝 | Fill the *Residual risks* block |
 
 ## 7. Examples (S1)
 
@@ -124,10 +124,17 @@ does it.
 
 Normative sentences in the English (default) pages are wrapped in
 `§<page>-<n>:…§`, and `conformance.md` ends with a paragraph containing only
-`§§§`, which the IG Publisher replaces with an *Id | Expectation | Rule* table.
+`§§§`, which the IG Publisher replaces with a table of the collected statements.
 The German mirror carries **no** markers and instead notes that the list is
-available in the English rendering — the *Expectation* column is derived from the
-English keywords SHALL/SHOULD/MAY, so a German statement would not classify.
+available in the English rendering.
+
+> **On the expectation column:** the rendered table shows an expectation
+> (`SHALL`, `SHOULD`, `MAY`) next to each statement, apparently read from the
+> English keyword in the sentence. That is *observed behaviour of the build, not
+> documented in HL7's* [ig-guidance](https://build.fhir.org/ig/FHIR/ig-guidance/conformance-statements.html),
+> which describes the markers and the table but names no expectation column. We
+> have not tested whether a German-marked statement classifies. English-only
+> markers avoid the question rather than answer it.
 
 Statements are a **curated set** of real obligations, not every sentence that
 happens to contain a bold verb. When you add one, give it the next free id on
@@ -136,9 +143,10 @@ in the table.
 
 ### 2. Which language leads the normative text
 
-The MII wiki is German while this template — like kerndatensatz-basis — leads the guide in English, and the wider FHIR
-ecosystem — and basis — lead in English. That is a project-level decision about
-the modules' normative language, not something a template should silently settle.
+The MII wiki is German, while this template — like kerndatensatz-basis and the
+wider FHIR ecosystem — leads the guide in English. Which language carries the
+modules' *normative* text is a project-level decision, not something a template
+should silently settle.
 
 ---
 

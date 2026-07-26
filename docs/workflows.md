@@ -33,7 +33,7 @@ Please, previews its own demo build, and monitors its own dependencies.
 
 Also removed by the bootstrap: `release-please-config.json`,
 `.release-please-manifest.json`, the template `CHANGELOG.md`,
-`docs/recipes/first-run-setup.md`, and `tools/first-run-bootstrap.sh` itself.
+`docs/recipes/first-run-setup.md`, and `scripts/first-run-bootstrap.sh` itself.
 
 > **Why these go:** they version and announce *the template*. A module must not carry
 > SemVer automation that fights its own CalVer release process.
@@ -47,25 +47,36 @@ Everything below **propagates** to a module (the bootstrap keeps it). This is ho
 | --- | --- | --- | --- | --- | --- |
 | `ig-publisher.yml` | push to any branch except `main`/`gh-pages`; `workflow_dispatch` | Builds the IG (SUSHI + IG Publisher) and deploys a preview | `gh-pages/branches/<branch>/` + PR comment | `ENABLE_PREVIEW` (ON) | no |
 | `cleanup-gh-pages.yml` | schedule (Sun 00:00 UTC); `workflow_dispatch` | Prunes previews of deleted branches; keeps root + version paths | pruned `gh-pages` | `ENABLE_PREVIEW` (ON) | no |
-| `validation.yml` | push/PR to `dev`/`main`; `workflow_dispatch` | Runs the **MII reusable validation** workflows | validation report | `ENABLE_VALIDATION` (ON) | no (skips on the template repo itself) |
-| `convention-check.yml` | push/PR to `dev`/`main`/`release/**`; `workflow_dispatch` | The **single** convention checker: metadata-contract patterns (hard on release branches) + wiki-drift (advisory) | check result | `ENABLE_CONVENTION_CHECK` (ON) | no |
-| `module-release.yml` | push of a CalVer tag `vYYYY.n.n`; `workflow_dispatch` (dry run) | Builds, creates the GitHub Release, announces to the MII Zulip (topic *Releases*), hands off to `go-publish` | release | `ENABLE_MODULE_RELEASE` (ON) · `ENABLE_ZULIP_ANNOUNCE` (ON) | production publish is gated |
-| `go-publish.yml` | `workflow_dispatch` **only** | Production `-go-publish`; `publish:false` = full dry run by default | published IG | — | **always human-triggered (Gate E)** |
-| `dependency-check.yml` | schedule (Mon 06:00 UTC); `workflow_dispatch` | Version drift (IG Publisher, SUSHI, Jekyll, both templates, FHIR deps) → tracking issue/PR | `dependencies` issue/PR | `ENABLE_DEPENDENCY_CHECK` (ON) | proposals only |
+| `validation.yml` | push to `dev`/`main`; any pull request; `workflow_dispatch` | Runs the **MII reusable validation** workflows | validation report | `ENABLE_VALIDATION` (ON) | no (skips on the template repo itself) |
+| `convention-check.yml` | push/PR to `dev`/`main`/`release/**`; `workflow_dispatch` | The **single** convention checker: metadata-contract patterns (hard on release branches) + the language-model guard (`scripts/language-model-check.sh`) + the offline test suites (`scripts/*.test.mjs`, `scripts/*.test.mjs`, and on the template repo `scripts/*.template-test.mjs`) + wiki-drift (advisory) | check result | `ENABLE_CONVENTION_CHECK` (ON) | no |
+| `module-release.yml` | push of a CalVer tag `vYYYY.n.n`; `release: published` (the announcement); `workflow_dispatch` (dry run) | Builds, creates the GitHub Release, announces to the MII Zulip (topic *Releases*), hands off to `go-publish` | release | `ENABLE_MODULE_RELEASE` (ON) · `ENABLE_ZULIP_ANNOUNCE` (ON) | production publish is gated |
+| `go-publish.yml` | `workflow_dispatch` **only** | Production `-go-publish`; `publish:false` = full dry run by default | published IG | — | **always human-triggered** |
+| `dependency-check.yml` | schedule (Mon 06:00 UTC); `workflow_dispatch` | Version drift (IG Publisher, SUSHI, Jekyll, both templates, FHIR deps) → one tracking issue | `dependencies` issue | `ENABLE_DEPENDENCY_CHECK` (ON) | proposals only |
 | `security-scan.yml` | schedule (Mon 07:00 UTC); PR to `dev`; `workflow_dispatch` | OSV + Trivy (fs + dev-container image) | SARIF in Security tab | `ENABLE_SECURITY_SCAN` (ON) | no |
 | `sync-ig-template.yml` | schedule (Mon 05:00 UTC); `workflow_dispatch`; PR to `dev` (check only) | Keeps the vendored `ig-template/` in step with `ig-template-mii-kds@dev`; opens a PR on drift, fails a PR whose mirror is stale | sync PR | `ENABLE_TEMPLATE_SYNC` (ON) | never auto-merges |
 
 Notes:
+- **The reusable validation needs two files in the repo root**, at fixed paths the
+  MII workflows read: `qc/custom.rules.yaml` (the Simplifier quality-control rule
+  set — MII naming conventions) and `advisor.json` (the errors the HL7 Java
+  validator may ignore). Both ship with the template; `qc/custom.rules.yaml`
+  carries `{{MODULE_SLUG}}`/`{{MODULE_NAME}}`/`{{CALVER_VERSION}}` placeholders
+  like the rest of the scaffold. The .NET job is configured upstream to always
+  pass, so a naming violation appears in its log, not as a red check.
 - **Terminology** is auto-selected, not a toggle: builds use **SU-TermServ** when the
   client-cert secrets are present, else fall back to HL7 `tx.fhir.org` with a notice.
 - **Pages mode** (`vars.PAGES_ACTIONS_ENABLED`) chooses the gh-pages push vs the
   Actions deploy path; either serves the previews.
 - **Dependabot** is switched by its config presence, not an `if:`.
+- **The vendored-template sync** needs the `IG_TEMPLATE_REPO_URL` variable while
+  the template repos have not moved (see
+  [recipes/first-run-setup.md](recipes/first-run-setup.md) step 5). If the
+  source is unreachable the job skips with a notice instead of failing.
 - On **this template repo**, some jobs intentionally skip or substitute demo
   placeholder values (the repo ships `{{…}}` values); in a real module they run for
   real. The workflow header comments say which.
 
-### The §2.13 toggle summary
+### The toggle summary
 
 | Pipeline | Variable | Default |
 | --- | --- | --- |
@@ -97,8 +108,9 @@ Notes:
 ## Secrets & enabling the gated features
 
 A module builds and previews without secrets. To enable the optional gated
-features — SU-TermServ terminology (Gate F, for both the build and the reusable
-validation) and the Zulip release announcement (Gate G) — see
+features — SU-TermServ terminology (for both the build and the reusable
+validation) and the Zulip release announcement — see
 [docs/secrets.md](secrets.md) for the exact `gh secret set` commands (including
-why the SU-TermServ cert is set under both `SU_TERMSERV_CLIENT_*` and
-`CDS_DEV_CLIENT_*` names). The workflows are already wired.
+why one secret name suffices: `validation.yml` maps `SU_TERMSERV_CLIENT_*` onto
+the reusable workflow's `CDS_DEV_CLIENT_*` inputs at the call site). The
+workflows are already wired.

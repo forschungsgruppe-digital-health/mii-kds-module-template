@@ -97,12 +97,6 @@ access (the first build downloads the base image and tools):
    SUSHI reads `sushi-config.yaml` and `input/fsh/` and writes the generated
    resources to `fsh-generated/`.
 
-   > **Not yet available on this template's `dev`:** the IG source scaffold
-   > (`sushi-config.yaml`, `ig.ini`, `input/fsh/` with a starter profile) is
-   > landing via a separate build-out pull request. Until it is merged, this
-   > step and the next have nothing to compile in the template repo itself;
-   > in a module created from the finished template they work as written.
-
 8. Run the IG Publisher to build the full IG website locally:
 
    ```sh
@@ -120,8 +114,9 @@ access (the first build downloads the base image and tools):
    > checker, not by the container image. Baking it in would mean rebuilding
    > and re-pinning the container for every publisher bump. Version
    > `2.2.11` + its SHA-256 above were the latest release when this recipe
-   > was written (2026-07-22); once the CI workflows land, **the version
-   > pinned in `.github/workflows/` is the source of truth** — use that one.
+   > was written (2026-07-22). **The pin in
+   > `.github/workflows/ig-publisher.yml` is the source of truth** — if it ever
+   > differs from the command above, the workflow wins.
 
    > **Terminology note (expected, not an error):** without an SU-TermServ
    > client certificate the publisher resolves terminology against the
@@ -139,12 +134,11 @@ access (the first build downloads the base image and tools):
 - VS Code runs inside the container (the green remote indicator in the
   bottom-left corner shows the dev container name).
 - All six version checks in step 6 print the pinned versions.
-- With the IG source scaffold in place: `sushi .` reports
-  `0 Errors` and the publisher produces `output/index.html` plus a QA report.
-- **Green CI build:** the CI workflows (SUSHI + IG Publisher build, QA gate,
-  Pages preview) land via a separate build-out pull request (task B4). Once
-  they are merged, pushing your branch gives you the same build in CI plus a
-  Pages preview under `branches/<branch>/`.
+- `sushi .` reports `0 Errors` and the publisher produces
+  `output/index.html` plus a QA report.
+- **Green CI build:** pushing your branch gives you the same build in CI
+  (SUSHI + IG Publisher, QA gate) plus a Pages preview under
+  `branches/<branch>/`.
 
 ## Common errors & fixes
 

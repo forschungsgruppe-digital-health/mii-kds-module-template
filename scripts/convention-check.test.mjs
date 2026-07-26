@@ -1,4 +1,4 @@
-// Unit tests for the convention checker. Run with: node --test tools/
+// Unit tests for the convention checker. Run with: node --test scripts/
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { evaluate, readTopLevel, readDependencies, readIgIniTemplate } from "./convention-check.mjs";

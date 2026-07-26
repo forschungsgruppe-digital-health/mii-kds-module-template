@@ -56,25 +56,26 @@ suffix: `2026.0.0-rc.1`, `2026.0.0-alpha.1`.
 | Release step | Who | Where |
 | --- | --- | --- |
 | Prepare the release branch, bump the version, open the PR, merge | **Human** | your machine + GitHub |
-| Reusable FHIR validation on the release PR (error gate) | Automated | the validation workflow (§4.2) |
+| Reusable FHIR validation on the release PR (error gate) | Automated | `validation.yml` |
 | Push the CalVer tag | **Human** | `git push origin v2026.0.1` |
 | Build the IG from the tagged commit (buildability gate) | Automated | `module-release.yml` → `build` |
 | Create the **draft** GitHub Release with generated notes | Automated | `module-release.yml` → `release` |
 | Edit notes, attach the package, **publish** the draft | **Human** | GitHub Releases |
 | Announce the published release on the MII Zulip (topic `Releases`) | Automated | `module-release.yml` → `notify_zulip` |
-| Formal FHIR publication (`-go-publish`) — dry run, then real | **Human (Gate E)** | `go-publish.yml` (manual) |
+| Formal FHIR publication (`-go-publish`) — dry run, then real | **Human** | `go-publish.yml` (manual) |
 
 > **Why a *draft* release, not a published one:** the automation cuts a draft so
 > a human always reviews the notes and attaches the package before anything goes
 > public. Publishing is the deliberate human act that fires the announcement.
 
-> **Why the build gate:** `kerndatensatz-basis` leaves the tag-time job to
-> release creation only and relies on the reusable validation workflow (run on
-> the release PR) for the FHIR error gate. This template adds a build on the tag
-> so a tag that does not even build never becomes a release, and so the
-> `package.tgz` is captured as a workflow artifact. QA *counts* are reported but
-> not required to be zero — the authoritative error gate is still the reusable
-> validation workflow (§4.2).
+> **Why the build gate:** `kerndatensatz-basis` runs no FHIR error gate at tag
+> time — its tag-time job only creates the release, and its PR-time signal is its
+> own IG-Publisher build. This template adds two things basis does not have: a
+> build on the tag, so a tag that does not even build never becomes a release
+> (and the `package.tgz` is captured as a workflow artifact), and the MII
+> reusable validation workflows on every PR. QA *counts* are reported but not
+> required to be zero — the authoritative error gate is the reusable validation
+> workflow.
 
 ---
 
@@ -101,13 +102,14 @@ git checkout -b release/v2026.0.1
 
 ### 2. Update the version — *human*
 
-Bump the CalVer version everywhere it appears **in this template**. Unlike the
-wiki's file list (which names Simplifier's `package.json` and `guide.yaml`, not
-present here), the version lives in exactly two files:
+Bump the CalVer version everywhere it appears **in this template**. The wiki's
+file list names Simplifier's `package.json` and `guide.yaml`, which are not
+present here; the surface in this scaffold is:
 
 - **`sushi-config.yaml`**
   - `version:` — the module version (e.g. `version: "2026.0.1"`).
-  - the `artifact-version` extension `valueString` — keep it equal to `version`.
+  - the `package-source` extension's `version` sub-extension (`valueString`) —
+    keep it equal to `version`.
   - the sequence `start:` year — the `YYYY` part (e.g. `2026`).
 - **`publication-request.json`**
   - `version` — the CalVer version.
@@ -116,11 +118,24 @@ present here), the version lives in exactly two files:
   - `desc` — a one-line human description of *this* release.
   - `first` — set to `true` only for a module's very first release; set it to
     `false` for every release after that.
+- **`input/fsh/rulesets/`** — the three files that stamp the version onto every
+  conformance resource, so an unbumped ruleset ships artifacts pointing at the
+  previous release:
+  - `version.fsh` — `version` / `^version` and the package-source version.
+  - `meta-profile.fsh` — `meta.profile[+] = "<canonical>|<version>"`.
+  - `cps-rules.fsh` — `supportedProfile[+] = "<profile>|<version>"`.
+  See [`input/fsh/rulesets/README.md`](../input/fsh/rulesets/README.md) for the
+  placeholder-to-file table.
+- **The narrative pages** — `index.md`, `changes.md`, `metadata.md` and
+  `version-history.md`, and their German mirrors under
+  `input/translations/de/pagecontent/`, print the version in prose.
 
 > **Why keep the three `sushi-config.yaml` spots in sync:** the metadata contract
-> (checked by the single convention check, `wiki-consistency-check`, §4.2)
-> asserts `version` is CalVer and that the embedded copies agree. Drift fails the
-> check — fix it before tagging.
+> (checked by the single convention check, `wiki-consistency-check`) asserts
+> `version` is CalVer and that the embedded copies agree. Drift fails the check —
+> fix it before tagging. The ruleset literals are **not** checked mechanically
+> yet; re-read them by hand, or extend `scripts/convention-check.mjs` to assert
+> them against `sushi-config.yaml`.
 
 > **Terminology & release notes:** author the module's changelog in the IG's
 > release-notes page (`input/pagecontent/…`). Terminology is selected
@@ -137,7 +152,7 @@ git push origin release/v2026.0.1
 ```
 
 Open a PR from `release/v2026.0.1` into `dev` (then promote `dev` → `main` per
-`CONTRIBUTING.md`). The **reusable FHIR validation workflow (§4.2)** runs on the
+`CONTRIBUTING.md`). The **reusable FHIR validation workflow** (`validation.yml`) runs on the
 PR and is the authoritative error gate (the wiki's `DOTNET_FHIR_VALIDATION` /
 `JAVA_FHIR_VALIDATION`). Wait for it to pass before merging.
 
@@ -188,14 +203,14 @@ Zulip organisation, stream `MII-Kerndatensatz`, **topic `Releases`**.
 > **Why topic `Releases` (not `Template Releases`):** `Releases` is the **module**
 > topic; the *template repos* announce their SemVer tooling releases under
 > `Template Releases`. Keeping the two topics apart keeps the CalVer/SemVer split
-> legible in chat too (§2.12).
+> legible in chat too.
 
-> **Gate G — the announcement key:** `notify_zulip` maps `secrets.ZULIP_API_KEY`
+> **The announcement key:** `notify_zulip` maps `secrets.ZULIP_API_KEY`
 > to an env var; when the key is absent the job **skips with a `::notice`, it
 > never fails the release**. A human adds the key once (MII bot
 > `kds-github-bot@mii.zulipchat.com`).
 
-### 8. Formal FHIR publication — *human, Gate E*
+### 8. Formal FHIR publication — *human*
 
 The release is now visible on GitHub, but the IG is **not yet formally
 published**. Do that through the gated
@@ -209,7 +224,7 @@ published**. Do that through the gated
    and deploy — the FHIR IG Registry change is exported as a patch for a
    **human-submitted** upstream PR; it is never pushed automatically.
 
-> **Why go-publish stays fully manual (Gate E):** formal publication is
+> **Why go-publish stays fully manual:** formal publication is
 > irreversible in practice and touches the public FHIR ecosystem. `module-release.yml`
 > only *points at* go-publish (in the release notes and the job summary) — it
 > never dispatches it. The maintainer owns the decision to publish, every time.
@@ -226,7 +241,7 @@ published**. Do that through the gated
 
 ---
 
-## Toggles (§2.13)
+## Toggles
 
 The release automation honours two repo-variable switches (unset = the default
 shown; set the variable to flip it):
@@ -237,7 +252,7 @@ shown; set the variable to flip it):
 | `ENABLE_ZULIP_ANNOUNCE` | ON | gates the `notify_zulip` job; set to `false` to disable the MII announcement |
 
 > **Toggles never override the gates:** even with everything enabled, `go-publish`
-> stays manual and its `publish` input defaults to `false` (Gate E). The full
+> stays manual and its `publish` input defaults to `false`. The full
 > workflow inventory and every toggle is listed in `docs/workflows.md`.
 
 ---
