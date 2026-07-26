@@ -358,7 +358,7 @@ parameters:
   # input/resources/Parameters-mii-param-base-manifest.json). Keep both in sync
   # with the cqf-expansionParameters extension above and with the file in
   # input/resources/ — see input/resources/README.md.
-  path-expansion-params: '../../input/resources/Parameters-mii-param-{{MODULE_SLUG}}-manifest.json'
+  path-expansion-params: '../../input/resources/Parameters-expansion-manifest.json'
   pin-manifest: 'mii-param-{{MODULE_SLUG}}-manifest'
   suppress-mappings:
     - http://hl7.org/v3
