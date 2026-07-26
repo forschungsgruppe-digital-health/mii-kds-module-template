@@ -31,7 +31,7 @@
 5. **Add content.** Replace the example profile in `input/fsh/` with your own
    ([add-a-profile.md](add-a-profile.md)) and the German starter pages in
    `input/pagecontent/` with your module's pages. Keep the English supplements in
-   `input/translations/en/` in step with them.
+   `input/translations/de/` in step with them.
 6. **Build.** Locally: `sushi . && java -jar publisher.jar -ig ig.ini`, read
    `output/qa.html`. Or push a `feature/*` branch and open the **CI preview URL**
    posted on the PR.
@@ -40,7 +40,7 @@
 
 ## Expected result
 
-Your module IG builds green and renders a bilingual (German-default) preview with
+Your module IG builds green and renders a bilingual (English-default, German translation) preview with
 your profile, examples and pages. No Release Please anywhere.
 
 ## Common errors & fixes

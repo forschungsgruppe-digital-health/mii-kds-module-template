@@ -89,7 +89,7 @@ Base-template facts verified against
 | Naming conventions (id) | `input/fsh/*.fsh` | Namenskonventionen → Element id | `id` kebab-case, ≤ 64 chars, corresponds to `name`? | Module |
 | Naming conventions (title) | `input/fsh/*.fsh` | Namenskonventionen → Element title | Pattern `MII <Präfix> <ModulAbk> <Beschreibung>`? | Module |
 | Naming conventions (url) | `sushi-config.yaml` canonical + artifacts | Namenskonventionen → Element url | `<canonical>/<ResourceType>/<id>` structure? Established published URLs are never changed retroactively (Bestandsschutz). | Module |
-| Language (content) | `sushi-config.yaml` (`i18n-default-lang`), `input/fsh` | Namenskonventionen → Sprache | German leading (`i18n-default-lang: de`); translation extension on `description`/`name`/`title` where content is German? | Module |
+| Language (content) | `sushi-config.yaml` (`i18n-default-lang`), `input/fsh` | Namenskonventionen → Sprache | Guide leads in English (`i18n-default-lang: en`, as kerndatensatz-basis); resource `description`/`name`/`title` may be German, and then a translation extension is required on them? | Module |
 | Language (template mechanism) | `includes/*.html`, `content/assets/css/` | Namenskonventionen → Sprache | Header/footer/CSS overrides language-neutral (`site.data.stringsBase[include.lang]`, no hard-coded UI strings)? See the `ig-translate` skill. | Template repo |
 | Terminology (versions) | terminology documentation, `sushi-config.yaml` | Terminology Version Policy | Dated SNOMED INTERNATIONAL version per CalVer release? | Module |
 | Terminology (instance data) | profiles/documentation | Terminology Version Policy | `Coding.version` required for ICD-10-GM/OPS/ATC? | Module |

@@ -44,7 +44,7 @@ Unfamiliar terms are in the [glossary](docs/glossary.md).
 | `sushi-config.yaml` | Your module's metadata — the file you edit first |
 | `input/fsh/` | Profiles, extensions, value sets (FHIR Shorthand) |
 | `input/pagecontent/` | The narrative pages, German by default |
-| `input/translations/en/` | English translations of pages, menu and resources |
+| `input/translations/de/` | German translations of pages, menu and resources |
 | `input/includes/menu.xml` | The navigation menu (one file per language) |
 | `ig-template/` | The MII IG template, mirrored automatically — don't edit |
 | `docs/` | Guides and step-by-step recipes |

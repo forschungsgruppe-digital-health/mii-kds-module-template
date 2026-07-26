@@ -12,11 +12,11 @@ The corresponding `sushi-config.yaml` parameters (already set):
 
 ```yaml
 parameters:
-  i18n-default-lang: de
+  i18n-default-lang: en
   i18n-lang:
-    - en
+    - de
   translation-sources:
-    - input/translations/en
+    - input/translations/de
 ```
 
 ## Directory structure
@@ -36,19 +36,19 @@ input/
 ## Workflow: adding English translations
 
 1. **Build first.** The IG Publisher generates translation templates for
-   every resource into `translations/en/po/` (repo root, gitignored) on each
+   every resource into `translations/de/po/` (repo root, gitignored) on each
    build.
 2. **Resources (profiles, extensions, value sets, …):** copy the generated
-   `.po` file into `input/translations/en/`, translate the `msgstr` lines
+   `.po` file into `input/translations/de/`, translate the `msgstr` lines
    (Poedit, any text editor, or machine translation with human review), and
    rebuild.
 3. **Pages:** create the English page under
-   `input/translations/en/pagecontent/<same-filename>.md`; the publisher
+   `input/translations/de/pagecontent/<same-filename>.md`; the publisher
    matches it to the German original by file name.
 4. **Menu:** maintain the translated `menu.xml` under
-   `input/translations/en/includes/`.
+   `input/translations/de/includes/`.
 
-Translations placed under `input/translations/en/` are preserved across
+Translations placed under `input/translations/de/` are preserved across
 rebuilds; everything under the repo-root `translations/` directory is
 generated output.
 
