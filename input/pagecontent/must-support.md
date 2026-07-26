@@ -1,30 +1,52 @@
 <!-- markdownlint-disable MD041 -->
-<!-- Must-Support-Definition. Der MII-Standardtext ist unten als Ausgangspunkt
-     vorformuliert; passen Sie ihn NUR an, wenn Ihr Modul abweicht. -->
+<!-- Must-Support. Der Text folgt der verbindlichen MII-Definition (Quelle:
+     MII-Meta-Wiki "Conformance", Abschnitt "Must Support (MS)"). Ändern Sie ihn
+     NUR, wenn Ihr Modul begründet abweicht — die Erwartungen an daten-erzeugende
+     und daten-verarbeitende Systeme sind MII-weit einheitlich. -->
 
-Für das Abfragen und Lesen von MII-Profilen ist *Must Support* auf einem
-Datenelement wie folgt zu interpretieren.
+### Must-Support
 
-### Pflicht-Elemente (min = 1)
+#### Definition
 
-Pflicht-Elemente haben eine Mindest-Kardinalität von 1. Die Daten werden immer
-erwartet. Sind sie ausnahmsweise nicht vorhanden, gilt der Abschnitt
-[Umgang mit fehlenden Daten](missing-data.html).
+Elemente einer FHIR-Ressource können in einem Profil als **obligatorisch** oder
+als [**Must Support**](http://hl7.org/fhir/R4/profiling.html#mustsupport)
+gekennzeichnet werden.
 
-### Must-Support-Elemente
+- **Obligatorische Elemente** sind Elemente mit Mindestkardinalität `1`
+  (z. B. `1..1`, `1..*`). Diese MÜSSEN grundsätzlich vorhanden sein. In
+  Ausnahmefällen können die Werte fehlen — in diesem Fall MUSS die Abwesenheit
+  dokumentiert werden, etwa über die `Data-Absent-Reason`-Extension (siehe
+  [Umgang mit fehlenden Daten](missing-data.html)).
+- **Must Support (MS)** bedeutet, dass Systeme dieses Element unterstützen
+  MÜSSEN, auch wenn die Kardinalität `0..*` lautet. **Unterstützen** heißt:
+  Systeme MÜSSEN in der Lage sein, das Element zu befüllen, zu speichern,
+  anzuzeigen und korrekt zu verarbeiten.
 
-Als *Must Support* (MS) markierte Elemente MÜSSEN von konformen Systemen
-unterstützt werden. Es wird zwischen datenliefernden Systemen (Server, z. B. die
-FHIR-API eines DIZ) und datenempfangenden Systemen (Client) unterschieden.
+Must-Support ist damit **nicht** dasselbe wie Kardinalität: ein Element kann
+`0..1` sein und trotzdem Must-Support — die Daten dürfen fehlen, die Fähigkeit,
+sie zu verarbeiten, darf nicht.
 
-#### Erwartung an Server
+#### Anforderungen an daten-erzeugende Systeme
 
-Der Server **SHALL** ein Must-Support-Element befüllen können, sofern die Daten
-lokal verfügbar sind, es speichern und auf Anfrage bereitstellen können.
+*(z. B. die FHIR-API eines Datenintegrationszentrums)*
 
-#### Erwartung an Clients
+Ein konformes daten-erzeugendes System MUSS:
 
-Der Client **SHALL** das Element verarbeiten (anzeigen/speichern/weiterverarbeiten)
-können.
+- ein MS-Element mit Daten füllen, sofern diese lokal verfügbar sind (z. B. über
+  ETL aus dem Primärsystem),
+- das MS-Element in der Ressource speichern können,
+- das MS-Element auf Anfrage (z. B. bei einer Feasibility-Query) bereitstellen.
 
-> [TODO: Nur ergänzen, falls Ihr Modul zusätzliche Must-Support-Regeln definiert.]
+#### Anforderungen an daten-verarbeitende Systeme
+
+*(z. B. anfragende Anwendungen)*
+
+Ein konformes daten-verarbeitendes System MUSS:
+
+- MS-Elemente dem Benutzer korrekt anzeigen,
+- die Werte für Berechnungen oder Weiterverarbeitung berücksichtigen können,
+- Ressourceninstanzen mit MS-Elementen fehlerfrei verarbeiten, ohne dass Fehler
+  oder Abbrüche entstehen.
+
+> [TODO: Nur ergänzen, falls Ihr Modul zusätzliche oder abweichende
+> Must-Support-Regeln definiert — und die Abweichung begründen.]
