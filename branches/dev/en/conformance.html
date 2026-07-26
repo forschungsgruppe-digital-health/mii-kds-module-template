@@ -221,10 +221,13 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
     <p>  <!-- white space is critical inside of capture --></p>
-<div>
-  <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown. -->
-</div>
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#conformance" id="markdown-toc-conformance">Conformance</a></li>
+  <li><a href="#list-of-conformance-statements" id="markdown-toc-list-of-conformance-statements">List of Conformance Statements</a></li>
+</ul>
 
+</div>
   <!-- markdownlint-disable MD041 -->
   <!-- Default-language (English) page. Overview of the Conformance section; the
      sub-page set is the MII standard set (source: MII meta wiki page
@@ -264,7 +267,7 @@ technical artifacts see the <a href="artifacts.html">Artifacts</a> section.</p>
 
   <p>Note on collecting them: conformance statements are <strong>not</strong> detected
 automatically. The IG Publisher only collects sentences that are explicitly
-marked — <code class="language-plaintext highlighter-rouge"><span class="fhir-conformance">&lt;page&gt;-&lt;n&gt;:Servers SHALL …</span></code> — and renders a summary table where a
+marked — <code class="language-plaintext highlighter-rouge"><span class="fhir-conformance"><a name="ci-c-1"> </a>&lt;page&gt;-&lt;n&gt;:Servers SHALL …<a href="conformance.html#ci-c-1"><sup>&sect;1</sup></a></span></code> — and renders a summary table where a
 paragraph contains nothing but <code class="language-plaintext highlighter-rouge"><span class="fhir-conformance"></span><span class="fhir-conformance"></span></code>. As long as no sentence is marked, there
 is no summary table. <code class="language-plaintext highlighter-rouge">kerndatensatz-basis</code> uses this mechanism; whether this
 template adopts it is still open, because the "Expectation" column is derived
@@ -273,6 +276,16 @@ page uses MUSS/SOLLTE/KANN — see the open decisions in
 <code class="language-plaintext highlighter-rouge">docs/ig-best-practices-checklist.md</code>. Verify with a real IG-Publisher build
 before shipping either way.]</p>
 </blockquote>
+
+<hr/>
+
+<h3 id="list-of-conformance-statements">List of Conformance Statements</h3>
+
+<p>The table below lists every conformance statement (a sentence marked with
+<code class="language-plaintext highlighter-rouge"><span class="fhir-conformance">id:…</span></code> in the narrative pages) together with its expectation and a link back
+to where it is stated.</p>
+
+<table class="fhir-conformance-list grid"><thead><tr style="background-color: WhiteSmoke;"><th style="text-align: center;">Id</th><th style="text-align: center;">Expectation</th><th style="text-align: center;" id="fcl-rule">Rule</th></tr><tr style="background-color: WhiteSmoke;"><td><input size="4" name="filterid" placeholder=" " type="text" title="Filter to only statements with ids that contain the specified text"/></td><td title="Filter to only statements with one of the selected expectation type(s)"><input name="expect1" type="checkbox">&nbsp;SHALL</input><br/><input name="expect2" type="checkbox">&nbsp;SHOULD</input><br/><input name="expect3" type="checkbox">&nbsp;SHALL NOT</input></td><td><input size="20" name="filterrule" placeholder=" " type="text" title="Filter to only statements that contain the specified text"/><input size="10" name="clearFilters" style="float:right" type="button" title="Clear the Filter" value="Clear Filters"/></td></tr></thead><tbody><tr><th><a name="ci-c-1"> </a><a href="conformance.html#ci-c-1">&sect;1</a></th><td>SHALL</td><td>&lt;page&gt;-&lt;n&gt;:Servers SHALL …</td></tr><tr><th><a name="ci-c-general-1"> </a><a href="general-requirements.html#ci-c-general-1">&sect;general-1</a></th><td>SHALL</td><td>Servers <strong>SHALL</strong> be able to populate all profile data elements that are mandatory or flagged as <em>Must Support</em> in that profile's StructureDefinition</td></tr><tr><th><a name="ci-c-general-2"> </a><a href="general-requirements.html#ci-c-general-2">&sect;general-2</a></th><td>SHOULD</td><td>Servers <strong>SHOULD</strong> declare support for a profile by including its official URL in <code class="language-plaintext highlighter-rouge">CapabilityStatement.rest.resource.supportedProfile</code></td></tr><tr><th><a name="ci-c-general-3"> </a><a href="general-requirements.html#ci-c-general-3">&sect;general-3</a></th><td>SHALL</td><td>A conformant server <strong>SHALL</strong> be able to populate all profile data elements that are mandatory and/or flagged as <em>Must Support</em></td></tr><tr><th><a name="ci-c-missing-data-1"> </a><a href="missing-data.html#ci-c-missing-data-1">&sect;missing-data-1</a></th><td>SHALL</td><td>if the source system has no data instance for an element with a minimum cardinality of <code class="language-plaintext highlighter-rouge">0</code> — including elements flagged Must Support — the data element <strong>SHALL</strong> be omitted from the resource</td></tr><tr><th><a name="ci-c-missing-data-2"> </a><a href="missing-data.html#ci-c-missing-data-2">&sect;missing-data-2</a></th><td>SHALL</td><td>if the data element is mandatory (minimum cardinality &gt; 0) it <strong>SHALL</strong> be present even when the source system holds no data, or does not know the reason for the absence</td></tr><tr><th><a name="ci-c-missing-data-3"> </a><a href="missing-data.html#ci-c-missing-data-3">&sect;missing-data-3</a></th><td>SHALL</td><td>For non-coded data elements (e.g. <code class="language-plaintext highlighter-rouge">string</code>, <code class="language-plaintext highlighter-rouge">HumanName</code>, <code class="language-plaintext highlighter-rouge">Address</code>), the <a href="http://hl7.org/fhir/R4/extension-data-absent-reason.html">DataAbsentReason extension</a> <strong>SHALL</strong> be used on the datatype with the code <code class="language-plaintext highlighter-rouge">unknown</code></td></tr><tr><th><a name="ci-c-missing-data-4"> </a><a href="missing-data.html#ci-c-missing-data-4">&sect;missing-data-4</a></th><td>SHALL</td><td>If the ValueSet has no such concept, a concept from the ValueSet <strong>SHALL</strong> nevertheless be used — otherwise the instance is <strong>not conformant</strong></td></tr><tr><th><a name="ci-c-must-support-1"> </a><a href="must-support.html#ci-c-must-support-1">&sect;must-support-1</a></th><td>SHALL</td><td><strong>Must Support (MS)</strong> means that systems <strong>SHALL</strong> support the element even where its cardinality is <code class="language-plaintext highlighter-rouge">0..*</code> — systems <strong>SHALL</strong> be capable of populating, storing, displaying and correctly processing it</td></tr><tr><th><a name="ci-c-must-support-2"> </a><a href="must-support.html#ci-c-must-support-2">&sect;must-support-2</a></th><td>SHALL</td><td>A conformant data-providing system <strong>SHALL</strong> be capable of populating a Must Support element with locally available data, storing it in the resource, and making it retrievable on request</td></tr><tr><th><a name="ci-c-must-support-3"> </a><a href="must-support.html#ci-c-must-support-3">&sect;must-support-3</a></th><td>SHALL NOT</td><td>Where no information is present for a data element and the reason for its absence is unknown, servers <strong>SHALL NOT</strong> include the element in the returned resource instance</td></tr><tr><th><a name="ci-c-must-support-4"> </a><a href="must-support.html#ci-c-must-support-4">&sect;must-support-4</a></th><td>SHALL</td><td>Clients <strong>SHALL</strong> interpret a missing data element in a resource instance as "not present in the server's system"</td></tr></tbody></table>
 
 
 
@@ -299,7 +312,7 @@ before shipping either way.]</p>
 
           IG &copy; 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Sun, Jul 26, 2026 11:56+0000">2026-07-26</span>
+          Generated <span title="Sun, Jul 26, 2026 12:24+0000">2026-07-26</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
               <!-- MII branding override for the fhir2.base.template footer fragment.

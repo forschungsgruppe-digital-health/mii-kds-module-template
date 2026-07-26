@@ -11,7 +11,7 @@
 
 Dieser Leitfaden ist **englischsprachig** (Standardsprache); **Deutsch** ist die Übersetzung. Englisch ist damit sowohl die Basis-Darstellung des Leitfadens als auch die `/en/`-Darstellung; über den Sprachumschalter oben rechts wechseln Sie zwischen `/en/` und `/de/`.
 
-Übersetzte Seiten liegen unter `input/translations/de/pagecontent/` (gleicher Dateiname wie die englische Seite); Ressourcen-Übersetzungen als `.po`-Dateien unter `input/translations/de/`. Details: [add-translation Rezept](../docs/recipes/add-translation.md).
+Übersetzte Seiten liegen unter `input/translations/de/pagecontent/` (gleicher Dateiname wie die englische Seite); Ressourcen-Übersetzungen als `.po`-Dateien unter `input/translations/de/`. Details: [add-translation Rezept](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/recipes/add-translation.md).
 
 > [TODO: Vermerken Sie, welche Teile des Moduls bereits ins Deutsche übersetzt sind.]
 

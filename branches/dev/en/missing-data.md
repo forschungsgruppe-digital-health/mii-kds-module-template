@@ -16,19 +16,19 @@ General guidance on Must Support elements is on the [Must Support](must-support.
 
 #### Elements with minimum cardinality 0
 
-**Rule:** if the source system has no data instance for an element with a minimum cardinality of `0` — including elements flagged [Must Support](must-support.md) — the data element **SHALL** be omitted from the resource.
+**Rule:** §missing-data-1:if the source system has no data instance for an element with a minimum cardinality of `0` — including elements flagged Must Support — the data element **SHALL** be omitted from the resource§
 
 This applies to coded and non-coded elements alike. Simply leave the element out of the resource instance.
 
 #### Mandatory elements (minimum cardinality > 0)
 
-**Rule:** if the data element is mandatory (minimum cardinality > 0) it **SHALL** be present even when the source system holds no data, or does not know the reason for the absence.
+**Rule:** §missing-data-2:if the data element is mandatory (minimum cardinality > 0) it **SHALL** be present even when the source system holds no data, or does not know the reason for the absence§
 
 How the missing value is represented depends on whether the element is coded or non-coded.
 
 ##### Non-coded data elements
 
-For non-coded data elements (e.g. `string`, `HumanName`, `Address`), the [DataAbsentReason extension](http://hl7.org/fhir/R4/extension-data-absent-reason.html) **SHALL** be used on the datatype with the code `unknown`.
+§missing-data-3:For non-coded data elements (e.g. `string`, `HumanName`, `Address`), the [DataAbsentReason extension](http://hl7.org/fhir/R4/extension-data-absent-reason.html) **SHALL** be used on the datatype with the code `unknown`§.
 
 **Code:** `unknown` — the value is expected to exist but is not known.
 
@@ -102,7 +102,7 @@ For elements with an `example`, `preferred` or `extensible` binding (`CodeableCo
 For elements with a `required` binding (`CodeableConcept`, `Coding` or `code` datatypes):
 
 1. Use the appropriate "unknown" concept from the ValueSet if one exists.
-1. If the ValueSet has no such concept, a concept from the ValueSet**SHALL**nevertheless be used — otherwise the instance is**not conformant**.
+1. §missing-data-4:If the ValueSet has no such concept, a concept from the ValueSet**SHALL**nevertheless be used — otherwise the instance is**not conformant**§
 
 > [TODO: Only add anything here if YOUR module has module-specific special cases — for example an element whose ValueSet carries its own "unknown" concept, or a data category for which the module prescribes a different representation. Delete this prompt afterwards.]
 

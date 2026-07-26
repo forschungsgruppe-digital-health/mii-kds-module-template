@@ -22,3 +22,7 @@ Hinweise zur Umsetzung stehen im Abschnitt [Anleitung](guidance.md), die technis
 
 > [TODO: Ergänzen Sie modul-spezifische Konformitätsaussagen.Hinweis zur Erfassung: Konformitätsaussagen werden **nicht** automatisch erkannt. Der IG-Publisher sammelt nur Sätze, die ausdrücklich markiert sind — `§<seite>-<n>:Server MÜSSEN …§` — und erzeugt daraus eine Übersichtstabelle an der Stelle eines Absatzes, der ausschließlich `§§§` enthält. Solange keine Sätze markiert sind, gibt es keine Übersicht. `kerndatensatz-basis` nutzt dieses Verfahren; ob diese Vorlage es übernimmt, ist noch offen, weil die Spalte „Expectation" aus den englischen Schlüsselworten SHALL/SHOULD/MAY abgeleitet wird, die deutsche Fassung einer Seite aber MUSS/SOLLTE/KANN verwendet — siehe die offenen Entscheidungen in `docs/ig-best-practices-checklist.md`. Prüfen Sie das vor der Veröffentlichung mit einem echten IG-Publisher-Build.]
 
+-------
+
+**Hinweis:** Eine Liste der Konformitätsaussagen ist in der englischen Fassung dieses Implementierungsleitfadens verfügbar. Die Aussagen werden aus den englischen Originalseiten erzeugt, weil der IG-Publisher die Erwartungsstufe aus den englischen Schlüsselworten (SHALL/SHOULD/MAY) ableitet.
+

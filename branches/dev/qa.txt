@@ -1,10 +1,10 @@
 MII_IG_Template : Validation Results
 =========================================
 
-err = 0, warn = 14, info = 122
+err = 0, warn = 14, info = 123
 IG Publisher Version: 2.2.11
-Generated Sun Jul 26 11:57:43 UTC 2026. FHIR version 4.0.1 for de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 (canonical = https://www.medizininformatik-initiative.de/fhir/modul-template)
- Build Errors : 6 / 7 / 2
+Generated Sun Jul 26 12:26:14 UTC 2026. FHIR version 4.0.1 for de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 (canonical = https://www.medizininformatik-initiative.de/fhir/modul-template)
+ Build Errors : 2 / 7 / 3
  /home/runner/work/mii-kds-module-template/mii-kds-module-template/fsh-generated/resources/ImplementationGuide-mii-ig-template : 0 / 4 / 42
  /home/runner/work/mii-kds-module-template/mii-kds-module-template/fsh-generated/resources/Patient-ExamplePatientInstance : 0 / 1 / 2
  /home/runner/work/mii-kds-module-template/mii-kds-module-template/fsh-generated/resources/StructureDefinition-example-patient : 0 / 2 / 86
@@ -15,12 +15,9 @@ WARNING: ImplementationGuide.id: The Implementation Guide Resource id should be 
 WARNING: Unable to find ImplementationGuide.definition.resource.description for the resource Parameters/mii-param-template-manifest.  Descriptions are strongly encouraged if they cannot be inferred from the resource to allow proper population of the artifact list.
 INFORMATION: de/conformance.html: No conformance term found in the text: 
 ERROR: de/downloads.html#/html/body/div/div/div/div/div/ul/li/a at Line 318, column 8: The link 'ImplementationGuide-mii-ig-template.html' for "ImplementationGuide-Ressource" cannot be resolved
-ERROR: de/profiles-and-extensions.html#/html/body/div/div/div/div/div/p/a at Line 249, column 101: The link '../docs/recipes/add-a-profile.md' for "add-a-profile Rezept" cannot be resolved
-ERROR: de/translationinfo.html#/html/body/div/div/div/div/div/p/a at Line 258, column 2: The link '../docs/recipes/add-translation.md' for "add-translation Rezept" cannot be resolved
 INFORMATION: en/conformance.html: No conformance term found in the text: 
+INFORMATION: en/conformance.html: No conformance term found in the text: id:…
 ERROR: en/downloads.html#/html/body/div/div/div/div/div/ul/li/a at Line 303, column 8: The link 'ImplementationGuide-mii-ig-template.html' for "ImplementationGuide resource" cannot be resolved
-ERROR: en/profiles-and-extensions.html#/html/body/div/div/div/div/div/p/a at Line 240, column 2: The link '../docs/recipes/add-a-profile.md' for "add-a-profile recipe" cannot be resolved
-ERROR: en/translationinfo.html#/html/body/div/div/div/div/div/p/a at Line 245, column 2: The link '../docs/recipes/add-translation.md' for "add-translation recipe" cannot be resolved
 WARNING: 1: An HTML fragment from the set [ip-statements.xhtml, ip-statements.xhtml] is not included anywhere in the produced implementation guide
 WARNING: 2: An HTML fragment from the set [cross-version-analysis.xhtml, cross-version-analysis-inline.xhtml, cross-version-analysis.xhtml, cross-version-analysis-inline.xhtml] is not included anywhere in the produced implementation guide
 WARNING: 3: An HTML fragment from the set [dependency-table.xhtml, dependency-table-short.xhtml, dependency-table-nontech.xhtml, dependency-table.xhtml, dependency-table-short.xhtml, dependency-table-nontech.xhtml] is not included anywhere in the produced implementation guide

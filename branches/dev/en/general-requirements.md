@@ -54,14 +54,14 @@ A system claims conformance to this module by fulfilling the module's profiles. 
 
 Systems may deploy and support one or more of this module's profiles to represent clinical information, using the profile's content model without implementing the associated interactions.
 
-* Servers **SHALL** be able to populate all profile data elements that are mandatory or flagged as **Must Support** in that profile's StructureDefinition.
-* Servers **SHOULD** declare support for a profile by including its official URL in `CapabilityStatement.rest.resource.supportedProfile`. The official ("canonical") URL of each profile is shown on its profile page.
+* §general-1:Servers **SHALL** be able to populate all profile data elements that are mandatory or flagged as **Must Support** in that profile's StructureDefinition§
+* §general-2:Servers **SHOULD** declare support for a profile by including its official URL in `CapabilityStatement.rest.resource.supportedProfile`§. The official ("canonical") URL of each profile is shown on its profile page.
 
 ##### Profile support and interaction support
 
 Systems may support one or more profiles **and** the RESTful interactions defined for the corresponding resources.
 
-* A conformant server **SHALL** be able to populate all profile data elements that are mandatory and/or flagged as **Must Support**.
+* §general-3:A conformant server **SHALL** be able to populate all profile data elements that are mandatory and/or flagged as **Must Support**§
 * A conformant server **SHOULD** declare conformance with the applicable CapabilityStatement by including its official URL in `CapabilityStatement.instantiates`.
 * A conformant server **SHALL** state the full capability details of the CapabilityStatement it claims to implement.
 * A conformant server claiming interaction support **SHALL** declare support for the profile by including its official URL in `CapabilityStatement.rest.resource.supportedProfile`.

@@ -20,3 +20,11 @@ For implementation guidance see the [Guidance](guidance.md) section; for the tec
 
 > [TODO: Add the conformance statements that are specific to your module.Note on collecting them: conformance statements are **not** detected automatically. The IG Publisher only collects sentences that are explicitly marked — `§<page>-<n>:Servers SHALL …§` — and renders a summary table where a paragraph contains nothing but `§§§`. As long as no sentence is marked, there is no summary table. `kerndatensatz-basis` uses this mechanism; whether this template adopts it is still open, because the "Expectation" column is derived from the English keywords SHALL/SHOULD/MAY and the German translation of a page uses MUSS/SOLLTE/KANN — see the open decisions in `docs/ig-best-practices-checklist.md`. Verify with a real IG-Publisher build before shipping either way.]
 
+-------
+
+### List of Conformance Statements
+
+The table below lists every conformance statement (a sentence marked with `§id:…§` in the narrative pages) together with its expectation and a link back to where it is stated.
+
+§§§
+
