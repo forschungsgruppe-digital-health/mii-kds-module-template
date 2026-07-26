@@ -1,6 +1,6 @@
 # Concepts — how this module template works and why
 
-Read this after the [Glossary](GLOSSARY.md). It explains the ideas behind this
+Read this after the [Glossary](glossary.md). It explains the ideas behind this
 repository. Every non-obvious choice carries a **Why**.
 
 ## 1. What this repository is
@@ -18,7 +18,7 @@ MII-branded FHIR Implementation Guide.
 ## 2. How it references the MII template — vendored vs published
 
 The **look** of the IG comes from a separate template package,
-[`de.medizininformatikinitiative.template`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds)
+[`de.medizininformatikinitiative.template`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)
 (Repo A). This scaffold references it in `ig.ini`:
 
 - **Vendored (bring-up):** a copy lives in `ig-template/`, referenced as
@@ -48,7 +48,7 @@ This is the single most important idea for a maintainer:
   Release Workflow — and it carries **no Release Please at all**, because the
   first-run bootstrap removes it.
 
-[WORKFLOWS.md](WORKFLOWS.md) explains both layers side by side. The
+[workflows.md](workflows.md) explains both layers side by side. The
 [first-run bootstrap](recipes/first-run-setup.md) is what enforces the separation.
 
 > **Why remove Release Please from a module:** two release systems on one repo (SemVer
@@ -76,4 +76,4 @@ the creating org; the canonical stays the MII URL). Production publication runs
 through the **gated** `-go-publish` — never automatically. The naming, terminology
 policy and release process are defined in the
 [MII meta wiki](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki);
-when it and this repo disagree, the wiki wins. See [FURTHER-READING.md](FURTHER-READING.md).
+when it and this repo disagree, the wiki wins. See [further-reading.md](further-reading.md).

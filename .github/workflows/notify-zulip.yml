@@ -56,7 +56,7 @@ jobs:
         uses: zulip/github-actions-zulip/send-message@f675f2b4eb2a95fae974215476dcb7ad8dfeff6b # v2.0.2
         with:
           api-key: ${{ env.ZULIP_API_KEY }}
-          email: "kds-github-bot@mii.zulipchat.com"
+          email: ${{ vars.MII_ZULIP_BOT_EMAIL || 'kds-github-bot@mii.zulipchat.com' }}
           organization-url: "https://mii.zulipchat.com/"
           type: "stream"
           to: "MII-Kerndatensatz"
@@ -78,19 +78,19 @@ jobs:
       FHIR_ZULIP_API_KEY: ${{ secrets.FHIR_ZULIP_API_KEY }}
     steps:
       - name: Notify public FHIR Zulip german/mi-initiative (human-enabled)
-        if: ${{ env.FHIR_ZULIP_API_KEY != '' }}
+        if: ${{ env.FHIR_ZULIP_API_KEY != '' && vars.FHIR_ZULIP_BOT_EMAIL != '' }}
         uses: zulip/github-actions-zulip/send-message@f675f2b4eb2a95fae974215476dcb7ad8dfeff6b # v2.0.2
         with:
           api-key: ${{ env.FHIR_ZULIP_API_KEY }}
-          # TODO(human): replace with the email address of the bot account you
-          # create on chat.fhir.org before setting ANNOUNCE_PUBLIC_ZULIP=true.
-          email: "TODO-bot-account@chat.fhir.org"
+          # Bot account on chat.fhir.org. Set the FHIR_ZULIP_BOT_EMAIL repository
+          # variable — no workflow edit is needed to enable this gate.
+          email: ${{ vars.FHIR_ZULIP_BOT_EMAIL }}
           organization-url: "https://chat.fhir.org/"
           type: "stream"
           to: "german/mi-initiative"
           topic: "MII KDS template"
           content: |
             New MII KDS template release: `${{ github.event.release.tag_name }}` — ${{ github.event.release.html_url }}
-      - name: Skip notice when FHIR_ZULIP_API_KEY is absent
-        if: ${{ env.FHIR_ZULIP_API_KEY == '' }}
-        run: echo "::notice::FHIR_ZULIP_API_KEY not set — skipping public announcement (Gate G)."
+      - name: Skip notice when the public-channel credentials are incomplete
+        if: ${{ env.FHIR_ZULIP_API_KEY == '' || vars.FHIR_ZULIP_BOT_EMAIL == '' }}
+        run: echo "::notice::Public announcement skipped (Gate G) — set BOTH the FHIR_ZULIP_API_KEY secret and the FHIR_ZULIP_BOT_EMAIL variable."

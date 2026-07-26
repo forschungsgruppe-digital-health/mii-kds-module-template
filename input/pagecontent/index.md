@@ -52,6 +52,20 @@ Dieser Implementierungsleitfaden richtet sich an:
   **[Terminologie](terminology.html)** — die technischen Artefakte.
 - **[Beispiele](examples.html)** — Beispielinstanzen.
 
+### Verwandte Leitfäden
+
+Dieses Modul ist Teil des MII-Kerndatensatzes; die weiteren KDS-Module und ihre
+Abhängigkeiten sind unter
+[medizininformatik-initiative.de](https://www.medizininformatik-initiative.de/)
+beschrieben.
+
+> [TODO: Nennen Sie die formalen Abhängigkeiten (siehe `dependencies` in
+> `sushi-config.yaml`) und verwandte Leitfäden Ihres Moduls.]
+
+Weitere FHIR-Implementierungsleitfäden finden Sie im offiziellen
+**[FHIR IG Registry](https://fhir.org/guides/registry/)** (Quelle:
+[`FHIR/ig-registry`](https://github.com/FHIR/ig-registry)).
+
 ### Impressum
 
 Dieser Leitfaden ist im Rahmen der Medizininformatik-Initiative erstellt worden

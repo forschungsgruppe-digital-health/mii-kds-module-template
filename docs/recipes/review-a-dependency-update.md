@@ -6,7 +6,7 @@ you from "a bump is proposed" to "the bump is merged — or consciously not".
 It applies unchanged in a module created from this template.
 
 > **Why a recipe:** updates are proposals, never automatic
-> ([`docs/MAINTENANCE.md`](../MAINTENANCE.md)). The human in the loop is you.
+> ([`docs/maintenance.md`](../maintenance.md)). The human in the loop is you.
 
 ## 1. Read the proposal
 

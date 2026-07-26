@@ -9,7 +9,7 @@ release automation) themselves. Click **"Use this template"**, follow the
 Quickstart, and you get a buildable module skeleton with CI, GitHub Pages
 previews, and the MII release process wired in. The scaffold **references** the
 MII IG template package
-[`ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds)
+[`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)
 (package id `de.medizininformatikinitiative.template`) **by a pinned version**
 — one line in `ig.ini` — and does **not contain** the template itself.
 
@@ -22,7 +22,7 @@ MII IG template package
 > prototypes pending discussion in the MII Taskforce Kerndatensatz. They are
 > released and fully usable, but the IG template is deliberately **not** registered
 > in `FHIR/ig-registry` and the repos must not be moved to another organisation
-> until that is explicitly decided — see [docs/PROJECT-STATUS.md](docs/PROJECT-STATUS.md).
+> until that is explicitly decided — see [docs/project-status.md](docs/project-status.md).
 
 ## Quickstart
 
@@ -54,9 +54,9 @@ important warning is right below this list, read it first.
 10. Release with **CalVer** via the MII Module Release Workflow
     ([recipe](docs/recipes/cut-a-release.md)) — **not** Release Please.
 
-New to the words above? Start with the [Glossary](docs/GLOSSARY.md) and
-[Concepts](docs/CONCEPTS.md). To understand the CI and the two release layers, read
-[docs/WORKFLOWS.md](docs/WORKFLOWS.md).
+New to the words above? Start with the [Glossary](docs/glossary.md) and
+[Concepts](docs/concepts.md). To understand the CI and the two release layers, read
+[docs/workflows.md](docs/workflows.md).
 
 > **⚠️ Before you click "Use this template" — read this.**
 > GitHub's *Use this template* button copies **only the default branch
@@ -88,11 +88,16 @@ arrive via the ongoing build-out pull requests onto `dev`.
 | `input/` | *(planned)* The IG source: FSH profiles (`input/fsh/`), narrative pages (`input/pagecontent/`, German by default), translations (`input/translations/en/`). |
 | `scripts/` | *(planned)* Publication and maintenance scripts (Node.js, no npm dependencies). |
 | `skills/` | *(planned)* Vendor-neutral agent skills (agentskills.io format) for IG authoring and maintenance tasks. |
-| `docs/` | *(planned)* Novice documentation: `GLOSSARY.md`, `CONCEPTS.md`, `WORKFLOWS.md`, `FURTHER-READING.md`, `SUPPORT.md`, and click-by-click `recipes/`. |
+| `docs/` | *(planned)* Novice documentation: `glossary.md`, `concepts.md`, `workflows.md`, `further-reading.md`, `SUPPORT.md`, and click-by-click `recipes/`. |
 | `.github/` | Issue templates and `CODEOWNERS` (this PR); CI workflows, Dependabot, and release automation *(planned)*. |
 | `.devcontainer/` | *(planned)* Dev container with Java, Node, SUSHI, Jekyll, Graphviz, and the IG Publisher preinstalled. |
 | `CONTRIBUTING.md` | Branching model, commit conventions, and how contributing **to this template** differs from working **in a module created from it**. |
 | `LICENSE` | CC-BY-4.0 (matches the MII IG content licensing). |
+
+
+## Quality bar
+
+- [IG best-practices checklist](docs/ig-best-practices-checklist.md) — the official HL7 IG best practices, with what the scaffold already does and what you must fill in.
 
 ## Where to get help
 

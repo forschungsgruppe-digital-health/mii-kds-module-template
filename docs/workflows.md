@@ -87,7 +87,7 @@ Notes:
 
 - **This template repo:** **SemVer** via Release Please on `main` (Layer 1).
 - **A module:** **CalVer** `YYYY.n.n` via the MII Module Release Workflow —
-  see [RELEASE.md](RELEASE.md) and [recipes/cut-a-release.md](recipes/cut-a-release.md).
+  see [release.md](release.md) and [recipes/cut-a-release.md](recipes/cut-a-release.md).
   A module has **no Release Please** after the bootstrap.
 
 > **Why one page with two layers:** post-2026 a new maintainer must be able to tell,
@@ -99,6 +99,6 @@ Notes:
 A module builds and previews without secrets. To enable the optional gated
 features — SU-TermServ terminology (Gate F, for both the build and the reusable
 validation) and the Zulip release announcement (Gate G) — see
-[docs/SECRETS.md](SECRETS.md) for the exact `gh secret set` commands (including
+[docs/secrets.md](secrets.md) for the exact `gh secret set` commands (including
 why the SU-TermServ cert is set under both `SU_TERMSERV_CLIENT_*` and
 `CDS_DEV_CLIENT_*` names). The workflows are already wired.

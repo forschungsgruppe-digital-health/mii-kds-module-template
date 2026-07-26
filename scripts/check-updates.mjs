@@ -2,7 +2,7 @@
 // check-updates.mjs — compares this repo's pinned versions against the latest
 // available upstream and prints a Markdown drift report.
 //
-// Design rules (see docs/MAINTENANCE.md):
+// Design rules (see docs/maintenance.md):
 // - Pins are read from the REAL repo files (ig.ini, sushi-config.yaml, the CI
 //   workflow env) so this checker never becomes a second source of truth.
 // - Every row links the upstream changelog / release notes so a reviewer can
@@ -17,7 +17,7 @@
 //   "pin file not found" reminder row, never a crash.
 //
 // This implementation is kept aligned with the sibling template repo
-// (forschungsgruppe-digital-health/ig-template-mii-kds, same file) and with
+// (medizininformatik-initiative/ig-template-mii-kds, same file) and with
 // the FGDH sample IG's tools/check-updates.py; Repo B extends the watch list
 // with de.medizininformatikinitiative.template and a fixed set of FHIR
 // package dependencies.
@@ -171,7 +171,7 @@ export function latestFromPackageList(packageList) {
  * (de.medizininformatikinitiative.template) from the two possible sources:
  * the FHIR package registry metadata (null when packages.fhir.org 404s —
  * i.e. not yet published there) and, as fallback, the GitHub releases of
- * forschungsgruppe-digital-health/ig-template-mii-kds (null when the repo
+ * medizininformatik-initiative/ig-template-mii-kds (null when the repo
  * has no release yet). Returns { latest, source }; when neither source has
  * a version: { latest: null, source: "not yet published" } — graceful, not
  * an error.
@@ -260,7 +260,7 @@ async function fetchJson(url, { github = false, allow404 = false } = {}) {
 }
 
 const TEMPLATE_PKG_ID = "de.medizininformatikinitiative.template";
-const TEMPLATE_REPO = "forschungsgruppe-digital-health/ig-template-mii-kds";
+const TEMPLATE_REPO = "medizininformatik-initiative/ig-template-mii-kds";
 
 // The FIXED FHIR package watch list (§2.5): these always get a row, even
 // before sushi-config.yaml has landed. Extra pins found in sushi-config.yaml

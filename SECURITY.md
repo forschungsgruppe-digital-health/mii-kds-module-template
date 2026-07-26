@@ -6,7 +6,7 @@ Please report vulnerabilities **privately** via GitHub's private vulnerability
 reporting: on this repository, go to the **Security** tab → **Report a
 vulnerability**, or use this direct link:
 
-<https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/security/advisories/new>
+<https://github.com/medizininformatik-initiative/mii-kds-module-template/security/advisories/new>
 
 Do **not** open a public issue for a security problem.
 

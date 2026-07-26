@@ -64,9 +64,40 @@ the template repos' *Template Releases*). It skips with a `::notice` if absent.
 printf '%s' 'THE_MII_ZULIP_BOT_API_KEY' | gh secret set ZULIP_API_KEY --repo <owner>/<module-repo>
 ```
 
-Bot account: `kds-github-bot@mii.zulipchat.com`. The public FHIR Zulip stays off
-unless you set `ANNOUNCE_PUBLIC_ZULIP=true` **and** `FHIR_ZULIP_API_KEY` (a
-`chat.fhir.org` bot).
+Bot account: `kds-github-bot@mii.zulipchat.com` by default; override it with the
+`MII_ZULIP_BOT_EMAIL` variable if your bot differs.
+
+The **public** FHIR Zulip (`chat.fhir.org`, stream `german/mi-initiative`) stays
+off unless you set **all three**:
+
+```sh
+gh variable set ANNOUNCE_PUBLIC_ZULIP  --body 'true'                       --repo <owner>/<repo>
+gh variable set FHIR_ZULIP_BOT_EMAIL   --body 'your-bot@chat.fhir.org'     --repo <owner>/<repo>
+printf '%s' 'THE_CHAT_FHIR_ORG_BOT_API_KEY' | gh secret set FHIR_ZULIP_API_KEY --repo <owner>/<repo>
+```
+
+If the key or the bot address is missing, the job **skips with a notice** instead
+of posting with an invalid sender. **No workflow file has to be edited to enable
+either channel.**
+
+## Verifying a gate after you enable it
+
+Both gates are *wired and fall back safely*, but until the credential exists the
+"enabled" code path has never executed. Verify each once, right after enabling:
+
+**Gate F (SU-TermServ).** Push any branch (or re-run the IG build) and open the
+log of the terminology step. Enabled and working looks like
+`SU-TermServ client certificate present — starting a local client-cert nginx proxy`
+followed by a green build; not configured looks like
+`No SU-TermServ credential — falling back to the public HL7 terminology server`.
+If the proxy fails to start, the step fails loudly rather than silently
+mis-expanding value sets — re-check that the cert/key are **base64-encoded** and
+that the key password is correct.
+
+**Gate G (Zulip).** The announcement runs on a published release. To verify
+without waiting for the next one, cut a throw-away pre-release in a scratch repo,
+or check the job log of the most recent release run — it prints either the
+delivered message or the explicit skip notice naming what is missing.
 
 ## CI toggles (variables — all default correctly when unset)
 
@@ -78,6 +109,8 @@ unless you set `ANNOUNCE_PUBLIC_ZULIP=true` **and** `FHIR_ZULIP_API_KEY` (a
 | `ENABLE_MODULE_RELEASE` | on | CalVer release workflow |
 | `ENABLE_ZULIP_ANNOUNCE` | on | MII Zulip announcement |
 | `ANNOUNCE_PUBLIC_ZULIP` | off | public FHIR Zulip announcement |
+| `FHIR_ZULIP_BOT_EMAIL` | unset | sender for the public FHIR Zulip; required for that channel |
+| `MII_ZULIP_BOT_EMAIL` | `kds-github-bot@mii.zulipchat.com` | sender for the MII Zulip |
 | `ENABLE_DEPENDENCY_CHECK` | on | weekly version-drift check |
 | `ENABLE_SECURITY_SCAN` | on | OSV + Trivy |
 | `PAGES_ACTIONS_ENABLED` | (gh-pages push mode) | switch preview deploy to the Actions Pages path |

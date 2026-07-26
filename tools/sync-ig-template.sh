@@ -20,7 +20,10 @@
 # (see docs/recipes/switch-template-to-published.md).
 set -euo pipefail
 
-SRC_REPO="${SRC_REPO:-https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds.git}"
+# Source of the template. Defaults to the TARGET organisation; override with the
+# SRC_REPO env var (CI passes the `IG_TEMPLATE_REPO_URL` repository variable when
+# set) — needed while the repositories still live in their pre-move organisation.
+SRC_REPO="${SRC_REPO:-https://github.com/medizininformatik-initiative/ig-template-mii-kds.git}"
 REF="dev"
 CHECK_ONLY="false"
 while [ $# -gt 0 ]; do
@@ -57,7 +60,7 @@ cat > "${tmp}/new/README.md" <<EOF
 
 A **vendored mirror** of the MII IG-Publisher template package
 \`de.medizininformatikinitiative.template\` (version \`${src_ver}\`), copied from
-[\`forschungsgruppe-digital-health/ig-template-mii-kds\`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds)
+[\`medizininformatik-initiative/ig-template-mii-kds\`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)
 at commit \`${src_sha}\`.
 
 **Do not edit these files here.** The single source of truth is the

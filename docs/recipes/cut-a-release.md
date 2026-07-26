@@ -3,7 +3,7 @@
 **Goal.** Release a version of your **module** using the MII **CalVer** Module
 Release Workflow. This is **not** Release Please — modules never use Release Please.
 
-**Prerequisites.** Your module builds green on `main`. See [RELEASE.md](../RELEASE.md)
+**Prerequisites.** Your module builds green on `main`. See [release.md](../release.md)
 for the step-by-step mapping to the MII wiki's Module Release Workflow.
 
 ## Steps
@@ -40,4 +40,4 @@ dry-run publication ready for a human to promote. **No SemVer tag, no Release Pl
 > **Why CalVer and not SemVer here:** the module and the template tooling have
 > different release authorities. The MII CalVer process is the module's single source
 > of release truth; adding Release Please would produce conflicting tags. See
-> [WORKFLOWS.md](../WORKFLOWS.md) and [RELEASE.md](../RELEASE.md).
+> [workflows.md](../workflows.md) and [release.md](../release.md).

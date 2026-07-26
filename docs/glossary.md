@@ -32,7 +32,7 @@ build on earlier ones.
 | **ValueSet / CodeSystem** | A *CodeSystem* defines codes and their meanings; a *ValueSet* selects a set of codes (often from one or more CodeSystems) for use in a profile. |
 | **Terminology server** | A server that validates and expands codes/value sets (e.g. SNOMED CT, ICD-10-GM). This project prefers **SU-TermServ** and falls back to HL7's `tx.fhir.org`. |
 | **Snapshot** | The fully-resolved form of a profile (base + all constraints flattened), as opposed to the "differential" (only what this profile changes). |
-| **CalVer vs SemVer** | *SemVer* (`MAJOR.MINOR.PATCH`, e.g. `0.2.0`) signals breaking vs compatible change — used for the **template tooling** (this repo). *CalVer* (`YYYY.n.n`, e.g. `2026.0.1`) is date-sequenced — used for MII **modules**. See [CONCEPTS.md](CONCEPTS.md). |
+| **CalVer vs SemVer** | *SemVer* (`MAJOR.MINOR.PATCH`, e.g. `0.2.0`) signals breaking vs compatible change — used for the **template tooling** (this repo). *CalVer* (`YYYY.n.n`, e.g. `2026.0.1`) is date-sequenced — used for MII **modules**. See [concepts.md](concepts.md). |
 | **Conventional Commits** | A commit-message convention (`feat:`, `fix:`, `docs:` …) that lets tooling derive version bumps and changelogs. See [CONTRIBUTING.md](../CONTRIBUTING.md). |
 | **Release Please** | The automation that reads Conventional Commits on `main` and opens a release PR (tag + changelog). Runs on the **template repos only**. |
 | **Dev container** | A pre-built development environment (Docker) that ships the whole toolchain (Java, Node, SUSHI, Jekyll…) so you do not install it by hand. See [recipes/first-build-in-devcontainer.md](recipes/first-build-in-devcontainer.md). |

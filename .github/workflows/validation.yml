@@ -64,7 +64,7 @@ jobs:
     name: SUSHI + Simplifier QC (.NET)
     # ON by default (§2.13), and only on created modules — the placeholder
     # template repo cannot produce clean SUSHI output for validation.
-    if: ${{ vars.ENABLE_VALIDATION != 'false' && github.repository != 'forschungsgruppe-digital-health/mii-kds-module-template' }}
+    if: ${{ vars.ENABLE_VALIDATION != 'false' && github.repository != 'medizininformatik-initiative/mii-kds-module-template' }}
     uses: medizininformatik-initiative/kerndatensatz-meta/.github/workflows/ci_dotnet_validation.yml@1db2e534704d92e5ee0cde663ce3e7ccd8825fa7 # kerndatensatz-meta master @ 2026-07-15
     with:
       ref: ${{ github.event.pull_request.head.ref || github.ref }}
@@ -74,7 +74,7 @@ jobs:
 
   java-validation:
     name: HL7 Java validator (SU-TermServ)
-    if: ${{ vars.ENABLE_VALIDATION != 'false' && github.repository != 'forschungsgruppe-digital-health/mii-kds-module-template' }}
+    if: ${{ vars.ENABLE_VALIDATION != 'false' && github.repository != 'medizininformatik-initiative/mii-kds-module-template' }}
     uses: medizininformatik-initiative/kerndatensatz-meta/.github/workflows/ci_java_validation.yml@1db2e534704d92e5ee0cde663ce3e7ccd8825fa7 # kerndatensatz-meta master @ 2026-07-15
     with:
       ref: ${{ github.event.pull_request.head.ref || github.ref }}
@@ -104,7 +104,7 @@ jobs:
     name: Validation skipped on the template repo
     # Explains the skip on THIS template repo so the run is a clear success, not
     # a confusing empty/skipped workflow. A created module skips this job.
-    if: ${{ vars.ENABLE_VALIDATION != 'false' && github.repository == 'forschungsgruppe-digital-health/mii-kds-module-template' }}
+    if: ${{ vars.ENABLE_VALIDATION != 'false' && endsWith(github.repository, '/mii-kds-module-template') }}
     runs-on: ubuntu-latest
     steps:
       - name: Explain why validation does not run here
