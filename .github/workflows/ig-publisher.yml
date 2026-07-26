@@ -41,17 +41,17 @@
 #            some MII-specific value sets may then not fully expand (a QA note).
 #
 # TEMPLATE-REPO SELF-CHECK (this repo only — a created module skips it):
-#            sushi-config.yaml here still carries {{PLACEHOLDER}} values and
-#            ig.ini still carries the B3 TODO template line, so the repo is not
-#            buildable as-is. The "Template-repo self-check substitution" step is
-#            gated to github.repository == the template repo and, in a WORKSPACE
-#            COPY that is NEVER committed, sed-substitutes documented demo values
-#            (MODULE_SLUG=demo, …) into sushi-config.yaml and MODULE_SLUG into
-#            ig.ini so a real build can run. While ig.ini's template line is
-#            still the B3 TODO placeholder the build DEGRADES to a SUSHI-only
-#            check with a clear ::notice (no IG Publisher, no preview deploy).
-#            Once B3 wires a buildable template into ig.ini, the full build +
-#            preview run automatically — no change to this file. In a created
+#            sushi-config.yaml here still carries {{PLACEHOLDER}} values, so the
+#            repo is not buildable as-is. The "Template-repo self-check
+#            substitution" step is gated to the template repository and, in a
+#            WORKSPACE COPY that is NEVER committed, sed-substitutes the
+#            documented self-check values (MODULE_SLUG=template, …) into
+#            sushi-config.yaml, ig.ini and the build inputs so a real build can
+#            run. The template line itself is left alone: `#ig-template` (the
+#            vendored folder) is buildable, so the full build + preview run.
+#            Should a repository ever carry a TODO template line instead, the
+#            build DEGRADES at runtime to a SUSHI-only check with a clear
+#            ::notice — no edit to this file needed either way. In a created
 #            module every placeholder is already replaced and this whole step is
 #            a no-op (it never runs, the repo name differs).
 #
@@ -137,7 +137,7 @@ jobs:
           set -euo pipefail
           # WHY: this repo ships {{PLACEHOLDER}} values so a module author starts
           # from a documented scaffold. To let CI still prove the pipeline builds,
-          # substitute the documented demo values into WORKSPACE copies only. The
+          # substitute the documented self-check values into WORKSPACE copies. The
           # workflow never commits source, so nothing here reaches the repo. In a
           # created module the placeholders are gone and this step does not run.
           subst() { # $1=file  (stdin: KEY|VALUE lines)
@@ -148,8 +148,8 @@ jobs:
               sed -i "s/{{${key}}}/${esc}/g" "${file}"
             done
           }
-          # Self-check values are derived from the placeholder table B2 documented at
-          # the top of sushi-config.yaml. These stand in only so the template repo's
+          # Self-check values are derived from the placeholder table at the top
+          # of sushi-config.yaml. These stand in only so the template repo's
           # OWN CI can prove the pipeline builds; a real module replaces them. The
           # rendered IG is the module template itself — NOT a "demo" (this scaffold
           # is a starting point for a new MII KDS module IG, or a migration target
@@ -174,7 +174,7 @@ jobs:
           PLACEHOLDERS
           # sushi-config.yaml + ig.ini (ig.ini's `ig =` line references
           # ImplementationGuide-mii-ig-{{MODULE_SLUG}}.json; the `template =` line is
-          # left untouched — while it is the B3 TODO the build degrades to SUSHI-only).
+          # left untouched — it already points at the vendored ig-template/).
           subst sushi-config.yaml < "${RUNNER_TEMP}/placeholders.txt"
           subst ig.ini < "${RUNNER_TEMP}/placeholders.txt"
           # narrative pages (both languages), if present
@@ -208,13 +208,13 @@ jobs:
           sushi .
           test -d fsh-generated/resources
           # A full IG Publisher build needs a buildable IG template in ig.ini.
-          # While ig.ini still carries the B3 TODO placeholder we cannot build,
-          # so degrade to a SUSHI-only check. Runtime detection means no edit to
-          # this file is needed once B3 wires a real template.
+          # `#ig-template` (the vendored folder) is buildable, so this normally
+          # takes the full path; a TODO template line degrades to a SUSHI-only
+          # check. Detecting it at runtime keeps this file edit-free either way.
           tmpl_line="$(grep -E '^[[:space:]]*template[[:space:]]*=' ig.ini || true)"
           if printf '%s' "${tmpl_line}" | grep -q 'TODO'; then
             echo "mode=sushi-only" >> "${GITHUB_OUTPUT}"
-            echo "::notice::ig.ini still carries the B3 TODO template placeholder — running a SUSHI-only check. The IG Publisher build and the Pages preview are skipped until B3 wires a buildable IG template. This degrade path is expected on the template repo until B3 lands; a created module references a real template and runs the full build + preview."
+            echo "::notice::ig.ini carries a TODO template placeholder — running a SUSHI-only check. The IG Publisher build and the Pages preview are skipped until ig.ini names a buildable template (the vendored #ig-template, or the published package once it exists — see docs/recipes/switch-template-to-published.md)."
           else
             echo "mode=full" >> "${GITHUB_OUTPUT}"
             echo "IG template reference present — running the full IG Publisher build + preview."

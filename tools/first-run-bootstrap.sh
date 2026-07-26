@@ -102,11 +102,13 @@ print_checklist() {
    comments — the module does NOT build until they are all replaced:
      - sushi-config.yaml   ({{MODULE_SLUG}}, {{MODULE_NAME}}, {{MODULE_TITLE}},
                             {{MODULE_DESCRIPTION}}, {{CALVER_VERSION}}, dates, …)
-     - ig.ini              (the {{MODULE_SLUG}} in the ig path AND the pinned
-                            `template = de.medizininformatikinitiative.template#<version>`
-                            — replace the TODO template reference)
+     - ig.ini              (the {{MODULE_SLUG}} in the ig path; LEAVE
+                            `template = #ig-template` as it is until the MII
+                            template package is published — see
+                            docs/recipes/switch-template-to-published.md)
      - publication-request.json, .github/workflows/go-publish.yml
        ({{GITHUB_ORG}}, {{REPO_NAME}}, canonical, …)
+     - qc/custom.rules.yaml, tests/, the pages and the FSH sources
    Run `node tools/convention-check.mjs` — it must be green (parameterized
    fields are OK until you resolve them; a release branch requires them all set).
 
