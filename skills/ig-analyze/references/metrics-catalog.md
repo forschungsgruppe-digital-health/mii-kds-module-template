@@ -23,8 +23,10 @@ mit Treiber-Beitragstabelle. Provenienz-Arrays in der `ig-stats.json`:
 > (Profile/Extensions/VS/CS/Logical/CapabilityStatement/Questionnaire/SearchParameter/
 > Operation/Beispiele). RuleSets, Invarianten und Mappings sind interne
 > FSH-Konstrukte und werden separat geführt (nicht im Vergleichs-`total`).
-> **Direktiven** werden anhand `mii-ig-migration/references/fql-rules.tsv` (SSOT)
-> erkannt; nicht abgedeckte → `UNBEKANNT` (im Report mit Fundstelle gelistet).
+> **Direktiven** werden anhand der Muster in
+> `references/report-content.json` (`directive_patterns`) und des Auffangmusters
+> `GENERIC_DIRECTIVE` in `tools/ig-stats.py` erkannt; nicht abgedeckte →
+> `UNBEKANNT` (im Report mit Fundstelle gelistet).
 
 ## A. Identität & Scope
 | metric_id | Misst | Quelle | Modus | Nutzen |
@@ -62,7 +64,7 @@ mit Treiber-Beitragstabelle. Provenienz-Arrays in der `ig-stats.json`:
 |---|---|---|---|---|
 | `narrative_pages`,`narrative_words`,`images` | Doku-Umfang | `input/pagecontent/**`, `implementation-guides/**`, `input/images` | static | V·A |
 | `mandatory_pages_present`/`_missing` | Pflichtabschnitte | Seitenliste vs. Soll-Set | static | V·A |
-| `simplifier_directives_total`,`_by_label`,`_unknown` | Simplifier-/FQL-Direktiven (Narrativ-Nacharbeit) | `tools/fql-scan.sh` bzw. eingebaute Muster | static | A |
+| `simplifier_directives_total`,`_by_label`,`_unknown` | Simplifier-/FQL-Direktiven (Narrativ-Nacharbeit) | `references/report-content.json` + `tools/ig-stats.py` | static | A |
 
 ## F. Mehrsprachigkeit
 | metric_id | Misst | Quelle | Modus | Nutzen |

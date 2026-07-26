@@ -1,9 +1,10 @@
-# `scripts/` — publication automation
+# `scripts/` — publication automation and the dependency-drift check
 
-Imported from
+The publication scripts are imported from
 [kerndatensatz-basis](https://github.com/medizininformatik-initiative/kerndatensatz-basis)
-(`main`). These scripts support the gated formal-publication workflow
-(`.github/workflows/go-publish.yml`). They are plain Node.js (no npm
+(`main`) and support the gated formal-publication workflow
+(`.github/workflows/go-publish.yml`); `check-updates.mjs` is this template's own
+weekly dependency-drift checker. All of them are plain Node.js (no npm
 dependencies, Node 22 `fetch`/`node:` builtins only) plus one bash script.
 
 Run all tests offline:
@@ -27,6 +28,7 @@ before a formal publication) and the second only on the template repo.
 | `install-history-template.mjs` | Installs the static support files of the [HL7 history template](https://github.com/HL7/fhir-ig-history-template) into a webroot per its `manifest.ini` (used when importing pre-existing publication history — see the note below). |
 | `merge-publication-webroot.mjs` | Replaces a legacy Pages root with a bootstrapped formal webroot while preserving every marker-backed branch preview (also part of the history-import path). |
 | `verify-preview-preservation.mjs` | Snapshots (`snapshot`) and byte-for-byte verifies (`verify`) all marker-backed branch previews across a publication run, so formal publication can never destroy a preview. |
+| `check-updates.mjs` | The dependency-drift checker run by `.github/workflows/dependency-check.yml`: compares the pinned IG Publisher, SUSHI, Jekyll, both IG templates and the FHIR dependencies against their latest releases and writes one Markdown/JSON drift report. Not part of publication. |
 | `publication-url-consistency.template-test.mjs` | Template-contract test (template repo only): keeps `sushi-config.yaml`, `ig.ini`, `publication-request.json`, and `go-publish.yml` placeholder-consistent (canonical vs. publication base, pinned toolchain, terminology fallback, dry-run default). |
 
 > **Note on the history-import scripts:** `install-history-template.mjs` and
