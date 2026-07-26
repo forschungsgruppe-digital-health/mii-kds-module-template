@@ -1,6 +1,8 @@
 <!-- markdownlint-disable MD041 -->
-### Anleitung für Forschende
+<!-- Source: kerndatensatz-basis input/pagecontent/researcher-guidance.md.
+     German mirror: input/translations/de/pagecontent/researcher-guidance.md. -->
+### Guidance for Researchers
 
-Hinweise für Forschende, die die Daten des Moduls **{{MODULE_TITLE}}** für Forschungszwecke nutzen — z. B. welche Datenelemente für welche Fragestellungen relevant sind und wie sie interpretiert werden.
+Guidance for researchers using the data of the **{{MODULE_TITLE}}** module for research purposes — e.g. which data elements are relevant to which research questions, and how they are to be interpreted.
 
-> [TODO: Beschreiben Sie die forschungsrelevanten Aspekte des Moduls.]
+> [TODO: Describe the research-relevant aspects of your module.]

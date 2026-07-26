@@ -1,6 +1,8 @@
 <!-- markdownlint-disable MD041 -->
-### Suchparameter und Operationen
+<!-- Source: kerndatensatz-basis input/pagecontent/search-parameters-and-operations.md.
+     German mirror: input/translations/de/pagecontent/search-parameters-and-operations.md. -->
+### Search Parameters and Operations
 
-Modul-spezifische FHIR-Suchparameter und Operationen des Moduls **{{MODULE_TITLE}}**, sofern vorhanden.
+Module-specific FHIR search parameters and operations of the **{{MODULE_TITLE}}** module, where defined.
 
-> [TODO: Listen Sie die Suchparameter/Operationen auf, oder entfernen Sie diese Seite, wenn keine definiert sind.]
+> [TODO: List the search parameters/operations, or delete this page if none are defined.]

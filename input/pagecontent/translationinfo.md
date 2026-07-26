@@ -1,14 +1,17 @@
 <!-- markdownlint-disable MD041 -->
-### Übersetzungsinformationen
+<!-- Source: kerndatensatz-basis input/pagecontent/translationinfo.md; the
+     mechanism is documented in docs/recipes/add-translation.md. German mirror:
+     input/translations/de/pagecontent/translationinfo.md. -->
+### Translation Information
 
-Dieser Leitfaden ist **deutschsprachig** (Standardsprache); **Englisch** ist die
-empfohlene zweite Sprache. Über den Sprachumschalter oben rechts wechseln Sie
-zwischen `/de/` und `/en/`.
+This guide is written in **English** (the default language); **German** is the
+translation. English is therefore both the base rendering of the guide and the
+`/en/` rendering; use the language switcher at the top right to move between
+`/en/` and `/de/`.
 
-Übersetzte Seiten liegen unter `input/translations/en/pagecontent/` (gleicher
-Dateiname wie die deutsche Seite); Ressourcen-Übersetzungen als `.po`-Dateien
-unter `input/translations/en/`. Details:
-[add-translation Rezept](../docs/recipes/add-translation.md).
+Translated pages live under `input/translations/de/pagecontent/` (same file name
+as the English page); resource translations are `.po` files under
+`input/translations/de/`. Details:
+[add-translation recipe](../docs/recipes/add-translation.md).
 
-> [TODO: Vermerken Sie, welche Teile des Moduls bereits ins Englische übersetzt
-> sind.]
+> [TODO: Record which parts of your module are already translated into German.]

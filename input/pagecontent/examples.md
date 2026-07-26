@@ -1,10 +1,12 @@
 <!-- markdownlint-disable MD041 -->
-Diese Seite führt die Beispielinstanzen des Moduls **{{MODULE_TITLE}}** auf. Die
-Vorlage enthält das synthetische Beispiel
+<!-- Source: kerndatensatz-basis input/pagecontent/examples.md.
+     German mirror: input/translations/de/pagecontent/examples.md. -->
+This page lists the example instances of the **{{MODULE_TITLE}}** module. The
+template ships the synthetic example
 [Max Mustermann-Testpatient](Patient-ExamplePatientInstance.html).
 
 {:.bg-warning}
-**Nur synthetische Daten** — niemals echte oder realistisch wirkende
-Patientendaten in Beispielen verwenden.
+**Synthetic data only** — never use real or realistic-looking patient data in
+examples.
 
-> [TODO: Ergänzen Sie aussagekräftige Beispielinstanzen zu Ihren Profilen.]
+> [TODO: Add meaningful example instances for your profiles.]
