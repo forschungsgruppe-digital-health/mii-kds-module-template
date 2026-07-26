@@ -1,8 +1,6 @@
 # Recipe: regenerate the `special-url` list for a module
 
-## Goal
-
-Produce the correct `special-url` parameter value in `sushi-config.yaml` for
+**Goal.** Produce the correct `special-url` parameter value in `sushi-config.yaml` for
 YOUR module — the list of canonical URLs **defined by this IG** that do not
 start with the module's own canonical
 (`https://www.medizininformatik-initiative.de/fhir/modul-<slug>`).
@@ -19,6 +17,14 @@ Background: the IG Publisher rejects a resource whose canonical URL lies
 outside the IG's canonical base, because that usually indicates a typo.
 `special-url` is the explicit allow-list for the deliberate exceptions.
 
+**Prerequisites.**
+
+- The module builds with SUSHI (`sushi .` succeeds), so `fsh-generated/` is
+  populated.
+- `jq` and a shell (the dev container has both).
+- Every `{{...}}` placeholder in `sushi-config.yaml` is already replaced —
+  the module canonical must be final before you derive exceptions from it.
+
 ## When you need this
 
 - Your module keeps **legacy canonicals** (e.g. the pre-consolidation
@@ -28,14 +34,6 @@ outside the IG's canonical base, because that usually indicates a typo.
 - Your module defines any other resource whose `url` intentionally does not
   start with the module canonical (e.g. a `CapabilityStatement/metadata`
   instance under a legacy base).
-
-## Prerequisites
-
-- The module builds with SUSHI (`sushi .` succeeds), so `fsh-generated/` is
-  populated.
-- `jq` and a shell (the dev container has both).
-- Every `{{...}}` placeholder in `sushi-config.yaml` is already replaced —
-  the module canonical must be final before you derive exceptions from it.
 
 ## Steps
 
@@ -88,7 +86,7 @@ outside the IG's canonical base, because that usually indicates a typo.
 - The QA report (`output/qa.html`) shows no URL-consistency errors for the
   listed resources.
 
-## Common errors
+## Common errors & fixes
 
 | Symptom | Cause | Fix |
 |---|---|---|

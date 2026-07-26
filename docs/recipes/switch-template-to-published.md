@@ -1,8 +1,6 @@
 # Recipe: switch from the vendored template to the published package
 
-## Goal
-
-Move your module's `ig.ini` from the **vendored** bring-up template
+**Goal.** Move your module's `ig.ini` from the **vendored** bring-up template
 (`ig-template/`, referenced as `template = #ig-template`) to the **pinned
 published** MII template package
 (`template = de.medizininformatikinitiative.template#x.y.z`), and delete the
@@ -17,6 +15,10 @@ visible.
 > one. This recipe is the one-time cleanup you run once the template is
 > published — after it, your module tracks a versioned dependency like every
 > other package, and the scheduled dependency checker proposes upgrades for you.
+
+**Prerequisites.** The template repository has cut a release **and** that release
+resolves for the IG Publisher (see below). Your module must build green before
+you start, so you can tell the switch apart from an unrelated breakage.
 
 ## When you do this
 
@@ -48,8 +50,6 @@ in order of preference:
 > (`scripts/check-updates.mjs`, which already watches
 > `de.medizininformatikinitiative.template`) surfaces newer template releases as
 > reviewable PRs — you never need a floating pin to stay current.
-
-## Prerequisites
 
 - The published template is **resolvable by the IG Publisher** — the template
   repo has published the package to the FHIR package registry and/or registered
@@ -142,7 +142,7 @@ in order of preference:
 - The convention check passes (`M7 no floating pins` shows the pinned template
   reference), and future template releases arrive as dependency-checker PRs.
 
-## Common errors
+## Common errors & fixes
 
 | Symptom | Cause | Fix |
 |---|---|---|
