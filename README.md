@@ -56,7 +56,9 @@ Unfamiliar terms are in the [glossary](docs/glossary.md).
 | `qc/custom.rules.yaml`, `advisor.json` | What the MII reusable validation reads: naming-convention rules and tolerated validator messages |
 | `ig-template/` | The MII IG template, mirrored automatically — don't edit |
 | `docs/` | Guides and step-by-step recipes |
-| `scripts/`, `scripts/` | Helper scripts (first-run bootstrap, template sync, …) |
+| `tests/` | FHIR validation test cases the build runs — see [tests/README.md](tests/README.md) |
+| `scripts/` | Helper scripts (first-run bootstrap, template sync, convention check, …) — see [scripts/README.md](scripts/README.md) |
+| `skills/` | Vendor-neutral agent skills: `ig-analyze`, `ig-translate`, `wiki-consistency-check` — see [AGENTS.md](AGENTS.md#skills) |
 | `.github/workflows/` | CI: build, preview, validation, release |
 
 ## Documentation
