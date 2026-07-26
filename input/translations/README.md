@@ -1,12 +1,8 @@
-# Multi-language support (German default, English supplement)
+# Multi-language support (English default, German translation)
 
-This template produces a bilingual IG with **German as the default language
-and English as the recommended second language**.
-
-> **Why this deviates from kerndatensatz-basis:** basis is en-default with
-> German translations under `translations/de/`. This template inverts that on
-> purpose (project decision) — the IG *content* language for modules built
-> from this template is German-first. Do not "correct" it back to en-default.
+This template produces a bilingual IG with **English as the default language
+and German as the translation**, the same model as
+[kerndatensatz-basis](https://github.com/medizininformatik-initiative/kerndatensatz-basis).
 
 The corresponding `sushi-config.yaml` parameters (already set):
 
@@ -24,16 +20,16 @@ parameters:
 ```
 input/
 └── translations/
-    └── en/                          # English translation supplements
+    └── de/                          # German translation supplements
         ├── pagecontent/             # Translated narrative pages (same file
         │                            #   names as input/pagecontent/)
         ├── includes/                # Translated fragments (e.g. menu.xml)
         ├── intro-notes/             # Translated per-artifact intro/notes
         └── *.po                     # Resource translations (PO format), e.g.
-                                     #   ImplementationGuide-mii-ig-{{MODULE_SLUG}}.po
+                                     #   StructureDefinition-<id>.po
 ```
 
-## Workflow: adding English translations
+## Workflow: adding German translations
 
 1. **Build first.** The IG Publisher generates translation templates for
    every resource into `translations/de/po/` (repo root, gitignored) on each
@@ -41,10 +37,13 @@ input/
 2. **Resources (profiles, extensions, value sets, …):** copy the generated
    `.po` file into `input/translations/de/`, translate the `msgstr` lines
    (Poedit, any text editor, or machine translation with human review), and
-   rebuild.
-3. **Pages:** create the English page under
+   rebuild. Only some resource types and fields actually render — see the
+   renders/does-not-render table in
+   [`docs/recipes/add-translation.md`](../../docs/recipes/add-translation.md)
+   §4 before you invest in a supplement.
+3. **Pages:** create the German page under
    `input/translations/de/pagecontent/<same-filename>.md`; the publisher
-   matches it to the German original by file name.
+   matches it to the English source by file name.
 4. **Menu:** maintain the translated `menu.xml` under
    `input/translations/de/includes/`.
 

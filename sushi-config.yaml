@@ -394,8 +394,8 @@ parameters:
 # │ property below.                                                                                │
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 # ── MENU (translatable — maintained as menu.xml, NOT the `menu:` property) ────
-# The menu lives in input/includes/menu.xml (German = the default language) with
-# a per-language translation at input/translations/de/includes/menu.xml. That is
+# The menu lives in input/includes/menu.xml (English = the default language) with
+# a German translation at input/translations/de/includes/menu.xml. That is
 # the mechanism the HL7 reference IG FHIR/multi-lang-test-ig uses and the ONLY
 # way to get a TRANSLATED menu.
 #
