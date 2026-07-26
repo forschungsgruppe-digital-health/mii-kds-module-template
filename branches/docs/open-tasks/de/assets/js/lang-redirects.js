@@ -4,7 +4,7 @@
 // ships a lang-redirects.js whose `return` is misplaced INSIDE the for-loop but
 // OUTSIDE the language-match `if`. As a result the loop always exits after
 // checking only the first language: a browser whose language is the first one
-// (de) is redirected, but a browser in ANY other language (e.g. en-US) hits
+// (en) is redirected, but a browser in ANY other language (e.g. de-DE) hits
 // `return` with no redirect and no fallback, and is left on the blank root
 // landing page (a perceived 404 — the root only works if the user manually
 // appends /en/ or /de/). The bug is already fixed on fhir2.base.template `main`,
