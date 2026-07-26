@@ -13,7 +13,7 @@ bump is a proposal that a human reviews and merges.
 **A module created from this template inherits all of this monitoring** — the
 `.github/dependabot.yml`, both workflows, the checker script, and these docs
 propagate on "Use this template" and keep running in the module unchanged
-(unlike the template-maintenance Release Please files, which the first-run
+(unlike the template's own Release Please files, which the first-run
 bootstrap removes). The checker reads pins from the module's own files, so it
 reports the module's drift without any adaptation.
 

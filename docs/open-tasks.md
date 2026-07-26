@@ -56,16 +56,6 @@ should re-check them.
   German `^title` renders nowhere, and `artifacts.html` keeps the
   default-language text. Recorded where the mechanism is documented.
 
-## Flagged for a human — an editorial call, not a bug
-
-- **`docs/recipes/first-run-setup.md` is on the bootstrap's REMOVE list, yet
-  surviving docs link to it.** `docs/workflows.md` and `docs/secrets.md` point
-  at its `IG_TEMPLATE_REPO_URL` instructions, and `glossary.md`, `concepts.md`
-  and `recipes/README.md` link to it too — so those links dangle in every
-  created module. Fixing it properly means moving the setup instructions into a
-  doc that survives, or into the text the bootstrap prints. Both change what a
-  module author reads first, so it is a decision, not a cleanup.
-
 ## Known limits of the guards
 
 The guards are worth more than the drift they catch, so their reach is stated

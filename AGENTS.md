@@ -111,7 +111,7 @@ hand-copy the content into the runtime directories.
 A new module needs the one-time first-run bootstrap
 ([`docs/recipes/first-run-setup.md`](docs/recipes/first-run-setup.md)): it
 creates `dev` from `main`, applies branch protection, and removes the
-template-maintenance files (Release Please + the template's SemVer
+files that would conflict with a module (Release Please + the template's SemVer
 announcement + this bootstrap machinery). The preview, validation, monitoring,
 convention-check, and module-release workflows plus the skills **stay** — a
 module wants them.
