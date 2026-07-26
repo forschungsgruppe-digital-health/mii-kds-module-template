@@ -53,7 +53,11 @@ Unfamiliar terms are in the [glossary](docs/glossary.md).
 
 ## Documentation
 
-- [Recipes](docs/recipes/) — step-by-step for the common tasks
+- [Recipes](docs/recipes/) — step-by-step for the common tasks, including authoring guidance:
+  [render profiles](docs/recipes/render-profiles.md) ·
+  [describe examples](docs/recipes/describe-examples.md) ·
+  [UML diagrams](docs/recipes/add-uml-diagrams.md) ·
+  [information models](docs/recipes/model-information-models.md)
 - [Glossary](docs/glossary.md) · [Concepts](docs/concepts.md) — the vocabulary and the ideas behind it
 - [Workflows](docs/workflows.md) — what the CI does, and how releases work
 - [IG best-practices checklist](docs/ig-best-practices-checklist.md) — the official HL7 practices, and what you still need to fill in

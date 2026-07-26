@@ -42,3 +42,13 @@ technical artifacts see the [Artifacts](artifacts.html) section.
 > page uses MUSS/SOLLTE/KANN — see the open decisions in
 > `docs/ig-best-practices-checklist.md`. Verify with a real IG-Publisher build
 > before shipping either way.]
+
+---
+
+### List of Conformance Statements
+
+The table below lists every conformance statement (a sentence marked with
+`§id:…§` in the narrative pages) together with its expectation and a link back
+to where it is stated.
+
+§§§
