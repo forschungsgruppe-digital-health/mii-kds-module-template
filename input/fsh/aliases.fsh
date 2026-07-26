@@ -34,7 +34,7 @@
 // The value below is the verified v2026.* pin (this template's dependencies are
 // pinned to the 2026 line). When your module moves to a later CalVer line, look
 // the release up in that wiki table and update BOTH this alias and
-// input/resources/Parameters-mii-param-{{MODULE_SLUG}}-manifest.json — do not guess.
+// input/resources/Parameters-expansion-manifest.json — do not guess.
 // Note the policy applies to ValueSet expansion; MII profiles do not currently
 // require Coding.version for SNOMED CT in instance data.
 Alias: $sct = http://snomed.info/sct|http://snomed.info/sct/900000000000207008/version/20250701

@@ -15,10 +15,10 @@
 # │                                                                                    │
 # │ ── ACTIVE ────────────────────────────────────────────────────────────────         │
 # │   {{MODULE_SLUG}}         lowercase module short name, e.g. `base`, `person`,      │
-# │                           `icu`. Drives packageId, id, and the canonical. It is    │
-# │                           also part of a FILE NAME — input/resources/Parameters-   │
-# │                           mii-param-{{MODULE_SLUG}}-manifest.json — so rename      │
-# │                           the file, not just its contents.                         │
+# │                           `icu`. Drives packageId, id, and the canonical — and     │
+# │                           the resource id inside input/resources/Parameters-       │
+# │                           expansion-manifest.json. File NAMES are never            │
+# │                           placeholders; replace contents only.                     │
 # │   {{MODULE_NAME}}         CamelCase computable name part, e.g. `Base` →            │
 # │                           name: MII_IG_Base.                                       │
 # │   {{MODULE_TITLE}}        human-readable title part, e.g.                          │
@@ -184,10 +184,10 @@ extension:
   # The module's expansion-parameters manifest — the pinned code system versions
   # every ValueSet in this IG is expanded against (MII meta wiki, "Terminology
   # Version Policy"). Shipped at
-  # input/resources/Parameters-mii-param-{{MODULE_SLUG}}-manifest.json; see
-  # input/resources/README.md for the CalVer → SNOMED CT release table and for
-  # how to rename the file. Active together with path-expansion-params /
-  # pin-manifest below — all three must name the same resource.
+  # input/resources/Parameters-expansion-manifest.json; see
+  # input/resources/README.md for the CalVer → SNOMED CT release table. Active
+  # together with path-expansion-params / pin-manifest below — all three must
+  # name the same resource.
   - url: http://hl7.org/fhir/StructureDefinition/cqf-expansionParameters
     valueReference:
       reference: Parameters/mii-param-{{MODULE_SLUG}}-manifest
@@ -356,8 +356,9 @@ parameters:
   pin-canonicals: pin-all
   # Where the IG Publisher reads the pinned code system versions from, and which
   # manifest's pins are written into the built package. The path is relative to
-  # the publisher's working directory, hence the '../../' (basis:
-  # input/resources/Parameters-mii-param-base-manifest.json). Keep both in sync
+  # the publisher's working directory, hence the '../../'. (basis names the file
+  # after its slug — Parameters-mii-param-base-manifest.json; this template uses
+  # a slug-free name so nothing has to be renamed per module.) Keep both in sync
   # with the cqf-expansionParameters extension above and with the file in
   # input/resources/ — see input/resources/README.md.
   path-expansion-params: '../../input/resources/Parameters-expansion-manifest.json'

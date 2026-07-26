@@ -10,7 +10,7 @@ ignores it — SUSHI only reads `input/fsh/`).
 
 ## What is here
 
-### `Parameters-mii-param-{{MODULE_SLUG}}-manifest.json` — the terminology manifest
+### `Parameters-expansion-manifest.json` — the terminology manifest
 
 This is the module's **expansion-parameters manifest**: it pins the exact code
 system versions that every ValueSet in this IG is expanded against, so that an
@@ -56,11 +56,12 @@ Three places in `sushi-config.yaml` reference this file — all three are active
 
 ### When you create a module
 
-1. **Rename the file**: `Parameters-mii-param-{{MODULE_SLUG}}-manifest.json` →
-   `Parameters-mii-param-<your-slug>-manifest.json`. The `{{MODULE_SLUG}}` in the
-   **file name** and in the resource `id` must be replaced together with every
-   other placeholder — a `{{…}}` left in a FHIR `id` is not a valid id and the IG
-   Publisher will reject it.
+1. **Replace `{{MODULE_SLUG}}` inside the file** — it appears in the resource
+   `id` (`mii-param-{{MODULE_SLUG}}-manifest`). A `{{…}}` left in a FHIR `id` is
+   not a valid id and the IG Publisher will reject it. **Do not rename the
+   file.** Its name is deliberately slug-free: `path-expansion-params` in
+   `sushi-config.yaml` hard-codes it, and the template's own CI substitutes
+   placeholders in file *contents*, never in file *names*.
 2. Check the SNOMED CT pin against the wiki table for your CalVer line.
 3. Add a `system-version` entry per further code system you bind.
 
