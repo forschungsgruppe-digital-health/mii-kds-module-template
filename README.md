@@ -71,6 +71,7 @@ Unfamiliar terms are in the [glossary](docs/glossary.md).
 - [Workflows](docs/workflows.md) — what the CI does, and how releases work
 - [IG best-practices checklist](docs/ig-best-practices-checklist.md) — the official HL7 practices, and what you still need to fill in
 - [Secrets](docs/secrets.md) — optional: MII terminology server, release announcements
+- [Open tasks](docs/open-tasks.md) — what is unfinished, and why
 
 ## Getting help
 
