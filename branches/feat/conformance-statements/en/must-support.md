@@ -15,7 +15,7 @@ For querying and reading this module's profiles, **Must Support** on any profile
 Elements of a FHIR resource can be marked in a profile as **mandatory** or as [**Must Support**](http://hl7.org/fhir/R4/profiling.html#mustsupport).
 
 * **Mandatory elements** are elements with a minimum cardinality of `1` (e.g. `1..1`, `1..*`). They **SHALL** always be present. In exceptional cases the value may be missing — the absence **SHALL** then be documented, for example with the `Data-Absent-Reason` extension (see [Handling Missing Data](missing-data.md)).
-* §must-support-1:**Must Support (MS)** means that systems **SHALL** support the element even where its cardinality is `0..*`. **Support** means: systems **SHALL** be capable of populating, storing, displaying and correctly processing the element.
+* §must-support-1:**Must Support (MS)** means that systems **SHALL** support the element even where its cardinality is `0..*` — systems **SHALL** be capable of populating, storing, displaying and correctly processing it§
 
 Must Support is therefore **not** the same as cardinality: an element can be `0..1` and still be Must Support — the data may be absent, the ability to handle it may not.
 
