@@ -34,7 +34,10 @@
 #   build must not hard-fail without the certificate).
 #
 # Fixed versions: every action, tool, and support repository below is pinned
-#   (commit SHA / exact version + SHA-256). Deliberate deviation from basis,
+#   (commit SHA / exact version + SHA-256). Deliberate deviation from the
+#   reference module — for example kerndatensatz-basis installs
+#   SUSHI and Jekyll unpinned, and whatever jar the IG Publisher's
+#   `latest` release redirect happens to serve,
 #   which resolves the current Publisher/SUSHI/Jekyll at run time — this
 #   repo's policy is reproducibility-first. The scheduled dependency check
 #   proposes bumps for the TOOLCHAIN pins in the env: block below (IG
@@ -48,13 +51,15 @@
 #   against the LIVE registry data; it is publication input for a human PR,
 #   not a build dependency.
 #
-# Removed vs. basis: the one-time "import the existing 2026.0.0 publication
-#   history" machinery (basis-specific). A fresh module publishes its FIRST
+# Removed vs. the reference module: the one-time "import the existing
+#   publication history" machinery — for example kerndatensatz-basis carries a
+#   bootstrap for its own 2026.0.0 release, which is specific to that module.
+#   A fresh module publishes its FIRST
 #   version with `"first": true` in publication-request.json instead; this
 #   workflow seeds `publish-setup.json` for that case. Modules that migrate
-#   pre-existing published history can rebuild the basis import step from
+#   pre-existing published history can rebuild that import step from
 #   scripts/install-history-template.mjs + scripts/merge-publication-webroot.mjs
-#   (shipped and tested) plus the basis workflow as reference.
+#   (shipped and tested) plus the reference module's workflow as a model.
 #
 # Prerequisites: the `gh-pages` branch exists (the preview workflow creates it
 #   on the first push) and the CI preview advertised as `ci-build` in
@@ -92,7 +97,8 @@ concurrency:
   queue: max
 
 env:
-  # The module's FHIR canonical (MII convention, basis: .../fhir/modul-base).
+  # The module's FHIR canonical (MII convention — for example,
+  # kerndatensatz-basis uses .../fhir/modul-base).
   EXPECTED_CANONICAL: "https://www.medizininformatik-initiative.de/fhir/modul-{{MODULE_SLUG}}"
   # The publication website: GitHub Pages under the creating org. Deliberately
   # different from the canonical ("canonical-mismatch").
@@ -264,9 +270,12 @@ jobs:
             exit 1
           fi
 
-          # Formal publication requires a pinned IG template (fixed-versions
-          # policy; basis rejects dev/cibuild — current and the bring-up TODO
-          # placeholder are rejected here as well).
+          # Formal publication requires a pinned IG template. This is THIS
+          # template's fixed-versions policy, not an MII-wide rule: for example
+          # kerndatensatz-basis's own ig.ini reads
+          # `template = fhir2.base.template#current` (verified against `main` @
+          # f6c6878), which the check below would reject. Development, CI-build
+          # and floating references are all refused here.
           if grep -Eq '^template[[:space:]]*=.*#(dev|cibuild|current)[[:space:]]*$' source/ig.ini; then
             echo "::error::Formal publication does not allow a development, CI-build, or floating IG template."
             exit 1
@@ -283,7 +292,8 @@ jobs:
           label="${publication_path##*/}"
           publication_base="${publication_path%/*}"
           # Single source of truth for the canonical: sushi-config.yaml
-          # (deviation from basis, which duplicates it in a root package.json).
+          # (deviation from the reference module — kerndatensatz-basis, for
+          # example, duplicates it in a root package.json).
           canonical="$(sed -nE \
             's/^canonical:[[:space:]]*"?([^"[:space:]]+)"?[[:space:]]*(#.*)?$/\1/p' \
             source/sushi-config.yaml)"
@@ -424,16 +434,19 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y graphviz libxml2-utils unzip
 
-          # Jekyll, pinned + checksum-verified (deviation from basis, which
+          # Jekyll, pinned + checksum-verified (deviation from the reference
+          # module — kerndatensatz-basis, for example,
           # installs the latest at run time).
           gem fetch jekyll --version "${JEKYLL_VERSION}"
           echo "${JEKYLL_GEM_SHA256}  jekyll-${JEKYLL_VERSION}.gem" | sha256sum --check
           sudo gem install --no-document "jekyll-${JEKYLL_VERSION}.gem"
 
-          # SUSHI, pinned (deviation from basis: no @latest).
+          # SUSHI, pinned — no @latest (deviation from the reference module;
+          # kerndatensatz-basis, for example, installs SUSHI unpinned).
           npm install --global "fsh-sushi@${SUSHI_VERSION}"
 
-          # IG Publisher, pinned + checksum-verified (deviation from basis:
+          # IG Publisher, pinned + checksum-verified (deviation from the
+          # reference module — kerndatensatz-basis, for example,
           # no releases/latest).
           publisher_url="https://github.com/HL7/fhir-ig-publisher/releases/download/${PUBLISHER_VERSION}/publisher.jar"
           curl --fail --location --silent --show-error \
@@ -570,7 +583,8 @@ jobs:
           set -euo pipefail
           # The very first -go-publish needs the webroot configuration that
           # tells the Publisher this Pages site hosts the module under a
-          # mismatched canonical. Shape mirrors kerndatensatz-basis
+          # mismatched canonical. Same shape as the reference module — for
+          # example kerndatensatz-basis
           # publication/webroot/publish-setup.json.
           jq -n \
             --arg canonical "${CANONICAL}" \
@@ -657,7 +671,8 @@ jobs:
         run: |
           set -euo pipefail
           # Package metadata comes from the built package (deviation from
-          # basis, which keeps a duplicate root package.json).
+          # the reference module; kerndatensatz-basis, for example, keeps a
+          # duplicate root package.json).
           tar -xOzf source/output/package.tgz package/package.json \
             > "${RUNNER_TEMP}/built-package.json"
           # Registry languages: English first (the IG's default rendering
@@ -733,7 +748,8 @@ jobs:
         run: |
           set -euo pipefail
           # If a check fails on the module's FIRST publication, compare the
-          # staged site with the kerndatensatz-basis publication/webroot seeds
+          # staged site with the publication/webroot seeds the reference module
+          # uses — for example those of kerndatensatz-basis
           # and the release recipe before changing this workflow.
 
           test -s site/index.html

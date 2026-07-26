@@ -12,7 +12,8 @@
 #   the two on one repo — two release systems corrupt the history.
 #
 # Purpose:   Faithful, gated automation of the MII "Module Release Workflow"
-#            (kerndatensatz-meta wiki). Mirrors kerndatensatz-basis `main.yml`
+#            (kerndatensatz-meta wiki). Modelled on the reference module's
+#            release workflow — for example kerndatensatz-basis `main.yml`
 #            (RELEASE + NOTIFY_ZULIP jobs) + hands off to `go-publish.yml`.
 #            On a CalVer tag it BUILDS the IG (buildability gate), CREATES a
 #            DRAFT GitHub Release with generated notes, and — when a human
@@ -21,7 +22,8 @@
 #            manual `go-publish.yml` (this workflow only points at it).
 #
 # Triggers:
-#   - push tag `v[0-9]+.[0-9]+.[0-9]+*` (CalVer, e.g. v2026.0.1; basis idiom) →
+#   - push tag `v[0-9]+.[0-9]+.[0-9]+*` (CalVer, e.g. v2026.0.1; the same glob
+#     kerndatensatz-basis uses, for example) →
 #     build + create the DRAFT release.
 #   - release published → announce on the MII Zulip.
 #   - workflow_dispatch → dry run: build only, NO release side effects.
@@ -70,7 +72,8 @@ on:
   push:
     tags:
       # CalVer `YYYY.n.n` (+ optional `-rc.1` / `-alpha.1` suffix), exactly the
-      # tag glob kerndatensatz-basis `main.yml` uses (tags v2026.0.0/v2026.0.1).
+      # the glob the reference module uses — for example kerndatensatz-basis
+      # `main.yml` matches 'v[0-9]+.[0-9]+.[0-9]+*' (its tags: v2026.0.0, v2026.0.1).
       - "v[0-9]+.[0-9]+.[0-9]+*"
   release:
     types: [published]
@@ -120,8 +123,11 @@ jobs:
 
   # ---------------------------------------------------------------------------
   # build — wiki step 5 support: verify the tagged commit BUILDS before a release
-  # is cut (basis relies on the reusable validation workflows for the error gate;
-  # this adds a buildability gate and produces the package.tgz artifact). Runs on
+  # is cut. kerndatensatz-basis, for example, runs no FHIR error gate at tag time
+  # — its only PR-time signal is its own IG-Publisher build, and it wires up
+  # neither MII reusable validation workflow (verified against `main` @ f6c6878).
+  # This template adds both: a buildability gate here, producing the package.tgz
+  # artifact, and the reusable validation workflows in validation.yml. Runs on
   # a CalVer tag or on a workflow_dispatch dry run — never creates a release.
   # ---------------------------------------------------------------------------
   build:
@@ -234,8 +240,10 @@ jobs:
 
           # The build must actually complete and produce a package. QA COUNTS
           # are reported for review and are not required to be zero — the hard
-          # FHIR error gate is the reusable validation workflow, run on
-          # the release PR before the tag (mirrors basis).
+          # FHIR error gate is the reusable validation workflow (validation.yml),
+          # run on the release PR before the tag. That gate is this template's
+          # addition — kerndatensatz-basis, for example, wires up neither MII
+          # reusable validation workflow.
           jq empty output/qa.json
           test -s output/package.tgz
 
@@ -265,7 +273,8 @@ jobs:
 
   # ---------------------------------------------------------------------------
   # release — wiki step 5: on a pushed CalVer tag, create a DRAFT GitHub Release
-  # with auto-generated notes (basis `main.yml` RELEASE idiom). A human finalizes
+  # with auto-generated notes (for example, the RELEASE job of kerndatensatz-basis
+  # `main.yml` does the same). A human finalizes
   # and PUBLISHES it (wiki step 7), which fires `notify_zulip`. Draft, so the
   # human can attach the package and edit notes before it goes out.
   # ---------------------------------------------------------------------------
@@ -280,7 +289,7 @@ jobs:
     permissions:
       contents: write # create the GitHub Release for this tag
     steps:
-      - name: Prepare version (basis idiom)
+      - name: Prepare version
         id: prep
         shell: bash
         run: |
@@ -363,7 +372,8 @@ jobs:
           organization-url: "https://mii.zulipchat.com/"
           type: "stream"
           to: "MII-Kerndatensatz"
-          # "Releases" is the MODULE topic (basis idiom) — NOT the template
+          # "Releases" is the MODULE topic (for example, the NOTIFY_ZULIP job of
+          # kerndatensatz-basis `main.yml` posts to the same topic) — NOT the template
           # repos' "Template Releases" topic. Keep the CalVer/SemVer split
           # legible in chat too.
           topic: "Releases"

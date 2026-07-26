@@ -11,7 +11,8 @@
 #
 # PROPAGATION: this workflow — unlike Release Please — is MEANT to
 #            propagate to modules created from this template. A module maintainer
-#            wants dev/feature previews too, and kerndatensatz-basis proves
+#            wants dev/feature previews too, and the MII modules work this way
+#            — for example kerndatensatz-basis builds on every branch, which shows
 #            modules use exactly this model. The first-run bootstrap KEEPS this
 #            file (and cleanup-gh-pages.yml); it strips only the template's own
 #            release automation.
