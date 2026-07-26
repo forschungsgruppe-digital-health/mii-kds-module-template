@@ -2,7 +2,7 @@
 
 **Goal.** Turn a fresh copy of this template (made with **"Use this template"**)
 into a working module repository: get the `dev` branch and branch protection in
-place, and remove the template-maintenance files that must not live in a module.
+place, and remove the template's own release automation, which must not live in a module.
 
 **Who this is for.** Anyone who just created a new module repo from
 `mii-kds-module-template` and has never done this before. No prior FHIR tooling
@@ -37,7 +37,7 @@ clicking **"Create repository from template"**.
 
 > **Why this is the easy path:** it copies `dev` (and any other branches) along
 > with `main`, so you skip creating `dev` by hand. You still run the bootstrap
-> below to apply branch protection and remove the template-maintenance files —
+> below to apply branch protection and remove the template's own release automation —
 > just skip the part that creates `dev` (the script detects it already exists).
 
 If you already created the repo **without** ticking it, use Option B.
@@ -45,8 +45,14 @@ If you already created the repo **without** ticking it, use Option B.
 ### Option B — run the first-run bootstrap
 
 The bootstrap creates `dev` from `main` for you, protects both branches, and
-removes the template-maintenance files. Do this once, right after creating the
+removes the template's own release automation. Do this once, right after creating the
 repo.
+
+> **What it does NOT remove:** everything the documentation points at stays —
+> this recipe, the bootstrap script itself, and every helper in `scripts/`. The
+> rule is to remove only what would actively conflict with a module (two release
+> systems on one repository), so every reference in your new module still
+> resolves.
 
 > **Why you must not skip this:** without `dev`, a newcomer pushes straight to
 > `main` and loses the stable/integration model on day one. And a module that
@@ -105,7 +111,7 @@ with `git rm` (nothing is committed yet). Review and commit on a branch:
 ```bash
 git status                 # see the staged removals
 git checkout -b chore/first-run-bootstrap
-git commit -m "chore: first-run bootstrap (remove template-maintenance files)"
+git commit -m "chore: first-run bootstrap (remove the template's release automation)"
 git push -u origin chore/first-run-bootstrap
 ```
 

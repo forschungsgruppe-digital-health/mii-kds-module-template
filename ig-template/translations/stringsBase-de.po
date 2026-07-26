@@ -11,7 +11,7 @@ msgstr "Für die aktuelle Seite ist keine Übersetzung verfügbar, daher wurde s
 # TRANS_HLP
 #: TRANS_HLP
 msgid "This page includes translations from the original source language in which the guide was authored.  Information on these translations and instructions on how to provide feedback on the translations can be found [here](translationinfo.html)."
-msgstr "Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfaden verfasst wurde.  Informationen zu diesen Übersetzungen und Anweisungen zum Abgeben von Feedback zu den Übersetzungen finden Sie [hier](translationinfo.html)."
+msgstr "Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfaden verfasst wurde.  Informationen zu diesen Übersetzungen und Anweisungen zum Abgeben von Feedback zu den Übersetzungen finden Sie <a href='translationinfo.html'>hier</a>."
 
 # Experimental
 #: Experimental

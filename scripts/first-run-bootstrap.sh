@@ -7,7 +7,7 @@
 # What it does:
 #   (a) creates the `dev` integration branch from `main` and applies branch
 #       protection to both (needs `gh` authenticated with admin on the repo);
-#   (b) removes the template-maintenance files that must NOT live in a module
+#   (b) removes the template's own release automation, which must NOT live in a module
 #       (the Release Please automation + the template's SemVer release
 #       announcement + this bootstrap machinery), using a deterministic,
 #       reversible `git rm` with a NEVER-protect list;
@@ -38,7 +38,10 @@ Usage: scripts/first-run-bootstrap.sh [--apply] [--main-reviews N] [--dev-review
 EOF
 }
 
-# Why each template-maintenance file is removed from a module.
+# Why each file is removed from a module. The rule: remove only what would
+# actively CONFLICT with a module (two release systems on one repo), never
+# something a doc points at. Everything else stays, so every reference in a
+# created module still resolves.
 why() {
   case "$1" in
     release-please-config.json|.release-please-manifest.json|.github/workflows/release-please.yml)
@@ -47,11 +50,7 @@ why() {
       echo "announces the TEMPLATE repo's SemVer releases; a module announces its own CalVer release via the module release workflow";;
     CHANGELOG.md)
       echo "the template's Release-Please-generated SemVer changelog; a module keeps its own release notes";;
-    docs/recipes/first-run-setup.md)
-      echo "the create-a-module-from-template recipe; only meaningful before the module exists";;
-    scripts/first-run-bootstrap.sh)
-      echo "this bootstrap itself; it runs once at module creation and is dead weight afterwards";;
-    *) echo "template-maintenance file";;
+    *) echo "conflicts with a module's own release process";;
   esac
 }
 
@@ -136,7 +135,7 @@ EOF
     echo "The file removals are STAGED (git rm). Review with 'git status' and"
     echo "'git diff --cached', then commit them on a branch, e.g.:"
     echo "   git checkout -b chore/first-run-bootstrap"
-    echo "   git commit -m 'chore: first-run bootstrap (remove template-maintenance files)'"
+    echo "   git commit -m 'chore: first-run bootstrap (remove the template's release automation)'"
     echo "To undo a removal before committing: git restore --staged --worktree <path>"
   fi
 }
@@ -157,13 +156,13 @@ main() {
   done
 
   # ── file categories (single source of truth) ──
-  # REMOVE: template-maintenance files that must NOT live in a module. The
+  # REMOVE: the template's own release automation, which must NOT live in a module. The
   # Release Please quartet + the template SemVer announcement are the set listed
   # by the header of .github/workflows/release-please.yml — honor it.
-  local REMOVE=".github/workflows/release-please.yml .github/workflows/notify-zulip.yml release-please-config.json .release-please-manifest.json CHANGELOG.md docs/recipes/first-run-setup.md scripts/first-run-bootstrap.sh"
+  local REMOVE=".github/workflows/release-please.yml .github/workflows/notify-zulip.yml release-please-config.json .release-please-manifest.json CHANGELOG.md"
   # NEVER: module content, build input, and PROPAGATED tooling that a
   # module keeps. A removal target colliding here is a bug → hard abort.
-  local NEVER="input sushi-config.yaml ig.ini publication-request.json advisor.json qc scripts skills .claude .agents AGENTS.md LICENSE README.md CONTRIBUTING.md .devcontainer .editorconfig .gitignore .github/dependabot.yml .github/CODEOWNERS .github/ISSUE_TEMPLATE .github/workflows/go-publish.yml .github/workflows/convention-check.yml .github/workflows/security-scan.yml .github/workflows/dependency-check.yml scripts/ig-stats.py scripts/ig-translate.sh scripts/convention-check.mjs scripts/convention-check.test.mjs scripts/language-model-check.sh"
+  local NEVER="input sushi-config.yaml ig.ini publication-request.json advisor.json qc scripts skills .claude .agents AGENTS.md LICENSE README.md CONTRIBUTING.md docs/recipes/first-run-setup.md .devcontainer .editorconfig .gitignore .github/dependabot.yml .github/CODEOWNERS .github/ISSUE_TEMPLATE .github/workflows/go-publish.yml .github/workflows/convention-check.yml .github/workflows/security-scan.yml .github/workflows/dependency-check.yml scripts/ig-stats.py scripts/ig-translate.sh scripts/convention-check.mjs scripts/convention-check.test.mjs scripts/language-model-check.sh"
 
   git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { echo "ERROR: not inside a git repository." >&2; return 1; }
 
@@ -187,7 +186,7 @@ main() {
   fi
   echo
 
-  echo "-- Step 2: remove template-maintenance files (reversible git rm) --"
+  echo "-- Step 2: remove the template's release automation (reversible git rm) --"
   local present="" tgt
   for tgt in $REMOVE; do
     if [ -e "$tgt" ] || git ls-files --error-unmatch "$tgt" >/dev/null 2>&1; then
