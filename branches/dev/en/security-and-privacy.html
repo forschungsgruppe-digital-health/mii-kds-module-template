@@ -3,7 +3,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en" dir="ltr">
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <title>Conformance - MII Implementation Guide Module Template v2026.0.0</title>
+    <title>Security and Privacy - MII Implementation Guide Module Template v2026.0.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -47,8 +47,8 @@
 	  <script src="assets/js/prism.js"></script>
     <script src="assets/js/mermaid.js" type="text/javascript"></script>
     <script src="assets/js/mermaid-init.js" type="text/javascript"></script>
-    <style type="text/css">h2{--heading-prefix:"3"}
-    h3,h4,h5,h6{--heading-prefix:"3.0"}</style>
+    <style type="text/css">h2{--heading-prefix:"3.4"}
+    h3,h4,h5,h6{--heading-prefix:"3.4"}</style>
     <div id="segment-header" class="segment">    <!-- segment-header -->
       <div class="container">    <!-- container -->
 
@@ -169,7 +169,7 @@
  	<div style="display: none;position: absolute;right: 0;z-index: 100;background-image: url(assets/images/icon_arrow_up.png);background-position: 133px 3px;" id="flaglist" class="flaglist">
     <div><img src="assets/images/lang-en.png" alt="flag en" class="flag"/>English</div>
 
-    <div><a href="../de/conformance.html"><img src="assets/images/lang-de.png" alt="flag de" class="flag"/>Deutsch</a></div>
+    <div><a href="../de/security-and-privacy.html"><img src="assets/images/lang-de.png" alt="flag de" class="flag"/>Deutsch</a></div>
 
   </div>
 </div>
@@ -185,7 +185,7 @@
     <div id="segment-breadcrumb" class="segment">    <!-- segment-breadcrumb -->
       <div class="container">    <!-- container -->
         <ul class="breadcrumb">
-          <li><a href="toc.html"><b>Table of Contents</b></a></li><li><b>Conformance</b></li>
+          <li><a href="toc.html"><b>Table of Contents</b></a></li><li><a href="conformance.html"><b>Conformance</b></a></li><li><b>Security and Privacy</b></li>
 
         </ul>
       </div>    <!-- /container -->
@@ -206,7 +206,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 </style>
 <div class="col-12">
     <!-- ReleaseHeader --><p id="publish-box">MII Implementation Guide Module Template - Local Development build (v2026.0.0) built by the FHIR (HL7&reg; FHIR&reg; Standard) Build Tools. See the <a href="https://www.medizininformatik-initiative.de/fhir/modul-template/history.html">Directory of published versions</a></p>  <!-- EndReleaseHeader -->
-  <h2>Conformance</h2>
+  <h2>Security and Privacy</h2>
   
 
 
@@ -227,30 +227,57 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <p style="border:var(--translation-box-border);background-color:var(--translation-background-color);padding: 5px 5px 5px 5px;">
 
-There is no translation page available for the current page, so it has been rendered in the default language
+This page includes translations from the original source language in which the guide was authored.  Information on these translations and instructions on how to provide feedback on the translations can be found [here](translationinfo.html).
 
 </p>
 
   <!-- markdownlint-disable MD041 -->
-  <!-- Übersichtsseite "Konformität". Die Unterseiten sind der MII-Standardsatz. -->
+  <!-- English rendering of input/pagecontent/security-and-privacy.md. -->
 
-<p>Dieser Abschnitt definiert die Konformitätsanforderungen für Systeme, die die
-Profile des Moduls <strong>Module Template</strong> umsetzen.</p>
+<h3 id="security-and-privacy">Security and Privacy</h3>
 
-<ul>
-  <li><strong><a href="general-requirements.html">Allgemeine Anforderungen</a></strong> — gemeinsame
-Anforderungen an alle MII-Akteure (Konformitäts-Verben SHALL/SHOULD/MAY,
-Verwendung von Codes, RESTful-API-Anforderungen).</li>
-  <li><strong><a href="must-support.html">Must-Support</a></strong> — Bedeutung und Erwartungen an
-Must-Support-Elemente für Server und Clients.</li>
-  <li><strong><a href="missing-data.html">Umgang mit fehlenden Daten</a></strong> — Kodierung fehlender oder
-unbekannter Werte in konformen Ressourcen.</li>
-</ul>
+<p>This section addresses security and privacy experts. It explains which attacks
+and risks were considered for the <strong>Module Template</strong> module and which
+countermeasures apply.</p>
+
+<p>General requirements are in the FHIR core specification —
+<a href="https://build.fhir.org/secpriv-module.html">Security &amp; Privacy Module</a> and the
+<a href="https://build.fhir.org/security.html">security checklist</a>. This section does not
+repeat them; it states only what is <strong>specific to this module</strong>.</p>
+
+<h4 id="privacy-principles">Privacy principles</h4>
+
+<p>Processing of personal data follows transparency, purpose limitation, data
+minimisation, accuracy, storage limitation and integrity/confidentiality
+(GDPR Art. 5). In the MII context, use is based on the MII Broad Consent.</p>
 
 <blockquote>
-  <p>[TODO: Ergänzen Sie modul-spezifische Konformitätsaussagen. In den
-Narrativ-Seiten werden Sätze mit <strong>SHALL/SHOULD/MAY</strong> automatisch als
-Konformitätsaussagen erfasst.]</p>
+  <p>[TODO: Describe the data categories your module carries and the applicable
+purpose limitation / legal basis in the MII context.]</p>
+</blockquote>
+
+<h4 id="security-considerations">Security considerations</h4>
+
+<p>Security is risk management against risks to confidentiality, integrity and
+availability.</p>
+
+<blockquote>
+  <p>[TODO: Name the attacks/risks considered and the countermeasures — e.g. FHIR
+API access control, pseudonymisation, transport encryption, audit logging.]</p>
+</blockquote>
+
+<h4 id="module-specific-conformance-requirements">Module-specific conformance requirements</h4>
+
+<blockquote>
+  <p>[TODO: If your module defines security- or privacy-related SHALL/SHOULD/MAY
+requirements, list them here and say which risk each one addresses.]</p>
+</blockquote>
+
+<h4 id="residual-risks">Residual risks</h4>
+
+<blockquote>
+  <p>[TODO: Name risks NOT addressed by this specification, which must therefore be
+handled in system design, deployment or policy.]</p>
 </blockquote>
 
 

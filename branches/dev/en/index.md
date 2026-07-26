@@ -42,13 +42,21 @@ Scientists using MII data for medical research.
 * **[Profiles and Extensions](profiles-and-extensions.md)** and **[Terminology](terminology.md)** — the technical artifacts.
 * **[Examples](examples.md)** — example instances.
 
+### Related guides
+
+This module is part of the MII Core Dataset; the other KDS modules and their dependencies are described at [medizininformatik-initiative.de](https://www.medizininformatik-initiative.de/).
+
+> [TODO: Name your module's formal dependencies (see `dependencies` in `sushi-config.yaml`) and any related guides.]
+
+More FHIR implementation guides can be found in the official **[FHIR IG Registry](https://fhir.org/guides/registry/)** (source: [`FHIR/ig-registry`](https://github.com/FHIR/ig-registry)).
+
 ### Imprint
 
 This guide was created within the Medical Informatics Initiative and is subject, by its governance process, to the coordination procedure of the Interoperability Forum and the technical committees of HL7 Germany.
 
 ### Contact
 
-Questions about this publication can be asked on the HL7 FHIR Zulip [chat.fhir.org](https://chat.fhir.org) in the `german/mi-initiative` stream. Comments and issues are welcome as **Issues** on [GitHub](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues).
+Questions about this publication can be asked on the HL7 FHIR Zulip [chat.fhir.org](https://chat.fhir.org) in the `german/mi-initiative` stream. Comments and issues are welcome as **Issues** on [GitHub](https://github.com/medizininformatik-initiative/mii-kds-module-template/issues).
 
 > [TODO: Name your module's domain contacts.]
 

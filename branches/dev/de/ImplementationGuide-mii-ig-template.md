@@ -1263,6 +1263,15 @@
           "nameUrl" : "missing-data.html",
           "title" : "Handling Missing Data",
           "generation" : "markdown"
+        },
+        {
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
+            "valueUrl" : "security-and-privacy.html"
+          }],
+          "nameUrl" : "security-and-privacy.html",
+          "title" : "Security and Privacy",
+          "generation" : "markdown"
         }]
       },
       {

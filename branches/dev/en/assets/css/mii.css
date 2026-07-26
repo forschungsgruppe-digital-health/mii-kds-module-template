@@ -9,7 +9,7 @@
    includes/fragment-css.html AFTER project.css, so this :root block wins the
    cascade at equal specificity.
 
-   Every value is derived from an MII source - see docs/DESIGN.md for the full
+   Every value is derived from an MII source - see docs/design.md for the full
    palette table (exact source per color) and the WCAG contrast calculations.
    Sources, short form (retrieved 2026-07-22):
    - "logo"  = dominant pixel colors of the official MII logo
@@ -68,7 +68,7 @@
   /* 25-26. Footer links + highlight: white, like the MII site footer
         (4.73:1 on #6a7484, AA). Note: this makes footer links the same color
         as surrounding footer text - see the accessibility notes in
-        docs/DESIGN.md (WCAG 1.4.1). */
+        docs/design.md (WCAG 1.4.1). */
   --footer-hyperlink-text-color: #ffffff;
   --footer-highlight-text-color: #ffffff;
 

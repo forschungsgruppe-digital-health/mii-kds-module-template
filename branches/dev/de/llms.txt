@@ -5,6 +5,7 @@
 * [Home](index.md)
 * [Translation Information](translationinfo.md)
 * [Logical Models](logical-models.md)
+* [Security and Privacy](security-and-privacy.md)
 * [UML Diagrams](uml-diagrams.md)
 * [General Requirements](general-requirements.md)
 * [Conformance](conformance.md)
