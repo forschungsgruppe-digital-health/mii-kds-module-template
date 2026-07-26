@@ -25,11 +25,39 @@ The certificate is used by **two independent consumers**, which read it under
 **1. The IG build / preview / go-publish** (this template's workflows) read
 `SU_TERMSERV_CLIENT_*`. Values are **base64-encoded** (decoded with `base64 -d`):
 
+### Recommended: use the helper script
+
+It validates the material **before** uploading anything — that the certificate is
+a readable PEM and not expired, that the key decrypts with your password, and
+that certificate and key belong together (matching modulus). Those mistakes
+otherwise surface as an opaque TLS failure deep inside a CI run.
+
 ```sh
-base64 -i client-cert.pem          | gh secret set SU_TERMSERV_CLIENT_CERT     --repo <owner>/<module-repo>
-base64 -i client-key-encrypted.key | gh secret set SU_TERMSERV_CLIENT_KEY      --repo <owner>/<module-repo>
-printf '%s' 'THE_KEY_PASSWORD'     | gh secret set SU_TERMSERV_CLIENT_PASSWORD --repo <owner>/<module-repo>
+tools/set-su-termserv-secrets.sh --cert client-cert.pem --key client-key.pem \
+  --repo <owner>/<your-module-repo>
+# dry run — validate locally, upload nothing:
+tools/set-su-termserv-secrets.sh --cert client-cert.pem --key client-key.pem --check-only
 ```
+
+The key password is prompted interactively, so it never lands in your shell
+history or the process list.
+
+### Or set the three secrets by hand
+
+The two files are **base64-encoded, single-line**; the key must be the
+**encrypted** PEM (the workflow decrypts it with
+`openssl rsa -passin env:SU_TERMSERV_CLIENT_PASSWORD`).
+
+```sh
+R=<owner>/<your-module-repo>
+base64 < client-cert.pem | tr -d '\n' | gh secret set SU_TERMSERV_CLIENT_CERT     --repo "$R"
+base64 < client-key.pem  | tr -d '\n' | gh secret set SU_TERMSERV_CLIENT_KEY      --repo "$R"
+printf '%s' 'THE_KEY_PASSWORD'         | gh secret set SU_TERMSERV_CLIENT_PASSWORD --repo "$R"
+```
+
+> **Why single-line base64:** the workflow runs `echo "$SECRET" | base64 -d`.
+> macOS `base64` wraps at 76 characters by default, which breaks that — hence
+> `tr -d '\n'` (GNU `base64 -w0` is equivalent).
 
 **2. The MII reusable validation workflow** (`validation.yml`, the Java validator)
 declares the secret names `CDS_DEV_CLIENT_CERT` / `_KEY` / `_CERT_PASSWORD` (the
