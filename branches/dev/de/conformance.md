@@ -20,9 +20,9 @@ Verbindlich sind die Festlegungen des [MII-Meta-Wikis](https://github.com/medizi
 
 Hinweise zur Umsetzung stehen im Abschnitt [Anleitung](guidance.md), die technischen Artefakte im Abschnitt [Artefakte](artifacts.md).
 
-> [TODO: Ergänzen Sie modul-spezifische Konformitätsaussagen.Hinweis zur Erfassung: Konformitätsaussagen werden **nicht** automatisch erkannt. Der IG-Publisher sammelt nur Sätze, die ausdrücklich markiert sind — `§<seite>-<n>:Server MÜSSEN …§` — und erzeugt daraus eine Übersichtstabelle an der Stelle eines Absatzes, der ausschließlich `§§§` enthält. Solange keine Sätze markiert sind, gibt es keine Übersicht. `kerndatensatz-basis` nutzt dieses Verfahren; ob diese Vorlage es übernimmt, ist noch offen, weil die Spalte „Expectation" aus den englischen Schlüsselworten SHALL/SHOULD/MAY abgeleitet wird, die deutsche Fassung einer Seite aber MUSS/SOLLTE/KANN verwendet — siehe die offenen Entscheidungen in `docs/ig-best-practices-checklist.md`. Prüfen Sie das vor der Veröffentlichung mit einem echten IG-Publisher-Build.]
+> [TODO: Ergänzen Sie modul-spezifische Konformitätsaussagen.Hinweis zur Erfassung: Konformitätsaussagen werden **nicht** automatisch erkannt. Jeder normative Satz der englischen Seiten wird ausdrücklich markiert — eine Id, ein Doppelpunkt und der Satz, begrenzt durch Paragraphenzeichen — und daraus erzeugt der IG-Publisher die Übersichtstabelle am Ende der englischen Fassung dieser Seite. Die Syntax steht im Original in `input/pagecontent/general-requirements.md`. Diese deutsche Fassung trägt bewusst keine Markierungen.]
 
 -------
 
-**Hinweis:** Eine Liste der Konformitätsaussagen ist in der englischen Fassung dieses Implementierungsleitfadens verfügbar. Die Aussagen werden aus den englischen Originalseiten erzeugt, weil der IG-Publisher die Erwartungsstufe aus den englischen Schlüsselworten (SHALL/SHOULD/MAY) ableitet.
+**Hinweis:** Eine Liste der Konformitätsaussagen ist in der englischen Fassung dieses Implementierungsleitfadens verfügbar. Die Aussagen sind ausschließlich auf den englischen Originalseiten markiert und werden nur dort erzeugt.
 

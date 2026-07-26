@@ -18,13 +18,13 @@ The binding rules are those of the [MII meta wiki](https://github.com/medizininf
 
 For implementation guidance see the [Guidance](guidance.md) section; for the technical artifacts see the [Artifacts](artifacts.md) section.
 
-> [TODO: Add the conformance statements that are specific to your module.Note on collecting them: conformance statements are **not** detected automatically. The IG Publisher only collects sentences that are explicitly marked — `§<page>-<n>:Servers SHALL …§` — and renders a summary table where a paragraph contains nothing but `§§§`. As long as no sentence is marked, there is no summary table. `kerndatensatz-basis` uses this mechanism; whether this template adopts it is still open, because the "Expectation" column is derived from the English keywords SHALL/SHOULD/MAY and the German translation of a page uses MUSS/SOLLTE/KANN — see the open decisions in `docs/ig-best-practices-checklist.md`. Verify with a real IG-Publisher build before shipping either way.]
+> [TODO: Add the conformance statements that are specific to your module.How the list below is produced: conformance statements are **not** detected automatically. Every normative sentence on the English pages is wrapped in an explicit marker — an id, a colon and the statement text, delimited by section signs — and the table at the end of this page is generated from those markers. `input/pagecontent/general-requirements.md` shows the syntax in place: copy a marked sentence from there and give yours the next free id on its page. The German mirror deliberately carries no markers; the list is produced from the English pages only.]
 
 -------
 
 ### List of Conformance Statements
 
-The table below lists every conformance statement (a sentence marked with `§id:…§` in the narrative pages) together with its expectation and a link back to where it is stated.
+The table below lists every marked conformance statement of this guide together with its expectation and a link back to where it is stated.
 
 §§§
 

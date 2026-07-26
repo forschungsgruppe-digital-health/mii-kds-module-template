@@ -117,8 +117,15 @@
             </button>
             <a class="navbar-brand hidden" href="http://hl7.org/fhir/R4/index.html">FHIR</a>
             <div class="nav-collapse collapse navbar-inverse-collapse">
-              <!-- English translation of input/includes/menu.xml.
-     Keep the href targets IDENTICAL to the source menu; translate only labels. -->
+              <!-- Menu in the IG's DEFAULT language (English).
+     The IG Publisher renders the navigation from this file. To translate it,
+     ship a per-language copy at input/translations/<lang>/includes/menu.xml —
+     this is the mechanism the HL7 reference IG FHIR/multi-lang-test-ig uses and
+     the ONLY way to get a TRANSLATED menu: the `menu:` property in
+     sushi-config.yaml generates a single menu.xml that cannot be translated.
+     Rules: keep the href targets identical across languages; dropdown parents
+     must link to a REAL page (href="#" is rejected by the template's menu QA);
+     only one sub-menu level is supported. -->
 <ul xmlns="http://www.w3.org/1999/xhtml" class="nav navbar-nav">
   <li><a href="index.html">Home</a></li>
   <li class="dropdown">
@@ -453,7 +460,7 @@
   &lt;<a href="http://hl7.org/fhir/R4/structuredefinition.html#StructureDefinition.title">title</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;Example Patient — template starter&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/structuredefinition.html#StructureDefinition.status">status</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;active&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/structuredefinition.html#StructureDefinition.experimental">experimental</a> <a href="http://hl7.org/fhir/R4/datatypes.html#boolean">value</a>=&quot;false&quot;/&gt;
-  &lt;<a href="http://hl7.org/fhir/R4/structuredefinition.html#StructureDefinition.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2026-07-26T14:56:41+00:00&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/structuredefinition.html#StructureDefinition.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2026-07-26T18:22:37+00:00&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/structuredefinition.html#StructureDefinition.publisher">publisher</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;Medical Informatics Initiative (MII)&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/structuredefinition.html#StructureDefinition.contact">contact</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/metadatatypes.html#ContactDetail#ContactDetail.name">name</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;Medical Informatics Initiative (MII)&quot;/&gt;
@@ -2921,7 +2928,7 @@ Modifier extensions SHALL NOT change the meaning of any elements on Resource or 
 
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Sun, Jul 26, 2026 14:56+0000">2026-07-26</span>
+          Generated <span title="Sun, Jul 26, 2026 18:22+0000">2026-07-26</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.
