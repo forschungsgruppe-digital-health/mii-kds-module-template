@@ -89,7 +89,8 @@ Two further dev-container limits, stated plainly:
   reviews (changelog first) and merges into `dev`.
 - **Version and checksum move together.** An IG Publisher bump always includes
   the recomputed jar SHA-256 — never one without the other.
-- Update PRs (Dependabot and PR mode) target `dev`, never `main`.
+- Update PRs (Dependabot) target `dev`, never `main`. The version checker
+  only opens a tracking issue — it never opens a PR.
 
 ## How-tos
 
