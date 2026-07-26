@@ -224,44 +224,75 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
     <p><!-- white space is critical inside of capture --></p>
-<div class="markdown-toc">
-<ul id="markdown-toc">
-  <li><a href="#pflicht-elemente-min--1" id="markdown-toc-pflicht-elemente-min--1">Pflicht-Elemente (min = 1)</a></li>
-  <li><a href="#must-support-elemente" id="markdown-toc-must-support-elemente">Must-Support-Elemente</a></li>
+<div>
+<!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown.-->
+</div>
+
+<p style="border:var(--translation-box-border);background-color:var(--translation-background-color);padding: 5px 5px 5px 5px;">
+
+There is no translation page available for the current page, so it has been rendered in the default language
+
+</p>
+
+<!-- markdownlint-disable MD041 -->
+<!-- Must-Support. Der Text folgt der verbindlichen MII-Definition (Quelle:
+     MII-Meta-Wiki "Conformance", Abschnitt "Must Support (MS)"). Ändern Sie ihn
+     NUR, wenn Ihr Modul begründet abweicht — die Erwartungen an daten-erzeugende
+     und daten-verarbeitende Systeme sind MII-weit einheitlich. -->
+
+<h3 id="must-support">Must-Support</h3>
+
+<h4 id="definition">Definition</h4>
+
+<p>Elemente einer FHIR-Ressource können in einem Profil als <strong>obligatorisch</strong> oder
+als <a href="http://hl7.org/fhir/R4/profiling.html#mustsupport"><strong>Must Support</strong></a>
+gekennzeichnet werden.</p>
+
+<ul>
+  <li><strong>Obligatorische Elemente</strong> sind Elemente mit Mindestkardinalität <code class="language-plaintext highlighter-rouge">1</code>
+(z. B. <code class="language-plaintext highlighter-rouge">1..1</code>, <code class="language-plaintext highlighter-rouge">1..*</code>). Diese MÜSSEN grundsätzlich vorhanden sein. In
+Ausnahmefällen können die Werte fehlen — in diesem Fall MUSS die Abwesenheit
+dokumentiert werden, etwa über die <code class="language-plaintext highlighter-rouge">Data-Absent-Reason</code>-Extension (siehe
+<a href="missing-data.html">Umgang mit fehlenden Daten</a>).</li>
+  <li><strong>Must Support (MS)</strong> bedeutet, dass Systeme dieses Element unterstützen
+MÜSSEN, auch wenn die Kardinalität <code class="language-plaintext highlighter-rouge">0..*</code> lautet. <strong>Unterstützen</strong> heißt:
+Systeme MÜSSEN in der Lage sein, das Element zu befüllen, zu speichern,
+anzuzeigen und korrekt zu verarbeiten.</li>
 </ul>
 
-</div>
-<!-- markdownlint-disable MD041 -->
-<!-- Must-Support-Definition. Der MII-Standardtext ist unten als Ausgangspunkt
-     vorformuliert; passen Sie ihn NUR an, wenn Ihr Modul abweicht. -->
+<p>Must-Support ist damit <strong>nicht</strong> dasselbe wie Kardinalität: ein Element kann
+<code class="language-plaintext highlighter-rouge">0..1</code> sein und trotzdem Must-Support — die Daten dürfen fehlen, die Fähigkeit,
+sie zu verarbeiten, darf nicht.</p>
 
-<p>Für das Abfragen und Lesen von MII-Profilen ist <em>Must Support</em> auf einem
-Datenelement wie folgt zu interpretieren.</p>
+<h4 id="anforderungen-an-daten-erzeugende-systeme">Anforderungen an daten-erzeugende Systeme</h4>
 
-<h3 id="pflicht-elemente-min--1">Pflicht-Elemente (min = 1)</h3>
+<p><em>(z. B. die FHIR-API eines Datenintegrationszentrums)</em></p>
 
-<p>Pflicht-Elemente haben eine Mindest-Kardinalität von 1. Die Daten werden immer
-erwartet. Sind sie ausnahmsweise nicht vorhanden, gilt der Abschnitt
-<a href="missing-data.html">Umgang mit fehlenden Daten</a>.</p>
+<p>Ein konformes daten-erzeugendes System MUSS:</p>
 
-<h3 id="must-support-elemente">Must-Support-Elemente</h3>
+<ul>
+  <li>ein MS-Element mit Daten füllen, sofern diese lokal verfügbar sind (z. B. über
+ETL aus dem Primärsystem),</li>
+  <li>das MS-Element in der Ressource speichern können,</li>
+  <li>das MS-Element auf Anfrage (z. B. bei einer Feasibility-Query) bereitstellen.</li>
+</ul>
 
-<p>Als <em>Must Support</em> (MS) markierte Elemente MÜSSEN von konformen Systemen
-unterstützt werden. Es wird zwischen datenliefernden Systemen (Server, z. B. die
-FHIR-API eines DIZ) und datenempfangenden Systemen (Client) unterschieden.</p>
+<h4 id="anforderungen-an-daten-verarbeitende-systeme">Anforderungen an daten-verarbeitende Systeme</h4>
 
-<h4 id="erwartung-an-server">Erwartung an Server</h4>
+<p><em>(z. B. anfragende Anwendungen)</em></p>
 
-<p>Der Server <strong>SHALL</strong> ein Must-Support-Element befüllen können, sofern die Daten
-lokal verfügbar sind, es speichern und auf Anfrage bereitstellen können.</p>
+<p>Ein konformes daten-verarbeitendes System MUSS:</p>
 
-<h4 id="erwartung-an-clients">Erwartung an Clients</h4>
-
-<p>Der Client <strong>SHALL</strong> das Element verarbeiten (anzeigen/speichern/weiterverarbeiten)
-können.</p>
+<ul>
+  <li>MS-Elemente dem Benutzer korrekt anzeigen,</li>
+  <li>die Werte für Berechnungen oder Weiterverarbeitung berücksichtigen können,</li>
+  <li>Ressourceninstanzen mit MS-Elementen fehlerfrei verarbeiten, ohne dass Fehler
+oder Abbrüche entstehen.</li>
+</ul>
 
 <blockquote>
-  <p>[TODO: Nur ergänzen, falls Ihr Modul zusätzliche Must-Support-Regeln definiert.]</p>
+  <p>[TODO: Nur ergänzen, falls Ihr Modul zusätzliche oder abweichende
+Must-Support-Regeln definiert — und die Abweichung begründen.]</p>
 </blockquote>
 
 
@@ -289,7 +320,7 @@ können.</p>
 
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Sun, Jul 26, 2026 10:07+0000">2026-07-26</span>
+          Generated <span title="Sun, Jul 26, 2026 10:42+0000">2026-07-26</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.

@@ -2,8 +2,11 @@ MII_IG_Template
 =========================================
 
 Generic: line 0, col 0, Warning - The Implementation Guide Resource id should be de.medizininformatikinitiative.kerndatensatz.template (BUSINESSRULE)
+Generic: line 0, col 0, Info - No conformance term found in the text:  (BUSINESSRULE)
 Generic: line 0, col 0, Error - The link '../docs/recipes/add-a-profile.md' for "add-a-profile Rezept" cannot be resolved (NOTFOUND)
 Generic: line 0, col 0, Error - The link '../docs/recipes/add-translation.md' for "add-translation Rezept" cannot be resolved (NOTFOUND)
+Generic: line 0, col 0, Info - No conformance term found in the text: <seite>-<n>:Der Server MUSS … (BUSINESSRULE)
+Generic: line 0, col 0, Info - No conformance term found in the text:  (BUSINESSRULE)
 Generic: line 0, col 0, Error - The link '../docs/recipes/add-a-profile.md' for "add-a-profile Rezept" cannot be resolved (NOTFOUND)
 Generic: line 0, col 0, Error - The link '../docs/recipes/add-translation.md' for "add-translation Rezept" cannot be resolved (NOTFOUND)
 Generic: line 0, col 0, Warning - An HTML fragment from the set [ip-statements.xhtml, ip-statements.xhtml] is not included anywhere in the produced implementation guide (NOTFOUND)
@@ -123,5 +126,5 @@ Generic: line 0, col 0, Warning - An HTML fragment from the set [globals-table.x
 /home/runner/work/mii-kds-module-template/mii-kds-module-template/fsh-generated/resources/StructureDefinition-example-patient.json: line 0, col 0, Info - The resource StructureDefinition/example-patient could usefully have an OID assigned (OIDs are easy to assign - see https://build.fhir.org/ig/FHIR/fhir-tools-ig/CodeSystem-ig-parameters.html#ig-parameters-auto-oid-root) (BUSINESSRULE)
 /home/runner/work/mii-kds-module-template/mii-kds-module-template/fsh-generated/resources/StructureDefinition-example-patient.json: line 0, col 0, Info - Unused 'en' translation 'Minimales Beispielprofil, das nur mit der Vorlage ausgeliefert wird, damit ein neu erstelltes Modul sofort eine gerenderte IG erzeugt. Kein MII-Artefakt — ersetzen Sie es durch die Profile Ihres Moduls.' -> 'Minimal example profile shipped only with the template so that a newly created module immediately renders an IG. Not an MII artifact — replace it with your module's profiles.' (INFORMATIONAL)
 
-err = 1, warn = 9, info = 107
+err = 1, warn = 9, info = 110
 IG Publisher Version: 2.2.11

@@ -235,12 +235,72 @@ There is no translation page available for the current page, so it has been rend
 </p>
 
 <!-- markdownlint-disable MD041 -->
+<!-- Allgemeine Anforderungen. Die Verb-Tabelle unten ist MII-Standard (Quelle:
+     MII-Meta-Wiki "Conformance") und gilt unverändert für JEDES Modul — bitte
+     nicht kürzen oder umformulieren. Ergänzen Sie darunter die Anforderungen
+     Ihres Moduls. -->
+
 <h3 id="allgemeine-anforderungen">Allgemeine Anforderungen</h3>
 
-<p>Gemeinsame, für das gesamte Modul <strong>Module Template</strong> geltende Anforderungen: Konformitäts-Verben (SHALL/SHOULD/MAY), das Beanspruchen von Konformität, die Verwendung von Codes in Profilen sowie RESTful-API-Anforderungen.</p>
+<p>Dieser Abschnitt beschreibt die für das gesamte Modul <strong>Module Template</strong>
+geltenden Anforderungen.</p>
+
+<h4 id="anforderungsdokumentation">Anforderungsdokumentation</h4>
+
+<p>Anforderungen in dieser Spezifikation werden durch folgende in Großbuchstaben
+geschriebene Schlüsselworte (Conformance verbs) auf Basis von
+<a href="https://datatracker.ietf.org/doc/html/rfc2119">RFC-2119</a> gekennzeichnet:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Deutsch</th>
+      <th>Englisch</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MUSS / MÜSSEN</td>
+      <td>MUST / SHALL</td>
+    </tr>
+    <tr>
+      <td>DARF NICHT / DÜRFEN NICHT</td>
+      <td>MUST NOT / SHALL NOT</td>
+    </tr>
+    <tr>
+      <td>VERPFLICHTEND</td>
+      <td>REQUIRED</td>
+    </tr>
+    <tr>
+      <td>SOLLTE / SOLLTEN</td>
+      <td>SHOULD</td>
+    </tr>
+    <tr>
+      <td>SOLLTE NICHT / SOLLTEN NICHT</td>
+      <td>SHOULD NOT</td>
+    </tr>
+    <tr>
+      <td>EMPFOHLEN</td>
+      <td>RECOMMENDED</td>
+    </tr>
+    <tr>
+      <td>KANN / OPTIONAL</td>
+      <td>MAY</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="beanspruchen-von-konformität">Beanspruchen von Konformität</h4>
+
+<p>Ein System beansprucht Konformität zu diesem Modul, indem es die Profile dieses
+Implementierungsleitfadens erfüllt. Die Erwartungen an einzelne Elemente sind in
+<a href="must-support.html">Must-Support</a> beschrieben, der Umgang mit fehlenden Werten
+in <a href="missing-data.html">Umgang mit fehlenden Daten</a>.</p>
 
 <blockquote>
-  <p>[TODO: Ergänzen Sie modul-spezifische allgemeine Anforderungen.]</p>
+  <p>[TODO: Ergänzen Sie modul-spezifische allgemeine Anforderungen — etwa
+Anforderungen an die FHIR-RESTful-API, an Suchparameter oder an die
+Verwendung von Codes in Ihren Profilen.]</p>
 </blockquote>
 
 
@@ -268,7 +328,7 @@ There is no translation page available for the current page, so it has been rend
 
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Sun, Jul 26, 2026 10:07+0000">2026-07-26</span>
+          Generated <span title="Sun, Jul 26, 2026 10:42+0000">2026-07-26</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.

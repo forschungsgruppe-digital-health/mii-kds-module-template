@@ -6,17 +6,31 @@
 
 ## Handling Missing Data
 
-### Fehlende Daten
+### Umgang mit fehlenden Daten
 
-Dieser Abschnitt beschreibt den Umgang mit fehlenden Daten in den Ressourcen des Moduls **Module Template**. Die Regeln folgen der [FHIR-Kernspezifikation](https://hl7.org/fhir/R4/extensibility.html#Special-Case) und dem [International Patient Summary (IPS)](https://hl7.org/fhir/uv/ips/Empty-Sections-and-Missing-Data.html).
+Es gibt Situationen, in denen Informationen zu einem Datenelement fehlen und das Quellsystem den Grund für das Fehlen nicht kennt. Es gelten die folgenden Regeln.
 
-#### Elemente mit Mindest-Kardinalität = 0
+#### Grundregeln
 
-**Regel:** Liegt für ein Element mit min = 0 (auch Must-Support) kein Wert vor, **SHALL** das Element aus der Ressource weggelassen werden.
+* Liegt dem Quellsystem **keine Dateninstanz** für ein Element mit Mindestkardinalität `0` vor (einschließlich der mit **Must Support** gekennzeichneten Elemente), MUSS das Datenelement in der Ressource **ausgelassen** werden.
+* Handelt es sich um ein **obligatorisches Element** (Mindestkardinalität `1..`), MUSS es **vorhanden sein**, auch wenn das Quellsystem keine Daten hat. Wie der fehlende Wert dargestellt wird, hängt vom Datenelement ab:
 
-#### Pflicht-Elemente (Mindest-Kardinalität > 0)
+#### Nicht-codierte Datenelemente
 
-**Regel:** Ein Pflicht-Element **SHALL** vorhanden sein, auch wenn kein Wert vorliegt. Für nicht-kodierte Elemente wird die [Data-Absent-Reason-Extension](http://hl7.org/fhir/StructureDefinition/data-absent-reason) verwendet; für kodierte Elemente ein entsprechender NullFlavor-Code (z. B. `unknown`).
+Es MUSS die Extension [`Data-Absent-Reason`](http://hl7.org/fhir/R4/extension-data-absent-reason.html) am Datentyp mit dem Code `unknown` verwendet werden.
+
+#### Codierte Datenelemente mit ValueSet-Binding „example", „preferred" oder „extensible"
+
+* Enthält das Quellsystem **nur Freitext**, SOLLTE ausschließlich das Textelement (`CodeableConcept.text`) genutzt werden.
+* Sind weder Text noch codierte Daten vorhanden: 
+* enthält das ValueSet einen „unbekannt"-Code, SOLL dieser verwendet werden;
+* andernfalls SOLL der Code `unknown` aus dem CodeSystem [DataAbsentReason](http://hl7.org/fhir/R4/codesystem-data-absent-reason.html) genutzt werden.
+ 
+
+#### Codierte Datenelemente mit ValueSet-Binding „required"
+
+* Enthält das ValueSet einen „unbekannt"-Code, MUSS dieser verwendet werden.
+* Andernfalls MUSS ein Konzept aus dem ValueSet verwendet werden — die Instanz wäre sonst **nicht konform**.
 
 > [TODO: Nur ergänzen, falls Ihr Modul modul-spezifische Sonderfälle hat.]
 
