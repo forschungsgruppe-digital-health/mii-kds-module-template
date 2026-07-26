@@ -8,10 +8,10 @@
 # │ OPTIONAL ones sit inside commented-out blocks and matter only once you enable      │
 # │ that block.                                                                        │
 # │                                                                                    │
-# │ They occur in: this file, ig.ini, publication-request.json, the workflows under    │
-# │ .github/workflows/, the narrative pages (input/pagecontent, input/translations),   │
-# │ the FSH sources (input/fsh, incl. the rulesets library), input/resources and       │
-# │ tests/.                                                                            │
+# │ They occur in: this file, ig.ini, publication-request.json,                        │
+# │ qc/custom.rules.yaml, .github/workflows/go-publish.yml, the narrative pages        │
+# │ (input/pagecontent, input/translations), the FSH sources (input/fsh, incl. the     │
+# │ rulesets library), input/resources and tests/.                                     │
 # │                                                                                    │
 # │ ── ACTIVE ────────────────────────────────────────────────────────────────         │
 # │   {{MODULE_SLUG}}         lowercase module short name, e.g. `base`, `person`,      │

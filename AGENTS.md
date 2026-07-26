@@ -54,7 +54,14 @@ Author identity is the configured human committer.
   label in anything built (dependencies, the IG template pin, tool versions).
   The convention check enforces this; the dependency check proposes bumps.
 - **The single convention checker** is `wiki-consistency-check` +
-  `tools/convention-check.mjs` (placeholder-aware). Do not add a second linter.
+  `tools/convention-check.mjs` (placeholder-aware). Do not add a second
+  metadata linter. `convention-check.yml` also runs `tools/language-model-check.sh`
+  — a separate concern (see below), not a second metadata linter.
+- **English is the IG's default language, German the translation**
+  (`i18n-default-lang: en`, sources under `input/translations/de/`) — the same
+  model as `kerndatensatz-basis`, so "deviates from basis" is never true. Prose
+  asserting the reverse fails `tools/language-model-check.sh` in CI — fix the
+  prose, never the guard.
 - Do not change canonical URLs of published artifacts.
 - Checker/analysis skills are report-only: they propose, humans decide; no
   auto-merge; any change is a PR targeting `dev`.
