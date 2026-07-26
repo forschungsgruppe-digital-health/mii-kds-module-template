@@ -4,10 +4,11 @@
 navigation **menu**, the **footer / base UI chrome**, the **narrative content**,
 and the **conformance resources**.
 
-**Language policy.** This module is **German-default, English-recommended**:
-German is the authoritative content language (`i18n-default-lang: de`), English
+**Language policy.** This module is **English-default with a German translation**,
+the same model as kerndatensatz-basis: English is the default rendering
+language (`i18n-default-lang: en`), German
 the recommended second rendering (`i18n-lang: [en]`, sources under
-`input/translations/en`). Everything below works the same for a further language
+`input/translations/de`). Everything below works the same for a further language
 — replace `en` with that language code and add it to `i18n-lang`.
 
 > **Why translation is *additive*:** you never edit the German source to
@@ -37,7 +38,7 @@ with the **same file name** as the German page:
 
 ```text
 input/pagecontent/index.md                     # German — the source
-input/translations/en/pagecontent/index.md     # English — renders on /en/
+input/translations/de/pagecontent/index.md     # German — renders on /de/
 ```
 
 - Keep structure, headings and links 1:1 with the German page.
@@ -60,7 +61,7 @@ This module maintains its menu as **files**, one per language:
 
 ```text
 input/includes/menu.xml                      # German — the source menu
-input/translations/en/includes/menu.xml      # English translation
+input/translations/de/includes/menu.xml      # German translation
 ```
 
 When you add, rename or remove a page, update **both** files (and the `pages:`
@@ -104,7 +105,7 @@ For each resource whose text you want in English, add one supplement named
 exactly `<ResourceType>-<id>.po`:
 
 ```text
-input/translations/en/StructureDefinition-example-patient.po
+input/translations/de/StructureDefinition-example-patient.po
 ```
 
 Format (`msgid` = the German source, `msgstr` = the translation):
@@ -164,7 +165,7 @@ The build must stay green (QA errors = 0).
 | Menu QA error about `href="#"` | A dropdown parent has no real target | Point it at a real page (§2) |
 | Navigation differs between languages | An entry was added to one menu file only | Keep both menu files in step (§2) |
 | Base/footer labels blank in some language | The template lacks that language's UI-string catalog | Fix in the template repo (§3); make sure your `ig-template/` mirror is current |
-| A translated page does not appear on `/en/` | It is a `<name>-en.md` sibling, or the file name differs from the German page | Move it to `input/translations/en/pagecontent/<same-filename>` (§1) |
+| A translated page does not appear on `/de/` | It is a `<name>-de.md` sibling, or the file name differs from the German page | Move it to `input/translations/de/pagecontent/<same-filename>` (§1) |
 | A resource supplement does nothing | `msgid` mismatch, wrong file name, or an untranslatable field | Copy the `msgid` from `fsh-generated/resources/…`; check §4 |
 
 ---

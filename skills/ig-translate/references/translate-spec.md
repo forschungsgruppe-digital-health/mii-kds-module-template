@@ -14,14 +14,14 @@ CapabilityStatement.
 translation-sources folder (`translation-sources: input/translations/<lang>`):
 
 ```
-input/translations/en/<ResourceType>-<id>.<ext>     # ext ∈ {po, xliff, json}
+input/translations/de/<ResourceType>-<id>.<ext>     # ext ∈ {po, xliff, json}
 ```
 
 Examples (for a "Dokument" module):
-- `input/translations/en/StructureDefinition-mii-pr-dokument-dokument.po`
-- `input/translations/en/StructureDefinition-mii-ex-dokument-nlp-processing-status.po`
-- `input/translations/en/StructureDefinition-mii-lm-dokument.po`  (Logical Model = StructureDefinition)
-- `input/translations/en/CodeSystem-mii-cs-dokument-nlp-processing-status.po`
+- `input/translations/de/StructureDefinition-mii-pr-dokument-dokument.po`
+- `input/translations/de/StructureDefinition-mii-ex-dokument-nlp-processing-status.po`
+- `input/translations/de/StructureDefinition-mii-lm-dokument.po`  (Logical Model = StructureDefinition)
+- `input/translations/de/CodeSystem-mii-cs-dokument-nlp-processing-status.po`
 
 > A wrong name (for example `ImplementationGuide-…po`, `menu.po`, or any
 > non-`{type}-{id}` name) is **ignored** by the Publisher (log: "name is not
@@ -54,7 +54,7 @@ with the **same file name** as the default-language page:
 
 ```
 input/pagecontent/<name>.md                    # German (leading / default)
-input/translations/en/pagecontent/<name>.md    # English — renders on /en/<name>.html
+input/translations/de/pagecontent/<name>.md    # German — renders on /de/<name>.html
 ```
 
 Content rules:
@@ -73,11 +73,11 @@ Content rules:
 
 ```yaml
 parameters:
-  i18n-default-lang: de          # leading language
+  i18n-default-lang: en          # leading language
   i18n-lang:
     - en                         # additional rendered language(s)
   translation-sources:
-    - input/translations/en      # folder holding the supplements
+    - input/translations/de      # folder holding the supplements
 ```
 
 ## 5. Guardrails (summary)

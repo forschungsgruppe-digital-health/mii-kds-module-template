@@ -31,10 +31,10 @@ duplicate it:
   ([`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds))**
   owns the language *mechanism* and *policy*: language-neutral
   header/footer/CSS overrides, the inherited UI-string translations of the base
-  template, and the de-default/en-recommended decision. Its own `ig-translate`
+  template, and the en-default/de-translation decision. Its own `ig-translate`
   skill documents those template obligations.
 - **This module scaffold** owns the module-facing *workflow* below: creating or
-  harvesting the actual translation supplements (`input/translations/en/…`) and
+  harvesting the actual translation supplements (`input/translations/de/…`) and
   the future-proof translated narrative pages for this concrete module IG, plus
   the supporting tool `tools/ig-translate.sh`.
 
@@ -58,7 +58,7 @@ translation-source folder, as the HL7 reference
 | **ValueSet**, some **ImplementationGuide** title fields, `concept.display`/`concept.definition` | **Partial / No** | Not applied from a plain `.po` supplement on this toolchain |
 
 Consequence: place the English rendering of `input/pagecontent/<name>.md` at
-`input/translations/en/pagecontent/<name>.md` and `/en/<name>.html` renders in
+`input/translations/de/pagecontent/<name>.md` and `/de/<name>.html` renders in
 English. Do NOT use a `<name>-<lang>.md` sibling in `input/pagecontent/`.
 
 > Treat this table as ground truth. **Re-verify it whenever the pinned IG
@@ -84,7 +84,7 @@ English. Do NOT use a `<name>-<lang>.md` sibling in `input/pagecontent/`.
 1. **Scan:** `tools/ig-translate.sh --scan en` → lists pages and supported
    resources with their target file paths.
 2. **Resource supplements:** one file per StructureDefinition/CodeSystem/
-   Questionnaire at `input/translations/en/<Type>-<id>.po` (`msgid` = exact
+   Questionnaire at `input/translations/de/<Type>-<id>.po` (`msgid` = exact
    German source text from the generated resource, `msgstr` = English
    translation). These render.
 3. **Narrative pages:** one translation per `input/pagecontent/<name>.md` at
@@ -102,7 +102,7 @@ English. Do NOT use a `<name>-<lang>.md` sibling in `input/pagecontent/`.
    parallel rendered English guide for narrative, FSH `translation`
    extensions / `designation`s for resource texts; page/artifact mapping).
 2. **Resources:** move existing English designations / translation extensions
-   from the source into `input/translations/en/<Type>-<id>.po` (instead of
+   from the source into `input/translations/de/<Type>-<id>.po` (instead of
    re-translating).
 3. **Narrative:** copy English page content from the parallel English guide into
    `input/pagecontent/<name>-en.md` (cite the source path per page; no
