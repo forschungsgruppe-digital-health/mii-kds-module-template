@@ -74,7 +74,7 @@ source of truth; consult them before doing the corresponding task by hand.
   a module IG (statistics, content hygiene) and objective comparison of several
   IGs. Backed by [`tools/ig-stats.py`](tools/ig-stats.py).
 - [`skills/ig-translate/`](skills/ig-translate/SKILL.md) — the module-facing
-  de→en translation workflow (translate/harvest), placing supplements where the
+  en→de translation workflow (translate/harvest), placing supplements where the
   IG Publisher expects them. Backed by
   [`tools/ig-translate.sh`](tools/ig-translate.sh). The template-side language
   *mechanism/policy* lives in `ig-template-mii-kds`.
