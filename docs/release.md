@@ -68,13 +68,14 @@ suffix: `2026.0.0-rc.1`, `2026.0.0-alpha.1`.
 > a human always reviews the notes and attaches the package before anything goes
 > public. Publishing is the deliberate human act that fires the announcement.
 
-> **Why the build gate:** `kerndatensatz-basis` leaves the tag-time job to
-> release creation only and relies on the reusable validation workflow (run on
-> the release PR) for the FHIR error gate. This template adds a build on the tag
-> so a tag that does not even build never becomes a release, and so the
-> `package.tgz` is captured as a workflow artifact. QA *counts* are reported but
-> not required to be zero — the authoritative error gate is still the reusable
-> validation workflow (§4.2).
+> **Why the build gate:** `kerndatensatz-basis` runs no FHIR error gate at tag
+> time — its tag-time job only creates the release, and its PR-time signal is its
+> own IG-Publisher build. This template adds two things basis does not have: a
+> build on the tag, so a tag that does not even build never becomes a release
+> (and the `package.tgz` is captured as a workflow artifact), and the MII
+> reusable validation workflows on every PR. QA *counts* are reported but not
+> required to be zero — the authoritative error gate is the reusable validation
+> workflow.
 
 ---
 
@@ -101,13 +102,14 @@ git checkout -b release/v2026.0.1
 
 ### 2. Update the version — *human*
 
-Bump the CalVer version everywhere it appears **in this template**. Unlike the
-wiki's file list (which names Simplifier's `package.json` and `guide.yaml`, not
-present here), the version lives in exactly two files:
+Bump the CalVer version everywhere it appears **in this template**. The wiki's
+file list names Simplifier's `package.json` and `guide.yaml`, which are not
+present here; the surface in this scaffold is:
 
 - **`sushi-config.yaml`**
   - `version:` — the module version (e.g. `version: "2026.0.1"`).
-  - the `artifact-version` extension `valueString` — keep it equal to `version`.
+  - the `package-source` extension's `version` sub-extension (`valueString`) —
+    keep it equal to `version`.
   - the sequence `start:` year — the `YYYY` part (e.g. `2026`).
 - **`publication-request.json`**
   - `version` — the CalVer version.
@@ -116,11 +118,24 @@ present here), the version lives in exactly two files:
   - `desc` — a one-line human description of *this* release.
   - `first` — set to `true` only for a module's very first release; set it to
     `false` for every release after that.
+- **`input/fsh/rulesets/`** — the three files that stamp the version onto every
+  conformance resource, so an unbumped ruleset ships artifacts pointing at the
+  previous release:
+  - `version.fsh` — `version` / `^version` and the package-source version.
+  - `meta-profile.fsh` — `meta.profile[+] = "<canonical>|<version>"`.
+  - `cps-rules.fsh` — `supportedProfile[+] = "<profile>|<version>"`.
+  See [`input/fsh/rulesets/README.md`](../input/fsh/rulesets/README.md) for the
+  placeholder-to-file table.
+- **The narrative pages** — `index.md`, `changes.md`, `metadata.md` and
+  `version-history.md`, and their German mirrors under
+  `input/translations/de/pagecontent/`, print the version in prose.
 
 > **Why keep the three `sushi-config.yaml` spots in sync:** the metadata contract
-> (checked by the single convention check, `wiki-consistency-check`, §4.2)
-> asserts `version` is CalVer and that the embedded copies agree. Drift fails the
-> check — fix it before tagging.
+> (checked by the single convention check, `wiki-consistency-check`) asserts
+> `version` is CalVer and that the embedded copies agree. Drift fails the check —
+> fix it before tagging. The ruleset literals are **not** checked mechanically
+> yet; re-read them by hand, or extend `tools/convention-check.mjs` to assert
+> them against `sushi-config.yaml`.
 
 > **Terminology & release notes:** author the module's changelog in the IG's
 > release-notes page (`input/pagecontent/…`). Terminology is selected
