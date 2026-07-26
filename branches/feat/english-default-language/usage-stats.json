@@ -8,40 +8,52 @@
     "Patient": [
       {
         "url": "https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient",
-        "title": "Beispiel-Patient (Vorlage)"
+        "title": "Example Patient — template starter"
       }
     ]
   },
   "usage": {
     "http://hl7.org/fhir/StructureDefinition/artifact-author": [
-      "ImplementationGuide"
+      "ImplementationGuide",
+      "StructureDefinition"
     ],
     "http://hl7.org/fhir/StructureDefinition/artifact-editor": [
-      "ImplementationGuide"
+      "ImplementationGuide",
+      "StructureDefinition"
     ],
     "http://hl7.org/fhir/StructureDefinition/artifact-endorser": [
-      "ImplementationGuide"
+      "ImplementationGuide",
+      "StructureDefinition"
     ],
     "http://hl7.org/fhir/StructureDefinition/artifact-purpose": [
       "ImplementationGuide"
     ],
     "http://hl7.org/fhir/StructureDefinition/artifact-reviewer": [
-      "ImplementationGuide"
+      "ImplementationGuide",
+      "StructureDefinition"
     ],
     "http://hl7.org/fhir/StructureDefinition/artifact-topic": [
-      "ImplementationGuide"
+      "ImplementationGuide",
+      "StructureDefinition"
     ],
     "http://hl7.org/fhir/StructureDefinition/artifact-usage": [
-      "ImplementationGuide"
+      "ImplementationGuide",
+      "StructureDefinition"
     ],
     "http://hl7.org/fhir/StructureDefinition/artifact-versionAlgorithm": [
-      "ImplementationGuide"
+      "ImplementationGuide",
+      "StructureDefinition"
     ],
     "http://hl7.org/fhir/StructureDefinition/artifact-versionPolicy": [
+      "ImplementationGuide",
+      "StructureDefinition"
+    ],
+    "http://hl7.org/fhir/StructureDefinition/cqf-expansionParameters": [
       "ImplementationGuide"
     ],
     "http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability": [
-      "ImplementationGuide"
+      "ImplementationGuide",
+      "StructureDefinition"
     ],
     "http://hl7.org/fhir/StructureDefinition/elementdefinition-bestpractice": [
       "StructureDefinition.snapshot.element.constraint"
@@ -56,19 +68,30 @@
       "StructureDefinition.snapshot.element.binding"
     ],
     "http://hl7.org/fhir/StructureDefinition/package-source": [
-      "ImplementationGuide"
+      "ImplementationGuide",
+      "Patient.meta",
+      "StructureDefinition.meta"
     ],
     "http://hl7.org/fhir/StructureDefinition/resource-approvalDate": [
-      "ImplementationGuide"
+      "ImplementationGuide",
+      "StructureDefinition"
     ],
     "http://hl7.org/fhir/StructureDefinition/resource-effectivePeriod": [
-      "ImplementationGuide"
+      "ImplementationGuide",
+      "StructureDefinition"
     ],
     "http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type": [
       "StructureDefinition.snapshot.element.type"
     ],
     "http://hl7.org/fhir/StructureDefinition/structuredefinition-hierarchy": [
       "StructureDefinition.snapshot.element.type"
+    ],
+    "http://hl7.org/fhir/StructureDefinition/translation": [
+      "StructureDefinition.description",
+      "StructureDefinition.title"
+    ],
+    "http://hl7.org/fhir/tools/StructureDefinition/expansion-parameters": [
+      "ImplementationGuide.definition"
     ],
     "http://hl7.org/fhir/tools/StructureDefinition/ig-internal-dependency": [
       "ImplementationGuide.definition"
@@ -89,6 +112,9 @@
     ],
     "http://hl7.org/fhir/tools/StructureDefinition/snapshot-base-version": [
       "StructureDefinition.snapshot"
+    ],
+    "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-license": [
+      "StructureDefinition.meta"
     ]
   }
 }

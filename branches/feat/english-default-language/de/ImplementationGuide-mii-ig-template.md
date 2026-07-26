@@ -9,9 +9,9 @@
   "resourceType" : "ImplementationGuide",
   "id" : "mii-ig-template",
   "meta" : {
-    "profile" : ["http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide|2.0.0",
-    "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishableimplementationguide|2.0.0",
-    "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide|2.0.0"]
+    "profile" : ["http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide",
+    "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishableimplementationguide",
+    "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide"]
   },
   "language" : "en",
   "extension" : [{
@@ -110,6 +110,12 @@
         "system" : "url",
         "value" : "https://www.medizininformatik-initiative.de/en/collaboration/national-steering-committee"
       }]
+    }
+  },
+  {
+    "url" : "http://hl7.org/fhir/StructureDefinition/cqf-expansionParameters",
+    "valueReference" : {
+      "reference" : "Parameters/mii-param-template-manifest"
     }
   },
   {
@@ -369,6 +375,28 @@
       {
         "url" : "value",
         "valueString" : "pin-all"
+      }],
+      "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"
+    },
+    {
+      "extension" : [{
+        "url" : "code",
+        "valueString" : "path-expansion-params"
+      },
+      {
+        "url" : "value",
+        "valueString" : "../../input/resources/Parameters-expansion-manifest.json"
+      }],
+      "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"
+    },
+    {
+      "extension" : [{
+        "url" : "code",
+        "valueString" : "pin-manifest"
+      },
+      {
+        "url" : "value",
+        "valueString" : "mii-param-template-manifest"
       }],
       "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"
     },
@@ -670,6 +698,12 @@
       "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"
     },
     {
+      "url" : "http://hl7.org/fhir/tools/StructureDefinition/expansion-parameters",
+      "valueReference" : {
+        "reference" : "Parameters/expansion-parameters"
+      }
+    },
+    {
       "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-internal-dependency",
       "valueCode" : "hl7.fhir.uv.tools.r4#1.1.2"
     },
@@ -835,6 +869,28 @@
       {
         "url" : "value",
         "valueString" : "pin-all"
+      }],
+      "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"
+    },
+    {
+      "extension" : [{
+        "url" : "code",
+        "valueCode" : "path-expansion-params"
+      },
+      {
+        "url" : "value",
+        "valueString" : "../../input/resources/Parameters-expansion-manifest.json"
+      }],
+      "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"
+    },
+    {
+      "extension" : [{
+        "url" : "code",
+        "valueCode" : "pin-manifest"
+      },
+      {
+        "url" : "value",
+        "valueString" : "mii-param-template-manifest"
       }],
       "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"
     },
@@ -1147,8 +1203,8 @@
       "reference" : {
         "reference" : "StructureDefinition/example-patient"
       },
-      "name" : "Beispiel-Patient (Vorlage)",
-      "description" : "Minimales Beispielprofil, das nur mit der Vorlage ausgeliefert wird, damit ein neu erstelltes Modul sofort eine gerenderte IG erzeugt. Kein MII-Artefakt — ersetzen Sie es durch die Profile Ihres Moduls.",
+      "name" : "Example Patient — template starter",
+      "description" : "Minimal example profile shipped with the template so that a newly created module renders a complete IG immediately. Not an MII artifact — replace it with your module's profiles.",
       "exampleBoolean" : false
     },
     {
@@ -1163,9 +1219,24 @@
       "reference" : {
         "reference" : "Patient/ExamplePatientInstance"
       },
-      "name" : "Beispiel: Max Mustermann-Testpatient",
-      "description" : "Synthetisches Beispiel für das Beispiel-Patient-Profil. Rein künstliche Daten.",
-      "exampleCanonical" : "https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient|2026.0.0"
+      "name" : "Example: Max Mustermann-Testpatient",
+      "description" : "Synthetic example for the Example Patient profile. Entirely artificial data.",
+      "exampleCanonical" : "https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Parameters"
+      },
+      {
+        "url" : "http://hl7.org/fhir/StructureDefinition/implementationguide-page",
+        "valueUri" : "Parameters-mii-param-template-manifest.html"
+      }],
+      "reference" : {
+        "reference" : "Parameters/mii-param-template-manifest"
+      },
+      "name" : "mii-param-template-manifest",
+      "exampleBoolean" : false
     }],
     "page" : {
       "extension" : [{
