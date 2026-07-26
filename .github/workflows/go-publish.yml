@@ -646,22 +646,22 @@ jobs:
           # basis, which keeps a duplicate root package.json).
           tar -xOzf source/output/package.tgz package/package.json \
             > "${RUNNER_TEMP}/built-package.json"
-          # Registry languages: German first (de-default template), English
-          # second.
+          # Registry languages: English first (the IG's default rendering
+          # language, i18n-default-lang: en), German second.
           node automation/scripts/fix-ig-registry-entry.mjs \
             publication/ig-registry/fhir-ig-list.json \
             source/publication-request.json \
             "${RUNNER_TEMP}/built-package.json" \
             "${CANONICAL}" \
             "${PUBLICATION_BASE}/history.html" \
-            de \
-            en
+            en \
+            de
 
           {
             echo "### FHIR IG Registry handoff"
             echo
             echo "- History: ${PUBLICATION_BASE}/history.html"
-            echo "- Languages: de, en"
+            echo "- Languages: en, de"
             echo "- Entry metadata and placeholders: validated"
           } >> "${GITHUB_STEP_SUMMARY}"
 

@@ -63,15 +63,15 @@ test("keeps the metadata contract consistent across the template files", () => {
   assert.equal(publicationRequest.first, true);
 });
 
-test("is German-default with English translation supplements", () => {
+test("is English-default with German translation supplements", () => {
   const sushiConfig = read("sushi-config.yaml");
 
-  // Deliberate deviation from basis (en-default with de translations).
-  assert.match(sushiConfig, /^\s+i18n-default-lang: de\b/m);
-  assert.match(sushiConfig, /^\s+i18n-lang:\n\s+- en\b/m);
+  // The same model as kerndatensatz-basis: en default, de translation.
+  assert.match(sushiConfig, /^\s+i18n-default-lang: en\b/m);
+  assert.match(sushiConfig, /^\s+i18n-lang:\n\s+- de\b/m);
   assert.match(
     sushiConfig,
-    /^\s+translation-sources:\n\s+- input\/translations\/en\b/m,
+    /^\s+translation-sources:\n\s+- input\/translations\/de\b/m,
   );
 });
 
