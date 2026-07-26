@@ -11,7 +11,7 @@ gh secret set NAME --repo <owner>/<module-repo> < value.txt
 gh variable set NAME --repo <owner>/<module-repo> --body "value"
 ```
 
-## Gate F — SU-TermServ terminology server (optional)
+## SU-TermServ terminology server (optional)
 
 The IG build/preview and `go-publish` resolve terminology against the public HL7
 server `tx.fhir.org` by default. To use the **MII SU-TermServ**
@@ -147,7 +147,7 @@ the job is still green and only its **log** says so.
 Both gates are *wired and fall back safely*, but until the credential exists the
 "enabled" code path has never executed. Verify each once, right after enabling:
 
-**Gate F (SU-TermServ).** Push any branch (or re-run the IG build) and open the
+**SU-TermServ.** Push any branch (or re-run the IG build) and open the
 log of the terminology step. Enabled and working looks like
 `SU-TermServ client certificate present — starting a local client-cert nginx proxy`
 followed by a green build; not configured looks like
@@ -156,7 +156,7 @@ If the proxy fails to start, the step fails loudly rather than silently
 mis-expanding value sets — re-check that the cert/key are **base64-encoded** and
 that the key password is correct.
 
-**Gate G (Zulip).** The announcement runs on a published release. To verify
+**Zulip.** The announcement runs on a published release. To verify
 without waiting for the next one, cut a throw-away pre-release in a scratch repo,
 or check the job log of the most recent release run — it prints either the
 delivered message or the explicit skip notice naming what is missing.
@@ -178,7 +178,7 @@ delivered message or the explicit skip notice naming what is missing.
 | `ENABLE_SECURITY_SCAN` | on | OSV + Trivy |
 | `PAGES_ACTIONS_ENABLED` | (gh-pages push mode) | switch preview deploy to the Actions Pages path |
 
-The [§2.13 toggle summary](workflows.md#the-213-toggle-summary) lists one more,
+The [toggle summary](workflows.md#the-toggle-summary) lists one more,
 `ENABLE_RELEASE_PLEASE`. It belongs to the template repository only — the
 first-run bootstrap deletes `release-please.yml`, so it has no effect in a
 module. `IG_TEMPLATE_REPO_URL` is a plain variable, not a toggle; see

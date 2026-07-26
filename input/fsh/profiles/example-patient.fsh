@@ -6,7 +6,7 @@
 // deliberately minimal FHIR profile: it only constrains cardinalities and marks
 // a few elements as Must-Support, and it binds to NO external value set, so it
 // validates without a terminology server and builds cleanly on the tx.fhir.org
-// fallback (spec §2.10). Delete it once your own profiles exist.
+// fallback. Delete it once your own profiles exist.
 //
 // Naming: the MII convention is MII_PR_<Module>_<Name> (see input/fsh/README.md
 // and the meta-wiki page "Namenskonventionen für FHIR-Ressourcen in der MII").

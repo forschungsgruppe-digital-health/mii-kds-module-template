@@ -3,22 +3,22 @@
 # bootstrap (docs/recipes/first-run-setup.md). Modules release via the MII
 # CalVer Module Release Workflow, never Release Please.
 # -----------------------------------------------------------------------------
-# release-please — SemVer release automation for THIS TEMPLATE REPO (spec §2.2)
+# release-please — SemVer release automation for THIS TEMPLATE REPO
 #
 # Purpose:   Watches the Conventional Commits that land on `main` (via the
 #            dev -> main release-candidate merge, see CONTRIBUTING.md) and
 #            maintains a release PR. Merging that release PR cuts the SemVer
 #            tag (vMAJOR.MINOR.PATCH), the GitHub Release, and the
 #            auto-generated CHANGELOG.md.
-# Trigger:   push to `main` (release automation runs on `main` only, §2.6).
+# Trigger:   push to `main` (release automation runs on `main` only).
 # Toggle:    vars.ENABLE_RELEASE_PLEASE — ON by default; set the repo variable
-#            to 'false' to make the job skip without editing YAML (§2.13).
+#            to 'false' to make the job skip without editing YAML.
 # Human-gated steps:
 #   - The dev -> main merge (release-candidate gate) is a human-reviewed PR.
 #   - The Release Please release PR must be merged by a human; nothing is
 #     tagged or released until then.
 #
-# Scope (§2.2) — the hard boundary: Release Please versions the TEMPLATE REPO
+# Scope — the hard boundary: Release Please versions the TEMPLATE REPO
 # ITSELF (SemVer, "the tooling"). A module created FROM this template must
 # NEVER carry these files — two release systems on one repo corrupt the
 # version history. Modules are released solely via the MII Module Release

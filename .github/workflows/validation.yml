@@ -1,4 +1,4 @@
-# FHIR validation via the MII reusable validation workflows (§4.2).
+# FHIR validation via the MII reusable validation workflows.
 #
 # Purpose:   Validate the module's FHIR conformance resources and examples by
 #            CALLING the Medical Informatics Initiative's shared reusable
@@ -16,7 +16,7 @@
 #            (The heavy Java validation deliberately does NOT run on every
 #            feature push; open a PR or dispatch it to validate a feature branch.)
 #
-# Toggle:    vars.ENABLE_VALIDATION (§2.13) — ON by default. Set the repo
+# Toggle:    vars.ENABLE_VALIDATION — ON by default. Set the repo
 #            variable to 'false' to skip validation (jobs show as "skipped").
 #
 # WHERE IT RUNS — modules only (documented choice): a reusable-workflow (`uses:`)
@@ -33,11 +33,11 @@
 #            normally. This workflow PROPAGATES to modules (the first-run
 #            bootstrap keeps it).
 #
-# Fixed versions (§0.2): the reusable workflows are pinned to a FIXED commit SHA
+# Fixed versions: the reusable workflows are pinned to a FIXED commit SHA
 #            of kerndatensatz-meta (not the moving @master the wiki shows).
 #            SUSHI + Java-validator versions are pinned with a repo-var override.
 #
-# Secrets (gated prerequisites — the agent cannot obtain them; see Gates D/F):
+# Secrets (human prerequisites — an agent cannot obtain them):
 #            passed via `secrets: inherit` (the wiki's canonical pattern). A
 #            module maintainer must set, as repo secrets:
 #              - SIMPLIFIER_USERNAME / SIMPLIFIER_PASSWORD  (dotnet QC login)
@@ -66,7 +66,7 @@ permissions:
 jobs:
   dotnet-validation:
     name: SUSHI + Simplifier QC (.NET)
-    # ON by default (§2.13), and only on created modules — the placeholder
+    # ON by default, and only on created modules — the placeholder
     # template repo cannot produce clean SUSHI output for validation.
     if: ${{ vars.ENABLE_VALIDATION != 'false' && !endsWith(github.repository, '/mii-kds-module-template') }}
     uses: medizininformatik-initiative/kerndatensatz-meta/.github/workflows/ci_dotnet_validation.yml@1db2e534704d92e5ee0cde663ce3e7ccd8825fa7 # kerndatensatz-meta master @ 2026-07-15
@@ -94,7 +94,7 @@ jobs:
     # CDS_DEV_CLIENT_CERT / _KEY / _CERT_PASSWORD (all required), but THIS repo's
     # canonical name for the same SU-TermServ client certificate is
     # SU_TERMSERV_CLIENT_CERT / _KEY / _PASSWORD (used by ig-publisher.yml and
-    # go-publish.yml, §2.10). Mapping them explicitly here means a maintainer sets
+    # go-publish.yml). Mapping them explicitly here means a maintainer sets
     # the certificate ONCE, under one name, for the whole repository — instead of
     # storing the same cert twice under two different secret names.
     # If your organisation already provisions CDS_DEV_CLIENT_* centrally, replace

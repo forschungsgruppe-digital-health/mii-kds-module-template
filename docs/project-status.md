@@ -33,7 +33,7 @@ template flow, and creating a module from the module template.
 Only on an explicit decision by the maintainer. At that point:
 
 1. Register the template in `FHIR/ig-registry` (`templates.json`) and name the
-   owner (project Gate D).
+   owner.
 2. Publish the package so modules can switch from the vendored folder to a
    pinned package reference (see
    `docs/recipes/switch-template-to-published.md`).

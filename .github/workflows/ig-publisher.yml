@@ -1,4 +1,4 @@
-# IG build + GitHub Pages branch preview (§2.8, Appendix A.9).
+# IG build + GitHub Pages branch preview.
 #
 # Purpose:   On every push to a non-release branch, run SUSHI + the HL7 IG
 #            Publisher and deploy the rendered IG to the gh-pages branch under
@@ -9,7 +9,7 @@
 #            removes previews of deleted branches (keyed on the .branch-name
 #            marker each preview drops here).
 #
-# PROPAGATION (§2.8): this workflow — unlike Release Please — is MEANT to
+# PROPAGATION: this workflow — unlike Release Please — is MEANT to
 #            propagate to modules created from this template. A module maintainer
 #            wants dev/feature previews too, and kerndatensatz-basis proves
 #            modules use exactly this model. The first-run bootstrap KEEPS this
@@ -20,7 +20,7 @@
 #            manual workflow_dispatch (rebuild one branch's preview). main and
 #            tags are reserved for formal publication and are NOT previewed here.
 #
-# Toggle:    vars.ENABLE_PREVIEW (§2.13) — ON by default. Set the repo variable
+# Toggle:    vars.ENABLE_PREVIEW — ON by default. Set the repo variable
 #            to 'false' to skip the whole workflow (jobs show as "skipped", not
 #            failed).
 #
@@ -33,7 +33,7 @@
 #              Actions). Set PAGES_ACTIONS_ENABLED=true ONLY after switching
 #              Settings → Pages to "GitHub Actions" (mirrors go-publish.yml).
 #
-# Terminology (§2.10): the IG Publisher build prefers the MII terminology server
+# Terminology: the IG Publisher build prefers the MII terminology server
 #            (SU-TermServ) through a client-certificate nginx proxy when the repo
 #            secrets SU_TERMSERV_CLIENT_CERT / _KEY / _PASSWORD are set, and
 #            otherwise falls back to the public HL7 server https://tx.fhir.org
@@ -55,7 +55,7 @@
 #            module every placeholder is already replaced and this whole step is
 #            a no-op (it never runs, the repo name differs).
 #
-# Fixed versions (§0.2): every Action is pinned to a commit SHA (# vX.Y.Z); the
+# Fixed versions: every Action is pinned to a commit SHA (# vX.Y.Z); the
 #            IG Publisher jar, SUSHI and Jekyll are pinned in the `env:` block
 #            below under the SAME names go-publish.yml and module-release.yml
 #            use (PUBLISHER_VERSION / PUBLISHER_SHA256 / SUSHI_VERSION /
@@ -102,7 +102,7 @@ env:
 
 jobs:
   build:
-    if: ${{ vars.ENABLE_PREVIEW != 'false' }} # toggle: ON by default (§2.13)
+    if: ${{ vars.ENABLE_PREVIEW != 'false' }} # toggle: ON by default
     runs-on: ubuntu-latest
     timeout-minutes: 90
     outputs:
@@ -238,7 +238,7 @@ jobs:
           set -euo pipefail
           # Prefer the MII terminology server (SU-TermServ) through a client-cert
           # nginx proxy; otherwise fall back to the public HL7 server. The build
-          # must not hard-fail without the certificate (§2.10).
+          # must not hard-fail without the certificate.
           if [[ -n "${SU_TERMSERV_CLIENT_CERT}" ]] && [[ -n "${SU_TERMSERV_CLIENT_KEY}" ]] && [[ -n "${SU_TERMSERV_CLIENT_PASSWORD}" ]]; then
             nginx_dir="${RUNNER_TEMP}/nginx"
             mkdir -p "${nginx_dir}/certs"

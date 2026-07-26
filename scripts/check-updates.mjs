@@ -262,7 +262,7 @@ async function fetchJson(url, { github = false, allow404 = false } = {}) {
 const TEMPLATE_PKG_ID = "de.medizininformatikinitiative.template";
 const TEMPLATE_REPO = "medizininformatik-initiative/ig-template-mii-kds";
 
-// The FIXED FHIR package watch list (§2.5): these always get a row, even
+// The FIXED FHIR package watch list: these always get a row, even
 // before sushi-config.yaml has landed. Extra pins found in sushi-config.yaml
 // are watched on top.
 const WATCHED_FHIR_DEPS = [

@@ -11,7 +11,7 @@ visible.
 > build, but the published package `de.medizininformatikinitiative.template`
 > initially had **no FHIR package-registry entry and no release**. So the
 > template scaffold ships the template *content* copied into `ig-template/` and
-> references it as a local folder (spec §4.1). That lets a module build on day
+> references it as a local folder. That lets a module build on day
 > one. This recipe is the one-time cleanup you run once the template is
 > published — after it, your module tracks a versioned dependency like every
 > other package, and the scheduled dependency checker proposes upgrades for you.
@@ -45,7 +45,7 @@ in order of preference:
    published versions once the template is registered there.
 
 > **Why pin an exact `x.y.z` and never `#current`:** fixed versions keep a 2029
-> rebuild byte-stable (spec §0.2). The convention check rejects a template
+> rebuild byte-stable. The convention check rejects a template
 > pinned to `current`/`latest`/`dev`, and the dependency checker
 > (`scripts/check-updates.mjs`, which already watches
 > `de.medizininformatikinitiative.template`) surfaces newer template releases as
@@ -54,7 +54,7 @@ in order of preference:
 - The published template is **resolvable by the IG Publisher** — the template
   repo has published the package to the FHIR package registry and/or registered
   it in [`FHIR/ig-registry`](https://github.com/FHIR/ig-registry)'s
-  `templates.json` (that registration is the template repo's Gate D). Quick
+  `templates.json` (the template repo owns that registration). Quick
   check: the registry URL above returns the version you intend to pin (HTTP 200,
   not 404).
 - Your module already builds green today against the vendored template (so you

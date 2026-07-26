@@ -35,7 +35,7 @@ concurrency:
 
 jobs:
   check:
-    if: ${{ vars.ENABLE_DEPENDENCY_CHECK != 'false' }} # toggle: ON by default (§2.13)
+    if: ${{ vars.ENABLE_DEPENDENCY_CHECK != 'false' }} # toggle: ON by default
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

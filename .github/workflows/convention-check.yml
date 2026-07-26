@@ -1,5 +1,5 @@
 # =============================================================================
-# convention-check.yml — THE single convention checker (spec §2.7 / §4.2)
+# convention-check.yml — THE single convention checker
 #
 # Purpose:   Runs the hard MII KDS module-metadata contract mechanically
 #            (packageId / id / name / title / canonical / CalVer version / no
@@ -18,8 +18,8 @@
 # Triggers:  push + pull_request to dev / main / release/** ; workflow_dispatch.
 #
 # Toggle:    vars.ENABLE_CONVENTION_CHECK — ON by default; set the repository
-#            variable to 'false' to make the job skip without editing YAML
-#            (§2.13). A skipped job is expected, not an error.
+#            variable to 'false' to make the job skip without editing YAML.
+#            A skipped job is expected, not an error.
 #
 # Placeholder-aware, branch-sensitive severity:
 #   - On normal branches (dev, feature/*), a {{PLACEHOLDER}} value is treated
@@ -52,7 +52,7 @@ permissions:
 
 jobs:
   convention-check:
-    if: ${{ vars.ENABLE_CONVENTION_CHECK != 'false' }} # toggle: ON by default (§2.13)
+    if: ${{ vars.ENABLE_CONVENTION_CHECK != 'false' }} # toggle: ON by default
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

@@ -1,4 +1,4 @@
-# Stale GitHub Pages preview cleanup (companion to ig-publisher.yml, §2.8).
+# Stale GitHub Pages preview cleanup (companion to ig-publisher.yml).
 #
 # Purpose:   Remove branch previews under gh-pages/branches/<branch>/ whose
 #            branch no longer exists, so gh-pages does not grow without bound as
@@ -8,14 +8,14 @@
 #            any version-like paths (e.g. 2026.0.0/) are NEVER cleanup
 #            candidates — they belong to -go-publish, not to previews.
 #
-# PROPAGATION (§2.8): like ig-publisher.yml, this file is meant to propagate to
+# PROPAGATION: like ig-publisher.yml, this file is meant to propagate to
 #            modules created from this template (the first-run bootstrap keeps
 #            it) — every module's gh-pages benefits from the same sweep.
 #
 # Triggers:  weekly schedule (Sundays 00:00 UTC) + manual workflow_dispatch
 #            (with a dry_run input to list stale previews without deleting).
 #
-# Toggle:    vars.ENABLE_PREVIEW (§2.13) — ON by default; shares the preview
+# Toggle:    vars.ENABLE_PREVIEW — ON by default; shares the preview
 #            subsystem's switch. Set the repo variable to 'false' to skip the
 #            sweep (it then shows as "skipped"). To purge once while previews are
 #            off, flip it on, dispatch this workflow, flip it back.
@@ -26,7 +26,7 @@
 #            cleaned tree through the Pages Actions pipeline. Mirrors
 #            ig-publisher.yml / go-publish.yml.
 #
-# Fixed versions (§0.2): every Action is pinned to a commit SHA (# vX.Y.Z).
+# Fixed versions: every Action is pinned to a commit SHA (# vX.Y.Z).
 #
 # Prerequisite: none. If the repository has no `gh-pages` branch yet (no preview
 #            and no publication so far), the sweep skips with a ::notice — an
@@ -59,7 +59,7 @@ concurrency:
 
 jobs:
   cleanup:
-    if: ${{ vars.ENABLE_PREVIEW != 'false' }} # toggle: ON by default (§2.13)
+    if: ${{ vars.ENABLE_PREVIEW != 'false' }} # toggle: ON by default
     runs-on: ubuntu-latest
     outputs:
       changed: ${{ steps.cleanup.outputs.changed }}

@@ -4,7 +4,7 @@
 # repository, right after creating it. See docs/recipes/first-run-setup.md for
 # the click-by-click walkthrough.
 #
-# What it does (spec §2.6):
+# What it does:
 #   (a) creates the `dev` integration branch from `main` and applies branch
 #       protection to both (needs `gh` authenticated with admin on the repo);
 #   (b) removes the template-maintenance files that must NOT live in a module
@@ -19,7 +19,7 @@
 #   - Removals go through `git rm` (staged, reversible with `git restore`),
 #     never a bare delete of tracked files.
 #   - A NEVER-protect list hard-aborts if any removal target ever collides with
-#     module content, build input, or PROPAGATED tooling (§2.8) — a safety net
+#     module content, build input, or PROPAGATED tooling — a safety net
 #     against an edited list.
 #   - The whole body is wrapped in main() so bash has parsed the entire script
 #     before execution; the script can therefore safely remove ITSELF.
@@ -42,9 +42,9 @@ EOF
 why() {
   case "$1" in
     release-please-config.json|.release-please-manifest.json|.github/workflows/release-please.yml)
-      echo "Release Please = SemVer automation for the TEMPLATE repo; a module releases via MII CalVer (§2.2) — two release systems on one repo corrupt the version history";;
+      echo "Release Please = SemVer automation for the TEMPLATE repo; a module releases via MII CalVer — two release systems on one repo corrupt the version history";;
     .github/workflows/notify-zulip.yml)
-      echo "announces the TEMPLATE repo's SemVer releases; a module announces its own CalVer release via the module release workflow (§2.12)";;
+      echo "announces the TEMPLATE repo's SemVer releases; a module announces its own CalVer release via the module release workflow";;
     CHANGELOG.md)
       echo "the template's Release-Please-generated SemVer changelog; a module keeps its own release notes";;
     docs/recipes/first-run-setup.md)
@@ -114,12 +114,12 @@ print_checklist() {
    Actions". Then set the repository variable PAGES_ACTIONS_ENABLED=true only
    once that is done (the publication workflow checks it).
 
-3. Terminology (optional, §2.10): to build against the MII SU-TermServ, add the
+3. Terminology (optional): to build against the MII SU-TermServ, add the
    repository secrets SU_TERMSERV_CLIENT_CERT / SU_TERMSERV_CLIENT_KEY /
    SU_TERMSERV_CLIENT_PASSWORD. Without them the build falls back to the
    public HL7 server https://tx.fhir.org (it does not hard-fail).
 
-4. Release announcements (optional, §2.12): add ZULIP_API_KEY to announce your
+4. Release announcements (optional): add ZULIP_API_KEY to announce your
    module's CalVer releases to the MII Zulip.
 
 5. CI pipeline toggles are ON by default. To require CI as a merge gate, add the
@@ -159,7 +159,7 @@ main() {
   # Release Please quartet + the template SemVer announcement are the set listed
   # by the header of .github/workflows/release-please.yml — honor it.
   local REMOVE=".github/workflows/release-please.yml .github/workflows/notify-zulip.yml release-please-config.json .release-please-manifest.json CHANGELOG.md docs/recipes/first-run-setup.md tools/first-run-bootstrap.sh"
-  # NEVER: module content, build input, and PROPAGATED tooling (§2.8) that a
+  # NEVER: module content, build input, and PROPAGATED tooling that a
   # module keeps. A removal target colliding here is a bug → hard abort.
   local NEVER="input sushi-config.yaml ig.ini publication-request.json advisor.json qc scripts skills .claude .agents AGENTS.md LICENSE README.md CONTRIBUTING.md .devcontainer .editorconfig .gitignore .github/dependabot.yml .github/CODEOWNERS .github/ISSUE_TEMPLATE .github/workflows/go-publish.yml .github/workflows/convention-check.yml .github/workflows/security-scan.yml .github/workflows/dependency-check.yml tools/ig-stats.py tools/ig-translate.sh tools/convention-check.mjs tools/convention-check.test.mjs tools/language-model-check.sh"
 

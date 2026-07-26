@@ -19,7 +19,7 @@ for the step-by-step mapping to the MII wiki's Module Release Workflow.
    (the tag pattern the `module-release.yml` workflow listens for).
 5. `module-release.yml` then **builds**, creates the **GitHub Release**, announces it
    to the MII Zulip (topic *Releases*), and **hands off to the gated `go-publish`**.
-6. **Production publication is a separate, human step (Gate E):** run `go-publish.yml`
+6. **Production publication is a separate, human step:** run `go-publish.yml`
    manually via *workflow_dispatch*. It defaults to `publish:false` (a full dry run);
    only a human sets `publish:true` for the real publication.
 
