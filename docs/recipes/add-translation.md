@@ -14,10 +14,10 @@ the recommended second rendering (`i18n-lang: [de]`, sources under
 `input/translations/de`). Everything below works the same for a further language
 — replace `de` with that language code and add it to `i18n-lang`.
 
-> **Why translation is *additive*:** you never edit the German source to
+> **Why translation is *additive*:** you never edit the English source to
 > translate it. Each language gets its own file beside the source, and a part
-> with no translation falls back to German. Nothing added here can break a build
-> — at worst it is ignored.
+> with no translation falls back to the English source. Nothing added here can
+> break a build — at worst it is ignored.
 
 ---
 
@@ -39,22 +39,23 @@ Your IG's visible text comes from four places, each with its **own** mechanism:
 ### 1. Narrative content (pages)
 
 Put the translated page under `pagecontent/` in the translation-source folder,
-with the **same file name** as the German page:
+with the **same file name** as the English source page:
 
 ```text
-input/pagecontent/index.md                     # German — the source
+input/pagecontent/index.md                     # English — the source
 input/translations/de/pagecontent/index.md     # German — renders on /de/
 ```
 
-- Keep structure, headings and links 1:1 with the German page.
+- Keep structure, headings and links 1:1 with the English source page.
 - Translate prose, not identifiers: leave artifact links
   (`StructureDefinition-<id>.html`, …) and FHIR ids unchanged.
-- A page with no translation falls back to German on `/en/` with a "no
-  translation available" note. Translate the pages that matter most first.
+- A page with no German translation falls back to the English source on `/de/`,
+  with a "no translation available" note. Translate the pages that matter most
+  first.
 
-> **The mistake to avoid:** a `<name>-en.md` sibling inside `input/pagecontent/`
+> **The mistake to avoid:** a `<name>-de.md` sibling inside `input/pagecontent/`
 > is **not** a translation — the toolchain renders it as a *separate page* and
-> `/en/` keeps showing German. It must live under
+> `/de/` keeps showing English. It must live under
 > `input/translations/<lang>/pagecontent/`, mirroring the HL7 reference IG
 > [`FHIR/multi-lang-test-ig`](https://github.com/FHIR/multi-lang-test-ig).
 
@@ -65,7 +66,7 @@ input/translations/de/pagecontent/index.md     # German — renders on /de/
 This module maintains its menu as **files**, one per language:
 
 ```text
-input/includes/menu.xml                      # German — the source menu
+input/includes/menu.xml                      # English — the source menu
 input/translations/de/includes/menu.xml      # German translation
 ```
 
@@ -106,22 +107,22 @@ around it here.
 
 ### 4. Conformance resources (profiles, code systems, questionnaires)
 
-For each resource whose text you want in English, add one supplement named
+For each resource whose text you want in German, add one supplement named
 exactly `<ResourceType>-<id>.po`:
 
 ```text
 input/translations/de/StructureDefinition-example-patient.po
 ```
 
-Format (`msgid` = the German source, `msgstr` = the translation):
+Format (`msgid` = the English source, `msgstr` = the German translation):
 
 ```po
 #: StructureDefinition.description
-msgid "Minimales Beispielprofil …"
-msgstr "Minimal example profile …"
+msgid "Minimal example profile …"
+msgstr "Minimales Beispielprofil …"
 ```
 
-- The `msgid` must match the generated German text **byte for byte** — copy it
+- The `msgid` must match the generated English text **byte for byte** — copy it
   from `fsh-generated/resources/<Type>-<id>.json` after `sushi .` (quote style,
   umlauts and trailing punctuation included).
 - The file name must match the **generated** `resourceType` + `id`, not the FSH
@@ -133,7 +134,7 @@ msgstr "Minimal example profile …"
 |---|---|
 | Resource-level `description` (StructureDefinition, CodeSystem, Questionnaire), and a StructureDefinition's element `definition` / `comment` / `requirements` | **Yes** |
 | `CodeSystem.concept.display` / `concept.definition` | **No** — localize with a language-tagged `designation` in the resource |
-| Resource `title` | **No** — leave it German |
+| Resource `title` | **No** — it stays in the source language (English) in every rendering |
 | ValueSet texts, ImplementationGuide title/description | **No** — a supplement is silently ignored |
 
 > **Do not "simulate" the unsupported cases.** A `ValueSet-*.po` or
@@ -154,9 +155,9 @@ sushi .
    FHIR …` and `Erstellt <date>`.
 2. `/en/` — menu in English; footer shows `Package … based on FHIR …` and
    `Generated <date>`.
-3. A translated page renders in English on `/en/`; an untranslated one falls back
-   to German.
-4. A translated resource's `description` is English on `/en/`, German on `/de/`.
+3. A translated page renders in German on `/de/`; an untranslated one falls back
+   to the English source.
+4. A translated resource's `description` is German on `/de/`, English on `/en/`.
 
 The build must stay green (QA errors = 0).
 
@@ -176,7 +177,7 @@ moves between them.
 | Menu QA error about `href="#"` | A dropdown parent has no real target | Point it at a real page (§2) |
 | Navigation differs between languages | An entry was added to one menu file only | Keep both menu files in step (§2) |
 | Base/footer labels blank in some language | The template lacks that language's UI-string catalog | Fix in the template repo (§3); make sure your `ig-template/` mirror is current |
-| A translated page does not appear on `/de/` | It is a `<name>-de.md` sibling, or the file name differs from the German page | Move it to `input/translations/de/pagecontent/<same-filename>` (§1) |
+| A translated page does not appear on `/de/` | It is a `<name>-de.md` sibling, or the file name differs from the English source page | Move it to `input/translations/de/pagecontent/<same-filename>` (§1) |
 | A resource supplement does nothing | `msgid` mismatch, wrong file name, or an untranslatable field | Copy the `msgid` from `fsh-generated/resources/…`; check §4 |
 
 ---

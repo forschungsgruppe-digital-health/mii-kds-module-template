@@ -27,7 +27,8 @@ which this scaffold references (and keeps up to date automatically).
 3. **Fill in your module's values** — replace every `{{PLACEHOLDER}}` in
    `sushi-config.yaml`; each one is explained in a comment right there.
 4. **Write a profile** in `input/fsh/` (an example is included to copy) and
-   replace the German starter pages in `input/pagecontent/`.
+   replace the English starter pages in `input/pagecontent/` (and their German
+   counterparts in `input/translations/de/pagecontent/`).
    → [add a profile](docs/recipes/add-a-profile.md)
 5. **Build it**: `sushi .`, then run the IG Publisher, then read `output/qa.html`.
    Or just push a branch — CI builds it and comments the preview URL on your PR.
@@ -43,7 +44,7 @@ Unfamiliar terms are in the [glossary](docs/glossary.md).
 | --- | --- |
 | `sushi-config.yaml` | Your module's metadata — the file you edit first |
 | `input/fsh/` | Profiles, extensions, value sets (FHIR Shorthand) |
-| `input/pagecontent/` | The narrative pages, German by default |
+| `input/pagecontent/` | The narrative pages — English, the IG's default language |
 | `input/translations/de/` | German translations of pages, menu and resources |
 | `input/includes/menu.xml` | The navigation menu (one file per language) |
 | `ig-template/` | The MII IG template, mirrored automatically — don't edit |

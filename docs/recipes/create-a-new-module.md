@@ -29,8 +29,8 @@
    copy) until the MII template package is published; then follow
    [switch-template-to-published.md](switch-template-to-published.md).
 5. **Add content.** Replace the example profile in `input/fsh/` with your own
-   ([add-a-profile.md](add-a-profile.md)) and the German starter pages in
-   `input/pagecontent/` with your module's pages. Keep the English supplements in
+   ([add-a-profile.md](add-a-profile.md)) and the English starter pages in
+   `input/pagecontent/` with your module's pages. Keep the German translations in
    `input/translations/de/` in step with them.
 6. **Build.** Locally: `sushi . && java -jar publisher.jar -ig ig.ini`, read
    `output/qa.html`. Or push a `feature/*` branch and open the **CI preview URL**
