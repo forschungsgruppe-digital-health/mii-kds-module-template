@@ -29,7 +29,7 @@ both repos share the same check-matrix contract (`references/check-matrix.md`,
 Sections 1a module / 1b template package). This copy is **scoped to the module
 scaffold** — it additionally implements the hard Section-1a assertions
 mechanically and placeholder-aware via
-[`../../tools/convention-check.mjs`](../../tools/convention-check.mjs) (which the
+[`../../scripts/convention-check.mjs`](../../scripts/convention-check.mjs) (which the
 template package repo does not carry, having no `{{PLACEHOLDER}}` values). It is
 adapted from the skill of the same name in the MII KDS sample IG
 ([`mii-kds-sample-ig-inoffiziell`](https://github.com/medizininformatik-initiative/mii-kds-sample-ig-inoffiziell),
@@ -39,7 +39,7 @@ CC-BY-4.0).
 
 - The **hard module-metadata contract** (Section 1 of
   [`references/check-matrix.md`](references/check-matrix.md)) is implemented
-  mechanically by [`../../tools/convention-check.mjs`](../../tools/convention-check.mjs)
+  mechanically by [`../../scripts/convention-check.mjs`](../../scripts/convention-check.mjs)
   and run in CI by `.github/workflows/convention-check.yml`
   (toggle `ENABLE_CONVENTION_CHECK`, ON by default). That script is
   **placeholder-aware** (see below) and hard-fails on a violation.
@@ -98,7 +98,7 @@ remembered wiki content.
 
 1. **Fetch the wiki.** Clone (or fetch) the wiki and read the pages named in
    the check matrix.
-2. **Run the hard assertions.** Run `node tools/convention-check.mjs`
+2. **Run the hard assertions.** Run `node scripts/convention-check.mjs`
    (add `--release` when checking a release branch). It evaluates every
    metadata assertion that applies to this repository type, placeholder-aware,
    and records pass/fail with the exact observed value.
@@ -125,5 +125,5 @@ remembered wiki content.
 
 - [`references/check-matrix.md`](references/check-matrix.md) — the concrete
   check points (repo file ↔ wiki page) and the hard module-metadata contract.
-- [`../../tools/convention-check.mjs`](../../tools/convention-check.mjs) — the
+- [`../../scripts/convention-check.mjs`](../../scripts/convention-check.mjs) — the
   mechanical, placeholder-aware implementation of the Section 1 hard assertions.

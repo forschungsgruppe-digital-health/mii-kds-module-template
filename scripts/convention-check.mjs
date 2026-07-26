@@ -9,7 +9,7 @@
 // wiki-consistency-check skill; they are never failed here.
 //
 // Usage:
-//   node tools/convention-check.mjs [--release] [--root <dir>]
+//   node scripts/convention-check.mjs [--release] [--root <dir>]
 //     --release   strict mode: an unresolved {{PLACEHOLDER}} is a FAILURE
 //                 (a module must not release with placeholders). The CI
 //                 workflow sets this automatically on release/** branches.

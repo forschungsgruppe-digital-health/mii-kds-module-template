@@ -8,7 +8,7 @@
 # shipped configuration, and it has crept back in more than once, so it fails
 # here instead of shipping to module authors.
 #
-#   tools/language-model-check.sh        # scan the tracked text files
+#   scripts/language-model-check.sh        # scan the tracked text files
 #
 # Exit 0 = clean, 1 = residue found. Run by .github/workflows/convention-check.yml.
 #
@@ -47,7 +47,7 @@ SCANNED_EXT='md|markdown|yaml|yml|xml|sh|mjs|js|json|fsh|po'
 status=0
 while IFS= read -r f; do
   case "$f" in
-    input/translations/de/*|ig-template/*|docs/reports/*|tools/language-model-check.sh) continue;;
+    input/translations/de/*|ig-template/*|docs/reports/*|scripts/language-model-check.sh) continue;;
   esac
   ext="${f##*.}"
   case "$ext" in
@@ -95,7 +95,7 @@ This IG is English-default with a German translation:
 There is no input/translations/en/, and kerndatensatz-basis is en-default too,
 so "deviates from basis" is never the right rewrite — delete such claims.
 
-If a hit is legitimate, add it to ALLOW in tools/language-model-check.sh with a
+If a hit is legitimate, add it to ALLOW in scripts/language-model-check.sh with a
 reason in the commit message. Do not widen the exclusions or relax PATTERNS.
 MSG
 else

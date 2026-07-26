@@ -7,7 +7,7 @@
 #   source repository from the `IG_TEMPLATE_REPO_URL` repository VARIABLE, which
 #   exists only while the two template repositories still live outside the
 #   target organisation. A module created from this template inherits the
-#   workflow but not the variable, so tools/sync-ig-template.sh falls back to
+#   workflow but not the variable, so scripts/sync-ig-template.sh falls back to
 #   the target-org URL — which does not exist yet — and the module's very first
 #   PR goes red for a reason its author cannot act on.
 #
@@ -17,7 +17,7 @@
 #   can be deleted.
 #
 # USAGE
-#   SRC_REPO=<url> bash tools/resolve-ig-template-source.sh
+#   SRC_REPO=<url> bash scripts/resolve-ig-template-source.sh
 #     SRC_REPO   optional; empty falls back to the target-organisation URL
 #   Writes `url=` and `reachable=true|false` to ${GITHUB_OUTPUT} when set, and
 #   prints the same values otherwise.

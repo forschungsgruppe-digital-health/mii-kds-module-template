@@ -185,7 +185,7 @@ test("prefers SU-TermServ and falls back to tx.fhir.org with a notice", () => {
 });
 
 test("spells the SU-TermServ key password the same way in every workflow", () => {
-  // tools/set-su-termserv-secrets.sh and docs/secrets.md provision the key
+  // scripts/set-su-termserv-secrets.sh and docs/secrets.md provision the key
   // password as SU_TERMSERV_CLIENT_PASSWORD. A workflow reading any other
   // name gets an empty value and falls back to tx.fhir.org silently — no
   // error, only a ::notice — so no other spelling may appear.

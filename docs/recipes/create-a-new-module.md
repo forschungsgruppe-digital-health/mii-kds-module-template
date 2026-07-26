@@ -11,8 +11,8 @@
    template" → Create a new repository**. **Tick "Include all branches"** so you get
    `dev` too. Name it for your module (e.g. `mii-kds-modul-person`).
 2. **Run the first-run bootstrap — always.** In a clone, run
-   `bash tools/first-run-bootstrap.sh` (dry run — shows what it will do), then
-   `bash tools/first-run-bootstrap.sh --apply`. It creates `dev`, applies branch
+   `bash scripts/first-run-bootstrap.sh` (dry run — shows what it will do), then
+   `bash scripts/first-run-bootstrap.sh --apply`. It creates `dev`, applies branch
    protection, and **removes** the template-maintenance files (Release Please config
    + workflow, the release announcement, the template `CHANGELOG`, and the bootstrap
    itself). If you ticked "Include all branches" it simply skips creating `dev`; the

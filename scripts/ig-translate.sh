@@ -5,8 +5,8 @@
 # translate itself (an agent/human does that) and creates nothing without being
 # asked.
 #
-#   tools/ig-translate.sh --scan de        # show the target path per page/resource
-#   tools/ig-translate.sh --validate de    # check existing translation files
+#   scripts/ig-translate.sh --scan de        # show the target path per page/resource
+#   scripts/ig-translate.sh --validate de    # check existing translation files
 #
 # Verified: translation supplements render only for StructureDefinition,
 # CodeSystem, Questionnaire (Publisher restriction). A narrative page is

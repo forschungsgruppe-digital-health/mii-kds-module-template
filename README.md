@@ -19,7 +19,7 @@ which this scaffold references (and keeps up to date automatically).
 ## Quickstart
 
 1. **Create your repo** — *Use this template*, tick *Include all branches*.
-2. **Run the first-run bootstrap** — `bash tools/first-run-bootstrap.sh` (dry
+2. **Run the first-run bootstrap** — `bash scripts/first-run-bootstrap.sh` (dry
    run), then `--apply`. It protects both branches and removes the template's
    own SemVer release automation, which a CalVer module must not carry. Run it
    even if you ticked *Include all branches*.
@@ -56,7 +56,7 @@ Unfamiliar terms are in the [glossary](docs/glossary.md).
 | `qc/custom.rules.yaml`, `advisor.json` | What the MII reusable validation reads: naming-convention rules and tolerated validator messages |
 | `ig-template/` | The MII IG template, mirrored automatically — don't edit |
 | `docs/` | Guides and step-by-step recipes |
-| `tools/`, `scripts/` | Helper scripts (first-run bootstrap, template sync, …) |
+| `scripts/`, `scripts/` | Helper scripts (first-run bootstrap, template sync, …) |
 | `.github/workflows/` | CI: build, preview, validation, release |
 
 ## Documentation

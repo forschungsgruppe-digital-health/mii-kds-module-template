@@ -14,10 +14,10 @@ overwritten by the next sync.
 The template package is not published to a FHIR package registry yet, so
 `ig.ini` references it as a local folder (`template = #ig-template`). To make
 sure the IG always builds against the CURRENT template during development, the
-mirror is refreshed by `tools/sync-ig-template.sh`:
+mirror is refreshed by `scripts/sync-ig-template.sh`:
 
-- `tools/sync-ig-template.sh` — re-vendor from `dev` (default).
-- `tools/sync-ig-template.sh --check` — fail if the mirror has drifted (run in CI).
+- `scripts/sync-ig-template.sh` — re-vendor from `dev` (default).
+- `scripts/sync-ig-template.sh --check` — fail if the mirror has drifted (run in CI).
 - `.github/workflows/sync-ig-template.yml` — scheduled + manual; opens a PR when
   the template repo has moved on.
 

@@ -5,7 +5,7 @@ Aufwand/Risiko. **Quelle:** woraus die Metrik gelesen wird. **Modus:** *static*
 (ohne Build) oder *build* (braucht IG-Publisher-`qa.json`/`_data`).
 
 > **Per Hand erweiterbar:** Neue Zeile mit eindeutiger `metric_id` ergänzen; wenn
-> die Metrik im Tool erhoben werden soll, in `tools/ig-stats.py` ein Feld mit dem
+> die Metrik im Tool erhoben werden soll, in `scripts/ig-stats.py` ein Feld mit dem
 > gleichen `metric_id` befüllen und im JSON-Schema ergänzen. Nicht implementierte
 > Metriken bleiben dokumentiert (Roadmap), liefern aber `null`.
 
@@ -25,7 +25,7 @@ mit Treiber-Beitragstabelle. Provenienz-Arrays in der `ig-stats.json`:
 > FSH-Konstrukte und werden separat geführt (nicht im Vergleichs-`total`).
 > **Direktiven** werden anhand der Muster in
 > `references/report-content.json` (`directive_patterns`) und des Auffangmusters
-> `GENERIC_DIRECTIVE` in `tools/ig-stats.py` erkannt; nicht abgedeckte →
+> `GENERIC_DIRECTIVE` in `scripts/ig-stats.py` erkannt; nicht abgedeckte →
 > `UNBEKANNT` (im Report mit Fundstelle gelistet).
 
 ## A. Identität & Scope
@@ -64,7 +64,7 @@ mit Treiber-Beitragstabelle. Provenienz-Arrays in der `ig-stats.json`:
 |---|---|---|---|---|
 | `narrative_pages`,`narrative_words`,`images` | Doku-Umfang | `input/pagecontent/**`, `implementation-guides/**`, `input/images` | static | V·A |
 | `mandatory_pages_present`/`_missing` | Pflichtabschnitte | Seitenliste vs. Soll-Set | static | V·A |
-| `simplifier_directives_total`,`_by_label`,`_unknown` | Simplifier-/FQL-Direktiven (Narrativ-Nacharbeit) | `references/report-content.json` + `tools/ig-stats.py` | static | A |
+| `simplifier_directives_total`,`_by_label`,`_unknown` | Simplifier-/FQL-Direktiven (Narrativ-Nacharbeit) | `references/report-content.json` + `scripts/ig-stats.py` | static | A |
 
 ## F. Mehrsprachigkeit
 | metric_id | Misst | Quelle | Modus | Nutzen |

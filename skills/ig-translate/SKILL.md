@@ -36,7 +36,7 @@ duplicate it:
 - **This module scaffold** owns the module-facing *workflow* below: creating or
   harvesting the actual translation supplements and translated narrative pages
   (`input/translations/de/…`) for this concrete module IG, plus the supporting
-  tool `tools/ig-translate.sh`.
+  tool `scripts/ig-translate.sh`.
 
 If the task is "keep the template's overrides language-neutral", switch to the
 template package's `ig-translate` skill. Stay here for a module's content.
@@ -77,11 +77,11 @@ German. Do NOT use a `<name>-<lang>.md` sibling in `input/pagecontent/`.
 - **No fact invention.** Mark every machine translation `TODO:REVIEW`; a
   bilingual human review of the language is mandatory before the German
   rendering is trusted.
-- **Only on confirmation.** The default is a dry-run/plan (`tools/ig-translate.sh`).
+- **Only on confirmation.** The default is a dry-run/plan (`scripts/ig-translate.sh`).
 
 ## Procedure — "translate" mode (en→de)
 
-1. **Scan:** `tools/ig-translate.sh --scan de` → lists pages and supported
+1. **Scan:** `scripts/ig-translate.sh --scan de` → lists pages and supported
    resources with their target file paths.
 2. **Resource supplements:** one file per StructureDefinition/CodeSystem/
    Questionnaire at `input/translations/de/<Type>-<id>.po` (`msgid` = exact
@@ -90,7 +90,7 @@ German. Do NOT use a `<name>-<lang>.md` sibling in `input/pagecontent/`.
 3. **Narrative pages:** one translation per `input/pagecontent/<name>.md` at
    `input/translations/de/pagecontent/<name>.md` (same file name, structure and
    links; FHIR identifiers unchanged).
-4. **Validate:** `tools/ig-translate.sh --validate de` (naming/placement
+4. **Validate:** `scripts/ig-translate.sh --validate de` (naming/placement
    convention).
 5. **Build & QA:** run the module build; confirm the `/de/` artifact pages show
    the translated element texts and QA errors are as expected.
@@ -118,7 +118,7 @@ Findings are reported and proposed as changes via a pull request **targeting
   mechanics, file conventions, and formats.
 - [`references/harvest-config.yaml`](references/harvest-config.yaml) —
   configuration schema for adopting an existing German rendering.
-- [`../../tools/ig-translate.sh`](../../tools/ig-translate.sh) — scan/validate
+- [`../../scripts/ig-translate.sh`](../../scripts/ig-translate.sh) — scan/validate
   (dry-run default).
 - Template-side mechanism and policy: the `ig-translate` skill in
   [`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds).

@@ -15,10 +15,10 @@
 #
 # USAGE
 #   # from a PKCS#12 bundle (.p12/.pfx — how certificates are usually delivered)
-#   tools/set-su-termserv-secrets.sh --p12 cert.p12 [--password-file pw.txt] [--repo owner/repo]
+#   scripts/set-su-termserv-secrets.sh --p12 cert.p12 [--password-file pw.txt] [--repo owner/repo]
 #
 #   # from separate PEM files (key must be the ENCRYPTED PEM)
-#   tools/set-su-termserv-secrets.sh --cert cert.pem --key key-enc.pem [--repo owner/repo]
+#   scripts/set-su-termserv-secrets.sh --cert cert.pem --key key-enc.pem [--repo owner/repo]
 #
 #   Options:
 #     --check-only     validate locally, upload nothing

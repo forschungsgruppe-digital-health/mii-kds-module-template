@@ -28,7 +28,7 @@ set -u
 
 usage() {
   cat <<'EOF'
-Usage: tools/first-run-bootstrap.sh [--apply] [--main-reviews N] [--dev-reviews N]
+Usage: scripts/first-run-bootstrap.sh [--apply] [--main-reviews N] [--dev-reviews N]
 
   (no flags)        DRY-RUN: print what would happen, change nothing.
   --apply           perform the branch setup and the file removals.
@@ -49,7 +49,7 @@ why() {
       echo "the template's Release-Please-generated SemVer changelog; a module keeps its own release notes";;
     docs/recipes/first-run-setup.md)
       echo "the create-a-module-from-template recipe; only meaningful before the module exists";;
-    tools/first-run-bootstrap.sh)
+    scripts/first-run-bootstrap.sh)
       echo "this bootstrap itself; it runs once at module creation and is dead weight afterwards";;
     *) echo "template-maintenance file";;
   esac
@@ -109,7 +109,7 @@ print_checklist() {
      - publication-request.json, .github/workflows/go-publish.yml
        ({{GITHUB_ORG}}, {{REPO_NAME}}, canonical, …)
      - qc/custom.rules.yaml, tests/, the pages and the FSH sources
-   Run `node tools/convention-check.mjs` — it must be green (parameterized
+   Run `node scripts/convention-check.mjs` — it must be green (parameterized
    fields are OK until you resolve them; a release branch requires them all set).
 
 2. Enable GitHub Pages: Settings → Pages → Build and deployment → "GitHub
@@ -160,10 +160,10 @@ main() {
   # REMOVE: template-maintenance files that must NOT live in a module. The
   # Release Please quartet + the template SemVer announcement are the set listed
   # by the header of .github/workflows/release-please.yml — honor it.
-  local REMOVE=".github/workflows/release-please.yml .github/workflows/notify-zulip.yml release-please-config.json .release-please-manifest.json CHANGELOG.md docs/recipes/first-run-setup.md tools/first-run-bootstrap.sh"
+  local REMOVE=".github/workflows/release-please.yml .github/workflows/notify-zulip.yml release-please-config.json .release-please-manifest.json CHANGELOG.md docs/recipes/first-run-setup.md scripts/first-run-bootstrap.sh"
   # NEVER: module content, build input, and PROPAGATED tooling that a
   # module keeps. A removal target colliding here is a bug → hard abort.
-  local NEVER="input sushi-config.yaml ig.ini publication-request.json advisor.json qc scripts skills .claude .agents AGENTS.md LICENSE README.md CONTRIBUTING.md .devcontainer .editorconfig .gitignore .github/dependabot.yml .github/CODEOWNERS .github/ISSUE_TEMPLATE .github/workflows/go-publish.yml .github/workflows/convention-check.yml .github/workflows/security-scan.yml .github/workflows/dependency-check.yml tools/ig-stats.py tools/ig-translate.sh tools/convention-check.mjs tools/convention-check.test.mjs tools/language-model-check.sh"
+  local NEVER="input sushi-config.yaml ig.ini publication-request.json advisor.json qc scripts skills .claude .agents AGENTS.md LICENSE README.md CONTRIBUTING.md .devcontainer .editorconfig .gitignore .github/dependabot.yml .github/CODEOWNERS .github/ISSUE_TEMPLATE .github/workflows/go-publish.yml .github/workflows/convention-check.yml .github/workflows/security-scan.yml .github/workflows/dependency-check.yml scripts/ig-stats.py scripts/ig-translate.sh scripts/convention-check.mjs scripts/convention-check.test.mjs scripts/language-model-check.sh"
 
   git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { echo "ERROR: not inside a git repository." >&2; return 1; }
 

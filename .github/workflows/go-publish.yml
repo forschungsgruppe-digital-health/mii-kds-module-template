@@ -411,12 +411,22 @@ jobs:
 
       - name: Test publication automation
         shell: bash
-        # The `*.test.mjs` glob covers the publication SCRIPTS only. The
-        # scaffold contract (scripts/*.template-test.mjs) asserts un-replaced
-        # placeholder values and would fail in every created module — the
-        # only place this workflow is meant to run — so it stays out of this
-        # glob and is checked by convention-check.yml instead.
-        run: node --test automation/scripts/*.test.mjs
+        # EXPLICIT LIST, not a glob. scripts/ holds every executable helper in
+        # the repository, so `scripts/*.test.mjs` would also pull in the
+        # convention checker and the dependency checker — neither of which has
+        # anything to do with publication, and both of which gate PRs already
+        # in convention-check.yml. A glob here is how the scaffold contract
+        # test ended up aborting this workflow once before. Add a line when you
+        # add a publication script; do not widen this back into a glob.
+        run: |
+          node --test \
+            automation/scripts/copy-localized-table-backgrounds.test.mjs \
+            automation/scripts/fix-cloud-redirects.test.mjs \
+            automation/scripts/fix-ig-registry-entry.test.mjs \
+            automation/scripts/fix-publication-history-links.test.mjs \
+            automation/scripts/install-history-template.test.mjs \
+            automation/scripts/merge-publication-webroot.test.mjs \
+            automation/scripts/verify-preview-preservation.test.mjs
 
       - name: Snapshot existing preview deployments
         shell: bash

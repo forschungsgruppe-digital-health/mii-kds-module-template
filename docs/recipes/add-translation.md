@@ -100,7 +100,7 @@ which vendors the base UI-string catalogs — see its
 around it here.
 
 > **Keep the template current** so you receive such fixes: the vendored copy in
-> `ig-template/` is refreshed by `tools/sync-ig-template.sh` and the
+> `ig-template/` is refreshed by `scripts/sync-ig-template.sh` and the
 > `sync-ig-template` workflow.
 
 ---

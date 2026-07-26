@@ -40,7 +40,7 @@ Read-only. It complements the convention check (`wiki-consistency-check`): that
 one checks conventions against the wiki and the metadata contract; this one
 measures the IG and its content.
 
-## Input and modes (`tools/ig-stats.py`)
+## Input and modes (`scripts/ig-stats.py`)
 
 **Input = one or more FHIR IGs, given as a path OR a URL.** `run` is the main
 entry point and resolves each input itself (local path, git URL → shallow
@@ -100,7 +100,7 @@ The **numeric measurements** the tool produces (counts, complexity, hygiene,
 linguistics, duplication, maturity, strategy, risk) are general-purpose and
 migration-neutral — that is the QA core this skill relies on.
 
-The tool (`tools/ig-stats.py`) is carried over verbatim from the sample IG. Its
+The tool (`scripts/ig-stats.py`) is carried over verbatim from the sample IG. Its
 **effort-estimation view** and some report section headings are still worded as
 a "migration" scoping (they estimate the effort to move an IG onto the HL7 IG
 Publisher toolchain) and its report prose is in **German**. Treat that
@@ -115,5 +115,5 @@ inherited framing for the skill's purpose.
 - `references/ig-stats-schema.json` — JSON schema of `ig-stats.json`.
 - `references/report-content.json` — plain-language texts, glossary, directive
   patterns (hand-editable, neutral, self-contained).
-- `../../tools/ig-stats.py` — the analysis / report / comparison tool
+- `../../scripts/ig-stats.py` — the analysis / report / comparison tool
   (`run` / `analyze` / `report` / `compare`).

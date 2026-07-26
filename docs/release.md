@@ -134,7 +134,7 @@ present here; the surface in this scaffold is:
 > (checked by the single convention check, `wiki-consistency-check`) asserts
 > `version` is CalVer and that the embedded copies agree. Drift fails the check —
 > fix it before tagging. The ruleset literals are **not** checked mechanically
-> yet; re-read them by hand, or extend `tools/convention-check.mjs` to assert
+> yet; re-read them by hand, or extend `scripts/convention-check.mjs` to assert
 > them against `sushi-config.yaml`.
 
 > **Terminology & release notes:** author the module's changelog in the IG's

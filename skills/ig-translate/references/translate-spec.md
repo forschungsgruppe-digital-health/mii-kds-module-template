@@ -1,7 +1,7 @@
 # ig-translate — mechanics, file conventions, formats
 
 As of 2026; empirically verified with IG Publisher 2.2.7/2.2.8 +
-`fhir2.base.template`. The authoritative tool logic is `tools/ig-translate.sh`.
+`fhir2.base.template`. The authoritative tool logic is `scripts/ig-translate.sh`.
 
 ## 1. Resource texts (render today)
 
