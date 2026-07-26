@@ -14,7 +14,7 @@ machine. Everything runs inside a container that VS Code builds for you.
 > ["Dev Container ‐ IG Publisher"](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Dev-Container-%E2%80%90-IG-Publisher).
 
 > **Why this dev container is identical to the one in
-> [`ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds):**
+> [`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds):**
 > the template package and the modules built from it must agree on the
 > toolchain. Two dev containers drifting apart (different Java, SUSHI, or
 > Jekyll versions) is a maintenance trap — a module would build in one
@@ -38,7 +38,7 @@ image and tools).
 ## Steps
 
 1. Create your module repository from this template: on
-   [the template's GitHub page](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template)
+   [the template's GitHub page](https://github.com/medizininformatik-initiative/mii-kds-module-template)
    click **"Use this template" → "Create a new repository"**.
    Mind the warning in the `README.md`: tick **"Include all branches"** (or
    run the first-run bootstrap afterwards) so your repository gets the `dev`

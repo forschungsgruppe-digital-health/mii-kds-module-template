@@ -7,7 +7,7 @@
 #            continuously-updated tracking issue ("Dependency status <YYYYWww>",
 #            label: dependencies). Proposes only — never bumps anything itself.
 #            A module created from this template inherits this workflow
-#            unchanged (see docs/MAINTENANCE.md).
+#            unchanged (see docs/maintenance.md).
 # Triggers:  schedule (Mondays 06:00 UTC) + workflow_dispatch
 #            (input "mode": notify = tracking issue [default] | pr = sketch below).
 # Toggle:    vars.ENABLE_DEPENDENCY_CHECK — ON by default; set the repo variable

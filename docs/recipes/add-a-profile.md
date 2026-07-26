@@ -7,8 +7,8 @@
 
 ## Steps
 
-1. Look at the shipped example `input/fsh/profiles/ExamplePatient.fsh` and its
-   instance `input/fsh/instances/ExamplePatientInstance.fsh` — copy their shape.
+1. Look at the shipped example `input/fsh/profiles/example-patient.fsh` and its
+   instance `input/fsh/instances/example-patient-instance.fsh` — copy their shape.
 2. Create your profile file under `input/fsh/profiles/`, named per the MII
    convention `MII_PR_<Module>_<Name>.fsh` (e.g. `MII_PR_Person_Patient.fsh`).
    A minimal profile:

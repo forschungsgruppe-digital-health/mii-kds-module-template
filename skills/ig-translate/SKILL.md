@@ -19,7 +19,7 @@ language; English is the recommended second rendering.
 
 > **Adapted from the FGDH sample IG.** Carried over from the `ig-translate`
 > skill of
-> [`mii-kds-sample-ig-inoffiziell`](https://github.com/forschungsgruppe-digital-health/mii-kds-sample-ig-inoffiziell)
+> [`mii-kds-sample-ig-inoffiziell`](https://github.com/medizininformatik-initiative/mii-kds-sample-ig-inoffiziell)
 > (CC-BY-4.0), refocused on the **module** side.
 
 ## Scope split (read this first)
@@ -28,7 +28,7 @@ Multi-language support is split across the two template repositories — do not
 duplicate it:
 
 - **The template package
-  ([`ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds))**
+  ([`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds))**
   owns the language *mechanism* and *policy*: language-neutral
   header/footer/CSS overrides, the inherited UI-string translations of the base
   template, and the de-default/en-recommended decision. Its own `ig-translate`
@@ -44,7 +44,7 @@ template package's `ig-translate` skill. Stay here for a module's content.
 ## What the current toolchain renders (verified)
 
 Re-verified with **IG Publisher 2.2.11** + `fhir2.base.template` 0.1.0 on the
-template package's self-test (2026-07). The earlier sample-IG table was WRONG
+template package's preview (2026-07). The earlier sample-IG table was WRONG
 about narrative pages: it used a `*-<lang>.md` sibling, which the toolchain reads
 as a separate page, not a translation. The correct location is a
 translation-source folder, as the HL7 reference
@@ -121,4 +121,4 @@ Findings are reported and proposed as changes via a pull request **targeting
 - [`../../tools/ig-translate.sh`](../../tools/ig-translate.sh) — scan/validate
   (dry-run default).
 - Template-side mechanism and policy: the `ig-translate` skill in
-  [`ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds).
+  [`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds).

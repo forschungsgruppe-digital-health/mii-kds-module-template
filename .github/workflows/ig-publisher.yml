@@ -117,7 +117,7 @@ jobs:
         run: gem install jekyll -v "4.4.1"
 
       - name: Template-repo self-check substitution (workspace only, never committed)
-        if: ${{ github.repository == 'forschungsgruppe-digital-health/mii-kds-module-template' }}
+        if: ${{ endsWith(github.repository, '/mii-kds-module-template') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -155,7 +155,7 @@ jobs:
           APPROVAL_DATE|2026-01-01
           MODULE_AUTHOR_EMAIL|noreply@example.org
           TOPIC_NCI_CODE|C15607
-          GITHUB_ORG|forschungsgruppe-digital-health
+          GITHUB_ORG|medizininformatik-initiative
           REPO_NAME|mii-kds-module-template
           PLACEHOLDERS
           # sushi-config.yaml + ig.ini (ig.ini's `ig =` line references

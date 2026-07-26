@@ -20,7 +20,7 @@ anything.
 
 > **Carried over from the FGDH sample IG.** This skill is adapted from the
 > `ig-analyze` skill of
-> [`mii-kds-sample-ig-inoffiziell`](https://github.com/forschungsgruppe-digital-health/mii-kds-sample-ig-inoffiziell)
+> [`mii-kds-sample-ig-inoffiziell`](https://github.com/medizininformatik-initiative/mii-kds-sample-ig-inoffiziell)
 > (CC-BY-4.0). The framing here is general QA and module comparison — not
 > migration scoping. See the honesty note at the end about the report wording
 > the underlying tool still carries from its origin.

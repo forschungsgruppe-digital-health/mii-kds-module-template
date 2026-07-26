@@ -3,7 +3,7 @@
 # Dependabot does NOT understand FHIR packages, the IG Publisher jar, or the
 # IG templates (de.medizininformatikinitiative.template / fhir2.base.template)
 # — those are watched by layer B (.github/workflows/dependency-check.yml).
-# See docs/MAINTENANCE.md. A module created from this template inherits this
+# See docs/maintenance.md. A module created from this template inherits this
 # file unchanged.
 #
 # There is no vars.ENABLE_* toggle for Dependabot: it is switched by this
@@ -42,7 +42,7 @@ updates:
   # the pinned FEATURE versions in devcontainer.json. It does NOT bump the
   # digest-pinned base image or the tool pins in postCreateCommand — those
   # are bumped manually; the weekly base-image security scan (layer C) is
-  # the signal. See docs/MAINTENANCE.md.
+  # the signal. See docs/maintenance.md.
   - package-ecosystem: devcontainers
     directory: "/"
     schedule:

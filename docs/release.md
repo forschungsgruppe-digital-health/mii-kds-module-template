@@ -126,7 +126,7 @@ present here), the version lives in exactly two files:
 > release-notes page (`input/pagecontent/…`). Terminology is selected
 > automatically by the build (SU-TermServ when the client certificate secret is
 > present, else the public HL7 fallback `https://tx.fhir.org`) — see
-> [`docs/MAINTENANCE.md`](./MAINTENANCE.md) and the workflow header.
+> [`docs/maintenance.md`](./maintenance.md) and the workflow header.
 
 ### 3–4. Open the release PR and pass validation — *human + automated*
 
@@ -238,7 +238,7 @@ shown; set the variable to flip it):
 
 > **Toggles never override the gates:** even with everything enabled, `go-publish`
 > stays manual and its `publish` input defaults to `false` (Gate E). The full
-> workflow inventory and every toggle is listed in `docs/WORKFLOWS.md`.
+> workflow inventory and every toggle is listed in `docs/workflows.md`.
 
 ---
 
@@ -251,7 +251,7 @@ shown; set the variable to flip it):
   [`.github/workflows/go-publish.yml`](../.github/workflows/go-publish.yml).
 - The click-by-click recipe: `docs/recipes/cut-a-release.md` (companion to this
   reference).
-- Dependency & vulnerability cadence: [`docs/MAINTENANCE.md`](./MAINTENANCE.md).
+- Dependency & vulnerability cadence: [`docs/maintenance.md`](./maintenance.md).
 - The authoritative source: the MII
   [Module Release Workflow](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow)
   wiki page — MII conventions win; if this page and the wiki ever conflict,
