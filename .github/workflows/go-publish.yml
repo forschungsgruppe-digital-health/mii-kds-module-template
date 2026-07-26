@@ -29,7 +29,7 @@
 # Terminology: the build prefers the MII terminology server (SU-TermServ)
 #   through a client-certificate nginx proxy when the repository secrets
 #   SU_TERMSERV_CLIENT_CERT / SU_TERMSERV_CLIENT_KEY /
-#   SU_TERMSERV_CLIENT_CERT_PASSWORD are configured, and otherwise falls back
+#   SU_TERMSERV_CLIENT_PASSWORD are configured, and otherwise falls back
 #   to the public HL7 server https://tx.fhir.org with a workflow notice (the
 #   build must not hard-fail without the certificate).
 #
@@ -392,6 +392,11 @@ jobs:
 
       - name: Test publication automation
         shell: bash
+        # The `*.test.mjs` glob covers the publication SCRIPTS only. The
+        # scaffold contract (scripts/*.template-test.mjs) asserts un-replaced
+        # {{PLACEHOLDER}} values and would fail in every created module — the
+        # only place this workflow is meant to run — so it stays out of this
+        # glob and is checked by convention-check.yml instead.
         run: node --test automation/scripts/*.test.mjs
 
       - name: Snapshot existing preview deployments
@@ -455,13 +460,13 @@ jobs:
         env:
           SU_TERMSERV_CLIENT_CERT: ${{ secrets.SU_TERMSERV_CLIENT_CERT }}
           SU_TERMSERV_CLIENT_KEY: ${{ secrets.SU_TERMSERV_CLIENT_KEY }}
-          SU_TERMSERV_CLIENT_CERT_PASSWORD: ${{ secrets.SU_TERMSERV_CLIENT_CERT_PASSWORD }}
+          SU_TERMSERV_CLIENT_PASSWORD: ${{ secrets.SU_TERMSERV_CLIENT_PASSWORD }}
         run: |
           set -euo pipefail
           # Prefer the MII terminology server (SU-TermServ) through the
           # client-certificate nginx proxy; otherwise fall back to the public
           # HL7 server. The build must not hard-fail without the certificate.
-          if [[ -n "${SU_TERMSERV_CLIENT_CERT}" ]] && [[ -n "${SU_TERMSERV_CLIENT_KEY}" ]] && [[ -n "${SU_TERMSERV_CLIENT_CERT_PASSWORD}" ]]; then
+          if [[ -n "${SU_TERMSERV_CLIENT_CERT}" ]] && [[ -n "${SU_TERMSERV_CLIENT_KEY}" ]] && [[ -n "${SU_TERMSERV_CLIENT_PASSWORD}" ]]; then
             nginx_dir="${RUNNER_TEMP}/nginx"
             mkdir -p "${nginx_dir}/certs"
             cp \
@@ -472,7 +477,7 @@ jobs:
             openssl rsa \
               -in "${nginx_dir}/certs/client-key-encrypted.key" \
               -out "${nginx_dir}/certs/client-key.key" \
-              -passin env:SU_TERMSERV_CLIENT_CERT_PASSWORD
+              -passin env:SU_TERMSERV_CLIENT_PASSWORD
             chmod 600 "${nginx_dir}/certs/"*
 
             docker run --detach --name publication-nginx \

@@ -9,8 +9,14 @@ dependencies, Node 22 `fetch`/`node:` builtins only) plus one bash script.
 Run all tests offline:
 
 ```bash
-node --test scripts/*.test.mjs
+node --test scripts/*.test.mjs           # the publication scripts
+node --test scripts/*.template-test.mjs  # the template scaffold contract
 ```
+
+The second glob is separate on purpose: it asserts the un-replaced
+`{{PLACEHOLDER}}` scaffold, so it passes only in THIS template repository. CI
+runs the first glob everywhere (`convention-check.yml`, and `go-publish.yml`
+before a formal publication) and the second only on the template repo.
 
 | Script | Role in publication |
 |---|---|
@@ -21,7 +27,7 @@ node --test scripts/*.test.mjs
 | `install-history-template.mjs` | Installs the static support files of the [HL7 history template](https://github.com/HL7/fhir-ig-history-template) into a webroot per its `manifest.ini` (used when importing pre-existing publication history — see the note below). |
 | `merge-publication-webroot.mjs` | Replaces a legacy Pages root with a bootstrapped formal webroot while preserving every marker-backed branch preview (also part of the history-import path). |
 | `verify-preview-preservation.mjs` | Snapshots (`snapshot`) and byte-for-byte verifies (`verify`) all marker-backed branch previews across a publication run, so formal publication can never destroy a preview. |
-| `publication-url-consistency.test.mjs` | Template-contract test: keeps `sushi-config.yaml`, `ig.ini`, `publication-request.json`, and `go-publish.yml` placeholder-consistent (canonical vs. publication base, pinned toolchain, terminology fallback, dry-run default). |
+| `publication-url-consistency.template-test.mjs` | Template-contract test (template repo only): keeps `sushi-config.yaml`, `ig.ini`, `publication-request.json`, and `go-publish.yml` placeholder-consistent (canonical vs. publication base, pinned toolchain, terminology fallback, dry-run default). |
 
 > **Note on the history-import scripts:** `install-history-template.mjs` and
 > `merge-publication-webroot.mjs` are not invoked by this template's

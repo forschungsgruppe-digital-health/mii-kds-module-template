@@ -131,7 +131,7 @@ The bootstrap printed it; the essentials:
    **"GitHub Actions"**. Then set the repository variable
    `PAGES_ACTIONS_ENABLED=true`.
 3. **Terminology (optional):** add `SU_TERMSERV_CLIENT_CERT` /
-   `SU_TERMSERV_CLIENT_KEY` / `SU_TERMSERV_CLIENT_CERT_PASSWORD` to build against
+   `SU_TERMSERV_CLIENT_KEY` / `SU_TERMSERV_CLIENT_PASSWORD` to build against
    the MII SU-TermServ; without them the build falls back to the public HL7
    server and does not fail.
 4. **Release announcements (optional):** add `ZULIP_API_KEY` to announce your

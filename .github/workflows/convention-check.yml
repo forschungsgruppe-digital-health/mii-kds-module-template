@@ -7,7 +7,9 @@
 #            skills/wiki-consistency-check/references/check-matrix.md) via
 #            tools/convention-check.mjs, and runs that checker's own unit tests.
 #            It also guards the IG's language model (English default, German
-#            translation) via tools/language-model-check.sh.
+#            translation) via tools/language-model-check.sh, and runs the
+#            offline test suites — the publication scripts everywhere, the
+#            template scaffold contract on the template repo only.
 #            This is the ONLY metadata linter — do not add a second one. The
 #            advisory wiki-drift findings (Section 2 of the check matrix) are a
 #            human/agent job via the wiki-consistency-check skill and are never
@@ -63,6 +65,19 @@ jobs:
 
       - name: Test the convention checker
         run: node --test tools/convention-check.test.mjs
+
+      # The publication scripts (scripts/*.mjs) only ever ran inside the
+      # manually dispatched go-publish.yml, so a regression in them stayed
+      # invisible until a formal publication. Gate them on every push/PR here.
+      - name: Test the publication scripts
+        run: node --test scripts/*.test.mjs
+
+      # The scaffold contract asserts the un-replaced {{PLACEHOLDER}} values,
+      # so it holds on the template repository only — a created module has
+      # replaced them. Org-agnostic guard: the repos have not moved yet.
+      - name: Test the template scaffold contract (template repo only)
+        if: ${{ endsWith(github.repository, '/mii-kds-module-template') }}
+        run: node --test scripts/*.template-test.mjs
 
       - name: Decide strict (release) mode
         id: mode

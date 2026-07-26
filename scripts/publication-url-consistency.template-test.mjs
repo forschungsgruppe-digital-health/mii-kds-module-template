@@ -3,10 +3,17 @@
 // concrete URLs; this version asserts that the TEMPLATE's placeholder
 // metadata contract stays internally consistent across sushi-config.yaml,
 // ig.ini, publication-request.json, and go-publish.yml, so that replacing the
-// {{...}} placeholders yields a coherent module. Runs offline via
-// `node --test scripts/*.test.mjs`.
+// {{...}} placeholders yields a coherent module.
+//
+// TEMPLATE REPO ONLY — that is why the file name ends in `.template-test.mjs`
+// and not `.test.mjs`: a created module has replaced every {{PLACEHOLDER}},
+// so these assertions would fail there. The `scripts/*.test.mjs` glob (run by
+// go-publish.yml and convention-check.yml, in the template AND in every
+// module) must therefore not pick it up. convention-check.yml runs this file
+// explicitly, gated to the template repository. Runs offline via
+// `node --test scripts/*.template-test.mjs`.
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 
@@ -89,15 +96,17 @@ test("does not copy the basis special-url list", () => {
   assert.match(sushiConfig, /docs\/recipes\/regenerate-special-url\.md/);
 });
 
-test("points ig.ini at the SUSHI-generated IG with a TODO template reference", () => {
+test("points ig.ini at the SUSHI-generated IG and the vendored template", () => {
   const igIni = read("ig.ini");
 
   assert.match(
     igIni,
     /^ig = fsh-generated\/resources\/ImplementationGuide-mii-ig-\{\{MODULE_SLUG\}\}\.json$/m,
   );
-  // Wired by the template-reference task; publication rejects the TODO.
-  assert.match(igIni, /^template = TODO/m);
+  // `#ig-template` = the vendored local template folder, kept in step by
+  // sync-ig-template.yml. Swapped for the published package once it exists
+  // (docs/recipes/switch-template-to-published.md).
+  assert.match(igIni, /^template = #ig-template$/m);
 });
 
 test("keeps publication locations separate from the FHIR canonical in go-publish", () => {
@@ -159,7 +168,7 @@ test("prefers SU-TermServ and falls back to tx.fhir.org with a notice", () => {
 
   assert.match(workflow, /SU_TERMSERV_CLIENT_CERT/);
   assert.match(workflow, /SU_TERMSERV_CLIENT_KEY/);
-  assert.match(workflow, /SU_TERMSERV_CLIENT_CERT_PASSWORD/);
+  assert.match(workflow, /SU_TERMSERV_CLIENT_PASSWORD/);
   assert.match(workflow, /::notice::.*tx\.fhir\.org/);
   assert.match(workflow, /tx_url=https:\/\/tx\.fhir\.org/);
   // The build must not hard-fail without the certificate.
@@ -167,6 +176,25 @@ test("prefers SU-TermServ and falls back to tx.fhir.org with a notice", () => {
     workflow,
     /client certificate secrets are required/,
   );
+});
+
+test("spells the SU-TermServ key password the same way in every workflow", () => {
+  // tools/set-su-termserv-secrets.sh and docs/secrets.md provision the key
+  // password as SU_TERMSERV_CLIENT_PASSWORD. A workflow reading any other
+  // name gets an empty value and falls back to tx.fhir.org silently — no
+  // error, only a ::notice — so no other spelling may appear.
+  const workflowDirectory = new URL(
+    ".github/workflows/",
+    `file://${repository}/`,
+  );
+  for (const file of readdirSync(workflowDirectory)) {
+    const text = readFileSync(new URL(file, workflowDirectory), "utf8");
+    assert.doesNotMatch(
+      text,
+      /SU_TERMSERV_CLIENT_CERT_PASSWORD/,
+      `${file} reads the SU-TermServ key password under a name nothing sets`,
+    );
+  }
 });
 
 test("stays a manually dispatched dry run by default", () => {

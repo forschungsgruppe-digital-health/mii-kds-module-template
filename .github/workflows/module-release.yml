@@ -52,7 +52,7 @@
 #
 # Terminology (§2.10): the build prefers the MII terminology server
 #   (SU-TermServ) through a client-certificate nginx proxy when the repository
-#   secrets SU_TERMSERV_CLIENT_CERT / _KEY / _CERT_PASSWORD are configured, and
+#   secrets SU_TERMSERV_CLIENT_CERT / _KEY / _PASSWORD are configured, and
 #   otherwise falls back to the public HL7 server https://tx.fhir.org with a
 #   ::notice — the same selection idiom as the preview / go-publish workflows.
 #   The build must not hard-fail without the certificate.
@@ -181,14 +181,14 @@ jobs:
         env:
           SU_TERMSERV_CLIENT_CERT: ${{ secrets.SU_TERMSERV_CLIENT_CERT }}
           SU_TERMSERV_CLIENT_KEY: ${{ secrets.SU_TERMSERV_CLIENT_KEY }}
-          SU_TERMSERV_CLIENT_CERT_PASSWORD: ${{ secrets.SU_TERMSERV_CLIENT_CERT_PASSWORD }}
+          SU_TERMSERV_CLIENT_PASSWORD: ${{ secrets.SU_TERMSERV_CLIENT_PASSWORD }}
         run: |
           set -euo pipefail
           # Prefer SU-TermServ through the client-certificate nginx proxy;
           # otherwise fall back to the public HL7 server. Same idiom as the
           # preview / go-publish workflows; the build must not hard-fail without
           # the certificate (§2.10, Gate F).
-          if [[ -n "${SU_TERMSERV_CLIENT_CERT}" ]] && [[ -n "${SU_TERMSERV_CLIENT_KEY}" ]] && [[ -n "${SU_TERMSERV_CLIENT_CERT_PASSWORD}" ]]; then
+          if [[ -n "${SU_TERMSERV_CLIENT_CERT}" ]] && [[ -n "${SU_TERMSERV_CLIENT_KEY}" ]] && [[ -n "${SU_TERMSERV_CLIENT_PASSWORD}" ]]; then
             nginx_dir="${RUNNER_TEMP}/nginx"
             mkdir -p "${nginx_dir}/certs"
             cp kerndatensatz-meta/.github/workflows/nginx.conf "${nginx_dir}/nginx.conf"
@@ -197,7 +197,7 @@ jobs:
             openssl rsa \
               -in "${nginx_dir}/certs/client-key-encrypted.key" \
               -out "${nginx_dir}/certs/client-key.key" \
-              -passin env:SU_TERMSERV_CLIENT_CERT_PASSWORD
+              -passin env:SU_TERMSERV_CLIENT_PASSWORD
             chmod 600 "${nginx_dir}/certs/"*
 
             docker run --detach --name termserv-proxy \
