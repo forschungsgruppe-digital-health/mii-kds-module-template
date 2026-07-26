@@ -38,7 +38,7 @@ in sync:
 | `de.medizininformatikinitiative.template` | `ig.ini` → `template = de.medizininformatikinitiative.template#<version>` |
 | `fhir2.base.template` | inside the template package (transitive) — locally only in a vendored bring-up copy (`ig-template/package/package.json`) |
 | FHIR package dependencies (`de.basisprofil.r4`, `de.medizininformatikinitiative.kerndatensatz.meta`, `hl7.fhir.uv.crmi`, `hl7.fhir.uv.xver-r5.r4`, …) | `sushi-config.yaml` → `dependencies:` block |
-| IG Publisher / SUSHI / Jekyll | `env:` values (`PUBLISHER_VERSION`, `SUSHI_VERSION`, `JEKYLL_VERSION`) in the CI build workflow |
+| IG Publisher / SUSHI / Jekyll | `env:` values (`PUBLISHER_VERSION`, `PUBLISHER_SHA256`, `SUSHI_VERSION`, `JEKYLL_VERSION`) in each build workflow — `ig-publisher.yml`, `module-release.yml`, `go-publish.yml`. Keep the three blocks identical; the checker reads the first one it finds, so a workflow left behind drifts silently |
 | GitHub Actions | commit-SHA pins in `.github/workflows/*.yml` (with `# vX.Y.Z` comments) |
 | Dev container (base-image digest, feature versions, SUSHI/Jekyll installs) | `.devcontainer/devcontainer.json` — features come as Dependabot PRs; the image digest and the `postCreateCommand` tool pins are bumped manually |
 

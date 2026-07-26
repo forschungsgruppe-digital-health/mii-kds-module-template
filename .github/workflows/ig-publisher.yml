@@ -56,9 +56,15 @@
 #            a no-op (it never runs, the repo name differs).
 #
 # Fixed versions (§0.2): every Action is pinned to a commit SHA (# vX.Y.Z); the
-#            IG Publisher jar (2.2.11) and SUSHI (3.20.0) are pinned to the exact
-#            versions go-publish.yml uses, the jar additionally by SHA-256. The
-#            scheduled dependency check proposes bumps.
+#            IG Publisher jar, SUSHI and Jekyll are pinned in the `env:` block
+#            below under the SAME names go-publish.yml and module-release.yml
+#            use (PUBLISHER_VERSION / PUBLISHER_SHA256 / SUSHI_VERSION /
+#            JEKYLL_VERSION), the jar additionally by SHA-256. Keep them there,
+#            not inline: docs/maintenance.md sends the maintainer to those
+#            names, and scripts/check-updates.mjs reads the first matching
+#            `env:` pin it finds across the workflows — an inline literal here
+#            would drift behind the other two builds unnoticed. The scheduled
+#            dependency check proposes bumps.
 #
 # Human-gated: none. PAGES_ACTIONS_ENABLED is the only extra authorization and
 #            it gates the Actions-based Pages deploy path, not the preview build.
@@ -85,6 +91,14 @@ concurrency:
   # formal go-publish share this group) so they never race. Queue, never cancel.
   group: gh-pages-writes
   cancel-in-progress: false
+
+env:
+  # Pinned toolchain — identical to go-publish.yml and module-release.yml, and
+  # the names docs/maintenance.md tells the maintainer to edit.
+  PUBLISHER_VERSION: "2.2.11"
+  PUBLISHER_SHA256: "a981af86bca3f3a22ee15b9d4ee3c97d63219b7a14e49d0a525e10bbfc71a911"
+  SUSHI_VERSION: "3.20.0"
+  JEKYLL_VERSION: "4.4.1"
 
 jobs:
   build:
@@ -114,7 +128,7 @@ jobs:
           ruby-version: "3.3"
 
       - name: Install Jekyll (pinned — the IG template renders via Jekyll)
-        run: gem install jekyll -v "4.4.1"
+        run: gem install jekyll -v "${JEKYLL_VERSION}"
 
       - name: Template-repo self-check substitution (workspace only, never committed)
         if: ${{ endsWith(github.repository, '/mii-kds-module-template') }}
@@ -190,7 +204,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          npm install --global fsh-sushi@3.20.0
+          npm install --global "fsh-sushi@${SUSHI_VERSION}"
           sushi .
           test -d fsh-generated/resources
           # A full IG Publisher build needs a buildable IG template in ig.ini.
@@ -266,9 +280,9 @@ jobs:
         run: |
           set -euo pipefail
           # IG Publisher pinned + checksum-verified (fixed versions; same jar as go-publish.yml).
-          publisher_url="https://github.com/HL7/fhir-ig-publisher/releases/download/2.2.11/publisher.jar"
+          publisher_url="https://github.com/HL7/fhir-ig-publisher/releases/download/${PUBLISHER_VERSION}/publisher.jar"
           curl --fail --location --silent --show-error "${publisher_url}" --output "${RUNNER_TEMP}/publisher.jar"
-          echo "a981af86bca3f3a22ee15b9d4ee3c97d63219b7a14e49d0a525e10bbfc71a911  ${RUNNER_TEMP}/publisher.jar" | sha256sum --check
+          echo "${PUBLISHER_SHA256}  ${RUNNER_TEMP}/publisher.jar" | sha256sum --check
           java -Xmx6g -jar "${RUNNER_TEMP}/publisher.jar" -ig ig.ini -tx "${TX_URL}"
           test -s output/index.html
           jq empty output/qa.json
