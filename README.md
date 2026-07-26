@@ -14,25 +14,30 @@ which this scaffold references (and keeps up to date automatically).
 
 > **⚠️ When you click *Use this template*, tick “Include all branches”.**
 > Otherwise you get `main` only, without the `dev` branch this scaffold works
-> with. Forgot? Run `bash tools/first-run-bootstrap.sh --apply` — it creates
-> `dev`, protects both branches, and removes files that belong to the template
-> but not to your module.
+> with. The first-run bootstrap in step 2 creates `dev` for you if you forgot.
 
 ## Quickstart
 
 1. **Create your repo** — *Use this template*, tick *Include all branches*.
-2. **Open it in the dev container** (VS Code → *Reopen in Container*). It brings
+2. **Run the first-run bootstrap** — `bash tools/first-run-bootstrap.sh` (dry
+   run), then `--apply`. It protects both branches and removes the template's
+   own SemVer release automation, which a CalVer module must not carry. Run it
+   even if you ticked *Include all branches*.
+3. **Open it in the dev container** (VS Code → *Reopen in Container*). It brings
    Java, Node, SUSHI, Jekyll and Graphviz.
    → [details](docs/recipes/first-build-in-devcontainer.md)
-3. **Fill in your module's values** — replace every `{{PLACEHOLDER}}` in
-   `sushi-config.yaml`; each one is explained in a comment right there.
-4. **Write a profile** in `input/fsh/` (an example is included to copy) and
+4. **Fill in your module's values** — start in `sushi-config.yaml`, whose header
+   lists all 19 placeholders and the files each one occurs in, then work through
+   `ig.ini`, `publication-request.json`, `.github/workflows/`,
+   `qc/custom.rules.yaml`, the pages and the FSH sources. Finish with
+   `grep -rn '{{' .` — outside `docs/` it must come back empty.
+5. **Write a profile** in `input/fsh/` (an example is included to copy) and
    replace the English starter pages in `input/pagecontent/` (and their German
    counterparts in `input/translations/de/pagecontent/`).
    → [add a profile](docs/recipes/add-a-profile.md)
-5. **Build it**: `sushi .`, then run the IG Publisher, then read `output/qa.html`.
+6. **Build it**: `sushi .`, then run the IG Publisher, then read `output/qa.html`.
    Or just push a branch — CI builds it and comments the preview URL on your PR.
-6. **Release** with CalVer via the MII Module Release Workflow.
+7. **Release** with CalVer via the MII Module Release Workflow.
    → [cut a release](docs/recipes/cut-a-release.md)
 
 The full walkthrough is [create a new module](docs/recipes/create-a-new-module.md).

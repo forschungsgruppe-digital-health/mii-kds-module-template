@@ -11,16 +11,24 @@
    instance `input/fsh/instances/example-patient-instance.fsh` — copy their shape.
 2. Create your profile file under `input/fsh/profiles/`, named per the MII
    convention `MII_PR_<Module>_<Name>.fsh` (e.g. `MII_PR_Person_Patient.fsh`).
-   A minimal profile:
+   The quickest correct start is to copy `example-patient.fsh`, rename it, and
+   edit — it already carries the shared metadata block. The shape:
    ```fsh
-   Profile: MyPatient
+   Profile: MII_PR_Person_Patient
    Parent: Patient
-   Id: my-patient
-   Title: "Mein Patient"
+   Id: mii-pr-person-patient
+   Title: "MII PR Person Patient"
    Description: "…"
+   // Copy the shared MII metadata block (insert Translation, PR_CS_VS_Version,
+   // Publisher, the licence and the CRMI rules) verbatim from
+   // input/fsh/profiles/example-patient.fsh — every MII conformance resource
+   // carries it. See input/fsh/rulesets/README.md.
    * name 1..* MS
    * birthDate 1..1 MS
    ```
+   `Title` and `Description` are authored in **English**, the IG's default
+   language; German goes in additively via the `Translation` RuleSet, as the
+   starter shows.
    > **Why start terminology-light:** a profile that binds to external code systems
    > needs a terminology server to validate. Cardinality + Must-Support constraints
    > build cleanly on the `tx.fhir.org` fallback — add coded bindings once your

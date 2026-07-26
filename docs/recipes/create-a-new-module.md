@@ -10,13 +10,14 @@
 1. **Create the repo.** On this repository's GitHub page, click **"Use this
    template" → Create a new repository**. **Tick "Include all branches"** so you get
    `dev` too. Name it for your module (e.g. `mii-kds-modul-person`).
-2. **First-run bootstrap** (skip only if you ticked "Include all branches" *and* you
-   also want the template-maintenance files gone — you do): in a clone, run
+2. **Run the first-run bootstrap — always.** In a clone, run
    `bash tools/first-run-bootstrap.sh` (dry run — shows what it will do), then
    `bash tools/first-run-bootstrap.sh --apply`. It creates `dev`, applies branch
    protection, and **removes** the template-maintenance files (Release Please config
    + workflow, the release announcement, the template `CHANGELOG`, and the bootstrap
-   itself). See [first-run-setup.md](first-run-setup.md). Confirm afterwards:
+   itself). If you ticked "Include all branches" it simply skips creating `dev`; the
+   removals and the branch protection still have to happen. See
+   [first-run-setup.md](first-run-setup.md). Confirm afterwards:
    `grep -ri release-please .github` returns nothing.
 3. **Fill the placeholders.** Open `sushi-config.yaml` and replace every `{{…}}`
    (each is documented inline). The key ones:
@@ -24,7 +25,11 @@
    - `{{MODULE_NAME}}` — CamelCase (`Person`) → `name: MII_IG_Person`.
    - `{{MODULE_TITLE}}` — human title (`Person`).
    - `{{CALVER_VERSION}}` — `YYYY.n.n` (e.g. `2026.0.0`), and the related dates.
-   Also update `ig.ini`'s `ig =` line to match your `id` if you changed the slug.
+   `sushi-config.yaml` is where you start, not where you finish: its header lists
+   all 19 placeholders and the files each occurs in. Update `ig.ini`'s `ig =`
+   line to match your `id`, then `publication-request.json`,
+   `.github/workflows/`, `qc/custom.rules.yaml`, the pages and the FSH sources.
+   Finish with `grep -rn '{{' .` — outside `docs/` it must come back empty.
 4. **Template reference.** Leave `ig.ini` at `template = #ig-template` (the vendored
    copy) until the MII template package is published; then follow
    [switch-template-to-published.md](switch-template-to-published.md).
