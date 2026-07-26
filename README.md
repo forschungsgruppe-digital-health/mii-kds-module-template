@@ -47,6 +47,7 @@ Unfamiliar terms are in the [glossary](docs/glossary.md).
 | `input/pagecontent/` | The narrative pages — English, the IG's default language |
 | `input/translations/de/` | German translations of pages, menu and resources |
 | `input/includes/menu.xml` | The navigation menu (one file per language) |
+| `qc/custom.rules.yaml`, `advisor.json` | What the MII reusable validation reads: naming-convention rules and tolerated validator messages |
 | `ig-template/` | The MII IG template, mirrored automatically — don't edit |
 | `docs/` | Guides and step-by-step recipes |
 | `tools/`, `scripts/` | Helper scripts (first-run bootstrap, template sync, …) |

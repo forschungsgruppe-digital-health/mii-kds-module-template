@@ -4,9 +4,10 @@
 #            CALLING the Medical Informatics Initiative's shared reusable
 #            workflows rather than reimplementing validation:
 #              - ci_dotnet_validation.yml — SUSHI compile + Simplifier Quality
-#                Control (MII naming conventions). NOTE (per the MII wiki): the
-#                .NET validator is configured to ALWAYS pass; read its logs for
-#                warnings it does not surface as a failure.
+#                Control (MII naming conventions), whose rule set this repo
+#                ships at the fixed path qc/custom.rules.yaml. NOTE (per the
+#                MII wiki): the .NET validator is configured to ALWAYS pass;
+#                read its logs for warnings it does not surface as a failure.
 #              - ci_java_validation.yml — HL7 Java validator against SU-TermServ;
 #                FAILS on errors (known ones are suppressed via advisor.json).
 #            Source + contract: MII wiki "GitHub Reusable Validation Workflows".

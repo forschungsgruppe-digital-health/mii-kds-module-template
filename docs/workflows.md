@@ -56,6 +56,13 @@ Everything below **propagates** to a module (the bootstrap keeps it). This is ho
 | `sync-ig-template.yml` | schedule (Mon 05:00 UTC); `workflow_dispatch`; PR to `dev` (check only) | Keeps the vendored `ig-template/` in step with `ig-template-mii-kds@dev`; opens a PR on drift, fails a PR whose mirror is stale | sync PR | `ENABLE_TEMPLATE_SYNC` (ON) | never auto-merges |
 
 Notes:
+- **The reusable validation needs two files in the repo root**, at fixed paths the
+  MII workflows read: `qc/custom.rules.yaml` (the Simplifier quality-control rule
+  set — MII naming conventions) and `advisor.json` (the errors the HL7 Java
+  validator may ignore). Both ship with the template; `qc/custom.rules.yaml`
+  carries `{{MODULE_SLUG}}`/`{{MODULE_NAME}}`/`{{CALVER_VERSION}}` placeholders
+  like the rest of the scaffold. The .NET job is configured upstream to always
+  pass, so a naming violation appears in its log, not as a red check.
 - **Terminology** is auto-selected, not a toggle: builds use **SU-TermServ** when the
   client-cert secrets are present, else fall back to HL7 `tx.fhir.org` with a notice.
 - **Pages mode** (`vars.PAGES_ACTIONS_ENABLED`) chooses the gh-pages push vs the
