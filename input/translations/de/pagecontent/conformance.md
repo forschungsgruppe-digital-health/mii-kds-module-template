@@ -43,3 +43,11 @@ technischen Artefakte im Abschnitt [Artefakte](artifacts.html).
 > verwendet — siehe die offenen Entscheidungen in
 > `docs/ig-best-practices-checklist.md`. Prüfen Sie das vor der
 > Veröffentlichung mit einem echten IG-Publisher-Build.]
+
+---
+
+{:.bg-info}
+**Hinweis:** Eine Liste der Konformitätsaussagen ist in der englischen Fassung
+dieses Implementierungsleitfadens verfügbar. Die Aussagen werden aus den
+englischen Originalseiten erzeugt, weil der IG-Publisher die Erwartungsstufe aus
+den englischen Schlüsselworten (SHALL/SHOULD/MAY) ableitet.

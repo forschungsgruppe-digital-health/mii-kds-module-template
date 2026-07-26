@@ -113,28 +113,26 @@ scaffold gives you the place and a prompt) · ➖ not applicable.
 
 ## Open decisions (not yet made)
 
-Two conformance questions are deliberately left open — they need a project
-decision plus a real build test, not a guess.
+One conformance question was open and is now decided; the language question
+below remains a project-level call.
 
-### 1. Machine-readable conformance statements (`§…§` / `§§§`)
+### 1. Machine-readable conformance statements — DECIDED (2026-07-26)
 
-The IG Publisher can build an *Id | Expectation | Rule* table of a guide's
-conformance statements, but **only for sentences that are explicitly marked**
-(`§must-support-1:Der Server MUSS …§`), with the table produced where a
-paragraph contains only `§§§`.
+**Adopted, with an English-only statement list**, the same way
 [kerndatensatz-basis](https://github.com/medizininformatik-initiative/kerndatensatz-basis)
-does exactly this — its published guide renders 42 marked statements.
+does it.
 
-*Why it is not simply copied:* the "Expectation" column is derived from the
-English keywords SHALL/SHOULD/MAY. This template is **German-default** and the
-MII's own conformance verbs are MUSS/SOLLTE/KANN, so the parser may classify
-nothing. basis avoids the problem by being English-default; its German
-translation carries a note that the statement list exists only in English.
+Normative sentences in the English (default) pages are wrapped in
+`§<page>-<n>:…§`, and `conformance.md` ends with a paragraph containing only
+`§§§`, which the IG Publisher replaces with an *Id | Expectation | Rule* table.
+The German mirror carries **no** markers and instead notes that the list is
+available in the English rendering — the *Expectation* column is derived from the
+English keywords SHALL/SHOULD/MAY, so a German statement would not classify.
 
-**Options:** (a) adopt the markers and accept an English-only statement list;
-(b) adopt them and test whether German verbs are recognised; (c) skip the
-machine-readable list and keep the conformance prose only. Decide, then verify
-with an actual IG-Publisher build before shipping.
+Statements are a **curated set** of real obligations, not every sentence that
+happens to contain a bold verb. When you add one, give it the next free id on
+that page and keep the sentence self-contained — it is displayed out of context
+in the table.
 
 ### 2. Which language leads the normative text
 

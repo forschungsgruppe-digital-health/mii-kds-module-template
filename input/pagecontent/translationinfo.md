@@ -12,6 +12,6 @@ translation. English is therefore both the base rendering of the guide and the
 Translated pages live under `input/translations/de/pagecontent/` (same file name
 as the English page); resource translations are `.po` files under
 `input/translations/de/`. Details:
-[add-translation recipe](../docs/recipes/add-translation.md).
+[add-translation recipe](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/recipes/add-translation.md).
 
 > [TODO: Record which parts of your module are already translated into German.]

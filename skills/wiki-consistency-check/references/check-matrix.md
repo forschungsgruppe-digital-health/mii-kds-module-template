@@ -9,7 +9,7 @@ module repository created from the scaffold, and the scaffold's starter
 content) — or both.
 
 Section 1 is implemented mechanically and placeholder-aware by
-[`../../tools/convention-check.mjs`](../../tools/convention-check.mjs) and run in
+[`../../../tools/convention-check.mjs`](../../../tools/convention-check.mjs) and run in
 CI by `.github/workflows/convention-check.yml`.
 
 ---
