@@ -28,6 +28,10 @@
 #
 # Fixed versions (§0.2): every Action is pinned to a commit SHA (# vX.Y.Z).
 #
+# Prerequisite: none. If the repository has no `gh-pages` branch yet (no preview
+#            and no publication so far), the sweep skips with a ::notice — an
+#            empty repository must not produce a red scheduled run.
+#
 # Human-gated: none (dry_run lets a human preview the deletions first).
 name: Cleanup stale GitHub Pages previews
 
@@ -60,7 +64,26 @@ jobs:
     outputs:
       changed: ${{ steps.cleanup.outputs.changed }}
     steps:
+      # gh-pages only exists once a preview or a formal publication has been
+      # deployed. A freshly created module has neither yet — that is NOT an
+      # error, there is simply nothing to sweep, so probe before checking out
+      # (a checkout of a missing ref fails the whole scheduled run).
+      - name: Check whether a gh-pages branch exists
+        id: probe
+        shell: bash
+        env:
+          REMOTE_URL: https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
+        run: |
+          set -euo pipefail
+          if git ls-remote --heads "${REMOTE_URL}" gh-pages | grep -q .; then
+            echo "exists=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "exists=false" >> "${GITHUB_OUTPUT}"
+            echo "::notice::No gh-pages branch yet — nothing to clean up. It is created by the first branch preview (ig-publisher.yml) or the first formal publication."
+          fi
+
       - name: Checkout gh-pages branch
+        if: ${{ steps.probe.outputs.exists == 'true' }}
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: gh-pages
@@ -68,6 +91,7 @@ jobs:
 
       - name: Remove only marker-backed stale previews
         id: cleanup
+        if: ${{ steps.probe.outputs.exists == 'true' }}
         shell: bash
         env:
           DRY_RUN: ${{ inputs.dry_run || false }}
