@@ -1,5 +1,13 @@
 <!-- markdownlint-disable MD041 -->
-<!-- English rendering of input/pagecontent/index.md. Keep in step with it. -->
+<!--
+  HOME PAGE — English is the IG's DEFAULT language, so this file is the source.
+  Structure follows the standard MII module IG page set (kerndatensatz-basis
+  input/pagecontent/index.md). Replace the {{...}} placeholders and the bracketed
+  [TODO ...] prompts with your module's real content, then delete these HTML
+  comments. Keep the section headings — a reviewer expects them. The German
+  translation of this page lives at input/translations/de/pagecontent/index.md
+  (see docs/recipes/add-translation.md) — keep both in step.
+-->
 
 ### Introduction
 
@@ -64,7 +72,9 @@ Forum and the technical committees of HL7 Germany.
 ### Contact
 
 Questions about this publication can be asked on the HL7 FHIR Zulip
-[chat.fhir.org](https://chat.fhir.org) in the `german/mi-initiative` stream.
+[chat.fhir.org](https://chat.fhir.org) in the `german/mi-initiative` stream, or
+on the MII Zulip [mii.zulipchat.com](https://mii.zulipchat.com/) in the
+`MII-Kerndatensatz` stream.
 Comments and issues are welcome as *Issues* on
 [GitHub](https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/issues).
 
@@ -74,7 +84,25 @@ Comments and issues are welcome as *Issues* on
 
 > [TODO: List the module's authors with their institution.]
 
-### Copyright / terms of use
+### Copyright and License
 
-© {{COPYRIGHT_START_YEAR}}+ — this work is licensed under the
+© {{COPYRIGHT_START_YEAR}}+ TMF e. V., Charlottenstraße 42, 10117 Berlin
+
+This work is licensed under the
 [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
+
+For the usage rights of the underlying FHIR technology, see the FHIR base
+specification.
+
+Some of the code systems used are published and maintained by other
+organizations; the copyright of the respective publishers applies.
+
+### Disclaimer
+
+* The content of this document is public. Please note that parts of this
+  document are based on FHIR version R4, which is copyrighted by
+  HL7 International.
+
+* Although this publication was prepared with the greatest care, the authors
+  cannot accept any liability for direct or indirect damage that may arise from
+  the content of this specification.
