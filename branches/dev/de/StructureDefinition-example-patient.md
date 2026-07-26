@@ -87,7 +87,7 @@ Weitere Repräsentationen des Profils: [CSV](../StructureDefinition-example-pati
   "name" : "ExamplePatient",
   "title" : "Beispiel-Patient (Vorlage)",
   "status" : "active",
-  "date" : "2026-07-26T10:42:02+00:00",
+  "date" : "2026-07-26T10:49:04+00:00",
   "publisher" : "Medical Informatics Initiative (MII)",
   "contact" : [{
     "name" : "Medical Informatics Initiative (MII)",
