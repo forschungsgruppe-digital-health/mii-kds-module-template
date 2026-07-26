@@ -24,9 +24,7 @@ Elements of a FHIR resource can be marked in a profile as **mandatory** or as
   the value may be missing — the absence **SHALL** then be documented, for
   example with the `Data-Absent-Reason` extension (see
   [Handling Missing Data](missing-data.html)).
-* §must-support-1:**Must Support (MS)** means that systems **SHALL** support the element even
-  where its cardinality is `0..*`. *Support* means: systems **SHALL** be capable
-  of populating, storing, displaying and correctly processing the element.
+* §must-support-1:**Must Support (MS)** means that systems **SHALL** support the element even where its cardinality is `0..*` — systems **SHALL** be capable of populating, storing, displaying and correctly processing it§
 
 Must Support is therefore **not** the same as cardinality: an element can be
 `0..1` and still be Must Support — the data may be absent, the ability to handle
