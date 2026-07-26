@@ -18,10 +18,11 @@
 # PLACEHOLDERS: {{MODULE_SLUG}}, {{MODULE_NAME}} and {{CALVER_VERSION}} are
 # replaced when you create your module — see the header of sushi-config.yaml.
 #
-# STARTER: the shipped example profile deliberately uses a neutral
-# `example-patient` name, so it cannot satisfy the naming rules below. Every
-# rule that checks a name therefore excludes it. Delete those exclusion lines
-# once you have replaced the starter with your own profiles.
+# STARTER: the shipped example profile and its example instance deliberately
+# use neutral names (`example-patient`, `ExamplePatientInstance`), so they
+# cannot satisfy the naming rules below. Every rule that checks a name
+# therefore excludes them. Delete those exclusion lines once you have replaced
+# the starters with your own profiles and examples.
 
 - action: parse
   name: parse-fhir-resources
@@ -84,6 +85,8 @@
   status: "Checking the id naming convention (mii-<prefix>-<module>-…)"
   predicate: id.matches('^mii-(pr|ex|lm|vs|cs|cm|sm|ns|sp|cps|od|ig|qst|obsdef|msr|exa|param)-{{MODULE_SLUG}}')
   error-message: "resource id naming convention mismatch"
+  # This rule has no `filter:`, so unlike the three below it also sees example
+  # INSTANCES — hence the second exclusion.
   files:
     - /**/*.xml
     - /**/*.json
@@ -91,6 +94,7 @@
     - "!fsh-index.json"
     - "!menu.xml"
     - "!/**/StructureDefinition-example-patient.json"
+    - "!/**/Patient-ExamplePatientInstance.json"
 
 - name: naming-convention-name
   status: "Checking the name naming convention (MII_<PREFIX>_<Module>_…)"
