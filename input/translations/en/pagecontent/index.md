@@ -42,6 +42,19 @@ standardized secondary use of routine clinical data for medical research.
   **[Terminology](terminology.html)** — the technical artifacts.
 - **[Examples](examples.html)** — example instances.
 
+### Related guides
+
+This module is part of the MII Core Dataset; the other KDS modules and their
+dependencies are described at
+[medizininformatik-initiative.de](https://www.medizininformatik-initiative.de/).
+
+> [TODO: Name your module's formal dependencies (see `dependencies` in
+> `sushi-config.yaml`) and any related guides.]
+
+More FHIR implementation guides can be found in the official
+**[FHIR IG Registry](https://fhir.org/guides/registry/)** (source:
+[`FHIR/ig-registry`](https://github.com/FHIR/ig-registry)).
+
 ### Imprint
 
 This guide was created within the Medical Informatics Initiative and is subject,

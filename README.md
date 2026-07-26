@@ -94,6 +94,11 @@ arrive via the ongoing build-out pull requests onto `dev`.
 | `CONTRIBUTING.md` | Branching model, commit conventions, and how contributing **to this template** differs from working **in a module created from it**. |
 | `LICENSE` | CC-BY-4.0 (matches the MII IG content licensing). |
 
+
+## Quality bar
+
+- [IG best-practices checklist](docs/ig-best-practices-checklist.md) — the official HL7 IG best practices, with what the scaffold already does and what you must fill in.
+
 ## Where to get help
 
 - **Public — HL7 FHIR community Zulip:** <https://chat.fhir.org>, stream

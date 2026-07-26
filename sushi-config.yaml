@@ -236,6 +236,8 @@ pages:
       title: Must Support
     missing-data.md:
       title: Handling Missing Data
+    security-and-privacy.md:
+      title: Security and Privacy
 
   profiles-and-extensions.md:
     title: Profiles and Extensions
