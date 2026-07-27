@@ -34,8 +34,9 @@ answer.
 
 ### 3. Apply the bump in the pin's real location
 
-Create a working branch off `dev` (e.g. `chore/bump-<artifact>`). Then edit
-exactly one pin (one bump per PR — keep diffs reviewable):
+Create a working branch off `dev` (e.g. `chore/bump-<artifact>`). Bump exactly
+one artifact per PR (keep diffs reviewable) — in every place that artifact is
+pinned:
 
 | Artifact | Edit here |
 |---|---|
