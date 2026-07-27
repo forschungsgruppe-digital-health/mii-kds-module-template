@@ -17,10 +17,10 @@ MII-Terminologieserver (SU-TermServ) bezogen:
 FHIR-Terminologieserver erzeugt — über SU-TermServ, sofern das
 Client-Zertifikat konfiguriert ist, sonst über den öffentlichen HL7-Server
 `tx.fhir.org` (dann expandieren einige MII-spezifische ValueSets ggf. nicht
-vollständig). Wenn Ihr Modul Implementierenden eine verbindliche Anforderung an
-Expansionen auferlegt, gehört sie auf die Konformitätsseiten — markiert wird sie
-dort in der englischen Fassung.
+vollständig).
 
 > [TODO: Falls Ihr Modul SNOMED CT nutzt, geben Sie die verwendete Edition/Version
 > an. Listen Sie die modul-eigenen ValueSets/CodeSystems auf oder verweisen Sie
-> auf die automatisch erzeugte Artefakt-Liste.]
+> auf die automatisch erzeugte Artefakt-Liste. Soll Ihr Modul Implementierenden
+> eine verbindliche Anforderung an Expansionen auferlegen, gehört sie auf die
+> Konformitätsseiten — diese Seite gehört nicht zum Konformitäts-Abschnitt.]
