@@ -105,6 +105,8 @@ env:
   EXPECTED_PUBLICATION_BASE: "https://{{GITHUB_ORG}}.github.io/{{REPO_NAME}}"
   EXPECTED_PACKAGE_ID: "de.medizininformatikinitiative.kerndatensatz.{{MODULE_SLUG}}"
   # Pinned toolchain (bumped by the scheduled dependency check, never floating).
+  # Must stay identical to ig-publisher.yml and module-release.yml —
+  # scripts/toolchain-pins.test.mjs fails the build if they drift apart.
   PUBLISHER_VERSION: "2.2.11"
   PUBLISHER_SHA256: "a981af86bca3f3a22ee15b9d4ee3c97d63219b7a14e49d0a525e10bbfc71a911"
   SUSHI_VERSION: "3.20.0"

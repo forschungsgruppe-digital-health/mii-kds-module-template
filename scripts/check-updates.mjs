@@ -362,8 +362,13 @@ function readBaseTemplatePin() {
 
 /**
  * Tool pins (IG Publisher, SUSHI, Jekyll) live as env vars in the CI build
- * workflow. Scan every workflow file for the conventional names; an explicit
- * process.env value (set by the calling workflow) wins.
+ * workflows. Report the pin from the workflow whose staleness actually ships —
+ * the publication path — then fall back to the remaining workflows. An explicit
+ * process.env value (set by the calling workflow) wins over both.
+ *
+ * The blocks are supposed to be identical; scripts/toolchain-pins.test.mjs
+ * fails the build when they are not, so the order below only decides which
+ * file gets reported while a drift PR is open.
  */
 function readToolPin(envKey, workflowTexts) {
   if (process.env[envKey]) return process.env[envKey];
@@ -374,12 +379,20 @@ function readToolPin(envKey, workflowTexts) {
   return null;
 }
 
+const PUBLICATION_WORKFLOW = "go-publish.yml";
+
 function readWorkflowTexts() {
   const dir = ".github/workflows";
   if (!existsSync(dir)) return [];
-  return readdirSync(dir)
+  const files = readdirSync(dir)
     .filter((f) => f.endsWith(".yml") || f.endsWith(".yaml"))
-    .map((f) => readFileSync(path.join(dir, f), "utf8"));
+    .sort();
+  // readdirSync order is filesystem-dependent — read the publication workflow
+  // first so the reported pin never depends on the runner's filesystem.
+  const ordered = files.includes(PUBLICATION_WORKFLOW)
+    ? [PUBLICATION_WORKFLOW, ...files.filter((f) => f !== PUBLICATION_WORKFLOW)]
+    : files;
+  return ordered.map((f) => readFileSync(path.join(dir, f), "utf8"));
 }
 
 // ---------------------------------------------------------------------------

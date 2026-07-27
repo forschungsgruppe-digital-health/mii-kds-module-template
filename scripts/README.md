@@ -47,3 +47,9 @@ list — not a glob, because this directory now holds unrelated helpers too.
 node --test scripts/*.test.mjs            # every unit test (what CI runs on a PR)
 node --test scripts/*.template-test.mjs   # scaffold contract — template repo only
 ```
+
+Two of these test the repository rather than a script:
+`toolchain-pins.test.mjs` fails when the `env:` pin blocks of the three build
+workflows stop agreeing (they must be copies — a workflow cannot read another
+workflow's `env:`), and `publication-url-consistency.template-test.mjs` asserts
+the placeholder metadata contract.

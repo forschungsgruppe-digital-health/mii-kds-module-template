@@ -88,7 +88,9 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # Pinned toolchain — identical to go-publish.yml (single source of the pins).
+  # Pinned toolchain — identical to go-publish.yml and ig-publisher.yml; a
+  # workflow cannot read another workflow's env:, so these are copies and
+  # scripts/toolchain-pins.test.mjs fails the build if they drift apart.
   PUBLISHER_VERSION: "2.2.11"
   PUBLISHER_SHA256: "a981af86bca3f3a22ee15b9d4ee3c97d63219b7a14e49d0a525e10bbfc71a911"
   SUSHI_VERSION: "3.20.0"
