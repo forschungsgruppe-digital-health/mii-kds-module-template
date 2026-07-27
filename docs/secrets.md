@@ -181,36 +181,13 @@ without waiting for the next one, cut a throw-away pre-release in a scratch repo
 or check the job log of the most recent release run — it prints either the
 delivered message or the explicit skip notice naming what is missing.
 
-## CI toggles (variables — all default correctly when unset)
+## CI toggles
 
-| Variable | Default (unset) | Effect |
-| --- | --- | --- |
-| `ENABLE_PREVIEW` | on | IG build + preview + cleanup |
-| `ENABLE_VALIDATION` | on | MII reusable validation |
-| `ENABLE_CONVENTION_CHECK` | on | metadata-contract + wiki-drift check |
-| `ENABLE_TEMPLATE_SYNC` | on | vendored `ig-template/` sync + the PR-time drift check |
-| `ENABLE_MODULE_RELEASE` | on | CalVer release workflow |
-| `ENABLE_ZULIP_ANNOUNCE` | on | MII Zulip announcement (see above) |
-| `ANNOUNCE_PUBLIC_ZULIP` | off | public FHIR Zulip announcement — **template repo only** |
-| `FHIR_ZULIP_BOT_EMAIL` | unset | sender for the public FHIR Zulip — **template repo only** |
-| `MII_ZULIP_BOT_EMAIL` | `kds-github-bot@mii.zulipchat.com` | sender for the MII Zulip — **template repo only** |
-| `ENABLE_DEPENDENCY_CHECK` | on | weekly version-drift check |
-| `ENABLE_SECURITY_SCAN` | on | OSV + Trivy |
-| `PAGES_ACTIONS_ENABLED` | (gh-pages push mode) | switch preview deploy to the Actions Pages path |
-
-The [toggle summary](workflows.md#the-toggle-summary) lists one more,
-`ENABLE_RELEASE_PLEASE`. It belongs to the template repository only — the
-first-run bootstrap deletes `release-please.yml`, so it has no effect in a
-module. The three rows marked **template repo only** above are the same case:
-their only consumer is `notify-zulip.yml`, which the bootstrap also deletes, so
-a module's announcement is governed by `ZULIP_API_KEY` and
-`ENABLE_ZULIP_ANNOUNCE` alone. `IG_TEMPLATE_REPO_URL` is a plain variable, not a
-toggle; see
-[recipes/first-run-setup.md](recipes/first-run-setup.md) step 5. `SUSHI_VERSION`
-and `JAVA_VALIDATOR_VERSION` are likewise plain variables, not toggles — they
-override the versions `validation.yml` passes to the MII reusable workflows;
-unset means the pinned defaults in that workflow (see
-[maintenance.md](maintenance.md#where-each-pin-lives-single-source-of-truth)).
+The variables live in one place: the
+[toggle summary in workflows.md](workflows.md#the-toggle-summary), which lists
+every pipeline switch in both layers with its default. Only one of them
+interacts with a secret on this page — `ENABLE_ZULIP_ANNOUNCE=false` silences
+the announcement even when `ZULIP_API_KEY` is set.
 
 Production publication (`go-publish.yml`) always stays a **manual, gated**
 `workflow_dispatch` with `publish:false` (dry run) by default — never automatic.

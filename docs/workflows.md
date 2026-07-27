@@ -81,9 +81,14 @@ Notes:
 
 ### The toggle summary
 
+The full inventory — every variable that turns a pipeline on or off, in both
+layers. All of them default correctly when unset;
+[secrets.md](secrets.md) covers the *secrets* that enable the gated features.
+
 | Pipeline | Variable | Default |
 | --- | --- | --- |
 | IG build + preview | `ENABLE_PREVIEW` | ON |
+| Preview deploy path | `PAGES_ACTIONS_ENABLED` | unset (gh-pages push mode) |
 | Reusable validation | `ENABLE_VALIDATION` | ON |
 | Convention check | `ENABLE_CONVENTION_CHECK` | ON |
 | Dependency check | `ENABLE_DEPENDENCY_CHECK` | ON |
@@ -92,8 +97,18 @@ Notes:
 | Module release (CalVer) | `ENABLE_MODULE_RELEASE` | ON |
 | Release Please (template only) | `ENABLE_RELEASE_PLEASE` | ON |
 | MII Zulip announcement | `ENABLE_ZULIP_ANNOUNCE` | ON |
-| Public FHIR Zulip announcement | `ANNOUNCE_PUBLIC_ZULIP` | OFF |
+| MII Zulip sender (template only) | `MII_ZULIP_BOT_EMAIL` | `kds-github-bot@mii.zulipchat.com` |
+| Public FHIR Zulip announcement (template only) | `ANNOUNCE_PUBLIC_ZULIP` | OFF |
+| Public FHIR Zulip sender (template only) | `FHIR_ZULIP_BOT_EMAIL` | unset |
 | Production `-go-publish` | manual `workflow_dispatch` + `publish:false` | OFF (gated) |
+
+The rows marked **template only** have no effect in a module: the bootstrap
+deletes `release-please.yml` and `notify-zulip.yml`, so a module's announcement
+is governed by `ZULIP_API_KEY` and `ENABLE_ZULIP_ANNOUNCE` alone.
+`IG_TEMPLATE_REPO_URL`, `SUSHI_VERSION` and `JAVA_VALIDATOR_VERSION` are plain
+variables, not toggles — the last two override the versions `validation.yml`
+passes to the MII reusable workflows, and unset means the pinned defaults there
+(see [maintenance.md](maintenance.md#where-each-pin-lives-single-source-of-truth)).
 
 ---
 
