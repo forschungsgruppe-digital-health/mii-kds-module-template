@@ -182,7 +182,11 @@ The [toggle summary](workflows.md#the-toggle-summary) lists one more,
 `ENABLE_RELEASE_PLEASE`. It belongs to the template repository only — the
 first-run bootstrap deletes `release-please.yml`, so it has no effect in a
 module. `IG_TEMPLATE_REPO_URL` is a plain variable, not a toggle; see
-[recipes/first-run-setup.md](recipes/first-run-setup.md) step 5.
+[recipes/first-run-setup.md](recipes/first-run-setup.md) step 5. `SUSHI_VERSION`
+and `JAVA_VALIDATOR_VERSION` are likewise plain variables, not toggles — they
+override the versions `validation.yml` passes to the MII reusable workflows;
+unset means the pinned defaults in that workflow (see
+[maintenance.md](maintenance.md#where-each-pin-lives-single-source-of-truth)).
 
 Production publication (`go-publish.yml`) always stays a **manual, gated**
 `workflow_dispatch` with `publish:false` (dry run) by default — never automatic.

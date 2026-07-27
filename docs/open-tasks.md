@@ -80,6 +80,13 @@ rather than assumed.
   `medizininformatik-initiative/kerndatensatz-meta`). They are re-resolved by
   hand; the workflow comments say so rather than claiming automation that does
   not exist.
+- **Two pins in `validation.yml` are not watched by any layer.** The
+  reusable-workflow inputs `SUSHI_VERSION` and `JAVA_VALIDATOR_VERSION` are
+  written as `${{ vars.X || '<version>' }}`, which the checker's env parser
+  cannot read. `scripts/toolchain-pins.test.mjs` at least holds the SUSHI
+  fallback equal to the three build workflows; nothing compares
+  `JAVA_VALIDATOR_VERSION` against upstream — re-check it whenever the
+  `kerndatensatz-meta` SHA is re-resolved.
 
 ## Cross-repo consistency — decided, not pending
 
