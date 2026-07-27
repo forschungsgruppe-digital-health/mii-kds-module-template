@@ -58,7 +58,7 @@ Unfamiliar terms are in the [glossary](docs/glossary.md).
 | `docs/` | Guides and step-by-step recipes |
 | `tests/` | FHIR validation test cases the build runs — see [tests/README.md](tests/README.md) |
 | `scripts/` | Helper scripts (first-run bootstrap, template sync, convention check, …) — see [scripts/README.md](scripts/README.md) |
-| `skills/` | Vendor-neutral agent skills: `ig-analyze`, `ig-translate`, `wiki-consistency-check` — see [AGENTS.md](AGENTS.md#skills) |
+| `skills/` | Vendor-neutral agent skills: `docs-steward`, `ig-analyze`, `ig-translate`, `wiki-consistency-check` — see [AGENTS.md](AGENTS.md#skills) |
 | `.github/workflows/` | CI: build, preview, validation, release |
 
 ## Documentation
