@@ -62,10 +62,11 @@
 #            use (PUBLISHER_VERSION / PUBLISHER_SHA256 / SUSHI_VERSION /
 #            JEKYLL_VERSION), the jar additionally by SHA-256. Keep them there,
 #            not inline: docs/maintenance.md sends the maintainer to those
-#            names, and scripts/check-updates.mjs reads the first matching
-#            `env:` pin it finds across the workflows — an inline literal here
-#            would drift behind the other two builds unnoticed. The scheduled
-#            dependency check proposes bumps.
+#            names, and scripts/toolchain-pins.test.mjs asserts the three
+#            blocks agree — an inline literal here would escape that check and
+#            drift behind the other two builds unnoticed. The JDK the jar runs
+#            on is pinned too (temurin 17, below). The scheduled dependency
+#            check proposes bumps.
 #
 # Human-gated: none. PAGES_ACTIONS_ENABLED is the only extra authorization and
 #            it gates the Actions-based Pages deploy path, not the preview build.
@@ -120,6 +121,16 @@ jobs:
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "22"
+
+      # The IG Publisher is a Java program; pin the JDK instead of inheriting
+      # whatever `ubuntu-latest` preinstalls. Same distribution/version as
+      # go-publish.yml, module-release.yml and the ig-template-mii-kds preview,
+      # and as the digest-pinned dev container (.devcontainer/devcontainer.json).
+      - name: Set up Java (for the IG Publisher)
+        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95 # v5.6.0
+        with:
+          distribution: temurin
+          java-version: "17"
 
       # The IG Publisher shells out to `jekyll` to render the HTML pages, and it
       # is NOT pre-installed on the runner. Without this step the build fails with
