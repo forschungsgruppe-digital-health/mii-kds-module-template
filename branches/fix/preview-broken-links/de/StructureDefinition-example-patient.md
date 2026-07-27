@@ -228,7 +228,7 @@ Weitere Repräsentationen des Profils: [CSV](../StructureDefinition-example-pati
   },
   "status" : "active",
   "experimental" : false,
-  "date" : "2026-07-27T07:17:02+00:00",
+  "date" : "2026-07-27T07:36:10+00:00",
   "publisher" : "Medical Informatics Initiative (MII)",
   "contact" : [{
     "name" : "Medical Informatics Initiative (MII)",
