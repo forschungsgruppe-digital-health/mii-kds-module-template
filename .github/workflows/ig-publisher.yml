@@ -200,15 +200,15 @@ jobs:
             subst "${page}" < "${RUNNER_TEMP}/placeholders.txt"
           done
           # Guard: no build input may still carry a placeholder after substitution.
-          if grep -rl '{{[A-Z_]\{2,\}}}' input 2>/dev/null | grep -qv '/README\.md$'; then
+          if grep -rl '{{[A-Z0-9_]\{2,\}}}' input 2>/dev/null | grep -qv '/README\.md$'; then
             echo "::error::A build input still contains an unsubstituted {{PLACEHOLDER}} after the self-check substitution."
-            grep -rn '{{[A-Z_]\{2,\}}}' input | grep -v '/README\.md:' | head -10
+            grep -rn '{{[A-Z0-9_]\{2,\}}}' input | grep -v '/README\.md:' | head -10
             exit 1
           fi
           # Guard: no ACTIVE (non-comment) placeholder may survive in sushi-config.yaml.
-          if grep -vE '^[[:space:]]*#' sushi-config.yaml | grep -q '{{[A-Za-z_]*}}'; then
+          if grep -vE '^[[:space:]]*#' sushi-config.yaml | grep -q '{{[A-Za-z0-9_]*}}'; then
             echo "::error::A self-check value is missing from the substitution table — an active {{PLACEHOLDER}} survives in sushi-config.yaml."
-            grep -nvE '^[[:space:]]*#' sushi-config.yaml | grep '{{[A-Za-z_]*}}'
+            grep -nvE '^[[:space:]]*#' sushi-config.yaml | grep '{{[A-Za-z0-9_]*}}'
             exit 1
           fi
           echo "::notice::Template-repo self-check: substituted self-check placeholders into WORKSPACE copies of sushi-config.yaml, ig.ini and the narrative pages (never committed). A created module replaces the placeholders for real and skips this step."
