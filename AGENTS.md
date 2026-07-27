@@ -97,6 +97,12 @@ source of truth; consult them before doing the corresponding task by hand.
   IG Publisher expects them. Backed by
   [`scripts/ig-translate.sh`](scripts/ig-translate.sh). The template-side language
   *mechanism/policy* lives in `ig-template-mii-kds`.
+- [`skills/docs-steward/`](skills/docs-steward/SKILL.md) — audits, repairs and
+  trims this repository's documentation: verifies every link, path and factual
+  claim against the repo itself, removes AI decision-narration, reduces the docs
+  to what create/modify/maintain actually needs, and walks the documented path
+  as a first-time and an experienced reader. Report-only by default; writes a
+  dated report to [`docs/reports/`](docs/reports/).
 
 ### Discovery paths (symlinks, not copies)
 
