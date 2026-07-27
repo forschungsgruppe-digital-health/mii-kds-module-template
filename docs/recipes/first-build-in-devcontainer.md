@@ -1,8 +1,6 @@
 # Recipe: first build in the dev container
 
-## Goal
-
-Go from "I want to author an MII KDS module" to a first local IG build — with
+**Goal.** Go from "I want to author an MII KDS module" to a first local IG build — with
 a working, fully equipped FHIR toolchain (Java 17, Node 22, SUSHI,
 Ruby/Jekyll, Graphviz) — without installing any of those tools on your own
 machine. Everything runs inside a container that VS Code builds for you.
@@ -14,16 +12,15 @@ machine. Everything runs inside a container that VS Code builds for you.
 > ["Dev Container ‐ IG Publisher"](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Dev-Container-%E2%80%90-IG-Publisher).
 
 > **Why this dev container is identical to the one in
-> [`ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds):**
+> [`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds):**
 > the template package and the modules built from it must agree on the
 > toolchain. Two dev containers drifting apart (different Java, SUSHI, or
 > Jekyll versions) is a maintenance trap — a module would build in one
 > environment and fail in the other. The pins are kept byte-for-byte aligned
 > and are bumped in both repos in the same sweep.
 
-## Prerequisites
-
-You need exactly three things on your machine:
+**Prerequisites.** Three things on your machine — plus `git` and network
+access (the first build downloads the base image and tools):
 
 1. **Docker** — [Docker Desktop](https://www.docker.com/products/docker-desktop/)
    (Windows/macOS) or any Docker engine (Linux). Must be running.
@@ -32,13 +29,10 @@ You need exactly three things on your machine:
    (`ms-vscode-remote.remote-containers`). Install it from the Extensions
    view in VS Code.
 
-You also need `git` and network access (the first build downloads the base
-image and tools).
-
 ## Steps
 
 1. Create your module repository from this template: on
-   [the template's GitHub page](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template)
+   [the template's GitHub page](https://github.com/medizininformatik-initiative/mii-kds-module-template)
    click **"Use this template" → "Create a new repository"**.
    Mind the warning in the `README.md`: tick **"Include all branches"** (or
    run the first-run bootstrap afterwards) so your repository gets the `dev`
@@ -103,12 +97,6 @@ image and tools).
    SUSHI reads `sushi-config.yaml` and `input/fsh/` and writes the generated
    resources to `fsh-generated/`.
 
-   > **Not yet available on this template's `dev`:** the IG source scaffold
-   > (`sushi-config.yaml`, `ig.ini`, `input/fsh/` with a starter profile) is
-   > landing via a separate build-out pull request. Until it is merged, this
-   > step and the next have nothing to compile in the template repo itself;
-   > in a module created from the finished template they work as written.
-
 8. Run the IG Publisher to build the full IG website locally:
 
    ```sh
@@ -126,8 +114,9 @@ image and tools).
    > checker, not by the container image. Baking it in would mean rebuilding
    > and re-pinning the container for every publisher bump. Version
    > `2.2.11` + its SHA-256 above were the latest release when this recipe
-   > was written (2026-07-22); once the CI workflows land, **the version
-   > pinned in `.github/workflows/` is the source of truth** — use that one.
+   > was written (2026-07-22). **The CI pins are the source of truth** (see
+   > [`docs/maintenance.md`](../maintenance.md#where-each-pin-lives-single-source-of-truth))
+   > — if they ever differ from the command above, CI wins.
 
    > **Terminology note (expected, not an error):** without an SU-TermServ
    > client certificate the publisher resolves terminology against the
@@ -145,14 +134,13 @@ image and tools).
 - VS Code runs inside the container (the green remote indicator in the
   bottom-left corner shows the dev container name).
 - All six version checks in step 6 print the pinned versions.
-- With the IG source scaffold in place: `sushi .` reports
-  `0 Errors` and the publisher produces `output/index.html` plus a QA report.
-- **Green CI build:** the CI workflows (SUSHI + IG Publisher build, QA gate,
-  Pages preview) land via a separate build-out pull request (task B4). Once
-  they are merged, pushing your branch gives you the same build in CI plus a
-  Pages preview under `branches/<branch>/`.
+- `sushi .` reports `0 Errors` and the publisher produces
+  `output/index.html` plus a QA report.
+- **Green CI build:** pushing your branch gives you the same build in CI
+  (SUSHI + IG Publisher, QA gate) plus a Pages preview under
+  `branches/<branch>/`.
 
-## Common errors and fixes
+## Common errors & fixes
 
 | Symptom | Cause | Fix |
 |---|---|---|

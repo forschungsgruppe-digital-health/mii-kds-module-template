@@ -1,18 +1,19 @@
 # =============================================================================
-# module-release.yml — MII CalVer module release path (spec §4.3)
+# module-release.yml — MII CalVer module release path
 #
 # INHERITED BY MODULES: this workflow is a MODULE file. The first-run bootstrap
 # (docs/recipes/first-run-setup.md) KEEPS it in a created module — unlike the
 # template-maintenance release automation (release-please.yml / notify-zulip.yml),
 # which the bootstrap removes. A module released from this template uses THIS
-# workflow (MII CalVer `YYYY.n.n`) and NEVER Release Please. See docs/RELEASE.md.
+# workflow (MII CalVer `YYYY.n.n`) and NEVER Release Please. See docs/release.md.
 #
 #   The two template repos release themselves with SemVer via Release Please.
 #   The MODULES they produce release with CalVer via THIS workflow. Never mix
-#   the two on one repo (§2.2/§4.3) — two release systems corrupt the history.
+#   the two on one repo — two release systems corrupt the history.
 #
 # Purpose:   Faithful, gated automation of the MII "Module Release Workflow"
-#            (kerndatensatz-meta wiki). Mirrors kerndatensatz-basis `main.yml`
+#            (kerndatensatz-meta wiki). Modelled on the reference module's
+#            release workflow — for example kerndatensatz-basis `main.yml`
 #            (RELEASE + NOTIFY_ZULIP jobs) + hands off to `go-publish.yml`.
 #            On a CalVer tag it BUILDS the IG (buildability gate), CREATES a
 #            DRAFT GitHub Release with generated notes, and — when a human
@@ -21,12 +22,13 @@
 #            manual `go-publish.yml` (this workflow only points at it).
 #
 # Triggers:
-#   - push tag `v[0-9]+.[0-9]+.[0-9]+*` (CalVer, e.g. v2026.0.1; basis idiom) →
+#   - push tag `v[0-9]+.[0-9]+.[0-9]+*` (CalVer, e.g. v2026.0.1; the same glob
+#     kerndatensatz-basis uses, for example) →
 #     build + create the DRAFT release.
 #   - release published → announce on the MII Zulip.
-#   - workflow_dispatch → dry run: build only, NO release side effects (Gate E).
+#   - workflow_dispatch → dry run: build only, NO release side effects.
 #
-# Toggles (§2.13):
+# Toggles:
 #   - vars.ENABLE_MODULE_RELEASE — gates `build` + `release`; ON by default
 #     (set the repo variable to 'false' to disable the automated release path).
 #   - vars.ENABLE_ZULIP_ANNOUNCE — gates `notify_zulip`; ON by default (set to
@@ -39,28 +41,30 @@
 #   job SKIPS with a ::notice instead of failing. This also prevents a template
 #   SemVer tag/release (Release Please) from ever driving the module path.
 #
-# Human-gated steps (never automated — §6):
+# Human-gated steps (never automated):
 #   1. Preparing the release (branch, version bump, PR, merge, tag) — the human
 #      does steps 1–5 of the wiki workflow; this file reacts to the pushed tag.
-#   2. Publishing the DRAFT release (Gate-E-style approval) — turns the draft
+#   2. Publishing the DRAFT release — turns the draft
 #      created here into a published release, which fires `notify_zulip`.
-#   3. Formal FHIR publication via `go-publish.yml` (Gate E) — manual
+#   3. Formal FHIR publication via `go-publish.yml` — manual
 #      workflow_dispatch, `publish: false` (a complete dry run) by default. This
 #      workflow only PRINTS the handoff; it never dispatches go-publish itself.
-#   4. secrets.ZULIP_API_KEY (Gate G) — mapped to env; when absent the
+#   4. secrets.ZULIP_API_KEY — mapped to env; when absent the
 #      announcement SKIPS with a ::notice, it never fails the release.
 #
-# Terminology (§2.10): the build prefers the MII terminology server
+# Terminology: the build prefers the MII terminology server
 #   (SU-TermServ) through a client-certificate nginx proxy when the repository
-#   secrets SU_TERMSERV_CLIENT_CERT / _KEY / _CERT_PASSWORD are configured, and
+#   secrets SU_TERMSERV_CLIENT_CERT / _KEY / _PASSWORD are configured, and
 #   otherwise falls back to the public HL7 server https://tx.fhir.org with a
 #   ::notice — the same selection idiom as the preview / go-publish workflows.
 #   The build must not hard-fail without the certificate.
 #
-# Fixed versions (§0.2): every action is pinned to a commit SHA; the IG
+# Fixed versions: every action is pinned to a commit SHA; the IG
 #   Publisher jar, SUSHI, Jekyll, the nginx image, and the kerndatensatz-meta
 #   ref are pinned by exact version + SHA-256/commit — identical to
-#   go-publish.yml. The scheduled dependency check proposes bumps.
+#   go-publish.yml. The scheduled dependency check proposes bumps for the
+#   toolchain pins in the env: block below; the nginx digest and the
+#   kerndatensatz-meta ref are re-resolved by hand (it does not watch them).
 # =============================================================================
 name: Module release (CalVer)
 
@@ -68,7 +72,8 @@ on:
   push:
     tags:
       # CalVer `YYYY.n.n` (+ optional `-rc.1` / `-alpha.1` suffix), exactly the
-      # tag glob kerndatensatz-basis `main.yml` uses (tags v2026.0.0/v2026.0.1).
+      # the glob the reference module uses — for example kerndatensatz-basis
+      # `main.yml` matches 'v[0-9]+.[0-9]+.[0-9]+*' (its tags: v2026.0.0, v2026.0.1).
       - "v[0-9]+.[0-9]+.[0-9]+*"
   release:
     types: [published]
@@ -83,7 +88,9 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # Pinned toolchain — identical to go-publish.yml (single source of the pins).
+  # Pinned toolchain — identical to go-publish.yml and ig-publisher.yml; a
+  # workflow cannot read another workflow's env:, so these are copies and
+  # scripts/toolchain-pins.test.mjs fails the build if they drift apart.
   PUBLISHER_VERSION: "2.2.11"
   PUBLISHER_SHA256: "a981af86bca3f3a22ee15b9d4ee3c97d63219b7a14e49d0a525e10bbfc71a911"
   SUSHI_VERSION: "3.20.0"
@@ -102,7 +109,7 @@ jobs:
       is_module: ${{ steps.detect.outputs.is_module }}
     steps:
       - name: Check out the repository
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Detect unreplaced template placeholders
         id: detect
         shell: bash
@@ -110,7 +117,7 @@ jobs:
           set -euo pipefail
           if grep -q '{{' sushi-config.yaml; then
             echo "is_module=false" >> "${GITHUB_OUTPUT}"
-            echo "::notice::Unreplaced {{...}} placeholders found in sushi-config.yaml. This looks like the un-instantiated module template (or a module not yet bootstrapped), so the MII CalVer release path is skipped. A real module — placeholders replaced by the first-run bootstrap — runs it for real."
+            echo "::notice::Unreplaced {{...}} placeholders found in sushi-config.yaml. This looks like the un-instantiated module template (or a module whose set-up is unfinished), so the MII CalVer release path is skipped. A real module — placeholders replaced by hand, per the first-run bootstrap's checklist — runs it for real."
           else
             echo "is_module=true" >> "${GITHUB_OUTPUT}"
             echo "Bootstrapped module detected — the CalVer release path applies."
@@ -118,8 +125,11 @@ jobs:
 
   # ---------------------------------------------------------------------------
   # build — wiki step 5 support: verify the tagged commit BUILDS before a release
-  # is cut (basis relies on the reusable validation workflows for the error gate;
-  # this adds a buildability gate and produces the package.tgz artifact). Runs on
+  # is cut. kerndatensatz-basis, for example, runs no FHIR error gate at tag time
+  # — its only PR-time signal is its own IG-Publisher build, and it wires up
+  # neither MII reusable validation workflow (verified against `main` @ f6c6878).
+  # This template adds both: a buildability gate here, producing the package.tgz
+  # artifact, and the reusable validation workflows in validation.yml. Runs on
   # a CalVer tag or on a workflow_dispatch dry run — never creates a release.
   # ---------------------------------------------------------------------------
   build:
@@ -131,24 +141,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the tagged commit
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Pin the kerndatensatz-meta reusable assets (nginx proxy config)
         # Only needed for the SU-TermServ proxy; pinned like go-publish.yml.
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: medizininformatik-initiative/kerndatensatz-meta
           ref: 1db2e534704d92e5ee0cde663ce3e7ccd8825fa7
           path: kerndatensatz-meta
 
       - name: Set up Java (temurin 17)
-        uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4.8.0
+        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95 # v5.6.0
         with:
           distribution: temurin
           java-version: "17"
 
       - name: Set up Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "22"
 
@@ -159,7 +169,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y graphviz libxml2-utils unzip jq
 
-          # SUSHI, pinned (no @latest — reproducibility, §0.2).
+          # SUSHI, pinned (no @latest — reproducibility).
           npm install --global "fsh-sushi@${SUSHI_VERSION}"
 
           # IG Publisher, pinned + checksum-verified.
@@ -181,14 +191,14 @@ jobs:
         env:
           SU_TERMSERV_CLIENT_CERT: ${{ secrets.SU_TERMSERV_CLIENT_CERT }}
           SU_TERMSERV_CLIENT_KEY: ${{ secrets.SU_TERMSERV_CLIENT_KEY }}
-          SU_TERMSERV_CLIENT_CERT_PASSWORD: ${{ secrets.SU_TERMSERV_CLIENT_CERT_PASSWORD }}
+          SU_TERMSERV_CLIENT_PASSWORD: ${{ secrets.SU_TERMSERV_CLIENT_PASSWORD }}
         run: |
           set -euo pipefail
           # Prefer SU-TermServ through the client-certificate nginx proxy;
           # otherwise fall back to the public HL7 server. Same idiom as the
           # preview / go-publish workflows; the build must not hard-fail without
-          # the certificate (§2.10, Gate F).
-          if [[ -n "${SU_TERMSERV_CLIENT_CERT}" ]] && [[ -n "${SU_TERMSERV_CLIENT_KEY}" ]] && [[ -n "${SU_TERMSERV_CLIENT_CERT_PASSWORD}" ]]; then
+          # the certificate.
+          if [[ -n "${SU_TERMSERV_CLIENT_CERT}" ]] && [[ -n "${SU_TERMSERV_CLIENT_KEY}" ]] && [[ -n "${SU_TERMSERV_CLIENT_PASSWORD}" ]]; then
             nginx_dir="${RUNNER_TEMP}/nginx"
             mkdir -p "${nginx_dir}/certs"
             cp kerndatensatz-meta/.github/workflows/nginx.conf "${nginx_dir}/nginx.conf"
@@ -197,7 +207,7 @@ jobs:
             openssl rsa \
               -in "${nginx_dir}/certs/client-key-encrypted.key" \
               -out "${nginx_dir}/certs/client-key.key" \
-              -passin env:SU_TERMSERV_CLIENT_CERT_PASSWORD
+              -passin env:SU_TERMSERV_CLIENT_PASSWORD
             chmod 600 "${nginx_dir}/certs/"*
 
             docker run --detach --name termserv-proxy \
@@ -232,8 +242,10 @@ jobs:
 
           # The build must actually complete and produce a package. QA COUNTS
           # are reported for review and are not required to be zero — the hard
-          # FHIR error gate is the reusable validation workflow (§4.2), run on
-          # the release PR before the tag (mirrors basis).
+          # FHIR error gate is the reusable validation workflow (validation.yml),
+          # run on the release PR before the tag. That gate is this template's
+          # addition — kerndatensatz-basis, for example, wires up neither MII
+          # reusable validation workflow.
           jq empty output/qa.json
           test -s output/package.tgz
 
@@ -247,11 +259,11 @@ jobs:
             echo "| ---: | ---: | ---: |"
             echo "| ${errors} | ${warnings} | ${hints} |"
             echo
-            echo "QA counts are reported for review; the authoritative FHIR error gate is the reusable validation workflow (§4.2)."
+            echo "QA counts are reported for review; the authoritative FHIR error gate is the reusable validation workflow."
           } >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Upload the build (package + QA report)
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: module-release-build
           path: |
@@ -263,7 +275,8 @@ jobs:
 
   # ---------------------------------------------------------------------------
   # release — wiki step 5: on a pushed CalVer tag, create a DRAFT GitHub Release
-  # with auto-generated notes (basis `main.yml` RELEASE idiom). A human finalizes
+  # with auto-generated notes (for example, the RELEASE job of kerndatensatz-basis
+  # `main.yml` does the same). A human finalizes
   # and PUBLISHES it (wiki step 7), which fires `notify_zulip`. Draft, so the
   # human can attach the package and edit notes before it goes out.
   # ---------------------------------------------------------------------------
@@ -278,7 +291,7 @@ jobs:
     permissions:
       contents: write # create the GitHub Release for this tag
     steps:
-      - name: Prepare version (basis idiom)
+      - name: Prepare version
         id: prep
         shell: bash
         run: |
@@ -287,7 +300,7 @@ jobs:
           echo "version=${version}" >> "${GITHUB_OUTPUT}"
 
       - name: Create the draft GitHub Release
-        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2.6.2
+        uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # v3.0.2
         with:
           name: "${{ steps.prep.outputs.version }}"
           draft: true
@@ -309,14 +322,14 @@ jobs:
             Add your own release notes here; the auto-generated notes are below.
             <!-- DELETE END -->
 
-            ### Next: formal FHIR publication (human-gated — Gate E)
+            ### Next: formal FHIR publication (human-gated)
 
             <!-- DELETE START -->
             After publishing this release, run the gated **go-publish.yml**
             (Actions → "Publish release with IG Publisher" → Run workflow):
             first with `publish: false` (a complete dry run), then — only after
             review — with `publish: true`. This workflow never triggers
-            go-publish itself. See `docs/RELEASE.md`.
+            go-publish itself. See `docs/release.md`.
             <!-- DELETE END -->
 
             See the auto-generated release notes below.
@@ -329,16 +342,16 @@ jobs:
             echo
             echo "1. Finalize and **publish** the draft Release \`${{ steps.prep.outputs.version }}\` (fires the MII Zulip announcement)."
             echo "2. Run the gated **go-publish.yml** dry run: Actions → \"Publish release with IG Publisher\" → \`release_ref = ${{ steps.prep.outputs.version }}\`, \`publish = false\`."
-            echo "3. After review, re-run go-publish with \`publish = true\` (Gate E)."
+            echo "3. After review, re-run go-publish with \`publish = true\`."
             echo
-            echo "The two paths never mix: modules release with CalVer via this workflow; the template repos release with SemVer via Release Please. See docs/RELEASE.md."
+            echo "The two paths never mix: modules release with CalVer via this workflow; the template repos release with SemVer via Release Please. See docs/release.md."
           } >> "${GITHUB_STEP_SUMMARY}"
 
   # ---------------------------------------------------------------------------
   # notify_zulip — wiki step 7: when the human PUBLISHES the release, announce it
   # on the MII Zulip. Topic "Releases" (the MODULE topic) — distinct from the
-  # template repos' "Template Releases" topic (§2.12). Skip-not-fail on a missing
-  # key (Gate G). Guarded by `is_module` so a template SemVer release never fires
+  # template repos' "Template Releases" topic. Skip-not-fail on a missing
+  # key. Guarded by `is_module` so a template SemVer release never fires
   # this (that repo's notify-zulip.yml owns "Template Releases").
   # ---------------------------------------------------------------------------
   notify_zulip:
@@ -354,16 +367,17 @@ jobs:
     steps:
       - name: Announce the release on the MII Zulip (skipped if no key)
         if: ${{ env.ZULIP_API_KEY != '' }}
-        uses: zulip/github-actions-zulip/send-message@e4c8f27c732ba9bd98ac6be0583096dea82feea5 # v1.0.2
+        uses: zulip/github-actions-zulip/send-message@f675f2b4eb2a95fae974215476dcb7ad8dfeff6b # v2.0.2
         with:
           api-key: ${{ env.ZULIP_API_KEY }}
           email: "kds-github-bot@mii.zulipchat.com"
           organization-url: "https://mii.zulipchat.com/"
           type: "stream"
           to: "MII-Kerndatensatz"
-          # "Releases" is the MODULE topic (basis idiom) — NOT the template
+          # "Releases" is the MODULE topic (for example, the NOTIFY_ZULIP job of
+          # kerndatensatz-basis `main.yml` posts to the same topic) — NOT the template
           # repos' "Template Releases" topic. Keep the CalVer/SemVer split
-          # legible in chat too (§2.12).
+          # legible in chat too.
           topic: "Releases"
           content: |
             **New Release:** `${{ github.event.release.tag_name }}`
@@ -374,4 +388,4 @@ jobs:
             🔗 [View on GitHub](${{ github.event.release.html_url }})
       - name: Skip notice when ZULIP_API_KEY is absent
         if: ${{ env.ZULIP_API_KEY == '' }}
-        run: echo "::notice::ZULIP_API_KEY not set — skipping MII announcement (Gate G)."
+        run: echo "::notice::ZULIP_API_KEY not set — skipping MII announcement."

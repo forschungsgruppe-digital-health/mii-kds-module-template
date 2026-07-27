@@ -12,7 +12,7 @@ it is released only via the MII Module Release Workflow (**CalVer
 `YYYY.n.n`**), and the first-run bootstrap removes the Release Please files
 from the new module so the two release systems never mix. The rest of this page
 describes contributing to **this template repository**; the full operational
-model for both layers will be documented in `docs/WORKFLOWS.md` (planned).
+model for both layers will be documented in `docs/workflows.md` (planned).
 
 ## Branching model
 

@@ -1,6 +1,8 @@
 <!-- markdownlint-disable MD041 -->
-### UML-Diagramme
+<!-- Source: kerndatensatz-basis input/pagecontent/uml-diagrams.md.
+     German mirror: input/translations/de/pagecontent/uml-diagrams.md. -->
+### UML Diagrams
 
-UML-Übersichten der Datenmodelle des Moduls **{{MODULE_TITLE}}** und ihrer Beziehungen. Editierbare Quellen (z. B. PlantUML) gehören nach `input/images-source/`, die gerenderten Bilder nach `input/images/`.
+UML overviews of the data models of the **{{MODULE_TITLE}}** module and their relationships. Editable sources (e.g. PlantUML) belong in `input/images-source/`, the rendered images in `input/images/`.
 
-> [TODO: Fügen Sie die UML-Diagramme Ihres Moduls ein, oder entfernen Sie diese Seite, wenn keine vorhanden sind.]
+> [TODO: Add your module's UML diagrams, or delete this page if there are none.]

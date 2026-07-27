@@ -1,24 +1,26 @@
 <!-- markdownlint-disable MD041 -->
-<!-- Terminologie-Seite. Der IG-Publisher listet ValueSets/CodeSystems auf den
-     Artefakt-Seiten automatisch; hier stehen die MII-Hinweise dazu. -->
+<!-- Source: kerndatensatz-basis input/pagecontent/terminology.md; SNOMED CT
+     version policy from the meta wiki page "Terminology Version Policy".
+     Terminology page. The IG Publisher lists ValueSets/CodeSystems on the
+     artifact pages automatically; this page carries the MII notes on them.
+     German mirror: input/translations/de/pagecontent/terminology.md. -->
 
-Diese Seite beschreibt die im Modul **{{MODULE_TITLE}}** verwendeten ValueSets
-und CodeSystems. Allgemeine Hinweise zur Verwendung von Codes: siehe
+This page describes the ValueSets and CodeSystems used in the
+**{{MODULE_TITLE}}** module. For general guidance on using codes, see
 [FHIR Terminology](http://hl7.org/fhir/R4/terminologies.html).
 
 {:.bg-info}
-**Wichtig:** CodeSystem-Ressourcen externer Terminologien (z. B. ICD-10-GM, OPS,
-SNOMED CT) werden in diesem Modul **nicht** publiziert, sondern über den
-MII-Terminologieserver (SU-TermServ) bezogen:
+**Important:** CodeSystem resources of external terminologies (e.g. ICD-10-GM,
+OPS, SNOMED CT) are **not** published in this module; they are obtained from the
+MII terminology service (SU-TermServ):
 [https://mii-termserv.de/](https://mii-termserv.de/).
 
 {:.bg-info}
-**Expansionen:** ValueSet-Expansionen MÜSSEN zur Validierung über einen
-FHIR-Terminologieserver erzeugt werden. Dieser Build nutzt SU-TermServ, sofern
-das Client-Zertifikat konfiguriert ist, sonst den öffentlichen HL7-Server
-`tx.fhir.org` (dann expandieren einige MII-spezifische ValueSets ggf. nicht
-vollständig).
+**Expansions:** ValueSet expansions MUST be created via a FHIR terminology
+server for validation purposes. This build uses SU-TermServ if the client
+certificate is configured, otherwise the public HL7 server `tx.fhir.org` (in
+which case some MII-specific ValueSets may not expand completely).
 
-> [TODO: Falls Ihr Modul SNOMED CT nutzt, geben Sie die verwendete Edition/Version
-> an. Listen Sie die modul-eigenen ValueSets/CodeSystems auf oder verweisen Sie
-> auf die automatisch erzeugte Artefakt-Liste.]
+> [TODO: If your module uses SNOMED CT, state the edition/version used. List the
+> module's own ValueSets/CodeSystems, or refer to the automatically generated
+> artifact list.]

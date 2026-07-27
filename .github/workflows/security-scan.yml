@@ -7,7 +7,7 @@
 #            findings are uploaded as SARIF to the repository Security tab
 #            (Code scanning), categories "osv-scanner", "trivy-fs" and
 #            "trivy-image". A module created from this template inherits
-#            this workflow unchanged (see docs/MAINTENANCE.md).
+#            this workflow unchanged (see docs/maintenance.md).
 # Triggers:  schedule (Mondays 07:00 UTC) + pull_request targeting dev +
 #            workflow_dispatch.
 # Toggle:    vars.ENABLE_SECURITY_SCAN — ON by default; set the repo variable
@@ -16,7 +16,7 @@
 #            see docs/recipes/triage-a-vulnerability-alert.md. Nothing here
 #            changes code or dependencies.
 #
-# HONEST COVERAGE LIMIT (docs/MAINTENANCE.md): these scanners do NOT cover
+# HONEST COVERAGE LIMIT (docs/maintenance.md): these scanners do NOT cover
 # FHIR content packages or the IG Publisher jar (not in vulnerability
 # databases). For those, the dependency version check (layer B) is the
 # available safeguard.
@@ -36,7 +36,7 @@ permissions:
 
 jobs:
   osv:
-    if: ${{ vars.ENABLE_SECURITY_SCAN != 'false' }} # toggle: ON by default (§2.13)
+    if: ${{ vars.ENABLE_SECURITY_SCAN != 'false' }} # toggle: ON by default
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -59,13 +59,13 @@ jobs:
 
       - name: Upload OSV SARIF
         if: ${{ always() && hashFiles('osv.sarif') != '' }}
-        uses: github/codeql-action/upload-sarif@e0647621c2984b5ed2f768cb892365bf2a616ad1 # v4.37.2
+        uses: github/codeql-action/upload-sarif@e4fba868fa4b1b91e1fdab776edc8cfbe6e9fb81 # v4.37.3
         with:
           sarif_file: osv.sarif
           category: osv-scanner
 
   trivy:
-    if: ${{ vars.ENABLE_SECURITY_SCAN != 'false' }} # toggle: ON by default (§2.13)
+    if: ${{ vars.ENABLE_SECURITY_SCAN != 'false' }} # toggle: ON by default
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -80,7 +80,7 @@ jobs:
 
       - name: Upload Trivy SARIF
         if: ${{ always() && hashFiles('trivy.sarif') != '' }}
-        uses: github/codeql-action/upload-sarif@e0647621c2984b5ed2f768cb892365bf2a616ad1 # v4.37.2
+        uses: github/codeql-action/upload-sarif@e4fba868fa4b1b91e1fdab776edc8cfbe6e9fb81 # v4.37.3
         with:
           sarif_file: trivy.sarif
           category: trivy-fs
@@ -92,7 +92,7 @@ jobs:
   # feature layers and postCreateCommand installs (SUSHI, Jekyll) are not
   # included; their manifests are covered by the fs/OSV jobs above.
   trivy-image:
-    if: ${{ vars.ENABLE_SECURITY_SCAN != 'false' }} # toggle: ON by default (§2.13)
+    if: ${{ vars.ENABLE_SECURITY_SCAN != 'false' }} # toggle: ON by default
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -124,7 +124,7 @@ jobs:
 
       - name: Upload Trivy image SARIF
         if: ${{ always() && hashFiles('trivy-image.sarif') != '' }}
-        uses: github/codeql-action/upload-sarif@e0647621c2984b5ed2f768cb892365bf2a616ad1 # v4.37.2
+        uses: github/codeql-action/upload-sarif@e4fba868fa4b1b91e1fdab776edc8cfbe6e9fb81 # v4.37.3
         with:
           sarif_file: trivy-image.sarif
           category: trivy-image

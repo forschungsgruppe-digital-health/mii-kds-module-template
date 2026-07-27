@@ -1,6 +1,8 @@
 <!-- markdownlint-disable MD041 -->
-### Logische Modelle
+<!-- Source: kerndatensatz-basis input/pagecontent/logical-models.md.
+     German mirror: input/translations/de/pagecontent/logical-models.md. -->
+### Logical Models
 
-Die logischen Datenmodelle des Moduls **{{MODULE_TITLE}}** beschreiben den fachlichen Datensatz unabhängig von der konkreten FHIR-Repräsentation.
+The logical data models of the **{{MODULE_TITLE}}** module describe the domain dataset independently of its concrete FHIR representation.
 
-> [TODO: Fügen Sie die logischen Modelle ein, oder entfernen Sie diese Seite.]
+> [TODO: Add the logical models, or delete this page.]

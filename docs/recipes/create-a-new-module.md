@@ -10,28 +10,57 @@
 1. **Create the repo.** On this repository's GitHub page, click **"Use this
    template" → Create a new repository**. **Tick "Include all branches"** so you get
    `dev` too. Name it for your module (e.g. `mii-kds-modul-person`).
-2. **First-run bootstrap** (skip only if you ticked "Include all branches" *and* you
-   also want the template-maintenance files gone — you do): in a clone, run
-   `bash tools/first-run-bootstrap.sh` (dry run — shows what it will do), then
-   `bash tools/first-run-bootstrap.sh --apply`. It creates `dev`, applies branch
-   protection, and **removes** the template-maintenance files (Release Please config
-   + workflow, the release announcement, the template `CHANGELOG`, and the bootstrap
-   itself). See [first-run-setup.md](first-run-setup.md). Confirm afterwards:
-   `grep -ri release-please .github` returns nothing.
+2. **Run the first-run bootstrap — always.** In a clone, run
+   `bash scripts/first-run-bootstrap.sh` (dry run — shows what it will do), then
+   `bash scripts/first-run-bootstrap.sh --apply`. It creates `dev`, applies branch
+   protection, and **removes** the template's own release automation (the Release
+   Please config and workflow, the release announcement, and the template
+   `CHANGELOG`). The bootstrap and this recipe stay. If you ticked "Include all
+   branches" it simply skips creating `dev`; the removals and the branch
+   protection still have to happen. See
+   [first-run-setup.md](first-run-setup.md). Confirm afterwards that
+   all five removed paths are gone — this must print nothing:
+
+   ```sh
+   ls release-please-config.json .release-please-manifest.json CHANGELOG.md \
+     .github/workflows/release-please.yml .github/workflows/notify-zulip.yml \
+     2>/dev/null
+   ```
 3. **Fill the placeholders.** Open `sushi-config.yaml` and replace every `{{…}}`
    (each is documented inline). The key ones:
    - `{{MODULE_SLUG}}` — lowercase short name (`person`), drives packageId/id/canonical.
    - `{{MODULE_NAME}}` — CamelCase (`Person`) → `name: MII_IG_Person`.
    - `{{MODULE_TITLE}}` — human title (`Person`).
    - `{{CALVER_VERSION}}` — `YYYY.n.n` (e.g. `2026.0.0`), and the related dates.
-   Also update `ig.ini`'s `ig =` line to match your `id` if you changed the slug.
+   `sushi-config.yaml` is where you start, not where you finish: its header lists
+   all 19 placeholders and the files each occurs in. Update `ig.ini`'s `ig =`
+   line to match your `id`, then `publication-request.json`,
+   `.github/workflows/go-publish.yml`, `qc/custom.rules.yaml`, `tests/`, the
+   pages and the FSH sources. Finish by sweeping the build inputs for leftovers:
+
+   ```sh
+   grep -rnE --exclude=README.md '\{\{[A-Z0-9_]+\}\}' \
+     sushi-config.yaml ig.ini publication-request.json qc input tests \
+     .github/workflows/go-publish.yml \
+   | grep -vE '\.(yaml|yml|ini|fsh):[0-9]+:[[:space:]]*(#|//|;)'
+   ```
+
+   It must come back empty. Both filters are deliberate. The scope is narrow
+   because `{{ }}` is also Liquid syntax in `ig-template/` and `${{ }}` is
+   GitHub-Actions syntax in every other workflow — do not grep the whole tree.
+   The second `grep` drops comment lines, because inside this scope the
+   `README.md` files and the comments that merely *name* a placeholder — the
+   `sushi-config.yaml` header (your reference list, leave it intact), `ig.ini`'s
+   `;` notes, `qc/custom.rules.yaml`, `go-publish.yml` and the FSH ruleset notes
+   — are documentation, not values. They stay. The digit in `[A-Z0-9_]` matters:
+   without it `{{SPECIAL_URL_1}}` is invisible to the sweep.
 4. **Template reference.** Leave `ig.ini` at `template = #ig-template` (the vendored
    copy) until the MII template package is published; then follow
    [switch-template-to-published.md](switch-template-to-published.md).
 5. **Add content.** Replace the example profile in `input/fsh/` with your own
-   ([add-a-profile.md](add-a-profile.md)) and the German starter pages in
-   `input/pagecontent/` with your module's pages. Keep the English supplements in
-   `input/translations/en/` in step with them.
+   ([add-a-profile.md](add-a-profile.md)) and the English starter pages in
+   `input/pagecontent/` with your module's pages. Keep the German translations in
+   `input/translations/de/` in step with them.
 6. **Build.** Locally: `sushi . && java -jar publisher.jar -ig ig.ini`, read
    `output/qa.html`. Or push a `feature/*` branch and open the **CI preview URL**
    posted on the PR.
@@ -40,7 +69,7 @@
 
 ## Expected result
 
-Your module IG builds green and renders a bilingual (German-default) preview with
+Your module IG builds green and renders a bilingual (English-default, German translation) preview with
 your profile, examples and pages. No Release Please anywhere.
 
 ## Common errors & fixes

@@ -1,8 +1,6 @@
 # Recipe: switch from the vendored template to the published package
 
-## Goal
-
-Move your module's `ig.ini` from the **vendored** bring-up template
+**Goal.** Move your module's `ig.ini` from the **vendored** bring-up template
 (`ig-template/`, referenced as `template = #ig-template`) to the **pinned
 published** MII template package
 (`template = de.medizininformatikinitiative.template#x.y.z`), and delete the
@@ -13,15 +11,19 @@ visible.
 > build, but the published package `de.medizininformatikinitiative.template`
 > initially had **no FHIR package-registry entry and no release**. So the
 > template scaffold ships the template *content* copied into `ig-template/` and
-> references it as a local folder (spec §4.1). That lets a module build on day
+> references it as a local folder. That lets a module build on day
 > one. This recipe is the one-time cleanup you run once the template is
 > published — after it, your module tracks a versioned dependency like every
 > other package, and the scheduled dependency checker proposes upgrades for you.
 
+**Prerequisites.** The template repository has cut a release **and** that release
+resolves for the IG Publisher (see below). Your module must build green before
+you start, so you can tell the switch apart from an unrelated breakage.
+
 ## When you do this
 
 Do this **once**, as soon as the template repository
-[`forschungsgruppe-digital-health/ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds)
+[`medizininformatik-initiative/ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)
 has cut its first release **and** that release is resolvable by the IG Publisher
 (see the prerequisite below). Before that point, keep the vendored copy — a
 published reference that cannot be resolved makes the build fail.
@@ -33,7 +35,7 @@ Please — *not* CalVer (only modules use CalVer). Find the exact number to pin,
 in order of preference:
 
 1. **The template repo's Releases page** —
-   <https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds/releases>.
+   <https://github.com/medizininformatik-initiative/ig-template-mii-kds/releases>.
    Use the latest non-prerelease tag, e.g. `0.1.0` (drop the leading `v` in
    `ig.ini`; the reference is `de.medizininformatikinitiative.template#0.1.0`).
 2. **The template's `package-list.json`** (in that repo) — the newest entry with
@@ -43,18 +45,16 @@ in order of preference:
    published versions once the template is registered there.
 
 > **Why pin an exact `x.y.z` and never `#current`:** fixed versions keep a 2029
-> rebuild byte-stable (spec §0.2). The convention check rejects a template
+> rebuild byte-stable. The convention check rejects a template
 > pinned to `current`/`latest`/`dev`, and the dependency checker
 > (`scripts/check-updates.mjs`, which already watches
 > `de.medizininformatikinitiative.template`) surfaces newer template releases as
 > reviewable PRs — you never need a floating pin to stay current.
 
-## Prerequisites
-
 - The published template is **resolvable by the IG Publisher** — the template
   repo has published the package to the FHIR package registry and/or registered
   it in [`FHIR/ig-registry`](https://github.com/FHIR/ig-registry)'s
-  `templates.json` (that registration is the template repo's Gate D). Quick
+  `templates.json` (the template repo owns that registration). Quick
   check: the registry URL above returns the version you intend to pin (HTTP 200,
   not 404).
 - Your module already builds green today against the vendored template (so you
@@ -142,7 +142,7 @@ in order of preference:
 - The convention check passes (`M7 no floating pins` shows the pinned template
   reference), and future template releases arrive as dependency-checker PRs.
 
-## Common errors
+## Common errors & fixes
 
 | Symptom | Cause | Fix |
 |---|---|---|

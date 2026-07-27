@@ -1,4 +1,4 @@
-# Stale GitHub Pages preview cleanup (companion to ig-publisher.yml, §2.8).
+# Stale GitHub Pages preview cleanup (companion to ig-publisher.yml).
 #
 # Purpose:   Remove branch previews under gh-pages/branches/<branch>/ whose
 #            branch no longer exists, so gh-pages does not grow without bound as
@@ -8,14 +8,14 @@
 #            any version-like paths (e.g. 2026.0.0/) are NEVER cleanup
 #            candidates — they belong to -go-publish, not to previews.
 #
-# PROPAGATION (§2.8): like ig-publisher.yml, this file is meant to propagate to
+# PROPAGATION: like ig-publisher.yml, this file is meant to propagate to
 #            modules created from this template (the first-run bootstrap keeps
 #            it) — every module's gh-pages benefits from the same sweep.
 #
 # Triggers:  weekly schedule (Sundays 00:00 UTC) + manual workflow_dispatch
 #            (with a dry_run input to list stale previews without deleting).
 #
-# Toggle:    vars.ENABLE_PREVIEW (§2.13) — ON by default; shares the preview
+# Toggle:    vars.ENABLE_PREVIEW — ON by default; shares the preview
 #            subsystem's switch. Set the repo variable to 'false' to skip the
 #            sweep (it then shows as "skipped"). To purge once while previews are
 #            off, flip it on, dispatch this workflow, flip it back.
@@ -26,7 +26,11 @@
 #            cleaned tree through the Pages Actions pipeline. Mirrors
 #            ig-publisher.yml / go-publish.yml.
 #
-# Fixed versions (§0.2): every Action is pinned to a commit SHA (# vX.Y.Z).
+# Fixed versions: every Action is pinned to a commit SHA (# vX.Y.Z).
+#
+# Prerequisite: none. If the repository has no `gh-pages` branch yet (no preview
+#            and no publication so far), the sweep skips with a ::notice — an
+#            empty repository must not produce a red scheduled run.
 #
 # Human-gated: none (dry_run lets a human preview the deletions first).
 name: Cleanup stale GitHub Pages previews
@@ -55,19 +59,39 @@ concurrency:
 
 jobs:
   cleanup:
-    if: ${{ vars.ENABLE_PREVIEW != 'false' }} # toggle: ON by default (§2.13)
+    if: ${{ vars.ENABLE_PREVIEW != 'false' }} # toggle: ON by default
     runs-on: ubuntu-latest
     outputs:
       changed: ${{ steps.cleanup.outputs.changed }}
     steps:
+      # gh-pages only exists once a preview or a formal publication has been
+      # deployed. A freshly created module has neither yet — that is NOT an
+      # error, there is simply nothing to sweep, so probe before checking out
+      # (a checkout of a missing ref fails the whole scheduled run).
+      - name: Check whether a gh-pages branch exists
+        id: probe
+        shell: bash
+        env:
+          REMOTE_URL: https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
+        run: |
+          set -euo pipefail
+          if git ls-remote --heads "${REMOTE_URL}" gh-pages | grep -q .; then
+            echo "exists=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "exists=false" >> "${GITHUB_OUTPUT}"
+            echo "::notice::No gh-pages branch yet — nothing to clean up. It is created by the first branch preview (ig-publisher.yml) or the first formal publication."
+          fi
+
       - name: Checkout gh-pages branch
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        if: ${{ steps.probe.outputs.exists == 'true' }}
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: gh-pages
           fetch-depth: 1
 
       - name: Remove only marker-backed stale previews
         id: cleanup
+        if: ${{ steps.probe.outputs.exists == 'true' }}
         shell: bash
         env:
           DRY_RUN: ${{ inputs.dry_run || false }}
@@ -222,4 +246,4 @@ jobs:
     steps:
       - name: Deploy Pages artifact
         id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0

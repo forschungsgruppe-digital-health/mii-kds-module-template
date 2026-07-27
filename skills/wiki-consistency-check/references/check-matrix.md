@@ -9,7 +9,7 @@ module repository created from the scaffold, and the scaffold's starter
 content) — or both.
 
 Section 1 is implemented mechanically and placeholder-aware by
-[`../../tools/convention-check.mjs`](../../tools/convention-check.mjs) and run in
+[`../../../scripts/convention-check.mjs`](../../../scripts/convention-check.mjs) and run in
 CI by `.github/workflows/convention-check.yml`.
 
 ---
@@ -35,7 +35,7 @@ pin). Reference values verified against
 | M4 | `title` follows the wiki title structure | `sushi-config.yaml` → `title` | Starts with `MII ` and names the module (wiki: `MII <Präfix> <Abkürzung Modulname> <Beschreibung>`) | `MII Implementation Guide Core Dataset Base` |
 | M5 | `canonical` is under the agreed MII path | `sushi-config.yaml` → `canonical` | `^https://www\.medizininformatik-initiative\.de/fhir/<technischer Modulname>$` — technical module name per the wiki table in "Namenskonventionen für FHIR‐Ressourcen in der MII" | `https://www.medizininformatik-initiative.de/fhir/modul-base` |
 | M6 | `version` is CalVer | `sushi-config.yaml` → `version` | `^\d{4}\.\d+\.\d+$` (`YYYY.n.n`; modules never use SemVer) | `2026.0.1` |
-| M7 | No dependency — including the IG template — pinned to a floating label | `sushi-config.yaml` → `dependencies`; `ig.ini` → `template` | No `current`, `#current`, `latest`, or `dev` anywhere; every dependency and the template use a fixed version | `kerndatensatz-basis` itself floats `template = fhir2.base.template#current` — a known upstream practice this project deliberately does **not** follow. Do not copy it, and do not "correct" a fixed pin back to `#current`. |
+| M7 | No dependency — including the IG template — pinned to a floating label | `sushi-config.yaml` → `dependencies`; `ig.ini` → `template` | No `current`, `#current`, `latest`, `dev`, or `cibuild` anywhere; every dependency and the template use a fixed version | `kerndatensatz-basis` itself floats `template = fhir2.base.template#current` — a known upstream practice this project deliberately does **not** follow. Do not copy it, and do not "correct" a fixed pin back to `#current`. |
 
 ### Placeholder-aware evaluation (this scaffold)
 
@@ -51,8 +51,10 @@ evaluates Section 1a **placeholder-aware**:
   `{{PLACEHOLDER}}` in M1–M6 (and a `TODO`/floating `ig.ini` template) is a
   **failure**: a module must not release with placeholders.
 - M7 (no floating label) is always hard: a `{{PLACEHOLDER}}` is not a floating
-  label, but `current`/`#current`/`latest`/`dev` anywhere is a failure on every
-  branch.
+  label, but `current`/`#current`/`latest`/`dev`/`cibuild` anywhere is a failure
+  on every branch. The publication gate in `.github/workflows/go-publish.yml`
+  re-checks the same label set on `ig.ini` — defence in depth, kept in step by
+  hand.
 
 ### 1b. Assertions for TEMPLATE PACKAGE repositories (do **not** apply to this scaffold)
 
@@ -89,7 +91,7 @@ Base-template facts verified against
 | Naming conventions (id) | `input/fsh/*.fsh` | Namenskonventionen → Element id | `id` kebab-case, ≤ 64 chars, corresponds to `name`? | Module |
 | Naming conventions (title) | `input/fsh/*.fsh` | Namenskonventionen → Element title | Pattern `MII <Präfix> <ModulAbk> <Beschreibung>`? | Module |
 | Naming conventions (url) | `sushi-config.yaml` canonical + artifacts | Namenskonventionen → Element url | `<canonical>/<ResourceType>/<id>` structure? Established published URLs are never changed retroactively (Bestandsschutz). | Module |
-| Language (content) | `sushi-config.yaml` (`i18n-default-lang`), `input/fsh` | Namenskonventionen → Sprache | German leading (`i18n-default-lang: de`); translation extension on `description`/`name`/`title` where content is German? | Module |
+| Language (content) | `sushi-config.yaml` (`i18n-default-lang`), `input/fsh` | Namenskonventionen → Sprache | Guide leads in English (`i18n-default-lang: en`, as kerndatensatz-basis); resource `description`/`name`/`title` may be German, and then a translation extension is required on them? | Module |
 | Language (template mechanism) | `includes/*.html`, `content/assets/css/` | Namenskonventionen → Sprache | Header/footer/CSS overrides language-neutral (`site.data.stringsBase[include.lang]`, no hard-coded UI strings)? See the `ig-translate` skill. | Template repo |
 | Terminology (versions) | terminology documentation, `sushi-config.yaml` | Terminology Version Policy | Dated SNOMED INTERNATIONAL version per CalVer release? | Module |
 | Terminology (instance data) | profiles/documentation | Terminology Version Policy | `Coding.version` required for ICD-10-GM/OPS/ATC? | Module |

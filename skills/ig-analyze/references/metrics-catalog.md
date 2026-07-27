@@ -1,21 +1,24 @@
 # ig-analyze — Metrik-Katalog (erweiterbare SSOT)
 
-Parameter für die IG-Statistik. **Nutzen:** V = objektiver Vergleich · A = Migrations-
-Aufwand/Risiko. **Quelle:** woraus die Metrik gelesen wird. **Modus:** *static*
-(ohne Build) oder *build* (braucht IG-Publisher-`qa.json`/`_data`).
+Parameter für die IG-Statistik. **Nutzen:** V = objektiver Vergleich · A =
+offener Arbeitsbedarf/Risiko. **Quelle:** woraus die Metrik gelesen wird.
+**Modus:** *static* (ohne Build) oder *build* (braucht IG-Publisher-`qa.json`/`_data`).
+
+> **Gemessen wird, nicht geschätzt.** Der Katalog enthält keine Aufwands-,
+> Personentage- oder Terminprognose; die frühere Schätzschicht wurde entfernt.
 
 > **Per Hand erweiterbar:** Neue Zeile mit eindeutiger `metric_id` ergänzen; wenn
-> die Metrik im Tool erhoben werden soll, in `tools/ig-stats.py` ein Feld mit dem
+> die Metrik im Tool erhoben werden soll, in `scripts/ig-stats.py` ein Feld mit dem
 > gleichen `metric_id` befüllen und im JSON-Schema ergänzen. Nicht implementierte
 > Metriken bleiben dokumentiert (Roadmap), liefern aber `null`.
 
 ## Report-Aufbau
-Der `report`-Modus erzeugt: **Executive Summary** (Identität, Umfang, Aufwandsband,
-Top-Treiber, Flags) · **Übersicht** mit Mermaid-Charts **und** Tabellen · eine
+Der `report`-Modus erzeugt: **Kennzahlen-Überblick** mit Mermaid-Charts **und**
+Tabellen · Reife, Strategie, Risiko · **Empfehlungen** je Themenbereich · eine
 **Detailaufschlüsselung (Single Source of Truth)** mit Herkunft/Pfad je Eintrag
 (Identität, Dependencies, Artefakte mit Quelldatei:Zeile, Narrative-Seiten,
-Direktiven-Fundstellen, definierte QC-Regeln, Mehrsprachigkeit) · **Aufwandsmodell**
-mit Treiber-Beitragstabelle. Provenienz-Arrays in der `ig-stats.json`:
+Direktiven-Fundstellen, definierte QC-Regeln, Mehrsprachigkeit).
+Provenienz-Arrays in der `ig-stats.json`:
 `artifacts_detail`, `narrative.files`, `directives.occurrences`, `quality.qc_rules`,
 `i18n.supplement_files`/`fsh_translation_files`.
 
@@ -23,8 +26,10 @@ mit Treiber-Beitragstabelle. Provenienz-Arrays in der `ig-stats.json`:
 > (Profile/Extensions/VS/CS/Logical/CapabilityStatement/Questionnaire/SearchParameter/
 > Operation/Beispiele). RuleSets, Invarianten und Mappings sind interne
 > FSH-Konstrukte und werden separat geführt (nicht im Vergleichs-`total`).
-> **Direktiven** werden anhand `mii-ig-migration/references/fql-rules.tsv` (SSOT)
-> erkannt; nicht abgedeckte → `UNBEKANNT` (im Report mit Fundstelle gelistet).
+> **Direktiven** werden anhand der Muster in
+> `references/report-content.json` (`directive_patterns`) und des Auffangmusters
+> `GENERIC_DIRECTIVE` in `scripts/ig-stats.py` erkannt; nicht abgedeckte →
+> `UNBEKANNT` (im Report mit Fundstelle gelistet).
 
 ## A. Identität & Scope
 | metric_id | Misst | Quelle | Modus | Nutzen |
@@ -62,7 +67,7 @@ mit Treiber-Beitragstabelle. Provenienz-Arrays in der `ig-stats.json`:
 |---|---|---|---|---|
 | `narrative_pages`,`narrative_words`,`images` | Doku-Umfang | `input/pagecontent/**`, `implementation-guides/**`, `input/images` | static | V·A |
 | `mandatory_pages_present`/`_missing` | Pflichtabschnitte | Seitenliste vs. Soll-Set | static | V·A |
-| `simplifier_directives_total`,`_by_label`,`_unknown` | Simplifier-/FQL-Direktiven (Narrativ-Nacharbeit) | `tools/fql-scan.sh` bzw. eingebaute Muster | static | A |
+| `simplifier_directives_total`,`_by_label`,`_unknown` | Simplifier-/FQL-Direktiven (Narrativ-Nacharbeit) | `references/report-content.json` + `scripts/ig-stats.py` | static | A |
 
 ## F. Mehrsprachigkeit
 | metric_id | Misst | Quelle | Modus | Nutzen |
@@ -85,7 +90,7 @@ mit Treiber-Beitragstabelle. Provenienz-Arrays in der `ig-stats.json`:
 | `build_toolchain`,`ci_workflows`,`devcontainer`,`template_based` | Reife der Toolchain | Repo-Dateien | static | V |
 | `fsh_present` | FSH-Quelle vorhanden (sonst GoFSH nötig) | `input/fsh` | static | A |
 
-## I. Migrations-Aufwand & Risiko (Aufwandstreiber, Ziel A)
+## I. Offener Arbeitsbedarf & Risiko (Treiber, Ziel A)
 | metric_id | Misst | Quelle | Modus | Nutzen |
 |---|---|---|---|---|
 | `driver_gofsh` | GoFSH nötig? (keine FSH) | `fsh_present` | static | A |
@@ -96,8 +101,10 @@ mit Treiber-Beitragstabelle. Provenienz-Arrays in der `ig-stats.json`:
 | `driver_qc_violations` | # QC-/Naming-Verletzungen | G | static/build | A |
 | `driver_source_errors` | quell-intrinsische Validierungsfehler | `qa.json` (Diff Quelle↔migriert) | build | A |
 | `heterogeneity` | Naming-Varianz, gemischte Sprachen, Strukturabweichung | abgeleitet | static* | A |
-| `effort.manual.hours_low/high`,`.band` | **manuelle** Aufwands-Spanne + Band S/M/L/XL | Modell (`EFFORT_FACTORS`) | static | A |
-| `effort.ai.hours_low/high`,`.band`,`.savings_pct` | **KI-gestützt teilautomatisiert** (HITL, Review-Gates), hersteller-/modellagnostisch + Ersparnis % | Modell (`EFFORT_FACTORS_AI`) | static | A |
+
+> Die Treiber-Zeilen benennen zählbare Größen; das Tool gibt sie in den Gruppen
+> aus, die in der Spalte *Quelle* stehen (D, E, G). Ein daraus abgeleitetes
+> Aufwandsmodell gibt es bewusst nicht mehr.
 
 ## J. Linguistik & Repo-Hygiene
 
@@ -111,10 +118,8 @@ mit Treiber-Beitragstabelle. Provenienz-Arrays in der `ig-stats.json`:
 
 ---
 
-> **Entscheidungs-Gruppen K–N** (Nutzen zusätzlich: **S**=Strategie · **P**=Planung ·
-> **R**=Risiko). Maßstab für Aufwand ist **Zeit** (Stunden/Personentage/Kalenderzeit),
-> **bewusst keine Geld-/Kostenrechnung**. Planungs-Annahmen kalibrierbar
-> (`PLANNING_PARAMS`); Heuristiken klar als solche markiert.
+> **Entscheidungs-Gruppen K–N** (Nutzen zusätzlich: **S**=Strategie ·
+> **R**=Risiko). Heuristiken sind klar als solche markiert.
 
 ## K. Reife & Freigabe
 
@@ -136,15 +141,6 @@ mit Treiber-Beitragstabelle. Provenienz-Arrays in der `ig-stats.json`:
 | `portfolio.dependency_stale_count`,`dependency_stale` | veraltete Dependencies (CalVer-Heuristik; exakt extern) | deps-Versionen | static* | S·R |
 | `portfolio.release_cadence_per_year`,`days_since_last_commit`,`tags` · `git.*` | Pflege-/Aktivitäts-Kadenz, Contributor-Verteilung | Git-Historie | static | S·R |
 | `compare`: Cross-IG-Overlap, Konsolidierungs-/Skaleneffekt | Schnittmengen-Reuse & Programm-Skaleneffekt über mehrere IGs | `artifacts_detail` über IGs | static | S |
-
-## M. Planung & Terminierung
-
-| metric_id | Misst | Quelle | Modus | Nutzen |
-|---|---|---|---|---|
-| `planning.calendar_days_low/high` (`assumptions`) | Kalenderzeit (h ÷ Tag·Team·Auslastung) | `PLANNING_PARAMS` | static | P |
-| `planning.scenario_min/expected/max_h`,`confidence` | Szenarien + Schätz-Konfidenz | Treiber/Unbekannte | static | P |
-| `planning.role_mix_pct`,`parallelizable` | Rollen-/Skill-Mix, Parallelisierbarkeit | Treiber-Stunden | static | P |
-| `planning.readiness_score`,`cross_module_dependency_risk`,`ai_fixed_cost_share_pct` | Startbereitschaft, Timing-Risiko, Fixkostenanteil | abgeleitet | static | P |
 
 ## N. Risiko & Compliance
 

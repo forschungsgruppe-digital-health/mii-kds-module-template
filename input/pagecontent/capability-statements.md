@@ -1,6 +1,8 @@
 <!-- markdownlint-disable MD041 -->
-### CapabilityStatements
+<!-- Source: kerndatensatz-basis input/pagecontent/capability-statements.md.
+     German mirror: input/translations/de/pagecontent/capability-statements.md. -->
+### Capability Statements
 
-Die CapabilityStatements des Moduls **{{MODULE_TITLE}}** beschreiben die erwarteten Server-/Client-Fähigkeiten (unterstützte Ressourcen und Interaktionen).
+The CapabilityStatements of the **{{MODULE_TITLE}}** module describe the expected server/client capabilities (supported resources and interactions).
 
-> [TODO: Verweisen Sie auf das/die CapabilityStatement(s) Ihres Moduls, oder entfernen Sie diese Seite.]
+> [TODO: Link to your module's CapabilityStatement(s), or delete this page.]

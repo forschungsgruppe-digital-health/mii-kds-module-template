@@ -1,6 +1,8 @@
 <!-- markdownlint-disable MD041 -->
-### Anleitung für Implementierende
+<!-- Source: kerndatensatz-basis input/pagecontent/implementer-guidance.md.
+     German mirror: input/translations/de/pagecontent/implementer-guidance.md. -->
+### Guidance for Implementers
 
-Technische Hinweise für DIZ-Implementierende zur Umsetzung der Profile des Moduls **{{MODULE_TITLE}}** (ETL aus Primärsystemen, FHIR-API, Validierung).
+Technical guidance for DIC implementers on implementing the profiles of the **{{MODULE_TITLE}}** module (ETL from primary systems, FHIR API, validation).
 
-> [TODO: Beschreiben Sie die technischen Umsetzungsschritte für Ihr Modul.]
+> [TODO: Describe the technical implementation steps for your module.]

@@ -1,6 +1,8 @@
 <!-- markdownlint-disable MD041 -->
-### Datensätze und Beschreibungen
+<!-- Source: kerndatensatz-basis input/pagecontent/datasets-and-descriptions.md.
+     German mirror: input/translations/de/pagecontent/datasets-and-descriptions.md. -->
+### Datasets and Descriptions
 
-Ausführliche Beschreibung der Datenelemente des Moduls **{{MODULE_TITLE}}** und ihrer Zuordnung zu den logischen Modellen.
+Detailed description of the data elements of the **{{MODULE_TITLE}}** module and how they map to the logical models.
 
-> [TODO: Beschreiben Sie die fachlichen Datenelemente; verweisen Sie auf die logischen Modelle.]
+> [TODO: Describe the domain data elements; link them to the logical models.]

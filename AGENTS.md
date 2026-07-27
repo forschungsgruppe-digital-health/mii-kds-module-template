@@ -11,9 +11,14 @@ Implementation Guide (IG)**. A user clicks "Use this template" to start a
 module; the scaffold's `sushi-config.yaml`, `ig.ini`, and workflows carry
 `{{PLACEHOLDER}}` values the new module fills in. The scaffold **references**
 the MII IG template package
-[`ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds)
-(`de.medizininformatikinitiative.template`) by a pinned version in `ig.ini`; it
-does not contain it. See [`README.md`](README.md) for the full picture.
+[`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)
+(`de.medizininformatikinitiative.template`) in `ig.ini` — **today as the
+vendored local folder `template = #ig-template`**, because that package has no
+published release yet; it switches to
+`template = de.medizininformatikinitiative.template#<version>` once it does (see
+[`docs/recipes/switch-template-to-published.md`](docs/recipes/switch-template-to-published.md)
+and [`docs/open-tasks.md`](docs/open-tasks.md)). See [`README.md`](README.md)
+for the full picture.
 
 **Two layers — do not confuse them:**
 
@@ -21,7 +26,7 @@ does not contain it. See [`README.md`](README.md) for the full picture.
   on `main`) — it is tooling.
 - **A module created from it** releases with **CalVer `YYYY.n.n`** via the MII
   Module Release Workflow. The first-run bootstrap
-  ([`tools/first-run-bootstrap.sh`](tools/first-run-bootstrap.sh)) removes this
+  ([`scripts/first-run-bootstrap.sh`](scripts/first-run-bootstrap.sh)) removes this
   repo's Release Please files from a new module so the two never mix.
 
 ## Branching and pull-request rules
@@ -50,11 +55,25 @@ Author identity is the configured human committer.
 - **Never mix release systems.** This template repo = SemVer/Release Please; a
   module = CalVer/MII Module Release Workflow. Do not wire Release Please into a
   module, and do not let a module inherit this repo's Release Please files.
-- **Fixed versions only.** Never use `current`/`latest`/`dev` as a version
-  label in anything built (dependencies, the IG template pin, tool versions).
-  The convention check enforces this; the dependency check proposes bumps.
+- **Fixed versions only.** Never use `current`/`latest`/`dev`/`cibuild` as a
+  version label in anything built (dependencies, the IG template pin, tool
+  versions). The convention check (M7) and the publication gate in
+  `go-publish.yml` both reject that set; the dependency check proposes bumps.
+- **`ig-template/` is a machine-synced mirror**, maintained by
+  `scripts/sync-ig-template.sh` (`--check` fails on drift; `sync-ig-template.yml`
+  runs it). Never hand-edit it, and never rewrite `template = #ig-template` into
+  a package pin — `scripts/first-run-bootstrap.sh` tells module owners to leave
+  that line alone until the package is published. Fix the source in
+  `ig-template-mii-kds` and re-sync.
 - **The single convention checker** is `wiki-consistency-check` +
-  `tools/convention-check.mjs` (placeholder-aware). Do not add a second linter.
+  `scripts/convention-check.mjs` (placeholder-aware). Do not add a second
+  metadata linter. `convention-check.yml` also runs `scripts/language-model-check.sh`
+  — a separate concern (see below), not a second metadata linter.
+- **English is the IG's default language, German the translation**
+  (`i18n-default-lang: en`, sources under `input/translations/de/`) — the same
+  model as `kerndatensatz-basis`, so "deviates from basis" is never true. Prose
+  asserting the reverse fails `scripts/language-model-check.sh` in CI — fix the
+  prose, never the guard.
 - Do not change canonical URLs of published artifacts.
 - Checker/analysis skills are report-only: they propose, humans decide; no
   auto-merge; any change is a PR targeting `dev`.
@@ -69,14 +88,14 @@ source of truth; consult them before doing the corresponding task by hand.
 - [`skills/wiki-consistency-check/`](skills/wiki-consistency-check/SKILL.md)
   — **the single convention checker**: repo ↔ MII meta wiki drift plus the hard
   module-metadata contract; placeholder-aware; report-only, PRs target `dev`.
-  Mechanized by [`tools/convention-check.mjs`](tools/convention-check.mjs).
+  Mechanized by [`scripts/convention-check.mjs`](scripts/convention-check.mjs).
 - [`skills/ig-analyze/`](skills/ig-analyze/SKILL.md) — read-only measurement of
   a module IG (statistics, content hygiene) and objective comparison of several
-  IGs. Backed by [`tools/ig-stats.py`](tools/ig-stats.py).
+  IGs. Backed by [`scripts/ig-stats.py`](scripts/ig-stats.py).
 - [`skills/ig-translate/`](skills/ig-translate/SKILL.md) — the module-facing
-  de→en translation workflow (translate/harvest), placing supplements where the
+  en→de translation workflow (translate/harvest), placing supplements where the
   IG Publisher expects them. Backed by
-  [`tools/ig-translate.sh`](tools/ig-translate.sh). The template-side language
+  [`scripts/ig-translate.sh`](scripts/ig-translate.sh). The template-side language
   *mechanism/policy* lives in `ig-template-mii-kds`.
 
 ### Discovery paths (symlinks, not copies)
@@ -104,7 +123,10 @@ hand-copy the content into the runtime directories.
 A new module needs the one-time first-run bootstrap
 ([`docs/recipes/first-run-setup.md`](docs/recipes/first-run-setup.md)): it
 creates `dev` from `main`, applies branch protection, and removes the
-template-maintenance files (Release Please + the template's SemVer
-announcement + this bootstrap machinery). The preview, validation, monitoring,
-convention-check, and module-release workflows plus the skills **stay** — a
-module wants them.
+files that would conflict with a module (Release Please + the template's SemVer
+announcement + the template `CHANGELOG`). The preview, validation, monitoring,
+convention-check, and module-release workflows, the skills, and the bootstrap
+with its recipe **stay** — a module wants them. The authoritative removal list
+is the `REMOVE=` line in
+[`scripts/first-run-bootstrap.sh`](scripts/first-run-bootstrap.sh); the dry run
+prints it.
