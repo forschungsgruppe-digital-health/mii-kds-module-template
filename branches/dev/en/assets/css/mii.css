@@ -120,3 +120,48 @@
 .mii-highlight-green h5 {
   color: #5a6b2f;
 }
+
+/* ── Narrative tables ─────────────────────────────────────────────────────────
+   The base template styles the IG Publisher's own tables (profile trees,
+   artifact indices, binding tables) but leaves markdown tables in page content
+   completely unstyled: no border, no header fill. kerndatensatz-basis works
+   around this per page with an inline <style> block, which is why its
+   /en/metadata.html has borders while its profile pages do not. Styling it here
+   instead means every module built from this template gets it, once.
+
+   WHY `:not([class])` — this is the load-bearing part. It matches ONLY tables
+   the markdown renderer emits, because every table the IG Publisher generates
+   carries a class (`grid`, `codes`, `dict`, `list`, `colsd`, `colsi`,
+   `binding grid`, `fhir-conformance-list`, …). Measured across both built
+   sites: 210 generated tables, all classed; every bare <table> was a narrative
+   one. A bare `table {}` rule would repaint the profile snapshot/differential
+   trees, whose hierarchy lines are background images — do not widen this
+   selector.
+
+   Loaded after the base stylesheets (see includes/fragment-css.html), so no
+   `!important` is needed. Colours are the documented MII palette (§3 of
+   docs/design.md); contrast is recorded in §7. */
+:root {
+  /* MII light background — the same site value as the breadcrumb fill. */
+  --mii-table-header-bg-color: #ebedef;
+  /* MII slate. Non-text contrast (WCAG 1.4.11) 3.78:1 on white and 3.22:1 on
+     the header fill — both above the 3:1 the guideline asks of a boundary. */
+  --mii-table-border-color: #7a8495;
+  /* MII body text: 10.77:1 on the header fill. */
+  --mii-table-header-text-color: #333333;
+}
+table:not([class]) {
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+table:not([class]) th,
+table:not([class]) td {
+  border: 1px solid var(--mii-table-border-color);
+  padding: 6px 10px;
+  vertical-align: top;
+}
+table:not([class]) th {
+  background-color: var(--mii-table-header-bg-color);
+  color: var(--mii-table-header-text-color);
+  text-align: left;
+}
