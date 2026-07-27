@@ -68,6 +68,6 @@ reader having to ask you.
 | Text renders raw in the built page | The file is a `.md` but contains HTML that Markdown swallowed | Keep intro/notes plain Markdown |
 
 > **Why this is worth the effort:** the generated tables tell a reader *what* is
-> constrained. Nothing but your prose tells them *why*, and the official
-> [IG best practices](https://build.fhir.org/ig/FHIR/ig-guidance/best-practice.html)
-> ask for an intro on every artifact for exactly that reason.
+> constrained. Nothing but your prose tells them *why*, and HL7's
+> [IG best-practice guidance](https://build.fhir.org/ig/FHIR/ig-guidance/best-practice.html)
+> asks for an intro on every artifact for exactly that reason.
