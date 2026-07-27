@@ -32,7 +32,7 @@
 # │   {{RELEASE_DATE}}        ISO date YYYY-MM-DD; go-publish.yml requires it to       │
 # │                           equal the publication date.                              │
 # │   {{COPYRIGHT_START_YEAR}}  first copyright year, e.g. 2019.                       │
-# │   {{APPROVAL_DATE}}       ISO date the MII governance approved the release.        │
+# │   {{APPROVAL_DATE}}       ISO date this release was approved; see docs/release.md. │
 # │   {{MODULE_AUTHOR_EMAIL}} contact email of the module author.                      │
 # │   {{TOPIC_NCI_CODE}}      NCI Thesaurus code for the module's topic, e.g.          │
 # │                           C15607 — e.g. basis uses C154624, C25218, C16960,        │
@@ -119,7 +119,7 @@ experimental: false
 # The artifact-* / cqf-* extension set below mirrors the reference module
 # kerndatensatz-basis one-for-one; only the per-module values are placeholders.
 extension:
-  # Date the MII governance approved this release
+  # Date this release was approved by whoever governs the module
   # (for example, kerndatensatz-basis records 2024-03-07).
   - url: http://hl7.org/fhir/StructureDefinition/resource-approvalDate
     valueDate: "{{APPROVAL_DATE}}"

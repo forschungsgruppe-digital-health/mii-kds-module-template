@@ -114,8 +114,11 @@ present here; the surface in this scaffold is:
   - `date:` — the ISO publication date (`YYYY-MM-DD`). `go-publish.yml`
     hard-fails when it does not equal the publication date (its
     *Validate release input and publication request* step).
-  - the `resource-approvalDate` extension's `valueDate` — the date MII
-    governance approved *this* release.
+  - the `resource-approvalDate` extension's `valueDate` — the date *this*
+    release was approved by whoever governs your module (for a KDS module, its
+    responsible MII body). If no formal approval step applies, use the date you
+    decided to release and say so on `metadata.html`: the extension records an
+    approval date, it does not create an approval process.
 - **`publication-request.json`**
   - `version` — the CalVer version.
   - `path` — ends in the version (`.../<version>`); update it too.
