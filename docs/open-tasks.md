@@ -97,11 +97,14 @@ rather than assumed.
 
 ## Cross-repo consistency — decided, not pending
 
-This repository and the IG template share thirteen documentation filenames. That
-was once real duplication; it is not any more. After the 2026-07-26 audit **no
-shared file is identical**, and the closest pairs differ for good reasons —
-`project-status.md` because each names the other repository, `glossary.md`
-because this scaffold defines nine terms the template repository has no use for.
+This repository and the IG template share fourteen documentation filenames —
+re-measured 2026-07-27 with `comm -12` over `git ls-files docs` in both
+checkouts, excluding `docs/reports/` (those share no filenames). That was once
+real duplication; it is not any more. **No shared file is identical**, and the
+closest pairs differ for good reasons — `project-status.md` because each names
+the other repository, `glossary.md` because this scaffold defines nine terms the
+template repository has no use for, `further-reading.md` because Release Please
+is a template-repo entry a module must not follow.
 
 No sync mechanism is planned. A module created from this template must be
 self-contained: replacing its copy of `glossary.md` or `maintenance.md` with a
