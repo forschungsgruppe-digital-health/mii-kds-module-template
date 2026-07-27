@@ -23,10 +23,10 @@ description, reproduction steps, and the affected files/workflows.
 This is a template repository for FHIR Implementation Guide tooling. It
 processes **no patient data**. In scope are, in particular:
 
-- the CI/CD workflows in `.github/workflows/` (planned) — e.g. injection via
-  untrusted inputs, excessive token permissions, unpinned actions;
-- the scripts in `scripts/` (planned);
-- the dev container definition in `.devcontainer/` (planned);
+- the CI/CD workflows in `.github/workflows/` — e.g. injection via untrusted
+  inputs, excessive token permissions, unpinned actions;
+- the scripts in `scripts/`;
+- the dev container definition in `.devcontainer/`;
 - supply-chain issues in pinned dependencies (SUSHI, IG Publisher, actions).
 
 Vulnerabilities in a **module created from this template** should be reported

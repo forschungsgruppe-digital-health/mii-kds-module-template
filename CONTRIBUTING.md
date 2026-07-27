@@ -12,7 +12,7 @@ it is released only via the MII Module Release Workflow (**CalVer
 `YYYY.n.n`**), and the first-run bootstrap removes the Release Please files
 from the new module so the two release systems never mix. The rest of this page
 describes contributing to **this template repository**; the full operational
-model for both layers will be documented in `docs/workflows.md` (planned).
+model for both layers is in [`docs/workflows.md`](docs/workflows.md).
 
 ## Branching model
 
@@ -105,6 +105,6 @@ If you created a repository via "Use this template", you are working in a
 **module**, not in this template. The same branching model applies there
 (after the first-run bootstrap creates `dev` — see the README's Quickstart
 warning), but the release process is the **MII CalVer Module Release
-Workflow**, not Release Please. Module recipes will live in `docs/recipes/`
-(planned); improvements to the scaffold itself belong here, as PRs to this
-repository.
+Workflow**, not Release Please. The module recipes are in
+[`docs/recipes/`](docs/recipes/README.md); improvements to the scaffold itself
+belong here, as PRs to this repository.
