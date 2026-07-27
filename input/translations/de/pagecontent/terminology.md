@@ -13,11 +13,13 @@ MII-Terminologieserver (SU-TermServ) bezogen:
 [https://mii-termserv.de/](https://mii-termserv.de/).
 
 {:.bg-info}
-**Expansionen:** ValueSet-Expansionen MÜSSEN zur Validierung über einen
-FHIR-Terminologieserver erzeugt werden. Dieser Build nutzt SU-TermServ, sofern
-das Client-Zertifikat konfiguriert ist, sonst den öffentlichen HL7-Server
+**Expansionen:** ValueSet-Expansionen dieses Leitfadens werden über einen
+FHIR-Terminologieserver erzeugt — über SU-TermServ, sofern das
+Client-Zertifikat konfiguriert ist, sonst über den öffentlichen HL7-Server
 `tx.fhir.org` (dann expandieren einige MII-spezifische ValueSets ggf. nicht
-vollständig).
+vollständig). Wenn Ihr Modul Implementierenden eine verbindliche Anforderung an
+Expansionen auferlegt, gehört sie auf die Konformitätsseiten — markiert wird sie
+dort in der englischen Fassung.
 
 > [TODO: Falls Ihr Modul SNOMED CT nutzt, geben Sie die verwendete Edition/Version
 > an. Listen Sie die modul-eigenen ValueSets/CodeSystems auf oder verweisen Sie

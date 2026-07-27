@@ -1,9 +1,9 @@
 <!-- markdownlint-disable MD041 -->
 <!-- Default-language (English) page. Overview of the Conformance section. The
-     FIRST THREE sub-pages are the MII standard set (source: MII meta wiki page
+     FIRST THREE sub-pages carry the conformance topics of the MII meta wiki page
      "Conformance",
      https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance;
-     structure as in kerndatensatz-basis input/pagecontent/conformance.md).
+     structure as in kerndatensatz-basis input/pagecontent/conformance.md.
      "Security and Privacy" is an addition of this template per HL7 IG best
      practice — see docs/ig-best-practices-checklist.md.
      German mirror: input/translations/de/pagecontent/conformance.md — both files
@@ -25,9 +25,12 @@ profiles of the **{{MODULE_TITLE}}** module.
 * **[Security and Privacy](security-and-privacy.html)** — the security and
   data-protection considerations of this module.
 
-The binding rules are those of the
-[MII meta wiki](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance);
-the pages of this section reproduce them.
+The MII meta wiki page
+[Conformance](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance)
+is authoritative for the MII-wide conformance rules. General Requirements, Must
+Support and Handling Missing Data restate them for this module; where the two
+differ, the wiki wins. Security and Privacy is an additional page of this guide,
+following HL7's IG best-practice guidance.
 
 For implementation guidance see the [Guidance](guidance.html) section; for the
 technical artifacts see the [Artifacts](artifacts.html) section.

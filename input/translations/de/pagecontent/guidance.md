@@ -1,6 +1,6 @@
 <!-- markdownlint-disable MD041 -->
 <!-- Übersichtsseite "Anleitung". Ersetzen Sie die [TODO]-Hinweise; die
-     Unterseiten-Struktur folgt dem MII-Standard (vgl. kerndatensatz-basis). -->
+     Unterseiten-Struktur folgt kerndatensatz-basis. -->
 
 Dieser Abschnitt bündelt die fachlichen Hinweise zur Umsetzung und Nutzung des
 Moduls **{{MODULE_TITLE}}**.
