@@ -17,7 +17,10 @@ for the step-by-step mapping to the MII wiki's Module Release Workflow.
    sequence year, the approval date), `publication-request.json`, the three
    `input/fsh/rulesets/` files, the `CRMIApprovalDate` call sites, and the
    narrative pages plus their German mirrors. Do this on a `feature/*` branch
-   → PR → `dev`.
+   → PR → `dev`. While you are in the pages, sweep both trees for unresolved
+   authoring prompts — `grep -rn '\[TODO' input/pagecontent input/translations`
+   must come back empty; the German pages render at `/de/` and ship whatever
+   is left in them.
 3. **Promote `dev → main`** with a merge commit.
 4. **Tag** the release on `main`: `git tag v2026.0.0 && git push origin v2026.0.0`
    (the tag pattern the `module-release.yml` workflow listens for).
