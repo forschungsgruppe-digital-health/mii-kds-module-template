@@ -17,13 +17,13 @@
    - "site"  = medizininformatik-initiative.de theme CSS
                (/themes/custom/mii/css/base.css and component.css)
    Base variables NOT listed here keep their fhir2.base.template defaults
-   (publish box, TOC box, STU note, header backgrounds, dragon, translation box):
+   (publish box, TOC box, STU note, footer-nav strip, dragon, translation box):
    those are IG-Publisher semantic signals, not brand surfaces. */
 
 :root {
-  /* 1. IG title/status text: MII slate (site menu-link color #6a7484;
-        4.33:1 on the base #f5f5f5 header background - AA for the large/bold
-        title text it styles) */
+  /* 1. IG title/status text: MII slate (site menu-link color #6a7484) —
+        contrast verified in docs/design.md § 7. It renders on the header
+        container, which vars 21-22 below make white. */
   --ig-status-text-color: #6a7484;
 
   /* 2. Navbar: MII logo blue (dominant blue #3473aa of the logo dots;
@@ -83,8 +83,8 @@
         mix. Make the header band (sides AND container) WHITE, matching the
         white logo background and the white content area, so the header reads as
         one clean white surface. The green stripe and blue navbar provide the
-        visual structure. Status text #6a7484 on white = 4.4:1 (AA for the large
-        IG-title text it styles). The breadcrumb keeps the MII light #ebedef as a
+        visual structure. Status text (var 1) stays AA on white — see
+        docs/design.md § 7. The breadcrumb keeps the MII light #ebedef as a
         subtle functional band below the navbar. */
   --ig-header-color: #ffffff;
   --ig-header-container-color: #ffffff;
