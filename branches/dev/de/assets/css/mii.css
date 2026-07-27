@@ -129,14 +129,24 @@
    /en/metadata.html has borders while its profile pages do not. Styling it here
    instead means every module built from this template gets it, once.
 
-   WHY `:not([class])` — this is the load-bearing part. It matches ONLY tables
-   the markdown renderer emits, because every table the IG Publisher generates
-   carries a class (`grid`, `codes`, `dict`, `list`, `colsd`, `colsi`,
-   `binding grid`, `fhir-conformance-list`, …). Measured across both built
-   sites: 210 generated tables, all classed; every bare <table> was a narrative
-   one. A bare `table {}` rule would repaint the profile snapshot/differential
-   trees, whose hierarchy lines are background images — do not widen this
-   selector.
+   WHY THE LONG `:not(...)` CHAIN — this is the load-bearing part, and the
+   obvious short version is wrong. `table:not([class])` alone is NOT safe: the
+   IG Publisher emits its profile snapshot/differential trees as tables that
+   carry NO class, only presentation attributes:
+
+     <table border="0" fhir="generated-heirarchy" cellpadding="0"
+            cellspacing="0" style="..." id="..." data-fhir="...">
+
+   Their inline `style` sits on the <table>, so it does not stop a stylesheet
+   rule from bordering their <td>s — which boxes every cell of the hierarchy
+   tree. What actually separates the two is that a markdown table has NO
+   attributes at all, while every generated one carries at least `style`.
+
+   Measured over every page of both built sites: the chain below matches 14
+   markdown tables and 0 generated tables; `:not([class])` alone would have hit
+   34 generated ones. Verified by simulating the selector against the built
+   HTML, not by reading the markup — see scripts/narrative-table-styles.test.mjs,
+   which re-runs that check against fixtures.
 
    Loaded after the base stylesheets (see includes/fragment-css.html), so no
    `!important` is needed. Colours are the documented MII palette (§3 of
@@ -150,17 +160,17 @@
   /* MII body text: 10.77:1 on the header fill. */
   --mii-table-header-text-color: #333333;
 }
-table:not([class]) {
+table:not([class]):not([style]):not([border]):not([data-fhir]) {
   border-collapse: collapse;
   margin-bottom: 10px;
 }
-table:not([class]) th,
-table:not([class]) td {
+table:not([class]):not([style]):not([border]):not([data-fhir]) th,
+table:not([class]):not([style]):not([border]):not([data-fhir]) td {
   border: 1px solid var(--mii-table-border-color);
   padding: 6px 10px;
   vertical-align: top;
 }
-table:not([class]) th {
+table:not([class]):not([style]):not([border]):not([data-fhir]) th {
   background-color: var(--mii-table-header-bg-color);
   color: var(--mii-table-header-text-color);
   text-align: left;
