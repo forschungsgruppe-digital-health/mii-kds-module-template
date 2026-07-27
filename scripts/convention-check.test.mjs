@@ -96,6 +96,22 @@ test("a floating ig.ini template fails M7", () => {
   assert.ok(ids(findings, "fail").includes("M7 no floating pins"));
 });
 
+// The publication gate in go-publish.yml refuses #cibuild; M7 must refuse it
+// too, or a CI-build pin passes every PR and only aborts a formal publication.
+test("a #cibuild ig.ini template fails M7", () => {
+  const igIni = "template = fhir2.base.template#cibuild\n";
+  const { ok, findings } = evaluate({ sushiConfig: CONCRETE, igIni, release: false });
+  assert.equal(ok, false);
+  assert.ok(ids(findings, "fail").includes("M7 no floating pins"));
+});
+
+test("a pinned package reference and the vendored local folder both pass M7", () => {
+  for (const tmpl of ["de.medizininformatikinitiative.template#1.0.0", "#ig-template"]) {
+    const { findings } = evaluate({ sushiConfig: CONCRETE, igIni: `template = ${tmpl}\n`, release: false });
+    assert.ok(ids(findings, "pass").includes("M7 no floating pins"), tmpl);
+  }
+});
+
 test("template package manifest (Section 1b) is validated when present", () => {
   const good = { name: "de.medizininformatikinitiative.template", type: "fhir.template", version: "0.1.0", dependencies: { "fhir2.base.template": "0.1.0" } };
   const r1 = evaluate({ sushiConfig: null, packageJson: good });

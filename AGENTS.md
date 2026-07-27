@@ -12,8 +12,13 @@ module; the scaffold's `sushi-config.yaml`, `ig.ini`, and workflows carry
 `{{PLACEHOLDER}}` values the new module fills in. The scaffold **references**
 the MII IG template package
 [`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)
-(`de.medizininformatikinitiative.template`) by a pinned version in `ig.ini`; it
-does not contain it. See [`README.md`](README.md) for the full picture.
+(`de.medizininformatikinitiative.template`) in `ig.ini` — **today as the
+vendored local folder `template = #ig-template`**, because that package has no
+published release yet; it switches to
+`template = de.medizininformatikinitiative.template#<version>` once it does (see
+[`docs/recipes/switch-template-to-published.md`](docs/recipes/switch-template-to-published.md)
+and [`docs/open-tasks.md`](docs/open-tasks.md)). See [`README.md`](README.md)
+for the full picture.
 
 **Two layers — do not confuse them:**
 
@@ -50,9 +55,16 @@ Author identity is the configured human committer.
 - **Never mix release systems.** This template repo = SemVer/Release Please; a
   module = CalVer/MII Module Release Workflow. Do not wire Release Please into a
   module, and do not let a module inherit this repo's Release Please files.
-- **Fixed versions only.** Never use `current`/`latest`/`dev` as a version
-  label in anything built (dependencies, the IG template pin, tool versions).
-  The convention check enforces this; the dependency check proposes bumps.
+- **Fixed versions only.** Never use `current`/`latest`/`dev`/`cibuild` as a
+  version label in anything built (dependencies, the IG template pin, tool
+  versions). The convention check (M7) and the publication gate in
+  `go-publish.yml` both reject that set; the dependency check proposes bumps.
+- **`ig-template/` is a machine-synced mirror**, maintained by
+  `scripts/sync-ig-template.sh` (`--check` fails on drift; `sync-ig-template.yml`
+  runs it). Never hand-edit it, and never rewrite `template = #ig-template` into
+  a package pin — `scripts/first-run-bootstrap.sh` tells module owners to leave
+  that line alone until the package is published. Fix the source in
+  `ig-template-mii-kds` and re-sync.
 - **The single convention checker** is `wiki-consistency-check` +
   `scripts/convention-check.mjs` (placeholder-aware). Do not add a second
   metadata linter. `convention-check.yml` also runs `scripts/language-model-check.sh`
@@ -112,6 +124,9 @@ A new module needs the one-time first-run bootstrap
 ([`docs/recipes/first-run-setup.md`](docs/recipes/first-run-setup.md)): it
 creates `dev` from `main`, applies branch protection, and removes the
 files that would conflict with a module (Release Please + the template's SemVer
-announcement + this bootstrap machinery). The preview, validation, monitoring,
-convention-check, and module-release workflows plus the skills **stay** — a
-module wants them.
+announcement + the template `CHANGELOG`). The preview, validation, monitoring,
+convention-check, and module-release workflows, the skills, and the bootstrap
+with its recipe **stay** — a module wants them. The authoritative removal list
+is the `REMOVE=` line in
+[`scripts/first-run-bootstrap.sh`](scripts/first-run-bootstrap.sh); the dry run
+prints it.

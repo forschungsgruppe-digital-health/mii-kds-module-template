@@ -142,6 +142,26 @@ They have no local equivalent, so they are inherited rather than mapped. Note
 that the .NET validator is configured to always pass — if the sign-in fails,
 the job is still green and only its **log** says so.
 
+## Zulip release announcement (optional)
+
+Your module's release announcement is the `notify_zulip` job of
+`module-release.yml`. It fires when a GitHub Release is **published** (not when
+the tag is pushed) and posts to the MII Zulip organisation, stream
+`MII-Kerndatensatz`, topic `Releases`, as the MII bot
+`kds-github-bot@mii.zulipchat.com` — the sender is hard-coded in the job, not a
+variable. One secret turns it on:
+
+```sh
+R=<owner>/<your-module-repo>
+gh secret set ZULIP_API_KEY --repo "$R"   # value on stdin
+```
+
+The value is that bot account's Zulip API key, held by whoever administers the
+MII bot — ask them for it rather than creating a second bot. Without the secret
+the job **skips with a `::notice`; it never fails the release**. Setting the
+`ENABLE_ZULIP_ANNOUNCE` variable to `false` turns the job off entirely. See
+[release.md § 7](release.md#7-finalize-and-publish-the-github-release--human).
+
 ## Verifying a gate after you enable it
 
 Both gates are *wired and fall back safely*, but until the credential exists the
@@ -170,10 +190,10 @@ delivered message or the explicit skip notice naming what is missing.
 | `ENABLE_CONVENTION_CHECK` | on | metadata-contract + wiki-drift check |
 | `ENABLE_TEMPLATE_SYNC` | on | vendored `ig-template/` sync + the PR-time drift check |
 | `ENABLE_MODULE_RELEASE` | on | CalVer release workflow |
-| `ENABLE_ZULIP_ANNOUNCE` | on | MII Zulip announcement |
-| `ANNOUNCE_PUBLIC_ZULIP` | off | public FHIR Zulip announcement |
-| `FHIR_ZULIP_BOT_EMAIL` | unset | sender for the public FHIR Zulip; required for that channel |
-| `MII_ZULIP_BOT_EMAIL` | `kds-github-bot@mii.zulipchat.com` | sender for the MII Zulip |
+| `ENABLE_ZULIP_ANNOUNCE` | on | MII Zulip announcement (see above) |
+| `ANNOUNCE_PUBLIC_ZULIP` | off | public FHIR Zulip announcement — **template repo only** |
+| `FHIR_ZULIP_BOT_EMAIL` | unset | sender for the public FHIR Zulip — **template repo only** |
+| `MII_ZULIP_BOT_EMAIL` | `kds-github-bot@mii.zulipchat.com` | sender for the MII Zulip — **template repo only** |
 | `ENABLE_DEPENDENCY_CHECK` | on | weekly version-drift check |
 | `ENABLE_SECURITY_SCAN` | on | OSV + Trivy |
 | `PAGES_ACTIONS_ENABLED` | (gh-pages push mode) | switch preview deploy to the Actions Pages path |
@@ -181,8 +201,16 @@ delivered message or the explicit skip notice naming what is missing.
 The [toggle summary](workflows.md#the-toggle-summary) lists one more,
 `ENABLE_RELEASE_PLEASE`. It belongs to the template repository only — the
 first-run bootstrap deletes `release-please.yml`, so it has no effect in a
-module. `IG_TEMPLATE_REPO_URL` is a plain variable, not a toggle; see
-[recipes/first-run-setup.md](recipes/first-run-setup.md) step 5.
+module. The three rows marked **template repo only** above are the same case:
+their only consumer is `notify-zulip.yml`, which the bootstrap also deletes, so
+a module's announcement is governed by `ZULIP_API_KEY` and
+`ENABLE_ZULIP_ANNOUNCE` alone. `IG_TEMPLATE_REPO_URL` is a plain variable, not a
+toggle; see
+[recipes/first-run-setup.md](recipes/first-run-setup.md) step 5. `SUSHI_VERSION`
+and `JAVA_VALIDATOR_VERSION` are likewise plain variables, not toggles — they
+override the versions `validation.yml` passes to the MII reusable workflows;
+unset means the pinned defaults in that workflow (see
+[maintenance.md](maintenance.md#where-each-pin-lives-single-source-of-truth)).
 
 Production publication (`go-publish.yml`) always stays a **manual, gated**
 `workflow_dispatch` with `publish:false` (dry run) by default — never automatic.

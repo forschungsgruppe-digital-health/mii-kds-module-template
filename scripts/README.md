@@ -36,7 +36,7 @@ list — not a glob, because this directory now holds unrelated helpers too.
 | `language-model-check.sh` | Fails the build when a file re-asserts the language model this repository moved away from | `convention-check.yml` |
 | `check-updates.mjs` | Reports drift between the pinned toolchain and what upstream released | `dependency-check.yml` |
 | `sync-ig-template.sh` | Re-vendors `ig-template/`, or fails on drift (`--check`) | `sync-ig-template.yml` |
-| `resolve-ig-template-source.sh` | Resolves which template repository the sync reads from | `sync-ig-template.sh` |
+| `resolve-ig-template-source.sh` | Resolves which template repository the sync reads from, and whether it is reachable | `sync-ig-template.yml` (both jobs, before the sync step) |
 | `ig-translate.sh` | Scans and validates the German translation set against the English source | a maintainer |
 | `ig-stats.py` | Collects IG metrics for the `ig-analyze` skill | the skill, or manually |
 | `set-su-termserv-secrets.sh` | Validates an SU-TermServ client certificate and uploads it as repository secrets | a maintainer, once |
@@ -47,3 +47,9 @@ list — not a glob, because this directory now holds unrelated helpers too.
 node --test scripts/*.test.mjs            # every unit test (what CI runs on a PR)
 node --test scripts/*.template-test.mjs   # scaffold contract — template repo only
 ```
+
+Two of these test the repository rather than a script:
+`toolchain-pins.test.mjs` fails when the `env:` pin blocks of the three build
+workflows stop agreeing (they must be copies — a workflow cannot read another
+workflow's `env:`), and `publication-url-consistency.template-test.mjs` asserts
+the placeholder metadata contract.

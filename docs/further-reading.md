@@ -38,7 +38,9 @@ is authoritative; when it and this repo disagree, the wiki wins.
   template this one derives from; read its `package/package.json`, `includes/` and
   `package-list.json` to understand what we override vs inherit.
 - [`FHIR/ig-registry`](https://github.com/FHIR/ig-registry) — the public IG/template
-  registry; `templates.json` is where this template gets listed.
+  registry; `templates.json` is where the MII IG template would get listed. That
+  listing belongs to the IG template repository, not to a module — it is still
+  an open decision ([open-tasks.md](open-tasks.md)).
 - [FHIR sample IG](https://build.fhir.org/ig/FHIR/sample-ig/) — a minimal reference
   IG, useful when you want to see a complete small example.
 
@@ -49,7 +51,8 @@ is authoritative; when it and this repo disagree, the wiki wins.
 - [Semantic Versioning 2.0.0](https://semver.org/) — the version scheme for the
   **template repos** (modules use CalVer).
 - [Release Please](https://github.com/googleapis/release-please) — the release
-  automation used on `main`.
+  automation on the **template repos only**. A module never carries it; the
+  first-run bootstrap removes it. See [release.md](release.md).
 - [Development Containers](https://containers.dev/) — the dev-container standard our
   `.devcontainer/` follows.
 

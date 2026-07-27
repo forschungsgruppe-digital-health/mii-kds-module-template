@@ -114,9 +114,9 @@ access (the first build downloads the base image and tools):
    > checker, not by the container image. Baking it in would mean rebuilding
    > and re-pinning the container for every publisher bump. Version
    > `2.2.11` + its SHA-256 above were the latest release when this recipe
-   > was written (2026-07-22). **The pin in
-   > `.github/workflows/ig-publisher.yml` is the source of truth** — if it ever
-   > differs from the command above, the workflow wins.
+   > was written (2026-07-22). **The CI pins are the source of truth** (see
+   > [`docs/maintenance.md`](../maintenance.md#where-each-pin-lives-single-source-of-truth))
+   > — if they ever differ from the command above, CI wins.
 
    > **Terminology note (expected, not an error):** without an SU-TermServ
    > client certificate the publisher resolves terminology against the

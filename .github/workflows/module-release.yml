@@ -88,7 +88,9 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # Pinned toolchain — identical to go-publish.yml (single source of the pins).
+  # Pinned toolchain — identical to go-publish.yml and ig-publisher.yml; a
+  # workflow cannot read another workflow's env:, so these are copies and
+  # scripts/toolchain-pins.test.mjs fails the build if they drift apart.
   PUBLISHER_VERSION: "2.2.11"
   PUBLISHER_SHA256: "a981af86bca3f3a22ee15b9d4ee3c97d63219b7a14e49d0a525e10bbfc71a911"
   SUSHI_VERSION: "3.20.0"
@@ -115,7 +117,7 @@ jobs:
           set -euo pipefail
           if grep -q '{{' sushi-config.yaml; then
             echo "is_module=false" >> "${GITHUB_OUTPUT}"
-            echo "::notice::Unreplaced {{...}} placeholders found in sushi-config.yaml. This looks like the un-instantiated module template (or a module not yet bootstrapped), so the MII CalVer release path is skipped. A real module — placeholders replaced by the first-run bootstrap — runs it for real."
+            echo "::notice::Unreplaced {{...}} placeholders found in sushi-config.yaml. This looks like the un-instantiated module template (or a module whose set-up is unfinished), so the MII CalVer release path is skipped. A real module — placeholders replaced by hand, per the first-run bootstrap's checklist — runs it for real."
           else
             echo "is_module=true" >> "${GITHUB_OUTPUT}"
             echo "Bootstrapped module detected — the CalVer release path applies."

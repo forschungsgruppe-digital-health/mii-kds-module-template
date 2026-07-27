@@ -22,8 +22,9 @@ anything.
 > `ig-analyze` skill of
 > [`mii-kds-sample-ig-inoffiziell`](https://github.com/medizininformatik-initiative/mii-kds-sample-ig-inoffiziell)
 > (CC-BY-4.0). The framing here is general QA and module comparison — not
-> migration scoping. See the honesty note at the end about the report wording
-> the underlying tool still carries from its origin.
+> migration scoping: the inherited effort/planning forecaster has been removed
+> from the tool, so the report measures and does not estimate. The report prose
+> is still German (see `docs/open-tasks.md`).
 
 ## When to activate
 
@@ -62,11 +63,11 @@ and stay empty/`null` in static mode.
 ## What is measured
 
 A full, **hand-extensible** parameter catalog (groups **A–N**, each metric with
-its source and its use V=comparison / A=effort / S=strategy / P=planning /
+its source and its use V=comparison / A=outstanding work / S=strategy /
 R=risk): `references/metrics-catalog.md`. Besides scope / complexity it covers
 **linguistic** metrics, **duplication** and **unused files** (J), **maturity &
-release** (K), **strategy / lock-in / future-proofing** (L), **planning** (M)
-and **risk & compliance** (N). Heuristics are marked as such; values that
+release** (K), **strategy / lock-in / future-proofing** (L) and **risk &
+compliance** (N). Heuristics are marked as such; values that
 cannot be derived statically stay `null` (never guessed). The output schema is
 `references/ig-stats-schema.json`. Plain-language texts, directive patterns,
 glossary and **metric explanations** (self-contained, neutral) live in
@@ -79,7 +80,7 @@ glossary and **metric explanations** (self-contained, neutral) live in
 - **Human-readable:** a Markdown report per IG plus a comparison report,
   **GitHub-centric** (`<div align="center">`), with **coloured Mermaid** charts
   (pie / quadrant, no JavaScript), sorted **descending**. The comparison report
-  additionally aggregates a **Σ total** (scope + effort) and shows
+  additionally aggregates a **Σ total** (scope) and shows
   **cross-IG consolidation**, using **normalised** metrics. Every report carries
   a **metric explanation** in its appendix.
 - **Neutral & self-contained:** the report references **no** other repo skills
@@ -88,26 +89,10 @@ glossary and **metric explanations** (self-contained, neutral) live in
 ## Binding guardrails
 
 - **Read-only.** Never change the analysed IG; never force a build.
-- **Estimates as a range with assumptions**, never a point value. Factors are
-  uncalibrated (`TODO:REVIEW`) — the value is mostly **relative** (IG-A vs.
-  IG-B).
+- **Measurement, not forecasting.** The tool reports what it counted; it does
+  not estimate effort, person-days or a readiness score.
 - **Fair comparison** only via **normalised** metrics (size varies).
 - No fact invention; a missing input → field `null`, never a guess.
-
-## Honesty note about the tool's report wording
-
-The **numeric measurements** the tool produces (counts, complexity, hygiene,
-linguistics, duplication, maturity, strategy, risk) are general-purpose and
-migration-neutral — that is the QA core this skill relies on.
-
-The tool (`scripts/ig-stats.py`) is carried over verbatim from the sample IG. Its
-**effort-estimation view** and some report section headings are still worded as
-a "migration" scoping (they estimate the effort to move an IG onto the HL7 IG
-Publisher toolchain) and its report prose is in **German**. Treat that
-effort/scoping section as an **optional** view; for general module QA and
-comparison, read the measurement sections. A future change may neutralise the
-wording — until then this note is the ground truth, so no one mistakes the
-inherited framing for the skill's purpose.
 
 ## References
 

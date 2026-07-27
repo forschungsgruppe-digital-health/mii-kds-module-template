@@ -15,8 +15,10 @@ knowledge required.
   [GitHub CLI `gh`](https://cli.github.com/) locally, and `gh auth login` is
   done. `gh` needs **admin** on the new repo to set branch protection (you have
   it if you created the repo).
-- Alternatively, you can run the bootstrap in the repo's **dev container** (it
-  ships `git`, Node, and the tooling) — see
+- The repo's **dev container** ships the *build* toolchain (Node, SUSHI,
+  Ruby/Jekyll, Graphviz) but adds no GitHub CLI feature, so `gh` is not
+  available there — run this bootstrap on your host, then use the container for
+  building; see
   [`first-build-in-devcontainer.md`](first-build-in-devcontainer.md).
 
 ---
@@ -89,15 +91,14 @@ Read the output. It prints, in order:
   - `.github/workflows/notify-zulip.yml` — announces the *template's* SemVer
     releases (your module announces its own CalVer releases instead).
   - `CHANGELOG.md` — only if present (the template's SemVer changelog).
-  - `docs/recipes/first-run-setup.md` and `scripts/first-run-bootstrap.sh` — this
-    recipe and the bootstrap itself; only meaningful before the module exists.
 - **Post-bootstrap checklist** — the manual steps below.
 
 > **Why a dry-run first:** you see exactly what will change before anything
-> happens. The removal list is the single source of truth — if it ever tried to
-> touch module content or the workflows a module keeps (previews, validation,
-> monitoring, the convention check, the module release workflow, the skills),
-> the script hard-aborts.
+> happens. The `REMOVE=` line in `scripts/first-run-bootstrap.sh` is the single
+> source of truth for that list, and the bullets above are its transcript — if
+> it ever tried to touch module content or the workflows a module keeps
+> (previews, validation, monitoring, the convention check, the module release
+> workflow, the skills), the script hard-aborts.
 
 ### 3. Apply it
 
@@ -129,9 +130,11 @@ Open a pull request into `dev` and merge it.
 The bootstrap printed it; the essentials:
 
 1. **Replace every `{{PLACEHOLDER}}`.** Start in `sushi-config.yaml` (its header
-   lists every placeholder and what it means), then `ig.ini` (the module slug
-   **and** the pinned `template = de.medizininformatikinitiative.template#<version>`),
-   then `publication-request.json` and `.github/workflows/go-publish.yml`. Run
+   lists every placeholder and what it means), then `ig.ini` (the module slug in
+   the `ig =` path only — **leave `template = #ig-template` as it is** until the
+   MII template package is published; see
+   [switch-template-to-published.md](switch-template-to-published.md)), then
+   `publication-request.json` and `.github/workflows/go-publish.yml`. Run
    `node scripts/convention-check.mjs` — it must stay green.
 2. **Enable GitHub Pages:** Settings → Pages → Build and deployment →
    **"GitHub Actions"**. Then set the repository variable
@@ -165,8 +168,10 @@ The bootstrap printed it; the essentials:
 
 - `main` and `dev` both exist and are protected (Settings → Branches shows the
   rules).
-- The Release Please files, `notify-zulip.yml`, and the bootstrap machinery are
-  gone; the preview, validation, monitoring, convention-check, module-release
+- The Release Please files (`release-please.yml`, `release-please-config.json`,
+  `.release-please-manifest.json`), `notify-zulip.yml` and the template
+  `CHANGELOG.md` are gone; this recipe, `scripts/first-run-bootstrap.sh`, the
+  preview, validation, monitoring, convention-check and module-release
   workflows and the `skills/` are still there.
 - `node scripts/convention-check.mjs` runs green (placeholders count as
   "parameterized" until you resolve them).
@@ -175,7 +180,7 @@ The bootstrap printed it; the essentials:
 
 | Symptom | Cause | Fix |
 | --- | --- | --- |
-| `ERROR: 'gh' not found` | GitHub CLI not installed | Install `gh` and run `gh auth login`, or run inside the dev container. |
+| `ERROR: 'gh' not found` | GitHub CLI not installed | Install [`gh`](https://cli.github.com/) and run `gh auth login` on the machine where you run the bootstrap — the dev container does not provide it. Step 2 (the removals) still runs; only step 1 is skipped. |
 | `cannot read main; … are you authenticated?` | `gh` not logged in, or run in the wrong repo | `gh auth login`; make sure you are inside the **new module** clone. |
 | Branch protection call fails with 403 | Your account lacks admin on the repo | Ask an owner to grant admin, or apply protection manually in Settings → Branches. |
 | Convention check fails on a `release/**` branch | A `{{PLACEHOLDER}}` is still unresolved | Resolve the reported field; a module must not release with placeholders. |

@@ -32,8 +32,11 @@ Please, previews its own demo build, and monitors its own dependencies.
 | `notify-zulip.yml` | `release: published` | Announces the template release to the MII Zulip (topic *Template Releases*) | `ENABLE_ZULIP_ANNOUNCE` (ON) · `ANNOUNCE_PUBLIC_ZULIP` (OFF) | **REMOVED by bootstrap** |
 
 Also removed by the bootstrap: `release-please-config.json`,
-`.release-please-manifest.json`, the template `CHANGELOG.md`,
-`docs/recipes/first-run-setup.md`, and `scripts/first-run-bootstrap.sh` itself.
+`.release-please-manifest.json` and the template `CHANGELOG.md`. The bootstrap
+script and its recipe are **not** removed — a module's docs link to both. The
+authoritative list is the `REMOVE=` line in `scripts/first-run-bootstrap.sh`,
+which the dry run prints; see
+[first-run-setup.md](recipes/first-run-setup.md).
 
 > **Why these go:** they version and announce *the template*. A module must not carry
 > SemVer automation that fights its own CalVer release process.
@@ -48,7 +51,7 @@ Everything below **propagates** to a module (the bootstrap keeps it). This is ho
 | `ig-publisher.yml` | push to any branch except `main`/`gh-pages`; `workflow_dispatch` | Builds the IG (SUSHI + IG Publisher) and deploys a preview | `gh-pages/branches/<branch>/` + PR comment | `ENABLE_PREVIEW` (ON) | no |
 | `cleanup-gh-pages.yml` | schedule (Sun 00:00 UTC); `workflow_dispatch` | Prunes previews of deleted branches; keeps root + version paths | pruned `gh-pages` | `ENABLE_PREVIEW` (ON) | no |
 | `validation.yml` | push to `dev`/`main`; any pull request; `workflow_dispatch` | Runs the **MII reusable validation** workflows | validation report | `ENABLE_VALIDATION` (ON) | no (skips on the template repo itself) |
-| `convention-check.yml` | push/PR to `dev`/`main`/`release/**`; `workflow_dispatch` | The **single** convention checker: metadata-contract patterns (hard on release branches) + the language-model guard (`scripts/language-model-check.sh`) + the offline test suites (`scripts/*.test.mjs`, `scripts/*.test.mjs`, and on the template repo `scripts/*.template-test.mjs`) + wiki-drift (advisory) | check result | `ENABLE_CONVENTION_CHECK` (ON) | no |
+| `convention-check.yml` | push/PR to `dev`/`main`/`release/**`; `workflow_dispatch` | The **single** convention checker: metadata-contract patterns (hard on release branches) + the language-model guard (`scripts/language-model-check.sh`) + the offline test suites (`scripts/*.test.mjs`, and on the template repo `scripts/*.template-test.mjs`) + wiki-drift (advisory) | check result | `ENABLE_CONVENTION_CHECK` (ON) | no |
 | `module-release.yml` | push of a CalVer tag `vYYYY.n.n`; `release: published` (the announcement); `workflow_dispatch` (dry run) | Builds, creates the GitHub Release, announces to the MII Zulip (topic *Releases*), hands off to `go-publish` | release | `ENABLE_MODULE_RELEASE` (ON) · `ENABLE_ZULIP_ANNOUNCE` (ON) | production publish is gated |
 | `go-publish.yml` | `workflow_dispatch` **only** | Production `-go-publish`; `publish:false` = full dry run by default | published IG | — | **always human-triggered** |
 | `dependency-check.yml` | schedule (Mon 06:00 UTC); `workflow_dispatch` | Version drift (IG Publisher, SUSHI, Jekyll, both templates, FHIR deps) → one tracking issue | `dependencies` issue | `ENABLE_DEPENDENCY_CHECK` (ON) | proposals only |

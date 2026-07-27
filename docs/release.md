@@ -111,6 +111,11 @@ present here; the surface in this scaffold is:
   - the `package-source` extension's `version` sub-extension (`valueString`) —
     keep it equal to `version`.
   - the sequence `start:` year — the `YYYY` part (e.g. `2026`).
+  - `date:` — the ISO publication date (`YYYY-MM-DD`). `go-publish.yml`
+    hard-fails when it does not equal the publication date (its
+    *Validate release input and publication request* step).
+  - the `resource-approvalDate` extension's `valueDate` — the date MII
+    governance approved *this* release.
 - **`publication-request.json`**
   - `version` — the CalVer version.
   - `path` — ends in the version (`.../<version>`); update it too.
@@ -126,6 +131,9 @@ present here; the surface in this scaffold is:
   - `cps-rules.fsh` — `supportedProfile[+] = "<profile>|<version>"`.
   See [`input/fsh/rulesets/README.md`](../input/fsh/rulesets/README.md) for the
   placeholder-to-file table.
+- **Approval-date call sites** — every `insert CRMIApprovalDate(<date>)` in
+  `input/fsh/` (e.g. `input/fsh/profiles/example-patient.fsh`). `crmi.fsh`
+  takes the date at the call site, so bumping the ruleset is not enough.
 - **The narrative pages** — `index.md`, `changes.md`, `metadata.md` and
   `version-history.md`, and their German mirrors under
   `input/translations/de/pagecontent/`, print the version in prose.

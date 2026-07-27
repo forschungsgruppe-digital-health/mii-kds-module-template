@@ -169,20 +169,35 @@ test("pins the publication toolchain (deviation from basis's runtime resolution)
   }
 });
 
-test("prefers SU-TermServ and falls back to tx.fhir.org with a notice", () => {
-  const workflow = read(".github/workflows/go-publish.yml");
+// The SU-TermServ proxy bring-up is copy-pasted into all three build
+// workflows — a workflow cannot call another workflow's shell step, and
+// go-publish.yml, module-release.yml and ig-publisher.yml source the nginx
+// config three different ways. The property that must hold in every copy is
+// the same one the ig-template's copy lost: a PARTIAL secret set falls back,
+// it does not hard-fail. Asserting it here makes that drift detectable.
+for (const file of [
+  ".github/workflows/go-publish.yml",
+  ".github/workflows/module-release.yml",
+  ".github/workflows/ig-publisher.yml",
+]) {
+  test(`${file} prefers SU-TermServ and falls back to tx.fhir.org with a notice`, () => {
+    const workflow = read(file);
 
-  assert.match(workflow, /SU_TERMSERV_CLIENT_CERT/);
-  assert.match(workflow, /SU_TERMSERV_CLIENT_KEY/);
-  assert.match(workflow, /SU_TERMSERV_CLIENT_PASSWORD/);
-  assert.match(workflow, /::notice::.*tx\.fhir\.org/);
-  assert.match(workflow, /tx_url=https:\/\/tx\.fhir\.org/);
-  // The build must not hard-fail without the certificate.
-  assert.doesNotMatch(
-    workflow,
-    /client certificate secrets are required/,
-  );
-});
+    // All three secrets guard the proxy: with only the cert set, `openssl rsa`
+    // reads an empty key and exits 1, which under `set -euo pipefail` fails
+    // the build instead of falling back.
+    assert.match(
+      workflow,
+      /-n "\$\{SU_TERMSERV_CLIENT_CERT\}"[^\n]*-n "\$\{SU_TERMSERV_CLIENT_KEY\}"[^\n]*-n "\$\{SU_TERMSERV_CLIENT_PASSWORD\}"/,
+      "the terminology step does not guard on all three SU-TermServ secrets",
+    );
+    // The else branch: a notice, and the public HL7 server as the tx URL.
+    assert.match(workflow, /::notice::.*tx\.fhir\.org/);
+    assert.match(workflow, /tx(?:_url)?=https:\/\/tx\.fhir\.org/);
+    // The build must not hard-fail without the certificate.
+    assert.doesNotMatch(workflow, /client certificate secrets are required/);
+  });
+}
 
 test("spells the SU-TermServ key password the same way in every workflow", () => {
   // scripts/set-su-termserv-secrets.sh and docs/secrets.md provision the key

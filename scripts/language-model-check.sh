@@ -18,7 +18,7 @@
 # Not scanned: input/translations/de/** (the German translation itself),
 # ig-template/** (the vendored mirror — fix it in ig-template-mii-kds and
 # re-sync), docs/reports/** (dated, immutable snapshots that may quote earlier
-# wording as evidence), and this file.
+# wording as evidence), and this file. Binary files are skipped by `git grep -I`.
 #
 # Bash 3.2 compatible.
 set -u
@@ -26,61 +26,72 @@ cd "$(dirname "$0")/.." || exit 1
 
 # Phrases that assert the wrong language model. Curated, not fuzzy: every entry
 # below was an actual defect in this repo.
-PATTERNS='german[^.]{0,30}\b(default|leading|authoritative|binding)\b
-german[^A-Za-z]{0,6}(is|stays|remains|as)?[^A-Za-z]{0,6}(the[^A-Za-z]{0,6})?(source|original)\b
-german[^.]{0,25}\bthe (source|original)\b
-falls back to german
-leave it german
-german-led\b
-german starter page
-\bde-default\b
-back to en-default
-deutsch \(standardsprache\)
-i18n-lang:[^]]{0,20}\ben\b
-input/translations/en\b'
+#
+# Word boundaries are written as `[^A-Za-z]` / `(^|[^A-Za-z])` / `([^A-Za-z]|$)`,
+# NOT as `\b`: git's built-in regex engine is not the GNU one, and it silently
+# matches nothing for a `\b` pattern on some platforms — a guard that quietly
+# under-matches is worse than no guard. The sibling ig-template-mii-kds script
+# writes them the same way.
+PATTERNS=(
+  'german[^.]{0,30}[^A-Za-z](default|leading|authoritative|binding)([^A-Za-z]|$)'
+  'german[^A-Za-z]{0,6}(is|stays|remains|as)?[^A-Za-z]{0,6}(the[^A-Za-z]{0,6})?(source|original)([^A-Za-z]|$)'
+  'german[^.]{0,25}[^A-Za-z]the (source|original)([^A-Za-z]|$)'
+  'falls back to german'
+  'leave it german'
+  'german-led([^A-Za-z]|$)'
+  'german starter page'
+  '(^|[^A-Za-z])de-default([^A-Za-z]|$)'
+  'back to en-default'
+  'deutsch \(standardsprache\)'
+  'i18n-lang:[^]]{0,20}[^A-Za-z]en([^A-Za-z]|$)'
+  'input/translations/en([^A-Za-z]|$)'
+)
 
-# Reviewed exceptions: "<path>|<substring of the offending line>".
+# Reviewed exceptions: "<path>|<substring of the offending line>", one per line.
+# A module author writing their own prose can record a legitimate hit here
+# without blanking a whole file from the scan.
 ALLOW=''
 
-SCANNED_EXT='md|markdown|yaml|yml|xml|sh|mjs|js|json|fsh|po'
+args=()
+for pattern in "${PATTERNS[@]}"; do
+  args+=(-e "$pattern")
+done
+
+hits="$(git grep -n -I -i -E "${args[@]}" -- . \
+  ':(exclude)input/translations/de' \
+  ':(exclude)ig-template' \
+  ':(exclude)docs/reports' \
+  ':(exclude)scripts/language-model-check.sh')"
+rc=$?
+
+# git grep exits 0 on a hit, 1 on no hit, and >1 on an error. The error case
+# must not be mistaken for a clean tree, so the status is handled explicitly.
+case "$rc" in
+  1) echo "language-model-check: no German-default residue found."; exit 0;;
+  0) ;;
+  *) echo "ERROR: git grep failed (exit $rc)." >&2; exit "$rc";;
+esac
 
 status=0
-while IFS= read -r f; do
-  case "$f" in
-    input/translations/de/*|ig-template/*|docs/reports/*|scripts/language-model-check.sh) continue;;
-  esac
-  ext="${f##*.}"
-  case "$ext" in
-    md|markdown|yaml|yml|xml|sh|mjs|js|json|fsh|po) ;;
-    *) continue;;
-  esac
-  while IFS= read -r pattern; do
-    [ -n "$pattern" ] || continue
-    hits="$(grep -nEi -- "$pattern" "$f" 2>/dev/null)" || continue
-    while IFS= read -r hit; do
-      [ -n "$hit" ] || continue
-      allowed=0
-      while IFS= read -r entry; do
-        [ -n "$entry" ] || continue
-        case "$entry" in
-          "$f|"*)
-            needle="${entry#*|}"
-            case "$hit" in *"$needle"*) allowed=1;; esac;;
-        esac
-      done <<EOF
+while IFS= read -r hit; do
+  [ -n "$hit" ] || continue
+  f="${hit%%:*}"
+  allowed=0
+  while IFS= read -r entry; do
+    [ -n "$entry" ] || continue
+    case "$entry" in
+      "$f|"*)
+        needle="${entry#*|}"
+        case "$hit" in *"$needle"*) allowed=1;; esac;;
+    esac
+  done <<EOF
 $ALLOW
 EOF
-      [ "$allowed" = 1 ] && continue
-      echo "$f:$hit"
-      status=1
-    done <<EOF
-$hits
-EOF
-  done <<EOF
-$PATTERNS
-EOF
+  [ "$allowed" = 1 ] && continue
+  echo "$hit"
+  status=1
 done <<EOF
-$(git ls-files)
+$hits
 EOF
 
 if [ "$status" != 0 ]; then

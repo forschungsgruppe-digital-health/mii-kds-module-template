@@ -152,7 +152,12 @@ should silently settle.
 
 ## Before every release
 
-1. Every `[TODO]` in `input/pagecontent/` is resolved (search for `[TODO`).
+1. Every `[TODO]` prompt is resolved in **both** page trees —
+   `grep -rn '\[TODO' input/pagecontent input/translations` must come back
+   empty. German is a rendered language here, so an unresolved prompt in the
+   translation ships to `/de/` just as visibly. (The scaffold's HTML authoring
+   comments mention `[TODO ...]` too; those comments are meant to be deleted —
+   see `input/pagecontent/index.md`.)
 2. `security-and-privacy.md` is filled in — it is a best-practice requirement, not optional.
 3. QA errors = 0 and no unreviewed entries in `input/ignoreWarnings.txt`.
 4. `convention-check` passes on the release branch.

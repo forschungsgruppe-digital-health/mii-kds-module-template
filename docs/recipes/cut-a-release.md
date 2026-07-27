@@ -11,9 +11,16 @@ for the step-by-step mapping to the MII wiki's Module Release Workflow.
 1. **Pick the CalVer version** `YYYY.n.n` per the MII scheme (e.g. `2026.0.0`; the
    first number is the release-sequence year). Confirm against the
    [Module Release Workflow wiki page](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow).
-2. **Bump the version** in `sushi-config.yaml` (`version:`) and the dates
-   (`date:`, and the `{{RELEASE_DATE}}`/approval fields), plus
-   `publication-request.json`. Do this on a `feature/*` branch → PR → `dev`.
+2. **Bump the version and the dates everywhere they appear** — the full file
+   list is in [release.md § 2](../release.md#2-update-the-version--human):
+   `sushi-config.yaml` (`version:`, `date:`, the `package-source` version, the
+   sequence year, the approval date), `publication-request.json`, the three
+   `input/fsh/rulesets/` files, the `CRMIApprovalDate` call sites, and the
+   narrative pages plus their German mirrors. Do this on a `feature/*` branch
+   → PR → `dev`. While you are in the pages, sweep both trees for unresolved
+   authoring prompts — `grep -rn '\[TODO' input/pagecontent input/translations`
+   must come back empty; the German pages render at `/de/` and ship whatever
+   is left in them.
 3. **Promote `dev → main`** with a merge commit.
 4. **Tag** the release on `main`: `git tag v2026.0.0 && git push origin v2026.0.0`
    (the tag pattern the `module-release.yml` workflow listens for).
@@ -33,7 +40,7 @@ dry-run publication ready for a human to promote. **No SemVer tag, no Release Pl
 | Symptom | Cause | Fix |
 | --- | --- | --- |
 | Workflow did not trigger | Tag does not match `vYYYY.n.n` | Use the CalVer tag pattern |
-| A SemVer release PR appeared | Release Please was not removed | Run the first-run bootstrap; `grep -ri release-please` must be clean |
+| A SemVer release PR appeared | Release Please was not removed | Run the first-run bootstrap; `release-please-config.json` and `.github/workflows/release-please.yml` must be gone |
 | `go-publish` published for real unexpectedly | `publish:true` was set | Keep it `false`; only a human sets it true, once, deliberately |
 | Zulip not posted | `ZULIP_API_KEY` absent | Expected — the job skips with a notice; add the secret to enable |
 

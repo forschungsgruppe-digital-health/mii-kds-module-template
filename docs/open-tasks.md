@@ -80,14 +80,38 @@ rather than assumed.
   `medizininformatik-initiative/kerndatensatz-meta`). They are re-resolved by
   hand; the workflow comments say so rather than claiming automation that does
   not exist.
+- **`scripts/ig-stats.py` writes its report in German.** The tool is carried
+  over from the MII KDS sample IG and its report prose was never translated,
+  while every other document here is English-source. The measurements are
+  language-neutral; only the surrounding sentences and section headings are
+  German. Translating them means touching
+  `skills/ig-analyze/references/report-content.json` and the literals in the
+  script — worth doing, not urgent.
+- **The report's recommendation rows still read as a migration.** The
+  effort/planning forecaster is gone and the headings are neutral, but the
+  `recommendations` rows in `report-content.json` (and the *Quell-/Zielformat*
+  glossary entry) still describe moving an IG onto the IG-Publisher toolchain
+  ("werden übernommen", "ins Zielformat überführt"). The advice itself is sound
+  IG hygiene; only the framing is inherited. Reword it in the same pass as the
+  German prose above.
+- **Two pins in `validation.yml` are not watched by any layer.** The
+  reusable-workflow inputs `SUSHI_VERSION` and `JAVA_VALIDATOR_VERSION` are
+  written as `${{ vars.X || '<version>' }}`, which the checker's env parser
+  cannot read. `scripts/toolchain-pins.test.mjs` at least holds the SUSHI
+  fallback equal to the three build workflows; nothing compares
+  `JAVA_VALIDATOR_VERSION` against upstream — re-check it whenever the
+  `kerndatensatz-meta` SHA is re-resolved.
 
 ## Cross-repo consistency — decided, not pending
 
-This repository and the IG template share thirteen documentation filenames. That
-was once real duplication; it is not any more. After the 2026-07-26 audit **no
-shared file is identical**, and the closest pairs differ for good reasons —
-`project-status.md` because each names the other repository, `glossary.md`
-because this scaffold defines nine terms the template repository has no use for.
+This repository and the IG template share fourteen documentation filenames —
+re-measured 2026-07-27 with `comm -12` over `git ls-files docs` in both
+checkouts, excluding `docs/reports/` (those share no filenames). That was once
+real duplication; it is not any more. **No shared file is identical**, and the
+closest pairs differ for good reasons — `project-status.md` because each names
+the other repository, `glossary.md` because this scaffold defines nine terms the
+template repository has no use for, `further-reading.md` because Release Please
+is a template-repo entry a module must not follow.
 
 No sync mechanism is planned. A module created from this template must be
 self-contained: replacing its copy of `glossary.md` or `maintenance.md` with a

@@ -13,12 +13,19 @@
 2. **Run the first-run bootstrap — always.** In a clone, run
    `bash scripts/first-run-bootstrap.sh` (dry run — shows what it will do), then
    `bash scripts/first-run-bootstrap.sh --apply`. It creates `dev`, applies branch
-   protection, and **removes** the template's own release automation (Release Please config
-   + workflow, the release announcement, the template `CHANGELOG`, and the bootstrap
-   itself). If you ticked "Include all branches" it simply skips creating `dev`; the
-   removals and the branch protection still have to happen. See
-   [first-run-setup.md](first-run-setup.md). Confirm afterwards:
-   `grep -ri release-please .github` returns nothing.
+   protection, and **removes** the template's own release automation (the Release
+   Please config and workflow, the release announcement, and the template
+   `CHANGELOG`). The bootstrap and this recipe stay. If you ticked "Include all
+   branches" it simply skips creating `dev`; the removals and the branch
+   protection still have to happen. See
+   [first-run-setup.md](first-run-setup.md). Confirm afterwards that
+   all five removed paths are gone — this must print nothing:
+
+   ```sh
+   ls release-please-config.json .release-please-manifest.json CHANGELOG.md \
+     .github/workflows/release-please.yml .github/workflows/notify-zulip.yml \
+     2>/dev/null
+   ```
 3. **Fill the placeholders.** Open `sushi-config.yaml` and replace every `{{…}}`
    (each is documented inline). The key ones:
    - `{{MODULE_SLUG}}` — lowercase short name (`person`), drives packageId/id/canonical.
@@ -32,15 +39,21 @@
    pages and the FSH sources. Finish by sweeping the build inputs for leftovers:
 
    ```sh
-   grep -rnE --exclude=README.md '\{\{[A-Z_]+\}\}' \
+   grep -rnE --exclude=README.md '\{\{[A-Z0-9_]+\}\}' \
      sushi-config.yaml ig.ini publication-request.json qc input tests \
-     .github/workflows/go-publish.yml
+     .github/workflows/go-publish.yml \
+   | grep -vE '\.(yaml|yml|ini|fsh):[0-9]+:[[:space:]]*(#|//|;)'
    ```
 
-   It must come back empty. Do **not** grep the whole tree: `{{ }}` is also
-   Liquid syntax in `ig-template/`, `${{ }}` is GitHub-Actions syntax in every
-   workflow, and the docs, the `README.md` files and several comments name
-   `{{PLACEHOLDER}}` as prose. None of those is a value to replace.
+   It must come back empty. Both filters are deliberate. The scope is narrow
+   because `{{ }}` is also Liquid syntax in `ig-template/` and `${{ }}` is
+   GitHub-Actions syntax in every other workflow — do not grep the whole tree.
+   The second `grep` drops comment lines, because inside this scope the
+   `README.md` files and the comments that merely *name* a placeholder — the
+   `sushi-config.yaml` header (your reference list, leave it intact), `ig.ini`'s
+   `;` notes, `qc/custom.rules.yaml`, `go-publish.yml` and the FSH ruleset notes
+   — are documentation, not values. They stay. The digit in `[A-Z0-9_]` matters:
+   without it `{{SPECIAL_URL_1}}` is invisible to the sweep.
 4. **Template reference.** Leave `ig.ini` at `template = #ig-template` (the vendored
    copy) until the MII template package is published; then follow
    [switch-template-to-published.md](switch-template-to-published.md).

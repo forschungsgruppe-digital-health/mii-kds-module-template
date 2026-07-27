@@ -38,20 +38,17 @@
     {"bereich": "Pflichtseiten", "empfehlung": "Das Standard-Seitenraster sollte vollständig vorhanden sein (z.B. Startseite, Anwendungsfälle, Datensätze, Konformität, Kontext, Referenzen, Änderungen, Downloads, Datenschutz, Übersetzungshinweis). Fehlende Zielseiten werden ergänzt und in die Seiten-/Menükonfiguration aufgenommen."},
     {"bereich": "QC-Regeln", "empfehlung": "Die im Quellprojekt definierten Qualitätsregeln (qc/custom.rules.yaml) werden übernommen und in der CI-Pipeline regelmäßig ausgeführt, damit Validierung und Namenskonventionen automatisch geprüft werden."},
     {"bereich": "Metadaten/Config", "empfehlung": "Die Kerndaten des IG (id, Version, Status, Publisher, Lizenz) werden in sushi-config.yaml und ig.ini ins Zielformat überführt, inklusive Seiten-, Menü- und Sprachkonfiguration; die gewünschte Zielversion wird gesetzt."},
-    {"bereich": "Arbeitsweise", "empfehlung": "Die Migration findet isoliert auf einem eigenen Arbeitszweig statt, getrennt vom Hauptstand. Änderungen werden über einen Pull Request eingebracht und vor dem Zusammenführen menschlich geprüft, statt direkt auf den Hauptzweig zu schreiben."}
+    {"bereich": "Arbeitsweise", "empfehlung": "Änderungen entstehen isoliert auf einem eigenen Arbeitszweig, getrennt vom Hauptstand. Änderungen werden über einen Pull Request eingebracht und vor dem Zusammenführen menschlich geprüft, statt direkt auf den Hauptzweig zu schreiben."}
   ],
   "section_intros": {
-    "executive": "Dieser Abschnitt fasst die wichtigsten Eckdaten und die Entscheidungsgrundlage auf einen Blick zusammen.",
     "artefakte": "Hier wird gezählt, wie viele FHIR-Bausteine (Profile, Extensions, ValueSets usw.) der IG je Typ definiert.",
     "direktiven": "Dieser Abschnitt listet die plattformspezifischen Platzhalter in den Erklärseiten, die ein generischer IG Publisher nicht versteht und die daher umgesetzt werden müssen.",
     "inhaltsumfang": "Linguistische Kennzahlen zum Textumfang (Wörter je Seite, Durchschnitt) sowie Hinweise auf inhaltliche Dopplungen und nicht referenzierte Dateien (Dead-Code-Analogie) - hilft, Umfang und Aufräumpotenzial einzuschätzen.",
     "hygiene_detail": "Konkrete Fundstellen doppelter Inhaltsblöcke sowie Listen nicht referenzierter Bilder und nicht eingebundener Beispiele.",
-    "aufwand": "Dieser Abschnitt schätzt den Arbeitsaufwand der Überführung als Spanne - manuell und KI-gestützt teilautomatisiert - abgeleitet aus zählbaren Treibern und Stundenfaktoren.",
     "reife": "Verdichteter Reifegrad als Freigabe-Indikator: Status, Vollständigkeit der Dokumentation, Beispiel-Abdeckung der Profile und Governance-Reife.",
     "strategie": "Strategische Kennzahlen: Bindung an die Quellplattform (Lock-in), Anteil standardisierter Terminologie, Wiederverwendung externer Bausteine und Zukunftssicherheit (FHIR-Version, Pflege-Aktivität).",
-    "planung": "Planungsgrößen jenseits reiner Personenstunden: Kalenderzeit, Szenarien (Min/Erwartet/Max), Schätz-Konfidenz, Startbereitschaft und grober Rollen-Mix.",
     "risiko": "Entscheidungsrelevante Risiken für die Freigabe: Terminologie-Lizenzen, unterdrückte Warnungen, Datenschutz-Substanz, Wissenskonzentration (Bus-Faktor) und Kompatibilitätsbruch zur Vorversion.",
-    "empfehlungen": "Hier stehen je Themenbereich konkrete, aus den Kennzahlen abgeleitete Schritte, um den IG in das generische HL7-FHIR-IG-Format zu überführen.",
+    "empfehlungen": "Hier stehen je Themenbereich konkrete, aus den Kennzahlen abgeleitete Schritte zur Verbesserung des IG.",
     "direktiven_mapping": "Dieser Abschnitt ordnet jedem Direktiven-Typ sein Gegenstück im IG-Publisher-Format zu, sortiert nach Häufigkeit.",
     "anhang": "Im Anhang steht jeder Einzelwert mit seiner Quelle, damit man die Kennzahlen nachvollziehen kann, ohne im Projekt suchen zu müssen.",
     "identität": "Kerndaten des IG (Kennungen, Version, Status, Herausgeber) und woher sie stammen.",
@@ -62,17 +59,14 @@
     "qc": "Die im Projekt hinterlegten Qualitätsregeln; ihre Einhaltung wird erst beim Qualitätslauf des Builds geprüft.",
     "mehrsprachigkeit": "Sprachkonfiguration und welche Übersetzungsmittel bereits vorhanden sind.",
     "glossar": "Kurzerklärung der im Report verwendeten Fachbegriffe für Leser mit grundlegendem FHIR-Verständnis.",
-    "methodik": "Beschreibung jeder im Report verwendeten Kennzahl - was sie misst und wie sie ermittelt wird - zur Nachvollziehbarkeit. Maßstab für Aufwand ist ZEIT (Stunden/Personentage/Kalenderzeit), keine Geldgrößen."
+    "methodik": "Beschreibung jeder im Report verwendeten Kennzahl - was sie misst und wie sie ermittelt wird - zur Nachvollziehbarkeit."
   },
   "metric_explanations": [
     {"metrik": "Artefakte (publiziert)", "misst": "Anzahl der vom IG bereitgestellten FHIR-Konformitätsressourcen je Typ (Profile, Extensions, ValueSets, CodeSystems, Logical Models, CapabilityStatements, Beispiele).", "herkunft": "Zählung der Deklarationen in input/fsh (bzw. generierten Ressourcen); interne FSH-Konstrukte (RuleSets/Invarianten/Mappings) separat, nicht im Total."},
-    {"metrik": "Plattform-/Simplifier-Direktiven", "misst": "Vorkommen plattformspezifischer Platzhalter in den Erklärseiten, die ein generischer IG Publisher nicht versteht (Migrations-Aufwandstreiber).", "herkunft": "Mustererkennung je Direktiven-Typ in den Narrative-Seiten; nicht abgedeckte -> UNBEKANNT."},
+    {"metrik": "Plattform-/Simplifier-Direktiven", "misst": "Vorkommen plattformspezifischer Platzhalter in den Erklärseiten, die ein generischer IG Publisher nicht versteht.", "herkunft": "Mustererkennung je Direktiven-Typ in den Narrative-Seiten; nicht abgedeckte -> UNBEKANNT."},
     {"metrik": "Linguistik (Wörter/Seite)", "misst": "Textumfang der Inhalts-Seiten als Durchschnitt, Median und Extremwerte - Indikator für Dokumentations- und Übersetzungsumfang.", "herkunft": "Wortzählung je Inhalts-Seite (ohne Stubs)."},
     {"metrik": "Inhaltliche Dopplungen", "misst": "Identische Textabsätze (>= 12 Wörter) bzw. identische Seiten - Hinweis auf Redundanz/Aufräumpotenzial.", "herkunft": "Hash-Vergleich normalisierter Absätze/Dateien."},
     {"metrik": "Repo-Hygiene (ungenutzte Dateien)", "misst": "Bilder/Beispiele, die in keiner Erklärseite referenziert sind (Dead-Code-Analogie).", "herkunft": "Heuristik: Datei-/Artefaktname kommt im Seitentext nicht vor (kein Beweis für Ungenutztheit)."},
-    {"metrik": "Aufwand manuell (Band + Spanne)", "misst": "Geschätzter Arbeitsaufwand der Migration in Stunden, eingeordnet in ein Band S/M/L/XL.", "herkunft": "Summe (Treibermenge x Erfahrungsfaktor) über GoFSH, Direktiven, Inhalts-Seiten, floating Pins; Spanne = Basis x 0,8...1,3. Faktoren kalibrierbar (EFFORT_FACTORS), noch nicht final kalibriert."},
-    {"metrik": "Aufwand KI-gestützt (HITL)", "misst": "Aufwand bei teilautomatisierter Migration mit menschlichen Review-Gates - hersteller-/modellunabhängig.", "herkunft": "Reduzierte Pro-Treiber-Faktoren + feste Pauschalen für Einarbeitung/Setup und Review-Gates + Validierungs-/Iterationsaufschlag; unbekannte Direktiven zum Manuell-Satz (EFFORT_FACTORS_AI). Ersparnis vorzeichensicher (kann bei Mini-IGs negativ sein)."},
-    {"metrik": "Planung & Terminierung", "misst": "Kalenderzeit, Szenario (Min/Erwartet/Max), Schätz-Konfidenz, Startbereitschaft, grober Rollen-Mix, Fixaufwandsanteil.", "herkunft": "Kalenderzeit = Stunden / (h-pro-Tag x Team x Auslastung) aus PLANNING_PARAMS; Konfidenz/Readiness aus Anzahl Unbekannter/Blocker; Rollen-Mix aus Treiber-Stunden."},
     {"metrik": "Reifegrad (Score)", "misst": "Freigabe-Indikator 0-100 mit Band (in Entwicklung/fortgeschritten/technisch reif).", "herkunft": "Mittelwert aus Status, Doku-Vollständigkeit (Inhalt vs. Stubs), Beispiel-Abdeckung der Profile und Governance-Reife."},
     {"metrik": "Hersteller-Lock-in", "misst": "Bindung an die Quellplattform durch proprietäre Direktiven (0-100, Band).", "herkunft": "Grobe Heuristik aus Direktiven je Seite."},
     {"metrik": "Standard-Terminologie-Anteil", "misst": "Anteil standardisierter Terminologie (SNOMED/LOINC/ICD/UCUM) gegenüber Eigen-Terminologie.", "herkunft": "Grobe Heuristik aus Textvorkommen der Standardsysteme vs. Anzahl lokaler CodeSystems."},
@@ -131,9 +125,6 @@
     {"term": "Unterdrückte Warnungen", "plain": "Bewusst ausgeblendete QA-Meldungen, die als bekannt/akzeptiert gelten und den Bericht nicht stören sollen."},
     {"term": "sushi-config.yaml", "plain": "Die zentrale Konfigurationsdatei eines FSH-basierten IG: enthält Kennungen, Version, Abhängigkeiten, Seiten- und Menüstruktur."},
     {"term": "ig.ini", "plain": "Eine kleine Startkonfigurationsdatei, die dem IG Publisher grundlegende Bau-Einstellungen vorgibt."},
-    {"term": "Migrationsaufwand / Band", "plain": "Eine grobe Schätzung des Arbeitsaufwands für die Überführung in Personenstunden, eingeordnet in eine Größenklasse (Band S/M/L/XL)."},
-    {"term": "Aufwandstreiber / Faktor", "plain": "Eine zählbare Größe (z.B. Anzahl Direktiven), die mit einem Stundenfaktor multipliziert den geschätzten Aufwand ergibt."},
-    {"term": "Human-in-the-Loop (HITL)", "plain": "Arbeitsweise, bei der eine KI Routinearbeit vorbereitet und ein Mensch an definierten Prüfpunkten (Review-Gates) kontrolliert und freigibt."},
     {"term": "Heuristische Schätzung", "plain": "Eine näherungsweise, auf Erfahrungswerten beruhende Schätzung - kein exakter Wert, sondern eine Spanne."},
     {"term": "statischer / full-Modus", "plain": "Statisch heißt, es wird nur der Quellcode ausgewertet ohne den IG zu bauen; im full-Modus wird zusätzlich gebaut, um z.B. Validierungsfehler zu erfassen."},
     {"term": "Mermaid-Diagramm", "plain": "Ein aus Textbeschreibung erzeugtes Diagramm (hier ein Tortendiagramm), das direkt in Markdown eingebettet wird."}
