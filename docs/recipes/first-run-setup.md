@@ -15,8 +15,10 @@ knowledge required.
   [GitHub CLI `gh`](https://cli.github.com/) locally, and `gh auth login` is
   done. `gh` needs **admin** on the new repo to set branch protection (you have
   it if you created the repo).
-- Alternatively, you can run the bootstrap in the repo's **dev container** (it
-  ships `git`, Node, and the tooling) — see
+- The repo's **dev container** ships the *build* toolchain (Node, SUSHI,
+  Ruby/Jekyll, Graphviz) but adds no GitHub CLI feature, so `gh` is not
+  available there — run this bootstrap on your host, then use the container for
+  building; see
   [`first-build-in-devcontainer.md`](first-build-in-devcontainer.md).
 
 ---
@@ -178,7 +180,7 @@ The bootstrap printed it; the essentials:
 
 | Symptom | Cause | Fix |
 | --- | --- | --- |
-| `ERROR: 'gh' not found` | GitHub CLI not installed | Install `gh` and run `gh auth login`, or run inside the dev container. |
+| `ERROR: 'gh' not found` | GitHub CLI not installed | Install [`gh`](https://cli.github.com/) and run `gh auth login` on the machine where you run the bootstrap — the dev container does not provide it. Step 2 (the removals) still runs; only step 1 is skipped. |
 | `cannot read main; … are you authenticated?` | `gh` not logged in, or run in the wrong repo | `gh auth login`; make sure you are inside the **new module** clone. |
 | Branch protection call fails with 403 | Your account lacks admin on the repo | Ask an owner to grant admin, or apply protection manually in Settings → Branches. |
 | Convention check fails on a `release/**` branch | A `{{PLACEHOLDER}}` is still unresolved | Resolve the reported field; a module must not release with placeholders. |
