@@ -35,7 +35,7 @@ pin). Reference values verified against
 | M4 | `title` follows the wiki title structure | `sushi-config.yaml` → `title` | Starts with `MII ` and names the module (wiki: `MII <Präfix> <Abkürzung Modulname> <Beschreibung>`) | `MII Implementation Guide Core Dataset Base` |
 | M5 | `canonical` is under the agreed MII path | `sushi-config.yaml` → `canonical` | `^https://www\.medizininformatik-initiative\.de/fhir/<technischer Modulname>$` — technical module name per the wiki table in "Namenskonventionen für FHIR‐Ressourcen in der MII" | `https://www.medizininformatik-initiative.de/fhir/modul-base` |
 | M6 | `version` is CalVer | `sushi-config.yaml` → `version` | `^\d{4}\.\d+\.\d+$` (`YYYY.n.n`; modules never use SemVer) | `2026.0.1` |
-| M7 | No dependency — including the IG template — pinned to a floating label | `sushi-config.yaml` → `dependencies`; `ig.ini` → `template` | No `current`, `#current`, `latest`, or `dev` anywhere; every dependency and the template use a fixed version | `kerndatensatz-basis` itself floats `template = fhir2.base.template#current` — a known upstream practice this project deliberately does **not** follow. Do not copy it, and do not "correct" a fixed pin back to `#current`. |
+| M7 | No dependency — including the IG template — pinned to a floating label | `sushi-config.yaml` → `dependencies`; `ig.ini` → `template` | No `current`, `#current`, `latest`, `dev`, or `cibuild` anywhere; every dependency and the template use a fixed version | `kerndatensatz-basis` itself floats `template = fhir2.base.template#current` — a known upstream practice this project deliberately does **not** follow. Do not copy it, and do not "correct" a fixed pin back to `#current`. |
 
 ### Placeholder-aware evaluation (this scaffold)
 
@@ -51,8 +51,10 @@ evaluates Section 1a **placeholder-aware**:
   `{{PLACEHOLDER}}` in M1–M6 (and a `TODO`/floating `ig.ini` template) is a
   **failure**: a module must not release with placeholders.
 - M7 (no floating label) is always hard: a `{{PLACEHOLDER}}` is not a floating
-  label, but `current`/`#current`/`latest`/`dev` anywhere is a failure on every
-  branch.
+  label, but `current`/`#current`/`latest`/`dev`/`cibuild` anywhere is a failure
+  on every branch. The publication gate in `.github/workflows/go-publish.yml`
+  re-checks the same label set on `ig.ini` — defence in depth, kept in step by
+  hand.
 
 ### 1b. Assertions for TEMPLATE PACKAGE repositories (do **not** apply to this scaffold)
 

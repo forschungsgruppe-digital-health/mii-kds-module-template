@@ -64,7 +64,11 @@ export function readIgIniTemplate(igIni) {
 }
 
 const PLACEHOLDER = /\{\{[^}]+\}\}/;
-const FLOATING = /(^|#)(current|latest|dev)$/i;
+// The floating labels. Keep this set identical to the publication gate's ERE in
+// .github/workflows/go-publish.yml ("Formal publication requires a pinned IG
+// template") — the two are deliberate defence in depth, so they must move
+// together.
+const FLOATING = /(^|#)(current|latest|dev|cibuild)$/i;
 
 function isPlaceholder(value) {
   return PLACEHOLDER.test(value);
@@ -152,7 +156,7 @@ export function evaluate({ sushiConfig = null, igIni = null, packageJson = null,
     if (tmpl && FLOATING.test(tmpl)) floats.push(`ig.ini template = ${tmpl}`);
     if (floats.length > 0) {
       add("M7 no floating pins", "module", "fail", floats.join("; "),
-        "no dependency or template may pin to current/latest/dev");
+        "no dependency or template may pin to current/latest/dev/cibuild");
     } else {
       add("M7 no floating pins", "module", "pass", tmpl ? `template = ${tmpl}` : "n/a", "OK");
     }

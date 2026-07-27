@@ -275,8 +275,10 @@ jobs:
           # kerndatensatz-basis's own ig.ini reads
           # `template = fhir2.base.template#current` (verified against `main` @
           # f6c6878), which the check below would reject. Development, CI-build
-          # and floating references are all refused here.
-          if grep -Eq '^template[[:space:]]*=.*#(dev|cibuild|current)[[:space:]]*$' source/ig.ini; then
+          # and floating references are all refused here. The label set mirrors
+          # M7 in scripts/convention-check.mjs (`FLOATING`) — deliberate defence
+          # in depth, so the two must be changed together.
+          if grep -Eq '^template[[:space:]]*=.*#(current|latest|dev|cibuild)[[:space:]]*$' source/ig.ini; then
             echo "::error::Formal publication does not allow a development, CI-build, or floating IG template."
             exit 1
           fi
