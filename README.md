@@ -63,17 +63,15 @@ Unfamiliar terms are in the [glossary](docs/glossary.md).
 
 ## Documentation
 
-- [Recipes](docs/recipes/) — step-by-step for the common tasks, including authoring guidance:
-  [render profiles](docs/recipes/render-profiles.md) ·
-  [describe examples](docs/recipes/describe-examples.md) ·
-  [UML diagrams](docs/recipes/add-uml-diagrams.md) ·
-  [information models](docs/recipes/model-information-models.md)
-- [Glossary](docs/glossary.md) · [Concepts](docs/concepts.md) — the vocabulary and the ideas behind it
-- [Page structure](docs/page-structure.md) — who owns the page set and the menu (your module, not the IG template)
-- [Workflows](docs/workflows.md) — what the CI does, and how releases work
-- [IG best-practices checklist](docs/ig-best-practices-checklist.md) — this scaffold's self-check against HL7's (non-normative) IG best-practice guidance and the MII meta wiki, plus the parts you still have to write
-- [Secrets](docs/secrets.md) — optional: MII terminology server, release announcements
-- [Open tasks](docs/open-tasks.md) — what is unfinished, and why
+**[docs/](docs/README.md) is the index** — every guide, with a reading order for
+newcomers. The three you are most likely to want first:
+
+- [Recipes](docs/recipes/) — step-by-step for the common tasks
+- [Create a new module](docs/recipes/create-a-new-module.md) — the path from *Use this template* to a module that builds
+- [Project status](docs/project-status.md) — prototype; what that means in practice
+
+Contributing and policies: [CONTRIBUTING.md](CONTRIBUTING.md) ·
+[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) · [SECURITY.md](SECURITY.md)
 
 ## Getting help
 
