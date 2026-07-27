@@ -12,10 +12,9 @@ which are **human-gated**.
 > template and wants to cut a version. New to the module itself? Start with the
 > README and `docs/recipes/create-a-new-module.md` first.
 
-> **Reference vs. recipe (keep the split clean):** this file explains *what the
-> release is and why each step exists*. The click-by-click walkthrough lives in
-> the companion recipe `docs/recipes/cut-a-release.md`. Read this page once to
-> understand the model; follow the recipe each time you release.
+> The click-by-click walkthrough lives in the companion recipe
+> `docs/recipes/cut-a-release.md`. Read this page once to understand the model;
+> follow the recipe each time you release.
 
 ---
 
@@ -32,11 +31,11 @@ which are **human-gated**.
 > **Why the hard boundary:** two release systems on one repo corrupt the version
 > history — a module carrying Release Please would auto-cut SemVer tags that
 > fight the MII CalVer process. One repo, one release mechanism. That is why the
-> **first-run bootstrap removes** Release Please (`release-please.yml`,
-> `release-please-config.json`, `.release-please-manifest.json`) and the
-> template-only `notify-zulip.yml` from a new module, but **keeps**
-> `module-release.yml`, `go-publish.yml`, and the preview workflow. See
-> `docs/recipes/first-run-setup.md`.
+> **first-run bootstrap removes** all five template-only files from a new
+> module — Release Please (`release-please.yml`, `release-please-config.json`,
+> `.release-please-manifest.json`), `notify-zulip.yml` and the template
+> `CHANGELOG.md` — but **keeps** `module-release.yml`, `go-publish.yml`, and the
+> preview workflow. See `docs/recipes/first-run-setup.md`.
 
 ### CalVer format
 
@@ -236,8 +235,6 @@ published**. Do that through the gated
 > irreversible in practice and touches the public FHIR ecosystem. `module-release.yml`
 > only *points at* go-publish (in the release notes and the job summary) — it
 > never dispatches it. The maintainer owns the decision to publish, every time.
-> `module-release.yml` and `go-publish.yml` are edited separately; this page does
-> not modify go-publish.
 
 ### Post-release checklist (from the wiki)
 

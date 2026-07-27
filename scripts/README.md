@@ -33,7 +33,7 @@ list — not a glob, because this directory now holds unrelated helpers too.
 | --- | --- | --- |
 | `first-run-bootstrap.sh` | One-time setup of a created module: branches, protection, removal of template-only files | a module author, once |
 | `convention-check.mjs` | Asserts the MII metadata contract (id/canonical/name/packageId, pinned versions) | `convention-check.yml` |
-| `language-model-check.sh` | Fails the build when a file re-asserts the language model this repository moved away from | `convention-check.yml` |
+| `language-model-check.sh` | Fails the build when prose contradicts the English-default / German-translation language model | `convention-check.yml` |
 | `check-updates.mjs` | Reports drift between the pinned toolchain and what upstream released | `dependency-check.yml` |
 | `sync-ig-template.sh` | Re-vendors `ig-template/`, or fails on drift (`--check`) | `sync-ig-template.yml` |
 | `resolve-ig-template-source.sh` | Resolves which template repository the sync reads from, and whether it is reachable | `sync-ig-template.yml` (both jobs, before the sync step) |

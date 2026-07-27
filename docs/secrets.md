@@ -1,4 +1,4 @@
-# Secrets & variables — enabling the gated features (F + G)
+# Secrets & variables — enabling the gated features
 
 A module built from this template builds and previews **without any secrets** (it
 uses the public HL7 terminology server; announcements skip cleanly). This page

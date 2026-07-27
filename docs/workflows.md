@@ -8,8 +8,7 @@ This repo has **two lives**, and keeping them apart is essential:
   after "Use this template").
 
 Read both. A reader must never confuse "how this template repo releases itself" with
-"how a module I create releases itself." Details live in the linked docs; every
-non-obvious point carries a **Why**.
+"how a module I create releases itself." Details live in the linked docs.
 
 ## Branching (both layers)
 

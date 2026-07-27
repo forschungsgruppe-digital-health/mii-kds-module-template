@@ -1,7 +1,7 @@
 # Further reading
 
-A curated, verified reading list. Each entry says **why** you would read it. Links
-were checked when this file was written; if one moves, search its title.
+A curated reading list of the specifications, wiki pages and tools this template
+and its modules build on. If a link moves, search its title.
 
 ## MII — the rules this template and its modules follow
 

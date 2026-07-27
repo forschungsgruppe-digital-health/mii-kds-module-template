@@ -1,7 +1,7 @@
 # Concepts — how this module template works and why
 
 Read this after the [Glossary](glossary.md). It explains the ideas behind this
-repository. Every non-obvious choice carries a **Why**.
+repository.
 
 ## 1. What this repository is
 

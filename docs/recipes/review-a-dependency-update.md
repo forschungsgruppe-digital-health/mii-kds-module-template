@@ -8,7 +8,7 @@
 
 This recipe applies unchanged in a module created from this template.
 
-> **Why a recipe:** updates are proposals, never automatic
+> **Updates are proposals, never automatic**
 > ([`docs/maintenance.md`](../maintenance.md)). The human in the loop is you.
 
 ## Steps

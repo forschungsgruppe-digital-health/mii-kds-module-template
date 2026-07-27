@@ -21,9 +21,8 @@ anything.
 > **Carried over from the MII KDS sample IG.** This skill is adapted from the
 > `ig-analyze` skill of
 > [`mii-kds-sample-ig-inoffiziell`](https://github.com/medizininformatik-initiative/mii-kds-sample-ig-inoffiziell)
-> (CC-BY-4.0). The framing here is general QA and module comparison — not
-> migration scoping: the inherited effort/planning forecaster has been removed
-> from the tool, so the report measures and does not estimate. The report prose
+> (CC-BY-4.0). The framing here is general QA and module comparison, not
+> migration scoping: the report measures and does not estimate. The report prose
 > is still German (see `docs/open-tasks.md`).
 
 ## When to activate
