@@ -166,8 +166,12 @@ Two failure modes, both of which misrepresent someone.
 - **Personal identification.** No individual should be named as contact, owner
   or example unless they have agreed to represent the project. Sweep names,
   usernames, email addresses and handles in file content, ownership files,
-  templates, code comments and example data. Report occurrences in git history;
-  never rewrite history to fix them.
+  templates, code comments and example data. Report occurrences in
+  version-control history too — cite those by revision identifier and where the
+  string sits (message body, trailer, author field) — and never rewrite history
+  to fix them. Check whether the exposure is *recurring*: something a merge
+  setting or template re-adds every time deserves a forward-looking fix even
+  when the past is left alone.
 
 ## Step 6 — One fact, one home
 
@@ -218,8 +222,10 @@ Flag and fix:
 - **Synonym drift** — one concept under three names. An expert reads through it;
   a newcomer cannot tell whether two words mean two things. One term per
   concept, everywhere.
-- **Sentences carrying too much** — measure. Much past ~30 words, or a paragraph
-  introducing more than two new terms, gets split.
+- **Sentences carrying too much** — measure per paragraph or list item, and
+  exclude tables, code fences and front matter, or the measurement is noise.
+  Much past ~30 words, or a paragraph introducing more than two new terms, gets
+  split.
 - **Hidden actors** — "the file is generated", "it is validated". By what, and
   when? Name the thing that acts, so the reader knows where to look.
 - **Fragments in another language** than the page they sit on.
@@ -247,14 +253,33 @@ and how a release happens?
 
 For both: note where you had to open a file the documentation never mentioned.
 
+**When the documented environment cannot be started** — no container runtime, no
+credentials, no network — do not silently fall back to reading. Run the
+underlying commands directly where you safely can, record the divergence as a
+**skip, not a finding**, and say how far the walk got and what is therefore
+unverified. Two runs on the same repository must be comparable; an unrecorded
+skip makes them not.
+
+**A walk that succeeds is a result**, not an empty section. Say so, and say how
+far you got — "followed the setup recipe to a verified checksum without needing
+another page" is worth more to a maintainer than silence.
+
 ## Step 10 — Public-repository hygiene
 
 If the repository is public, check for the community files readers and the
 hosting platform expect: an entry document, a licence, contribution guidance, a
 code of conduct, a security policy, ownership, issue and change-request
-templates, a changelog, citation metadata, a support pointer. Most forges report
-several of these under a community profile — use that where available rather
-than guessing.
+templates, a changelog, citation metadata, a support pointer.
+
+**Check the filesystem. A forge's community-profile API is a hint, not an
+answer, and taking it as one manufactures false findings.** GitHub's endpoint
+reports `issue_template: null` for a `.github/ISSUE_TEMPLATE/` *directory* — the
+modern form GitHub itself recommends — and says nothing at all about a security
+policy, support pointer or citation file. Every absence in such a payload must
+be corroborated against the default-branch tree before it becomes a finding:
+absence from the payload is not absence from the repository. If you use the API,
+run a control against a repository known to have the file, and confirm the
+endpoint reports it.
 
 **Before writing a missing one, check whether the owning organisation already
 publishes it**, including in an organisation-level defaults repository, whose
@@ -274,7 +299,14 @@ Re-check **every** finding against the repository as it stands *now*, and
 **default to discarding when uncertain**. A dropped true finding costs one
 run; a confident false one costs the reader's trust in all of them.
 
-For each finding, in this order:
+**First, deduplicate.** Several passes over one repository will surface the same
+defect more than once, with different framings, evidence and severities. Merge
+them into one finding before verifying: keep the sharpest evidence from each,
+and take the **highest** severity offered, since the pass that saw it as serious
+usually saw more of it. A report that lists one defect three times is a report
+nobody finishes.
+
+Then, for each finding, in this order:
 
 1. **Is the evidence still there?** Quote-match the text again. Line numbers
    move during a run — including because of your own fixes — so search for the
@@ -296,9 +328,14 @@ For each finding, in this order:
 6. **If you already applied it** (apply mode), verify against the *result*, not
    against what you intended. Re-read the file and re-run the relevant gate.
 
-Findings that survive go in the report. Findings that do not go in **Declined**,
-with what disproved them — that record is what stops the next run raising them
-again.
+Findings that survive go in the report.
+
+Findings that do not are split, because they are not the same thing:
+**Declined** is for a finding actively disproved — the inference did not follow,
+the counter-example exists, or the project already recorded it as decided. That
+record is what stops the next run raising it again. A finding you merely *could
+not check* is not declined; it belongs under **Could not verify** with what you
+tried, so a later run with better access can pick it up.
 
 > **Why this step exists.** A check can pass while the thing it protects is
 > broken, if it tests the shape of an answer instead of its substance. Verify
@@ -314,7 +351,10 @@ identity, and **never overwrite an existing one**.
 Structure:
 
 1. **Scope** — what step 0 discovered, what was checked, what was deliberately
-   not, and the mode the run used.
+   not, and the mode the run used. Say which steps returned **nothing**, and
+   why if you know: a documentation cleanup landed just before the run explains
+   an empty residue section, and without that note an empty section reads as a
+   step that was skipped.
 2. **Fixed** — one line each with the file. Apply mode only.
 3. **Needs a human** — each with the evidence (file, line, quoted text), why it
    matters, and **a concrete task** phrased so it can be handed to a person or
@@ -339,7 +379,9 @@ result rather than assuming. If access is missing, say exactly what is missing
 and stop — the report still stands on its own.
 
 **Then propose, with the list.** Show the titles you would create and ask for a
-yes. On confirmation, create **one issue per finding**, each carrying: the
+yes. If the run is not interactive, that is not a licence to proceed: put the
+proposed titles in the report and stop. On confirmation, create **one issue per
+finding**, each carrying: the
 evidence with file and line, why it matters, the concrete task, and a link to
 the report section it came from. Apply a consistent label so the set can be
 found and closed together.
