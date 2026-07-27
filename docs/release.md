@@ -113,8 +113,9 @@ present here; the surface in this scaffold is:
   - the `resource-approvalDate` extension's `valueDate` — the date *this*
     release was approved by whoever governs your module (for a KDS module, its
     responsible MII body). If no formal approval step applies, use the date you
-    decided to release and say so on `metadata.html`: the extension records an
-    approval date, it does not create an approval process.
+    decided to release and say so in `input/pagecontent/metadata.md` (and its
+    German mirror): the extension records an approval date, it does not create
+    an approval process.
 - **`publication-request.json`**
   - `version` — the CalVer version.
   - `path` — ends in the version (`.../<version>`); update it too.
