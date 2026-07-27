@@ -35,7 +35,7 @@ in sync:
 
 | Pin | Location |
 |---|---|
-| `de.medizininformatikinitiative.template` | `ig.ini` → `template = de.medizininformatikinitiative.template#<version>` |
+| `de.medizininformatikinitiative.template` | `ig.ini` → `template = de.medizininformatikinitiative.template#<version>`; when moving off a vendored copy, follow [`recipes/switch-template-to-published.md`](recipes/switch-template-to-published.md) |
 | `fhir2.base.template` | inside the template package (transitive) — locally only in a vendored bring-up copy (`ig-template/package/package.json`) |
 | FHIR package dependencies (`de.basisprofil.r4`, `de.medizininformatikinitiative.kerndatensatz.meta`, `hl7.fhir.uv.crmi`, `hl7.fhir.uv.xver-r5.r4`, …) | `sushi-config.yaml` → `dependencies:` block |
 | IG Publisher / SUSHI / Jekyll | `env:` values (`PUBLISHER_VERSION`, `PUBLISHER_SHA256`, `SUSHI_VERSION`, `JEKYLL_VERSION`) in each build workflow — `ig-publisher.yml`, `module-release.yml`, `go-publish.yml`. A workflow cannot read another workflow's `env:`, so the three blocks are copies and must stay identical — `scripts/toolchain-pins.test.mjs` fails the build if they drift. The checker reads `go-publish.yml` |
@@ -45,7 +45,7 @@ in sync:
 | Publication support repos (`HL7/fhir-ig-history-template`, `HL7/fhir-web-templates`) | commit-SHA `ref:` pins in `go-publish.yml` **only** (the two checkout steps). **Not watched by the checker** — re-resolve by hand when preparing a release; the comment at each pin records the last resolution date |
 | SU-TermServ proxy: the `medizininformatik-initiative/kerndatensatz-meta` `nginx.conf` ref **and** the nginx proxy image digest | commit-SHA / digest pins in all three build workflows — `ig-publisher.yml`, `module-release.yml`, `go-publish.yml`. Keep the three identical, for the same reason as the toolchain pins above; nothing cross-checks these. **Not watched by the checker** — re-resolve all three by hand when preparing a release |
 | MII reusable validation workflows (`kerndatensatz-meta/.github/workflows/ci_dotnet_validation.yml`, `ci_java_validation.yml`) | `uses: …@<commit-SHA>` in `validation.yml`. **Not watched by the checker** — re-resolve by hand; the trailing comment records the last resolution date |
-| Dev container (base-image digest, feature versions, SUSHI/Jekyll installs) | `.devcontainer/devcontainer.json` — features come as Dependabot PRs; the image digest and the `postCreateCommand` tool pins are bumped manually |
+| Dev container (base-image digest, feature versions, SUSHI/Jekyll installs) | `.devcontainer/devcontainer.json` — features come as Dependabot PRs; the image digest and the `postCreateCommand` tool pins are bumped manually. **Kept byte-for-byte identical to the dev container in [`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)** — the template package and the modules built from it must agree on the toolchain, so bump both repos in the same sweep; drifted pins mean a module builds in one environment and fails in the other |
 
 Until a pin's file lands, the tracking issue shows a `pin not found` row — a
 reminder, not an error. Two more expected row states:
