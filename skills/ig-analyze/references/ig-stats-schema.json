@@ -92,7 +92,7 @@
     },
     "directives": {
       "type": "object",
-      "description": "Simplifier-/FQL-Direktiven in Narrativen (Migrations-Aufwandstreiber).",
+      "description": "Simplifier-/FQL-Direktiven in Narrativen (Treiber für offenen Arbeitsbedarf).",
       "properties": {
         "total": { "type": "integer" },
         "by_label": { "type": "object" },

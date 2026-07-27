@@ -55,9 +55,10 @@ Author identity is the configured human committer.
 - **Never mix release systems.** This template repo = SemVer/Release Please; a
   module = CalVer/MII Module Release Workflow. Do not wire Release Please into a
   module, and do not let a module inherit this repo's Release Please files.
-- **Fixed versions only.** Never use `current`/`latest`/`dev` as a version
-  label in anything built (dependencies, the IG template pin, tool versions).
-  The convention check enforces this; the dependency check proposes bumps.
+- **Fixed versions only.** Never use `current`/`latest`/`dev`/`cibuild` as a
+  version label in anything built (dependencies, the IG template pin, tool
+  versions). The convention check (M7) and the publication gate in
+  `go-publish.yml` both reject that set; the dependency check proposes bumps.
 - **`ig-template/` is a machine-synced mirror**, maintained by
   `scripts/sync-ig-template.sh` (`--check` fails on drift; `sync-ig-template.yml`
   runs it). Never hand-edit it, and never rewrite `template = #ig-template` into

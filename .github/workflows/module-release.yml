@@ -117,7 +117,7 @@ jobs:
           set -euo pipefail
           if grep -q '{{' sushi-config.yaml; then
             echo "is_module=false" >> "${GITHUB_OUTPUT}"
-            echo "::notice::Unreplaced {{...}} placeholders found in sushi-config.yaml. This looks like the un-instantiated module template (or a module not yet bootstrapped), so the MII CalVer release path is skipped. A real module — placeholders replaced by the first-run bootstrap — runs it for real."
+            echo "::notice::Unreplaced {{...}} placeholders found in sushi-config.yaml. This looks like the un-instantiated module template (or a module whose set-up is unfinished), so the MII CalVer release path is skipped. A real module — placeholders replaced by hand, per the first-run bootstrap's checklist — runs it for real."
           else
             echo "is_module=true" >> "${GITHUB_OUTPUT}"
             echo "Bootstrapped module detected — the CalVer release path applies."
