@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.3.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.2.0...v0.3.0) (2026-07-27)
+
+
+### Features
+
+* conformance pages follow the MII convention ([#33](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/33)) ([c08a94e](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/c08a94e3d6c8b038bc11e977d4e07eb80e73c81d))
+* English-default language, ported MII boilerplate, FSH scaffolding ([#35](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/35)) ([bf88224](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/bf88224b39378376e1772e2562e5b856a18b43a8))
+* machine-readable conformance statements + authoring recipes ([#36](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/36)) ([5055cb5](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/5055cb5504c1566d213f9d20331fa697ea9fd07e))
+* SU-TermServ setup helper for modules (Gate F) ([#30](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/30)) ([211bcfc](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/211bcfc581a74da960a8aa418695d543541c7b32))
+
+
+### Bug Fixes
+
+* apply the deep audit — red CI, language model, publication gate; merge tools/ into scripts/ ([#39](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/39)) ([0586ddd](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/0586ddd248c975ef6a4c8bf30b1ee99410181f88))
+* German menu translation, always-current vendored template, one-cert validation secrets ([#27](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/27)) ([e6f8330](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/e6f83301596df83e8824953019a5c6f191b05bb3))
+* **pages:** do not link to a repository that does not exist yet ([#42](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/42)) ([fcdc4ed](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/fcdc4ed38743b05ce5cdcf6a4fcd5ce3ec3d05ec))
+* second verification round — the novice path, the pin duplication, and what the docs got wrong ([#41](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/41)) ([95f1b8b](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/95f1b8ba09c113db107491664311f66d7cf7113b))
+
 ## [0.2.0](https://github.com/medizininformatik-initiative/mii-kds-module-template/compare/v0.1.0...v0.2.0) (2026-07-23)
 
 
