@@ -128,9 +128,11 @@ Open a pull request into `dev` and merge it.
 The bootstrap printed it; the essentials:
 
 1. **Replace every `{{PLACEHOLDER}}`.** Start in `sushi-config.yaml` (its header
-   lists every placeholder and what it means), then `ig.ini` (the module slug
-   **and** the pinned `template = de.medizininformatikinitiative.template#<version>`),
-   then `publication-request.json` and `.github/workflows/go-publish.yml`. Run
+   lists every placeholder and what it means), then `ig.ini` (the module slug in
+   the `ig =` path only — **leave `template = #ig-template` as it is** until the
+   MII template package is published; see
+   [switch-template-to-published.md](switch-template-to-published.md)), then
+   `publication-request.json` and `.github/workflows/go-publish.yml`. Run
    `node scripts/convention-check.mjs` — it must stay green.
 2. **Enable GitHub Pages:** Settings → Pages → Build and deployment →
    **"GitHub Actions"**. Then set the repository variable
