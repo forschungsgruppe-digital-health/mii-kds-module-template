@@ -87,6 +87,13 @@ rather than assumed.
   German. Translating them means touching
   `skills/ig-analyze/references/report-content.json` and the literals in the
   script — worth doing, not urgent.
+- **The report's recommendation rows still read as a migration.** The
+  effort/planning forecaster is gone and the headings are neutral, but the
+  `recommendations` rows in `report-content.json` (and the *Quell-/Zielformat*
+  glossary entry) still describe moving an IG onto the IG-Publisher toolchain
+  ("werden übernommen", "ins Zielformat überführt"). The advice itself is sound
+  IG hygiene; only the framing is inherited. Reword it in the same pass as the
+  German prose above.
 - **Two pins in `validation.yml` are not watched by any layer.** The
   reusable-workflow inputs `SUSHI_VERSION` and `JAVA_VALIDATOR_VERSION` are
   written as `${{ vars.X || '<version>' }}`, which the checker's env parser
