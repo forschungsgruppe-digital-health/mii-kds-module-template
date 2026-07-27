@@ -56,6 +56,23 @@ should re-check them.
   German `^title` renders nowhere, and `artifacts.html` keeps the
   default-language text. Recorded where the mechanism is documented.
 
+## Rendered pages never hard-code this repository's URL
+
+The two template repositories do not exist under `medizininformatik-initiative`
+yet — they move there once the drafts are approved. Until then any link to their
+target-organisation URL resolves nowhere, and a built IG is read by people who
+cannot know that.
+
+So **`input/pagecontent/**` and `input/translations/**` name a repository path in
+prose (`docs/recipes/add-a-profile.md` in this repository) instead of linking to
+it.** Links to `kerndatensatz-meta` and `kerndatensatz-basis` stay — those repos
+exist today. After the migration, self-referential links may be reintroduced;
+until then, adding one ships a 404 to every reader of that build.
+
+The IG Publisher reports these as broken links in `qa.html`. CI does not fail on
+the count — it includes external URLs whose reachability depends on the network
+at build time — so read it when you change page content.
+
 ## Known limits of the guards
 
 The guards are worth more than the drift they catch, so their reach is stated
