@@ -329,8 +329,9 @@ def git_stats(d):
         authors, dates = {}, []
         for l in lines:
             a, email, dt = l.split("|", 2)
-            # Aliasing vermeiden: nach E-Mail gruppieren (gleiche Person, versch. Anzeigenamen
-            # wie "Marcel Susky" / "M. Susky"); Fallback auf normalisierten Namen.
+            # Aliasing vermeiden: nach E-Mail gruppieren (gleiche Person, versch.
+            # Anzeigenamen wie "Erika Mustermann" / "E. Mustermann"); Fallback auf
+            # normalisierten Namen.
             key = email.strip().lower() or re.sub(r'[^a-z]', '', a.lower())
             authors[key] = authors.get(key, 0) + 1
             dates.append(dt.strip())
