@@ -1,10 +1,14 @@
-# FHIR IG best-practices checklist (module author)
+# FHIR IG best practices — this scaffold's self-check (module author)
 
-A checklist derived from the **official** HL7 sources below, with the current
-state of this scaffold proven item by item. Use it when you build your module and
-again before a release.
+A recommendation set, not a compliance gate. It is this scaffold's reading of
+HL7's IG best-practice guidance and of the MII meta wiki, with the current state
+of the scaffold proven item by item. HL7's guidance recommends; it does not
+oblige. No MII governance document makes any of it a release gate for a KDS
+module, and this repository decides nothing about MII modules — where the meta
+wiki and this page disagree, the wiki wins. Use it when you build your module and
+again before a release, and drop the items your module has no use for.
 
-## Sources (all official, retrieved 2026-07-26)
+## Sources (retrieved 2026-07-26)
 
 | # | Source | What it governs |
 |---|---|---|
@@ -31,13 +35,13 @@ scaffold gives you the place and a prompt) · ➖ not applicable.
 | Has a background page | ✅ | `guidance.md` + `datasets-and-descriptions.md` |
 | Has a downloads page | ✅ | `downloads.md` |
 | Has one or more pages defining the normative content | ✅ | the Conformance section (4 pages) |
-| **Security and Privacy Considerations section** | ✅ | `security-and-privacy.md` — ships with the required structure (privacy principles, security considerations, module conformance requirements, residual risks); **fill the `[TODO]` blocks** 📝 |
+| **Security and Privacy Considerations section** | ✅ | `security-and-privacy.md` — ships pre-structured (privacy principles, security considerations, module conformance requirements, residual risks); **fill the `[TODO]` blocks** 📝 |
 | Index page starts with an accessible explanation of the IG's purpose | ✅ / 📝 | `index.md` opens with *Introduction* + *Target audience*; replace the `[TODO]` with your module's purpose in lay terms |
-| Explains what `mustSupport` means for this IG | ✅ | `must-support.md` ships the MII-standard server/client expectations |
+| Explains what `mustSupport` means for this IG | ✅ | `must-support.md` restates the server/client expectations of the meta wiki (S8) |
 | Explains prerequisite knowledge (FHIR basics, SHALL/SHOULD/MAY, the domain) | ✅ | `general-requirements.md` (conformance verbs) + `docs/glossary.md`; link further reading from `guidance.md` 📝 |
 | Says how to engage with the community — durable for 5+ years | ✅ | `index.md` → *Contact*: `chat.fhir.org` stream `german/mi-initiative` + the repo's GitHub issues |
 | Explains the relationship to other guides **and references the IG registry** | ✅ / 📝 | `index.md` → *Related guides* links the [FHIR IG Registry](https://fhir.org/guides/registry/); add your module's formal dependencies |
-| Prefer single larger pages over many tiny ones | 📝 | The page set is the MII-standard structure; keep related content together rather than splitting further |
+| Prefer single larger pages over many tiny ones | 📝 | The page set mirrors `kerndatensatz-basis` plus this scaffold's own Security-and-Privacy page. It is a starting point your module owns and may change (see [page-structure.md](page-structure.md)), not a fixed MII page set |
 | Good anchor names on pages | 📝 | Use explicit headings; the Publisher generates version-specific anchors otherwise |
 
 ## 2. Writing and narrative (S1, S2)
@@ -150,7 +154,11 @@ should silently settle.
 
 ---
 
-## Before every release
+## Before every release — this scaffold's own check
+
+None of this is an MII release gate. The gates that really stop a release are the
+MII reusable validation workflow and, on a release branch, `convention-check`
+(see [release.md](release.md)). The rest is what this scaffold recommends:
 
 1. Every `[TODO]` prompt is resolved in **both** page trees —
    `grep -rn '\[TODO' input/pagecontent input/translations` must come back
@@ -158,7 +166,11 @@ should silently settle.
    translation ships to `/de/` just as visibly. (The scaffold's HTML authoring
    comments mention `[TODO ...]` too; those comments are meant to be deleted —
    see `input/pagecontent/index.md`.)
-2. `security-and-privacy.md` is filled in — it is a best-practice requirement, not optional.
-3. QA errors = 0 and no unreviewed entries in `input/ignoreWarnings.txt`.
+2. `security-and-privacy.md` is filled in. HL7's guidance recommends a
+   security-and-privacy section and this scaffold ships the page pre-structured;
+   whether an unfilled section blocks your release is your project's decision.
+3. Read `output/qa.html` and `input/ignoreWarnings.txt`. This scaffold aims for 0
+   QA errors and no unreviewed ignore entries; the authoritative error gate
+   remains the reusable validation workflow.
 4. `convention-check` passes on the release branch.
 5. Both languages render: menu, footer and pages (see the translation recipe).

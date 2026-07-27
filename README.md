@@ -71,7 +71,7 @@ Unfamiliar terms are in the [glossary](docs/glossary.md).
 - [Glossary](docs/glossary.md) · [Concepts](docs/concepts.md) — the vocabulary and the ideas behind it
 - [Page structure](docs/page-structure.md) — who owns the page set and the menu (your module, not the IG template)
 - [Workflows](docs/workflows.md) — what the CI does, and how releases work
-- [IG best-practices checklist](docs/ig-best-practices-checklist.md) — the official HL7 practices, and what you still need to fill in
+- [IG best-practices checklist](docs/ig-best-practices-checklist.md) — this scaffold's self-check against HL7's (non-normative) IG best-practice guidance and the MII meta wiki, plus the parts you still have to write
 - [Secrets](docs/secrets.md) — optional: MII terminology server, release announcements
 - [Open tasks](docs/open-tasks.md) — what is unfinished, and why
 
