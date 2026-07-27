@@ -116,8 +116,8 @@ this repository does not speak for the MII.
 
 The MII does publish rules for commenting on a Kerndatensatz module, and a
 module built from this scaffold will eventually sit inside them. They are in
-the **KDS governance, version 4.0 (7 May 2026)**, adopted by the National
-Steering Committee and linked from the
+the [**KDS governance, version 4.0 (7 May 2026)**](https://www.medizininformatik-initiative.de/sites/default/files/2026-07/KDS-Governance-v4.pdf),
+adopted by the National Steering Committee and linked from the
 [MII core-data-set page](https://www.medizininformatik-initiative.de/en/medical-informatics-initiatives-core-data-set):
 
 - **Where comments go.** After FHIR profiling, a module runs a commenting round.
@@ -136,9 +136,11 @@ Two things the MII does **not** publish, which are worth knowing so you do not
 go looking:
 
 - **No code of conduct**, anywhere — see [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
-- **No `CONTRIBUTING.md`** in the MII organisation or in any KDS module,
-  including the reference module `kerndatensatz-basis`. The one participation
-  rule published organisation-wide is how to request GitHub access, on the
+- **No `CONTRIBUTING.md` for a KDS module** — not in the reference module
+  `kerndatensatz-basis`, not in any other `kerndatensatz-*` repository, and not
+  as an organisation-level default. (A couple of the MII's *software* repos
+  carry one; no core-data-set module does.) The one participation rule
+  published organisation-wide is how to request GitHub access, on the
   [MII organisation profile](https://github.com/medizininformatik-initiative/.github/blob/main/profile/README.md):
   email the Geschäftsstelle with the subject *"Zugang zum GitHub der MII"*.
 
