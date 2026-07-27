@@ -32,11 +32,11 @@ This scaffold references it in `ig.ini`:
 ## 3. The metadata contract (CRMI)
 
 `sushi-config.yaml` is not just config — it is a **contract**. It claims the CRMI
-ImplementationGuide profiles and carries the MII-required `artifact-*` extensions,
-so the module is a properly described, versioned, shareable publication unit. The
-`convention-check` job enforces the naming patterns (packageId, id, name, title,
-canonical, CalVer version). Fill every `{{PLACEHOLDER}}`; the comments in the file
-tell you what each one means.
+ImplementationGuide profiles and carries the same `artifact-*` extensions as the
+reference module kerndatensatz-basis, so the module is a properly described,
+versioned, shareable publication unit. The `convention-check` job enforces the
+naming patterns (packageId, id, name, title, canonical, CalVer version). Fill
+every `{{PLACEHOLDER}}`; the comments in the file tell you what each one means.
 
 ## 4. Two layers you must not confuse
 
