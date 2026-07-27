@@ -22,6 +22,7 @@ say "go" — none should be done by an agent.
 | Store the SU-TermServ client certificate as repository secrets | A maintainer with the certificate | The procedure is written and the handshake was verified locally against the live server. See [secrets](secrets.md); run `scripts/set-su-termserv-secrets.sh`. Without it, builds fall back to `tx.fhir.org`. |
 | Store the Zulip announcement key | A maintainer | See [secrets](secrets.md). Release announcements stay silent until then. |
 | Decide who owns the template after 2026 | TF KDS | Currently "the MII, for now". |
+| Decide which language carries a module's *normative* text | TF KDS | The MII wiki is German; this template, like `kerndatensatz-basis` and the wider FHIR ecosystem, renders English by default and German as the translation. Which of the two is *normative* is a project-level call, not something a template settles silently. Nothing is blocked meanwhile — both languages render. |
 
 ## To raise upstream
 

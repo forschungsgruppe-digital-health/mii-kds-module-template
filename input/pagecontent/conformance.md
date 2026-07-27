@@ -44,7 +44,11 @@ technical artifacts see the [Artifacts](artifacts.html) section.
 > `input/pagecontent/general-requirements.md` shows the syntax in place: copy a
 > marked sentence from there and give yours the next free id on its page. The
 > German mirror deliberately carries no markers; the list is produced from the
-> English pages only.]
+> English pages only.
+>
+> Keep the set **curated** — mark real obligations, not every sentence that
+> happens to contain a bold verb — and keep each marked sentence
+> self-contained: the table shows it out of context.]
 
 ---
 

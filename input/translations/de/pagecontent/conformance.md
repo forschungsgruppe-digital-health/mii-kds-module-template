@@ -43,7 +43,11 @@ technischen Artefakte im Abschnitt [Artefakte](artifacts.html).
 > Paragraphenzeichen — und daraus erzeugt der IG-Publisher die Übersichtstabelle
 > am Ende der englischen Fassung dieser Seite. Die Syntax steht im Original in
 > `input/pagecontent/general-requirements.md`. Diese deutsche Fassung trägt
-> bewusst keine Markierungen.]
+> bewusst keine Markierungen.
+>
+> Halten Sie die Menge **kuratiert** — markieren Sie echte Verpflichtungen,
+> nicht jeden Satz mit einem fett gesetzten Verb — und formulieren Sie jeden
+> markierten Satz für sich verständlich: die Tabelle zeigt ihn ohne Kontext.]
 
 ---
 

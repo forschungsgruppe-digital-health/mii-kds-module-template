@@ -54,6 +54,7 @@ scaffold gives you the place and a prompt) · ➖ not applicable.
 | Uses the defined narrative styles where appropriate (`stu-note`, `dragon`, …) | 📝 | Available from the template; use `{:.stu-note}` / `{:.dragon}` for open issues and warnings |
 | Intros/notes on artifacts | 📝 | Put `StructureDefinition-<id>-intro.md` / `-notes.md` in `input/intro-notes/` (wired via `path-pages`) |
 | Rationale for controversial design decisions is captured | 📝 | Record it in the artifact's notes or in `guidance.md` |
+| Normative sentences are machine-readably marked | ✅ / 📝 | Normative sentences on the English pages carry `§<page>-<n>:…§` markers; `conformance.md` ends with a paragraph of only `§§§`, which the Publisher renders as the statement table. Markers are English-only — [why](open-tasks.md#verified-by-observation-not-by-specification). How to write one: the author note in `input/pagecontent/conformance.md` |
 
 ## 3. Images and diagrams (S1)
 
@@ -112,45 +113,6 @@ scaffold gives you the place and a prompt) · ➖ not applicable.
 | Publication runs through the IG Publisher's `-go-publish` | ✅ | `go-publish.yml`, manual and dry-run by default — see [`docs/release.md`](release.md) |
 | Multi-language is set up the supported way | ✅ | `i18n-default-lang: en`, `i18n-lang: [de]`, `translation-sources`; menu/content/resource translation per [`docs/recipes/add-translation.md`](recipes/add-translation.md) (S3) |
 | Required IG metadata is complete (publisher, contact, jurisdiction, licence, copyright) | ✅ | `sushi-config.yaml` — `publisher`, `jurisdiction: DE`, `license: CC-BY-4.0`, `copyrightYear` |
-
----
-
-## Open decisions (not yet made)
-
-One conformance question was open and is now decided; the language question
-below remains a project-level call.
-
-### 1. Machine-readable conformance statements — DECIDED (2026-07-26)
-
-**Adopted, with an English-only statement list**, the same way
-[kerndatensatz-basis](https://github.com/medizininformatik-initiative/kerndatensatz-basis)
-does it.
-
-Normative sentences in the English (default) pages are wrapped in
-`§<page>-<n>:…§`, and `conformance.md` ends with a paragraph containing only
-`§§§`, which the IG Publisher replaces with a table of the collected statements.
-The German mirror carries **no** markers and instead notes that the list is
-available in the English rendering.
-
-> **On the expectation column:** the rendered table shows an expectation
-> (`SHALL`, `SHOULD`, `MAY`) next to each statement, apparently read from the
-> English keyword in the sentence. That is *observed behaviour of the build, not
-> documented in HL7's* [ig-guidance](https://build.fhir.org/ig/FHIR/ig-guidance/conformance-statements.html),
-> which describes the markers and the table but names no expectation column. We
-> have not tested whether a German-marked statement classifies. English-only
-> markers avoid the question rather than answer it.
-
-Statements are a **curated set** of real obligations, not every sentence that
-happens to contain a bold verb. When you add one, give it the next free id on
-that page and keep the sentence self-contained — it is displayed out of context
-in the table.
-
-### 2. Which language leads the normative text
-
-The MII wiki is German, while this template — like kerndatensatz-basis and the
-wider FHIR ecosystem — leads the guide in English. Which language carries the
-modules' *normative* text is a project-level decision, not something a template
-should silently settle.
 
 ---
 
