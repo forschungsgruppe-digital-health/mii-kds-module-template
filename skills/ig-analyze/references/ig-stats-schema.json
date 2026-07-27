@@ -147,31 +147,6 @@
         "note": { "type": "string" }
       }
     },
-    "effort": {
-      "type": "object",
-      "description": "Aufwands-/Risiko-Schaetzung als Spanne (kein Punktwert): manuell UND KI-gestuetzt teilautomatisiert (Human-in-the-Loop, Review-Gates), hersteller-/modellagnostisch.",
-      "properties": {
-        "drivers": { "type": "object", "description": "gofsh_needed, directives, directives_unknown, pages, floating_pins" },
-        "manual": {
-          "type": "object",
-          "properties": {
-            "factors": { "type": "object" },
-            "hours_low": { "type": "number" }, "hours_high": { "type": "number" },
-            "band": { "type": "string", "enum": ["S", "M", "L", "XL"] }
-          }
-        },
-        "ai": {
-          "type": "object",
-          "properties": {
-            "factors": { "type": "object" },
-            "hours_low": { "type": "number" }, "hours_high": { "type": "number" },
-            "band": { "type": "string", "enum": ["S", "M", "L", "XL"] },
-            "savings_pct": { "type": "number" }
-          }
-        },
-        "assumptions": { "type": "array", "items": { "type": "string" } }
-      }
-    },
     "maturity": {
       "type": "object",
       "description": "Gruppe K: Reife & Freigabe (Score, Doku-Vollstaendigkeit, Beispiel-Abdeckung, Governance).",
@@ -187,10 +162,6 @@
     "portfolio": {
       "type": "object",
       "description": "Gruppe L: Strategie - Lock-in, Standard-Anteil, Wiederverwendung, FHIR-Aktualitaet, Pflege-Kadenz."
-    },
-    "planning": {
-      "type": "object",
-      "description": "Gruppe M: Planung - Kalenderzeit, Szenarien, Konfidenz, Rollen-Mix, Startbereitschaft (PLANNING_PARAMS)."
     },
     "risk": {
       "type": "object",

@@ -19,7 +19,7 @@ try:
 except Exception:
     datetime = None
 
-SCHEMA_VERSION = "1.2"
+SCHEMA_VERSION = "1.3"
 MANDATORY_PAGES = ["index", "use-cases", "data-sets", "uml", "conformance",
                    "context", "references", "changes", "downloads",
                    "security-privacy", "translationinfo"]
@@ -35,28 +35,10 @@ GENERIC_DIRECTIVE = r"\{\{[A-Za-z]|<fql|@```|</?tab"
 DEFAULT_PALETTE = ["#4E79A7", "#F28E2B", "#59A14F", "#E15759", "#76B7B2", "#EDC948",
                    "#B07AA1", "#FF9DA7", "#9C755F", "#BAB0AC", "#86BCB6", "#D37295"]
 
-# Aufwandsfaktoren (Stunden je Einheit) — KALIBRIERBAR (TODO:REVIEW).
-EFFORT_FACTORS = {"gofsh_flat": 8.0, "directive": 0.2, "page": 0.5, "floating_pin": 1.0}
-# KI-gestützt teilautomatisiert (Human-in-the-Loop, Review-Gates), anbieter-/modellAGNOSTISCH.
-# Die KI transformiert wiederkehrende Muster; Menschen prüfen an Kontrollpunkten. Bewusst KONSERVATIV
-# (Review-Aufwand je Treffer, fixe Einarbeitung, Validierungs-/Iterationsaufschlag), keine Über-Optimismus-Ersparnis.
-EFFORT_FACTORS_AI = {"gofsh_flat": 3.0, "directive_known": 0.08, "directive_unknown": 0.2,
-                     "page": 0.2, "floating_pin": 0.8, "gate_fixed": 3.0, "setup": 3.0,
-                     "iteration_pct": 0.2}
-
-# Planungs-Annahmen — KALIBRIERBAR (Defaults, keine Zusage). Maß ist ZEIT (Stunden/
-# Personentage/Kalenderzeit), bewusst KEINE Geld-/Kostenrechnung.
-PLANNING_PARAMS = {"hours_per_day": 8.0, "team_size": 1, "utilization": 0.6}
 STD_TERMINOLOGY = {"SNOMED CT": r"sct\b|snomed", "LOINC": r"loinc", "ICD-10": r"icd-?10|dimdi|bfarm",
                    "UCUM": r"ucum|unitsofmeasure", "ATC": r"\batc\b", "ASK": r"\bask\b"}
 TERM_LICENSE = {"SNOMED CT": "lizenzpflichtig (Affiliate/Land)", "LOINC": "frei (Registrierung)",
                 "ICD-10": "frei", "UCUM": "frei", "ATC": "eingeschränkt", "ASK": "frei"}
-
-BAND_LABEL = {"S": "klein", "M": "mittel", "L": "groß", "XL": "sehr groß"}
-BAND_KLARTEXT = {"S": "klein und schnell erledigt", "M": "gut machbar und mittelgroß",
-                 "L": "umfangreich", "XL": "sehr umfangreich"}
-BAND_EINORDNUNG = {"S": "am unteren Ende", "M": "im Mittelfeld",
-                   "L": "im oberen Bereich", "XL": "an der Obergrenze"}
 
 
 # ---------- Hilfen -------------------------------------------------------------
@@ -334,7 +316,7 @@ def parse_qc(path):
     return len(rules), rules
 
 
-# ---------- Strategie/Risiko/Planung/Wirtschaftlichkeit (Gruppen K–P) ----------
+# ---------- Strategie/Reife/Risiko (Gruppen K–P) -------------------------------
 def git_stats(d):
     out = {"commits": None, "authors": None, "top_author_share": None, "days_since_last": None,
            "commits_per_year": None, "tags": None, "first": None, "last": None}
@@ -468,40 +450,6 @@ def compute_risk(igdir, fsh_text, found_terms, example_decls, narrative, gs, qua
         "breaking_change_note": "Erfordert Diff gegen die publizierte Vorversion (Build/extern) — statisch nicht erhoben."}
 
 
-def compute_planning(effort, dependencies, narrative):
-    p = PLANNING_PARAMS
-    prod = max(p["hours_per_day"] * p["team_size"] * p["utilization"], 0.1)
-    man = effort["manual"]
-    drv = effort["drivers"]
-    import math
-    cal_low, cal_high = math.ceil(man["hours_low"] / prod), math.ceil(man["hours_high"] / prod)
-    expected = round((man["hours_low"] + man["hours_high"]) / 2, 1)
-    # Rollen-Mix grob aus Treiber-Stunden
-    f = man["factors"]
-    h_fsh = f["gofsh_flat"] if drv["gofsh_needed"] else 0
-    h_dir = drv["directives"] * f["directive"]
-    h_pag = drv["pages"] * f["page"]
-    h_dep = drv["floating_pins"] * f["floating_pin"]
-    tot = max(h_fsh + h_dir + h_pag + h_dep, 0.1)
-    roles = {"FSH-Rückgewinnung/Pins": round((h_fsh + h_dep) / tot * 100),
-             "Template/Tooling (Direktiven)": round(h_dir / tot * 100),
-             "Redaktion/Doku (Seiten)": round(h_pag / tot * 100)}
-    unknowns = drv["directives_unknown"] + drv["floating_pins"] + (1 if drv["gofsh_needed"] else 0)
-    confidence = "niedrig" if unknowns >= 5 else "mittel" if unknowns >= 1 else "höher"
-    readiness = 100 - (30 if drv["gofsh_needed"] else 0) - 5 * drv["floating_pins"] - (10 if drv["directives_unknown"] else 0)
-    ai = effort["ai"]
-    ai_fixed = ai.get("setup", 0) + ai.get("gate", 0)
-    return {
-        "calendar_days_low": cal_low, "calendar_days_high": cal_high,
-        "assumptions": {"hours_per_day": p["hours_per_day"], "team_size": p["team_size"], "utilization": p["utilization"]},
-        "scenario_min_h": man["hours_low"], "scenario_expected_h": expected, "scenario_max_h": man["hours_high"],
-        "confidence": confidence, "role_mix_pct": roles,
-        "parallelizable": "Direktiven & Seiten gut parallelisierbar; Setup/QA seriell",
-        "readiness_score": max(0, readiness),
-        "cross_module_dependency_risk": "erhöht (floating Pins)" if dependencies["floating"] else "gering",
-        "ai_fixed_cost_share_pct": round(ai_fixed / ai["hours_high"] * 100) if ai["hours_high"] else None}
-
-
 # ---------- analyze ------------------------------------------------------------
 def analyze(igdir, label, content):
     sushi = read(os.path.join(igdir, "sushi-config.yaml"))
@@ -595,41 +543,7 @@ def analyze(igdir, label, content):
 
     linguistics, duplication, hygiene = linguistics_hygiene(igdir, ndetail, artifact_list)
 
-    # ---- Aufwand: manuell + KI-gestützt ----
-    dtot, dunknown = directives["total"], directives["unknown"]
-    dknown = max(0, dtot - dunknown)
-    pages, flo, gofsh = narrative["pages"], dependencies["floating"], (not fsh_present)
-    m = EFFORT_FACTORS
-    man_base = (m["gofsh_flat"] if gofsh else 0) + dtot * m["directive"] + pages * m["page"] + flo * m["floating_pin"]
-    a = EFFORT_FACTORS_AI
-    ai_variable = (a["gofsh_flat"] if gofsh else 0) + dknown * a["directive_known"] + dunknown * a["directive_unknown"] \
-        + pages * a["page"] + flo * a["floating_pin"]
-    ai_iter = round(ai_variable * a["iteration_pct"], 2)
-    ai_base = a["setup"] + a["gate_fixed"] + ai_variable + ai_iter
-
-    def band_of(h):
-        return "S" if h < 8 else "M" if h < 40 else "L" if h < 120 else "XL"
-    man_low, man_high = round(man_base * 0.8, 1), round(man_base * 1.3, 1)
-    ai_low, ai_high = round(ai_base * 0.8, 1), round(ai_base * 1.3, 1)
-    savings = round((1 - (ai_low + ai_high) / (man_low + man_high)) * 100) if (man_low + man_high) else 0
-    effort = {
-        "drivers": {"gofsh_needed": gofsh, "directives": dtot, "directives_unknown": dunknown,
-                    "pages": pages, "floating_pins": flo},
-        "manual": {"factors": m, "hours_low": man_low, "hours_high": man_high, "band": band_of(man_high)},
-        "ai": {"factors": a, "hours_low": ai_low, "hours_high": ai_high, "band": band_of(ai_high),
-               "savings_pct": savings, "variable": round(ai_variable, 1), "iteration": ai_iter,
-               "setup": a["setup"], "gate": a["gate_fixed"]},
-        "assumptions": [
-            "Nur statisch berechenbare Treiber; id/url-Mismatch, QC-Verletzungen und quell-intrinsische "
-            "Validierungsfehler erfordern einen Build und sind hier nicht enthalten.",
-            "Faktoren sind Erfahrungswerte, noch nicht final kalibriert; Spanne = Basis × 0,8…1,3.",
-            "pages = Inhalts-Seiten (Stubs/Navigation < %d Wörter ausgeschlossen)." % STUB_MIN_WORDS,
-            "KI-Schätzung: anbieter-/modellunabhängig (Human-in-the-Loop, Review-Gates). Enthält feste Pauschalen "
-            "für Einarbeitung/Setup (%g h) und Review-Gates (%g h) sowie einen Validierungs-/Iterationsaufschlag "
-            "(%d %%); unbekannte Direktiven werden wie manuell gerechnet. Bewusst konservativ – keine garantierte "
-            "Einsparung." % (a["setup"], a["gate_fixed"], round(a["iteration_pct"] * 100))]}
-
-    # ---- Strategie / Reife / Risiko / Planung / Wirtschaftlichkeit (Gruppen K–P) ----
+    # ---- Strategie / Reife / Risiko (Gruppen K–P) ----
     fsh_text = " ".join(read(f) for f in fsh_files)
     decl_names = {x["name"] for x in artifact_list}
     gs = git_stats(igdir)
@@ -641,7 +555,6 @@ def analyze(igdir, label, content):
     portfolio = compute_portfolio(fsh_text, decl_names, artifacts, directives, narrative["pages"], identity,
                                   dependencies["items"], gs)
     risk = compute_risk(igdir, fsh_text, portfolio["terminology_standard_systems"], None, narrative, gs, quality)
-    planning = compute_planning(effort, dependencies, narrative)
 
     ts = None
     if datetime:
@@ -656,8 +569,8 @@ def analyze(igdir, label, content):
             "identity": identity, "artifacts": artifacts, "artifacts_detail": artifact_list,
             "dependencies": dependencies, "narrative": narrative, "linguistics": linguistics,
             "duplication": duplication, "hygiene": hygiene, "i18n": i18n,
-            "directives": directives, "quality": quality, "effort": effort,
-            "maturity": maturity, "portfolio": portfolio, "risk": risk, "planning": planning,
+            "directives": directives, "quality": quality,
+            "maturity": maturity, "portfolio": portfolio, "risk": risk,
             "git": gs}
 
 
@@ -673,16 +586,6 @@ def _de(x):
     else:
         s = str(x)
     return s.replace(".", ",")
-
-
-def _sav_word(sp):
-    """Ersparnis als Worte (vorzeichensicher): '31 % weniger' bzw. '53 % mehr'."""
-    return ("%d %% weniger" % sp) if sp >= 0 else ("%d %% mehr" % abs(sp))
-
-
-def _sav_short(sp):
-    """Ersparnis kompakt: '−31 %' bzw. '+53 %'."""
-    return ("−%d %%" % sp) if sp >= 0 else ("+%d %%" % abs(sp))
 
 
 def _nz(x):
@@ -752,131 +655,10 @@ def _methodology_blocks(content):
     return B
 
 
-# ---------- Executive Summary (Entscheider) -----------------------------------
-def exec_summary_blocks(stats):
-    i, a, n, e = stats["identity"], stats["artifacts"], stats["narrative"], stats["effort"]
-    d, ii = stats["dependencies"], stats["i18n"]
-    drv, man, ai = e["drivers"], e["manual"], e["ai"]
-    band = man["band"]
-    lg = stats["linguistics"]
-    mt = stats["maturity"]
-    pt_low_s = ("%.1f" % round(man["hours_low"] / 8, 1)).replace(".", ",")
-    pt_high_s = ("%.1f" % round(man["hours_high"] / 8, 1)).replace(".", ",")
-    avg_s = ("%.0f" % lg["words_avg"])
-    mh_low, mh_high = round(man["hours_low"]), round(man["hours_high"])
-    ah_low, ah_high = round(ai["hours_low"]), round(ai["hours_high"])
-    sp = ai["savings_pct"]
-    if sp < 10:
-        ai_sentence = ("Bei dieser Größe bringt KI-Unterstützung kaum Vorteil – der feste Aufwand für Einrichtung "
-                       "und Review überwiegt (modellierte ~%d–%d h)." % (ah_low, ah_high))
-    else:
-        ai_sentence = ("Mit KI-Unterstützung lässt sich der Aufwand voraussichtlich %s senken (modellierte ~%d–%d h, "
-                       "≈ %s; Annahmen und Vorbehalte siehe „Aufwand“)."
-                       % ("deutlich" if sp >= 40 else "spürbar", ah_low, ah_high, _sav_word(sp)))
-    dir_h = round(drv["directives"] * man["factors"]["directive"])
-    page_h = round(drv["pages"] * man["factors"]["page"])
-    parts = []
-    for cnt, sg, pl in [(a.get("profiles", 0), "Profil (Kernregelwerk)", "Profile (Kernregelwerk)"),
-                        (a.get("extensions", 0), "Erweiterung", "Erweiterungen"),
-                        (a.get("valuesets", 0), "Werte-Liste", "Werte-Listen"),
-                        (a.get("codesystems", 0), "Codesystem", "Codesysteme"),
-                        (a.get("logicals", 0), "logisches Datenmodell", "logische Datenmodelle"),
-                        (a.get("capabilitystatements", 0), "Fähigkeitsbeschreibung", "Fähigkeitsbeschreibungen"),
-                        (a.get("examples", 0), "Beispiel", "Beispiele")]:
-        if cnt:
-            parts.append(_plural(cnt, sg, pl))
-
-    blockers = []
-    if drv["floating_pins"]:
-        blockers.append("bewegliche Abhängigkeiten (vor Migration fixieren)")
-    if drv["gofsh_needed"]:
-        blockers.append("FSH-Rückgewinnung nötig (kein FSH vorhanden)")
-    blocker_satz = "ohne erkennbare Blocker" if not blockers else "mit wenigen vorab zu klärenden Punkten"
-    blocker_bewertung = "Keine harten Blocker." if not blockers else ("Zu klären vor Start: " + "; ".join(blockers) + ".")
-
-    quelle = "die fachliche Substanz liegt bereits in maschinenlesbarer, sauberer Form vor" if not drv["gofsh_needed"] \
-        else "die Regeln müssen zunächst aus generierten Dateien zurückgewonnen werden"
-    empfehlung = "Durchführen empfohlen." if band in ("S", "M") and not blockers else \
-        ("Durchführbar – mit Ressourcen- und Zeitplanung." if band in ("S", "M", "L") else
-         "Vor Durchführung Scope und Ressourcen prüfen.")
-
-    B = []
-    B.append("## Executive Summary: Migration des FHIR-Leitfadens \"%s\"" % (i.get("title") or i.get("id")))
-    B.append("> **Worum geht es?** Ein FHIR Implementation Guide (kurz „IG“) ist die technische Spezifikation "
-             "eines Datenstandards im Gesundheitswesen – das Regelwerk plus die zugehörige Online-Dokumentation. "
-             "Dieser IG soll von einer herstellergebundenen Plattform auf das herstellerneutrale Standard-Werkzeug "
-             "der FHIR-Community (den „IG Publisher“) umgezogen werden. Inhaltlich ändert sich nichts – nur die "
-             "technische Bauweise der Veröffentlichung. _Fachbegriffe sind im Glossar am Dokumentende erklärt._")
-    B.append("### Das Wichtigste in einem Satz")
-    B.append("Der Umzug ist **%s** (geschätzt **%d–%d Personenstunden**, also rund **%s–%s Personentage**), "
-             "**%s** – %s. %s"
-             % (BAND_KLARTEXT.get(band, band), mh_low, mh_high, pt_low_s, pt_high_s, blocker_satz, quelle, ai_sentence))
-    B.append("### Inhaltlicher Umfang (was migriert wird)")
-    B.append("\n".join([
-        "- **Identität:** `%s`, Version %s, Herausgeber %s, Lizenz %s, Status „%s“."
-        % (i.get("id"), i.get("version"), i.get("publisher"), i.get("license"), i.get("status")),
-        "- **%s fachliche Bausteine:** %s." % (a.get("total"), ", ".join(parts)),
-        "- **Dokumentation:** %d inhaltliche Textseiten (~%d Wörter, Ø %s Wörter/Seite) und %d Bilder."
-        % (lg["content_pages"], lg["words_total"], avg_s, n["images"])]))
-    B.append("### Aufwand und was das Band bedeutet")
-    B.append("\n".join([
-        "- **Aufwandsband: %s (%s)** – auf einer Skala S (klein, <1 Tag) / M (mittel, einige Tage) / "
-        "L (groß, 1–2 Wochen) / XL (sehr groß) liegt dieses Vorhaben **%s**."
-        % (band, BAND_LABEL.get(band, band), BAND_EINORDNUNG.get(band, "")),
-        "- **Manuell: rund %d–%d Stunden.** Das ist eine **Größenordnungsschätzung zur Budgetplanung** "
-        "(Faustregel: Menge der Arbeitsschritte × Erfahrungswert) – **kein verbindliches Angebot**." % (mh_low, mh_high),
-        "- **KI-gestützt teilautomatisiert: rund %d–%d Stunden** (≈ %s). Das heißt: eine KI erledigt die "
-        "wiederkehrenden Umbauten, Menschen prüfen und geben an Kontrollpunkten frei (Human-in-the-Loop / Review-Gates). "
-        "Die Schätzung gilt **unabhängig davon, welches KI-Produkt eingesetzt wird** – sie ist eine _modellierte_ Annahme "
-        "mit noch nicht kalibrierten Faktoren, **keine garantierte Einsparung**." % (ah_low, ah_high, _sav_word(sp)),
-        "- **Größte Aufwandstreiber:** %d plattformspezifische Platzhalter in den Textseiten (sog. „Direktiven“ – das neue "
-        "Standard-Werkzeug kennt sie nicht, sie werden einzeln umgebaut; ~%d h) und %d Inhaltsseiten (~%d h)."
-        % (drv["directives"], dir_h, drv["pages"], page_h),
-        "- **Reife & Strategie:** Reifegrad **%s/100 (%s)** · Hersteller-Lock-in %s. "
-        "(Details in den Abschnitten Reife & Freigabe und Strategie.)"
-        % (_nz(mt["score"]), mt["band"], stats["portfolio"]["vendor_lockin_band"])]))
-    B.append("### Wie sauber ist die Quelle?")
-    src_lines = []
-    src_lines.append("- **%s**" % ("Regeln liegen bereits in der bearbeitbaren Textform (FSH) vor – kein aufwändiger "
-                     "Rückbau nötig (Effizienzvorteil)." if not drv["gofsh_needed"] else
-                     "Regeln müssen aus den fertigen Dateien in die Textform zurückgewonnen werden (zusätzlicher Vorlauf)."))
-    src_lines.append("- **%d externe Abhängigkeiten, davon %d fest verankert, %d beweglich.** %s"
-                     % (d["count"], d["pinned"], d["floating"],
-                        "Feste Versionen bedeuten reproduzierbare, stabile Builds – kein wackeliges Fundament."
-                        if d["floating"] == 0 else "Bewegliche Versionen vor der Migration auf feste Stände festlegen."))
-    if i.get("calver"):
-        src_lines.append("- **Versionsnummer aus dem Kalenderjahr (CalVer)** – wird unverändert übernommen, kein Anpassungsbedarf.")
-    if ii["fsh_translation_ext"]:
-        src_lines.append("- **Mehrsprachigkeit bereits technisch vorbereitet** – Übersetzungen können automatisch mitgenommen werden.")
-    if stats["quality"]["qc_rules_defined"]:
-        src_lines.append("- **%d Qualitätsregeln** bereits definiert und 1:1 übernehmbar." % stats["quality"]["qc_rules_defined"])
-    B.append("\n".join(src_lines))
-    B.append("### Risiken und Blocker")
-    risk = ["- **%s**" % blocker_bewertung]
-    if drv["directives_unknown"]:
-        risk.append("- **%d der %d Platzhalter/„Direktiven“ sind „unbekannt“** – ohne automatisches Umsetzungsmuster, "
-                    "daher **von Hand** zu übertragen. Überwiegend eingebettete Ansichten; Mehraufwand begrenzt, aber einzuplanen."
-                    % (drv["directives_unknown"], drv["directives"]))
-    risk.append("- **Schätzungs-Vorbehalt:** beruht auf einer rein **statischen** Analyse der Quelldateien (ohne "
-                "Test-Build); ein vollständiger Validierungslauf kann zusätzliche Detailkorrekturen aufdecken. Die "
-                "Erfahrungswerte sind noch nicht final kalibriert – daher die bewusst breite Spanne.")
-    risk.append("- **Risikomindernd:** Der Umzug erfolgt isoliert auf einem separaten Arbeitszweig, ohne Eingriff in "
-                "den produktiven Stand; ein menschliches Abschluss-Review ist vorgesehen.")
-    B.append("\n".join(risk))
-    B.append("### Bottom Line / Empfehlung")
-    B.append("**%s** Der Aufwand ist %s und kalkulierbar (manuell ~%s–%s Personentage, KI-gestützt voraussichtlich "
-             "spürbar weniger), die Quelle ist %s. Konkret einzuplanen: %sein abschließender Validierungslauf mit "
-             "fachlichem Review."
-             % (empfehlung, BAND_LABEL.get(band, band), pt_low_s, pt_high_s,
-                "reif" if not drv["gofsh_needed"] and d["floating"] == 0 else "mit überschaubaren Vorarbeiten",
-                ("die %d von Hand zu übertragenden Platzhalter sowie " % drv["directives_unknown"]) if drv["directives_unknown"] else ""))
-    return B
-
-
 # ---------- report -------------------------------------------------------------
 def report(stats, content, out):
     i, a = stats["identity"], stats["artifacts"]
-    d, n, t, e = stats["dependencies"], stats["narrative"], stats["directives"], stats["effort"]
+    d, n, t = stats["dependencies"], stats["narrative"], stats["directives"]
     q, ii = stats["quality"], stats["i18n"]
     pal = _palette(content)
     di = content.get("directive_info") or {}
@@ -887,9 +669,6 @@ def report(stats, content, out):
     if stats["mode"] == "reduced":
         meta += " · ⚠ reduzierte Analyse (nur generierte Ressourcen, kein FSH/Narrative)"
     B.append("_%s_" % meta)
-
-    # Executive Summary
-    B.extend(exec_summary_blocks(stats))
 
     # Kennzahlen-Überblick
     B.append("## Kennzahlen-Überblick")
@@ -932,35 +711,6 @@ def report(stats, content, out):
     ]))
     B.append("_%s_" % hy["note"])
 
-    # Aufwand: manuell vs. KI-gestützt
-    B.append("## Aufwand: manuell vs. KI-gestützt")
-    if _intro(content, "aufwand"):
-        B.append("_%s_" % _intro(content, "aufwand"))
-    drv, man, ai = e["drivers"], e["manual"], e["ai"]
-    mf, af = man["factors"], ai["factors"]
-    known = max(0, drv["directives"] - drv["directives_unknown"])
-    erows = [
-        ("GoFSH-Vorlauf (Regel-Rückgewinnung)", "ja" if drv["gofsh_needed"] else "nein",
-         mf["gofsh_flat"] if drv["gofsh_needed"] else 0, af["gofsh_flat"] if drv["gofsh_needed"] else 0),
-        ("Direktiven (bekannt)", known, known * mf["directive"], known * af["directive_known"]),
-        ("Direktiven (unbekannt → manuell)", drv["directives_unknown"],
-         drv["directives_unknown"] * mf["directive"], drv["directives_unknown"] * af["directive_unknown"]),
-        ("Inhalts-Seiten", drv["pages"], drv["pages"] * mf["page"], drv["pages"] * af["page"]),
-        ("Floating Pins (Versionen fixieren)", drv["floating_pins"],
-         drv["floating_pins"] * mf["floating_pin"], drv["floating_pins"] * af["floating_pin"]),
-        ("Einarbeitung/Setup (einmalig)", "—", 0, af["setup"]),
-        ("Review-Gates (Pauschale)", "—", 0, af["gate_fixed"]),
-        ("Validierungs-/Iterationsaufschlag (%d %%)" % round(af["iteration_pct"] * 100), "—", 0, ai.get("iteration", 0)),
-    ]
-    erows = sorted(erows, key=lambda r: -(r[2] if isinstance(r[2], (int, float)) else 0))
-    erows = [(name, menge, _de(round(m, 1)), _de(round(av, 1))) for (name, menge, m, av) in erows]
-    B.append(_table(["Treiber", "Menge", "manuell [h]", "KI-gestützt [h]"], erows))
-    B.append("**Manuell:** Band %s · **%s–%s h**  |  **KI-gestützt (HITL, Review-Gates, anbieter-/modellunabhängig):** "
-             "Band %s · **%s–%s h** · **≈ %s**"
-             % (man["band"], _de(man["hours_low"]), _de(man["hours_high"]), ai["band"],
-                _de(ai["hours_low"]), _de(ai["hours_high"]), _sav_word(ai["savings_pct"])))
-    B.append("_Annahmen:_ " + " ".join("• " + x for x in e["assumptions"]))
-
     # Reife & Freigabe
     nz = lambda x: "—" if x is None else x
     mt = stats["maturity"]
@@ -993,25 +743,6 @@ def report(stats, content, out):
     ]))
     B.append("_Lock-in und Standard-Terminologie-Anteil sind grobe Heuristiken aus Textvorkommen. %s_" % pf["dependency_staleness_note"])
 
-    # Planung & Terminierung
-    pl = stats["planning"]
-    B.append("## Planung & Terminierung")
-    if _intro(content, "planung"):
-        B.append("_%s_" % _intro(content, "planung"))
-    B.append(_table(["Planungsgröße", "Wert"], [
-        ("Kalenderzeit", "%d–%d Arbeitstage" % (pl["calendar_days_low"], pl["calendar_days_high"])),
-        ("Szenario Min / Erwartet / Max", "%s / %s / %s h" % (_de(pl["scenario_min_h"]), _de(pl["scenario_expected_h"]), _de(pl["scenario_max_h"]))),
-        ("Schätz-Konfidenz", pl["confidence"]),
-        ("Startbereitschaft", "%d/100" % pl["readiness_score"]),
-        ("Cross-Modul-Abhängigkeit", pl["cross_module_dependency_risk"]),
-        ("KI-Fixaufwandsanteil", "%s %%" % nz(pl["ai_fixed_cost_share_pct"])),
-    ]))
-    B.append("**Rollen-Mix (grob):** " + " · ".join("%s %d %%" % (k, v) for k, v in pl["role_mix_pct"].items()) + ". " + pl["parallelizable"] + ".")
-    pa = pl["assumptions"]
-    B.append("_Hinweis: FHIR-/FSH-Fachwissen ist für Review, Validierung und QC-Übernahme generell erforderlich; "
-             "ein 0-%%-Wert bei FSH bedeutet nur, dass **kein FSH-Rückbau (GoFSH)** anfällt. "
-             "Annahmen Kalenderzeit: %g h/Tag · Team %d · Auslastung %d %%._" % (pa["hours_per_day"], pa["team_size"], round(pa["utilization"] * 100)))
-
     # Risiko & Compliance
     rk = stats["risk"]
     B.append("## Risiko & Compliance")
@@ -1028,11 +759,12 @@ def report(stats, content, out):
     ]))
 
     # Empfehlungen (neutral, generisch)
-    B.append("## Empfehlungen für die Überführung in ein generisches HL7-FHIR-IG")
+    B.append("## Empfehlungen")
     if _intro(content, "empfehlungen"):
         B.append("_%s_" % _intro(content, "empfehlungen"))
+    fsh_present = str(a.get("_source") or "").startswith("input/fsh")
     befund = {
-        "Artefakte (FSH)": "%d publiziert, FSH %s" % (a.get("total"), "vorhanden" if not drv["gofsh_needed"] else "fehlt"),
+        "Artefakte (FSH)": "%d publiziert, FSH %s" % (a.get("total"), "vorhanden" if fsh_present else "fehlt"),
         "Narrative": "%d Inhalts-Seiten, Format %s" % (n["pages"], n["format"]),
         "Direktiven": "%d (%d unbekannt)" % (t["total"], t["unknown"]),
         "Dependencies": "%d (%d floating)" % (d["count"], d["floating"]),
@@ -1107,8 +839,8 @@ def report(stats, content, out):
     if n["format"] == "target" and n["mandatory_missing_in_target"]:
         B.append("**Fehlende Pflichtseiten im Zielformat:** " + ", ".join("`%s`" % x for x in n["mandatory_missing_in_target"]))
     elif n["format"] == "source":
-        B.append("> Format = **source**: Pflichtseiten existieren im Quell-Guide und werden bei der Migration ins "
-                 "Zielformat überführt; „fehlende Zielseiten\" wird hier daher nicht als Lücke gewertet.")
+        B.append("> Format = **source**: die Pflichtseiten existieren im Quell-Guide; „fehlende Zielseiten\" "
+                 "wird hier daher nicht als Lücke gewertet.")
 
     if t.get("occurrences") or t.get("unknown_occurrences"):
         B.append("## Direktiven-Fundstellen")
@@ -1181,8 +913,8 @@ def compare(statslist, content, out):
         return s["analyzed"]["label"]
     B = []
     B.append("# IG-Vergleich (%d IGs)" % len(statslist))
-    B.append("_Objektiver Kennzahlen-Vergleich der analysierten IGs inkl. Linguistik und Aufwandsschätzung. "
-             "Die Spalte „Σ Gesamt“ zeigt den aggregierten Migrations-Gesamtumfang und die -kosten; "
+    B.append("_Objektiver Kennzahlen-Vergleich der analysierten IGs inkl. Linguistik. "
+             "Die Spalte „Σ Gesamt“ zeigt den aggregierten Gesamtumfang; "
              "faire Einordnung über normalisierte Werte._")
 
     B.append("## Kennzahlen (je IG + Gesamt)")
@@ -1210,28 +942,7 @@ def compare(statslist, content, out):
                      ("Standard-Terminologie %", lambda s: _nz(s["portfolio"]["terminology_standard_share_pct"])),
                      ("Bus-Faktor % (Top-Autor)", lambda s: _nz(s["risk"]["bus_factor_top_author_pct"]))]:
         krows.append([name] + [fn(s) for s in statslist] + ["—"])
-    man_low = sum(s["effort"]["manual"]["hours_low"] for s in statslist)
-    man_high = sum(s["effort"]["manual"]["hours_high"] for s in statslist)
-    ai_low = sum(s["effort"]["ai"]["hours_low"] for s in statslist)
-    ai_high = sum(s["effort"]["ai"]["hours_high"] for s in statslist)
-    krows.append(["Aufwand manuell [h] (Band)"]
-                 + ["%s–%s (%s)" % (_de(s["effort"]["manual"]["hours_low"]), _de(s["effort"]["manual"]["hours_high"]), s["effort"]["manual"]["band"]) for s in statslist]
-                 + ["%s–%s" % (_de(round(man_low, 1)), _de(round(man_high, 1)))])
-    krows.append(["Aufwand KI-gestützt [h] (Δ)"]
-                 + ["%s–%s (%s)" % (_de(s["effort"]["ai"]["hours_low"]), _de(s["effort"]["ai"]["hours_high"]), _sav_short(s["effort"]["ai"]["savings_pct"])) for s in statslist]
-                 + ["%s–%s" % (_de(round(ai_low, 1)), _de(round(ai_high, 1)))])
     B.append(_table(["Metrik"] + [lab(s) for s in statslist] + ["Σ Gesamt"], krows))
-
-    B.append("## Gesamtumfang & -aufwand der Migration")
-    B.append("\n".join([
-        "- **Gesamt-Umfang:** %d Artefakte · %d Inhalts-Seiten (~%d Wörter) · %d Plattform-Direktiven über %d IG(s)."
-        % (sum(s["artifacts"]["total"] for s in statslist), sum(s["narrative"]["pages"] for s in statslist),
-           sum(s["linguistics"]["words_total"] for s in statslist), sum(s["directives"]["total"] for s in statslist), len(statslist)),
-        "- **Gesamt-Aufwand manuell:** **%s–%s h** (≈ %s–%s Personentage)."
-        % (_de(round(man_low, 1)), _de(round(man_high, 1)), _de(round(man_low / 8, 1)), _de(round(man_high / 8, 1))),
-        "- **Gesamt-Aufwand KI-gestützt** (HITL, Review-Gates, anbieter-/modellunabhängig): **%s–%s h** (≈ %s–%s Personentage)."
-        % (_de(round(ai_low, 1)), _de(round(ai_high, 1)), _de(round(ai_low / 8, 1)), _de(round(ai_high / 8, 1))),
-        "_Aufwand als Spanne (Zeit, keine Geldgröße), kein Festpreis; Faktoren noch nicht final kalibriert._"]))
 
     # Portfolio: Wiederverwendung & Konsolidierung (Cross-IG-Overlap, Skaleneffekt)
     name_to_igs = {}
@@ -1247,8 +958,6 @@ def compare(statslist, content, out):
                         [("%s (%s)" % (k.split("|", 1)[1], k.split("|", 1)[0]), " · ".join(sorted(v))) for k, v in sorted(shared.items())]))
     else:
         B.append("_Keine namensgleichen Artefakte über die IGs gefunden — geringe direkte Überlappung._")
-    if len(statslist) > 1:
-        B.append("- **Skaleneffekt KI:** Würde die KI-Einrichtung **programmweit einmal** statt je IG aufgesetzt, entfielen %d−1 der festen Setup-Pauschalen; der Grenzaufwand je weiterem IG sinkt auf den variablen Anteil." % len(statslist))
 
     B.append("## Normalisierte Kennzahlen (fairer Vergleich)")
 
@@ -1258,23 +967,23 @@ def compare(statslist, content, out):
     B.append(_table(["Metrik"] + [lab(s) for s in statslist], [
         ["Direktiven je Seite"] + [per(s, lambda x: x["directives"]["total"], lambda x: x["narrative"]["pages"]) for s in statslist],
         ["Beispiele je Profil"] + [per(s, lambda x: x["artifacts"].get("examples", 0), lambda x: x["artifacts"].get("profiles", 0)) for s in statslist],
-        ["KI-Ersparnis %"] + [s["effort"]["ai"]["savings_pct"] for s in statslist],
     ]))
 
     maxart = max((s["artifacts"]["total"] for s in statslist), default=1) or 1
-    maxh = max((s["effort"]["manual"]["hours_high"] for s in statslist), default=1) or 1
-    B.append("## Scope vs. Migrationsaufwand")
+    maxdir = max((s["directives"]["total"] for s in statslist), default=1) or 1
+    B.append("## Umfang: Artefakte vs. Plattform-Direktiven")
     tv = {"quadrant1Fill": pal[0], "quadrant2Fill": pal[1], "quadrant3Fill": pal[2], "quadrant4Fill": pal[3],
           "quadrant1TextFill": "#FFFFFF", "quadrant2TextFill": "#FFFFFF", "quadrant3TextFill": "#FFFFFF",
           "quadrant4TextFill": "#FFFFFF", "quadrantPointFill": "#1A1A1A", "quadrantPointTextFill": "#1A1A1A",
           "quadrantXAxisTextFill": "#1A1A1A", "quadrantYAxisTextFill": "#1A1A1A", "quadrantTitleFill": "#1A1A1A"}
     mer = ["```mermaid", "%%{init: {'theme':'base','themeVariables':" + json.dumps(tv) + "}}%%", "quadrantChart",
-           "    title Scope vs. Migrationsaufwand", "    x-axis Klein --> Gross",
-           "    y-axis Geringer_Aufwand --> Hoher_Aufwand", "    quadrant-1 gross & aufwaendig",
-           "    quadrant-2 klein & aufwaendig", "    quadrant-3 klein & einfach", "    quadrant-4 gross & einfach"]
+           "    title Artefakte vs. Direktiven", "    x-axis Wenige_Artefakte --> Viele_Artefakte",
+           "    y-axis Wenige_Direktiven --> Viele_Direktiven", "    quadrant-1 viele & direktivenlastig",
+           "    quadrant-2 wenige & direktivenlastig", "    quadrant-3 wenige & direktivenarm",
+           "    quadrant-4 viele & direktivenarm"]
     for s in statslist:
         mer.append('    "%s": [%s, %s]' % (lab(s), round(s["artifacts"]["total"] / maxart, 3),
-                                           round(s["effort"]["manual"]["hours_high"] / maxh, 3)))
+                                           round(s["directives"]["total"] / maxdir, 3)))
     mer.append("```")
     B.append("\n".join(mer))
 
@@ -1376,9 +1085,9 @@ def main():
         outp = json.dumps(stats, ensure_ascii=False, indent=2)
         if args.o:
             open(args.o, "w", encoding="utf-8").write(outp + "\n")
-            print("ig-stats -> %s  (Artefakte %d, Direktiven %d, manuell %s / KI %s)"
+            print("ig-stats -> %s  (Artefakte %d, Direktiven %d, Inhalts-Seiten %d)"
                   % (args.o, stats["artifacts"]["total"], stats["directives"]["total"],
-                     stats["effort"]["manual"]["band"], stats["effort"]["ai"]["band"]))
+                     stats["narrative"]["pages"]))
         else:
             print(outp)
         return 0

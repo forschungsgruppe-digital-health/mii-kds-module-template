@@ -80,6 +80,13 @@ rather than assumed.
   `medizininformatik-initiative/kerndatensatz-meta`). They are re-resolved by
   hand; the workflow comments say so rather than claiming automation that does
   not exist.
+- **`scripts/ig-stats.py` writes its report in German.** The tool is carried
+  over from the MII KDS sample IG and its report prose was never translated,
+  while every other document here is English-source. The measurements are
+  language-neutral; only the surrounding sentences and section headings are
+  German. Translating them means touching
+  `skills/ig-analyze/references/report-content.json` and the literals in the
+  script — worth doing, not urgent.
 - **Two pins in `validation.yml` are not watched by any layer.** The
   reusable-workflow inputs `SUSHI_VERSION` and `JAVA_VALIDATOR_VERSION` are
   written as `${{ vars.X || '<version>' }}`, which the checker's env parser
