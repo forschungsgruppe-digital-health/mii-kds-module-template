@@ -8,13 +8,11 @@ published** MII template package
 visible.
 
 > **Why the module starts vendored:** the IG Publisher needs a template to
-> build, but the published package `de.medizininformatikinitiative.template`
-> initially had **no FHIR package-registry entry and no release**. So the
-> template scaffold ships the template *content* copied into `ig-template/` and
-> references it as a local folder. That lets a module build on day
-> one. This recipe is the one-time cleanup you run once the template is
-> published — after it, your module tracks a versioned dependency like every
-> other package, and the scheduled dependency checker proposes upgrades for you.
+> build, and while the template package has no registry entry a module cannot
+> reference one — see [concepts.md § 2](../concepts.md#2-how-it-references-the-mii-template--vendored-vs-published)
+> and [project-status.md](../project-status.md) for whether it is published yet.
+> After this cleanup your module tracks a versioned dependency like every other
+> package, and the scheduled dependency checker proposes upgrades for you.
 
 **Prerequisites.** The template repository has cut a release **and** that release
 resolves for the IG Publisher (see below). Your module must build green before

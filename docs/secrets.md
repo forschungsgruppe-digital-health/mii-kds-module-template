@@ -34,14 +34,11 @@ all four — you never store the certificate twice.
 ### What kind of certificate is required
 
 SU-TermServ authenticates clients with **mutual TLS**. Verified against the live
-server on 2026-07-26 (`openssl s_client` to `ontoserver.mii-termserv.de:443`):
+server (`openssl s_client` to `ontoserver.mii-termserv.de:443`):
 
-- The server **requests** a client certificate and advertises the CAs it accepts.
-- That list includes the **German academic PKI** — DFN-Verein (Global Issuing CA,
-  Community Issuing/Root CA 2022), **GÉANT** (OV/EV/Personal, and
-  `GEANT S/MIME RSA 1` / `GEANT TLS RSA 1` via HARICA), Sectigo/USERTrust,
-  T-TeleSec — **and SU-TermServ's own CA** (`ca.mii-termserv.de`,
-  `intermediate.ca.mii-termserv.de`).
+- The server **requests** a client certificate and advertises the CAs it accepts
+  — the German academic PKI (DFN, GÉANT/HARICA) among them, and SU-TermServ's
+  own CA. Ask the server itself if you need the current list.
 - The certificate needs the **`TLS Web Client Authentication`** extended key
   usage.
 - Without a client certificate the endpoint answers **HTTP 400**.

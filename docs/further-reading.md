@@ -22,8 +22,7 @@ is authoritative; when it and this repo disagree, the wiki wins.
 - [Dev Container ‐ IG Publisher](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Dev-Container-‐-IG-Publisher)
   — the dev-container approach this repo aligns with.
 - [Release 2027](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Release-2027)
-  — evidence that the KDS is maintained past 2026; the post-funding horizon this
-  repo is built for.
+  — the planned scope and schedule of the next KDS release.
 
 ## FHIR, IG Publisher and authoring
 

@@ -81,9 +81,9 @@ Notes:
 
 ### The toggle summary
 
-The full inventory — every variable that turns a pipeline on or off, in both
-layers. All of them default correctly when unset;
-[secrets.md](secrets.md) covers the *secrets* that enable the gated features.
+The full inventory — every repository variable the workflows read, in both
+layers. All of them default correctly when unset; [secrets.md](secrets.md)
+covers the *secrets* that enable the gated features.
 
 | Pipeline | Variable | Default |
 | --- | --- | --- |

@@ -40,30 +40,22 @@ every `{{PLACEHOLDER}}`; the comments in the file tell you what each one means.
 
 ## 4. Two layers you must not confuse
 
-This is the single most important idea for a maintainer:
+The single most important idea for a maintainer: **this template repository
+releases itself with SemVer; a module you create releases itself with CalVer and
+carries no Release Please at all.** [workflows.md](workflows.md) sets the two
+layers side by side; the [first-run bootstrap](recipes/first-run-setup.md) is
+what enforces the separation.
 
-- **This template repository** releases *itself* with **SemVer** via Release Please
-  (it is tooling).
-- **A module you create** releases *itself* with **CalVer** via the MII Module
-  Release Workflow — and it carries **no Release Please at all**, because the
-  first-run bootstrap removes it.
-
-[workflows.md](workflows.md) explains both layers side by side. The
-[first-run bootstrap](recipes/first-run-setup.md) is what enforces the separation.
-
-> **Why remove Release Please from a module:** two release systems on one repo (SemVer
-> tags fighting CalVer tags) corrupt the version history. One repo, one release
-> mechanism.
+> **Why one mechanism per repo:** SemVer tags fighting CalVer tags corrupt the
+> version history.
 
 ## 5. What propagates to a module, and what does not
 
-When you create a module, the bootstrap **keeps** everything a module needs to live
-(the preview build, the CalVer release workflow, validation, the convention check,
-dependency + security monitoring, the agent skills, the starter content) and
-**removes** only the files that maintain *this template repo itself* (Release Please
-config/workflow, the template's release announcement, and the template
-`CHANGELOG`). The first-run tooling itself stays, so the recipe a module links
-to still resolves.
+The bootstrap **keeps** everything a module needs to live and **removes** only
+the files that maintain *this template repo itself*. The authoritative list is
+the `REMOVE=` line in `scripts/first-run-bootstrap.sh`, which the dry run
+prints; the first-run tooling itself stays, so the recipe a module links to
+still resolves — see [first-run-setup.md](recipes/first-run-setup.md).
 
 > **Why previews propagate but Release Please does not:** a branch preview is a
 > per-repo development aid every module wants; Release Please is a versioning
