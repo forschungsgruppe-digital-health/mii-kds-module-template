@@ -37,7 +37,7 @@ which this scaffold references (and keeps up to date automatically).
    counterparts in `input/translations/de/pagecontent/`).
    → [add a profile](docs/recipes/add-a-profile.md)
 6. **Build it**: `sushi .`, then run the IG Publisher, then read `output/qa.html`.
-   Or just push a branch — CI builds it and comments the preview URL on your PR.
+   Or push a branch — CI builds it and comments the preview URL on your PR.
 7. **Release** with CalVer via the MII Module Release Workflow.
    → [cut a release](docs/recipes/cut-a-release.md)
 

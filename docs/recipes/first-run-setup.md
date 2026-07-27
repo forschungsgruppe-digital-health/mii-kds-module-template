@@ -184,4 +184,4 @@ The bootstrap printed it; the essentials:
 | `cannot read main; … are you authenticated?` | `gh` not logged in, or run in the wrong repo | `gh auth login`; make sure you are inside the **new module** clone. |
 | Branch protection call fails with 403 | Your account lacks admin on the repo | Ask an owner to grant admin, or apply protection manually in Settings → Branches. |
 | Convention check fails on a `release/**` branch | A `{{PLACEHOLDER}}` is still unresolved | Resolve the reported field; a module must not release with placeholders. |
-| `dev already exists — leaving it as is.` | You used Option A ("Include all branches") | Expected — the script just skips creating `dev`. |
+| `dev already exists — leaving it as is.` | You used Option A ("Include all branches") | Expected — the script skips creating `dev`. |

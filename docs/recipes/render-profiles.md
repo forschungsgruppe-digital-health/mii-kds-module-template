@@ -35,7 +35,7 @@ input/intro-notes/StructureDefinition-<id>-notes.md   # rendered BELOW the table
 ```
 
 `<id>` is the profile's `Id:` from the FSH, not the file name. These are wired in
-already via the `path-pages` parameter in `sushi-config.yaml` — just drop the
+already via the `path-pages` parameter in `sushi-config.yaml` — drop the
 files in.
 
 **Use the intro for:** what the profile is for, which use case it serves, how it

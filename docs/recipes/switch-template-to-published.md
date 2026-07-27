@@ -58,7 +58,7 @@ in order of preference:
 - Your module already builds green today against the vendored template (so you
   have a clean baseline to compare against).
 - `sushi` (`3.20.0`), the IG Publisher jar (`2.2.11`), and `jq` are available —
-  the dev container has all three. Or simply push the branch and let the
+  the dev container has all three. Or push the branch and let the
   `IG build and preview` workflow build it for you.
 
 ## Steps
