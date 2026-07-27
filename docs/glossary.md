@@ -45,7 +45,3 @@ build on earlier ones.
 | **`publication-request.json`** | The file the IG Publisher's `-go-publish` reads to publish an IG (version, path, dates). |
 | **`special-url`** | A `sushi-config.yaml` list of canonical URLs a module defines that do **not** start with its own canonical; usually empty for a new module. See [recipes/regenerate-special-url.md](recipes/regenerate-special-url.md). |
 | **`-go-publish`** | The IG Publisher's production-publication mode. Here it is a **gated**, manual, dry-run-by-default workflow — never run automatically. |
-
-> **Why a glossary this long:** the biggest barrier for a newcomer is not any single
-> concept but the *stack* of unfamiliar words that assume each other. Skim it once;
-> come back when a term bites.

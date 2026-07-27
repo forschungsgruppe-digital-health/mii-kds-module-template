@@ -104,10 +104,6 @@ Notes:
   see [release.md](release.md) and [recipes/cut-a-release.md](recipes/cut-a-release.md).
   A module has **no Release Please** after the bootstrap.
 
-> **Why one page with two layers:** post-2026 a new maintainer must be able to tell,
-> in one read, whether a given workflow maintains the template or ships in a module —
-> or the automation becomes an unowned black box.
-
 ## Secrets & enabling the gated features
 
 A module builds and previews without secrets. To enable the optional gated
