@@ -47,7 +47,7 @@ Diese werden je Profil statt je Ansicht erzeugt und listen die zugehörigen Beis
 
 Die Direktive `{% fragment %}` rendert eine in diesem Leitfaden enthaltene Instanz und kann sie per FHIRPath einengen, sodass nur das gerade besprochene Element sichtbar wird — hilfreich, wenn ein Beispiel lang ist und es nur auf ein Feld ankommt.
 
-Die Syntax lautet `[Ressourcentyp]/[id] [Format] [Filter]`. Als Format ist `json`, `xml`, `ttl` oder `fml` zulässig; alles andere ist ein Fehler. Die `id` ist die Instanz-Id, und die Ressource muss in diesem Leitfaden vorhanden sein.
+Die Syntax lautet `[Ressourcentyp]/[id] [Format] [Filter]`. Als Format ist `json`, `xml`, `ttl` oder `fml` zulässig; alles andere ist ein Fehler. In der Praxis verwenden Sie `json` oder `xml` — siehe unten. Die `id` ist die Instanz-Id, und die Ressource muss in diesem Leitfaden vorhanden sein.
 
 ```
 {% fragment Patient/ExamplePatientInstance JSON BASE:name %}
@@ -59,13 +59,14 @@ Derselbe Teilbaum als XML:
 {% fragment Patient/ExamplePatientInstance XML BASE:name %}
 ```
 
-Und als Turtle:
+`ttl` und `fml` werden von derselben Prüfung akzeptiert, hier aber nicht gezeigt. `ttl` wird geparst und anschließend nicht gerendert: Der Publisher schreibt sein internes Objekt in die Seite —
 
 ```
-{% fragment Patient/ExamplePatientInstance TTL BASE:name %}
+org.hl7.fhir.utilities.turtle.Turtle@7d4f6072
+
 ```
 
-org.hl7.fhir.utilities.turtle.Turtle@7e194d88
+— ohne Fehler, ohne Warnung und ohne defekten Link; nur wer die Seite liest, bemerkt es. `fml` gilt für StructureMaps, die diese Vorlage nicht enthält. Verwenden Sie `json` oder `xml`.
 
 Ohne Filter erhalten Sie die vollständige Instanz. `ELIDE:` ersetzt ein benanntes Element durch `...`, statt es zu entfernen — so bleibt die Struktur der Ressource sichtbar, während Details ausgeblendet werden:
 
