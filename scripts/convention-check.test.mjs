@@ -127,3 +127,30 @@ test("missing sushi-config yields a skip, not a crash", () => {
   const { findings } = evaluate({ sushiConfig: null });
   assert.ok(ids(findings, "skip").includes("Section 1a"));
 });
+
+test("M8 — the demonstration page blocks a release, but not development", () => {
+  // Shipped so an author can see the mechanisms working; it renders the
+  // scaffold's starter artefacts, so publishing it in a real module would ship
+  // someone else's example profile as content. Deleting it at creation would
+  // mean nobody reads it, so the gate is at release, not at creation.
+  const dev = evaluate({ demoPagePresent: true, release: false });
+  const rel = evaluate({ demoPagePresent: true, release: true });
+  const gone = evaluate({ demoPagePresent: false, release: true });
+
+  assert.equal(dev.findings.find((f) => f.id === "M8")?.status, "pass");
+  assert.equal(rel.findings.find((f) => f.id === "M8")?.status, "fail");
+  assert.equal(rel.ok, false, "a release with the demo page still present must fail");
+  assert.equal(gone.findings.find((f) => f.id === "M8"), undefined);
+
+  // The message must name every file, or the author fixes one and re-runs.
+  const msg = rel.findings.find((f) => f.id === "M8").message;
+  for (const f of [
+    "input/pagecontent/rendering-artifacts.md",
+    "input/translations/de/pagecontent/rendering-artifacts.md",
+    "sushi-config.yaml",
+    "input/includes/menu.xml",
+    "input/translations/de/includes/menu.xml",
+  ]) {
+    assert.ok(msg.includes(f), `the failure message should name ${f}`);
+  }
+});

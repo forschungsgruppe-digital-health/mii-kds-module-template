@@ -5,7 +5,13 @@ narrative page, instead of linking the reader away to the generated artifact
 page.
 
 **Prerequisites.** A module that builds ([create a new module](create-a-new-module.md))
-and at least one artifact to render. The demonstration page
+and at least one artifact to render.
+
+**Not this recipe:** improving the page the Publisher *generates* for a profile —
+that is [how profiles render](render-profiles.md), which covers the tabs and the
+`-intro.md` / `-notes.md` files. The fragment names here are those same views:
+`-diff` is the *Differential* tab, `-snapshot` the *Snapshot* tab, `-dict` the
+element table. The demonstration page
 `input/pagecontent/rendering-artifacts.md` ships with this scaffold and renders
 live — read it next to its own source.
 

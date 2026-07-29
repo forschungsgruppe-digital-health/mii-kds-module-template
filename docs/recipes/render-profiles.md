@@ -24,6 +24,12 @@ Must Support elements are flagged with a red **S** badge; mandatory elements sho
 their cardinality in bold. Readers rely on those two signals, so do not restate
 them in prose.
 
+> **The same views are available individually.** Each tab above is also an
+> includable fragment — *Differential* is `-diff`, *Snapshot* is `-snapshot`, the
+> element table is `-dict` — so you can put one of them inside a narrative page
+> rather than sending the reader to the artifact page. See
+> [render existing artifacts in a page](render-existing-artifacts.md).
+
 ## What you must add yourself
 
 The publisher cannot explain intent. Two files per profile, both optional but

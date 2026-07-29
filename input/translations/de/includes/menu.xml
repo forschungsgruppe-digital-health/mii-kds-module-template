@@ -10,7 +10,6 @@
       <li><a href="implementer-guidance.html">Anleitung für Implementierende</a></li>
       <li><a href="datasets-and-descriptions.html">Datensätze und Beschreibungen</a></li>
       <li><a href="uml-diagrams.html">UML-Diagramme</a></li>
-      <li><a href="rendering-artifacts.html">Artefakt-Rendering (Demo)</a></li>
     </ul>
   </li>
   <li class="dropdown">
@@ -33,6 +32,7 @@
       <li><a href="search-parameters-and-operations.html">Suchparameter und Operationen</a></li>
       <li><a href="logical-models.html">Logische Modelle</a></li>
       <li><a href="examples.html">Beispiele</a></li>
+      <li><a href="rendering-artifacts.html">Artefakt-Rendering (Demo — bitte löschen)</a></li>
     </ul>
   </li>
   <li><a href="downloads.html">Downloads</a></li>

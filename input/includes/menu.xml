@@ -17,7 +17,6 @@
       <li><a href="implementer-guidance.html">Guidance for Implementers</a></li>
       <li><a href="datasets-and-descriptions.html">Datasets and Descriptions</a></li>
       <li><a href="uml-diagrams.html">UML Diagrams</a></li>
-      <li><a href="rendering-artifacts.html">Rendering Artifacts (demo)</a></li>
     </ul>
   </li>
   <li class="dropdown">
@@ -40,6 +39,7 @@
       <li><a href="search-parameters-and-operations.html">Search Parameters and Operations</a></li>
       <li><a href="logical-models.html">Logical Models</a></li>
       <li><a href="examples.html">Examples</a></li>
+      <li><a href="rendering-artifacts.html">Rendering Artifacts (demo — delete me)</a></li>
     </ul>
   </li>
   <li><a href="downloads.html">Downloads</a></li>

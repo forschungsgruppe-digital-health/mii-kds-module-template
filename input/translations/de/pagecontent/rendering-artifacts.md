@@ -20,9 +20,11 @@ what it produces.
 <div class="mii-highlight mii-highlight-blue">
 <h5>What this page is</h5>
 A live demonstration shipped with the module scaffold. Read the source of this
-page next to the rendering, copy what you need, then delete the page. The
-step-by-step version is in the repository at
-<code>docs/recipes/render-existing-artifacts.md</code>.
+page next to the rendering, copy what you need, then delete the page.
+<strong>Your own repository has the step-by-step version</strong> at
+<code>docs/recipes/render-existing-artifacts.md</code> — or read
+<a href="https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/blob/main/docs/recipes/render-existing-artifacts.md">the
+scaffold's copy</a>. It lists every file to remove when you delete this page.
 </div>
 
 #### 1. Embed a generated artifact view
