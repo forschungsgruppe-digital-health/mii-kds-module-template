@@ -15,7 +15,7 @@
 //
 // basis literals replaced by this repository's placeholders:
 //   "2019+ Medical Informatics Initiative (MII)" → "{{COPYRIGHT_START_YEAR}}+ …"
-//   julian.sass@charite.de (artifact-author)     → {{MODULE_AUTHOR_EMAIL}}
+//   the basis artifact-author contact email      → {{MODULE_AUTHOR_EMAIL}}
 // The approval date and the artifact topic stay RuleSet PARAMETERS (as in
 // basis); pass {{APPROVAL_DATE}} / {{TOPIC_NCI_CODE}} at the call site.
 // ─────────────────────────────────────────────────────────────────────────────

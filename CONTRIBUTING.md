@@ -12,7 +12,7 @@ it is released only via the MII Module Release Workflow (**CalVer
 `YYYY.n.n`**), and the first-run bootstrap removes the Release Please files
 from the new module so the two release systems never mix. The rest of this page
 describes contributing to **this template repository**; the full operational
-model for both layers will be documented in `docs/workflows.md` (planned).
+model for both layers is in [`docs/workflows.md`](docs/workflows.md).
 
 ## Branching model
 
@@ -105,6 +105,48 @@ If you created a repository via "Use this template", you are working in a
 **module**, not in this template. The same branching model applies there
 (after the first-run bootstrap creates `dev` — see the README's Quickstart
 warning), but the release process is the **MII CalVer Module Release
-Workflow**, not Release Please. Module recipes will live in `docs/recipes/`
-(planned); improvements to the scaffold itself belong here, as PRs to this
-repository.
+Workflow**, not Release Please. The module recipes are in
+[`docs/recipes/`](docs/recipes/README.md); improvements to the scaffold itself
+belong here, as PRs to this repository.
+
+## How this relates to the MII process
+
+Everything above is **this repository's** workflow. It is not an MII rule, and
+this repository does not speak for the MII.
+
+The MII does publish rules for commenting on a Kerndatensatz module, and a
+module built from this scaffold will eventually sit inside them. They are in
+the [**KDS governance, version 4.0 (7 May 2026)**](https://www.medizininformatik-initiative.de/sites/default/files/2026-07/KDS-Governance-v4.pdf),
+adopted by the National Steering Committee and linked from the
+[MII core-data-set page](https://www.medizininformatik-initiative.de/en/medical-informatics-initiatives-core-data-set):
+
+- **Where comments go.** After FHIR profiling, a module runs a commenting round.
+  Comments are filed either through the HL7 Deutschland ballot portal **or as an
+  issue in the module's own GitHub repository** (§5.1.2) — so a module's issue
+  tracker is a sanctioned channel, not an informal one.
+- **Who may comment, and for how long.** Anyone may comment; the round is
+  announced in advance and runs for a defined window (§3.5.4). Voting on an HL7
+  ballot is a separate matter and is restricted to HL7 Deutschland members.
+- **The module team must answer.** Every comment is answered — accepted or
+  rejected, with a reason (§3.5.4).
+- **Comments are public by default.** A commenter may ask for their identity to
+  be pseudonymised.
+
+Two things the MII does **not** publish, which are worth knowing so you do not
+go looking:
+
+- **No code of conduct**, anywhere — see [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+- **No `CONTRIBUTING.md` for a KDS module** — not in the reference module
+  `kerndatensatz-basis`, not in any other `kerndatensatz-*` repository, and not
+  as an organisation-level default. (A couple of the MII's *software* repos
+  carry one; no core-data-set module does.) The one participation rule
+  published organisation-wide is how to request GitHub access, on the
+  [MII organisation profile](https://github.com/medizininformatik-initiative/.github/blob/main/profile/README.md):
+  email the Geschäftsstelle with the subject *"Zugang zum GitHub der MII"*.
+
+> **Cite version 4.0, not what you may find first.** The
+> `medizininformatik-initiative/kerndatensatz-governance` repository still
+> announces version 3, ships no document and has not been touched since January
+> 2024. Version 3.0's tooling chapter — GitHub, SharePoint, Simplifier, Zulip
+> access — was **removed** in 4.0 and replaced by an appendix marked *in
+> Arbeit*, so those instructions are no longer published guidance.

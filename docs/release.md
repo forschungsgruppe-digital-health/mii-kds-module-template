@@ -12,10 +12,9 @@ which are **human-gated**.
 > template and wants to cut a version. New to the module itself? Start with the
 > README and `docs/recipes/create-a-new-module.md` first.
 
-> **Reference vs. recipe (keep the split clean):** this file explains *what the
-> release is and why each step exists*. The click-by-click walkthrough lives in
-> the companion recipe `docs/recipes/cut-a-release.md`. Read this page once to
-> understand the model; follow the recipe each time you release.
+> The click-by-click walkthrough lives in the companion recipe
+> `docs/recipes/cut-a-release.md`. Read this page once to understand the model;
+> follow the recipe each time you release.
 
 ---
 
@@ -32,11 +31,11 @@ which are **human-gated**.
 > **Why the hard boundary:** two release systems on one repo corrupt the version
 > history — a module carrying Release Please would auto-cut SemVer tags that
 > fight the MII CalVer process. One repo, one release mechanism. That is why the
-> **first-run bootstrap removes** Release Please (`release-please.yml`,
-> `release-please-config.json`, `.release-please-manifest.json`) and the
-> template-only `notify-zulip.yml` from a new module, but **keeps**
-> `module-release.yml`, `go-publish.yml`, and the preview workflow. See
-> `docs/recipes/first-run-setup.md`.
+> **first-run bootstrap removes** all five template-only files from a new
+> module — Release Please (`release-please.yml`, `release-please-config.json`,
+> `.release-please-manifest.json`), `notify-zulip.yml` and the template
+> `CHANGELOG.md` — but **keeps** `module-release.yml`, `go-publish.yml`, and the
+> preview workflow. See `docs/recipes/first-run-setup.md`.
 
 ### CalVer format
 
@@ -68,14 +67,10 @@ suffix: `2026.0.0-rc.1`, `2026.0.0-alpha.1`.
 > a human always reviews the notes and attaches the package before anything goes
 > public. Publishing is the deliberate human act that fires the announcement.
 
-> **Why the build gate:** `kerndatensatz-basis` runs no FHIR error gate at tag
-> time — its tag-time job only creates the release, and its PR-time signal is its
-> own IG-Publisher build. This template adds two things basis does not have: a
-> build on the tag, so a tag that does not even build never becomes a release
-> (and the `package.tgz` is captured as a workflow artifact), and the MII
-> reusable validation workflows on every PR. QA *counts* are reported but not
-> required to be zero — the authoritative error gate is the reusable validation
-> workflow.
+> **Why the build gate:** a tag that does not build never becomes a release, and
+> the build captures `package.tgz` as a workflow artifact. QA *counts* are
+> reported but not required to be zero — the authoritative error gate is the
+> reusable validation workflow, which runs on every PR.
 
 ---
 
@@ -114,8 +109,12 @@ present here; the surface in this scaffold is:
   - `date:` — the ISO publication date (`YYYY-MM-DD`). `go-publish.yml`
     hard-fails when it does not equal the publication date (its
     *Validate release input and publication request* step).
-  - the `resource-approvalDate` extension's `valueDate` — the date MII
-    governance approved *this* release.
+  - the `resource-approvalDate` extension's `valueDate` — the date *this*
+    release was approved by whoever governs your module (for a KDS module, its
+    responsible MII body). If no formal approval step applies, use the date you
+    decided to release and say so in `input/pagecontent/metadata.md` (and its
+    German mirror): the extension records an approval date, it does not create
+    an approval process.
 - **`publication-request.json`**
   - `version` — the CalVer version.
   - `path` — ends in the version (`.../<version>`); update it too.
@@ -191,18 +190,18 @@ Pushing the tag triggers **`module-release.yml`** (automated):
 > a `::notice`. Only a real, bootstrapped module runs it for real. This also
 > keeps a template-repo SemVer tag from ever driving the module path.
 
-### 6. Package publishing — *human (adapted for IG-Publisher-native)*
+### 6. Package publishing — *does not apply*
 
-The wiki's Simplifier "bake pipeline" step does not apply here. Instead, the
+The wiki's Simplifier "bake pipeline" step has no counterpart here: the
 authoritative FHIR package is produced by the IG Publisher and published via the
-gated **`go-publish.yml`** in step 8 below. The `package.tgz` from the `build`
-job is available now as a convenience (attach it in step 7).
+gated **`go-publish.yml`** in step 8.
 
 ### 7. Finalize and publish the GitHub Release — *human*
 
 1. Open the **draft** release the automation created.
 2. Edit the notes; remove the `<!-- DELETE START/END -->` blocks.
-3. Attach the module's `package.tgz` (from the `module-release-build` artifact).
+3. Attach the module's `package.tgz` (from the `module-release-build` artifact
+   the `build` job uploaded).
 4. Change the release from **draft** to **published**.
 
 Publishing fires the **`notify_zulip`** job (automated): it posts to the MII
@@ -236,8 +235,6 @@ published**. Do that through the gated
 > irreversible in practice and touches the public FHIR ecosystem. `module-release.yml`
 > only *points at* go-publish (in the release notes and the job summary) — it
 > never dispatches it. The maintainer owns the decision to publish, every time.
-> `module-release.yml` and `go-publish.yml` are edited separately; this page does
-> not modify go-publish.
 
 ### Post-release checklist (from the wiki)
 

@@ -18,10 +18,10 @@ build on earlier ones.
 | **SUSHI** | The tool that compiles **FSH** into FHIR JSON resources. Runs before the IG Publisher. |
 | **FSH (FHIR Shorthand)** | A concise text language for authoring profiles/extensions/value sets, compiled by SUSHI. Files end in `.fsh`. |
 | **Template** | A bundle of layout, HTML/Liquid fragments, CSS and scripts that decides how an IG *looks*. Applied by the IG Publisher. |
-| **Template package** | A template shipped as an installable FHIR package (id ending in `.template`). **This repository is one:** `de.medizininformatikinitiative.template`. |
+| **Template package** | A template shipped as an installable FHIR package (id ending in `.template`). The MII one is `de.medizininformatikinitiative.template`; a module built from this scaffold consumes it — first vendored in `ig-template/`, later as a pinned package. |
 | **IG vs template** | The IG is *what* is documented (the profiles + narrative); the template is *how* it is presented (branding + layout). One template serves many IGs. |
 | **Package vs template package** | A normal FHIR *package* ships conformance resources (profiles, value sets). A *template package* ships presentation (layout, CSS) and has an id ending in `.template`. |
-| **Base template** | The template this one is derived from: [`fhir2.base.template`](https://github.com/HL7/ig-template-base2). This repo overrides only branding fragments and inherits everything else. |
+| **Base template** | The template the MII template is derived from: [`fhir2.base.template`](https://github.com/HL7/ig-template-base2). A module never references it directly — a newer base arrives with a newer MII template pin. |
 | **Canonical URL** | The stable, globally-unique identifier URL of an IG or artifact (e.g. `https://www.medizininformatik-initiative.de/fhir/modul-person`). It is an identifier, **not** necessarily where the site is hosted. |
 | **Package registry** | A server that hosts installable FHIR packages so tools can download them by id + version (e.g. `packages.fhir.org`). |
 | **`FHIR/ig-registry`** | HL7's public list of published IGs and IG **templates** (`templates.json`); being listed there lets the IG Publisher resolve a template by id. |
@@ -45,7 +45,3 @@ build on earlier ones.
 | **`publication-request.json`** | The file the IG Publisher's `-go-publish` reads to publish an IG (version, path, dates). |
 | **`special-url`** | A `sushi-config.yaml` list of canonical URLs a module defines that do **not** start with its own canonical; usually empty for a new module. See [recipes/regenerate-special-url.md](recipes/regenerate-special-url.md). |
 | **`-go-publish`** | The IG Publisher's production-publication mode. Here it is a **gated**, manual, dry-run-by-default workflow — never run automatically. |
-
-> **Why a glossary this long:** the biggest barrier for a newcomer is not any single
-> concept but the *stack* of unfamiliar words that assume each other. Skim it once;
-> come back when a term bites.

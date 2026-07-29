@@ -8,7 +8,7 @@
 
 This recipe applies unchanged in a module created from this template.
 
-> **Why a recipe:** updates are proposals, never automatic
+> **Updates are proposals, never automatic**
 > ([`docs/maintenance.md`](../maintenance.md)). The human in the loop is you.
 
 ## Steps
@@ -36,23 +36,21 @@ answer.
 
 Create a working branch off `dev` (e.g. `chore/bump-<artifact>`). Bump exactly
 one artifact per PR (keep diffs reviewable) — in every place that artifact is
-pinned:
+pinned. Every pin's location is listed in [`docs/maintenance.md` → Where each
+pin lives](../maintenance.md#where-each-pin-lives-single-source-of-truth); look
+it up there, because several artifacts are pinned in more than one file.
+
+The two that catch reviewers out (excerpt — the full list is in
+`maintenance.md`):
 
 | Artifact | Edit here |
 |---|---|
-| `de.medizininformatikinitiative.template` | the `template =` line in `ig.ini` (see also [`switch-template-to-published.md`](switch-template-to-published.md) when moving off a vendored copy) |
-| `fhir2.base.template` | not pinned here — arrives via a template bump (row above); only a vendored `ig-template/package/package.json` has a local pin |
-| FHIR package dependency | its line in the `dependencies:` block of `sushi-config.yaml` |
 | IG Publisher | `PUBLISHER_VERSION` **and** the jar SHA-256 (step 4) in all three build workflows — `ig-publisher.yml`, `module-release.yml`, `go-publish.yml`; the three `env:` blocks must stay identical |
 | SUSHI / Jekyll | `SUSHI_VERSION` / `JEKYLL_VERSION` in the same three `env:` blocks — plus, for SUSHI only, the reusable-validation input in `validation.yml` |
-| GitHub Action | the commit SHA in the `uses:` line **and** its `# vX.Y.Z` comment (Dependabot PRs do this for you) |
 
 `scripts/toolchain-pins.test.mjs` fails the build when the three `env:` blocks
 (or `validation.yml`'s SUSHI fallback) stop agreeing, so a half-applied bump
-does not reach `dev`. Pins that no bump proposal reaches — the dev-container
-digest, the publication support repos, the SU-TermServ nginx pins — are listed
-in [`docs/maintenance.md` → Where each pin
-lives](../maintenance.md#where-each-pin-lives-single-source-of-truth).
+does not reach `dev`.
 
 ### 4. IG Publisher only: recompute the jar SHA-256
 

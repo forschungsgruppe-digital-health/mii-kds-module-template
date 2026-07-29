@@ -14,11 +14,11 @@ input/images/<name>.svg               # the rendered image the pages reference
 ```
 
 The IG Publisher renders PlantUML sources automatically when Graphviz is
-available (the dev container has it). Keeping the source in the repository is a
-requirement, not a nicety: the official
-[IG best practices](https://build.fhir.org/ig/FHIR/ig-guidance/best-practice.html)
-ask that a diagram's source be checked in and its tool be free or widely used, so
-that the picture can still be changed after its author has moved on.
+available (the dev container has it). Keep the source in the repository: HL7's
+[IG best-practice guidance](https://build.fhir.org/ig/FHIR/ig-guidance/best-practice.html)
+asks that a diagram's source be checked in and its tool be free or widely used,
+so that the picture can still be changed after its author has moved on. This
+scaffold treats that as the default and gives you `input/images-source/` for it.
 
 ## Steps
 

@@ -16,7 +16,7 @@
    protection, and **removes** the template's own release automation (the Release
    Please config and workflow, the release announcement, and the template
    `CHANGELOG`). The bootstrap and this recipe stay. If you ticked "Include all
-   branches" it simply skips creating `dev`; the removals and the branch
+   branches" it skips creating `dev`; the removals and the branch
    protection still have to happen. See
    [first-run-setup.md](first-run-setup.md). Confirm afterwards that
    all five removed paths are gone — this must print nothing:

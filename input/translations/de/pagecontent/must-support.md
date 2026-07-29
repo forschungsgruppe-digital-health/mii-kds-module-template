@@ -8,8 +8,8 @@
      die Abschnitte zu Darstellung, primitiven/komplexen Elementen, Referenzen,
      Datentyp-Auswahl und Slices stammen aus kerndatensatz-basis
      input/pagecontent/must-support.md (Branch main).
-     Ändern Sie den Text NUR, wenn Ihr Modul begründet abweicht — die Erwartungen
-     sind MII-weit einheitlich. -->
+     Lesen Sie das Wiki, bevor Sie die Erwartungen ändern, und begründen Sie
+     eine Abweichung auf der Seite selbst. -->
 
 ### Must-Support
 

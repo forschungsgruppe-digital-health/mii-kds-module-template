@@ -11,14 +11,6 @@ machine. Everything runs inside a container that VS Code builds for you.
 > **Reopen in Container**. This follows the MII meta wiki page
 > ["Dev Container ‐ IG Publisher"](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Dev-Container-%E2%80%90-IG-Publisher).
 
-> **Why this dev container is identical to the one in
-> [`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds):**
-> the template package and the modules built from it must agree on the
-> toolchain. Two dev containers drifting apart (different Java, SUSHI, or
-> Jekyll versions) is a maintenance trap — a module would build in one
-> environment and fail in the other. The pins are kept byte-for-byte aligned
-> and are bumped in both repos in the same sweep.
-
 **Prerequisites.** Three things on your machine — plus `git` and network
 access (the first build downloads the base image and tools):
 

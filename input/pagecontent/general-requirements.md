@@ -5,8 +5,10 @@
      from which the conformance-verb table is taken verbatim.
      German mirror: input/translations/de/pagecontent/general-requirements.md —
      both files must say the same thing.
-     The verb table and the MII-wide rules below apply UNCHANGED to every module.
-     Do not shorten or reword them; add your module's own requirements underneath. -->
+     Keeping the verb table and the MII-wide rules verbatim is the safest
+     default — rewording a conformance verb changes its strength — so check any
+     change against the wiki (authoritative) first. Add your module's own
+     requirements underneath. -->
 
 ### General Requirements
 
