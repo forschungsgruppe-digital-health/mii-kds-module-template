@@ -185,12 +185,15 @@ export function evaluate({ sushiConfig = null, igIni = null, packageJson = null,
       "M8", "module", release ? "fail" : "pass",
       "input/pagecontent/rendering-artifacts.md present",
       release
-        ? "the demonstration page is still present on a release branch — remove all five: " +
+        ? "the demonstration page is still present on a release branch — remove all of: " +
           "input/pagecontent/rendering-artifacts.md, " +
           "input/translations/de/pagecontent/rendering-artifacts.md, " +
           "the rendering-artifacts.md entry in sushi-config.yaml pages:, " +
-          "and the menu entry in input/includes/menu.xml and " +
-          "input/translations/de/includes/menu.xml"
+          "the menu entry in input/includes/menu.xml and " +
+          "input/translations/de/includes/menu.xml, " +
+          "the demo/ directory (its Liquid template), and the generator " +
+          "scripts/gen-rendering-demo.py with its demo-en.md, demo-de.md and " +
+          "rendering-demo-codes.json inputs"
         : "demonstration page present — fine in development; it must be removed before a release",
     );
   }
