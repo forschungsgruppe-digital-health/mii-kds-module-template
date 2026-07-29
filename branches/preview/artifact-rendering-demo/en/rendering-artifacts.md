@@ -31,7 +31,7 @@ Guidance on how to interpret the contents of this table can be found[here](https
 
 Some are deliberately empty — `history` has nothing to show without Provenance resources, `experimental-warning` nothing unless the artifact is experimental. An empty fragment is not an error.
 
-Three of the 96 are listed with their include line but **without** their rendering. `search-params`, `span` and `spanall` contain links written relative to the artifact page — `patient.html`, `formats.html`, `help16.png`. On the artifact page those resolve; embedded in a narrative page one directory away they do not, and the build reports each as a broken link. This is worth knowing generally: a fragment being generated does not guarantee it can be embedded anywhere. If your QA report gains broken links after you include one, this is why.
+Four of the 96 are listed with their include line but **without** their rendering. `search-params`, `span`, `spanall` and `pseudo-json` link to targets that only exist in the artifact-page context — the base-spec pages, `formats.html`, or anchors the artifact page defines for itself. Embedded in a narrative page those do not resolve, and the build reports each as a broken link. This is worth knowing generally: a fragment being generated does not guarantee it can be embedded anywhere. If your QA report gains broken links after you include one, this is why.
 
 #### The example profile — 78 codes
 
@@ -65,7 +65,7 @@ And as Turtle:
 {% fragment Patient/ExamplePatientInstance TTL BASE:name %}
 ```
 
-org.hl7.fhir.utilities.turtle.Turtle@3e36c5
+org.hl7.fhir.utilities.turtle.Turtle@4a670227
 
 Without a filter you get the whole instance. `ELIDE:` replaces a named element with `...` instead of removing it, which keeps the shape of the resource visible while hiding detail:
 
