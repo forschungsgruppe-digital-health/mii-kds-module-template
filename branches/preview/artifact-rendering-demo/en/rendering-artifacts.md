@@ -7,6 +7,8 @@
 
 ### Rendering existing FHIR artifacts in a narrative page
 
+* [Rendering existing FHIR artifacts in a narrative page](#rendering-existing-fhir-artifacts-in-a-narrative-page)
+
 The IG Publisher generates a page for every profile, extension, value set and example in this guide. You do not have to link readers away to them — you can render the parts that matter **inside** a narrative page, next to the prose that explains them.
 
 This page demonstrates three mechanisms. Each block shows the source line, then what it produces.
