@@ -37,6 +37,22 @@ Always run **report** first on a repository you have not stewarded before.
 
 ## Non-negotiable limits
 
+**Every finding carries a severity**, and the report leads with the worst:
+
+| Severity | Test |
+| --- | --- |
+| **high** | Someone following the documentation is led into a broken or harmful outcome — a command that cannot work, a report routed somewhere unread, a rule stated backwards. |
+| **medium** | The documentation is wrong or self-contradictory, but a careful reader survives it. |
+| **low** | Correct and usable, but harder to find, follow or trust than it needs to be. |
+
+Nothing is high because it was tedious to find. If a defect cannot hurt a
+reader, it is not high, however wrong it is.
+
+**A finding belongs to the step that discovers it**, and later steps do not
+re-file what an earlier one already reported. Walking the docs surfaces
+inventory and claim problems as a matter of course; report them where they were
+found and move on.
+
 Violating any of these is a failure of the run, not a judgement call.
 
 1. **Never rewrite git history.** Not to remove an address, not to reword a
@@ -78,6 +94,14 @@ report so the reader knows what the run was measured against.
 - **What is generated or vendored.** Check ignore files, lockfiles, sync
   scripts, build outputs, dependency directories and any tree a tool owns.
   These are read-only for this skill.
+- **What this repository exports to others** — files copied or synced *out* into
+  other projects, if any. Look for sync scripts here or in a consuming repo,
+  publish manifests, template directories. Step 6 cannot be applied correctly
+  without this list: a file copied elsewhere must stay self-contained, so
+  "replace the duplicate with a link" is the wrong fix for it.
+- **Where the built or published artefact is**, if the project produces one: a
+  pages branch, the publish target named in CI, a configured output directory.
+  Step 2 needs it.
 - **What has already been decided.** Find the project's backlog, decision
   records, open-questions file or previous audit reports, whatever they are
   called. A finding already recorded as a deliberate decision is **not a
@@ -90,7 +114,11 @@ report so the reader knows what the run was measured against.
 Produce the numbers before the opinions.
 
 - Every documentation file, its size, and its **inbound link count**. A file
-  nothing links to is either orphaned or an entry point — decide which.
+  nothing links to is either orphaned or an entry point — decide which. Strip
+  code spans and fenced blocks before extracting links, or example text
+  produces phantom references; credit a link to a directory to that directory's
+  index. Where a project wires pages through a config file rather than links,
+  inbound-link count is a weak orphan signal — check the config too.
 - Whether each documentation directory has an index. A bare file listing is the
   most common cause of "I could not find it".
 - Where one topic is covered by more than one file.
@@ -205,32 +233,56 @@ Correct documentation can still be unusable. This step is about the words:
 someone who does not know this project's subject, tooling or history must be
 able to read it without stopping.
 
-Work from a **term list**. Extract the domain terms, acronyms and tool names,
-then for each ask: *where is this first used, and is it explained or linked
-there?* A term expanded only in a glossary is not expanded for someone who
-arrived on that page from a search engine.
+**This step has a failure mode the others do not.** The rest of the skill finds
+discrete defects — this link is broken, this number is wrong. Readability is a
+*condition*, and a naive pass reports every instance of it: dozens of overlong
+sentences, dozens of undefined terms. That is an editorial programme, not a
+findings list, and nobody works through it — so the two or three genuinely
+blocking items are discarded along with the rest.
 
-Flag and fix:
+Sort by consequence, not by category. The three groups are handled differently
+on purpose.
 
-- **Undefined on first use** — on the page where the reader meets it. Explain it
-  in a clause or link the definition; do not expand it four times on one page.
-- **Assumed knowledge** — "just run the build", "the usual place", "as
-  expected". If understanding the sentence requires already knowing the answer,
-  it fails.
-- **`simply`, `just`, `obviously`, `of course`** — these tell a stuck reader the
-  problem is them. Delete the word; the sentence is almost always better.
-- **Synonym drift** — one concept under three names. An expert reads through it;
-  a newcomer cannot tell whether two words mean two things. One term per
-  concept, everywhere.
-- **Sentences carrying too much** — measure per paragraph or list item, and
-  exclude tables, code fences and front matter, or the measurement is noise.
-  Much past ~30 words, or a paragraph introducing more than two new terms, gets
-  split.
+### Blocking — report as findings
+
+A reader is *stopped* by these. Each gets a finding and a concrete task.
+
+- **Undefined on first use** — on the page where the reader meets the term.
+  Explain it in a clause or link the definition; do not expand it four times on
+  one page. A term defined only in a glossary is not defined for someone who
+  arrived from a search engine.
 - **Hidden actors** — "the file is generated", "it is validated". By what, and
   when? Name the thing that acts, so the reader knows where to look.
-- **Fragments in another language** than the page they sit on.
 - **Instructions that are not instructions** — "the configuration should be
   correct" tells nobody what to type.
+- **Assumed knowledge** — "the usual place", "as expected". If understanding the
+  sentence requires already knowing the answer, it fails.
+- **Fragments in a language other than the page** they sit on.
+
+### Mechanical — fix, do not report
+
+Unambiguous and safe. In apply mode delete them and list them under *Fixed*; in
+report mode give the count and the files, not every instance.
+
+- **`simply`, `just`, `obviously`, `of course`, `merely`, `trivially`** — these
+  tell a stuck reader the problem is them. Deleting the word almost always
+  improves the sentence and never changes its meaning.
+
+### Aggregate — one observation per page, never line items
+
+Smells, not defects. Report a per-page number and **at most three illustrative
+examples**, then stop. Never open a finding per sentence.
+
+- **Sentence length** — measure per paragraph or list item, excluding tables,
+  code fences and front matter, or the measurement is noise.
+- **Term density** — a paragraph introducing more than two new terms.
+- **Synonym drift** — one concept under three names. An expert reads through it;
+  a newcomer cannot tell whether two words mean two things. Name the concept and
+  the competing terms once, and propose the one to keep.
+
+**Budget.** If the blocking group runs past roughly a dozen findings, report the
+worst by consequence and say how many were left out. A truncated list that says
+so is useful; an exhaustive one is not read at all.
 
 Two things this step must *not* do: it does not blur a precise technical term
 into a vague one, and it does not drop a caveat for being hard. Accuracy wins;
@@ -356,9 +408,10 @@ Structure:
    an empty residue section, and without that note an empty section reads as a
    step that was skipped.
 2. **Fixed** — one line each with the file. Apply mode only.
-3. **Needs a human** — each with the evidence (file, line, quoted text), why it
-   matters, and **a concrete task** phrased so it can be handed to a person or
-   an assistant.
+3. **Needs a human** — **ordered by severity, highest first**, each with the
+   evidence (file, line, quoted text), why it matters, and **a concrete task**
+   phrased so it can be handed to a person or an assistant. If a group was
+   truncated to a budget, say what was left out and roughly how much.
 4. **Declined** — things that look like problems and are not, with the reason.
    This section is what stops the next run re-reporting them.
 5. **Could not verify** — and what was tried.
@@ -400,7 +453,13 @@ report and the tracker agree.
 In apply mode, fix only what is verifiable and reversible: broken relative links
 and anchors with an unambiguous target; stale paths after a rename; provably
 wrong numbers; assistant residue and self-referential justification; stale
-"not yet available" notes for things that exist.
+"not yet available" notes for things that exist; and step 8's **mechanical**
+group — the hedge words — which are deletions that cannot change meaning.
+
+Step 8's **blocking** group is reported, never auto-fixed: naming a hidden actor
+or defining a term requires knowing which actor and which definition, and
+guessing produces confident nonsense. Its **aggregate** group is never fixed at
+all — rewriting for length is editing, not repair.
 
 Everything else is a reported task — in particular: deleting or merging whole
 files, changing what a rule *means*, editing anything generated or vendored, and
@@ -434,3 +493,8 @@ once. Read them as patterns, not as a checklist for one ecosystem.
   longer be true.
 - **Explicit lists silently exclude.** A test file existed and never ran,
   because the automation listed test files by name and nobody added it.
+- **The world can move while you audit it.** Mid-run, two repositories a project
+  linked to were created — turning every one of those links from a visible 404
+  into a plausible-looking wrong destination, including the one that routed
+  security reports. Re-check time-sensitive external facts at the *end* of a
+  long run, and treat "this link 404s" as a fact with a timestamp.
