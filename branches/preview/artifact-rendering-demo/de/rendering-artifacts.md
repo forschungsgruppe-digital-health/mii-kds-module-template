@@ -65,7 +65,7 @@ Und als Turtle:
 {% fragment Patient/ExamplePatientInstance TTL BASE:name %}
 ```
 
-org.hl7.fhir.utilities.turtle.Turtle@3f727390
+org.hl7.fhir.utilities.turtle.Turtle@7e194d88
 
 Ohne Filter erhalten Sie die vollständige Instanz. `ELIDE:` ersetzt ein benanntes Element durch `...`, statt es zu entfernen — so bleibt die Struktur der Ressource sichtbar, während Details ausgeblendet werden:
 
