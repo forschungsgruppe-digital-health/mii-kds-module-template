@@ -301,6 +301,14 @@ jobs:
           test -s output/index.html
           jq empty output/qa.json
 
+      - name: PROBE list every generated fragment (temporary)
+        if: ${{ steps.build.outputs.mode == 'full' }}
+        run: |
+          echo "=== directories holding .xhtml fragments"
+          find . -name '*.xhtml' -printf '%h\n' 2>/dev/null | sort | uniq -c | sort -rn | head -10
+          echo "=== every distinct fragment file name"
+          find . -name '*.xhtml' -printf '%f\n' 2>/dev/null | sort -u | sed 's/^/FRAG /'
+
       - name: Stop terminology proxy
         if: ${{ always() && steps.build.outputs.mode == 'full' }}
         shell: bash
