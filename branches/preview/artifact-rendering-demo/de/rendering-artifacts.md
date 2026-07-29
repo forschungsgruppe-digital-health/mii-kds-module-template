@@ -14,8 +14,10 @@ The IG Publisher generates a page for every profile, extension, value set and ex
 This page demonstrates three mechanisms. Each block shows the source line, then what it produces.
 
 ##### What this page is
-A live demonstration shipped with the module scaffold. Read the source of this page next to the rendering, copy what you need, then delete the page. The step-by-step version is in the repository at
-`docs/recipes/render-existing-artifacts.md`.
+A live demonstration shipped with the module scaffold. Read the source of this page next to the rendering, copy what you need, then delete the page.
+**Your own repository has the step-by-step version**at
+`docs/recipes/render-existing-artifacts.md`— or read
+[the scaffold's copy](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/blob/main/docs/recipes/render-existing-artifacts.md). It lists every file to remove when you delete this page.
 
 #### 1. Embed a generated artifact view
 
