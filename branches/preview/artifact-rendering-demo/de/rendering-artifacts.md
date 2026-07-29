@@ -56,11 +56,24 @@ During the build the Publisher writes `package.db`, a SQLite database of the gui
 A JSON form of the same tag controls column titles, CSS class and per-column rendering (`link`, `markdown`, `canonical`, `resource`, …), and a `{% sqlToData %}` tag puts the rows into a Liquid variable instead of rendering a table, so you can lay them out yourself.
 
 ##### Showing a directive without running it
-The source blocks above escape their opening brace as
-`&#123;`. That is deliberate:
+Two different escapes appear above, because two engines run in sequence. The Publisher's own Liquid pass runs
+**before**Jekyll and claims eight keywords:
+`sql`,
+`fragment`,
+`json`,
+`class-diagram`,
+`uml`,
+`multi-map`,
+`lang-fragment`and
+`dataset`. To show one of those without running it, add an exclamation mark —
+`{% sql … %}`. The Publisher turns that into a literal itself. Wrapping it in
 `{% raw %}`does
-**not**protect these directives. The IG Publisher's own Liquid runs before Jekyll and ignores
-`raw`, so a wrapped example is still executed — and the publisher then writes its error into the rendered page, where the build reports no error at all. Escaping the brace means no directive token ever exists in the source.
+**not**work, because the Publisher's pass runs first and does not know what
+`raw`means; the directive executes and its error is written into the page while the build still reports success.
+
+For a plain Jekyll tag such as
+`{% include %}`it is the other way round: the Publisher never looks at it, so
+`{% raw %}`is the correct escape — and the exclamation mark is a build error, because the Publisher leaves it alone and Jekyll cannot parse it.
 
 ##### Before you rely on any of this
 These three are documented and stable. Several neighbouring mechanisms are
