@@ -16,11 +16,11 @@ Dieser Abschnitt definiert die Konformitätsanforderungen für Systeme, die die 
 * **[Umgang mit fehlenden Daten](missing-data.md)** — wie fehlende oder unbekannte Werte kodiert werden.
 * **[Sicherheit und Datenschutz](security-and-privacy.md)** — die Sicherheits- und Datenschutzbetrachtungen dieses Moduls.
 
-Verbindlich sind die Festlegungen des [MII-Meta-Wikis](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance); die Seiten dieses Abschnitts geben sie wieder.
+Maßgeblich für die MII-weiten Konformitätsregeln ist die Seite [Conformance](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance) des MII-Meta-Wikis. Allgemeine Anforderungen, Must-Support und Umgang mit fehlenden Daten geben sie für dieses Modul wieder; bei Abweichungen gilt das Wiki. Sicherheit und Datenschutz ist eine zusätzliche Seite dieses Leitfadens gemäß den HL7-IG-Best-Practices.
 
 Hinweise zur Umsetzung stehen im Abschnitt [Anleitung](guidance.md), die technischen Artefakte im Abschnitt [Artefakte](artifacts.md).
 
-> [TODO: Ergänzen Sie modul-spezifische Konformitätsaussagen.Hinweis zur Erfassung: Konformitätsaussagen werden **nicht** automatisch erkannt. Jeder normative Satz der englischen Seiten wird ausdrücklich markiert — eine Id, ein Doppelpunkt und der Satz, begrenzt durch Paragraphenzeichen — und daraus erzeugt der IG-Publisher die Übersichtstabelle am Ende der englischen Fassung dieser Seite. Die Syntax steht im Original in `input/pagecontent/general-requirements.md`. Diese deutsche Fassung trägt bewusst keine Markierungen.]
+> [TODO: Ergänzen Sie modul-spezifische Konformitätsaussagen.Hinweis zur Erfassung: Konformitätsaussagen werden **nicht** automatisch erkannt. Jeder normative Satz der englischen Seiten wird ausdrücklich markiert — eine Id, ein Doppelpunkt und der Satz, begrenzt durch Paragraphenzeichen — und daraus erzeugt der IG-Publisher die Übersichtstabelle am Ende der englischen Fassung dieser Seite. Die Syntax steht im Original in `input/pagecontent/general-requirements.md`. Diese deutsche Fassung trägt bewusst keine Markierungen.Halten Sie die Menge **kuratiert** — markieren Sie echte Verpflichtungen, nicht jeden Satz mit einem fett gesetzten Verb — und formulieren Sie jeden markierten Satz für sich verständlich: die Tabelle zeigt ihn ohne Kontext.]
 
 -------
 

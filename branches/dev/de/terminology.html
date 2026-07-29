@@ -247,16 +247,18 @@ SNOMED CT) werden in diesem Modul <strong>nicht</strong> publiziert, sondern üb
 MII-Terminologieserver (SU-TermServ) bezogen:
 <a href="https://mii-termserv.de/">https://mii-termserv.de/</a>.</p>
 
-<p class="bg-info"><strong>Expansionen:</strong> ValueSet-Expansionen MÜSSEN zur Validierung über einen
-FHIR-Terminologieserver erzeugt werden. Dieser Build nutzt SU-TermServ, sofern
-das Client-Zertifikat konfiguriert ist, sonst den öffentlichen HL7-Server
+<p class="bg-info"><strong>Expansionen:</strong> ValueSet-Expansionen dieses Leitfadens werden über einen
+FHIR-Terminologieserver erzeugt — über SU-TermServ, sofern das
+Client-Zertifikat konfiguriert ist, sonst über den öffentlichen HL7-Server
 <code class="language-plaintext highlighter-rouge">tx.fhir.org</code> (dann expandieren einige MII-spezifische ValueSets ggf. nicht
 vollständig).</p>
 
 <blockquote>
   <p>[TODO: Falls Ihr Modul SNOMED CT nutzt, geben Sie die verwendete Edition/Version
 an. Listen Sie die modul-eigenen ValueSets/CodeSystems auf oder verweisen Sie
-auf die automatisch erzeugte Artefakt-Liste.]</p>
+auf die automatisch erzeugte Artefakt-Liste. Soll Ihr Modul Implementierenden
+eine verbindliche Anforderung an Expansionen auferlegen, gehört sie auf die
+Konformitätsseiten — diese Seite gehört nicht zum Konformitäts-Abschnitt.]</p>
 </blockquote>
 
 
@@ -284,7 +286,7 @@ auf die automatisch erzeugte Artefakt-Liste.]</p>
 
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Mon, Jul 27, 2026 11:05+0000">2026-07-27</span>
+          Erstellt <span title="Wed, Jul 29, 2026 19:15+0000">2026-07-29</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.
