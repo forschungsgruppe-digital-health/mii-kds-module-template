@@ -62,6 +62,16 @@ Manche sind absichtlich leer: `history` hat ohne Provenance-Ressourcen nichts zu
 zeigen, `experimental-warning` nichts, solange das Artefakt nicht als
 experimentell gekennzeichnet ist. Ein leeres Fragment ist kein Fehler.
 
+Drei der 96 sind mit ihrer Include-Zeile aufgeführt, *ohne* ihre Darstellung.
+`search-params`, `span` und `spanall` enthalten Verweise, die relativ zur
+Artefaktseite geschrieben sind — `patient.html`, `formats.html`, `help16.png`.
+Auf der Artefaktseite lösen diese korrekt auf; eingebettet in eine
+Fließtextseite ein Verzeichnis weiter jedoch nicht, und der Build meldet jeden
+davon als defekten Link. Das ist allgemein wissenswert: Dass ein Fragment
+erzeugt wird, heißt nicht, dass es überall eingebettet werden kann. Wenn Ihr
+QA-Bericht nach dem Einbinden eines Fragments defekte Links ausweist, liegt es
+daran.
+
 #### Das Beispielprofil — @@SD_COUNT@@ Codes
 
 @@SD_CATALOGUE@@
@@ -254,10 +264,10 @@ wert, bekannt zu sein, bevor Sie danach greifen.
 
 | Direktive | Warum es kein Beispiel gibt | Was nötig wäre |
 | --- | --- | --- |
-| `{% raw %}{% uml %}{% endraw %}` | **Sie ist defekt.** Das Keyword ist registriert, aber ohne Implementierung dahinter; es schreibt `Error processing command: Internal Error - unknown keyword uml` in Ihre Seite, während der Build weiterhin Erfolg meldet | Stattdessen `class-diagram` verwenden |
-| `{% raw %}{% class-diagram %}{% endraw %}` | Benötigt ein Verzeichnis `input/diagrams/` und ein logisches Modell zum Zeichnen; diese Vorlage hat beides nicht | Ein logisches Modell sowie Graphviz auf dem Build-Rechner |
-| `{% raw %}{% multi-map %}{% endraw %}` | Benötigt ein Quell-ValueSet und ConceptMaps zum Auswerten; diese Vorlage definiert keine Terminologie | Ein ValueSet und mindestens eine ConceptMap |
-| `{% raw %}{% dataset %}{% endraw %}` | Benötigt ein über einen IG-Parameter registriertes Dataset; ohne ein solches wirft sie `Unable to find dataset` | Ein in `sushi-config.yaml` deklariertes Dataset |
+| `{%! uml %}` | **Sie ist defekt.** Das Keyword ist registriert, aber ohne Implementierung dahinter; es schreibt `Error processing command: Internal Error - unknown keyword uml` in Ihre Seite, während der Build weiterhin Erfolg meldet | Stattdessen `class-diagram` verwenden |
+| `{%! class-diagram %}` | Benötigt ein Verzeichnis `input/diagrams/` und ein logisches Modell zum Zeichnen; diese Vorlage hat beides nicht | Ein logisches Modell sowie Graphviz auf dem Build-Rechner |
+| `{%! multi-map %}` | Benötigt ein Quell-ValueSet und ConceptMaps zum Auswerten; diese Vorlage definiert keine Terminologie | Ein ValueSet und mindestens eine ConceptMap |
+| `{%! dataset %}` | Benötigt ein über einen IG-Parameter registriertes Dataset; ohne ein solches wirft sie `Unable to find dataset` | Ein in `sushi-config.yaml` deklariertes Dataset |
 
 Ergänzen Sie das jeweils benötigte Artefakt, und die Direktive funktioniert —
 keine davon ist abgekündigt. Das Rezept erläutert, wo die einzelnen Direktiven

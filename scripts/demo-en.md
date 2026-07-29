@@ -55,6 +55,15 @@ Some are deliberately empty — `history` has nothing to show without Provenance
 resources, `experimental-warning` nothing unless the artifact is experimental.
 An empty fragment is not an error.
 
+Three of the 96 are listed with their include line but *without* their
+rendering. `search-params`, `span` and `spanall` contain links written relative
+to the artifact page — `patient.html`, `formats.html`, `help16.png`. On the
+artifact page those resolve; embedded in a narrative page one directory away
+they do not, and the build reports each as a broken link. This is worth knowing
+generally: a fragment being generated does not guarantee it can be embedded
+anywhere. If your QA report gains broken links after you include one, this is
+why.
+
 #### The example profile — @@SD_COUNT@@ codes
 
 @@SD_CATALOGUE@@
@@ -236,10 +245,10 @@ knowing before you reach for them.
 
 | Directive | Why there is no example | What it would need |
 | --- | --- | --- |
-| `{% raw %}{% uml %}{% endraw %}` | **It is broken.** The keyword is registered but has no implementation behind it, so it writes `Error processing command: Internal Error - unknown keyword uml` into your page while the build still reports success | Use `class-diagram` instead |
-| `{% raw %}{% class-diagram %}{% endraw %}` | Needs an `input/diagrams/` directory and a logical model to draw; this scaffold has neither | A logical model, plus Graphviz on the build machine |
-| `{% raw %}{% multi-map %}{% endraw %}` | Needs a source ValueSet and ConceptMaps to scan; this scaffold defines no terminology | A ValueSet and at least one ConceptMap |
-| `{% raw %}{% dataset %}{% endraw %}` | Needs a dataset registered through an IG parameter; without one it throws `Unable to find dataset` | A dataset declared in `sushi-config.yaml` |
+| `{%! uml %}` | **It is broken.** The keyword is registered but has no implementation behind it, so it writes `Error processing command: Internal Error - unknown keyword uml` into your page while the build still reports success | Use `class-diagram` instead |
+| `{%! class-diagram %}` | Needs an `input/diagrams/` directory and a logical model to draw; this scaffold has neither | A logical model, plus Graphviz on the build machine |
+| `{%! multi-map %}` | Needs a source ValueSet and ConceptMaps to scan; this scaffold defines no terminology | A ValueSet and at least one ConceptMap |
+| `{%! dataset %}` | Needs a dataset registered through an IG parameter; without one it throws `Unable to find dataset` | A dataset declared in `sushi-config.yaml` |
 
 Add the artifact each one needs and the directive starts working — none of them
 is deprecated. The recipe explains where each is documented, and which are

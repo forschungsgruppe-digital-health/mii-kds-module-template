@@ -120,18 +120,53 @@ GLOSS_DE = {
 SD_PREFIX = 'StructureDefinition-example-patient-'
 PT_PREFIX = 'Patient-ExamplePatientInstance-'
 
+# These fragments are generated, but they carry links written relative to the
+# artifact page ("patient.html", "formats.html", "help16.png"). Included into a
+# narrative page they resolve against the wrong directory and the build reports
+# them as broken links. Measured, not assumed: each one was rendered live and
+# the resulting page checked against the built site's file list.
+NOT_EMBEDDABLE = {
+    'search-params': ('links to the base-spec resource pages '
+                      '(patient.html, person.html, practitioner.html, …)'),
+    'span': 'links to formats.html and the help16.png icon',
+    'spanall': 'links to formats.html and the help16.png icon',
+}
+NOT_EMBEDDABLE_DE = {
+    'search-params': ('verweist auf die Seiten der Basisspezifikation '
+                      '(patient.html, person.html, practitioner.html, …)'),
+    'span': 'verweist auf formats.html und das Symbol help16.png',
+    'spanall': 'verweist auf formats.html und das Symbol help16.png',
+}
 
-def catalogue(prefix, codes, gloss, summary_tpl):
-    """One <details> per code: the exact include line, then the live rendering."""
+
+def catalogue(prefix, codes, gloss, de=False):
+    """One <details> per code: the exact include line, then the live rendering.
+
+    Three codes are shown without their rendering - see NOT_EMBEDDABLE.
+    """
+    warn = NOT_EMBEDDABLE_DE if de else NOT_EMBEDDABLE
+    note = ('Nicht eingebettet: dieses Fragment '
+            if de else 'Not embedded here: this fragment ')
+    tail = ('. Auf der Artefaktseite ist es korrekt; in einer Fließtextseite '
+            'lösen die Verweise ins falsche Verzeichnis auf und der Build '
+            'meldet defekte Links. Die Include-Zeile ist dennoch gültig.'
+            if de else
+            '. It is correct on the artifact page; inside a narrative page the '
+            'links resolve against the wrong directory and the build reports '
+            'them as broken. The include line itself is still valid.')
     out = []
     for c in codes:
         frag = f'{prefix}{c}.xhtml'
         desc = gloss.get(c, '')
+        body = (f'<pre><code>{{% raw %}}{{% include {frag} %}}{{% endraw %}}</code></pre>\n\n')
+        if c in warn:
+            body += f'<p><em>{note}{warn[c]}{tail}</em></p>\n\n'
+        else:
+            body += f'{{% include {frag} %}}\n\n'
         out.append(
             f'<details>\n'
             f'<summary><code>{c}</code>{(" — " + desc) if desc else ""}</summary>\n\n'
-            f'<pre><code>{{% raw %}}{{% include {frag} %}}{{% endraw %}}</code></pre>\n\n'
-            f'{{% include {frag} %}}\n\n'
+            f'{body}'
             f'</details>\n'
         )
     return '\n'.join(out)
@@ -155,8 +190,8 @@ def build(lang):
     gloss = GLOSS_DE if de else GLOSS_EN
     t = TEXT_DE if de else TEXT_EN
     body = t['body']
-    body = body.replace('@@SD_CATALOGUE@@', catalogue(SD_PREFIX, SD, gloss, None))
-    body = body.replace('@@PT_CATALOGUE@@', catalogue(PT_PREFIX, PT, gloss, None))
+    body = body.replace('@@SD_CATALOGUE@@', catalogue(SD_PREFIX, SD, gloss, de))
+    body = body.replace('@@PT_CATALOGUE@@', catalogue(PT_PREFIX, PT, gloss, de))
     body = body.replace('@@LIST_CATALOGUE@@', listy_catalogue(None))
     body = body.replace('@@SD_COUNT@@', str(len(SD)))
     body = body.replace('@@PT_COUNT@@', str(len(PT)))
