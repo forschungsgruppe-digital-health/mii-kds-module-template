@@ -7,11 +7,6 @@
      IG Publisher 2.2.11. Nothing here is Simplifier-specific: FQL does not run
      in an IG-Publisher build. See docs/recipes/render-existing-artifacts.md. -->
 
-### Rendering existing FHIR artifacts in a narrative page
-
-* Placeholder for the auto-generated table of contents (this line is not shown)
-{:toc}
-
 The IG Publisher generates a page for every profile, extension, value set and
 example in this guide. You do not have to link readers away to them — you can
 render the parts that matter **inside** a narrative page, next to the prose that
@@ -30,7 +25,7 @@ page next to the rendering, copy what you need, then delete the page.
 scaffold's copy</a>. It lists every file to remove when you delete this page.
 </div>
 
-#### 1. Embed a generated artifact view
+### 1. Embed a generated artifact view
 
 The Publisher writes several views per artifact as includable fragments. This
 one is the **element dictionary** of the scaffold's example profile:
@@ -44,7 +39,7 @@ Other views for the same profile follow the pattern
 produces include `snapshot`, `diff`, `dict`, `xml` and `json-html` — the same
 fragments the base template uses to build the artifact pages themselves.
 
-#### 2. Embed part of an example instance
+### 2. Embed part of an example instance
 
 The <code>&#123;% fragment %}</code> tag renders an instance held in this guide, and can
 narrow it with FHIRPath so the reader sees only the element under discussion —
@@ -58,7 +53,7 @@ useful when an example is long and one field is the point:
 `EXCEPT:` keeps only what you list. XML works the same way; TTL is not
 supported.
 
-#### 3. Query this guide's own artifacts
+### 3. Query this guide's own artifacts
 
 During the build the Publisher writes `package.db`, a SQLite database of the
 guide's own artifacts. Any page can query it and render the result as a table —
