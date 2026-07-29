@@ -9,6 +9,9 @@
 
 ### Rendering existing FHIR artifacts in a narrative page
 
+* Placeholder for the auto-generated table of contents (this line is not shown)
+{:toc}
+
 The IG Publisher generates a page for every profile, extension, value set and
 example in this guide. You do not have to link readers away to them — you can
 render the parts that matter **inside** a narrative page, next to the prose that
