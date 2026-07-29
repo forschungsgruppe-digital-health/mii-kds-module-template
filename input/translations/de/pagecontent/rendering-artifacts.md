@@ -30,7 +30,7 @@ scaffold's copy</a>. It lists every file to remove when you delete this page.
 The Publisher writes several views per artifact as includable fragments. This
 one is the **element dictionary** of the scaffold's example profile:
 
-<pre><code>&#123;% include StructureDefinition-example-patient-dict.xhtml %}</code></pre>
+<pre><code>{% raw %}{% include StructureDefinition-example-patient-dict.xhtml %}{% endraw %}</code></pre>
 
 {% include StructureDefinition-example-patient-dict.xhtml %}
 
@@ -41,11 +41,11 @@ fragments the base template uses to build the artifact pages themselves.
 
 ### 2. Embed part of an example instance
 
-The <code>&#123;% fragment %}</code> tag renders an instance held in this guide, and can
+The <code>{% raw %}{% fragment %}{% endraw %}</code> tag renders an instance held in this guide, and can
 narrow it with FHIRPath so the reader sees only the element under discussion —
 useful when an example is long and one field is the point:
 
-<pre><code>&#123;% fragment Patient/ExamplePatientInstance JSON BASE:name %}</code></pre>
+<pre><code>{%! fragment Patient/ExamplePatientInstance JSON BASE:name %}</code></pre>
 
 {% fragment Patient/ExamplePatientInstance JSON BASE:name %}
 
@@ -59,24 +59,30 @@ During the build the Publisher writes `package.db`, a SQLite database of the
 guide's own artifacts. Any page can query it and render the result as a table —
 this is the IG-Publisher answer to a cross-artifact query:
 
-<pre><code>&#123;% sql select Name, Description from Resources order by Name %}</code></pre>
+<pre><code>{%! sql select Name, Description from Resources order by Name %}</code></pre>
 
 {% sql select Name, Description from Resources order by Name %}
 
 A JSON form of the same tag controls column titles, CSS class and per-column
 rendering (`link`, `markdown`, `canonical`, `resource`, …), and a
-<code>&#123;% sqlToData %}</code> tag puts the rows into a Liquid variable
+<code>{%! sqlToData %}</code> tag puts the rows into a Liquid variable
 instead of rendering a table, so you can lay them out yourself.
 
 <div class="mii-highlight mii-highlight-green">
 <h5>Showing a directive without running it</h5>
-The source blocks above escape their opening brace as <code>&amp;#123;</code>.
-That is deliberate: <code>&#123;% raw %}</code> does <em>not</em> protect these
-directives. The IG Publisher's own Liquid runs before Jekyll and ignores
-<code>raw</code>, so a wrapped example is still executed — and the publisher
-then writes its error into the rendered page, where the build reports no error
-at all. Escaping the brace means no directive token ever exists in the source.
+Two different escapes appear above, because two different engines are involved.
+The Publisher's own Liquid runs <em>before</em> Jekyll and handles eight
+keywords of its own; for those, write <code>{% raw %}{%! keyword … %}{% endraw %}</code>
+with an exclamation mark — the Publisher rewrites it into a literal and does not
+execute it. <code>{% raw %}{% raw %}{% endraw %}</code> does not help there,
+because the Publisher's pass ignores it. For a plain Jekyll tag such as
+<code>{% raw %}{% include %}{% endraw %}</code> the Publisher never looks, so
+<code>{% raw %}{% raw %}{% endraw %}</code> is the right escape.
 </div>
+
+<!-- PROBE — remove before merging -->
+<p>probe uml: {% uml {json} %}</p>
+<p>probe bang-include: {%! include StructureDefinition-example-patient-dict.xhtml %}</p>
 
 <div class="mii-highlight mii-highlight-green">
 <h5>Before you rely on any of this</h5>
