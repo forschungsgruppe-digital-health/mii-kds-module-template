@@ -1110,6 +1110,14 @@
         <title value="Metadata Overview"/>
         <generation value="markdown"/>
       </page>
+      <page>
+        <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-page-name">
+          <valueUrl value="rendering-artifacts.html"/>
+        </extension>
+        <nameUrl value="rendering-artifacts.html"/>
+        <title value="Rendering Artifacts (demo)"/>
+        <generation value="markdown"/>
+      </page>
     </page>
     <parameter>
       <code value="path-resource"/>

@@ -1443,6 +1443,15 @@
         "nameUrl" : "metadata.html",
         "title" : "Metadata Overview",
         "generation" : "markdown"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
+          "valueUrl" : "rendering-artifacts.html"
+        }],
+        "nameUrl" : "rendering-artifacts.html",
+        "title" : "Rendering Artifacts (demo)",
+        "generation" : "markdown"
       }]
     },
     "parameter" : [{

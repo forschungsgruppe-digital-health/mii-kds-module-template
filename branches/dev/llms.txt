@@ -10,6 +10,7 @@
 * [General Requirements](en/general-requirements.md)
 * [Conformance](en/conformance.md)
 * [Changelog](en/changes.md)
+* [Rendering Artifacts (demo)](en/rendering-artifacts.md)
 * [Versioning](en/version-history.md)
 * [Profiles and Extensions](en/profiles-and-extensions.md)
 * [Downloads](en/downloads.md)
