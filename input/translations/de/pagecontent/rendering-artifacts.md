@@ -62,12 +62,12 @@ Manche sind absichtlich leer: `history` hat ohne Provenance-Ressourcen nichts zu
 zeigen, `experimental-warning` nichts, solange das Artefakt nicht als
 experimentell gekennzeichnet ist. Ein leeres Fragment ist kein Fehler.
 
-Drei der 96 sind mit ihrer Include-Zeile aufgeführt, *ohne* ihre Darstellung.
-`search-params`, `span` und `spanall` enthalten Verweise, die relativ zur
-Artefaktseite geschrieben sind — `patient.html`, `formats.html`, `help16.png`.
-Auf der Artefaktseite lösen diese korrekt auf; eingebettet in eine
-Fließtextseite ein Verzeichnis weiter jedoch nicht, und der Build meldet jeden
-davon als defekten Link. Das ist allgemein wissenswert: Dass ein Fragment
+Vier der 96 sind mit ihrer Include-Zeile aufgeführt, *ohne* ihre Darstellung.
+`search-params`, `span`, `spanall` und `pseudo-json` verweisen auf Ziele, die
+es nur im Kontext der Artefaktseite gibt — die Seiten der Basisspezifikation,
+`formats.html` oder Anker, die die Artefaktseite für sich selbst definiert. In
+eine Fließtextseite eingebettet lösen diese nicht auf, und der Build meldet
+jeden davon als defekten Link. Das ist allgemein wissenswert: Dass ein Fragment
 erzeugt wird, heißt nicht, dass es überall eingebettet werden kann. Wenn Ihr
 QA-Bericht nach dem Einbinden eines Fragments defekte Links ausweist, liegt es
 daran.
@@ -403,7 +403,7 @@ daran.
 
 <pre><code>{% raw %}{% include StructureDefinition-example-patient-pseudo-json.xhtml %}{% endraw %}</code></pre>
 
-{% include StructureDefinition-example-patient-pseudo-json.xhtml %}
+<p><em>Nicht eingebettet: dieses Fragment verweist für jedes Element auf einen Anker der Artefaktseite, den diese nicht definiert, und enthält acht Binding-Verweise ohne Ziel. Auf der Artefaktseite ist es korrekt; in einer Fließtextseite lösen die Verweise ins falsche Verzeichnis auf und der Build meldet defekte Links. Die Include-Zeile ist dennoch gültig.</em></p>
 
 </details>
 

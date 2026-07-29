@@ -130,12 +130,18 @@ NOT_EMBEDDABLE = {
                       '(patient.html, person.html, practitioner.html, …)'),
     'span': 'links to formats.html and the help16.png icon',
     'spanall': 'links to formats.html and the help16.png icon',
+    'pseudo-json': ('links every element to a dictionary anchor on the artifact '
+                    'page that the artifact page does not define, and carries '
+                    'eight binding links whose target is null'),
 }
 NOT_EMBEDDABLE_DE = {
     'search-params': ('verweist auf die Seiten der Basisspezifikation '
                       '(patient.html, person.html, practitioner.html, …)'),
     'span': 'verweist auf formats.html und das Symbol help16.png',
     'spanall': 'verweist auf formats.html und das Symbol help16.png',
+    'pseudo-json': ('verweist für jedes Element auf einen Anker der '
+                    'Artefaktseite, den diese nicht definiert, und enthält acht '
+                    'Binding-Verweise ohne Ziel'),
 }
 
 
