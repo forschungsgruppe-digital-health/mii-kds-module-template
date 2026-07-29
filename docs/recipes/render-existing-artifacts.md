@@ -135,23 +135,32 @@ This is worth re-checking after a Publisher bump; it may simply be a bug.
 
 **The fragment-code list is openly incomplete.** The Confluence page says so
 itself, above the list: *"Note: as of July 2023, this list is not
-comprehensive."* Measured against IG Publisher 2.2.11, it documents 37
-per-resource codes while the source emits 105. Undocumented but generated:
-`tree`, `grid`, `status`, `uses`, `links`, `crumbs`, `obligations`,
-`search-params`, `dict-diff`, `dict-ms`, `inv-diff`, `sd-xref`, the whole
-`snapshot-by-key…` / `snapshot-by-mustsupport…` family, and about sixty more.
-Seven codes are documented but **no longer produced**: `ttl`, `shex`, `sch`,
-`java`, `json-schema`, `pseudo-xml`, `pseudo-ttl`.
+comprehensive."* Measured against IG Publisher 2.2.11 by listing the `.xhtml`
+files a real build writes: **96 codes** are emitted for a scaffold holding one
+profile and one instance, where the page documents 37. Undocumented but
+generated: `tree`, `grid`, `status`, `uses`, `crumbs`, `obligations`,
+`search-params`, `dict-diff`, `dict-key`, `dict-ms`, `inv-diff`, `sd-xref`,
+`typename`, `validate`, and the whole `snapshot-by-key…` /
+`snapshot-by-mustsupport…` family. Of the documented codes, `ttl`, `sch` and
+`java` were not produced in that build.
 
-The reliable way to know what your build actually offers is to look: the
-fragments are written next to the generated pages, so list the
-`<ResourceType>-<id>-*.xhtml` files in your own output rather than trusting any
-list, including this one.
+**A generated fragment is not necessarily an embeddable one.** Four of the 96 —
+`search-params`, `span`, `spanall` and `pseudo-json` — contain links that only
+resolve in the artifact-page context: the base-spec pages (`patient.html`),
+`formats.html`, the `help16.png` icon, or element anchors the artifact page
+defines for itself. Include one in a narrative page and the build's broken-link
+count rises while `Errors:` stays at 0. The demonstration page lists these four
+with their include line and without their rendering, and says why.
 
-**Experimental by its own documentation:** SQL-on-FHIR `ViewDefinition`s, added
-through the `viewDefinition` IG parameter, extend `package.db` with your own
-tables — the guidance says the definition and the tables "may change without
-warning".
+The reliable way to know what your build offers, and what is safe to embed, is
+to look rather than to trust a list — including this one. The fragments are
+written to the build's `temp` tree, not to `output/`, so list them there:
+
+```
+find . -name 'StructureDefinition-<your-id>-*.xhtml' -printf '%f\n' | sort
+```
+
+Then include one, build, and check the broken-link count.
 
 ## Common errors & fixes
 
