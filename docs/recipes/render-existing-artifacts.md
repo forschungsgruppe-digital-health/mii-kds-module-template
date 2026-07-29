@@ -20,20 +20,25 @@ What replaces it:
 
 | Simplifier | Here |
 | --- | --- |
-| `{{tree}}` | `{% raw %}{% include StructureDefinition-<id>-snapshot.xhtml %}{% endraw %}` (or `-diff`, `-dict`) |
-| `{{xml}}` / `{{json}}` | `{% raw %}{% include StructureDefinition-<id>-xml.xhtml %}{% endraw %}` / `-json-html` |
-| `<fql … select …>` over one artifact's elements | `{% raw %}{% include StructureDefinition-<id>-dict.xhtml %}{% endraw %}` |
-| `<fql …>` across many artifacts | `{% raw %}{% sql … %}{% endraw %}` over `package.db` |
+| `{{tree}}` | `{% include StructureDefinition-<id>-snapshot.xhtml %}` (or `-diff`, `-dict`) |
+| `{{xml}}` / `{{json}}` | `{% include StructureDefinition-<id>-xml.xhtml %}` / `-json-html` |
+| `<fql … select …>` over one artifact's elements | `{% include StructureDefinition-<id>-dict.xhtml %}` |
+| `<fql …>` across many artifacts | `{% sql … %}` over `package.db` |
 | `{{render:<canonical>}}` | usually nothing — the Publisher already generates that artifact's page |
 
 ## Steps
 
 1. **Decide which of the three families you need.**
    - One artifact, a view the Publisher already renders → an `include`.
-   - Part of one example instance → `{% raw %}{% fragment %}{% endraw %}`.
-   - Something across several artifacts → `{% raw %}{% sql %}{% endraw %}`.
+   - Part of one example instance → `{% fragment %}`.
+   - Something across several artifacts → `{% sql %}`.
 2. **Write the directive** into any page under `input/pagecontent/`. Use the
    demonstration page as the reference for exact syntax.
+
+   To *show* a directive rather than run it, escape the opening brace —
+   `&#123;% … %}` inside a `<pre><code>` block. `{% raw %}` does **not** work
+   here: the publisher's own Liquid runs before Jekyll and ignores it, so the
+   directive executes anyway and its error is written into the page.
 3. **Build and look at it.** A directive that names an artifact or fragment that
    does not exist renders as nothing, or fails the build — both are loud, which
    is the point of checking here rather than after publication.
@@ -54,9 +59,9 @@ you find quoted elsewhere is worth verifying.
 
 **Documented and safe to rely on** — [HL7 guidance, *Page Content*](https://build.fhir.org/ig/FHIR/ig-guidance/):
 
-- [`{% raw %}{% fragment %}{% endraw %}`](https://build.fhir.org/ig/FHIR/ig-guidance/fragments.html) — a filtered slice of an instance
-- [`{% raw %}{% sql %}{% endraw %}` and `{% raw %}{% sqlToData %}{% endraw %}`](https://build.fhir.org/ig/FHIR/ig-guidance/sql.html) — queries over `package.db`
-- [`{% raw %}{% json <file> <template> %}{% endraw %}`](https://build.fhir.org/ig/FHIR/ig-guidance/jsonxml.html) — render a JSON file through a Liquid template
+- [`{% fragment %}`](https://build.fhir.org/ig/FHIR/ig-guidance/fragments.html) — a filtered slice of an instance
+- [`{% sql %}` and `{% sqlToData %}`](https://build.fhir.org/ig/FHIR/ig-guidance/sql.html) — queries over `package.db`
+- [`{% json <file> <template> %}`](https://build.fhir.org/ig/FHIR/ig-guidance/jsonxml.html) — render a JSON file through a Liquid template
 - [Mermaid](https://build.fhir.org/ig/FHIR/ig-guidance/diagrams-mermaid.html) and [PlantUML](https://build.fhir.org/ig/FHIR/ig-guidance/diagrams-plantuml.html) diagrams
 - Generated fragment codes — [IG Publisher documentation](https://confluence.hl7.org/display/FHIR/IG+Publisher+Documentation), whose own list is explicitly incomplete
 - `-intro.md` / `-notes.md` files, which inject your prose into a generated artifact page
@@ -65,11 +70,11 @@ you find quoted elsewhere is worth verifying.
 structure on them, and re-check after an IG Publisher bump:
 
 - `[[[ … ]]]` — auto-links a canonical URL or artifact name
-- `{% raw %}{% lang-fragment %}{% endraw %}`, `{% raw %}{% dataset %}{% endraw %}`
+- `{% lang-fragment %}`, `{% dataset %}`
 - Sort and format variants of the list fragments (`list-byid-…`, `table-…`)
 
 **Documented under a name the implementation does not use:** the guidance
-describes `{% raw %}{% uml %}{% endraw %}`; the keyword registered in the
+describes `{% uml %}`; the keyword registered in the
 Publisher is `class-diagram`. Try both and keep whichever builds.
 
 **Experimental by its own documentation:** SQL-on-FHIR `ViewDefinition`s, added
@@ -82,7 +87,8 @@ warning".
 | Symptom | Cause | Fix |
 | --- | --- | --- |
 | The include renders nothing | The fragment name does not match a generated file | Check the artifact `Id:` — the fragment is `<ResourceType>-<Id>-<view>.xhtml`, using the `Id:`, not the FSH `Profile:` name |
-| The directive appears as literal text on the page | It was inside a code fence, or Liquid was disabled | Wrap examples in `{% raw %}…{% endraw %}` only when you want to *show* the directive |
-| `{% raw %}{% sql %}{% endraw %}` returns nothing | The table or column does not exist | Open `package.db` from the build output with any SQLite client and look at the real schema |
+| A directive you wanted to *show* was executed instead | `{% raw %}` does not protect it — the publisher's Liquid runs before Jekyll and ignores it | Escape the opening brace: `&#123;% … %}` inside a `<pre><code>` block, so no directive token exists in the source |
+| The page shows "Error processing command: …" | A directive ran and failed — often one you meant to display | Same fix. Note the build reports **no error** for this and stays green; read the rendered page |
+| `{% sql %}` returns nothing | The table or column does not exist | Open `package.db` from the build output with any SQLite client and look at the real schema |
 | The build fails after adding a page | The page is not registered | Add it to `pages:` in `sushi-config.yaml`; a `pages:` entry also needs the file to exist |
 | It worked, then broke after a toolchain bump | An undocumented mechanism changed | Check the list above; prefer the documented three |
