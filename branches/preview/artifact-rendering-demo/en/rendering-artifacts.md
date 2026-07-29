@@ -5,10 +5,6 @@
 
 ## Rendering Artifacts (demo)
 
-### Rendering existing FHIR artifacts in a narrative page
-
-* [Rendering existing FHIR artifacts in a narrative page](#rendering-existing-fhir-artifacts-in-a-narrative-page)
-
 The IG Publisher generates a page for every profile, extension, value set and example in this guide. You do not have to link readers away to them — you can render the parts that matter **inside** a narrative page, next to the prose that explains them.
 
 This page demonstrates three mechanisms. Each block shows the source line, then what it produces.
@@ -19,7 +15,7 @@ A live demonstration shipped with the module scaffold. Read the source of this p
 `docs/recipes/render-existing-artifacts.md`— or read
 [the scaffold's copy](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/blob/main/docs/recipes/render-existing-artifacts.md). It lists every file to remove when you delete this page.
 
-#### 1. Embed a generated artifact view
+### 1. Embed a generated artifact view
 
 The Publisher writes several views per artifact as includable fragments. This one is the **element dictionary** of the scaffold's example profile:
 
@@ -31,7 +27,7 @@ Guidance on how to interpret the contents of this table can be found[here](https
 
 Other views for the same profile follow the pattern `StructureDefinition-<id>-<view>.xhtml`. The ones this scaffold's build produces include `snapshot`, `diff`, `dict`, `xml` and `json-html` — the same fragments the base template uses to build the artifact pages themselves.
 
-#### 2. Embed part of an example instance
+### 2. Embed part of an example instance
 
 The `{% fragment %}` tag renders an instance held in this guide, and can narrow it with FHIRPath so the reader sees only the element under discussion — useful when an example is long and one field is the point:
 
@@ -41,7 +37,7 @@ The `{% fragment %}` tag renders an instance held in this guide, and can narrow 
 
 `BASE:` selects the subtree, `ELIDE:` replaces named elements with `...`, and `EXCEPT:` keeps only what you list. XML works the same way; TTL is not supported.
 
-#### 3. Query this guide's own artifacts
+### 3. Query this guide's own artifacts
 
 During the build the Publisher writes `package.db`, a SQLite database of the guide's own artifacts. Any page can query it and render the result as a table — this is the IG-Publisher answer to a cross-artifact query:
 

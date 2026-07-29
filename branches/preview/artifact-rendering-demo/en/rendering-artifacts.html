@@ -232,10 +232,14 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 
     <p><!-- white space is critical inside of capture --></p>
-<div>
-<!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown.-->
-</div>
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#1-embed-a-generated-artifact-view" id="markdown-toc-1-embed-a-generated-artifact-view">1. Embed a generated artifact view</a></li>
+  <li><a href="#2-embed-part-of-an-example-instance" id="markdown-toc-2-embed-part-of-an-example-instance">2. Embed part of an example instance</a></li>
+  <li><a href="#3-query-this-guides-own-artifacts" id="markdown-toc-3-query-this-guides-own-artifacts">3. Query this guide's own artifacts</a></li>
+</ul>
 
+</div>
 <!-- DEMONSTRATION PAGE — delete it, and its `pages:` entry and menu link, once
      you have taken what you need. It renders THIS scaffold's example profile
      and example instance, so it keeps working until you remove the starter
@@ -244,12 +248,6 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
      Every mechanism below is documented HL7 guidance, verified against
      IG Publisher 2.2.11. Nothing here is Simplifier-specific: FQL does not run
      in an IG-Publisher build. See docs/recipes/render-existing-artifacts.md. -->
-
-<h3 id="rendering-existing-fhir-artifacts-in-a-narrative-page">Rendering existing FHIR artifacts in a narrative page</h3>
-
-<ul id="markdown-toc">
-  <li><a href="#rendering-existing-fhir-artifacts-in-a-narrative-page" id="markdown-toc-rendering-existing-fhir-artifacts-in-a-narrative-page">Rendering existing FHIR artifacts in a narrative page</a></li>
-</ul>
 
 <p>The IG Publisher generates a page for every profile, extension, value set and
 example in this guide. You do not have to link readers away to them — you can
@@ -269,7 +267,7 @@ page next to the rendering, copy what you need, then delete the page.
 scaffold's copy</a>. It lists every file to remove when you delete this page.
 </div>
 
-<h4 id="1-embed-a-generated-artifact-view">1. Embed a generated artifact view</h4>
+<h3 id="1-embed-a-generated-artifact-view">1. Embed a generated artifact view</h3>
 
 <p>The Publisher writes several views per artifact as includable fragments. This
 one is the <strong>element dictionary</strong> of the scaffold's example profile:</p>
@@ -539,7 +537,7 @@ Multiple GPs may be recorded against the patient for various reasons, such as a 
 produces include <code class="language-plaintext highlighter-rouge">snapshot</code>, <code class="language-plaintext highlighter-rouge">diff</code>, <code class="language-plaintext highlighter-rouge">dict</code>, <code class="language-plaintext highlighter-rouge">xml</code> and <code class="language-plaintext highlighter-rouge">json-html</code> — the same
 fragments the base template uses to build the artifact pages themselves.</p>
 
-<h4 id="2-embed-part-of-an-example-instance">2. Embed part of an example instance</h4>
+<h3 id="2-embed-part-of-an-example-instance">2. Embed part of an example instance</h3>
 
 <p>The <code>&#123;% fragment %}</code> tag renders an instance held in this guide, and can
 narrow it with FHIRPath so the reader sees only the element under discussion —
@@ -558,7 +556,7 @@ useful when an example is long and one field is the point:</p>
 <code class="language-plaintext highlighter-rouge">EXCEPT:</code> keeps only what you list. XML works the same way; TTL is not
 supported.</p>
 
-<h4 id="3-query-this-guides-own-artifacts">3. Query this guide's own artifacts</h4>
+<h3 id="3-query-this-guides-own-artifacts">3. Query this guide's own artifacts</h3>
 
 <p>During the build the Publisher writes <code class="language-plaintext highlighter-rouge">package.db</code>, a SQLite database of the
 guide's own artifacts. Any page can query it and render the result as a table —
@@ -616,7 +614,7 @@ which is which, and which primary source to check.
 
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Wed, Jul 29, 2026 15:42+0000">2026-07-29</span>
+          Generated <span title="Wed, Jul 29, 2026 15:49+0000">2026-07-29</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.
