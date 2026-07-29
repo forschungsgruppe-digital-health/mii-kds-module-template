@@ -23,6 +23,7 @@ single job from start to a checkable result.
 | [how profiles render](render-profiles.md) | A profile page needs prose a reader can follow |
 | [add and describe examples](describe-examples.md) | You are adding example instances |
 | [information models — Logical Models vs profiles](model-information-models.md) | You are unsure which artifact expresses your data model |
+| [render existing artifacts in a page](render-existing-artifacts.md) | You want a profile, example or artifact table inline in your prose |
 | [add UML diagrams and other images](add-uml-diagrams.md) | A picture would explain it better |
 | [extend the translations](add-translation.md) | Menu, pages, footer or resource text needs a second language |
 
