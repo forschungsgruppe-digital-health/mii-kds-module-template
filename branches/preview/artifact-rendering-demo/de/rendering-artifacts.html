@@ -267,8 +267,7 @@ step-by-step version is in the repository at
 <p>The Publisher writes several views per artifact as includable fragments. This
 one is the <strong>element dictionary</strong> of the scaffold's example profile:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% include StructureDefinition-example-patient-dict.xhtml %}
-</code></pre></div></div>
+<pre><code>&#123;% include StructureDefinition-example-patient-dict.xhtml %}</code></pre>
 
 <p>Guidance on how to interpret the contents of this table can be found<a href="https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#data-dictionaries">here</a></p>
 <table class="dict" data-fhir="generated"><tr><td colspan="2" class="structure"><span class="self-link-parent"><a name="Patient">  </a><span style="color: grey">0</span><b>. Patient</b><a href="#Patient" title="link to here" class="self-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" class="self-link" height="16"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z"></path></svg></a></span></td></tr><tr><td style="white-space: nowrap">Definition</td><td><p style="font-size: 11px">Demographics and other administrative information about an individual or animal receiving care or other health-related services.</p>
@@ -535,19 +534,11 @@ fragments the base template uses to build the artifact pages themselves.</p>
 
 <h4 id="2-embed-part-of-an-example-instance">2. Embed part of an example instance</h4>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;p&gt;Error processing command: Fragment syntax error: syntax must be '[ResourceType]/[id] [syntax] [filters]'.  Found: 
- in file /home/runner/work/mii-kds-module-template/mii-kds-module-template/input/pagecontent/rendering-artifacts</code> renders an instance held in this guide, and can
+<p>The <code>&#123;% fragment %}</code> tag renders an instance held in this guide, and can
 narrow it with FHIRPath so the reader sees only the element under discussion —
 useful when an example is long and one field is the point:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;pre class="json" data-fhir="generated" style="white-space: pre; text-wrap: nowrap; width: auto;"&gt;&lt;code class="language-json" style="white-space: pre; text-wrap: nowrap;"&gt;{
-  "&lt;a href="http://hl7.org/fhir/R4/datatypes.html#HumanName#HumanName.family"&gt;family&lt;/a&gt;" : "Mustermann-Testpatient",
-  "&lt;a href="http://hl7.org/fhir/R4/datatypes.html#HumanName#HumanName.given"&gt;given&lt;/a&gt;" : [
-    "Max"
-  ]
-}&lt;/code&gt;&lt;/pre&gt;
-
-</code></pre></div></div>
+<pre><code>&#123;% fragment Patient/ExamplePatientInstance JSON BASE:name %}</code></pre>
 
 <pre class="json" data-fhir="generated" style="white-space: pre; text-wrap: nowrap; width: auto;"><code class="language-json" style="white-space: pre; text-wrap: nowrap;">{
   "<a href="http://hl7.org/fhir/R4/datatypes.html#HumanName#HumanName.family">family</a>" : "Mustermann-Testpatient",
@@ -566,15 +557,24 @@ supported.</p>
 guide's own artifacts. Any page can query it and render the result as a table —
 this is the IG-Publisher answer to a cross-artifact query:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% include sql-3-fragment.xhtml %}
-</code></pre></div></div>
+<pre><code>&#123;% sql select Name, Description from Resources order by Name %}</code></pre>
 
 <table class="grid"><tr><td style="background-color: #eeeeee">Name</td><td style="background-color: #eeeeee">Description</td></tr><tr><td>Example: Max Mustermann-Testpatient</td><td>Synthetic example for the Example Patient profile. Entirely artificial data.</td></tr><tr><td>ExamplePatient</td><td>Minimal example profile shipped with the template so that a newly created module renders a complete IG immediately. Not an MII artifact — replace it with your module's profiles.</td></tr><tr><td>MII_IG_Template</td><td>Self-check build of the mii-kds-module-template scaffold. This repository is a template for creating a new MII KDS module Implementation Guide, or a migration target for an existing Simplifier MII IG. Every value here is a placeholder — replace them all when you create a real module.</td></tr><tr><td>mii-param-template-manifest</td><td /></tr></table>
 
 <p>A JSON form of the same tag controls column titles, CSS class and per-column
-rendering (<code class="language-plaintext highlighter-rouge">link</code>, <code class="language-plaintext highlighter-rouge">markdown</code>, <code class="language-plaintext highlighter-rouge">canonical</code>, <code class="language-plaintext highlighter-rouge">resource</code>, …), and
-<code class="language-plaintext highlighter-rouge">{% include sql-5-fragment.xhtml %}</code> puts the rows into a Liquid variable instead
-of rendering a table, so you can lay them out yourself.</p>
+rendering (<code class="language-plaintext highlighter-rouge">link</code>, <code class="language-plaintext highlighter-rouge">markdown</code>, <code class="language-plaintext highlighter-rouge">canonical</code>, <code class="language-plaintext highlighter-rouge">resource</code>, …), and a
+<code>&#123;% sqlToData %}</code> tag puts the rows into a Liquid variable
+instead of rendering a table, so you can lay them out yourself.</p>
+
+<div class="mii-highlight mii-highlight-green">
+<h5>Showing a directive without running it</h5>
+The source blocks above escape their opening brace as <code>&amp;#123;</code>.
+That is deliberate: <code>&#123;% raw %}</code> does <em>not</em> protect these
+directives. The IG Publisher's own Liquid runs before Jekyll and ignores
+<code>raw</code>, so a wrapped example is still executed — and the publisher
+then writes its error into the rendered page, where the build reports no error
+at all. Escaping the brace means no directive token ever exists in the source.
+</div>
 
 <div class="mii-highlight mii-highlight-green">
 <h5>Before you rely on any of this</h5>
@@ -609,7 +609,7 @@ which is which, and which primary source to check.
 
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Wed, Jul 29, 2026 14:17+0000">2026-07-29</span>
+          Erstellt <span title="Wed, Jul 29, 2026 14:24+0000">2026-07-29</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.

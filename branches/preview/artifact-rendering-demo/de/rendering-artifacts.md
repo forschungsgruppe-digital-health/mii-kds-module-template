@@ -23,7 +23,6 @@ The Publisher writes several views per artifact as includable fragments. This on
 
 ```
 {% include StructureDefinition-example-patient-dict.xhtml %}
-
 ```
 
 Guidance on how to interpret the contents of this table can be found[here](https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#data-dictionaries)
@@ -32,17 +31,10 @@ Other views for the same profile follow the pattern `StructureDefinition-<id>-<v
 
 #### 2. Embed part of an example instance
 
-`<p>Error processing command: Fragment syntax error: syntax must be '[ResourceType]/[id] [syntax] [filters]'. Found: in file /home/runner/work/mii-kds-module-template/mii-kds-module-template/input/pagecontent/rendering-artifacts` renders an instance held in this guide, and can narrow it with FHIRPath so the reader sees only the element under discussion — useful when an example is long and one field is the point:
+The `{% fragment %}` tag renders an instance held in this guide, and can narrow it with FHIRPath so the reader sees only the element under discussion — useful when an example is long and one field is the point:
 
 ```
-<pre class="json" data-fhir="generated" style="white-space: pre; text-wrap: nowrap; width: auto;"><code class="language-json" style="white-space: pre; text-wrap: nowrap;">{
-  "<a href="http://hl7.org/fhir/R4/datatypes.html#HumanName#HumanName.family">family</a>" : "Mustermann-Testpatient",
-  "<a href="http://hl7.org/fhir/R4/datatypes.html#HumanName#HumanName.given">given</a>" : [
-    "Max"
-  ]
-}</code></pre>
-
-
+{% fragment Patient/ExamplePatientInstance JSON BASE:name %}
 ```
 
 `BASE:` selects the subtree, `ELIDE:` replaces named elements with `...`, and `EXCEPT:` keeps only what you list. XML works the same way; TTL is not supported.
@@ -52,8 +44,7 @@ Other views for the same profile follow the pattern `StructureDefinition-<id>-<v
 During the build the Publisher writes `package.db`, a SQLite database of the guide's own artifacts. Any page can query it and render the result as a table — this is the IG-Publisher answer to a cross-artifact query:
 
 ```
-{% include sql-3-fragment.xhtml %}
-
+{% sql select Name, Description from Resources order by Name %}
 ```
 
 | | |
@@ -64,7 +55,14 @@ During the build the Publisher writes `package.db`, a SQLite database of the gui
 | MII_IG_Template | Self-check build of the mii-kds-module-template scaffold. This repository is a template for creating a new MII KDS module Implementation Guide, or a migration target for an existing Simplifier MII IG. Every value here is a placeholder — replace them all when you create a real module. |
 | mii-param-template-manifest |  |
 
-A JSON form of the same tag controls column titles, CSS class and per-column rendering (`link`, `markdown`, `canonical`, `resource`, …), and `{% include sql-5-fragment.xhtml %}` puts the rows into a Liquid variable instead of rendering a table, so you can lay them out yourself.
+A JSON form of the same tag controls column titles, CSS class and per-column rendering (`link`, `markdown`, `canonical`, `resource`, …), and a `{% sqlToData %}` tag puts the rows into a Liquid variable instead of rendering a table, so you can lay them out yourself.
+
+##### Showing a directive without running it
+The source blocks above escape their opening brace as
+`&#123;`. That is deliberate:
+`{% raw %}`does
+**not**protect these directives. The IG Publisher's own Liquid runs before Jekyll and ignores
+`raw`, so a wrapped example is still executed — and the publisher then writes its error into the rendered page, where the build reports no error at all. Escaping the brace means no directive token ever exists in the source.
 
 ##### Before you rely on any of this
 These three are documented and stable. Several neighbouring mechanisms are
