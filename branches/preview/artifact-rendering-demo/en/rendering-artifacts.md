@@ -31,6 +31,8 @@ Guidance on how to interpret the contents of this table can be found[here](https
 
 Some are deliberately empty — `history` has nothing to show without Provenance resources, `experimental-warning` nothing unless the artifact is experimental. An empty fragment is not an error.
 
+Three of the 96 are listed with their include line but **without** their rendering. `search-params`, `span` and `spanall` contain links written relative to the artifact page — `patient.html`, `formats.html`, `help16.png`. On the artifact page those resolve; embedded in a narrative page one directory away they do not, and the build reports each as a broken link. This is worth knowing generally: a fragment being generated does not guarantee it can be embedded anywhere. If your QA report gains broken links after you include one, this is why.
+
 #### The example profile — 78 codes
 
 #### The example instance — 10 codes
@@ -63,7 +65,7 @@ And as Turtle:
 {% fragment Patient/ExamplePatientInstance TTL BASE:name %}
 ```
 
-org.hl7.fhir.utilities.turtle.Turtle@7d4f6072
+org.hl7.fhir.utilities.turtle.Turtle@3e36c5
 
 Without a filter you get the whole instance. `ELIDE:` replaces a named element with `...` instead of removing it, which keeps the shape of the resource visible while hiding detail:
 
@@ -183,10 +185,10 @@ Four of the Publisher's keywords are not demonstrated above, for reasons worth k
 
 | | | |
 | :--- | :--- | :--- |
-| `<p>Error processing command: Internal Error - unknown keyword uml` | **It is broken.**The keyword is registered but has no implementation behind it, so it writes`Error processing command: Internal Error - unknown keyword uml`into your page while the build still reports success | Use`class-diagram`instead |
-| `<p style="color: maroon"><b>Error parsing JSON source: Unexpected content at start of JSON: Eof at Line 1 (path=[null])</b></p>` | Needs an`input/diagrams/`directory and a logical model to draw; this scaffold has neither | A logical model, plus Graphviz on the build machine |
-| `<p style="color: maroon"><b>Error parsing JSON source: Unexpected content at start of JSON: Eof at Line 1 (path=[null])</b></p>` | Needs a source ValueSet and ConceptMaps to scan; this scaffold defines no terminology | A ValueSet and at least one ConceptMap |
-| `<p>Error processing command: Index 1 out of bounds for length 1` | Needs a dataset registered through an IG parameter; without one it throws`Unable to find dataset` | A dataset declared in`sushi-config.yaml` |
+| `{% uml %}` | **It is broken.**The keyword is registered but has no implementation behind it, so it writes`Error processing command: Internal Error - unknown keyword uml`into your page while the build still reports success | Use`class-diagram`instead |
+| `{% class-diagram %}` | Needs an`input/diagrams/`directory and a logical model to draw; this scaffold has neither | A logical model, plus Graphviz on the build machine |
+| `{% multi-map %}` | Needs a source ValueSet and ConceptMaps to scan; this scaffold defines no terminology | A ValueSet and at least one ConceptMap |
+| `{% dataset %}` | Needs a dataset registered through an IG parameter; without one it throws`Unable to find dataset` | A dataset declared in`sushi-config.yaml` |
 
 Add the artifact each one needs and the directive starts working — none of them is deprecated. The recipe explains where each is documented, and which are documented at all.
 

@@ -31,6 +31,8 @@ Guidance on how to interpret the contents of this table can be found[here](https
 
 Manche sind absichtlich leer: `history` hat ohne Provenance-Ressourcen nichts zu zeigen, `experimental-warning` nichts, solange das Artefakt nicht als experimentell gekennzeichnet ist. Ein leeres Fragment ist kein Fehler.
 
+Drei der 96 sind mit ihrer Include-Zeile aufgeführt, **ohne** ihre Darstellung. `search-params`, `span` und `spanall` enthalten Verweise, die relativ zur Artefaktseite geschrieben sind — `patient.html`, `formats.html`, `help16.png`. Auf der Artefaktseite lösen diese korrekt auf; eingebettet in eine Fließtextseite ein Verzeichnis weiter jedoch nicht, und der Build meldet jeden davon als defekten Link. Das ist allgemein wissenswert: Dass ein Fragment erzeugt wird, heißt nicht, dass es überall eingebettet werden kann. Wenn Ihr QA-Bericht nach dem Einbinden eines Fragments defekte Links ausweist, liegt es daran.
+
 #### Das Beispielprofil — 78 Codes
 
 #### Die Beispielinstanz — 10 Codes
@@ -63,7 +65,7 @@ Und als Turtle:
 {% fragment Patient/ExamplePatientInstance TTL BASE:name %}
 ```
 
-org.hl7.fhir.utilities.turtle.Turtle@da79d11
+org.hl7.fhir.utilities.turtle.Turtle@12d84621
 
 Ohne Filter erhalten Sie die vollständige Instanz. `ELIDE:` ersetzt ein benanntes Element durch `...`, statt es zu entfernen — so bleibt die Struktur der Ressource sichtbar, während Details ausgeblendet werden:
 
@@ -183,10 +185,10 @@ Vier Keywords des Publishers werden oben nicht demonstriert. Die Gründe sind es
 
 | | | |
 | :--- | :--- | :--- |
-| `<p>Error processing command: Internal Error - unknown keyword uml` | **Sie ist defekt.**Das Keyword ist registriert, aber ohne Implementierung dahinter; es schreibt`Error processing command: Internal Error - unknown keyword uml`in Ihre Seite, während der Build weiterhin Erfolg meldet | Stattdessen`class-diagram`verwenden |
-| `<p style="color: maroon"><b>Error parsing JSON source: Unexpected content at start of JSON: Eof at Line 1 (path=[null])</b></p>` | Benötigt ein Verzeichnis`input/diagrams/`und ein logisches Modell zum Zeichnen; diese Vorlage hat beides nicht | Ein logisches Modell sowie Graphviz auf dem Build-Rechner |
-| `<p style="color: maroon"><b>Error parsing JSON source: Unexpected content at start of JSON: Eof at Line 1 (path=[null])</b></p>` | Benötigt ein Quell-ValueSet und ConceptMaps zum Auswerten; diese Vorlage definiert keine Terminologie | Ein ValueSet und mindestens eine ConceptMap |
-| `<p>Error processing command: Index 1 out of bounds for length 1` | Benötigt ein über einen IG-Parameter registriertes Dataset; ohne ein solches wirft sie`Unable to find dataset` | Ein in`sushi-config.yaml`deklariertes Dataset |
+| `{% uml %}` | **Sie ist defekt.**Das Keyword ist registriert, aber ohne Implementierung dahinter; es schreibt`Error processing command: Internal Error - unknown keyword uml`in Ihre Seite, während der Build weiterhin Erfolg meldet | Stattdessen`class-diagram`verwenden |
+| `{% class-diagram %}` | Benötigt ein Verzeichnis`input/diagrams/`und ein logisches Modell zum Zeichnen; diese Vorlage hat beides nicht | Ein logisches Modell sowie Graphviz auf dem Build-Rechner |
+| `{% multi-map %}` | Benötigt ein Quell-ValueSet und ConceptMaps zum Auswerten; diese Vorlage definiert keine Terminologie | Ein ValueSet und mindestens eine ConceptMap |
+| `{% dataset %}` | Benötigt ein über einen IG-Parameter registriertes Dataset; ohne ein solches wirft sie`Unable to find dataset` | Ein in`sushi-config.yaml`deklariertes Dataset |
 
 Ergänzen Sie das jeweils benötigte Artefakt, und die Direktive funktioniert — keine davon ist abgekündigt. Das Rezept erläutert, wo die einzelnen Direktiven dokumentiert sind und welche überhaupt dokumentiert sind.
 
