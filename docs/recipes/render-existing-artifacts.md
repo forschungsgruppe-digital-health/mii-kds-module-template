@@ -116,6 +116,14 @@ Four of the eight have a guidance page: `sql`, `fragment`, `json` and
 `lang-fragment` and `dataset` are implemented but undocumented. The eighth is
 the odd one out, below.
 
+**A second silent gap, inside a keyword that does work.** `{% fragment %}`
+accepts four formats — `json`, `xml`, `ttl`, `fml` — and rejects anything else
+with an error. `ttl` passes that check and then does not render: the page
+receives the Publisher's internal object,
+`org.hl7.fhir.utilities.turtle.Turtle@7d4f6072`, with no error, no warning and
+no broken link. Verified by building it. Use `json` or `xml`; `fml` applies only
+to StructureMaps.
+
 **One of the eight is registered and not implemented.** `uml` is in the array,
 but the `switch` that dispatches the keywords has no `case "uml"`, so it reaches
 `default:` and throws. Writing `{% uml … %}` in a page therefore produces, in

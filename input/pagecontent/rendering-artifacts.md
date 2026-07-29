@@ -963,11 +963,17 @@ The same subtree as XML:
 
 {% fragment Patient/ExamplePatientInstance XML BASE:name %}
 
-And as Turtle:
+`ttl` and `fml` are accepted by the same check, but neither is demonstrated
+here. `ttl` parses and then does not render: the Publisher writes its internal
+object into the page —
 
-<pre><code>{%! fragment Patient/ExamplePatientInstance TTL BASE:name %}</code></pre>
+```
+org.hl7.fhir.utilities.turtle.Turtle@7d4f6072
+```
 
-{% fragment Patient/ExamplePatientInstance TTL BASE:name %}
+— with no error, no warning and no broken link, so nothing but reading the page
+catches it. `fml` applies to StructureMaps, and this scaffold has none. Use
+`json` or `xml`.
 
 Without a filter you get the whole instance. `ELIDE:` replaces a named element
 with `...` instead of removing it, which keeps the shape of the resource visible
