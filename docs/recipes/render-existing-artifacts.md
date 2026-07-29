@@ -41,10 +41,9 @@ What replaces it:
 2. **Write the directive** into any page under `input/pagecontent/`. Use the
    demonstration page as the reference for exact syntax.
 
-   To *show* a directive rather than run it, escape the opening brace —
-   `&#123;% … %}` inside a `<pre><code>` block. `{% raw %}` does **not** work
-   here: the publisher's own Liquid runs before Jekyll and ignores it, so the
-   directive executes anyway and its error is written into the page.
+   To *show* a directive rather than run it, see
+   [Escaping a directive](#escaping-a-directive) below — which escape is correct
+   depends on which engine owns the tag.
 3. **Build and look at it.** A directive that names an artifact or fragment that
    does not exist renders as nothing, or fails the build — both are loud, which
    is the point of checking here rather than after publication.
@@ -56,6 +55,35 @@ What replaces it:
 
 The rendering appears inline in your page, styled like the rest of the guide,
 and the QA report shows no new errors or broken links.
+
+## Escaping a directive
+
+Two engines run in sequence, and each owns different tags. The IG Publisher's
+own Liquid pass runs **first**, then Jekyll. Which escape works depends on who
+owns the tag:
+
+| You want to show | Write | Why |
+| --- | --- | --- |
+| One of the Publisher's own keywords (`sql`, `fragment`, `json`, `class-diagram`, `uml`, `multi-map`, `lang-fragment`, `dataset`) | `{%! sql … %}` | The Publisher rewrites `{%! x %}` into a literal itself |
+| A Jekyll tag such as `{% include %}` | `{% raw %}…{% endraw %}` | The Publisher never looks at it; Jekyll's own escape applies |
+
+Getting this backwards fails in two different ways, and only one of them is
+loud:
+
+- `{% raw %}` around a **Publisher** keyword does not protect it. The Publisher
+  runs before Jekyll and does not know what `raw` means, so the directive
+  executes; if it fails, the error text is written into the rendered page while
+  the build still reports success. Read the page, not just the log.
+- `{%!` in front of a **Jekyll** tag is a hard build failure — the Publisher
+  leaves it untouched and Jekyll reports
+  `Tag '{%! include … %}' was not properly terminated`.
+
+The exclamation-mark form is what HL7's own guidance IG uses to display these
+tags — see the source of
+[`sql.xml`](https://github.com/FHIR/ig-guidance/blob/master/input/pagecontent/sql.xml)
+and [`uml.md`](https://github.com/FHIR/ig-guidance/blob/master/input/pagecontent/uml.md).
+It is implemented at
+[`PublisherGenerator.java:6118`](https://github.com/HL7/fhir-ig-publisher/blob/master/org.hl7.fhir.publisher.core/src/main/java/org/hl7/fhir/igtools/publisher/PublisherGenerator.java#L6118).
 
 ## What is documented, and what only works
 
@@ -72,16 +100,53 @@ you find quoted elsewhere is worth verifying.
 - Generated fragment codes — [IG Publisher documentation](https://confluence.hl7.org/display/FHIR/IG+Publisher+Documentation), whose own list is explicitly incomplete
 - `-intro.md` / `-notes.md` files, which inject your prose into a generated artifact page
 
-**Works, but is not in any documentation** — usable, but do not build a module's
-structure on them, and re-check after an IG Publisher bump:
+**The complete set of Publisher keywords** is a single array in the source —
+[`PublisherGenerator.java:6051`](https://github.com/HL7/fhir-ig-publisher/blob/master/org.hl7.fhir.publisher.core/src/main/java/org/hl7/fhir/igtools/publisher/PublisherGenerator.java#L6051):
 
-- `[[[ … ]]]` — auto-links a canonical URL or artifact name
-- `{% lang-fragment %}`, `{% dataset %}`
-- Sort and format variants of the list fragments (`list-byid-…`, `table-…`)
+```java
+String[] keywords = {"sql", "fragment", "json", "class-diagram", "uml",
+                     "multi-map", "lang-fragment", "dataset"};
+```
 
-**Documented under a name the implementation does not use:** the guidance
-describes `{% uml %}`; the keyword registered in the
-Publisher is `class-diagram`. Try both and keep whichever builds.
+There are eight, and no ninth. `[[[ … ]]]`, which auto-links a canonical URL or
+artifact name, is handled separately a few lines below, at
+[line 6129](https://github.com/HL7/fhir-ig-publisher/blob/master/org.hl7.fhir.publisher.core/src/main/java/org/hl7/fhir/igtools/publisher/PublisherGenerator.java#L6129).
+Four of the eight have a guidance page: `sql`, `fragment`, `json` and
+`multi-map`. Three appear in no guidance page at all — `class-diagram`,
+`lang-fragment` and `dataset` are implemented but undocumented. The eighth is
+the odd one out, below.
+
+**One of the eight is registered and not implemented.** `uml` is in the array,
+but the `switch` that dispatches the keywords has no `case "uml"`, so it reaches
+`default:` and throws. Writing `{% uml … %}` in a page therefore produces, in
+the rendered output:
+
+```
+Error processing command: Internal Error - unknown keyword uml
+```
+
+Verified by building it. The working keyword is `class-diagram` — which is
+itself undocumented, so the only diagram keyword with a guidance page is the one
+that does not run. HL7's own
+guidance page for it,
+[`uml.md`](https://github.com/FHIR/ig-guidance/blob/master/input/pagecontent/uml.md),
+shows `{%! uml {json} %}` — escaped, so their build never executes it either.
+This is worth re-checking after a Publisher bump; it may simply be a bug.
+
+**The fragment-code list is openly incomplete.** The Confluence page says so
+itself, above the list: *"Note: as of July 2023, this list is not
+comprehensive."* Measured against IG Publisher 2.2.11, it documents 37
+per-resource codes while the source emits 105. Undocumented but generated:
+`tree`, `grid`, `status`, `uses`, `links`, `crumbs`, `obligations`,
+`search-params`, `dict-diff`, `dict-ms`, `inv-diff`, `sd-xref`, the whole
+`snapshot-by-key…` / `snapshot-by-mustsupport…` family, and about sixty more.
+Seven codes are documented but **no longer produced**: `ttl`, `shex`, `sch`,
+`java`, `json-schema`, `pseudo-xml`, `pseudo-ttl`.
+
+The reliable way to know what your build actually offers is to look: the
+fragments are written next to the generated pages, so list the
+`<ResourceType>-<id>-*.xhtml` files in your own output rather than trusting any
+list, including this one.
 
 **Experimental by its own documentation:** SQL-on-FHIR `ViewDefinition`s, added
 through the `viewDefinition` IG parameter, extend `package.db` with your own
@@ -93,7 +158,8 @@ warning".
 | Symptom | Cause | Fix |
 | --- | --- | --- |
 | The include renders nothing | The fragment name does not match a generated file | Check the artifact `Id:` — the fragment is `<ResourceType>-<Id>-<view>.xhtml`, using the `Id:`, not the FSH `Profile:` name |
-| A directive you wanted to *show* was executed instead | `{% raw %}` does not protect it — the publisher's Liquid runs before Jekyll and ignores it | Escape the opening brace: `&#123;% … %}` inside a `<pre><code>` block, so no directive token exists in the source |
+| A directive you wanted to *show* was executed instead | `{% raw %}` does not protect a Publisher keyword | Use `{%! … %}` — see [Escaping a directive](#escaping-a-directive) |
+| `Tag '{%! include … %}' was not properly terminated` | `{%!` used on a Jekyll tag, which the Publisher does not touch | Use `{% raw %}…{% endraw %}` for Jekyll tags |
 | The page shows "Error processing command: …" | A directive ran and failed — often one you meant to display | Same fix. Note the build reports **no error** for this and stays green; read the rendered page |
 | `{% sql %}` returns nothing | The table or column does not exist | Open `package.db` from the build output with any SQLite client and look at the real schema |
 | The build fails after adding a page | The page is not registered | Add it to `pages:` in `sushi-config.yaml`; a `pages:` entry also needs the file to exist |

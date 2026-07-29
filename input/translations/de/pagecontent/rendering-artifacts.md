@@ -41,7 +41,7 @@ fragments the base template uses to build the artifact pages themselves.
 
 ### 2. Embed part of an example instance
 
-The <code>{% raw %}{% fragment %}{% endraw %}</code> tag renders an instance held in this guide, and can
+The <code>{%! fragment %}</code> tag renders an instance held in this guide, and can
 narrow it with FHIRPath so the reader sees only the element under discussion —
 useful when an example is long and one field is the point:
 
@@ -70,19 +70,25 @@ instead of rendering a table, so you can lay them out yourself.
 
 <div class="mii-highlight mii-highlight-green">
 <h5>Showing a directive without running it</h5>
-Two different escapes appear above, because two different engines are involved.
-The Publisher's own Liquid runs <em>before</em> Jekyll and handles eight
-keywords of its own; for those, write <code>{% raw %}{%! keyword … %}{% endraw %}</code>
-with an exclamation mark — the Publisher rewrites it into a literal and does not
-execute it. <code>{% raw %}{% raw %}{% endraw %}</code> does not help there,
-because the Publisher's pass ignores it. For a plain Jekyll tag such as
-<code>{% raw %}{% include %}{% endraw %}</code> the Publisher never looks, so
-<code>{% raw %}{% raw %}{% endraw %}</code> is the right escape.
+Two different escapes appear above, because two engines run in sequence. The
+Publisher's own Liquid pass runs <em>before</em> Jekyll and claims eight
+keywords: <code>sql</code>, <code>fragment</code>, <code>json</code>,
+<code>class-diagram</code>, <code>uml</code>, <code>multi-map</code>,
+<code>lang-fragment</code> and <code>dataset</code>. To show one of those
+without running it, add an exclamation mark — <code>{%! sql … %}</code>. The
+Publisher turns that into a literal itself. Wrapping it in
+<code>{% raw %}{% raw %}{% endraw %}</code> does <em>not</em> work, because the
+Publisher's pass runs first and does not know what <code>raw</code> means; the
+directive executes and its error is written into the page while the build still
+reports success.
+<br><br>
+For a plain Jekyll tag such as <code>{% raw %}{% include %}{% endraw %}</code>
+it is the other way round: the Publisher never looks at it, so
+<code>{% raw %}{% raw %}{% endraw %}</code> is the correct escape — and the
+exclamation mark is a build error, because the Publisher leaves it alone and
+Jekyll cannot parse it.
 </div>
 
-<!-- PROBE — remove before merging -->
-<p>probe uml: {% uml {json} %}</p>
-<p>probe bang-include: {%! include StructureDefinition-example-patient-dict.xhtml %}</p>
 
 <div class="mii-highlight mii-highlight-green">
 <h5>Before you rely on any of this</h5>
