@@ -3,7 +3,7 @@
 A **vendored mirror** of the MII IG-Publisher template package
 `de.medizininformatikinitiative.template` (version `0.4.0`), copied from
 <https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds>
-at commit `7ad25a052891ae1d1004f2aa492a96f2f5d64b53`.
+at commit `b1d4948fcee12b345b4b3a6eca56de2c3b9ddd3b`.
 
 **Do not edit these files here.** The single source of truth is the
 `ig-template-mii-kds` repository; local edits would silently drift and be
