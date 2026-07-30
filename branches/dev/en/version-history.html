@@ -316,8 +316,9 @@ previous package).</p>
 the same kind of report before any formal publication exists: the build
 compares itself against the previous <code class="language-plaintext highlighter-rouge">dev</code> preview using the FHIR validator's
 <code class="language-plaintext highlighter-rouge">-compare</code> command and publishes the result at <code class="language-plaintext highlighter-rouge">comparison-demo/index.html</code>.
-Maintainers can switch the demonstration off with the repository variable
-<code class="language-plaintext highlighter-rouge">ENABLE_COMPARISON_DEMO=false</code>; a created module never renders it.</p>
+The repository variable <code class="language-plaintext highlighter-rouge">ENABLE_VERSION_COMPARISON=false</code> switches the whole
+feature off — the publisher's comparison in every build workflow and this
+demonstration alike; a created module never renders the demonstration.</p>
 
 <blockquote class="mii-highlight mii-highlight-grey">
   <p>[TODO: If your module has a versioning policy of its own beyond the MII scheme
@@ -350,7 +351,7 @@ profiles — describe it here. Delete this prompt afterwards.]</p>
 
           IG © 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Thu, Jul 30, 2026 19:07+0000">2026-07-30</span>
+          Generated <span title="Thu, Jul 30, 2026 19:37+0000">2026-07-30</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.
