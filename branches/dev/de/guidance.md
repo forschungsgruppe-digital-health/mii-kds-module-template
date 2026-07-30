@@ -1,9 +1,9 @@
-# Guidance - MII Implementation Guide Module Template v2027.0.0-draft.1
+# Anleitung - MII Implementation Guide Module Template v2027.0.0-draft.1
 
-* [**Table of Contents**](toc.md)
-* **Guidance**
+* [**Inhaltsverzeichnis**](toc.md)
+* **Anleitung**
 
-## Guidance
+## Anleitung
 
 Dieser Abschnitt bündelt die fachlichen Hinweise zur Umsetzung und Nutzung des Moduls **Module Template**.
 

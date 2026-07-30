@@ -1,6 +1,6 @@
 # Artefaktübersicht - MII Implementation Guide Module Template v2027.0.0-draft.1
 
-* [**Table of Contents**](toc.md)
+* [**Inhaltsverzeichnis**](toc.md)
 * **Artefaktübersicht**
 
 ## Artefaktübersicht

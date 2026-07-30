@@ -1,9 +1,9 @@
-# Search Parameters and Operations - MII Implementation Guide Module Template v2027.0.0-draft.1
+# Suchparameter und Operationen - MII Implementation Guide Module Template v2027.0.0-draft.1
 
-* [**Table of Contents**](toc.md)
-* **Search Parameters and Operations**
+* [**Inhaltsverzeichnis**](toc.md)
+* **Suchparameter und Operationen**
 
-## Search Parameters and Operations
+## Suchparameter und Operationen
 
  Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfaden verfasst wurde. Informationen zu diesen Übersetzungen und Anweisungen zum Abgeben von Feedback zu den Übersetzungen finden Sie [hier](translationinfo.md). 
 

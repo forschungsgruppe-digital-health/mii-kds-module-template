@@ -1,9 +1,9 @@
-# Rendering Artifacts (demo) - MII Implementation Guide Module Template v2027.0.0-draft.1
+# Artefakt-Rendering (Demo) - MII Implementation Guide Module Template v2027.0.0-draft.1
 
-* [**Table of Contents**](toc.md)
-* **Rendering Artifacts (demo)**
+* [**Inhaltsverzeichnis**](toc.md)
+* **Artefakt-Rendering (Demo)**
 
-## Rendering Artifacts (demo)
+## Artefakt-Rendering (Demo)
 
 Der IG Publisher erzeugt für jedes Profil, jede Extension, jedes ValueSet und jedes Beispiel dieses Leitfadens eine eigene Seite. Sie müssen Leserinnen und Leser nicht dorthin wegschicken — Sie können die entscheidenden Teile **direkt in einer Fließtextseite** rendern, unmittelbar neben der Erläuterung.
 

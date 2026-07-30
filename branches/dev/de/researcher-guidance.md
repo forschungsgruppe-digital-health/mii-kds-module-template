@@ -1,10 +1,10 @@
-# Guidance for Researchers - MII Implementation Guide Module Template v2027.0.0-draft.1
+# Anleitung für Forschende - MII Implementation Guide Module Template v2027.0.0-draft.1
 
-* [**Table of Contents**](toc.md)
-* [**Guidance**](guidance.md)
-* **Guidance for Researchers**
+* [**Inhaltsverzeichnis**](toc.md)
+* [**Anleitung**](guidance.md)
+* **Anleitung für Forschende**
 
-## Guidance for Researchers
+## Anleitung für Forschende
 
  Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfaden verfasst wurde. Informationen zu diesen Übersetzungen und Anweisungen zum Abgeben von Feedback zu den Übersetzungen finden Sie [hier](translationinfo.md). 
 

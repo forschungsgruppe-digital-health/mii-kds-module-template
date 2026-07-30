@@ -142,7 +142,7 @@
   "url" : "https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template",
   "version" : "2027.0.0-draft.1",
   "name" : "MII_IG_Template",
-  "title" : "MII Implementation Guide Module Template",
+  "title" : "MII Implementierungsleitfaden Module Template",
   "status" : "active",
   "experimental" : false,
   "date" : "2027-01-01",
@@ -1229,7 +1229,7 @@
         "valueUrl" : "toc.html"
       }],
       "nameUrl" : "toc.html",
-      "title" : "Table of Contents",
+      "title" : "Inhaltsverzeichnis",
       "generation" : "html",
       "page" : [{
         "extension" : [{
@@ -1237,7 +1237,7 @@
           "valueUrl" : "index.html"
         }],
         "nameUrl" : "index.html",
-        "title" : "Home",
+        "title" : "Startseite",
         "generation" : "markdown"
       },
       {
@@ -1246,7 +1246,7 @@
           "valueUrl" : "guidance.html"
         }],
         "nameUrl" : "guidance.html",
-        "title" : "Guidance",
+        "title" : "Anleitung",
         "generation" : "markdown",
         "page" : [{
           "extension" : [{
@@ -1254,7 +1254,7 @@
             "valueUrl" : "researcher-guidance.html"
           }],
           "nameUrl" : "researcher-guidance.html",
-          "title" : "Guidance for Researchers",
+          "title" : "Anleitung für Forschende",
           "generation" : "markdown"
         },
         {
@@ -1263,7 +1263,7 @@
             "valueUrl" : "implementer-guidance.html"
           }],
           "nameUrl" : "implementer-guidance.html",
-          "title" : "Guidance for Implementers",
+          "title" : "Anleitung für Implementierende",
           "generation" : "markdown"
         },
         {
@@ -1272,7 +1272,7 @@
             "valueUrl" : "datasets-and-descriptions.html"
           }],
           "nameUrl" : "datasets-and-descriptions.html",
-          "title" : "Datasets and Descriptions",
+          "title" : "Datensätze und Beschreibungen",
           "generation" : "markdown"
         },
         {
@@ -1281,7 +1281,7 @@
             "valueUrl" : "uml-diagrams.html"
           }],
           "nameUrl" : "uml-diagrams.html",
-          "title" : "UML Diagrams",
+          "title" : "UML-Diagramme",
           "generation" : "markdown"
         }]
       },
@@ -1291,7 +1291,7 @@
           "valueUrl" : "conformance.html"
         }],
         "nameUrl" : "conformance.html",
-        "title" : "Conformance",
+        "title" : "Konformität",
         "generation" : "markdown",
         "page" : [{
           "extension" : [{
@@ -1299,7 +1299,7 @@
             "valueUrl" : "general-requirements.html"
           }],
           "nameUrl" : "general-requirements.html",
-          "title" : "General Requirements",
+          "title" : "Allgemeine Anforderungen",
           "generation" : "markdown"
         },
         {
@@ -1308,7 +1308,7 @@
             "valueUrl" : "must-support.html"
           }],
           "nameUrl" : "must-support.html",
-          "title" : "Must Support",
+          "title" : "Must-Support",
           "generation" : "markdown"
         },
         {
@@ -1317,7 +1317,7 @@
             "valueUrl" : "missing-data.html"
           }],
           "nameUrl" : "missing-data.html",
-          "title" : "Handling Missing Data",
+          "title" : "Umgang mit fehlenden Daten",
           "generation" : "markdown"
         },
         {
@@ -1326,7 +1326,7 @@
             "valueUrl" : "security-and-privacy.html"
           }],
           "nameUrl" : "security-and-privacy.html",
-          "title" : "Security and Privacy",
+          "title" : "Sicherheit und Datenschutz",
           "generation" : "markdown"
         }]
       },
@@ -1336,7 +1336,7 @@
           "valueUrl" : "profiles-and-extensions.html"
         }],
         "nameUrl" : "profiles-and-extensions.html",
-        "title" : "Profiles and Extensions",
+        "title" : "Profile und Extensions",
         "generation" : "markdown"
       },
       {
@@ -1345,7 +1345,7 @@
           "valueUrl" : "search-parameters-and-operations.html"
         }],
         "nameUrl" : "search-parameters-and-operations.html",
-        "title" : "Search Parameters and Operations",
+        "title" : "Suchparameter und Operationen",
         "generation" : "markdown"
       },
       {
@@ -1354,7 +1354,7 @@
           "valueUrl" : "terminology.html"
         }],
         "nameUrl" : "terminology.html",
-        "title" : "Terminology",
+        "title" : "Terminologie",
         "generation" : "markdown"
       },
       {
@@ -1363,7 +1363,7 @@
           "valueUrl" : "capability-statements.html"
         }],
         "nameUrl" : "capability-statements.html",
-        "title" : "Capability Statements",
+        "title" : "CapabilityStatements",
         "generation" : "markdown"
       },
       {
@@ -1372,7 +1372,7 @@
           "valueUrl" : "logical-models.html"
         }],
         "nameUrl" : "logical-models.html",
-        "title" : "Logical Models",
+        "title" : "Logische Modelle",
         "generation" : "markdown"
       },
       {
@@ -1381,7 +1381,7 @@
           "valueUrl" : "examples.html"
         }],
         "nameUrl" : "examples.html",
-        "title" : "Examples",
+        "title" : "Beispiele",
         "generation" : "markdown"
       },
       {
@@ -1399,7 +1399,7 @@
           "valueUrl" : "version-history.html"
         }],
         "nameUrl" : "version-history.html",
-        "title" : "Versioning",
+        "title" : "Versionierung",
         "generation" : "markdown",
         "page" : [{
           "extension" : [{
@@ -1407,7 +1407,7 @@
             "valueUrl" : "changes.html"
           }],
           "nameUrl" : "changes.html",
-          "title" : "Changelog",
+          "title" : "Änderungshistorie",
           "generation" : "markdown"
         }]
       },
@@ -1417,7 +1417,7 @@
           "valueUrl" : "translationinfo.html"
         }],
         "nameUrl" : "translationinfo.html",
-        "title" : "Translation Information",
+        "title" : "Hinweise zur Übersetzung",
         "generation" : "markdown"
       },
       {
@@ -1426,7 +1426,7 @@
           "valueUrl" : "metadata.html"
         }],
         "nameUrl" : "metadata.html",
-        "title" : "Metadata Overview",
+        "title" : "Metadaten",
         "generation" : "markdown"
       },
       {
@@ -1435,7 +1435,7 @@
           "valueUrl" : "rendering-artifacts.html"
         }],
         "nameUrl" : "rendering-artifacts.html",
-        "title" : "Rendering Artifacts (demo)",
+        "title" : "Artefakt-Rendering (Demo)",
         "generation" : "markdown"
       }]
     },

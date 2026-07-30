@@ -123,7 +123,7 @@
   <url value="https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template"/>
   <version value="2027.0.0-draft.1"/>
   <name value="MII_IG_Template"/>
-  <title value="MII Implementation Guide Module Template"/>
+  <title value="MII Implementierungsleitfaden Module Template"/>
   <status value="active"/>
   <experimental value="false"/>
   <date value="2027-01-01"/>
@@ -932,14 +932,14 @@
         <valueUrl value="toc.html"/>
       </extension>
       <nameUrl value="toc.html"/>
-      <title value="Table of Contents"/>
+      <title value="Inhaltsverzeichnis"/>
       <generation value="html"/>
       <page>
         <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-page-name">
           <valueUrl value="index.html"/>
         </extension>
         <nameUrl value="index.html"/>
-        <title value="Home"/>
+        <title value="Startseite"/>
         <generation value="markdown"/>
       </page>
       <page>
@@ -947,14 +947,14 @@
           <valueUrl value="guidance.html"/>
         </extension>
         <nameUrl value="guidance.html"/>
-        <title value="Guidance"/>
+        <title value="Anleitung"/>
         <generation value="markdown"/>
         <page>
           <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-page-name">
             <valueUrl value="researcher-guidance.html"/>
           </extension>
           <nameUrl value="researcher-guidance.html"/>
-          <title value="Guidance for Researchers"/>
+          <title value="Anleitung für Forschende"/>
           <generation value="markdown"/>
         </page>
         <page>
@@ -962,7 +962,7 @@
             <valueUrl value="implementer-guidance.html"/>
           </extension>
           <nameUrl value="implementer-guidance.html"/>
-          <title value="Guidance for Implementers"/>
+          <title value="Anleitung für Implementierende"/>
           <generation value="markdown"/>
         </page>
         <page>
@@ -970,7 +970,7 @@
             <valueUrl value="datasets-and-descriptions.html"/>
           </extension>
           <nameUrl value="datasets-and-descriptions.html"/>
-          <title value="Datasets and Descriptions"/>
+          <title value="Datensätze und Beschreibungen"/>
           <generation value="markdown"/>
         </page>
         <page>
@@ -978,7 +978,7 @@
             <valueUrl value="uml-diagrams.html"/>
           </extension>
           <nameUrl value="uml-diagrams.html"/>
-          <title value="UML Diagrams"/>
+          <title value="UML-Diagramme"/>
           <generation value="markdown"/>
         </page>
       </page>
@@ -987,14 +987,14 @@
           <valueUrl value="conformance.html"/>
         </extension>
         <nameUrl value="conformance.html"/>
-        <title value="Conformance"/>
+        <title value="Konformität"/>
         <generation value="markdown"/>
         <page>
           <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-page-name">
             <valueUrl value="general-requirements.html"/>
           </extension>
           <nameUrl value="general-requirements.html"/>
-          <title value="General Requirements"/>
+          <title value="Allgemeine Anforderungen"/>
           <generation value="markdown"/>
         </page>
         <page>
@@ -1002,7 +1002,7 @@
             <valueUrl value="must-support.html"/>
           </extension>
           <nameUrl value="must-support.html"/>
-          <title value="Must Support"/>
+          <title value="Must-Support"/>
           <generation value="markdown"/>
         </page>
         <page>
@@ -1010,7 +1010,7 @@
             <valueUrl value="missing-data.html"/>
           </extension>
           <nameUrl value="missing-data.html"/>
-          <title value="Handling Missing Data"/>
+          <title value="Umgang mit fehlenden Daten"/>
           <generation value="markdown"/>
         </page>
         <page>
@@ -1018,7 +1018,7 @@
             <valueUrl value="security-and-privacy.html"/>
           </extension>
           <nameUrl value="security-and-privacy.html"/>
-          <title value="Security and Privacy"/>
+          <title value="Sicherheit und Datenschutz"/>
           <generation value="markdown"/>
         </page>
       </page>
@@ -1027,7 +1027,7 @@
           <valueUrl value="profiles-and-extensions.html"/>
         </extension>
         <nameUrl value="profiles-and-extensions.html"/>
-        <title value="Profiles and Extensions"/>
+        <title value="Profile und Extensions"/>
         <generation value="markdown"/>
       </page>
       <page>
@@ -1035,7 +1035,7 @@
           <valueUrl value="search-parameters-and-operations.html"/>
         </extension>
         <nameUrl value="search-parameters-and-operations.html"/>
-        <title value="Search Parameters and Operations"/>
+        <title value="Suchparameter und Operationen"/>
         <generation value="markdown"/>
       </page>
       <page>
@@ -1043,7 +1043,7 @@
           <valueUrl value="terminology.html"/>
         </extension>
         <nameUrl value="terminology.html"/>
-        <title value="Terminology"/>
+        <title value="Terminologie"/>
         <generation value="markdown"/>
       </page>
       <page>
@@ -1051,7 +1051,7 @@
           <valueUrl value="capability-statements.html"/>
         </extension>
         <nameUrl value="capability-statements.html"/>
-        <title value="Capability Statements"/>
+        <title value="CapabilityStatements"/>
         <generation value="markdown"/>
       </page>
       <page>
@@ -1059,7 +1059,7 @@
           <valueUrl value="logical-models.html"/>
         </extension>
         <nameUrl value="logical-models.html"/>
-        <title value="Logical Models"/>
+        <title value="Logische Modelle"/>
         <generation value="markdown"/>
       </page>
       <page>
@@ -1067,7 +1067,7 @@
           <valueUrl value="examples.html"/>
         </extension>
         <nameUrl value="examples.html"/>
-        <title value="Examples"/>
+        <title value="Beispiele"/>
         <generation value="markdown"/>
       </page>
       <page>
@@ -1083,14 +1083,14 @@
           <valueUrl value="version-history.html"/>
         </extension>
         <nameUrl value="version-history.html"/>
-        <title value="Versioning"/>
+        <title value="Versionierung"/>
         <generation value="markdown"/>
         <page>
           <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-page-name">
             <valueUrl value="changes.html"/>
           </extension>
           <nameUrl value="changes.html"/>
-          <title value="Changelog"/>
+          <title value="Änderungshistorie"/>
           <generation value="markdown"/>
         </page>
       </page>
@@ -1099,7 +1099,7 @@
           <valueUrl value="translationinfo.html"/>
         </extension>
         <nameUrl value="translationinfo.html"/>
-        <title value="Translation Information"/>
+        <title value="Hinweise zur Übersetzung"/>
         <generation value="markdown"/>
       </page>
       <page>
@@ -1107,7 +1107,7 @@
           <valueUrl value="metadata.html"/>
         </extension>
         <nameUrl value="metadata.html"/>
-        <title value="Metadata Overview"/>
+        <title value="Metadaten"/>
         <generation value="markdown"/>
       </page>
       <page>
@@ -1115,7 +1115,7 @@
           <valueUrl value="rendering-artifacts.html"/>
         </extension>
         <nameUrl value="rendering-artifacts.html"/>
-        <title value="Rendering Artifacts (demo)"/>
+        <title value="Artefakt-Rendering (Demo)"/>
         <generation value="markdown"/>
       </page>
     </page>
