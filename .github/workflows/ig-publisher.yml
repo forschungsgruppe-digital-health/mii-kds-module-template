@@ -213,6 +213,36 @@ jobs:
           fi
           echo "::notice::Template-repo self-check: substituted self-check placeholders into WORKSPACE copies of sushi-config.yaml, ig.ini and the narrative pages (never committed). A created module replaces the placeholders for real and skips this step."
 
+      - name: Template-repo self-check DEMO of the version comparison (workspace only)
+        # Demonstrates the version-comparison feature on the scaffold's own
+        # preview: the latest dev preview's package.tgz is seeded into the
+        # cache RELABELLED as 2027.0.0-draft.0, and the workspace copy of
+        # sushi-config.yaml activates `version-comparison` against it. The
+        # published preview then carries comparison-v2027.0.0-draft.0/ - on
+        # dev a self-comparison (every artifact "no change": what a clean
+        # release looks like), on a feature branch the REAL delta against dev.
+        # Workspace-only, gated on this repo's name: a created module keeps
+        # the parameter commented out until its second release. Skip-not-fail:
+        # without a reachable dev package the demo is simply absent.
+        if: ${{ endsWith(github.repository, '/mii-kds-module-template') }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          pid="de.medizininformatikinitiative.kerndatensatz.template"
+          prev_v="2027.0.0-draft.0"
+          url="https://forschungsgruppe-digital-health.github.io/mii-kds-module-template/branches/dev/package.tgz"
+          dest="${HOME}/.fhir/packages/${pid}#${prev_v}"
+          if curl -fsSL "${url}" --output /tmp/prev-package.tgz; then
+            mkdir -p "${dest}"
+            tar -xzf /tmp/prev-package.tgz -C "${dest}"
+            python3 -c 'import json,sys; p=sys.argv[1]; d=json.load(open(p)); d["version"]=sys.argv[2]; json.dump(d, open(p,"w"), indent=2)' \
+              "${dest}/package/package.json" "${prev_v}"
+            sed -i 's|^  # version-comparison: "2027.0.0"|  version-comparison: "'"${prev_v}"'"|' sushi-config.yaml
+            echo "Comparison demo enabled: current build vs ${prev_v} (relabelled dev preview package)."
+          else
+            echo "::warning::No dev preview package.tgz reachable - the comparison demo is skipped for this build."
+          fi
+
       - name: SUSHI compile and decide build mode
         id: build
         shell: bash
@@ -284,36 +314,6 @@ jobs:
             echo "tx=https://tx.fhir.org" >> "${GITHUB_OUTPUT}"
             echo "::notice::No SU-TermServ client certificate configured — falling back to the public HL7 terminology server https://tx.fhir.org. Some MII-specific value sets may not fully expand (a QA note, not a failure)."
             echo "Terminology: public HL7 fallback (https://tx.fhir.org)" >> "${GITHUB_STEP_SUMMARY}"
-          fi
-
-      - name: Template-repo self-check DEMO of the version comparison (workspace only)
-        # Demonstrates the version-comparison feature on the scaffold's own
-        # preview: the latest dev preview's package.tgz is seeded into the
-        # cache RELABELLED as 2027.0.0-draft.0, and the workspace copy of
-        # sushi-config.yaml activates `version-comparison` against it. The
-        # published preview then carries comparison-v2027.0.0-draft.0/ - on
-        # dev a self-comparison (every artifact "no change": what a clean
-        # release looks like), on a feature branch the REAL delta against dev.
-        # Workspace-only, gated on this repo's name: a created module keeps
-        # the parameter commented out until its second release. Skip-not-fail:
-        # without a reachable dev package the demo is simply absent.
-        if: ${{ endsWith(github.repository, '/mii-kds-module-template') }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          pid="de.medizininformatikinitiative.kerndatensatz.template"
-          prev_v="2027.0.0-draft.0"
-          url="https://forschungsgruppe-digital-health.github.io/mii-kds-module-template/branches/dev/package.tgz"
-          dest="${HOME}/.fhir/packages/${pid}#${prev_v}"
-          if curl -fsSL "${url}" --output /tmp/prev-package.tgz; then
-            mkdir -p "${dest}"
-            tar -xzf /tmp/prev-package.tgz -C "${dest}"
-            python3 -c 'import json,sys; p=sys.argv[1]; d=json.load(open(p)); d["version"]=sys.argv[2]; json.dump(d, open(p,"w"), indent=2)' \
-              "${dest}/package/package.json" "${prev_v}"
-            sed -i 's|^  # version-comparison: "2027.0.0"|  version-comparison: "'"${prev_v}"'"|' sushi-config.yaml
-            echo "Comparison demo enabled: current build vs ${prev_v} (relabelled dev preview package)."
-          else
-            echo "::warning::No dev preview package.tgz reachable - the comparison demo is skipped for this build."
           fi
 
       - name: Seed the comparison cache (previous-version packages)
