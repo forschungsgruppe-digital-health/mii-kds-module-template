@@ -151,7 +151,7 @@ Here it renders this repository's own `publication-request.json`, the file that 
 * **Version**: {{CALVER_VERSION}} (release, milestone)
 * **Path**: [https://{{GITHUB_ORG}}.github.io/{{REPO_NAME}}/{{CALVER_VERSION}}](https://{{GITHUB_ORG}}.github.io/{{REPO_NAME}}/{{CALVER_VERSION}})
 
-The template is four lines and lives at `demo/rendering-artifacts.liquid`. Delete it together with this page.
+The template is five lines and lives at `demo/rendering-artifacts.liquid`. Delete it together with this page.
 
 ### 6. Include the reader's own language
 

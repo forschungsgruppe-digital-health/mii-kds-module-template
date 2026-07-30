@@ -151,7 +151,7 @@ Hier rendert sie die Datei `publication-request.json` dieses Repositories — di
 * **Version**: {{CALVER_VERSION}} (release, milestone)
 * **Path**: [https://{{GITHUB_ORG}}.github.io/{{REPO_NAME}}/{{CALVER_VERSION}}](https://{{GITHUB_ORG}}.github.io/{{REPO_NAME}}/{{CALVER_VERSION}})
 
-Die Schablone umfasst vier Zeilen und liegt unter `demo/rendering-artifacts.liquid`. Löschen Sie sie zusammen mit dieser Seite.
+Die Schablone umfasst fünf Zeilen und liegt unter `demo/rendering-artifacts.liquid`. Löschen Sie sie zusammen mit dieser Seite.
 
 ### 6. Die Sprache der Leserin einbinden
 
