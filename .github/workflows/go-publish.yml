@@ -550,6 +550,14 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: bash source/scripts/seed-comparison-cache.sh
 
+      - name: Disable the version comparison when toggled off
+        if: ${{ vars.ENABLE_VERSION_COMPARISON == 'false' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          sed -i -E 's/^(  version-comparison(-master)?:)/  # (disabled by ENABLE_VERSION_COMPARISON) \1/' source/sushi-config.yaml
+          echo "::notice::version comparison disabled via ENABLE_VERSION_COMPARISON."
+
       - name: Run clean release build
         shell: bash
         env:
