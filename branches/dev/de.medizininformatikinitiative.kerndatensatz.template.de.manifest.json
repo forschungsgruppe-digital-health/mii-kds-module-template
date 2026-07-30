@@ -1,7 +1,7 @@
 {
   "version" : "2026.0.0",
   "fhirVersion" : ["4.0.1"],
-  "date" : "20260729193052",
+  "date" : "20260730033606",
   "name" : "de.medizininformatikinitiative.kerndatensatz.template",
   "jurisdiction" : "urn:iso:std:iso:3166#DE"
 }
