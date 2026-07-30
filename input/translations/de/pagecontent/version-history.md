@@ -51,15 +51,39 @@ Merge wird das Release getaggt.
 * **[Änderungshistorie](changes.html)** — die Änderungen jeder veröffentlichten
   Version.
 
+#### Versionsvergleich
+
 Ab der zweiten **formalen Publikation** veröffentlicht dieser Leitfaden
-zusätzlich einen **maschinell erzeugten Versionsvergleich**: Der IG Publisher
-vergleicht jedes Profil, ValueSet und CodeSystem mit dem vorherigen Release
-und rendert das Delta unter `comparison-v<Vorversion>/index.html`, verlinkt
-aus dem QA-Bericht. Aktiviert wird er über den Parameter `version-comparison`
-in der `sushi-config.yaml` (der auskommentierte Block dort erklärt die
-Einrichtung und ihre Voraussetzungen). Er ergänzt die Änderungshistorie: Die
-Änderungshistorie erklärt *warum* und *was zu tun ist*, der Vergleich zeigt,
-*was sich genau geändert hat*.
+zusätzlich einen **maschinell erzeugten Versionsvergleich**. Er ergänzt die
+Änderungshistorie: Die Änderungshistorie erklärt *warum* und *was zu tun
+ist*, der Vergleich zeigt, *was sich genau geändert hat*.
+
+**Wo er liegt.** Der Bericht ist Teil der veröffentlichten Website selbst:
+`comparison-v<Vorversion>/index.html` neben den Seiten des Leitfadens,
+verlinkt aus dem QA-Bericht. Der Index listet die verglichenen
+Artefakt-Paare; jedes Paar verlinkt eine Detailseite mit drei Ansichten — der
+**Differenz**-Analyse (was sich Element für Element geändert hat), der
+**Vereinigung** (alles, was eine der beiden Versionen erlaubt) und dem
+**Schnitt** (nur was beide Versionen erlauben).
+
+**Wie er erzeugt wird.** Der Vorversions-Vergleicher des IG Publishers lädt
+das Paket des vorherigen Releases, ordnet jedes Profil, ValueSet und
+CodeSystem über die kanonische URL seinem Gegenstück zu, vergleicht die Paare
+und rendert den Bericht in die Build-Ausgabe — er wird also mit der Website
+veröffentlicht, ohne zusätzlichen Deployment-Schritt. Aktiviert wird er über
+den Parameter `version-comparison` in der `sushi-config.yaml` (der
+auskommentierte Block dort erklärt die Einrichtung und ihre beiden
+Voraussetzungen: eine Publikationshistorie an der kanonischen URL und ein
+ladbares Vorversions-Paket).
+
+**Die Demonstration unten** (nur in der Vorschau dieses
+Vorlagen-Repositories) zeigt dieselbe Art Bericht, bevor eine formale
+Publikation existiert: Der Build vergleicht sich mit der vorherigen
+`dev`-Vorschau über das `-compare`-Kommando des FHIR-Validators und
+veröffentlicht das Ergebnis unter `comparison-demo/index.html`.
+Betreiber:innen können die Demonstration über die Repository-Variable
+`ENABLE_COMPARISON_DEMO=false` abschalten; ein erstelltes Modul rendert sie
+nie.
 
 > [TODO: Falls Ihr Modul über das MII-Schema hinaus eine eigene
 > Versionierungs-Politik hat — etwa einen Unterstützungszeitraum für ältere
