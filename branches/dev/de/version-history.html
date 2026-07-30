@@ -290,15 +290,39 @@ Merge wird das Release getaggt.</p>
 Version.</li>
 </ul>
 
+<h4 id="versionsvergleich">Versionsvergleich</h4>
+
 <p>Ab der zweiten <strong>formalen Publikation</strong> veröffentlicht dieser Leitfaden
-zusätzlich einen <strong>maschinell erzeugten Versionsvergleich</strong>: Der IG Publisher
-vergleicht jedes Profil, ValueSet und CodeSystem mit dem vorherigen Release
-und rendert das Delta unter <code class="language-plaintext highlighter-rouge">comparison-v&lt;Vorversion&gt;/index.html</code>, verlinkt
-aus dem QA-Bericht. Aktiviert wird er über den Parameter <code class="language-plaintext highlighter-rouge">version-comparison</code>
-in der <code class="language-plaintext highlighter-rouge">sushi-config.yaml</code> (der auskommentierte Block dort erklärt die
-Einrichtung und ihre Voraussetzungen). Er ergänzt die Änderungshistorie: Die
-Änderungshistorie erklärt <em>warum</em> und <em>was zu tun ist</em>, der Vergleich zeigt,
-<em>was sich genau geändert hat</em>.</p><div class="mii-highlight mii-highlight-grey"><h5>Demonstration (nur in der Vorschau dieses Vorlagen-Repositories)</h5><p>Diese Vorschau rendert eine lebende Demonstration eines solchen Berichts, erzeugt mit dem <code>-compare</code> des FHIR-Validators: der vorherige dev-Build (umbenannt zu <code>2027.0.0-draft.0</code>) gegen diesen Build - <a href="../comparison-demo/index.html">Vergleichsbericht &ouml;ffnen</a>. Auf <code>dev</code> ist es ein Selbstvergleich; auf einem Feature-Branch zeigt er das echte Delta gegen&uuml;ber <code>dev</code>.</p></div>
+zusätzlich einen <strong>maschinell erzeugten Versionsvergleich</strong>. Er ergänzt die
+Änderungshistorie: Die Änderungshistorie erklärt <em>warum</em> und <em>was zu tun
+ist</em>, der Vergleich zeigt, <em>was sich genau geändert hat</em>.</p><div class="mii-highlight mii-highlight-grey"><h5>Demonstration (nur in der Vorschau dieses Vorlagen-Repositories)</h5><p>Diese Vorschau rendert eine lebende Demonstration eines solchen Berichts, erzeugt mit dem <code>-compare</code> des FHIR-Validators: der vorherige dev-Build (umbenannt zu <code>2027.0.0-draft.0</code>) gegen diesen Build - <a href="../comparison-demo/index.html">Vergleichsbericht &ouml;ffnen</a>. Auf <code>dev</code> ist es ein Selbstvergleich; auf einem Feature-Branch zeigt er das echte Delta gegen&uuml;ber <code>dev</code>.</p></div>
+
+<p><strong>Wo er liegt.</strong> Der Bericht ist Teil der veröffentlichten Website selbst:
+<code class="language-plaintext highlighter-rouge">comparison-v&lt;Vorversion&gt;/index.html</code> neben den Seiten des Leitfadens,
+verlinkt aus dem QA-Bericht. Der Index listet die verglichenen
+Artefakt-Paare; jedes Paar verlinkt eine Detailseite mit drei Ansichten — der
+<strong>Differenz</strong>-Analyse (was sich Element für Element geändert hat), der
+<strong>Vereinigung</strong> (alles, was eine der beiden Versionen erlaubt) und dem
+<strong>Schnitt</strong> (nur was beide Versionen erlauben).</p>
+
+<p><strong>Wie er erzeugt wird.</strong> Der Vorversions-Vergleicher des IG Publishers lädt
+das Paket des vorherigen Releases, ordnet jedes Profil, ValueSet und
+CodeSystem über die kanonische URL seinem Gegenstück zu, vergleicht die Paare
+und rendert den Bericht in die Build-Ausgabe — er wird also mit der Website
+veröffentlicht, ohne zusätzlichen Deployment-Schritt. Aktiviert wird er über
+den Parameter <code class="language-plaintext highlighter-rouge">version-comparison</code> in der <code class="language-plaintext highlighter-rouge">sushi-config.yaml</code> (der
+auskommentierte Block dort erklärt die Einrichtung und ihre beiden
+Voraussetzungen: eine Publikationshistorie an der kanonischen URL und ein
+ladbares Vorversions-Paket).</p>
+
+<p><strong>Die Demonstration unten</strong> (nur in der Vorschau dieses
+Vorlagen-Repositories) zeigt dieselbe Art Bericht, bevor eine formale
+Publikation existiert: Der Build vergleicht sich mit der vorherigen
+<code class="language-plaintext highlighter-rouge">dev</code>-Vorschau über das <code class="language-plaintext highlighter-rouge">-compare</code>-Kommando des FHIR-Validators und
+veröffentlicht das Ergebnis unter <code class="language-plaintext highlighter-rouge">comparison-demo/index.html</code>.
+Betreiber:innen können die Demonstration über die Repository-Variable
+<code class="language-plaintext highlighter-rouge">ENABLE_COMPARISON_DEMO=false</code> abschalten; ein erstelltes Modul rendert sie
+nie.</p>
 
 <blockquote class="mii-highlight mii-highlight-grey">
   <p>[TODO: Falls Ihr Modul über das MII-Schema hinaus eine eigene
@@ -332,7 +356,7 @@ hier. Löschen Sie diesen Hinweis anschließend.]</p>
 
           IG © 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Thu, Jul 30, 2026 16:22+0000">2026-07-30</span>
+          Erstellt <span title="Thu, Jul 30, 2026 19:07+0000">2026-07-30</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.
@@ -340,7 +364,7 @@ hier. Löschen Sie diesen Hinweis anschließend.]</p>
      renders "Links: Table of Contents | QA Report [| feedback dashboards]".
      The base uses site.data.stringsBase[include.lang][...] for the labels. The
      reason this override supplies its own is the Imprint label: the base ships no
-     stringsBase key for it and a child template cannot add one (docs/design.md
+     stringsBase key for it and a child template cannot add one (docs/styleguide.md
      section 6), and the same include.lang branch then has to carry the other
      labels too. (The blank-label problem that first motivated this is separately
      mitigated: this repo vendors the base's own German catalogs into
