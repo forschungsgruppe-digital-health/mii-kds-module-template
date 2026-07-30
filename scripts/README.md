@@ -41,6 +41,7 @@ list — not a glob, because this directory now holds unrelated helpers too.
 | `ig-translate.sh` | Scans and validates the German translation set against the English source | a maintainer |
 | `ig-stats.py` | Collects IG metrics for the `ig-analyze` skill | the skill, or manually |
 | `set-su-termserv-secrets.sh` | Validates an SU-TermServ client certificate and uploads it as repository secrets | a maintainer, once |
+| `seed-comparison-cache.sh` | Places the previous release's `package.tgz` (a GitHub Release asset) into `~/.fhir/packages` so the publisher's `version-comparison` can load it; no-op while the parameter is commented out | `ig-publisher.yml`, `module-release.yml`, `go-publish.yml` (before the publisher) |
 
 ## Tests
 

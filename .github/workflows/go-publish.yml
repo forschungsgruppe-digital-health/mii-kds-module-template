@@ -542,6 +542,14 @@ jobs:
             echo "Terminology: public HL7 fallback (https://tx.fhir.org)" >> "${GITHUB_STEP_SUMMARY}"
           fi
 
+      - name: Seed the comparison cache (previous-version packages)
+        # No-op unless the module's sushi-config.yaml activates
+        # `version-comparison`. The go-publish checkout lives in source/;
+        # warn-not-fail like the build workflows.
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: bash source/scripts/seed-comparison-cache.sh
+
       - name: Run clean release build
         shell: bash
         env:

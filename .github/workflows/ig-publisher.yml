@@ -286,6 +286,16 @@ jobs:
             echo "Terminology: public HL7 fallback (https://tx.fhir.org)" >> "${GITHUB_STEP_SUMMARY}"
           fi
 
+      - name: Seed the comparison cache (previous-version packages)
+        # No-op unless sushi-config.yaml activates `version-comparison`; then
+        # the previous release's package.tgz (a GitHub Release asset) is placed
+        # in ~/.fhir/packages so the publisher's PreviousVersionComparator can
+        # load it. Warn-not-fail: a missing historical asset must not break the
+        # build - the comparison page reports the gap instead.
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: bash scripts/seed-comparison-cache.sh
+
       - name: Build IG (SUSHI already ran) with the pinned IG Publisher
         if: ${{ steps.build.outputs.mode == 'full' }}
         shell: bash

@@ -103,10 +103,10 @@ organizations; the copyright of the respective publishers applies.
 
 ### Disclaimer
 
-* The content of this document is public. Please note that parts of this
-  document are based on FHIR version R4, which is copyrighted by
-  HL7 International.
+The content of this document is public. Please note that parts of this
+document are based on FHIR version R4, which is copyrighted by
+HL7 International.
 
-* Although this publication was prepared with the greatest care, the authors
-  cannot accept any liability for direct or indirect damage that may arise from
-  the content of this specification.
+Although this publication was prepared with the greatest care, the authors
+cannot accept any liability for direct or indirect damage that may arise from
+the content of this specification.
