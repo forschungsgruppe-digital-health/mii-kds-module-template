@@ -228,8 +228,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # Comment out any explicit versions, then set the publisher's NATIVE
+          # off-value: the ig-parameters registry documents that an ABSENT
+          # version-comparison defaults to {last} (the comparator still runs),
+          # while the value n/a means "don't do any comparison".
           sed -i -E 's/^(  version-comparison(-master)?:)/  # (disabled by ENABLE_VERSION_COMPARISON) \1/' sushi-config.yaml
-          echo "::notice::version comparison disabled via ENABLE_VERSION_COMPARISON."
+          sed -i '/^parameters:/a\  version-comparison: n/a' sushi-config.yaml
+          echo "::notice::version comparison disabled via ENABLE_VERSION_COMPARISON (set to the publisher-native n/a)."
 
       - name: SUSHI compile and decide build mode
         id: build

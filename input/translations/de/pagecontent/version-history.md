@@ -70,11 +70,14 @@ Artefakt-Paare; jedes Paar verlinkt eine Detailseite mit drei Ansichten — der
 das Paket des vorherigen Releases, ordnet jedes Profil, ValueSet und
 CodeSystem über die kanonische URL seinem Gegenstück zu, vergleicht die Paare
 und rendert den Bericht in die Build-Ausgabe — er wird also mit der Website
-veröffentlicht, ohne zusätzlichen Deployment-Schritt. Aktiviert wird er über
-den Parameter `version-comparison` in der `sushi-config.yaml` (der
-auskommentierte Block dort erklärt die Einrichtung und ihre beiden
-Voraussetzungen: eine Publikationshistorie an der kanonischen URL und ein
-ladbares Vorversions-Paket).
+veröffentlicht, ohne zusätzlichen Deployment-Schritt. Aktiviert wird er über den Parameter `version-comparison` — einen
+offiziellen IG-Publisher-Parameter aus der
+[ig-parameters-Registry](https://build.fhir.org/ig/FHIR/fhir-tools-ig/CodeSystem-ig-parameters.html),
+durchgereicht über die `sushi-config.yaml` (der auskommentierte Block dort
+erklärt die Einrichtung und ihre beiden Voraussetzungen: eine
+Publikationshistorie an der kanonischen URL und ein ladbares
+Vorversions-Paket). Fehlt der Parameter, gilt der Standard `{last}`; der
+Wert `n/a` ist der dokumentierte Weg, den Vergleich abzuschalten.
 
 **Die Demonstration unten** (nur in der Vorschau dieses
 Vorlagen-Repositories) zeigt dieselbe Art Bericht, bevor eine formale
