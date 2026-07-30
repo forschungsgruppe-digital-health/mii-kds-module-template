@@ -15,3 +15,4 @@ as the English page); resource translations are `.po` files under
 `docs/recipes/add-translation.md` in this repository.
 
 > [TODO: Record which parts of your module are already translated into German.]
+{: .mii-highlight .mii-highlight-grey}

@@ -6,3 +6,4 @@
 Module-specific FHIR search parameters and operations of the **{{MODULE_TITLE}}** module, where defined.
 
 > [TODO: List the search parameters/operations, or delete this page if none are defined.]
+{: .mii-highlight .mii-highlight-grey}

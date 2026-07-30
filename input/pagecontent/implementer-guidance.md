@@ -6,3 +6,4 @@
 Technical guidance for DIC implementers on implementing the profiles of the **{{MODULE_TITLE}}** module (ETL from primary systems, FHIR API, validation).
 
 > [TODO: Describe the technical implementation steps for your module.]
+{: .mii-highlight .mii-highlight-grey}

@@ -176,11 +176,11 @@ jobs:
           MODULE_NAME|Template
           MODULE_TITLE|Module Template
           MODULE_DESCRIPTION|Self-check build of the mii-kds-module-template scaffold. This repository is a template for creating a new MII KDS module Implementation Guide, or a migration target for an existing Simplifier MII IG. Every value here is a placeholder — replace them all when you create a real module.
-          CALVER_VERSION|2026.0.0
-          CALVER_YEAR|2026
-          RELEASE_DATE|2026-01-01
-          COPYRIGHT_START_YEAR|2026
-          APPROVAL_DATE|2026-01-01
+          CALVER_VERSION|2027.0.0-draft.1
+          CALVER_YEAR|2027
+          RELEASE_DATE|2027-01-01
+          COPYRIGHT_START_YEAR|2027
+          APPROVAL_DATE|2027-01-01
           MODULE_AUTHOR_EMAIL|noreply@example.org
           TOPIC_NCI_CODE|C15607
           GITHUB_ORG|medizininformatik-initiative

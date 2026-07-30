@@ -21,6 +21,7 @@ Moduls **{{MODULE_TITLE}}**.
 
 > [TODO: Ergänzen Sie modul-spezifische Hinweise, die für alle Zielgruppen
 > relevant sind — z. B. den fachlichen Geltungsbereich oder Abgrenzungen.]
+{: .mii-highlight .mii-highlight-grey}
 
 ---
 Für Konformitätsanforderungen siehe [Konformität](conformance.html); für die

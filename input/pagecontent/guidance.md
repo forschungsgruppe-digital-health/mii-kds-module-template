@@ -23,6 +23,7 @@ This section collects the domain guidance for implementing and using the
 
 > [TODO: Add the module-specific guidance that is relevant to all audiences —
 > e.g. the domain scope or its delimitations.]
+{: .mii-highlight .mii-highlight-grey}
 
 ---
 For conformance requirements see [Conformance](conformance.html); for the

@@ -66,6 +66,7 @@ publication, including its dependencies and publication parameters.
 > languages and link it from here. The file name must carry your slug
 > literally: a `pages:` file name cannot hold a placeholder, because the
 > placeholder substitution rewrites file contents, not file names.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Version history
 
@@ -75,3 +76,4 @@ Earlier versions and the detailed change history are on the
 > [TODO: Add any further downloads your module offers — for example an example
 > bundle, a data dictionary or a mapping table — and remove the entries above
 > that your build does not produce.]
+{: .mii-highlight .mii-highlight-grey}

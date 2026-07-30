@@ -142,6 +142,7 @@ Für Elemente mit `required`-Binding (Datentypen `CodeableConcept`, `Coding` ode
 > ein Element, dessen ValueSet einen eigenen „unbekannt"-Code mitbringt, oder
 > eine Datenkategorie, für die das Modul eine abweichende Darstellung vorgibt.
 > Löschen Sie diesen Hinweis anschließend.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Siehe auch
 

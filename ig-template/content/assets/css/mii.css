@@ -93,6 +93,7 @@
    Reusable, purpose-neutral highlight-box classes the template provides for
    calling out content on a page. A page writes:
      <div class="mii-highlight mii-highlight-blue"><h5>…</h5><p>…</p></div>
+     Variants: -blue, -green, -orange (warning), -red (important), -grey (hint).
    The colours are the MII-aligned highlight backgrounds carried over from
    kerndatensatz-basis. These are STYLING only — the template attaches no
    semantics (e.g. "audience") to them; a module decides what each colour means. */
@@ -118,6 +119,33 @@
 }
 .mii-highlight-green h5 {
   color: #5a6b2f;
+}
+/* The three below were added on top of the kerndatensatz-basis pair, with the
+   conventional reading orange = warning, red = important, grey = hint. Like
+   blue/green they are styling only — a module may repurpose them. All three
+   pass WCAG: h5 on background >= 6.1:1 (AA text), border on background >= 3:1
+   (1.4.11 non-text; the inherited green border sits below that — recorded
+   upstream trade-off, kept for parity with kerndatensatz-basis). */
+.mii-highlight-orange {
+  background-color: #fdf3e7;
+  border-left-color: #c9721c;
+}
+.mii-highlight-orange h5 {
+  color: #8a4b12;
+}
+.mii-highlight-red {
+  background-color: #fbeaea;
+  border-left-color: #c0392b;
+}
+.mii-highlight-red h5 {
+  color: #8f2318;
+}
+.mii-highlight-grey {
+  background-color: #f2f3f5;
+  border-left-color: #7a8495; /* same slate as the narrative-table border */
+}
+.mii-highlight-grey h5 {
+  color: #4a5260;
 }
 
 /* ── Narrative tables ─────────────────────────────────────────────────────────

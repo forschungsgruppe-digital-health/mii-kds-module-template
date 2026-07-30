@@ -99,6 +99,7 @@ Not enabled in this scaffold, but prepared as commented blocks in
 > StructureDefinitions, CapabilityStatements, CodeSystems and ValueSets — the
 > `kerndatensatz-basis` idiom is a shared `RuleSet` in
 > `input/fsh/rulesets/crmi.fsh` — add the corresponding rows here.]
+{: .mii-highlight .mii-highlight-grey}
 
 ##### CodeSystem supplements
 
@@ -154,6 +155,7 @@ package pinning.
 > [TODO: Add the manifest for your module (see the commented blocks in
 > `sushi-config.yaml`) and link the generated `Parameters` resource page here,
 > or state explicitly that this module does not pin expansion parameters.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Relationship to FAIR
 
@@ -206,6 +208,7 @@ asserted to be a persistently identified FAIR dataset.
 > [TODO: The table lists the indicators of priority *Essential*. If your module
 > wants the complete self-assessment, extend it with the *Important* and
 > *Useful* indicators — `kerndatensatz-basis` carries the full table.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Practical use
 

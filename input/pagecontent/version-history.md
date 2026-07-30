@@ -52,3 +52,4 @@ after the merge.
 > [TODO: If your module has a versioning policy of its own beyond the MII scheme
 > — for example a support window for older versions, or a deprecation policy for
 > profiles — describe it here. Delete this prompt afterwards.]
+{: .mii-highlight .mii-highlight-grey}

@@ -6,3 +6,4 @@
 UML overviews of the data models of the **{{MODULE_TITLE}}** module and their relationships. Editable sources (e.g. PlantUML) belong in `input/images-source/`, the rendered images in `input/images/`.
 
 > [TODO: Add your module's UML diagrams, or delete this page if there are none.]
+{: .mii-highlight .mii-highlight-grey}

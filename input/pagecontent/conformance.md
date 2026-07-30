@@ -49,6 +49,7 @@ technical artifacts see the [Artifacts](artifacts.html) section.
 > Keep the set **curated** — mark real obligations, not every sentence that
 > happens to contain a bold verb — and keep each marked sentence
 > self-contained: the table shows it out of context.]
+{: .mii-highlight .mii-highlight-grey}
 
 ---
 

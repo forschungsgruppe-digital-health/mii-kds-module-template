@@ -10,3 +10,4 @@ template ships the synthetic example
 examples.
 
 > [TODO: Add meaningful example instances for your profiles.]
+{: .mii-highlight .mii-highlight-grey}

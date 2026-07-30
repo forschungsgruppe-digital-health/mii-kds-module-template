@@ -55,3 +55,4 @@ Merge wird das Release getaggt.
 > Versionierungs-Politik hat — etwa einen Unterstützungszeitraum für ältere
 > Versionen oder eine Abkündigungs-Politik für Profile —, beschreiben Sie sie
 > hier. Löschen Sie diesen Hinweis anschließend.]
+{: .mii-highlight .mii-highlight-grey}

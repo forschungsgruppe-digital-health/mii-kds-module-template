@@ -20,6 +20,7 @@ Routinedaten für die medizinische Forschung.
 
 > [TODO: Beschreiben Sie in ein bis zwei Sätzen den fachlichen Gegenstand Ihres
 > Moduls — welche Daten es abdeckt und wofür sie genutzt werden.]
+{: .mii-highlight .mii-highlight-grey}
 
 | Veröffentlichung |               |
 |------------------|---------------|
@@ -62,6 +63,7 @@ beschrieben.
 
 > [TODO: Nennen Sie die formalen Abhängigkeiten (siehe `dependencies` in
 > `sushi-config.yaml`) und verwandte Leitfäden Ihres Moduls.]
+{: .mii-highlight .mii-highlight-grey}
 
 Weitere FHIR-Implementierungsleitfäden finden Sie im offiziellen
 **[FHIR IG Registry](https://fhir.org/guides/registry/)** (Quelle:
@@ -83,10 +85,12 @@ Anmerkungen und Kritik werden als *Issues* auf
 [GitHub](https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/issues) entgegengenommen.
 
 > [TODO: Nennen Sie die fachlichen Ansprechpartner:innen Ihres Moduls.]
+{: .mii-highlight .mii-highlight-grey}
 
 ### Autor:innen (in alphabetischer Reihenfolge)
 
 > [TODO: Listen Sie die Autor:innen des Moduls mit Institution auf.]
+{: .mii-highlight .mii-highlight-grey}
 
 ### Urheberrecht und Lizenz
 

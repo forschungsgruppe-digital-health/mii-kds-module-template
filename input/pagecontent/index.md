@@ -19,6 +19,7 @@ standardized secondary use of routine clinical data for medical research.
 
 > [TODO: In one or two sentences, describe what your module covers and what the
 > data is used for.]
+{: .mii-highlight .mii-highlight-grey}
 
 | Publication |               |
 |-------------|---------------|
@@ -58,6 +59,7 @@ dependencies are described at
 
 > [TODO: Name your module's formal dependencies (see `dependencies` in
 > `sushi-config.yaml`) and any related guides.]
+{: .mii-highlight .mii-highlight-grey}
 
 More FHIR implementation guides can be found in the official
 **[FHIR IG Registry](https://fhir.org/guides/registry/)** (source:
@@ -79,10 +81,12 @@ Comments and issues are welcome as *Issues* on
 [GitHub](https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/issues).
 
 > [TODO: Name your module's domain contacts.]
+{: .mii-highlight .mii-highlight-grey}
 
 ### Authors (in alphabetical order)
 
 > [TODO: List the module's authors with their institution.]
+{: .mii-highlight .mii-highlight-grey}
 
 ### Copyright and License
 

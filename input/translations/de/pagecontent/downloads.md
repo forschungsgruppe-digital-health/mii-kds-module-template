@@ -69,6 +69,7 @@ Veröffentlichungsparameter.
 > muss Ihren Slug wörtlich enthalten: ein `pages:`-Dateiname kann keinen
 > Platzhalter tragen, weil die Platzhalter-Ersetzung Dateiinhalte ersetzt, nicht
 > Dateinamen.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Versionshistorie
 
@@ -79,3 +80,4 @@ Frühere Versionen und die ausführliche Änderungshistorie stehen auf den Seite
 > [TODO: Ergänzen Sie weitere Downloads Ihres Moduls — etwa ein Beispiel-Bundle,
 > ein Datenwörterbuch oder eine Mapping-Tabelle — und entfernen Sie die oben
 > aufgeführten Einträge, die Ihr Build nicht erzeugt.]
+{: .mii-highlight .mii-highlight-grey}
