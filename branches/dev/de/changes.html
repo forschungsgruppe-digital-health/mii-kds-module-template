@@ -288,6 +288,29 @@ Transformationsschritte, Standardwerte, Umkodierungs-Hinweise — oder die
 ausdrückliche Aussage, dass kein Migrationspfad bereitgestellt wird, und
 warum.</li>
 </ul>
+<p><b>Was als Breaking Change zählt</b> — behandeln Sie eine Änderung als
+Breaking Change, wenn sie eines der Folgenden tut, auch wenn sie klein wirkt:
+eine Kardinalität verschärft (<code>0..*</code> → <code>1..1</code>), eine
+Binding-Stärke erhöht (example → required), Codes aus einem required-ValueSet
+entfernt, ein Element oder einen Slice entfernt oder umbenennt, einen Typ
+einengt, eine Invariante oder eine Must-Support-Pflicht hinzufügt oder eine
+kanonische URL ändert. Im Zweifel: als Breaking Change berichten.</p>
+<p><b>Breaking für wen:</b> benennen Sie beide Perspektiven — <i>gespeicherte
+Daten</i> (Instanzen, die gegen die alte Version valide sind) und
+<i>Implementierungen</i> (Clients und Server, die dagegen gebaut wurden; ein
+entfernter Suchparameter bricht Implementierungen, während jede gespeicherte
+Instanz valide bleibt).</p>
+<p><b>Die Versionsnummer warnt niemanden.</b> Das MII-Kalender-Versionsschema
+(<code>JJJJ.n.n</code>) trägt kein Major-Signal wie SemVer — dieser
+Changelog-Abschnitt ist die <i>einzige</i> Warnung, die Lesende bekommen.</p>
+<p><b>Verlinken Sie das technische Delta.</b> Ab dem zweiten Release
+aktivieren Sie den Versionsvergleich des IG Publishers
+(<code>version-comparison</code> in <code>sushi-config.yaml</code> — siehe die
+Seite <a href="version-history.html">Versionierung</a>); er veröffentlicht
+einen maschinell erzeugten Vergleich unter
+<code>comparison-v&lt;Vorversion&gt;/index.html</code>. Verlinken Sie ihn aus
+dem Versionsabschnitt, damit die Erläuterung und der technische Diff
+nebeneinanderstehen.</p>
 <p>Kennzeichnen Sie solche Einträge deutlich (zum Beispiel mit dem Präfix
 <b>BREAKING:</b>), damit sie beim Überfliegen des Abschnitts nicht übersehen
 werden können.</p>
@@ -342,7 +365,7 @@ einheitlich.]</p>
 
           IG © 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Thu, Jul 30, 2026 13:14+0000">2026-07-30</span>
+          Erstellt <span title="Thu, Jul 30, 2026 14:06+0000">2026-07-30</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.

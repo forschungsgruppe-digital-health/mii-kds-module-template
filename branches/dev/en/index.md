@@ -76,6 +76,7 @@ Some of the code systems used are published and maintained by other organization
 
 ### Disclaimer
 
-* The content of this document is public. Please note that parts of this document are based on FHIR version R4, which is copyrighted by HL7 International.
-* Although this publication was prepared with the greatest care, the authors cannot accept any liability for direct or indirect damage that may arise from the content of this specification.
+The content of this document is public. Please note that parts of this document are based on FHIR version R4, which is copyrighted by HL7 International.
+
+Although this publication was prepared with the greatest care, the authors cannot accept any liability for direct or indirect damage that may arise from the content of this specification.
 

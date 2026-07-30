@@ -289,6 +289,14 @@ after the merge.</p>
   <li><strong><a href="changes.html">Changelog</a></strong> — the changes of each released version.</li>
 </ul>
 
+<p>From the second release on, this guide also publishes a <strong>machine-generated
+version comparison</strong>: the IG Publisher compares every profile, value set and
+code system against the previous release and renders the delta at
+<code class="language-plaintext highlighter-rouge">comparison-v&lt;previous&gt;/index.html</code>, linked from the QA report. It is enabled
+by the <code class="language-plaintext highlighter-rouge">version-comparison</code> parameter in <code class="language-plaintext highlighter-rouge">sushi-config.yaml</code> (the commented
+block there explains the setup) and complements the changelog: the changelog
+explains <em>why</em> and <em>what to do</em>, the comparison shows <em>exactly what changed</em>.</p>
+
 <blockquote class="mii-highlight mii-highlight-grey">
   <p>[TODO: If your module has a versioning policy of its own beyond the MII scheme
 — for example a support window for older versions, or a deprecation policy for
@@ -320,7 +328,7 @@ profiles — describe it here. Delete this prompt afterwards.]</p>
 
           IG © 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Thu, Jul 30, 2026 13:14+0000">2026-07-30</span>
+          Generated <span title="Thu, Jul 30, 2026 14:06+0000">2026-07-30</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.

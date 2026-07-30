@@ -35,5 +35,7 @@ Releases folgen dem [MII Module Release Workflow](https://github.com/medizininfo
 
 * **[Änderungshistorie](changes.md)** — die Änderungen jeder veröffentlichten Version.
 
+Ab dem zweiten Release veröffentlicht dieser Leitfaden zusätzlich einen **maschinell erzeugten Versionsvergleich**: Der IG Publisher vergleicht jedes Profil, ValueSet und CodeSystem mit dem vorherigen Release und rendert das Delta unter `comparison-v<Vorversion>/index.html`, verlinkt aus dem QA-Bericht. Aktiviert wird er über den Parameter `version-comparison` in der `sushi-config.yaml` (der auskommentierte Block dort erklärt die Einrichtung). Er ergänzt die Änderungshistorie: Die Änderungshistorie erklärt **warum** und **was zu tun ist**, der Vergleich zeigt, **was sich genau geändert hat**.
+
 > [TODO: Falls Ihr Modul über das MII-Schema hinaus eine eigene Versionierungs-Politik hat — etwa einen Unterstützungszeitraum für ältere Versionen oder eine Abkündigungs-Politik für Profile —, beschreiben Sie sie hier. Löschen Sie diesen Hinweis anschließend.]
 
