@@ -350,11 +350,16 @@ jobs:
           curl -fsSL "https://github.com/hapifhir/org.hl7.fhir.core/releases/download/${VALIDATOR_VERSION}/validator_cli.jar"             --output "${work}/validator_cli.jar"
           echo "${VALIDATOR_SHA256}  ${work}/validator_cli.jar" | sha256sum --check
           mkdir -p output/comparison-demo
-          if java -Xmx4g -jar "${work}/validator_cli.jar" -compare               -dest "$(pwd)/output/comparison-demo" -version 4.0.1 -tx n/a               -ig "${work}/prev.tgz" -ig output/package.tgz               -left "${canonical}|2027.0.0-draft.0"               -right "${canonical}|2027.0.0-draft.1"; then
+          # After rendering, the compare command calls Desktop.getDesktop() to
+          # open a browser and dies with a HeadlessException on CI - the files
+          # are already on disk at that point, so success is judged by the
+          # rendered index, not by the exit code.
+          java -Xmx4g -jar "${work}/validator_cli.jar" -compare               -dest "$(pwd)/output/comparison-demo" -version 4.0.1 -tx n/a               -ig "${work}/prev.tgz" -ig output/package.tgz               -left "${canonical}|2027.0.0-draft.0"               -right "${canonical}|2027.0.0-draft.1" || true
+          if [ -s output/comparison-demo/index.html ]; then
             echo "Comparison demo rendered to output/comparison-demo/ (deploys with the preview)."
           else
             rm -rf output/comparison-demo
-            echo "::warning::comparison demo skipped — the validator compare failed; the preview deploys without it."
+            echo "::warning::comparison demo skipped — the validator compare produced no report; the preview deploys without it."
           fi
 
       - name: Stop terminology proxy
