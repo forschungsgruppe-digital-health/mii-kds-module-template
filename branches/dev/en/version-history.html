@@ -307,10 +307,13 @@ element by element), the <strong>union</strong> (everything either version allow
 the previous release's package, pairs every profile, value set and code
 system with its counterpart by canonical URL, compares the pairs, and renders
 the report into the build output — so it publishes with the site, with no
-extra deployment step. It is enabled by the <code class="language-plaintext highlighter-rouge">version-comparison</code> parameter in
-<code class="language-plaintext highlighter-rouge">sushi-config.yaml</code> (the commented block there explains the setup and its two
-prerequisites: a publication history at the canonical, and a loadable
-previous package).</p>
+extra deployment step. It is enabled by the <code class="language-plaintext highlighter-rouge">version-comparison</code> parameter — an official IG
+Publisher parameter from the
+<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig/CodeSystem-ig-parameters.html">ig-parameters registry</a>,
+passed through <code class="language-plaintext highlighter-rouge">sushi-config.yaml</code> (the commented block there explains the
+setup and its two prerequisites: a publication history at the canonical, and
+a loadable previous package). Absent, it defaults to <code class="language-plaintext highlighter-rouge">{last}</code>; the value
+<code class="language-plaintext highlighter-rouge">n/a</code> is the documented way to switch the comparison off.</p>
 
 <p><strong>The demonstration below</strong> (this template repository's preview only) shows
 the same kind of report before any formal publication exists: the build
@@ -351,7 +354,7 @@ profiles — describe it here. Delete this prompt afterwards.]</p>
 
           IG © 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Thu, Jul 30, 2026 19:37+0000">2026-07-30</span>
+          Generated <span title="Thu, Jul 30, 2026 19:57+0000">2026-07-30</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.

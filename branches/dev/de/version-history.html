@@ -309,11 +309,14 @@ Artefakt-Paare; jedes Paar verlinkt eine Detailseite mit drei Ansichten — der
 das Paket des vorherigen Releases, ordnet jedes Profil, ValueSet und
 CodeSystem über die kanonische URL seinem Gegenstück zu, vergleicht die Paare
 und rendert den Bericht in die Build-Ausgabe — er wird also mit der Website
-veröffentlicht, ohne zusätzlichen Deployment-Schritt. Aktiviert wird er über
-den Parameter <code class="language-plaintext highlighter-rouge">version-comparison</code> in der <code class="language-plaintext highlighter-rouge">sushi-config.yaml</code> (der
-auskommentierte Block dort erklärt die Einrichtung und ihre beiden
-Voraussetzungen: eine Publikationshistorie an der kanonischen URL und ein
-ladbares Vorversions-Paket).</p>
+veröffentlicht, ohne zusätzlichen Deployment-Schritt. Aktiviert wird er über den Parameter <code class="language-plaintext highlighter-rouge">version-comparison</code> — einen
+offiziellen IG-Publisher-Parameter aus der
+<a href="https://build.fhir.org/ig/FHIR/fhir-tools-ig/CodeSystem-ig-parameters.html">ig-parameters-Registry</a>,
+durchgereicht über die <code class="language-plaintext highlighter-rouge">sushi-config.yaml</code> (der auskommentierte Block dort
+erklärt die Einrichtung und ihre beiden Voraussetzungen: eine
+Publikationshistorie an der kanonischen URL und ein ladbares
+Vorversions-Paket). Fehlt der Parameter, gilt der Standard <code class="language-plaintext highlighter-rouge">{last}</code>; der
+Wert <code class="language-plaintext highlighter-rouge">n/a</code> ist der dokumentierte Weg, den Vergleich abzuschalten.</p>
 
 <p><strong>Die Demonstration unten</strong> (nur in der Vorschau dieses
 Vorlagen-Repositories) zeigt dieselbe Art Bericht, bevor eine formale
@@ -356,7 +359,7 @@ hier. Löschen Sie diesen Hinweis anschließend.]</p>
 
           IG © 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Thu, Jul 30, 2026 19:37+0000">2026-07-30</span>
+          Erstellt <span title="Thu, Jul 30, 2026 19:57+0000">2026-07-30</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.
