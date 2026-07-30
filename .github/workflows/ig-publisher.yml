@@ -389,13 +389,16 @@ jobs:
           p = "output/qa.html"
           h = open(p, encoding="utf-8").read()
           i = h.find("Previous Version Comparison:")
-          if i >= 0:
-              j = h.find("</tr>", i)
-              if j >= 0:
-                  row = "<tr><td>Version Comparison (demo):</td><td><a href=\"comparison-demo/index.html\">comparison-demo/index.html</a> - the previous dev preview (relabelled 2027.0.0-draft.0) vs this build</td></tr>"
-                  h = h[:j+5] + row + h[j+5:]
-                  open(p, "w", encoding="utf-8").write(h)
-                  print("comparison-demo link injected into qa.html")
+          j = h.find("</tr>", i) if i >= 0 else -1
+          if i >= 0 and j >= 0:
+              row = "<tr><td>Version Comparison (demo):</td><td><a href=\"comparison-demo/index.html\">comparison-demo/index.html</a> - the previous dev preview (relabelled 2027.0.0-draft.0) vs this build</td></tr>"
+              h = h[:j+5] + row + h[j+5:]
+              open(p, "w", encoding="utf-8").write(h)
+              print("comparison-demo link injected into qa.html")
+          else:
+              # The anchor is publisher-generated markup: a publisher bump may
+              # rename or restructure it. Warn loudly so the bump PR shows it.
+              print("::warning::qa.html no longer carries the \"Previous Version Comparison:\" row this injection anchors on - the qa link to the comparison demo was NOT added. Re-check the injection against the new IG Publisher qa.html format.")
           '
             # Link the demo from the rendered Versioning pages (both languages)
             # - injected AFTER the build so the link exists only when the
@@ -423,11 +426,13 @@ jobs:
               try:
                   h = open(path, encoding="utf-8").read()
               except OSError:
+                  print("::warning::" + path + " not found - comparison-demo link not injected there.")
                   continue
               i = h.find(anchor)
-              if i < 0: continue
-              j = h.find("</p>", i)
-              if j < 0: continue
+              j = h.find("</p>", i) if i >= 0 else -1
+              if i < 0 or j < 0:
+                  print("::warning::" + path + " no longer contains the anchor text this injection relies on - comparison-demo link not injected there.")
+                  continue
               h = h[:j+4] + block + h[j+4:]
               open(path, "w", encoding="utf-8").write(h)
               print("comparison-demo link injected into " + path)
