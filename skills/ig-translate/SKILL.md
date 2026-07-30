@@ -19,7 +19,7 @@ language; German is the translation.
 
 > **Adapted from the MII KDS sample IG.** Carried over from the `ig-translate`
 > skill of
-> [`mii-kds-sample-ig-inoffiziell`](https://github.com/medizininformatik-initiative/mii-kds-sample-ig-inoffiziell)
+> [`mii-kds-sample-ig-inoffiziell`](https://github.com/forschungsgruppe-digital-health/mii-kds-sample-ig-inoffiziell)
 > (CC-BY-4.0), refocused on the **module** side.
 
 ## Scope split (read this first)
@@ -28,7 +28,7 @@ Multi-language support is split across the two template repositories — do not
 duplicate it:
 
 - **The template package
-  ([`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds))**
+  ([`ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds))**
   owns the language *mechanism* and *policy*: language-neutral
   header/footer/CSS overrides, the inherited UI-string translations of the base
   template, and the en-default/de-translation decision. Its own `ig-translate`
@@ -121,4 +121,4 @@ Findings are reported and proposed as changes via a pull request **targeting
 - [`../../scripts/ig-translate.sh`](../../scripts/ig-translate.sh) — scan/validate
   (dry-run default).
 - Template-side mechanism and policy: the `ig-translate` skill in
-  [`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds).
+  [`ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds).

@@ -27,11 +27,11 @@ zeigt dann das Ergebnis. Zeile kopieren, Artefaktnamen ändern, Seite löschen.
 Eine mitgelieferte, lebende Demonstration der Modulvorlage. Lesen Sie den
 Quelltext dieser Seite neben ihrer Darstellung, übernehmen Sie, was Sie
 brauchen, und löschen Sie die Seite anschließend.
-<strong>Die Schritt-für-Schritt-Fassung liegt in Ihrem eigenen Repository</strong>
-unter <code>docs/recipes/render-existing-artifacts.md</code> — oder lesen Sie
-<a href="https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/blob/main/docs/recipes/render-existing-artifacts.md">die
-Fassung der Vorlage</a>. Dort ist jede Datei aufgeführt, die beim Löschen dieser
-Seite mit entfernt werden muss.
+<strong>Die Schritt-für-Schritt-Fassung ist</strong>
+<code>docs/recipes/render-existing-artifacts.md</code> in diesem Repository
+(gerenderte Seiten verlinken bewusst keine Repository-URLs — siehe
+<code>docs/open-tasks.md</code>). Dort ist jede Datei aufgeführt, die beim
+Löschen dieser Seite mit entfernt werden muss.
 </div>
 
 ### 1. Ein erzeugtes Fragment einbinden

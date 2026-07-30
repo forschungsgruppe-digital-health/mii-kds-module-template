@@ -60,8 +60,8 @@ should re-check them.
 
 ## Rendered pages never hard-code this repository's URL
 
-The two template repositories do not exist under `medizininformatik-initiative`
-yet — they move there once the drafts are approved. Until then any link to their
+The two template repositories exist under `medizininformatik-initiative` only
+as empty placeholders — the content moves there once the drafts are approved. Until then any link to their
 target-organisation URL resolves nowhere, and a built IG is read by people who
 cannot know that.
 
