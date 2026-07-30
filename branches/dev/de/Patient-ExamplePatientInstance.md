@@ -1,4 +1,4 @@
-# Example: Max Mustermann-Testpatient - MII Implementation Guide Module Template v2026.0.0
+# Example: Max Mustermann-Testpatient - MII Implementation Guide Module Template v2027.0.0-draft.1
 
 * [**Table of Contents**](toc.md)
 * [**Artefaktübersicht**](artifacts.md)
@@ -12,7 +12,7 @@
 
 -------
 
-Profile: [Example Patient — template starter](StructureDefinition-example-patient.md) version: 2026.0.0
+Profile: [Example Patient — template starter](StructureDefinition-example-patient.md) version: 2027.0.0-draft.1
 
 Security Label: [test health data (Details: ActReason code HTEST = 'test health data')](http://terminology.hl7.org/7.3.0/CodeSystem-v3-ActReason.html)
 
@@ -36,7 +36,7 @@ Max Mustermann-Testpatient Male, DoB: 1990-01-01
       },
       {
         "url" : "version",
-        "valueString" : "2026.0.0"
+        "valueString" : "2027.0.0-draft.1"
       },
       {
         "url" : "uri",
@@ -44,7 +44,7 @@ Max Mustermann-Testpatient Male, DoB: 1990-01-01
       }],
       "url" : "http://hl7.org/fhir/StructureDefinition/package-source"
     }],
-    "profile" : ["https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient|2026.0.0"],
+    "profile" : ["https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient|2027.0.0-draft.1"],
     "security" : [{
       "system" : "http://terminology.hl7.org/CodeSystem/v3-ActReason",
       "code" : "HTEST",

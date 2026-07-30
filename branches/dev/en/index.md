@@ -1,4 +1,4 @@
-# Home - MII Implementation Guide Module Template v2026.0.0
+# Home - MII Implementation Guide Module Template v2027.0.0-draft.1
 
 * [**Table of Contents**](toc.md)
 * **Home**
@@ -7,8 +7,8 @@
 
 | | |
 | :--- | :--- |
-| *Official URL*:https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template | *Version*:2026.0.0 |
-| Active as of 2026-01-01 | *Computable Name*:MII_IG_Template |
+| *Official URL*:https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template | *Version*:2027.0.0-draft.1 |
+| Active as of 2027-01-01 | *Computable Name*:MII_IG_Template |
 
 ### Introduction
 
@@ -18,8 +18,8 @@ This specification describes the FHIR representation of the Core Dataset (CDS) m
 
 | | |
 | :--- | :--- |
-| Date | 2026-01-01 |
-| Version | 2026.0.0 (CalVer`YYYY.n.n`) |
+| Date | 2027-01-01 |
+| Version | 2027.0.0-draft.1 (CalVer`YYYY.n.n`) |
 | Status | active |
 | Realm | DE |
 
@@ -66,7 +66,7 @@ Questions about this publication can be asked on the HL7 FHIR Zulip [chat.fhir.o
 
 ### Copyright and License
 
-© 2026+ TMF e. V., Charlottenstraße 42, 10117 Berlin
+© 2027+ TMF e. V., Charlottenstraße 42, 10117 Berlin
 
 This work is licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
 

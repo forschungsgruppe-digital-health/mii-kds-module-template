@@ -1,4 +1,4 @@
-# Example Patient — template starter - MII Implementation Guide Module Template v2026.0.0
+# Example Patient — template starter - MII Implementation Guide Module Template v2027.0.0-draft.1
 
 * [**Table of Contents**](toc.md)
 * [**Artefaktübersicht**](artifacts.md)
@@ -8,7 +8,7 @@
 
 | | |
 | :--- | :--- |
-| *Offizielle URL*:https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient | *Version*:2026.0.0 |
+| *Offizielle URL*:https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient | *Version*:2027.0.0-draft.1 |
 | Active Stand: 2026-07-30 | *Maschinenlesbarer Name*:ExamplePatient |
 
  
@@ -94,7 +94,7 @@ Weitere Repräsentationen des Profils: [CSV](../StructureDefinition-example-pati
       },
       {
         "url" : "version",
-        "valueString" : "2026.0.0"
+        "valueString" : "2027.0.0-draft.1"
       },
       {
         "url" : "uri",
@@ -137,12 +137,12 @@ Weitere Repräsentationen des Profils: [CSV](../StructureDefinition-example-pati
   },
   {
     "url" : "http://hl7.org/fhir/StructureDefinition/resource-approvalDate",
-    "valueDate" : "2026-01-01"
+    "valueDate" : "2027-01-01"
   },
   {
     "url" : "http://hl7.org/fhir/StructureDefinition/resource-effectivePeriod",
     "valuePeriod" : {
-      "start" : "2026"
+      "start" : "2027"
     }
   },
   {
@@ -210,7 +210,7 @@ Weitere Repräsentationen des Profils: [CSV](../StructureDefinition-example-pati
     }
   }],
   "url" : "https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient",
-  "version" : "2026.0.0",
+  "version" : "2027.0.0-draft.1",
   "name" : "ExamplePatient",
   "title" : "Example Patient — template starter",
   "_title" : {
@@ -228,7 +228,7 @@ Weitere Repräsentationen des Profils: [CSV](../StructureDefinition-example-pati
   },
   "status" : "active",
   "experimental" : false,
-  "date" : "2026-07-30T10:04:49+00:00",
+  "date" : "2026-07-30T13:14:56+00:00",
   "publisher" : "Medical Informatics Initiative (MII)",
   "contact" : [{
     "name" : "Medical Informatics Initiative (MII)",

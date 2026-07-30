@@ -1,4 +1,4 @@
-# Home - MII Implementation Guide Module Template v2026.0.0
+# Home - MII Implementation Guide Module Template v2027.0.0-draft.1
 
 * [**Table of Contents**](toc.md)
 * **Home**
@@ -7,8 +7,8 @@
 
 | | |
 | :--- | :--- |
-| *Offizielle URL*:https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template | *Version*:2026.0.0 |
-| Active Stand: 2026-01-01 | *Maschinenlesbarer Name*:MII_IG_Template |
+| *Offizielle URL*:https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template | *Version*:2027.0.0-draft.1 |
+| Active Stand: 2027-01-01 | *Maschinenlesbarer Name*:MII_IG_Template |
 
 ### Einleitung
 
@@ -18,8 +18,8 @@ Diese Spezifikation beschreibt die FHIR-Repräsentation des Kerndatensatz-(KDS-)
 
 | | |
 | :--- | :--- |
-| Datum | 2026-01-01 |
-| Version | 2026.0.0 (CalVer`JJJJ.n.n`) |
+| Datum | 2027-01-01 |
+| Version | 2027.0.0-draft.1 (CalVer`JJJJ.n.n`) |
 | Status | active |
 | Realm | DE |
 
@@ -68,7 +68,7 @@ Fragen zu dieser Publikation können im HL7-FHIR-Zulip [chat.fhir.org](https://c
 
 ### Urheberrecht und Lizenz
 
-© 2026+ TMF e. V., Charlottenstraße 42, 10117 Berlin
+© 2027+ TMF e. V., Charlottenstraße 42, 10117 Berlin
 
 Dieses Werk ist lizenziert unter der [Creative Commons Namensnennung 4.0 International Lizenz (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.de).
 

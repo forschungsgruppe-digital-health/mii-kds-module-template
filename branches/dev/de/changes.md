@@ -1,4 +1,4 @@
-# Changelog - MII Implementation Guide Module Template v2026.0.0
+# Changelog - MII Implementation Guide Module Template v2027.0.0-draft.1
 
 * [**Table of Contents**](toc.md)
 * [**Versioning**](version-history.md)
@@ -23,11 +23,21 @@ Jede Version erhält einen eigenen Abschnitt mit dem Release-Datum und den nach 
 
 Kategorien ohne Inhalt werden weggelassen. Geht eine Änderung auf ein Issue oder einen Pull-Request zurück, wird darauf verlinkt.
 
+##### Breaking Changes MÜSSEN berichtet und erläutert werden
+
+Ein Versionsabschnitt mit einer Breaking Change ist erst vollständig, wenn er ausdrücklich und in diesem Changelog beantwortet:
+
+* **Was genau sich geändert hat** zwischen den beiden Versionen — das Artefakt, das Element, die alte und die neue Einschränkung (nicht nur „Profil X wurde überarbeitet“).
+* **Was das für bestehende Daten bedeutet:** Validieren Daten, die der Vorversion entsprachen, weiterhin gegen die neue Version? Falls nein: welche Ressourcen und Elemente sind betroffen, und wie zeigt sich der Fehler?
+* **Was Implementierende tun sollten:** die Empfehlung der Autorinnen und Autoren zur Migration bestehender Daten auf die neue Version — Transformationsschritte, Standardwerte, Umkodierungs-Hinweise — oder die ausdrückliche Aussage, dass kein Migrationspfad bereitgestellt wird, und warum.
+
+Kennzeichnen Sie solche Einträge deutlich (zum Beispiel mit dem Präfix **BREAKING:**), damit sie beim Überfliegen des Abschnitts nicht übersehen werden können.
+
 -------
 
-#### Version 2026.0.0
+#### Version 2027.0.0-draft.1
 
-**Datum:** 2026-01-01
+**Datum:** 2027-01-01
 
 ##### Hinzugefügt
 

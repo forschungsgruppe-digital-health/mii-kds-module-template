@@ -1,4 +1,4 @@
-# Versioning - MII Implementation Guide Module Template v2026.0.0
+# Versioning - MII Implementation Guide Module Template v2027.0.0-draft.1
 
 * [**Table of Contents**](toc.md)
 * **Versioning**
@@ -11,7 +11,7 @@
 
 The **Module Template** module follows the MII calendar-versioning (CalVer) scheme in a SemVer-compatible numeric form:
 
-* format **`YYYY.MINOR.PATCH[-label]`** — the current version is `2026.0.0`;
+* format **`YYYY.MINOR.PATCH[-label]`** — the current version is `2027.0.0-draft.1`;
 * **`YYYY`** — the year in which the guide applies and is intended to be used; it takes the place of the major version;
 * **`MINOR`** — incremented for non-breaking additions and refinements;
 * **`PATCH`** — incremented for corrections and bug fixes;

@@ -1,4 +1,4 @@
-# mii-param-template-manifest - MII Implementation Guide Module Template v2026.0.0
+# mii-param-template-manifest - MII Implementation Guide Module Template v2027.0.0-draft.1
 
 * [**Table of Contents**](toc.md)
 * [**Artefaktübersicht**](artifacts.md)
@@ -39,7 +39,7 @@
   },
   {
     "name" : "default-canonical-version",
-    "valueCanonical" : "https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient|2026.0.0"
+    "valueCanonical" : "https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient|2027.0.0-draft.1"
   },
   {
     "name" : "default-canonical-version",

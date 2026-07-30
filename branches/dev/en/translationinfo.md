@@ -1,4 +1,4 @@
-# Translation Information - MII Implementation Guide Module Template v2026.0.0
+# Translation Information - MII Implementation Guide Module Template v2027.0.0-draft.1
 
 * [**Table of Contents**](toc.md)
 * **Translation Information**

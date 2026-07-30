@@ -1,4 +1,4 @@
-# Metadata Overview - MII Implementation Guide Module Template v2026.0.0
+# Metadata Overview - MII Implementation Guide Module Template v2027.0.0-draft.1
 
 * [**Table of Contents**](toc.md)
 * **Metadata Overview**
@@ -49,8 +49,8 @@ The following CRMI-related metadata is set in [`sushi-config.yaml`](https://gith
 | [Artifact Version Algorithm](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-versionAlgorithm.html) | Artifact conventions; versioning | `ImplementationGuide.extension`(`semver`) | Declares how versions are compared to determine which is more current. |
 | [Artifact Version Policy](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-versionPolicy.html) | Artifact lifecycle; versioning | `ImplementationGuide.extension`(`package`) | Declares that artifact versions are managed with the package version — a release can bump an artifact's version even when its content did not change. |
 | [Package Source](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-package-source.html) | Version manifest; packaging; distribution | `ImplementationGuide.extension`(packageId, version, uri) | Declares the package in which an artifact is defined, so evaluation environments resolve namespaces and dependencies in the intended scope. |
-| [Resource Approval Date](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-resource-approvalDate.html) | Artifact lifecycle; publishing; governance | `ImplementationGuide.extension`(`2026-01-01`) | Records the date on which the publisher officially approved the content for use. |
-| [Resource Effective Period](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-resource-effectivePeriod.html) | Artifact lifecycle; publishing; implementation | `ImplementationGuide.extension`(start`2026`) | Records the period during which the content is planned to be, or has been, effective. |
+| [Resource Approval Date](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-resource-approvalDate.html) | Artifact lifecycle; publishing; governance | `ImplementationGuide.extension`(`2027-01-01`) | Records the date on which the publisher officially approved the content for use. |
+| [Resource Effective Period](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-resource-effectivePeriod.html) | Artifact lifecycle; publishing; implementation | `ImplementationGuide.extension`(start`2027`) | Records the period during which the content is planned to be, or has been, effective. |
 | [Artifact Author](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-author.html)[Artifact Editor](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-editor.html)[Artifact Reviewer](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-reviewer.html)[Artifact Endorser](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-endorser.html) | Publishing; governance; provenance | `ImplementationGuide.extension` | Records the author, the editor responsible for internal coherence, the reviewers, and the bodies that officially endorse the release. For an MII module the editor, reviewers and endorsers are the MII governance bodies. |
 
 Not enabled in this scaffold, but prepared as commented blocks in `sushi-config.yaml`:
@@ -68,7 +68,7 @@ Where a module publishes CodeSystem supplements, note that the CRMI **ShareableC
 
 The human-readable version scheme is described on the [Versioning](version-history.md) page. This section describes how that policy is expressed as CRMI metadata.
 
-The module uses calendar versioning in the SemVer-compatible numeric form `YYYY.MINOR.PATCH[-label]`, currently `2026.0.0`. The calendar year serves as the CRMI `<major>` component; `MINOR` and `PATCH` keep their usual additive and corrective semantics. Stable versions can therefore be compared using the declared `semver` version algorithm. Labels carry pre-release or build information; following CRMI/FHIR convention, no ordering is inferred among labels.
+The module uses calendar versioning in the SemVer-compatible numeric form `YYYY.MINOR.PATCH[-label]`, currently `2027.0.0-draft.1`. The calendar year serves as the CRMI `<major>` component; `MINOR` and `PATCH` keep their usual additive and corrective semantics. Stable versions can therefore be compared using the declared `semver` version algorithm. Labels carry pre-release or build information; following CRMI/FHIR convention, no ordering is inferred among labels.
 
 | | |
 | :--- | :--- |

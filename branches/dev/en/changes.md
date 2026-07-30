@@ -1,4 +1,4 @@
-# Changelog - MII Implementation Guide Module Template v2026.0.0
+# Changelog - MII Implementation Guide Module Template v2027.0.0-draft.1
 
 * [**Table of Contents**](toc.md)
 * [**Versioning**](version-history.md)
@@ -21,11 +21,21 @@ Each version gets its own section with the release date and the changes grouped 
 
 Leave out the categories with nothing to report. Where a change is driven by an issue or a pull request, link it.
 
+##### Breaking changes MUST be reported and explained
+
+A version section that contains a breaking change is not complete until it answers, explicitly and in this changelog:
+
+* **What exactly changed** between the two versions — the artifact, the element, the old and the new constraint (not just "profile X was revised").
+* **What it means for existing data:** does data that conformed to the previous version still validate against the new one? If not, which resources and elements are affected, and how does the failure show up?
+* **What implementers should do:** the authors' recommendation for migrating existing data to the new version — transformation steps, default values, re-coding guidance — or an explicit statement that no migration path is provided and why.
+
+Mark such entries clearly (for example, prefix them with **BREAKING:**) so a reader scanning the section cannot miss them.
+
 -------
 
-#### Version 2026.0.0
+#### Version 2027.0.0-draft.1
 
-**Date:** 2026-01-01
+**Date:** 2027-01-01
 
 ##### Added
 

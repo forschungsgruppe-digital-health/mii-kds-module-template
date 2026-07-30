@@ -26,7 +26,7 @@ WARNING: 5: An HTML fragment from the set [expansion-params.xhtml, expansion-par
 INFORMATION: ImplementationGuide.meta.profile[0]: Pinned the version of http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableimplementationguide to 2.0.0
 INFORMATION: ImplementationGuide.meta.profile[1]: Pinned the version of http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishableimplementationguide to 2.0.0
 INFORMATION: ImplementationGuide.meta.profile[2]: Pinned the version of http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-implementationguide to 2.0.0
-INFORMATION: ImplementationGuide.definition.resource[1].profile[0]: Pinned the version of https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient to 2026.0.0
+INFORMATION: ImplementationGuide.definition.resource[1].profile[0]: Pinned the version of https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient to 2027.0.0-draft.1
 WARNING: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[4].extension[2].value.ofType(uri): No definition could be found for URL value 'https://www.medizininformatik-initiative.de/fhir/modul-template'
 WARNING: ImplementationGuide/mii-ig-template: ImplementationGuide.extension[16].value.ofType(CodeableConcept).coding[0].code: Unknown Code 'C15607' in the CodeSystem 'http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl' version 'null' - note that the code system is labeled as a fragment, so the code may be valid in some other fragment
 WARNING: ImplementationGuide/mii-ig-template: ImplementationGuide.dependsOn[2].uri: A definition could not be found for Canonical URL 'http://fhir.org/packages/de.basisprofil.r4/ImplementationGuide/de.basisprofil.r4'
