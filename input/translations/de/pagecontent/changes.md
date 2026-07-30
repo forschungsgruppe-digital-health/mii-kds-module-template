@@ -34,6 +34,28 @@ Kategorien gruppierten Änderungen:
 Kategorien ohne Inhalt werden weggelassen. Geht eine Änderung auf ein Issue oder
 einen Pull-Request zurück, wird darauf verlinkt.
 
+<div class="mii-highlight mii-highlight-red">
+<h5>Breaking Changes MÜSSEN berichtet und erläutert werden</h5>
+<p>Ein Versionsabschnitt mit einer Breaking Change ist erst vollständig, wenn
+er ausdrücklich und in diesem Changelog beantwortet:</p>
+<ul>
+<li><b>Was genau sich geändert hat</b> zwischen den beiden Versionen — das
+Artefakt, das Element, die alte und die neue Einschränkung (nicht nur
+„Profil X wurde überarbeitet“).</li>
+<li><b>Was das für bestehende Daten bedeutet:</b> Validieren Daten, die der
+Vorversion entsprachen, weiterhin gegen die neue Version? Falls nein: welche
+Ressourcen und Elemente sind betroffen, und wie zeigt sich der Fehler?</li>
+<li><b>Was Implementierende tun sollten:</b> die Empfehlung der Autorinnen
+und Autoren zur Migration bestehender Daten auf die neue Version —
+Transformationsschritte, Standardwerte, Umkodierungs-Hinweise — oder die
+ausdrückliche Aussage, dass kein Migrationspfad bereitgestellt wird, und
+warum.</li>
+</ul>
+<p>Kennzeichnen Sie solche Einträge deutlich (zum Beispiel mit dem Präfix
+<b>BREAKING:</b>), damit sie beim Überfliegen des Abschnitts nicht übersehen
+werden können.</p>
+</div>
+
 ---
 
 #### Version {{CALVER_VERSION}}
@@ -53,3 +75,4 @@ einen Pull-Request zurück, wird darauf verlinkt.
 > voran — nutzen Sie die für Ihr Modul passende der beiden Gruppierungen,
 > bleiben Sie dabei aber über alle Versionen hinweg und in beiden Sprachen
 > einheitlich.]
+{: .mii-highlight .mii-highlight-grey}

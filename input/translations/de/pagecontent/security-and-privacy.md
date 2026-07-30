@@ -25,6 +25,7 @@ MII-Broad-Consent-Regelungen.
 
 > [TODO: Beschreiben Sie, welche Datenkategorien Ihr Modul führt und welche
 > Zweckbindung bzw. Rechtsgrundlage im MII-Kontext gilt.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Sicherheitsbetrachtung
 
@@ -34,15 +35,18 @@ Verfügbarkeit.
 > [TODO: Nennen Sie die betrachteten Angriffe/Risiken und die Gegenmaßnahmen —
 > z. B. Zugriffsschutz der FHIR-API, Pseudonymisierung, Transportverschlüsselung,
 > Protokollierung.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Modul-spezifische Konformitätsanforderungen
 
 > [TODO: Falls Ihr Modul sicherheits- oder datenschutzbezogene
 > SHALL/SHOULD/MAY-Anforderungen definiert, führen Sie sie hier auf und benennen
 > Sie, welchem Risiko sie begegnen.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Verbleibende Risiken
 
 > [TODO: Nennen Sie Risiken, die NICHT durch diese Spezifikation adressiert
 > werden und daher im Systemdesign, im Betrieb oder per Policy behandelt werden
 > müssen.]
+{: .mii-highlight .mii-highlight-grey}

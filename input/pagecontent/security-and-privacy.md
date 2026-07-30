@@ -20,6 +20,7 @@ minimisation, accuracy, storage limitation and integrity/confidentiality
 
 > [TODO: Describe the data categories your module carries and the applicable
 > purpose limitation / legal basis in the MII context.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Security considerations
 
@@ -28,13 +29,16 @@ availability.
 
 > [TODO: Name the attacks/risks considered and the countermeasures — e.g. FHIR
 > API access control, pseudonymisation, transport encryption, audit logging.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Module-specific conformance requirements
 
 > [TODO: If your module defines security- or privacy-related SHALL/SHOULD/MAY
 > requirements, list them here and say which risk each one addresses.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Residual risks
 
 > [TODO: Name risks NOT addressed by this specification, which must therefore be
 > handled in system design, deployment or policy.]
+{: .mii-highlight .mii-highlight-grey}

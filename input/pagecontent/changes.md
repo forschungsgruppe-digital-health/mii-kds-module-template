@@ -31,6 +31,25 @@ by category:
 Leave out the categories with nothing to report. Where a change is driven by an
 issue or a pull request, link it.
 
+<div class="mii-highlight mii-highlight-red">
+<h5>Breaking changes MUST be reported and explained</h5>
+<p>A version section that contains a breaking change is not complete until it
+answers, explicitly and in this changelog:</p>
+<ul>
+<li><b>What exactly changed</b> between the two versions — the artifact, the
+element, the old and the new constraint (not just "profile X was revised").</li>
+<li><b>What it means for existing data:</b> does data that conformed to the
+previous version still validate against the new one? If not, which resources
+and elements are affected, and how does the failure show up?</li>
+<li><b>What implementers should do:</b> the authors' recommendation for
+migrating existing data to the new version — transformation steps, default
+values, re-coding guidance — or an explicit statement that no migration path
+is provided and why.</li>
+</ul>
+<p>Mark such entries clearly (for example, prefix them with
+<b>BREAKING:</b>) so a reader scanning the section cannot miss them.</p>
+</div>
+
 ---
 
 #### Version {{CALVER_VERSION}}
@@ -48,3 +67,4 @@ issue or a pull request, link it.
 > sub-module) and prefixes each bullet with **Added:** / **Changed:** /
 > **Removed:** — use whichever of the two groupings suits your module, but keep
 > it the same across versions and identical in both languages.]
+{: .mii-highlight .mii-highlight-grey}

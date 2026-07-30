@@ -31,7 +31,8 @@
    - `{{MODULE_SLUG}}` — lowercase short name (`person`), drives packageId/id/canonical.
    - `{{MODULE_NAME}}` — CamelCase (`Person`) → `name: MII_IG_Person`.
    - `{{MODULE_TITLE}}` — human title (`Person`).
-   - `{{CALVER_VERSION}}` — `YYYY.n.n` (e.g. `2026.0.0`), and the related dates.
+   - `{{CALVER_VERSION}}` — `YYYY.n.n` (e.g. `2027.0.0`; drafts/pre-releases add a
+     SemVer prerelease suffix such as `2027.0.0-draft.1`), and the related dates.
    `sushi-config.yaml` is where you start, not where you finish: its header lists
    all 19 placeholders and the files each occurs in. Update `ig.ini`'s `ig =`
    line to match your `id`, then `publication-request.json`,

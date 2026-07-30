@@ -82,6 +82,7 @@ wird die Notwendigkeit auf der jeweiligen Profilseite in Textform begründet.
 > tatsächlich ausrichtet (sie sollten zu den `dependencies` in
 > `sushi-config.yaml` passen), und löschen Sie die oben nicht zutreffenden
 > Einträge.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Beanspruchen von Konformität
 
@@ -239,6 +240,7 @@ beeinflussen.
 > spezifisch sind — etwa zusätzliche Erwartungen an die FHIR-RESTful-API, an
 > Suchparameter oder an die Verwendung von Codes in Ihren Profilen. Löschen Sie
 > diesen Hinweis anschließend.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Siehe auch
 

@@ -39,9 +39,11 @@ which are **human-gated**.
 
 ### CalVer format
 
-`YYYY.n.n` — for example `2026.0.0`, then `2026.0.1` for a patch in the same
+`YYYY.n.n` — for example `2027.0.0`, then `2027.0.1` for a patch in the same
 sequence, then `2027.0.0` for the next annual sequence. A pre-release adds a
-suffix: `2026.0.0-rc.1`, `2026.0.0-alpha.1`.
+suffix: `2027.0.0-rc.1`, `2027.0.0-draft.1` (valid SemVer prerelease
+identifiers; the module-release workflow marks any tag containing `-` as a
+prerelease, and the preview build labels itself `2027.0.0-draft.1` this way).
 
 - **Tag** = the version prefixed with `v`: `v2026.0.1` (the basis precedent —
   `kerndatensatz-basis` tags `v2026.0.0` / `v2026.0.1` on `main`).
