@@ -21,7 +21,7 @@ you start, so you can tell the switch apart from an unrelated breakage.
 ## When you do this
 
 Do this **once**, as soon as the template repository
-[`medizininformatik-initiative/ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)
+[`medizininformatik-initiative/ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds)
 has cut its first release **and** that release is resolvable by the IG Publisher
 (see the prerequisite below). Before that point, keep the vendored copy — a
 published reference that cannot be resolved makes the build fail.
@@ -33,7 +33,7 @@ Please — *not* CalVer (only modules use CalVer). Find the exact number to pin,
 in order of preference:
 
 1. **The template repo's Releases page** —
-   <https://github.com/medizininformatik-initiative/ig-template-mii-kds/releases>.
+   <https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds/releases>.
    Use the latest non-prerelease tag, e.g. `0.1.0` (drop the leading `v` in
    `ig.ini`; the reference is `de.medizininformatikinitiative.template#0.1.0`).
 2. **The template's `package-list.json`** (in that repo) — the newest entry with

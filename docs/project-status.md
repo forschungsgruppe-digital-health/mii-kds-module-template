@@ -12,7 +12,7 @@ settled yet.
 | --- | --- |
 | Is the template registered in [`FHIR/ig-registry`](https://github.com/FHIR/ig-registry)? | **No — and it must not be**, until the maintainer explicitly says so. |
 | Is the package published to a FHIR package registry? | **No.** Modules consume the template as a vendored folder (`ig-template/`, kept current automatically — see `scripts/sync-ig-template.sh` in this repo). |
-| Which GitHub organisation will own these repos? | **`medizininformatik-initiative`** is the agreed TARGET organisation — all references in these repos already name it. |
+| Which GitHub organisation will own these repos? | **`medizininformatik-initiative`** is the agreed TARGET organisation. Canonical URLs and package ids already name it; navigation links point at the current organisation so they resolve today, and are swept to the target organisation in one tracked pass at transfer time. |
 | Have they moved yet? | **No.** They still live in the pre-move organisation; the transfer happens on an explicit decision. Until then some links here point at the future location, and CI bridges the gap via the `IG_TEMPLATE_REPO_URL` repository variable (module template) — remove it after the move. |
 | Who owns the template after 2026? | **The MII**, for now. Revisit with the TF KDS. |
 

@@ -24,7 +24,7 @@ second linter next to it.
 
 This is the **same single convention checker** the project uses in the template
 package repo
-([`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)):
+([`ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds)):
 both repos share the same check-matrix contract (`references/check-matrix.md`,
 Sections 1a module / 1b template package). This copy is **scoped to the module
 scaffold** — it additionally implements the hard Section-1a assertions
@@ -32,7 +32,7 @@ mechanically and placeholder-aware via
 [`../../scripts/convention-check.mjs`](../../scripts/convention-check.mjs) (which the
 template package repo does not carry, having no `{{PLACEHOLDER}}` values). It is
 adapted from the skill of the same name in the MII KDS sample IG
-([`mii-kds-sample-ig-inoffiziell`](https://github.com/medizininformatik-initiative/mii-kds-sample-ig-inoffiziell),
+([`mii-kds-sample-ig-inoffiziell`](https://github.com/forschungsgruppe-digital-health/mii-kds-sample-ig-inoffiziell),
 CC-BY-4.0).
 
 ## What runs where

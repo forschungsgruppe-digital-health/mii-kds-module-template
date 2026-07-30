@@ -11,7 +11,7 @@ Implementation Guide (IG)**. A user clicks "Use this template" to start a
 module; the scaffold's `sushi-config.yaml`, `ig.ini`, and workflows carry
 `{{PLACEHOLDER}}` values the new module fills in. The scaffold **references**
 the MII IG template package
-[`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)
+[`ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds)
 (`de.medizininformatikinitiative.template`) in `ig.ini` — **today as the
 vendored local folder `template = #ig-template`**, because that package has no
 published release yet; it switches to

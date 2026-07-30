@@ -23,10 +23,11 @@ produces. Copy the line, change the artifact name, delete the page.
 <h5>What this page is</h5>
 A live demonstration shipped with the module scaffold. Read the source of this
 page next to the rendering, copy what you need, then delete the page.
-<strong>Your own repository has the step-by-step version</strong> at
-<code>docs/recipes/render-existing-artifacts.md</code> — or read
-<a href="https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/blob/main/docs/recipes/render-existing-artifacts.md">the
-scaffold's copy</a>. It lists every file to remove when you delete this page.
+<strong>The step-by-step version is</strong>
+<code>docs/recipes/render-existing-artifacts.md</code> in this repository
+(rendered pages deliberately do not link repository URLs — see
+<code>docs/open-tasks.md</code>). It lists every file to remove when you delete
+this page.
 </div>
 
 ### 1. Include a generated fragment

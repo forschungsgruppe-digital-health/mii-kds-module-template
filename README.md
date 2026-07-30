@@ -6,7 +6,7 @@ Implementation Guide**. Click *Use this template* and you get a working IG proje
 up — so you can start with profiles and content instead of setup.
 
 The MII look comes from the separate IG template
-[`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds),
+[`ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds),
 which this scaffold references (and keeps up to date automatically).
 
 > **Status: prototype.** Usable and released, but pending discussion in the MII

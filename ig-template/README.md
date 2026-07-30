@@ -1,9 +1,9 @@
 # `ig-template/` — vendored IG template (development mirror)
 
 A **vendored mirror** of the MII IG-Publisher template package
-`de.medizininformatikinitiative.template` (version `0.2.0`), copied from
+`de.medizininformatikinitiative.template` (version `0.3.0`), copied from
 [`medizininformatik-initiative/ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)
-at commit `cb0c602065abb012e81e0e2b995cc4ef5867b22f`.
+at commit `78c84ff185638ed83f049f8d888a63a79b2ffd57`.
 
 **Do not edit these files here.** The single source of truth is the
 `ig-template-mii-kds` repository; local edits would silently drift and be
