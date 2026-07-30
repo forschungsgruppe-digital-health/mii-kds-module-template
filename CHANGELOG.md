@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.4.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.3.0...v0.4.0) (2026-07-30)
+
+
+### Features
+
+* **demo:** move the demo under Artifacts, and make its removal enforced ([028ef24](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/028ef240a91e2582d9660e571cf5c1b46bc1f200))
+* **demo:** preview page and recipe for rendering existing FHIR artifacts ([10a7ba0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/10a7ba0655926de43d40f87c93f40ba07276b336))
+* **skills:** add docs-steward, a documentation audit and repair skill ([8cafaa8](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/8cafaa84d325460a59463fc55d81529de8e325a8))
+
+
+### Bug Fixes
+
+* **contributing:** the MII does have CONTRIBUTING files, just not for modules ([4bd26af](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/4bd26af0ae0e6ecc537b5d8e9ab4bfe5d84651e3))
+* deep-audit — empty-repo probe defeat, dead links, drifted twins ([ee31f02](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/ee31f02bd1a61522885f215fa75a0b4fbe1d0adc))
+* deep-audit findings — probe defeat, dead links, drifted twins ([5519443](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/5519443e3e0c45aa889c800d0749325d399df2a9))
+* **demo:** drop the TTL fragment example — it renders a Java object ([2792e9f](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/2792e9ff77b250b7c407ff2ed35cd7d7b9df6422))
+* **demo:** exclude pseudo-json from live rendering — it links to anchors the artifact page does not define ([1248562](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/124856258806a4b2015cd905a678abfb5da20fa1))
+* **demo:** show directives by escaping the brace, not with raw ([99acba5](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/99acba568e267b037bbf33522a9d4b00582c562a))
+* **demo:** stop the section-8 table executing the keywords it documents ([0126a20](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/0126a20fc8040c4606c2ab2806ca2766d3494473))
+* **docs:** the glossary told the reader they are in the IG template repo ([1479c8f](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/1479c8f30eebb146f3ed1e0204d301121e2e08f6))
+* **fsh:** stop copying a third party's email into every created module ([8941ab9](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/8941ab97e8b7aae795b8551a29d60a10fef73e9b))
+* round-2 deep-audit — release-path gates, first-run ordering, resolution facts ([4e93f9b](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/4e93f9b5cb61eba733de778f8772c025c9c40ad8))
+* round-2 deep-audit findings — release path, first-run ordering, resolution facts ([675d524](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/675d524672f4da0e104393968259b9e1037cb313))
+* **security:** do not hard-code the advisory URL ([18c502a](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/18c502a2fc57ea86e7ffe1163d8cbea214228be7))
+* **skills:** apply what the first dry run of docs-steward found ([9ca1fad](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/9ca1faddb193bffba5f04b578af20ad8c46d5bbf))
+* **skills:** sort step 8 by consequence, and give findings a severity ([c215ef7](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/c215ef70edb57b03c2062b3ea75d4f370c063d98))
+
 ## [0.3.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.2.0...v0.3.0) (2026-07-27)
 
 
