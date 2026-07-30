@@ -67,10 +67,13 @@ element by element), the **union** (everything either version allows) and the
 the previous release's package, pairs every profile, value set and code
 system with its counterpart by canonical URL, compares the pairs, and renders
 the report into the build output — so it publishes with the site, with no
-extra deployment step. It is enabled by the `version-comparison` parameter in
-`sushi-config.yaml` (the commented block there explains the setup and its two
-prerequisites: a publication history at the canonical, and a loadable
-previous package).
+extra deployment step. It is enabled by the `version-comparison` parameter — an official IG
+Publisher parameter from the
+[ig-parameters registry](https://build.fhir.org/ig/FHIR/fhir-tools-ig/CodeSystem-ig-parameters.html),
+passed through `sushi-config.yaml` (the commented block there explains the
+setup and its two prerequisites: a publication history at the canonical, and
+a loadable previous package). Absent, it defaults to `{last}`; the value
+`n/a` is the documented way to switch the comparison off.
 
 **The demonstration below** (this template repository's preview only) shows
 the same kind of report before any formal publication exists: the build
