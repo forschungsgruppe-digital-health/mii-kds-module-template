@@ -135,3 +135,8 @@ msgstr "Metadaten"
 #: ImplementationGuide.definition.page.title
 msgid "Rendering Artifacts (demo)"
 msgstr "Artefakt-Rendering (Demo)"
+
+# ImplementationGuide.publisher — the footer's "IG © <year> <publisher>" line
+#: ImplementationGuide.publisher
+msgid "Medical Informatics Initiative (MII)"
+msgstr "Medizininformatik-Initiative (MII)"
