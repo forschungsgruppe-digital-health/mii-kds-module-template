@@ -1,0 +1,602 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en" dir="ltr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <title>General Requirements - MII Implementation Guide Module Template v2027.0.0-draft.1</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="http://hl7.org/fhir"/>
+
+    <link rel="stylesheet" href="fhir.css"/>
+
+      <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap-fhir.css"/>
+
+      <!-- Project extras -->
+    <link rel="stylesheet" href="assets/css/pygments-manni.css"/>
+    <link rel="stylesheet" href="assets/css/jquery-ui.css"/>
+  	<link rel="stylesheet" href="assets/css/prism.css"/>
+    <link rel="stylesheet" href="assets/css/project.css"/>
+  	<link rel="stylesheet" href="assets/css/cqf.css"/>
+      <!-- MII branding override for the fhir2.base.template CSS placeholder
+     (base ships includes/fragment-css.html as a single comment; it is included
+     in <head> AFTER all base stylesheets, so mii.css wins the cascade). -->
+<link rel="stylesheet" href="assets/css/mii.css"/>
+
+
+    <script src="fhir-table-scripts.js" type="text/javascript"> </script>
+    <script src="assets/js/direction-management.js" type="text/javascript"> </script>
+
+      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!-- [if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif] -->
+
+      <!-- Favicons -->
+    <link sizes="144x144" rel="fhir-logo" href="assets/ico/icon-fhir-144.png"/>
+    <link sizes="114x114" rel="fhir-logo" href="assets/ico/icon-fhir-114.png"/>
+    <link sizes="72x72" rel="fhir-logo" href="assets/ico/icon-fhir-72.png"/>
+    <link rel="fhir-logo" href="assets/ico/icon-fhir-57.png"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.png"/>
+  </head>
+  <body onload="document.body.style.opacity='1'">
+
+	  <script src="assets/js/prism.js"></script>
+    <script src="assets/js/mermaid.js" type="text/javascript"></script>
+    <script src="assets/js/mermaid-init.js" type="text/javascript"></script>
+    <style type="text/css">h2{--heading-prefix:"3.1"}
+    h3,h4,h5,h6{--heading-prefix:"3.1"}</style>
+    <div id="segment-header" class="segment">    <!-- segment-header -->
+      <div class="container">    <!-- container -->
+
+          <!-- MII branding override for the fhir2.base.template header placeholder
+     (base ships includes/fragment-header.html as a single comment; it is included
+     inside "#segment-header > .container", before the #ig-status block).
+     Language handling: only the asset and its descriptive alt text switch on
+     include.lang (the pattern kerndatensatz-basis uses); no translatable UI
+     strings are hard-coded.
+     Two logos, mirroring kerndatensatz-basis: the HL7 FHIR logo (links to the
+     FHIR spec) in #family-nav, and the MII logo in #project-nav. fhir-logo-www.png
+     is shipped by fhir2.base.template (content/assets/images/), so it resolves
+     from the inherited assets without shipping it here. -->
+<div id="family-nav">
+  <a no-external="true" id="family-logo" href="https://hl7.org/fhir">
+    <img src="assets/images/fhir-logo-www.png" alt="HL7 FHIR" height="50"/>
+  </a>
+</div>
+<div id="project-nav">
+  <a no-external="true" id="project-logo" href="https://www.medizininformatik-initiative.de/">
+
+    <img src="assets/images/logo-en.svg" alt="Medical Informatics Initiative (MII)" height="50"/>
+
+  </a>
+</div>
+
+
+        <div id="ig-status">
+          <p><span style="font-size:12pt;font-weight:bold">MII Implementation Guide Module Template</span>
+            <br/>
+            <span style="display:inline-block;">2027.0.0-draft.1 - 
+
+
+
+  <img src="assets/images/deu.svg" alt="Germany flag" title="Germany" height="16"/>
+
+
+            </span>
+          </p>
+        </div>
+      </div>   <!-- /container -->
+    </div>    <!-- /segment-header -->
+
+    <div id="segment-navbar" class="segment">    <!-- segment-navbar -->
+      <div id="stripe"> </div>
+      <div class="container">    <!-- container -->
+          <!-- HEADER CONTENT -->
+
+        <nav class="navbar navbar-inverse">
+            <!-- status-bar -->
+          <div class="container">
+
+            <button data-target=".navbar-inverse-collapse" data-toggle="collapse" type="button" class="navbar-toggle">
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+            </button>
+            <a href="http://hl7.org/fhir/R4/index.html" class="navbar-brand hidden">FHIR</a>
+            <div class="nav-collapse collapse navbar-inverse-collapse">
+                <!-- Menu in the IG's DEFAULT language (English).
+     The IG Publisher renders the navigation from this file. To translate it,
+     ship a per-language copy at input/translations/<lang>/includes/menu.xml —
+     this is the mechanism the HL7 reference IG FHIR/multi-lang-test-ig uses and
+     the ONLY way to get a TRANSLATED menu: the `menu:` property in
+     sushi-config.yaml generates a single menu.xml that cannot be translated.
+     Rules: keep the href targets identical across languages; dropdown parents
+     must link to a REAL page (href="#" is rejected by the template's menu QA);
+     only one sub-menu level is supported. -->
+<ul class="nav navbar-nav">
+  <li><a href="index.html">Home</a></li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="guidance.html" class="dropdown-toggle">Guidance<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="guidance.html">Guidance</a></li>
+      <li><a href="researcher-guidance.html">Guidance for Researchers</a></li>
+      <li><a href="implementer-guidance.html">Guidance for Implementers</a></li>
+      <li><a href="datasets-and-descriptions.html">Datasets and Descriptions</a></li>
+      <li><a href="uml-diagrams.html">UML Diagrams</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="conformance.html" class="dropdown-toggle">Conformance<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="conformance.html">Conformance</a></li>
+      <li><a href="general-requirements.html">General Requirements</a></li>
+      <li><a href="must-support.html">Must Support</a></li>
+      <li><a href="missing-data.html">Handling Missing Data</a></li>
+      <li><a href="security-and-privacy.html">Security and Privacy</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="artifacts.html" class="dropdown-toggle">Artifacts<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="artifacts.html">Artifacts Summary</a></li>
+      <li><a href="profiles-and-extensions.html">Profiles and Extensions</a></li>
+      <li><a href="terminology.html">Terminology</a></li>
+      <li><a href="capability-statements.html">Capability Statements</a></li>
+      <li><a href="search-parameters-and-operations.html">Search Parameters and Operations</a></li>
+      <li><a href="logical-models.html">Logical Models</a></li>
+      <li><a href="examples.html">Examples</a></li>
+      <li><a href="rendering-artifacts.html">Rendering Artifacts (demo — delete me)</a></li>
+    </ul>
+  </li>
+  <li><a href="downloads.html">Downloads</a></li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="version-history.html" class="dropdown-toggle">Versioning<b class="caret"> </b></a>
+    <ul class="dropdown-menu">
+      <li><a href="version-history.html">Versioning</a></li>
+      <li><a href="changes.html">Changelog</a></li>
+    </ul>
+  </li>
+  <li><a href="metadata.html">Metadata</a></li>
+</ul>
+
+            </div>    <!-- /.nav-collapse -->
+
+              
+
+
+<div style="float: var(--ig-right);padding: 8px 0px;" id="language">
+  <div style="background-image: url(assets/images/icon_arrow_down.png);background-position: 133px 3px;" id="select_flg" class="flaglist">
+    <div><img src="assets/images/lang-en.png" alt="flag en" class="flag"/>English</div>
+  </div>
+  <div style="float: var(--ig-right); margin: 2px 0px; padding: 1px 0;color: var(--btn-text-color);font-size:12px">Language:</div>
+ 	<div style="display: none;position: absolute;right: 0;z-index: 100;background-image: url(assets/images/icon_arrow_up.png);background-position: 133px 3px;" id="flaglist" class="flaglist">
+    <div><img src="assets/images/lang-en.png" alt="flag en" class="flag"/>English</div>
+
+    <div><a href="../de/general-requirements.html"><img src="assets/images/lang-de.png" alt="flag de" class="flag"/>Deutsch</a></div>
+
+  </div>
+</div>
+
+
+          </div>    <!-- /.container -->
+        </nav>    <!-- /.navbar -->
+        <!-- /HEADER CONTENT -->
+      </div>    <!-- /container -->
+    </div>    <!-- /segment-navbar -->
+      <!-- status-bar -->
+
+    <div id="segment-breadcrumb" class="segment">    <!-- segment-breadcrumb -->
+      <div class="container">    <!-- container -->
+        <ul class="breadcrumb">
+          <li><a href="toc.html"><b>Table of Contents</b></a></li><li><a href="conformance.html"><b>Conformance</b></a></li><li><b>General Requirements</b></li>
+
+        </ul>
+      </div>    <!-- /container -->
+    </div>    <!-- /segment-breadcrumb -->
+
+    <a name="top"> </a>
+    <div id="segment-content" class="segment">    <!-- segment-content -->
+      <div class="container">    <!-- container -->
+        <div class="row">
+          <div class="inner-wrapper">
+
+<style type="text/css">
+h2:before{color:silver;counter-increment:section;content:var(--heading-prefix) " ";}
+h3:before{color:silver;counter-increment:sub-section;content:var(--heading-prefix) "." counter(sub-section) " ";}
+h4:before{color:silver;counter-increment:composite;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) " ";}
+h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) " ";}
+h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
+</style>
+<div class="col-12">
+    <!-- ReleaseHeader --><p id="publish-box">MII Implementation Guide Module Template - Local Development build (v2027.0.0-draft.1) built by the FHIR (HL7&reg; FHIR&reg; Standard) Build Tools. See the <a href="https://www.medizininformatik-initiative.de/fhir/modul-template/history.html">Directory of published versions</a></p>  <!-- EndReleaseHeader -->
+  <h2>General Requirements</h2>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+    <p>  <!-- white space is critical inside of capture --></p>
+<div>
+  <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown. -->
+</div>
+
+  <!-- markdownlint-disable MD041 -->
+  <!-- Default-language (English) page. Ported from kerndatensatz-basis
+     input/pagecontent/general-requirements.md (branch main) and the MII meta wiki
+     page "Conformance" (https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance),
+     from which the conformance-verb table is taken verbatim.
+     German mirror: input/translations/de/pagecontent/general-requirements.md —
+     both files must say the same thing.
+     Keeping the verb table and the MII-wide rules verbatim is the safest
+     default — rewording a conformance verb changes its strength — so check any
+     change against the wiki (authoritative) first. Add your module's own
+     requirements underneath. -->
+
+<h3 id="general-requirements">General Requirements</h3>
+
+<p>This page documents the requirements that apply to the whole
+<strong>Module Template</strong> module and to every MII actor implementing it.</p>
+
+<h4 id="documenting-requirements">Documenting requirements</h4>
+
+<p>Requirements in this specification are indicated by the following keywords
+written in capital letters, based on
+<a href="https://datatracker.ietf.org/doc/html/rfc2119">RFC-2119</a> and the FHIR
+<a href="http://hl7.org/fhir/R4/conformance-rules.html#conflang">conformance language</a>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>German</th>
+      <th>English</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MUSS / MÜSSEN</td>
+      <td>MUST / SHALL</td>
+    </tr>
+    <tr>
+      <td>DARF NICHT / DÜRFEN NICHT</td>
+      <td>MUST NOT / SHALL NOT</td>
+    </tr>
+    <tr>
+      <td>VERPFLICHTEND</td>
+      <td>REQUIRED</td>
+    </tr>
+    <tr>
+      <td>SOLLTE / SOLLTEN</td>
+      <td>SHOULD</td>
+    </tr>
+    <tr>
+      <td>SOLLTE NICHT / SOLLTEN NICHT</td>
+      <td>SHOULD NOT</td>
+    </tr>
+    <tr>
+      <td>EMPFOHLEN</td>
+      <td>RECOMMENDED</td>
+    </tr>
+    <tr>
+      <td>KANN / OPTIONAL</td>
+      <td>MAY</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The German column is the wording used in the German rendering of this guide; the
+English column is the RFC-2119 keyword it corresponds to. The two are equivalent
+— a requirement does not change its strength by being read in the other
+language.</p>
+
+<h4 id="mii-conformance-artifacts">MII conformance artifacts</h4>
+
+<ul>
+  <li>The <a href="profiles-and-extensions.html">Profiles and Extensions</a> page lists the
+profiles defined by this module. Their
+<a href="http://hl7.org/fhir/R4/structuredefinition.html">StructureDefinitions</a> define
+the <em>minimum</em> elements, extensions, vocabularies and ValueSets that <strong>SHALL</strong>
+be present, and constrain how the elements are used.</li>
+  <li>Profile elements carry <em>mandatory</em> and <em>Must Support</em> requirements. Mandatory
+elements have a minimum cardinality of 1 (min=1). The
+<a href="must-support.html">Must Support</a> page defines what servers and clients are
+expected to do with them and how the flags are rendered.</li>
+  <li>The <a href="capability-statements.html">Capability Statements</a> page states the
+RESTful transactions, supported profiles and search parameters expected of a
+conformant server. Profiles carry the structural constraints, terminology
+bindings and invariants; the CapabilityStatements carry the interaction
+expectations. Implementers need both.</li>
+</ul>
+
+<h4 id="standards-and-alignment">Standards and alignment</h4>
+
+<p>The MII core dataset specifications build, wherever possible, on international
+standards and terminologies. The following are of particular relevance across
+modules:</p>
+
+<ul>
+  <li><strong><a href="http://hl7.org/fhir/uv/ips/">International Patient Summary (IPS)</a></strong> —
+international standard for patient summaries.</li>
+  <li><strong><a href="https://ig.fhir.de/basisprofile-de/">German base profiles (Basisprofil DE R4)</a></strong>
+— adaptation to the conditions of the German healthcare system.</li>
+  <li><strong><a href="https://simplifier.net/organization/kassenrztlichebundesvereinigungkbv">KBV FHIR specifications</a></strong>
+— compatibility with the specifications of the National Association of
+Statutory Health Insurance Physicians.</li>
+  <li><strong><a href="https://simplifier.net/organization/gematik">gematik FHIR specifications</a></strong>
+— compatibility with the gematik specifications.</li>
+  <li><strong><a href="https://fachportal.gematik.de/informationen-fuer/isik">ISiK (Informationssysteme im Krankenhaus)</a></strong>
+— reference specification for hospital information systems.</li>
+</ul>
+
+<p>Where this module adapts a profile away from one of these specifications, the
+reason is given in prose on the profile page.</p>
+
+<blockquote class="mii-highlight mii-highlight-grey">
+  <p>[TODO: Name the standards and specifications YOUR module actually aligns with
+(they should match the <code class="language-plaintext highlighter-rouge">dependencies</code> in <code class="language-plaintext highlighter-rouge">sushi-config.yaml</code>), and delete the
+entries above that do not apply.]</p>
+</blockquote>
+
+<h4 id="claiming-conformance">Claiming conformance</h4>
+
+<p>A system claims conformance to this module by fulfilling the module's profiles.
+Two levels are distinguished.</p>
+
+<h5 id="profile-support">Profile support</h5>
+
+<p>Systems may deploy and support one or more of this module's profiles to
+represent clinical information, using the profile's content model without
+implementing the associated interactions.</p>
+
+<ul>
+  <li><span id="general-1" class="fhir-conformance"><a name="ci-c-general-1"> </a>Servers <strong>SHALL</strong> be able to populate all profile data elements that are mandatory or flagged as <em>Must Support</em> in that profile's StructureDefinition<a href="conformance.html#ci-c-general-1"><sup>&sect;general-1</sup></a></span></li>
+  <li><span id="general-2" class="fhir-conformance"><a name="ci-c-general-2"> </a>Servers <strong>SHOULD</strong> declare support for a profile by including its official URL in <code class="language-plaintext highlighter-rouge">CapabilityStatement.rest.resource.supportedProfile</code><a href="conformance.html#ci-c-general-2"><sup>&sect;general-2</sup></a></span>. The official
+("canonical") URL of each profile is shown on its profile page.</li>
+</ul>
+
+<h5 id="profile-support-and-interaction-support">Profile support and interaction support</h5>
+
+<p>Systems may support one or more profiles <em>and</em> the RESTful interactions defined
+for the corresponding resources.</p>
+
+<ul>
+  <li><span id="general-3" class="fhir-conformance"><a name="ci-c-general-3"> </a>A conformant server <strong>SHALL</strong> be able to populate all profile data elements that are mandatory and/or flagged as <em>Must Support</em><a href="conformance.html#ci-c-general-3"><sup>&sect;general-3</sup></a></span></li>
+  <li>A conformant server <strong>SHOULD</strong> declare conformance with the applicable
+CapabilityStatement by including its official URL in
+<code class="language-plaintext highlighter-rouge">CapabilityStatement.instantiates</code>.</li>
+  <li>A conformant server <strong>SHALL</strong> state the full capability details of the
+CapabilityStatement it claims to implement.</li>
+  <li>A conformant server claiming interaction support <strong>SHALL</strong> declare support for
+the profile by including its official URL in
+<code class="language-plaintext highlighter-rouge">CapabilityStatement.rest.resource.supportedProfile</code>.</li>
+  <li>A conformant server claiming interaction support <strong>SHALL</strong> declare support for
+that profile's FHIR RESTful transactions.</li>
+</ul>
+
+<h4 id="using-codes-in-profiles">Using codes in profiles</h4>
+
+<p>The rules below summarise the requirements that
+<a href="http://hl7.org/fhir/R4/terminologies.html">FHIR terminology</a> places on coded
+elements (<code class="language-plaintext highlighter-rouge">CodeableConcept</code>, <code class="language-plaintext highlighter-rouge">Coding</code> and <code class="language-plaintext highlighter-rouge">code</code> datatypes).</p>
+
+<h5 id="required-bindings">Required bindings</h5>
+
+<p>A <a href="http://hl7.org/fhir/R4/terminologies.html#required">required binding</a> to a
+ValueSet means that one of the codes from that ValueSet <strong>SHALL</strong> be used. For
+<code class="language-plaintext highlighter-rouge">CodeableConcept</code>, which permits several codings plus a text element, the rule
+applies to <em>at least one</em> of the codings — text alone is <em>not</em> valid.</p>
+
+<ul>
+  <li>Servers <strong>SHALL</strong> provide at least one code from the bound ValueSet;
+additional codes from other systems <strong>MAY</strong> be provided.</li>
+  <li>Clients <strong>SHALL</strong> be capable of processing the codes of the bound ValueSet.</li>
+</ul>
+
+<h5 id="extensible-bindings">Extensible bindings</h5>
+
+<p>An <a href="http://hl7.org/fhir/R4/terminologies.html#extensible">extensible binding</a>
+means that one of the codes from the ValueSet <strong>SHALL</strong> be used if a suitable
+concept exists there. If none exists, alternative code(s) may be provided. For
+<code class="language-plaintext highlighter-rouge">CodeableConcept</code> the rule again applies to <em>at least one</em> of the codings; if
+only text is available and it has no conceptual overlap with the bound values,
+text alone may be used.</p>
+
+<ul>
+  <li>Servers <strong>SHALL</strong> provide a code from the bound ValueSet <em>if the concept
+exists</em> there, an alternative code <em>if it does not</em>, or text if only text is
+available.</li>
+  <li>Clients <strong>SHALL</strong> be capable of processing codes of the bound ValueSet,
+alternative codes, and text.</li>
+</ul>
+
+<h5 id="several-codings-in-one-codeableconcept">Several codings in one CodeableConcept</h5>
+
+<p>Alternative codes may be supplied in addition to the codes of a required or
+extensible ValueSet ("additional codings"). They may be equivalent to, or
+narrower than, the standard concept.</p>
+
+<p>The following illustrates a diagnosis carrying both an ICD-10-GM code and a
+SNOMED CT code for international interoperability:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"coding"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://fhir.de/CodeSystem/bfarm/icd-10-gm"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E11.90"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Diabetes mellitus, Typ 2, ohne Komplikationen"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://snomed.info/sct"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"44054006"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Diabetes mellitus type 2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h4 id="missing-data">Missing data</h4>
+
+<p>There are situations in which no information is available for a data element and
+the source system does not know why. The
+<a href="missing-data.html">Handling Missing Data</a> page defines how this is represented.</p>
+
+<h4 id="fhir-restful-search-api">FHIR RESTful search API</h4>
+
+<p>For all search interactions supported by this guide:</p>
+
+<ul>
+  <li>Servers <strong>SHALL</strong> support <code class="language-plaintext highlighter-rouge">POST</code>-based search.</li>
+  <li>Servers <strong>SHALL</strong> support <code class="language-plaintext highlighter-rouge">GET</code>-based search.</li>
+</ul>
+
+<p>For the individual search parameter types:</p>
+
+<ul>
+  <li><strong>Token</strong> — <a href="http://hl7.org/fhir/R4/search.html#token">how to search by token</a>
+    <ul>
+      <li>Clients <strong>SHALL</strong> supply at least a code value and <strong>MAY</strong> supply system and
+code.</li>
+      <li>Servers <strong>SHALL</strong> support both code-only and system+code searches.</li>
+    </ul>
+  </li>
+  <li><strong>Reference</strong> — <a href="http://hl7.org/fhir/R4/search.html#reference">how to search by reference</a>
+    <ul>
+      <li>Clients <strong>SHALL</strong> supply at least an id value and <strong>MAY</strong> supply type and
+id.</li>
+      <li>Servers <strong>SHALL</strong> support both id-only and type+id searches.</li>
+    </ul>
+  </li>
+  <li><strong>Date</strong> — <a href="http://hl7.org/fhir/R4/search.html#date">how to search by date</a>
+    <ul>
+      <li>Clients <strong>SHALL</strong> supply values precise to the <em>day</em> for elements of type
+<code class="language-plaintext highlighter-rouge">date</code>, and to the <em>second including time offset</em> for elements of type
+<code class="language-plaintext highlighter-rouge">dateTime</code>.</li>
+      <li>Servers <strong>SHALL</strong> support values of that precision.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="modifier-elements">Modifier elements</h4>
+
+<p>A <a href="http://hl7.org/fhir/R4/conformance-rules.html#isModifier">modifier element</a>
+changes the meaning of the element that contains it. Not every modifier element
+is mandatory or <em>Must Support</em>, and there is no blanket requirement to support
+them. For modifier elements that <em>are</em> mandatory or <em>Must Support</em>, servers and
+clients <strong>SHALL</strong> be able to process them.</p>
+
+<p>Clients must be aware of <em>unexpected</em> modifier elements in received data: they
+can change the meaning of the data and, if mishandled, lead to errors or even
+security problems. Unless a client can establish that it processes such an
+element safely, rejecting the instance is usually the only safe response.</p>
+
+<p>Modifier elements that are frequently <em>not</em> flagged Must Support include:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">modifierExtension</code> element present on every profile,</li>
+  <li><code class="language-plaintext highlighter-rouge">Observation.valueQuantity.comparator</code>,</li>
+  <li><code class="language-plaintext highlighter-rouge">Patient.active</code>.</li>
+</ul>
+
+<p>Implementers <strong>SHOULD</strong> read the profile pages carefully to see which elements
+are modifiers and how they affect the interpretation of a resource.</p>
+
+<blockquote class="mii-highlight mii-highlight-grey">
+  <p>[TODO: Add the general requirements that are specific to YOUR module — for
+example additional expectations on the FHIR RESTful API, on search parameters,
+or on the use of codes in your profiles. Delete this prompt afterwards.]</p>
+</blockquote>
+
+<h4 id="see-also">See also</h4>
+
+<ul>
+  <li><a href="must-support.html">Must Support</a> — detailed Must Support expectations.</li>
+  <li><a href="missing-data.html">Handling Missing Data</a> — representing absent values.</li>
+  <li><a href="capability-statements.html">Capability Statements</a> — server and client
+capability requirements.</li>
+  <li><a href="security-and-privacy.html">Security and Privacy</a> — module-specific security
+and data-protection considerations.</li>
+</ul>
+
+
+
+
+</div>
+        </div>    <!-- /inner-wrapper -->
+      </div>    <!-- /row -->
+    </div>    <!-- /container -->
+  </div>    <!-- /segment-content -->
+
+  <script src="assets/js/jquery.js" type="text/javascript"> </script>       <!-- note keep space here, otherwise it will be transformed to empty tag -> fails -->
+  <script src="assets/js/jquery-ui.min.js" type="text/javascript"> </script>
+  <script src="assets/js/flags.js" type="text/javascript"> </script>
+
+  <script src="assets/js/window-hash.js" type="text/javascript"> </script>
+  <a name="bottom"> </a>
+  <div igtool="footer" id="segment-footer" class="segment">    <!-- segment-footer -->
+    <div class="container">    <!-- container -->
+
+      <div class="inner-wrapper">
+        <p>
+
+
+
+          IG &copy; 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de">Medical Informatics Initiative (MII)</a>.  
+          Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
+          Generated <span title="Thu, Jul 30, 2026 18:49+0000">2026-07-30</span>
+          <br/>
+          <span style="color: var(--footer-highlight-text-color)">
+              <!-- MII branding override for the fhir2.base.template footer fragment.
+     Unlike header/css, the base footer fragment is NOT an empty placeholder: it
+     renders "Links: Table of Contents | QA Report [| feedback dashboards]".
+     The base uses site.data.stringsBase[include.lang][...] for the labels. The
+     reason this override supplies its own is the Imprint label: the base ships no
+     stringsBase key for it and a child template cannot add one (docs/design.md
+     section 6), and the same include.lang branch then has to carry the other
+     labels too. (The blank-label problem that first motivated this is separately
+     mitigated: this repo vendors the base's own German catalogs into
+     translations/ — see translations/README.md.) The override preserves the base
+     links (TOC, QA, feedback dashboards) and appends the MII information links.
+     Imprint: the MII website has separate German (/de/impressum) and English
+     (/en/legal-notice) imprint pages (both verified HTTP 200 on 2026-07-22). -->
+
+          Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" href="../qa.html">QA Report</a>
+                 
+                 | <a style="color: var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/" target="_blank">medizininformatik-initiative.de</a>
+                 | <a style="color: var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en/legal-notice" target="_blank">Legal notice</a>
+
+          </span>
+        </p>
+      </div>    <!-- /inner-wrapper -->
+    </div>    <!-- /container -->
+  </div>    <!-- /segment-footer -->
+  
+  <div id="segment-post-footer" class="segment hidden">    <!-- segment-post-footer -->
+    <div class="container">    <!-- container -->
+    </div>    <!-- /container -->
+  </div>    <!-- /segment-post-footer -->
+
+    <!-- JS and analytics only. -->
+    <!-- Bootstrap core JavaScript
+  ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  <script src="assets/js/bootstrap.min.js" type="text/javascript"> </script>
+  <script src="assets/js/respond.min.js" type="text/javascript"> </script>
+  <script src="assets/js/anchor.min.js" type="text/javascript"> </script>
+  <script src="assets/js/clipboard.min.js" type="text/javascript"> </script>
+  <script src="assets/js/clipboard-btn.js" type="text/javascript"> </script>
+  <script src="assets/js/anchor-hover.js" type="text/javascript"> </script>
+    <!-- Analytics Below
+  ================================================== -->
+  </body>
+</html>
