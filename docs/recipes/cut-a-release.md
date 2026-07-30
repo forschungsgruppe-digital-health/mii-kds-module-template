@@ -16,30 +16,38 @@ for the step-by-step mapping to the MII wiki's Module Release Workflow.
    `sushi-config.yaml` (`version:`, `date:`, the `package-source` version, the
    sequence year, the approval date), `publication-request.json`, the three
    `input/fsh/rulesets/` files, the `CRMIApprovalDate` call sites, and the
-   narrative pages plus their German mirrors. Do this on a `feature/*` branch
-   → PR → `dev`. While you are in the pages, sweep both trees for unresolved
+   narrative pages plus their German mirrors. Do this on a
+   `release/vYYYY.n.n` branch (e.g. `release/v2026.0.0`) → PR → `dev` — the
+   `release/**` name is what makes the convention check run in strict release
+   mode (unresolved placeholders and the scaffold's demonstration page fail
+   there, not on a `feature/*` branch). While you are in the pages, sweep
+   both trees for unresolved
    authoring prompts — `grep -rn '\[TODO' input/pagecontent input/translations`
    must come back empty; the German pages render at `/de/` and ship whatever
    is left in them.
 3. **Promote `dev → main`** with a merge commit.
 4. **Tag** the release on `main`: `git tag v2026.0.0 && git push origin v2026.0.0`
    (the tag pattern the `module-release.yml` workflow listens for).
-5. `module-release.yml` then **builds**, creates the **GitHub Release**, announces it
-   to the MII Zulip (topic *Releases*), and **hands off to the gated `go-publish`**.
+5. `module-release.yml` then **builds** and creates a **draft GitHub
+   Release** with the package attached. **A human reviews and publishes the
+   draft** — publishing is what fires the MII Zulip announcement (topic
+   *Releases*) — and then the gated `go-publish` takes over.
 6. **Production publication is a separate, human step:** run `go-publish.yml`
    manually via *workflow_dispatch*. It defaults to `publish:false` (a full dry run);
    only a human sets `publish:true` for the real publication.
 
 ## Expected result
 
-A `v2026.0.0` tag + GitHub Release, a Zulip announcement (if the key is set), and a
-dry-run publication ready for a human to promote. **No SemVer tag, no Release Please.**
+A `v2026.0.0` tag + a **draft** GitHub Release to publish by hand — the Zulip
+announcement (if the key is set) fires on publishing — and a dry-run
+publication ready for a human to promote. **No SemVer tag, no Release Please.**
 
 ## Common errors & fixes
 
 | Symptom | Cause | Fix |
 | --- | --- | --- |
 | Workflow did not trigger | Tag does not match `vYYYY.n.n` | Use the CalVer tag pattern |
+| `convention-check` red on the release branch: M8 | The scaffold's demonstration page is still present | Remove it — the check's message lists every file; the list is also in [render existing artifacts](render-existing-artifacts.md) step 4 |
 | A SemVer release PR appeared | Release Please was not removed | Run the first-run bootstrap; `release-please-config.json` and `.github/workflows/release-please.yml` must be gone |
 | `go-publish` published for real unexpectedly | `publish:true` was set | Keep it `false`; only a human sets it true, once, deliberately |
 | Zulip not posted | `ZULIP_API_KEY` absent | Expected — the job skips with a notice; add the secret to enable |

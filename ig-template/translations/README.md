@@ -17,7 +17,8 @@ from [`HL7/ig-template-base2`](https://github.com/HL7/ig-template-base2) `main`
 
 **Upkeep:** when the pinned base is bumped to a release that ships `de` itself,
 delete this folder — the base's own catalogs then apply. The scheduled dependency
-checker watches `fhir2.base.template`, so that bump arrives as a reviewable PR.
+checker watches `fhir2.base.template`, so that bump surfaces in the
+dependencies tracking issue.
 Re-apply the one change listed below, or check first whether the bumped base has
 made it unnecessary.
 

@@ -28,6 +28,10 @@ Two long-lived branches, short-lived working branches:
 - **`dev` — integration branch, unstable.** Where reviewed changes accumulate
   between releases; may be temporarily broken. Protected: changes arrive only
   via pull request. CI preview builds run here.
+- **`release/vYYYY.n.n` — release-preparation branches.** The `release/**`
+  name arms the convention check's strict release mode (unresolved
+  placeholders and the demonstration page fail there); see
+  [docs/release.md](docs/release.md).
 - **`feature/*`, `change/*`, `fix/*` — short-lived working branches.** Branched
   **off `dev`**, one focused change each, merged back into `dev` via PR, then
   deleted. Name them descriptively (`feature/add-terminology-page`,

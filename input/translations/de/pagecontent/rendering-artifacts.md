@@ -1089,7 +1089,7 @@ Datei, die die formale Publikation steuert:
 
 {% json publication-request.json demo/rendering-artifacts.liquid %}
 
-Die Schablone umfasst vier Zeilen und liegt unter
+Die Schablone umfasst fünf Zeilen und liegt unter
 `demo/rendering-artifacts.liquid`. Löschen Sie sie zusammen mit dieser Seite.
 
 ### 6. Die Sprache der Leserin einbinden

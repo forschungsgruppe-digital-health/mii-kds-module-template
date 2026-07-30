@@ -148,7 +148,7 @@ NOT_EMBEDDABLE_DE = {
 def catalogue(prefix, codes, gloss, de=False):
     """One <details> per code: the exact include line, then the live rendering.
 
-    Three codes are shown without their rendering - see NOT_EMBEDDABLE.
+    Codes listed in NOT_EMBEDDABLE are shown without their rendering.
     """
     warn = NOT_EMBEDDABLE_DE if de else NOT_EMBEDDABLE
     note = ('Nicht eingebettet: dieses Fragment '

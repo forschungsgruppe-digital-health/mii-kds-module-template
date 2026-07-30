@@ -80,7 +80,15 @@ access (the first build downloads the base image and tools):
 
    Each command must print the version shown in the comment.
 
-7. Run SUSHI to compile the module's FSH sources into FHIR resources:
+7. **Replace the `{{PLACEHOLDER}}` values first — SUSHI cannot compile
+   them.** In a new module, work through the placeholder list in the
+   `sushi-config.yaml` header (`id: mii-ig-{{MODULE_SLUG}}` is not a valid id
+   until you do). On a clone of the template repo itself there is nothing to
+   replace permanently: substitute throwaway values locally and do not commit
+   them — CI does the same for its self-check build
+   (`.github/workflows/ig-publisher.yml`, workspace-only substitution).
+
+   Then run SUSHI to compile the module's FSH sources into FHIR resources:
 
    ```sh
    sushi .

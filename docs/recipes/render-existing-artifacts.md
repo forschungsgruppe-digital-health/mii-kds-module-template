@@ -47,9 +47,18 @@ What replaces it:
 3. **Build and look at it.** A directive that names an artifact or fragment that
    does not exist renders as nothing, or fails the build — both are loud, which
    is the point of checking here rather than after publication.
-4. **Delete the demonstration page** when you no longer need it: remove
-   `input/pagecontent/rendering-artifacts.md`, its `pages:` entry in
-   `sushi-config.yaml`, its menu entry, and the German mirror.
+4. **Delete the demonstration page** when you no longer need it — at the
+   latest before a release: the convention check hard-fails a `release/**`
+   branch while it is present (M8). Remove all of:
+   - `input/pagecontent/rendering-artifacts.md` and the German mirror
+     `input/translations/de/pagecontent/rendering-artifacts.md`
+   - the `rendering-artifacts.md` entry in `sushi-config.yaml` `pages:`
+   - the menu entry in `input/includes/menu.xml` and
+     `input/translations/de/includes/menu.xml`
+   - the `demo/` directory (the Liquid template the page renders)
+   - the generator and its inputs: `scripts/gen-rendering-demo.py`,
+     `scripts/demo-en.md`, `scripts/demo-de.md`,
+     `scripts/rendering-demo-codes.json`
 
 ## Expected result
 
@@ -80,10 +89,10 @@ loud:
 
 The exclamation-mark form is what HL7's own guidance IG uses to display these
 tags — see the source of
-[`sql.xml`](https://github.com/FHIR/ig-guidance/blob/master/input/pagecontent/sql.xml)
-and [`uml.md`](https://github.com/FHIR/ig-guidance/blob/master/input/pagecontent/uml.md).
+[`sql.xml`](https://github.com/FHIR/ig-guidance/blob/HEAD/input/pagecontent/sql.xml)
+and [`uml.md`](https://github.com/FHIR/ig-guidance/blob/HEAD/input/pagecontent/uml.md).
 It is implemented at
-[`PublisherGenerator.java:6118`](https://github.com/HL7/fhir-ig-publisher/blob/master/org.hl7.fhir.publisher.core/src/main/java/org/hl7/fhir/igtools/publisher/PublisherGenerator.java#L6118).
+[`PublisherGenerator.java:6118`](https://github.com/HL7/fhir-ig-publisher/blob/ae30f97e5b6a06207b099e2fb8c17e57eb03b872/org.hl7.fhir.publisher.core/src/main/java/org/hl7/fhir/igtools/publisher/PublisherGenerator.java#L6118).
 
 ## What is documented, and what only works
 
@@ -101,7 +110,7 @@ you find quoted elsewhere is worth verifying.
 - `-intro.md` / `-notes.md` files, which inject your prose into a generated artifact page
 
 **The complete set of Publisher keywords** is a single array in the source —
-[`PublisherGenerator.java:6051`](https://github.com/HL7/fhir-ig-publisher/blob/master/org.hl7.fhir.publisher.core/src/main/java/org/hl7/fhir/igtools/publisher/PublisherGenerator.java#L6051):
+[`PublisherGenerator.java:6051`](https://github.com/HL7/fhir-ig-publisher/blob/ae30f97e5b6a06207b099e2fb8c17e57eb03b872/org.hl7.fhir.publisher.core/src/main/java/org/hl7/fhir/igtools/publisher/PublisherGenerator.java#L6051):
 
 ```java
 String[] keywords = {"sql", "fragment", "json", "class-diagram", "uml",
@@ -110,7 +119,7 @@ String[] keywords = {"sql", "fragment", "json", "class-diagram", "uml",
 
 There are eight, and no ninth. `[[[ … ]]]`, which auto-links a canonical URL or
 artifact name, is handled separately a few lines below, at
-[line 6129](https://github.com/HL7/fhir-ig-publisher/blob/master/org.hl7.fhir.publisher.core/src/main/java/org/hl7/fhir/igtools/publisher/PublisherGenerator.java#L6129).
+[line 6129](https://github.com/HL7/fhir-ig-publisher/blob/ae30f97e5b6a06207b099e2fb8c17e57eb03b872/org.hl7.fhir.publisher.core/src/main/java/org/hl7/fhir/igtools/publisher/PublisherGenerator.java#L6129).
 Four of the eight have a guidance page: `sql`, `fragment`, `json` and
 `multi-map`. Three appear in no guidance page at all — `class-diagram`,
 `lang-fragment` and `dataset` are implemented but undocumented. The eighth is
@@ -137,9 +146,9 @@ Verified by building it. The working keyword is `class-diagram` — which is
 itself undocumented, so the only diagram keyword with a guidance page is the one
 that does not run. HL7's own
 guidance page for it,
-[`uml.md`](https://github.com/FHIR/ig-guidance/blob/master/input/pagecontent/uml.md),
+[`uml.md`](https://github.com/FHIR/ig-guidance/blob/HEAD/input/pagecontent/uml.md),
 shows `{%! uml {json} %}` — escaped, so their build never executes it either.
-This is worth re-checking after a Publisher bump; it may simply be a bug.
+This is worth re-checking after a Publisher bump; it may be a bug.
 
 **The fragment-code list is openly incomplete.** The Confluence page says so
 itself, above the list: *"Note: as of July 2023, this list is not

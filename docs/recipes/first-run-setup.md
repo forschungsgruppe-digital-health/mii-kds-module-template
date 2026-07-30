@@ -33,6 +33,11 @@ You have two ways to get it. **Pick one.**
 
 ### Option A — tick "Include all branches" when you create the repo (simplest)
 
+> This copies **every** branch the template repo had at that moment — `dev`,
+> which you want, and possibly short-lived working branches. Delete any copy
+> that is not `dev` or `main` afterwards (Settings → Branches, or
+> `git push origin --delete <branch>`).
+
 On the **"Create a new repository"** page (the one you land on after clicking
 "Use this template"), tick the checkbox **"Include all branches"** before
 clicking **"Create repository from template"**.
@@ -116,6 +121,12 @@ git commit -m "chore: first-run bootstrap (remove the template's release automat
 git push -u origin chore/first-run-bootstrap
 ```
 
+**Before you push:** replace the `{{PLACEHOLDER}}` values (checklist item 1
+below) in the same branch — the pull request triggers the IG build, and SUSHI
+cannot compile placeholder values, so a bootstrap-only PR comes up red on the
+`build` check. If you prefer to merge the bootstrap alone, expect that red
+build: it turns green with the placeholder PR.
+
 Open a pull request into `dev` and merge it.
 
 > **Reviews on a solo project:** by default the bootstrap requires **1**
@@ -151,9 +162,13 @@ The bootstrap printed it; the essentials:
    mirror current:
 
    ```sh
-   gh variable set IG_TEMPLATE_REPO_URL --repo <owner>/<your-module-repo> \
-     --body "https://github.com/<owner>/ig-template-mii-kds.git"
+   gh variable set IG_TEMPLATE_REPO_URL --repo <your-org>/<your-module-repo> \
+     --body "https://github.com/<template-host-org>/ig-template-mii-kds.git"
    ```
+
+   `<your-org>` is where **your module** lives; `<template-host-org>` is where
+   `ig-template-mii-kds` lives (currently `forschungsgruppe-digital-health`) —
+   they are usually **not** the same.
 
    Without it the workflow probes the built-in target-organisation URL and, if
    that is not reachable, **skips with a notice instead of failing** — your
@@ -185,3 +200,4 @@ The bootstrap printed it; the essentials:
 | Branch protection call fails with 403 | Your account lacks admin on the repo | Ask an owner to grant admin, or apply protection manually in Settings → Branches. |
 | Convention check fails on a `release/**` branch | A `{{PLACEHOLDER}}` is still unresolved | Resolve the reported field; a module must not release with placeholders. |
 | `dev already exists — leaving it as is.` | You used Option A ("Include all branches") | Expected — the script skips creating `dev`. |
+| The bootstrap PR's `build` check is red | `{{PLACEHOLDER}}` values are still in `sushi-config.yaml` — SUSHI cannot compile them | Replace the placeholders (checklist item 1), push to the same branch |

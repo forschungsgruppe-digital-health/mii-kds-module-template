@@ -1074,7 +1074,7 @@ drives formal publication:
 
 {% json publication-request.json demo/rendering-artifacts.liquid %}
 
-The template is four lines and lives at `demo/rendering-artifacts.liquid`.
+The template is five lines and lives at `demo/rendering-artifacts.liquid`.
 Delete it together with this page.
 
 ### 6. Include the reader's own language
