@@ -8,10 +8,12 @@ for the step-by-step mapping to the MII wiki's Module Release Workflow.
 
 ## Steps
 
-0. **From your second release: point `version-comparison` in
+0. **From your second formal publication: point `version-comparison` in
    `sushi-config.yaml` at the version you are superseding** — the build
    publishes the technical delta at `comparison-v<previous>/index.html`;
-   link it from the new version's changelog section.
+   link it from the new version's changelog section. (Needs the canonical to
+   serve `package-list.json`; the first formal publication provides it — the
+   commented block in `sushi-config.yaml` has the details.)
 1. **Pick the CalVer version** `YYYY.n.n` per the MII scheme (e.g. `2027.0.0`; the
    first number is the release-sequence year). Confirm against the
    [Module Release Workflow wiki page](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow).

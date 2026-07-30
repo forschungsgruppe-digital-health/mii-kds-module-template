@@ -366,16 +366,23 @@ parameters:
   excludexml: false
   excludejson: false
   excludettl: true
-  # ── Version comparison (enable from your SECOND release on) ────────────────
+  # ── Version comparison (enable once a FORMAL publication exists) ───────────
   # Publishes a machine-generated delta against the previous version at
   # comparison-v<version>/index.html, and annotates changed elements on the
-  # artifact pages. The previous version's package must be loadable:
-  # scripts/seed-comparison-cache.sh (wired into the build workflows) fetches
-  # it from this repository's GitHub Release assets — module-release.yml
-  # attaches package.tgz to every release for exactly this purpose. Keep the
-  # value a released version; update it with every release; link the report
-  # from the version's changelog section (see the Changelog page's notice).
-  # A first release has nothing to compare against — leave this commented out.
+  # artifact pages. TWO prerequisites (verified against the publisher's
+  # PreviousVersionComparator):
+  #   1. The canonical must serve package-list.json — the comparator fetches
+  #      <canonical>/package-list.json unconditionally, even for an explicit
+  #      version, and takes the package id from it. MII modules get this with
+  #      their first formal publication at the canonical; until then the
+  #      comparison reports "Unable to find version history" and does nothing.
+  #   2. The previous version's package must be loadable from the package
+  #      cache/registry. If it is not on packages.fhir.org yet,
+  #      scripts/seed-comparison-cache.sh fills the cache from this
+  #      repository's GitHub Release assets (module-release.yml attaches
+  #      package.tgz to every release for exactly this purpose).
+  # Keep the value a released version; update it with every release; link the
+  # report from the version's changelog section (see the Changelog page).
   # version-comparison: "2027.0.0"
   excludemap: false
   # ({current}/{last} forms are NOT usable here: they resolve by fetching

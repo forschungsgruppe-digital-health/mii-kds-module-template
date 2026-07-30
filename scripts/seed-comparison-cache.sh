@@ -3,6 +3,11 @@
 # `version-comparison` parameter in sushi-config.yaml, so the IG Publisher's
 # PreviousVersionComparator can load them.
 #
+# NOTE: this covers ONE of the two prerequisites — the package cache. The
+# comparator ALSO requires <canonical>/package-list.json to be fetchable
+# (it takes the package id from it, even for explicit versions); MII modules
+# get that with their first formal publication. See sushi-config.yaml.
+#
 # WHY THIS EXISTS: the publisher resolves an explicit comparison version via
 # the local package cache (~/.fhir/packages/<packageId>#<version>). This
 # module's packages are not on packages.fhir.org, so the cache must be seeded

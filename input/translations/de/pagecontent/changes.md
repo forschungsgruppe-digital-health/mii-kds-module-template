@@ -66,14 +66,14 @@ Instanz valide bleibt).</p>
 <p><b>Die Versionsnummer warnt niemanden.</b> Das MII-Kalender-Versionsschema
 (<code>JJJJ.n.n</code>) trägt kein Major-Signal wie SemVer — dieser
 Changelog-Abschnitt ist die <i>einzige</i> Warnung, die Lesende bekommen.</p>
-<p><b>Verlinken Sie das technische Delta.</b> Ab dem zweiten Release
-aktivieren Sie den Versionsvergleich des IG Publishers
+<p><b>Verlinken Sie das technische Delta.</b> Ab der zweiten formalen
+Publikation aktivieren Sie den Versionsvergleich des IG Publishers
 (<code>version-comparison</code> in <code>sushi-config.yaml</code> — siehe die
-Seite <a href="version-history.html">Versionierung</a>); er veröffentlicht
-einen maschinell erzeugten Vergleich unter
-<code>comparison-v&lt;Vorversion&gt;/index.html</code>. Verlinken Sie ihn aus
-dem Versionsabschnitt, damit die Erläuterung und der technische Diff
-nebeneinanderstehen.</p>
+Seite <a href="version-history.html">Versionierung</a> zur Einrichtung und
+ihren Voraussetzungen); er veröffentlicht einen maschinell erzeugten
+Vergleich unter <code>comparison-v&lt;Vorversion&gt;/index.html</code>.
+Verlinken Sie ihn aus dem Versionsabschnitt, damit die Erläuterung und der
+technische Diff nebeneinanderstehen.</p>
 <p>Kennzeichnen Sie solche Einträge deutlich (zum Beispiel mit dem Präfix
 <b>BREAKING:</b>), damit sie beim Überfliegen des Abschnitts nicht übersehen
 werden können.</p>
