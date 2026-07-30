@@ -60,7 +60,7 @@ cat > "${tmp}/new/README.md" <<EOF
 
 A **vendored mirror** of the MII IG-Publisher template package
 \`de.medizininformatikinitiative.template\` (version \`${src_ver}\`), copied from
-[\`medizininformatik-initiative/ig-template-mii-kds\`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)
+<${SRC_REPO%.git}>
 at commit \`${src_sha}\`.
 
 **Do not edit these files here.** The single source of truth is the

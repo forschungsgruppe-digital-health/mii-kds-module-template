@@ -41,6 +41,7 @@ pin). Reference values verified against
 | M5 | *wiki* — `canonical` is under the agreed MII path | `sushi-config.yaml` → `canonical` | `^https://www\.medizininformatik-initiative\.de/fhir/<technischer Modulname>$` — technical module name per the wiki table in "Namenskonventionen für FHIR‐Ressourcen in der MII" | `https://www.medizininformatik-initiative.de/fhir/modul-base` |
 | M6 | *wiki* — `version` is CalVer | `sushi-config.yaml` → `version` | `^\d{4}\.\d+\.\d+$` (`YYYY.n.n`; modules never use SemVer) | `2026.0.1` |
 | M7 | *local* — no dependency — including the IG template — pinned to a floating label | `sushi-config.yaml` → `dependencies`; `ig.ini` → `template` | No `current`, `#current`, `latest`, `dev`, or `cibuild` anywhere; every dependency and the template use a fixed version | `kerndatensatz-basis` itself floats `template = fhir2.base.template#current` — a known upstream practice this project deliberately does **not** follow. Do not copy it, and do not "correct" a fixed pin back to `#current`. |
+| M8 | *local* — the scaffold's demonstration page does not reach a release | `input/pagecontent/rendering-artifacts.md` | On a `release/**` branch (or `--release`) the page and its generator files must be gone; present = hard fail. In development the row passes with a reminder | The check's failure message enumerates every file to remove |
 
 ### Placeholder-aware evaluation (this scaffold)
 
@@ -76,7 +77,7 @@ Base-template facts verified against
 | T2 | Package type | `package/package.json` → `type` | Exactly `fhir.template` | `fhir.template` |
 | T3 | Version scheme is **SemVer** | `package/package.json` → `version` | `^\d+\.\d+\.\d+$` — template repos release with SemVer/Release Please, never CalVer | e.g. `0.1.0` |
 | T4 | Base template pinned to a fixed version | `package/package.json` → `dependencies` | `"fhir2.base.template": "0.1.0"` — a fixed version, **never** `#current` | `0.1.0` |
-| T5 | No floating version labels anywhere | whole repo (manifests, `ig.ini`, CI) | No `current`, `latest`, or `dev` as a version label | — |
+| T5 | No floating version labels anywhere | whole repo (manifests, `ig.ini`, CI) | No `current`, `latest`, or `dev` as a version label. **Human-checked** — `convention-check.mjs` implements M7's file set only, not a whole-repo sweep | — |
 
 > **Why templates and modules diverge (M6/M7 vs. T3/T4):** the template repos
 > are *tooling* whose consumers pin a version — SemVer communicates breaking

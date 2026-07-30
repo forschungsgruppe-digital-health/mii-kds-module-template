@@ -69,8 +69,11 @@ suffix: `2026.0.0-rc.1`, `2026.0.0-alpha.1`.
 
 > **Why the build gate:** a tag that does not build never becomes a release, and
 > the build captures `package.tgz` as a workflow artifact. QA *counts* are
-> reported but not required to be zero — the authoritative error gate is the
-> reusable validation workflow, which runs on every PR.
+> reported but not required to be zero — the intended error gate is the
+> reusable validation workflow, which runs on every PR. **Known gap:** its
+> Java job reads a repo-root `package.json` this scaffold does not ship, so on
+> a created module that job currently fails until the `package.json` decision
+> in [open-tasks](open-tasks.md) is made; the .NET QC job is unaffected.
 
 ---
 
@@ -86,7 +89,7 @@ by the IG-Publisher / `go-publish.yml` path — noted inline where they differ.
 ```bash
 git checkout dev
 git pull origin dev
-git checkout -b release/v2026.0.1
+git checkout -b release/v2026.0.1   # release/** arms the strict convention check
 ```
 
 > **Why off `dev`, not `main`:** this template uses the `dev` → `main` branching
@@ -96,6 +99,11 @@ git checkout -b release/v2026.0.1
 > the branch names differ, the intent is identical.)
 
 ### 2. Update the version — *human*
+
+> **First release of a module: delete the scaffold's demonstration page
+> first.** The convention check hard-fails a `release/**` branch while it is
+> present (M8) and its message lists every file to remove; the same list is in
+> [render existing artifacts](recipes/render-existing-artifacts.md) step 4.
 
 Bump the CalVer version everywhere it appears **in this template**. The wiki's
 file list names Simplifier's `package.json` and `guide.yaml`, which are not
@@ -137,12 +145,12 @@ present here; the surface in this scaffold is:
   `version-history.md`, and their German mirrors under
   `input/translations/de/pagecontent/`, print the version in prose.
 
-> **Why keep the three `sushi-config.yaml` spots in sync:** the metadata contract
-> (checked by the single convention check, `wiki-consistency-check`) asserts
-> `version` is CalVer and that the embedded copies agree. Drift fails the check —
-> fix it before tagging. The ruleset literals are **not** checked mechanically
-> yet; re-read them by hand, or extend `scripts/convention-check.mjs` to assert
-> them against `sushi-config.yaml`.
+> **Why keep the three `sushi-config.yaml` spots in sync:** the metadata
+> contract asserts only that `version:` itself is CalVer (M6 in
+> `scripts/convention-check.mjs`). **Nothing compares the embedded copies** —
+> the `package-source` version, the sequence year and the ruleset literals are
+> re-read by hand, or extend `scripts/convention-check.mjs` to assert them
+> against `sushi-config.yaml`.
 
 > **Terminology & release notes:** author the module's changelog in the IG's
 > release-notes page (`input/pagecontent/…`). Terminology is selected

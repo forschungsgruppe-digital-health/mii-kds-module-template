@@ -119,8 +119,10 @@ Three traps that each cost a failed CI run — all handled by the helper script:
 ### Rotating or revoking
 
 Re-run the helper with the new certificate — `gh secret set` overwrites. To turn
-the integration off again, delete the three secrets; the build falls back to
-`tx.fhir.org` on the next run with a `::notice`. Note the expiry date: an expired
+the integration off again, delete the three secrets; the preview and publish
+builds fall back to `tx.fhir.org` on the next run with a `::notice`, and the
+HL7 Java validator job **skips** (its upstream workflow has no fallback —
+without the certificate it would fail, not fall back). Note the expiry date: an expired
 certificate fails the handshake, so rotate before `notAfter`.
 
 ## Simplifier login (the .NET validation job)
@@ -168,7 +170,7 @@ Both gates are *wired and fall back safely*, but until the credential exists the
 log of the terminology step. Enabled and working looks like
 `SU-TermServ client certificate present — starting a local client-cert nginx proxy`
 followed by a green build; not configured looks like
-`No SU-TermServ credential — falling back to the public HL7 terminology server`.
+`No SU-TermServ client certificate configured — falling back to the public HL7 terminology server https://tx.fhir.org`.
 If the proxy fails to start, the step fails loudly rather than silently
 mis-expanding value sets — re-check that the cert/key are **base64-encoded** and
 that the key password is correct.

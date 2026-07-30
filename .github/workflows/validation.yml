@@ -76,9 +76,36 @@ jobs:
       SUSHI_VERSION: ${{ vars.SUSHI_VERSION || '3.20.0' }}
     secrets: inherit
 
+  # The upstream Java-validation workflow has NO terminology fallback: it
+  # builds its client-cert proxy from the CDS_DEV_CLIENT_* secrets
+  # unconditionally, so calling it without the SU-TermServ certificate fails
+  # the job instead of falling back to tx.fhir.org (unlike ig-publisher.yml).
+  # Job-level `if:` cannot read secrets, so this guard computes their presence.
+  java-validation-guard:
+    name: SU-TermServ certificate present?
+    if: ${{ vars.ENABLE_VALIDATION != 'false' && !endsWith(github.repository, '/mii-kds-module-template') }}
+    runs-on: ubuntu-latest
+    outputs:
+      has_cert: ${{ steps.probe.outputs.has_cert }}
+    steps:
+      - name: Probe
+        id: probe
+        env:
+          C: ${{ secrets.SU_TERMSERV_CLIENT_CERT }}
+          K: ${{ secrets.SU_TERMSERV_CLIENT_KEY }}
+          P: ${{ secrets.SU_TERMSERV_CLIENT_PASSWORD }}
+        run: |
+          if [ -n "${C}" ] && [ -n "${K}" ] && [ -n "${P}" ]; then
+            echo "has_cert=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "has_cert=false" >> "${GITHUB_OUTPUT}"
+            echo "::notice::SU-TermServ client certificate not configured — skipping the HL7 Java validator (the upstream workflow has no terminology fallback). The IG preview build still validates via tx.fhir.org."
+          fi
+
   java-validation:
     name: HL7 Java validator (SU-TermServ)
-    if: ${{ vars.ENABLE_VALIDATION != 'false' && !endsWith(github.repository, '/mii-kds-module-template') }}
+    needs: java-validation-guard
+    if: ${{ vars.ENABLE_VALIDATION != 'false' && !endsWith(github.repository, '/mii-kds-module-template') && needs.java-validation-guard.outputs.has_cert == 'true' }}
     uses: medizininformatik-initiative/kerndatensatz-meta/.github/workflows/ci_java_validation.yml@1db2e534704d92e5ee0cde663ce3e7ccd8825fa7 # kerndatensatz-meta master @ 2026-07-15
     with:
       ref: ${{ github.event.pull_request.head.ref || github.ref }}

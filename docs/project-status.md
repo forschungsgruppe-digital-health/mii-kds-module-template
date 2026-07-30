@@ -1,7 +1,7 @@
 # Project status — PROTOTYPE (not yet an MII-endorsed artifact)
 
 **Status as of 2026-07-27: PROTOTYPE.** This repository and its companion IG template
-[`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)
+[`ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds)
 are prototypes, to be discussed in the **MII Taskforce Kerndatensatz (TF KDS)**.
 They are fully functional and released (`v0.3.0`), but their governance is not
 settled yet.

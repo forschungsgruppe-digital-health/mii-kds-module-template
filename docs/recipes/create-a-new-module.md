@@ -61,8 +61,9 @@
    ([add-a-profile.md](add-a-profile.md)) and the English starter pages in
    `input/pagecontent/` with your module's pages. Keep the German translations in
    `input/translations/de/` in step with them.
-6. **Build.** Locally: `sushi . && java -jar publisher.jar -ig ig.ini`, read
+6. **Build.** Locally: `sushi . && java -Xmx6g -jar publisher.jar -ig ig.ini`, read
    `output/qa.html`. Or push a `feature/*` branch and open the **CI preview URL**
+   (one-time: [enable GitHub Pages](publish-the-preview-on-github-pages.md) first, else the URL 404s)
    posted on the PR.
 7. **Iterate** until `qa.html` shows 0 errors (a terminology-fallback notice is fine
    when SU-TermServ is not configured).
