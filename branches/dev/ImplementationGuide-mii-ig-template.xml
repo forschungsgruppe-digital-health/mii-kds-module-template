@@ -137,12 +137,21 @@
   <status value="active"/>
   <experimental value="false"/>
   <date value="2027-01-01"/>
-  <publisher value="Medical Informatics Initiative (MII)"/>
+  <publisher value="Medical Informatics Initiative (MII)">
+    <extension url="http://hl7.org/fhir/StructureDefinition/translation">
+      <extension url="lang">
+        <valueCode value="de"/>
+      </extension>
+      <extension url="content">
+        <valueString value="Medizininformatik-Initiative (MII)"/>
+      </extension>
+    </extension>
+  </publisher>
   <contact>
     <name value="Medical Informatics Initiative (MII)"/>
     <telecom>
       <system value="url"/>
-      <value value="https://www.medizininformatik-initiative.de/en"/>
+      <value value="https://www.medizininformatik-initiative.de"/>
     </telecom>
   </contact>
   <description value="Self-check build of the mii-kds-module-template scaffold. This repository is a template for creating a new MII KDS module Implementation Guide, or a migration target for an existing Simplifier MII IG. Every value here is a placeholder — replace them all when you create a real module."/>

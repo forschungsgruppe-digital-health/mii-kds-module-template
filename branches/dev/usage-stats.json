@@ -90,8 +90,10 @@
       "ImplementationGuide.definition.page.page.page.title",
       "ImplementationGuide.definition.page.page.title",
       "ImplementationGuide.definition.page.title",
+      "ImplementationGuide.publisher",
       "ImplementationGuide.title",
       "StructureDefinition.description",
+      "StructureDefinition.publisher",
       "StructureDefinition.title"
     ],
     "http://hl7.org/fhir/tools/StructureDefinition/expansion-parameters": [

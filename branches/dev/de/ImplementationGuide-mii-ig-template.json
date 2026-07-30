@@ -146,12 +146,12 @@
   "status" : "active",
   "experimental" : false,
   "date" : "2027-01-01",
-  "publisher" : "Medical Informatics Initiative (MII)",
+  "publisher" : "Medizininformatik-Initiative (MII)",
   "contact" : [{
     "name" : "Medical Informatics Initiative (MII)",
     "telecom" : [{
       "system" : "url",
-      "value" : "https://www.medizininformatik-initiative.de/en"
+      "value" : "https://www.medizininformatik-initiative.de"
     }]
   }],
   "description" : "Self-check build of the mii-kds-module-template scaffold. This repository is a template for creating a new MII KDS module Implementation Guide, or a migration target for an existing Simplifier MII IG. Every value here is a placeholder — replace them all when you create a real module.",

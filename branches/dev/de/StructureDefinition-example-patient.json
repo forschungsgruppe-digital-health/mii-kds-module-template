@@ -139,13 +139,13 @@
   "title" : "Example Patient — template starter",
   "status" : "active",
   "experimental" : false,
-  "date" : "2026-07-30T15:42:59+00:00",
-  "publisher" : "Medical Informatics Initiative (MII)",
+  "date" : "2026-07-30T16:08:08+00:00",
+  "publisher" : "Medizininformatik-Initiative (MII)",
   "contact" : [{
     "name" : "Medical Informatics Initiative (MII)",
     "telecom" : [{
       "system" : "url",
-      "value" : "https://www.medizininformatik-initiative.de/en"
+      "value" : "https://www.medizininformatik-initiative.de"
     }]
   }],
   "description" : "Minimal example profile shipped with the template so that a newly created module renders a complete IG immediately. Not an MII artifact — replace it with your module's profiles.",

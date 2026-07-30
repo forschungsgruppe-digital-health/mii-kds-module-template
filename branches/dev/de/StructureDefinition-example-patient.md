@@ -228,13 +228,26 @@ Weitere Repräsentationen des Profils: [CSV](../StructureDefinition-example-pati
   },
   "status" : "active",
   "experimental" : false,
-  "date" : "2026-07-30T15:42:59+00:00",
+  "date" : "2026-07-30T16:08:08+00:00",
   "publisher" : "Medical Informatics Initiative (MII)",
+  "_publisher" : {
+    "extension" : [{
+      "extension" : [{
+        "url" : "lang",
+        "valueCode" : "de"
+      },
+      {
+        "url" : "content",
+        "valueString" : "Medizininformatik-Initiative (MII)"
+      }],
+      "url" : "http://hl7.org/fhir/StructureDefinition/translation"
+    }]
+  },
   "contact" : [{
     "name" : "Medical Informatics Initiative (MII)",
     "telecom" : [{
       "system" : "url",
-      "value" : "https://www.medizininformatik-initiative.de/en"
+      "value" : "https://www.medizininformatik-initiative.de"
     }]
   }],
   "description" : "Minimal example profile shipped with the template so that a newly created module renders a complete IG immediately. Not an MII artifact — replace it with your module's profiles.",
