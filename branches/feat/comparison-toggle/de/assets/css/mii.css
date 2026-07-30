@@ -8,7 +8,7 @@
    includes/fragment-css.html AFTER project.css, so this :root block wins the
    cascade at equal specificity.
 
-   Every value is derived from an MII source - see docs/design.md for the full
+   Every value is derived from an MII source - see docs/styleguide.md for the full
    palette table (exact source per color) and the WCAG contrast calculations.
    Sources, short form (retrieved 2026-07-22):
    - "logo"  = dominant pixel colors of the official MII logo
@@ -21,7 +21,7 @@
 
 :root {
   /* 1. IG title/status text: MII slate (site menu-link color #6a7484) —
-        contrast verified in docs/design.md § 7. It renders on the header
+        contrast verified in docs/styleguide.md §8. It renders on the header
         container, which vars 21-22 below make white. */
   --ig-status-text-color: #6a7484;
 
@@ -68,7 +68,7 @@
   /* 25-26. Footer links + highlight: white, like the MII site footer
         (4.73:1 on #6a7484, AA). Note: this makes footer links the same color
         as surrounding footer text - see the accessibility notes in
-        docs/design.md (WCAG 1.4.1). */
+        docs/styleguide.md (WCAG 1.4.1). */
   --footer-hyperlink-text-color: #ffffff;
   --footer-highlight-text-color: #ffffff;
 
@@ -84,7 +84,7 @@
         white logo background and the white content area, so the header reads as
         one clean white surface. The green stripe and blue navbar provide the
         visual structure. Status text (var 1) stays AA on white — see
-        docs/design.md § 7. The breadcrumb keeps the MII light #ebedef as a
+        docs/styleguide.md §8. The breadcrumb keeps the MII light #ebedef as a
         subtle functional band below the navbar. */
   --ig-header-color: #ffffff;
   --ig-header-container-color: #ffffff;
@@ -178,7 +178,7 @@
 
    Loaded after the base stylesheets (see includes/fragment-css.html), so no
    `!important` is needed. Colours are the documented MII palette (§3 of
-   docs/design.md); contrast is recorded in §7. */
+   docs/styleguide.md); contrast is recorded in §7. */
 :root {
   /* MII light background — the same site value as the breadcrumb fill. */
   --mii-table-header-bg-color: #ebedef;
