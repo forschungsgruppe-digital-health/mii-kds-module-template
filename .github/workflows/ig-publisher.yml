@@ -196,8 +196,15 @@ jobs:
           # pages. FSH is compiled by SUSHI, so an unsubstituted {{...}} there is a
           # hard type error ("Cannot assign string value: ... does not match element
           # type: id"), and input/resources JSON is read by the publisher.
-          find input -type f \( -name '*.md' -o -name '*.xml' -o -name '*.fsh' -o -name '*.json' \) 2>/dev/null | while read -r page; do
+          find input -type f \( -name '*.md' -o -name '*.xml' -o -name '*.fsh' -o -name '*.json' -o -name '*.po' \) 2>/dev/null | while read -r page; do
             subst "${page}" < "${RUNNER_TEMP}/placeholders.txt"
+          done
+          # One file NAME carries the slug placeholder: the IG-resource
+          # translation catalog must be found by the substituted IG id
+          # (ImplementationGuide-mii-ig-template.po), so rename it here the
+          # way a module author renames it for real.
+          find input -depth -name '*{{MODULE_SLUG}}*' 2>/dev/null | while read -r f; do
+            mv "${f}" "${f//'{{MODULE_SLUG}}'/template}"
           done
           # Guard: no build input may still carry a placeholder after substitution.
           if grep -rl '{{[A-Z0-9_]\{2,\}}}' input 2>/dev/null | grep -qv '/README\.md$'; then
