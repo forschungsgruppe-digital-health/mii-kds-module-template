@@ -46,6 +46,26 @@ migrating existing data to the new version — transformation steps, default
 values, re-coding guidance — or an explicit statement that no migration path
 is provided and why.</li>
 </ul>
+<p><b>What counts as breaking</b> — treat a change as breaking if it does any
+of the following, even when it looks small: tightens a cardinality
+(<code>0..*</code> → <code>1..1</code>), raises a binding strength (example →
+required), removes codes from a required value set, removes or renames an
+element or a slice, narrows a type, adds an invariant or a must-support
+obligation, or changes a canonical URL. When in doubt, report it as
+breaking.</p>
+<p><b>Breaking for whom:</b> state both perspectives — <i>stored data</i>
+(instances valid against the old version) and <i>implementations</i> (clients
+and servers built against it; a removed search parameter breaks
+implementations while every stored instance stays valid).</p>
+<p><b>The version number will not warn anyone.</b> The MII calendar versioning
+scheme (<code>YYYY.n.n</code>) carries no major-version signal the way SemVer
+does — this changelog section is the <i>only</i> warning a reader gets.</p>
+<p><b>Link the technical delta.</b> From the second release on, enable the IG
+Publisher's version comparison (<code>version-comparison</code> in
+<code>sushi-config.yaml</code> — see the <a href="version-history.html">
+Versioning</a> page); it publishes a machine-generated comparison at
+<code>comparison-v&lt;previous&gt;/index.html</code>. Link it from the version
+section, so the prose explanation and the technical diff sit side by side.</p>
 <p>Mark such entries clearly (for example, prefix them with
 <b>BREAKING:</b>) so a reader scanning the section cannot miss them.</p>
 </div>

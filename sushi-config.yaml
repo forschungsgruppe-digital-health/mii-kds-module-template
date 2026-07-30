@@ -366,10 +366,21 @@ parameters:
   excludexml: false
   excludejson: false
   excludettl: true
+  # ── Version comparison (enable from your SECOND release on) ────────────────
+  # Publishes a machine-generated delta against the previous version at
+  # comparison-v<version>/index.html, and annotates changed elements on the
+  # artifact pages. The previous version's package must be loadable:
+  # scripts/seed-comparison-cache.sh (wired into the build workflows) fetches
+  # it from this repository's GitHub Release assets — module-release.yml
+  # attaches package.tgz to every release for exactly this purpose. Keep the
+  # value a released version; update it with every release; link the report
+  # from the version's changelog section (see the Changelog page's notice).
+  # A first release has nothing to compare against — leave this commented out.
+  # version-comparison: "2027.0.0"
   excludemap: false
-  #version-comparison-master: '{current}'
-  #version-comparison:
-  #  - '{current}'
+  # ({current}/{last} forms are NOT usable here: they resolve by fetching
+  # <canonical>/package-list.json, which the MII canonical does not serve —
+  # use the explicit version above.)
   logging:
     - init
     - progress

@@ -107,10 +107,10 @@ veröffentlicht und gepflegt; es gilt das Urheberrecht der jeweiligen Herausgebe
 
 ### Haftungsausschluss
 
-* Der Inhalt dieses Dokuments ist öffentlich. Bitte beachten Sie, dass Teile
-  dieses Dokuments auf FHIR Version R4 basieren, dessen Urheberrecht bei
-  HL7 International liegt.
+Der Inhalt dieses Dokuments ist öffentlich. Bitte beachten Sie, dass Teile
+dieses Dokuments auf FHIR Version R4 basieren, dessen Urheberrecht bei
+HL7 International liegt.
 
-* Obwohl diese Publikation mit größter Sorgfalt erstellt wurde, können die
-  Autor:innen keine Haftung für direkte oder indirekte Schäden übernehmen, die
-  aus dem Inhalt dieser Spezifikation entstehen könnten.
+Obwohl diese Publikation mit größter Sorgfalt erstellt wurde, können die
+Autor:innen keine Haftung für direkte oder indirekte Schäden übernehmen, die
+aus dem Inhalt dieser Spezifikation entstehen könnten.

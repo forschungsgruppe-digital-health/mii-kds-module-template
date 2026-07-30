@@ -49,6 +49,14 @@ after the merge.
 
 * **[Changelog](changes.html)** — the changes of each released version.
 
+From the second release on, this guide also publishes a **machine-generated
+version comparison**: the IG Publisher compares every profile, value set and
+code system against the previous release and renders the delta at
+`comparison-v<previous>/index.html`, linked from the QA report. It is enabled
+by the `version-comparison` parameter in `sushi-config.yaml` (the commented
+block there explains the setup) and complements the changelog: the changelog
+explains *why* and *what to do*, the comparison shows *exactly what changed*.
+
 > [TODO: If your module has a versioning policy of its own beyond the MII scheme
 > — for example a support window for older versions, or a deprecation policy for
 > profiles — describe it here. Delete this prompt afterwards.]
