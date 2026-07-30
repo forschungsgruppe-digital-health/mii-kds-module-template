@@ -357,6 +357,41 @@ jobs:
           java -Xmx4g -jar "${work}/validator_cli.jar" -compare               -dest "$(pwd)/output/comparison-demo" -version 4.0.1 -tx n/a               -ig "${work}/prev.tgz" -ig output/package.tgz               -left "${canonical}|2027.0.0-draft.0"               -right "${canonical}|2027.0.0-draft.1" || true
           if [ -s output/comparison-demo/index.html ]; then
             echo "Comparison demo rendered to output/comparison-demo/ (deploys with the preview)."
+            # Link the demo from the rendered Versioning pages (both languages)
+            # - injected AFTER the build so the link exists only when the
+            # report does: no dead link on a skipped demo, no effect on the QA
+            # link check (inspection already ran), nothing in a created module.
+            python3 -c '
+          import sys
+          blocks = {
+            "output/en/version-history.html": (
+              "machine-generated",
+              "<div class=\"mii-highlight mii-highlight-grey\"><h5>Demonstration (this template repository&#39;s preview only)</h5>"
+              "<p>This preview renders a live demonstration of such a report, produced with the FHIR validator&#39;s "
+              "<code>-compare</code>: the previous dev build (relabelled <code>2027.0.0-draft.0</code>) against this build - "
+              "<a href=\"../comparison-demo/index.html\">open the comparison report</a>. "
+              "On <code>dev</code> it is a self-comparison; on a feature branch it shows the real delta against <code>dev</code>.</p></div>"),
+            "output/de/version-history.html": (
+              "maschinell erzeugten",
+              "<div class=\"mii-highlight mii-highlight-grey\"><h5>Demonstration (nur in der Vorschau dieses Vorlagen-Repositories)</h5>"
+              "<p>Diese Vorschau rendert eine lebende Demonstration eines solchen Berichts, erzeugt mit dem "
+              "<code>-compare</code> des FHIR-Validators: der vorherige dev-Build (umbenannt zu <code>2027.0.0-draft.0</code>) "
+              "gegen diesen Build - <a href=\"../comparison-demo/index.html\">Vergleichsbericht &ouml;ffnen</a>. "
+              "Auf <code>dev</code> ist es ein Selbstvergleich; auf einem Feature-Branch zeigt er das echte Delta gegen&uuml;ber <code>dev</code>.</p></div>"),
+          }
+          for path, (anchor, block) in blocks.items():
+              try:
+                  h = open(path, encoding="utf-8").read()
+              except OSError:
+                  continue
+              i = h.find(anchor)
+              if i < 0: continue
+              j = h.find("</p>", i)
+              if j < 0: continue
+              h = h[:j+4] + block + h[j+4:]
+              open(path, "w", encoding="utf-8").write(h)
+              print("comparison-demo link injected into " + path)
+          '
           else
             rm -rf output/comparison-demo
             echo "::warning::comparison demo skipped — the validator compare produced no report; the preview deploys without it."
@@ -429,7 +464,11 @@ jobs:
         if: ${{ steps.build.outputs.mode == 'full' && github.ref_name != 'main' && github.ref_name != 'gh-pages' }}
         shell: bash
         run: |
-          echo "Preview: https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/branches/${GITHUB_REF_NAME}/" >> "${GITHUB_STEP_SUMMARY}"
+          base="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/branches/${GITHUB_REF_NAME}"
+          echo "Preview: ${base}/" >> "${GITHUB_STEP_SUMMARY}"
+          if [ -s output/comparison-demo/index.html ]; then
+            echo "Comparison demo: ${base}/comparison-demo/index.html" >> "${GITHUB_STEP_SUMMARY}"
+          fi
 
       # ── PAGES_ACTIONS_ENABLED mode only: also publish via the Pages Actions
       # pipeline (Settings → Pages → GitHub Actions). Mirrors go-publish.yml's
