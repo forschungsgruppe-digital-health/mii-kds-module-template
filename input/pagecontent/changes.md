@@ -60,10 +60,11 @@ implementations while every stored instance stays valid).</p>
 <p><b>The version number will not warn anyone.</b> The MII calendar versioning
 scheme (<code>YYYY.n.n</code>) carries no major-version signal the way SemVer
 does — this changelog section is the <i>only</i> warning a reader gets.</p>
-<p><b>Link the technical delta.</b> From the second release on, enable the IG
-Publisher's version comparison (<code>version-comparison</code> in
-<code>sushi-config.yaml</code> — see the <a href="version-history.html">
-Versioning</a> page); it publishes a machine-generated comparison at
+<p><b>Link the technical delta.</b> From the second formal publication on,
+enable the IG Publisher's version comparison (<code>version-comparison</code>
+in <code>sushi-config.yaml</code> — see the <a href="version-history.html">
+Versioning</a> page for the setup and its prerequisites); it publishes a
+machine-generated comparison at
 <code>comparison-v&lt;previous&gt;/index.html</code>. Link it from the version
 section, so the prose explanation and the technical diff sit side by side.</p>
 <p>Mark such entries clearly (for example, prefix them with

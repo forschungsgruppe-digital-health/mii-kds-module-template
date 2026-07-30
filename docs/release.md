@@ -102,15 +102,19 @@ git checkout -b release/v2026.0.1   # release/** arms the strict convention chec
 
 ### 2. Update the version — *human*
 
-> **From the second release on: enable the version comparison.** Set
-> `version-comparison: "<previous released version>"` in `sushi-config.yaml`
-> (the commented block explains it). The build then publishes a
-> machine-generated delta at `comparison-v<previous>/index.html` and annotates
-> changed elements on the artifact pages — link that report from the version's
-> changelog section, next to the prose explanation of any breaking change.
-> The previous package is fetched from the previous GitHub Release's
-> `package.tgz` asset (attached automatically by `module-release.yml`) by
-> `scripts/seed-comparison-cache.sh`.
+> **From the second formal publication on: enable the version comparison.**
+> Set `version-comparison: "<previous released version>"` in
+> `sushi-config.yaml` (the commented block explains the two prerequisites —
+> the canonical must serve `package-list.json`, which the first formal
+> publication provides, and the previous package must be loadable, which
+> `scripts/seed-comparison-cache.sh` covers from the GitHub Release assets).
+> The build then publishes a machine-generated delta at
+> `comparison-v<previous>/index.html` and annotates changed elements on the
+> artifact pages — link that report from the version's changelog section,
+> next to the prose explanation of any breaking change. Until the first
+> formal publication the comparator has no version history to read; this
+> template repo demonstrates the report anyway with the validator's compare
+> command on its preview (`comparison-demo/` — see `docs/workflows.md`).
 
 > **First release of a module: delete the scaffold's demonstration page
 > first.** The convention check hard-fails a `release/**` branch while it is

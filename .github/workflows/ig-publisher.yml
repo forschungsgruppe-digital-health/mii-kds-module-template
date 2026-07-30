@@ -213,36 +213,6 @@ jobs:
           fi
           echo "::notice::Template-repo self-check: substituted self-check placeholders into WORKSPACE copies of sushi-config.yaml, ig.ini and the narrative pages (never committed). A created module replaces the placeholders for real and skips this step."
 
-      - name: Template-repo self-check DEMO of the version comparison (workspace only)
-        # Demonstrates the version-comparison feature on the scaffold's own
-        # preview: the latest dev preview's package.tgz is seeded into the
-        # cache RELABELLED as 2027.0.0-draft.0, and the workspace copy of
-        # sushi-config.yaml activates `version-comparison` against it. The
-        # published preview then carries comparison-v2027.0.0-draft.0/ - on
-        # dev a self-comparison (every artifact "no change": what a clean
-        # release looks like), on a feature branch the REAL delta against dev.
-        # Workspace-only, gated on this repo's name: a created module keeps
-        # the parameter commented out until its second release. Skip-not-fail:
-        # without a reachable dev package the demo is simply absent.
-        if: ${{ endsWith(github.repository, '/mii-kds-module-template') }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          pid="de.medizininformatikinitiative.kerndatensatz.template"
-          prev_v="2027.0.0-draft.0"
-          url="https://forschungsgruppe-digital-health.github.io/mii-kds-module-template/branches/dev/package.tgz"
-          dest="${HOME}/.fhir/packages/${pid}#${prev_v}"
-          if curl -fsSL "${url}" --output /tmp/prev-package.tgz; then
-            mkdir -p "${dest}"
-            tar -xzf /tmp/prev-package.tgz -C "${dest}"
-            python3 -c 'import json,sys; p=sys.argv[1]; d=json.load(open(p)); d["version"]=sys.argv[2]; json.dump(d, open(p,"w"), indent=2)' \
-              "${dest}/package/package.json" "${prev_v}"
-            sed -i 's|^  # version-comparison: "2027.0.0"|  version-comparison: "'"${prev_v}"'"|' sushi-config.yaml
-            echo "Comparison demo enabled: current build vs ${prev_v} (relabelled dev preview package)."
-          else
-            echo "::warning::No dev preview package.tgz reachable - the comparison demo is skipped for this build."
-          fi
-
       - name: SUSHI compile and decide build mode
         id: build
         shell: bash
@@ -340,6 +310,52 @@ jobs:
           java -Xmx6g -jar "${RUNNER_TEMP}/publisher.jar" -ig ig.ini -tx "${TX_URL}"
           test -s output/index.html
           jq empty output/qa.json
+
+      - name: Template-repo self-check DEMO — render the version-comparison report
+        # Demonstrates what a version delta looks like and where it lives,
+        # using the FHIR validator's compare command (the publisher's own
+        # `version-comparison` needs a formal publication history at the
+        # canonical, which this scaffold will never have). The last dev
+        # preview's package is relabelled 2027.0.0-draft.0 and compared to the
+        # package just built: on dev a self-comparison (a clean, no-changes
+        # report), on a feature branch the REAL delta against dev. The report
+        # lands in output/comparison-demo/ and deploys with the preview.
+        # Template repo only; skip-not-fail throughout.
+        if: ${{ endsWith(github.repository, '/mii-kds-module-template') && steps.build.outputs.mode == 'full' }}
+        env:
+          VALIDATOR_VERSION: "6.5.7"
+          VALIDATOR_SHA256: "e9ee13966d5cef045adf946c3e4ecb57400eaaa459c889f4ec0f68ba23551bff"
+        shell: bash
+        run: |
+          set -euo pipefail
+          canonical="https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient"
+          prev_url="https://forschungsgruppe-digital-health.github.io/mii-kds-module-template/branches/dev/package.tgz"
+          work="${RUNNER_TEMP}/comparison-demo"
+          mkdir -p "${work}"
+          if ! curl -fsSL "${prev_url}" --output "${work}/current-dev.tgz"; then
+            echo "::warning::comparison demo skipped — no dev preview package.tgz reachable."
+            exit 0
+          fi
+          mkdir -p "${work}/prev" && tar -xzf "${work}/current-dev.tgz" -C "${work}/prev"
+          python3 -c '
+          import json, glob, sys
+          for f in glob.glob(sys.argv[1] + "/package/*.json"):
+              try: d = json.load(open(f))
+              except Exception: continue
+              if isinstance(d, dict) and "version" in d:
+                  d["version"] = "2027.0.0-draft.0"
+                  json.dump(d, open(f, "w"), indent=2)
+          ' "${work}/prev"
+          (cd "${work}/prev" && tar -czf "${work}/prev.tgz" package)
+          curl -fsSL "https://github.com/hapifhir/org.hl7.fhir.core/releases/download/${VALIDATOR_VERSION}/validator_cli.jar"             --output "${work}/validator_cli.jar"
+          echo "${VALIDATOR_SHA256}  ${work}/validator_cli.jar" | sha256sum --check
+          mkdir -p output/comparison-demo
+          if java -Xmx4g -jar "${work}/validator_cli.jar" -compare               -dest "$(pwd)/output/comparison-demo" -version 4.0.1 -tx n/a               -ig "${work}/prev.tgz" -ig output/package.tgz               -left "${canonical}|2027.0.0-draft.0"               -right "${canonical}|2027.0.0-draft.1"; then
+            echo "Comparison demo rendered to output/comparison-demo/ (deploys with the preview)."
+          else
+            rm -rf output/comparison-demo
+            echo "::warning::comparison demo skipped — the validator compare failed; the preview deploys without it."
+          fi
 
       - name: Stop terminology proxy
         if: ${{ always() && steps.build.outputs.mode == 'full' }}
