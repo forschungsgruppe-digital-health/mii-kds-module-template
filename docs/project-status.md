@@ -1,9 +1,9 @@
 # Project status — PROTOTYPE (not yet an MII-endorsed artifact)
 
-**Status as of 2026-07-26: PROTOTYPE.** This repository and its companion IG template
-[`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)
+**Status as of 2026-07-27: PROTOTYPE.** This repository and its companion IG template
+[`ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds)
 are prototypes, to be discussed in the **MII Taskforce Kerndatensatz (TF KDS)**.
-They are fully functional and released (`v0.2.0`), but their governance is not
+They are fully functional and released (`v0.3.0`), but their governance is not
 settled yet.
 
 ## What this means in practice
@@ -12,7 +12,7 @@ settled yet.
 | --- | --- |
 | Is the template registered in [`FHIR/ig-registry`](https://github.com/FHIR/ig-registry)? | **No — and it must not be**, until the maintainer explicitly says so. |
 | Is the package published to a FHIR package registry? | **No.** Modules consume the template as a vendored folder (`ig-template/`, kept current automatically — see `scripts/sync-ig-template.sh` in this repo). |
-| Which GitHub organisation will own these repos? | **`medizininformatik-initiative`** is the agreed TARGET organisation — all references in these repos already name it. |
+| Which GitHub organisation will own these repos? | **`medizininformatik-initiative`** is the agreed TARGET organisation. Canonical URLs and package ids already name it; navigation links point at the current organisation so they resolve today, and are swept to the target organisation in one tracked pass at transfer time. |
 | Have they moved yet? | **No.** They still live in the pre-move organisation; the transfer happens on an explicit decision. Until then some links here point at the future location, and CI bridges the gap via the `IG_TEMPLATE_REPO_URL` repository variable (module template) — remove it after the move. |
 | Who owns the template after 2026? | **The MII**, for now. Revisit with the TF KDS. |
 

@@ -1,10 +1,14 @@
-# FHIR IG best-practices checklist (module author)
+# FHIR IG best practices — this scaffold's self-check (module author)
 
-A checklist derived from the **official** HL7 sources below, with the current
-state of this scaffold proven item by item. Use it when you build your module and
-again before a release.
+A recommendation set, not a compliance gate. It is this scaffold's reading of
+HL7's IG best-practice guidance and of the MII meta wiki, with the current state
+of the scaffold proven item by item. HL7's guidance recommends; it does not
+oblige. No MII governance document makes any of it a release gate for a KDS
+module, and this repository decides nothing about MII modules — where the meta
+wiki and this page disagree, the wiki wins. Use it when you build your module and
+again before a release, and drop the items your module has no use for.
 
-## Sources (all official, retrieved 2026-07-26)
+## Sources (retrieved 2026-07-26)
 
 | # | Source | What it governs |
 |---|---|---|
@@ -31,13 +35,13 @@ scaffold gives you the place and a prompt) · ➖ not applicable.
 | Has a background page | ✅ | `guidance.md` + `datasets-and-descriptions.md` |
 | Has a downloads page | ✅ | `downloads.md` |
 | Has one or more pages defining the normative content | ✅ | the Conformance section (4 pages) |
-| **Security and Privacy Considerations section** | ✅ | `security-and-privacy.md` — ships with the required structure (privacy principles, security considerations, module conformance requirements, residual risks); **fill the `[TODO]` blocks** 📝 |
+| **Security and Privacy Considerations section** | ✅ | `security-and-privacy.md` — ships pre-structured (privacy principles, security considerations, module conformance requirements, residual risks); **fill the `[TODO]` blocks** 📝 |
 | Index page starts with an accessible explanation of the IG's purpose | ✅ / 📝 | `index.md` opens with *Introduction* + *Target audience*; replace the `[TODO]` with your module's purpose in lay terms |
-| Explains what `mustSupport` means for this IG | ✅ | `must-support.md` ships the MII-standard server/client expectations |
+| Explains what `mustSupport` means for this IG | ✅ | `must-support.md` restates the server/client expectations of the meta wiki (S8) |
 | Explains prerequisite knowledge (FHIR basics, SHALL/SHOULD/MAY, the domain) | ✅ | `general-requirements.md` (conformance verbs) + `docs/glossary.md`; link further reading from `guidance.md` 📝 |
 | Says how to engage with the community — durable for 5+ years | ✅ | `index.md` → *Contact*: `chat.fhir.org` stream `german/mi-initiative` + the repo's GitHub issues |
 | Explains the relationship to other guides **and references the IG registry** | ✅ / 📝 | `index.md` → *Related guides* links the [FHIR IG Registry](https://fhir.org/guides/registry/); add your module's formal dependencies |
-| Prefer single larger pages over many tiny ones | 📝 | The page set is the MII-standard structure; keep related content together rather than splitting further |
+| Prefer single larger pages over many tiny ones | 📝 | The page set mirrors `kerndatensatz-basis` plus this scaffold's own Security-and-Privacy page. It is a starting point your module owns and may change (see [page-structure.md](page-structure.md)), not a fixed MII page set |
 | Good anchor names on pages | 📝 | Use explicit headings; the Publisher generates version-specific anchors otherwise |
 
 ## 2. Writing and narrative (S1, S2)
@@ -50,6 +54,7 @@ scaffold gives you the place and a prompt) · ➖ not applicable.
 | Uses the defined narrative styles where appropriate (`stu-note`, `dragon`, …) | 📝 | Available from the template; use `{:.stu-note}` / `{:.dragon}` for open issues and warnings |
 | Intros/notes on artifacts | 📝 | Put `StructureDefinition-<id>-intro.md` / `-notes.md` in `input/intro-notes/` (wired via `path-pages`) |
 | Rationale for controversial design decisions is captured | 📝 | Record it in the artifact's notes or in `guidance.md` |
+| Normative sentences are machine-readably marked | ✅ / 📝 | Normative sentences on the English pages carry `§<page>-<n>:…§` markers; `conformance.md` ends with a paragraph of only `§§§`, which the Publisher renders as the statement table. Markers are English-only — [why](open-tasks.md#verified-by-observation-not-by-specification). How to write one: the author note in `input/pagecontent/conformance.md` |
 
 ## 3. Images and diagrams (S1)
 
@@ -111,46 +116,15 @@ scaffold gives you the place and a prompt) · ➖ not applicable.
 
 ---
 
-## Open decisions (not yet made)
+## Before every release — this scaffold's own check
 
-One conformance question was open and is now decided; the language question
-below remains a project-level call.
-
-### 1. Machine-readable conformance statements — DECIDED (2026-07-26)
-
-**Adopted, with an English-only statement list**, the same way
-[kerndatensatz-basis](https://github.com/medizininformatik-initiative/kerndatensatz-basis)
-does it.
-
-Normative sentences in the English (default) pages are wrapped in
-`§<page>-<n>:…§`, and `conformance.md` ends with a paragraph containing only
-`§§§`, which the IG Publisher replaces with a table of the collected statements.
-The German mirror carries **no** markers and instead notes that the list is
-available in the English rendering.
-
-> **On the expectation column:** the rendered table shows an expectation
-> (`SHALL`, `SHOULD`, `MAY`) next to each statement, apparently read from the
-> English keyword in the sentence. That is *observed behaviour of the build, not
-> documented in HL7's* [ig-guidance](https://build.fhir.org/ig/FHIR/ig-guidance/conformance-statements.html),
-> which describes the markers and the table but names no expectation column. We
-> have not tested whether a German-marked statement classifies. English-only
-> markers avoid the question rather than answer it.
-
-Statements are a **curated set** of real obligations, not every sentence that
-happens to contain a bold verb. When you add one, give it the next free id on
-that page and keep the sentence self-contained — it is displayed out of context
-in the table.
-
-### 2. Which language leads the normative text
-
-The MII wiki is German, while this template — like kerndatensatz-basis and the
-wider FHIR ecosystem — leads the guide in English. Which language carries the
-modules' *normative* text is a project-level decision, not something a template
-should silently settle.
-
----
-
-## Before every release
+None of this is an MII release gate. What the MII publishes for a KDS module is
+the [KDS governance, v4.0 (7 May 2026)](https://www.medizininformatik-initiative.de/sites/default/files/2026-07/KDS-Governance-v4.pdf)
+and the [Module Release Workflow](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow)
+in the meta wiki; neither makes an item below a condition of releasing. The gates
+that really stop a release here are the MII reusable validation workflow and, on
+a release branch, `convention-check` (see [release.md](release.md)). The rest is
+what this scaffold recommends:
 
 1. Every `[TODO]` prompt is resolved in **both** page trees —
    `grep -rn '\[TODO' input/pagecontent input/translations` must come back
@@ -158,7 +132,11 @@ should silently settle.
    translation ships to `/de/` just as visibly. (The scaffold's HTML authoring
    comments mention `[TODO ...]` too; those comments are meant to be deleted —
    see `input/pagecontent/index.md`.)
-2. `security-and-privacy.md` is filled in — it is a best-practice requirement, not optional.
-3. QA errors = 0 and no unreviewed entries in `input/ignoreWarnings.txt`.
+2. `security-and-privacy.md` is filled in. HL7's guidance recommends a
+   security-and-privacy section and this scaffold ships the page pre-structured;
+   whether an unfilled section blocks your release is your project's decision.
+3. Read `output/qa.html` and `input/ignoreWarnings.txt`. This scaffold aims for 0
+   QA errors and no unreviewed ignore entries; the authoritative error gate
+   remains the reusable validation workflow.
 4. `convention-check` passes on the release branch.
 5. Both languages render: menu, footer and pages (see the translation recipe).

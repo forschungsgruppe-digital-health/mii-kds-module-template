@@ -1,7 +1,7 @@
 # Further reading
 
-A curated, verified reading list. Each entry says **why** you would read it. Links
-were checked when this file was written; if one moves, search its title.
+A curated reading list of the specifications, wiki pages and tools this template
+and its modules build on. If a link moves, search its title.
 
 ## MII — the rules this template and its modules follow
 
@@ -22,8 +22,7 @@ is authoritative; when it and this repo disagree, the wiki wins.
 - [Dev Container ‐ IG Publisher](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Dev-Container-‐-IG-Publisher)
   — the dev-container approach this repo aligns with.
 - [Release 2027](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Release-2027)
-  — evidence that the KDS is maintained past 2026; the post-funding horizon this
-  repo is built for.
+  — the planned scope and schedule of the next KDS release.
 
 ## FHIR, IG Publisher and authoring
 

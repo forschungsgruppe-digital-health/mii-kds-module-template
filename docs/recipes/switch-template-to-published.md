@@ -8,13 +8,11 @@ published** MII template package
 visible.
 
 > **Why the module starts vendored:** the IG Publisher needs a template to
-> build, but the published package `de.medizininformatikinitiative.template`
-> initially had **no FHIR package-registry entry and no release**. So the
-> template scaffold ships the template *content* copied into `ig-template/` and
-> references it as a local folder. That lets a module build on day
-> one. This recipe is the one-time cleanup you run once the template is
-> published — after it, your module tracks a versioned dependency like every
-> other package, and the scheduled dependency checker proposes upgrades for you.
+> build, and while the template package has no registry entry a module cannot
+> reference one — see [concepts.md § 2](../concepts.md#2-how-it-references-the-mii-template--vendored-vs-published)
+> and [project-status.md](../project-status.md) for whether it is published yet.
+> After this cleanup your module tracks a versioned dependency like every other
+> package, and the scheduled dependency checker proposes upgrades for you.
 
 **Prerequisites.** The template repository has cut a release **and** that release
 resolves for the IG Publisher (see below). Your module must build green before
@@ -23,7 +21,7 @@ you start, so you can tell the switch apart from an unrelated breakage.
 ## When you do this
 
 Do this **once**, as soon as the template repository
-[`medizininformatik-initiative/ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)
+[`medizininformatik-initiative/ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds)
 has cut its first release **and** that release is resolvable by the IG Publisher
 (see the prerequisite below). Before that point, keep the vendored copy — a
 published reference that cannot be resolved makes the build fail.
@@ -35,11 +33,12 @@ Please — *not* CalVer (only modules use CalVer). Find the exact number to pin,
 in order of preference:
 
 1. **The template repo's Releases page** —
-   <https://github.com/medizininformatik-initiative/ig-template-mii-kds/releases>.
+   <https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds/releases>.
    Use the latest non-prerelease tag, e.g. `0.1.0` (drop the leading `v` in
    `ig.ini`; the reference is `de.medizininformatikinitiative.template#0.1.0`).
-2. **The template's `package-list.json`** (in that repo) — the newest entry with
-   `"status"` other than `"ci-build"` is the published version.
+2. **The template's `package-list.json`** (in that repo) — only once a formal
+   publication has added a released entry; today it holds a single `ci-build`
+   row, so this source answers nothing until then.
 3. **The FHIR package registry** —
    `https://packages.fhir.org/de.medizininformatikinitiative.template` lists the
    published versions once the template is registered there.
@@ -48,19 +47,26 @@ in order of preference:
 > rebuild byte-stable. The convention check rejects a template
 > pinned to `current`/`latest`/`dev`, and the dependency checker
 > (`scripts/check-updates.mjs`, which already watches
-> `de.medizininformatikinitiative.template`) surfaces newer template releases as
-> reviewable PRs — you never need a floating pin to stay current.
+> `de.medizininformatikinitiative.template`) surfaces newer template releases
+> in the continuously-updated dependencies tracking issue — you never need a
+> floating pin to stay current.
 
-- The published template is **resolvable by the IG Publisher** — the template
-  repo has published the package to the FHIR package registry and/or registered
-  it in [`FHIR/ig-registry`](https://github.com/FHIR/ig-registry)'s
-  `templates.json` (the template repo owns that registration). Quick
-  check: the registry URL above returns the version you intend to pin (HTTP 200,
-  not 404).
+- The published template is **resolvable by the IG Publisher**. For a
+  version pin (`template = de.medizininformatikinitiative.template#x.y.z`) the
+  Publisher resolves **only** through the FHIR package server — the package
+  must exist on `packages.fhir.org`; registration in
+  [`FHIR/ig-registry`](https://github.com/FHIR/ig-registry)'s `templates.json`
+  is a directory listing, **not** an alternative resolution path
+  (`TemplateManager.loadPackage`: `#folder` → local directory, `id`/`id#ver` →
+  package server, GitHub URL → zip; nothing reads `templates.json`). Quick
+  check: the registry URL above returns the version you intend to pin
+  (HTTP 200, not 404). Until the package is on the package server, the
+  supported alternatives are the vendored folder you already have, or a GitHub
+  URL reference.
 - Your module already builds green today against the vendored template (so you
   have a clean baseline to compare against).
 - `sushi` (`3.20.0`), the IG Publisher jar (`2.2.11`), and `jq` are available —
-  the dev container has all three. Or simply push the branch and let the
+  the dev container has all three. Or push the branch and let the
   `IG build and preview` workflow build it for you.
 
 ## Steps
@@ -147,7 +153,7 @@ in order of preference:
 | Symptom | Cause | Fix |
 |---|---|---|
 | Publisher aborts: `Unable to resolve template de.medizininformatikinitiative.template#x.y.z` | The template is not yet published/registered, or the version does not exist | Confirm the registry URL returns that version (prerequisite); if it 404s, the template repo has not published it yet — revert to the vendored `#ig-template` and wait |
-| Build works but the MII branding disappeared | You deleted `ig-template/` but `ig.ini` still says `template = #ig-template` (now a dangling local folder) | Make sure step 2 (edit) happened before/with step 3 (delete); the Publisher silently builds an unbranded IG if the local folder is missing |
+| Build fails with `Unable to load template source from #ig-template` | You deleted `ig-template/` but `ig.ini` still says `template = #ig-template` (now a dangling local folder) | Make sure step 2 (edit) happened before/with step 3 (delete) — the Publisher fails loudly on a missing `#folder`, so this is caught at the next build |
 | Convention check fails on the template line | You pinned `#current` / `#latest` / left a `TODO` | Pin an exact SemVer `x.y.z` from the template repo's release |
 | QA error count jumped after the switch | The published release differs from the vendored commit (a newer template version, or the vendored copy had local edits) | Expected if you jumped versions — read the template repo's CHANGELOG for the delta; if you had edited `ig-template/` locally (you should not have), reconcile those edits upstream first |
 | `git rm -r ig-template` says "did not match any files" | Already deleted, or you are not at the repo root | Run from the module root; confirm with `ls ig-template` |

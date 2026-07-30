@@ -2,10 +2,10 @@
 <!-- Deutsche Übersetzung der Standardsprachseite
      input/pagecontent/conformance.md — beide Dateien müssen dasselbe aussagen
      und dieselben Unterseiten aufführen wie die beiden Menü-Dateien.
-     Die ERSTEN DREI Unterseiten sind der MII-Standardsatz (Quelle:
-     MII-Meta-Wiki "Conformance",
+     Die ERSTEN DREI Unterseiten tragen die Konformitätsthemen der Seite
+     "Conformance" des MII-Meta-Wikis,
      https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance;
-     Aufbau wie kerndatensatz-basis input/pagecontent/conformance.md).
+     Aufbau wie kerndatensatz-basis input/pagecontent/conformance.md.
      "Sicherheit und Datenschutz" ist eine Ergänzung dieser Vorlage gemäß den
      HL7-IG-Best-Practices — siehe docs/ig-best-practices-checklist.md. -->
 
@@ -25,9 +25,12 @@ Profile des Moduls **{{MODULE_TITLE}}** umsetzen.
 * **[Sicherheit und Datenschutz](security-and-privacy.html)** — die
   Sicherheits- und Datenschutzbetrachtungen dieses Moduls.
 
-Verbindlich sind die Festlegungen des
-[MII-Meta-Wikis](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance);
-die Seiten dieses Abschnitts geben sie wieder.
+Maßgeblich für die MII-weiten Konformitätsregeln ist die Seite
+[Conformance](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance)
+des MII-Meta-Wikis. Allgemeine Anforderungen, Must-Support und Umgang mit
+fehlenden Daten geben sie für dieses Modul wieder; bei Abweichungen gilt das
+Wiki. Sicherheit und Datenschutz ist eine zusätzliche Seite dieses Leitfadens
+gemäß den HL7-IG-Best-Practices.
 
 Hinweise zur Umsetzung stehen im Abschnitt [Anleitung](guidance.html), die
 technischen Artefakte im Abschnitt [Artefakte](artifacts.html).
@@ -40,7 +43,11 @@ technischen Artefakte im Abschnitt [Artefakte](artifacts.html).
 > Paragraphenzeichen — und daraus erzeugt der IG-Publisher die Übersichtstabelle
 > am Ende der englischen Fassung dieser Seite. Die Syntax steht im Original in
 > `input/pagecontent/general-requirements.md`. Diese deutsche Fassung trägt
-> bewusst keine Markierungen.]
+> bewusst keine Markierungen.
+>
+> Halten Sie die Menge **kuratiert** — markieren Sie echte Verpflichtungen,
+> nicht jeden Satz mit einem fett gesetzten Verb — und formulieren Sie jeden
+> markierten Satz für sich verständlich: die Tabelle zeigt ihn ohne Kontext.]
 
 ---
 

@@ -21,7 +21,10 @@ say "go" — none should be done by an agent.
 | Run the first production `-go-publish` | A maintainer, deliberately | The workflow is manual-dispatch only and dry-run by default. **An agent must never trigger it.** See [cut-a-release](recipes/cut-a-release.md). |
 | Store the SU-TermServ client certificate as repository secrets | A maintainer with the certificate | The procedure is written and the handshake was verified locally against the live server. See [secrets](secrets.md); run `scripts/set-su-termserv-secrets.sh`. Without it, builds fall back to `tx.fhir.org`. |
 | Store the Zulip announcement key | A maintainer | See [secrets](secrets.md). Release announcements stay silent until then. |
+| Decide how the Java-validation job gets its `package.json` | A maintainer (design decision) | The pinned upstream `ci_java_validation.yml` reads IG dependencies from a repo-root `package.json` this scaffold deliberately does not ship, so the job fails on a created module even with the certificate. Options: ship a parameterized `package.json` mirroring `sushi-config.yaml` `dependencies:` (adds a drift surface — it would join the release checklist), ask upstream to read `sushi-config.yaml`, or leave the job to the .NET QC only. Until decided, the job is gated on the SU-TermServ certificate and its failure mode is documented in `docs/release.md`. |
 | Decide who owns the template after 2026 | TF KDS | Currently "the MII, for now". |
+| Name a code owner, a security contact and a conduct-report contact | The owning organisation | All three are deliberately unnamed while this is a prototype: no individual speaks for the MII, and the MII Geschäftsstelle must not be given as the contact for a repository it does not own. `.github/CODEOWNERS` therefore lists no owner (reviews are requested by hand), [SECURITY.md](../SECURITY.md) names no fallback address, and [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) routes reports through GitHub. Set all three to a **team**, not a person, when the repositories move to the `medizininformatik-initiative` organisation. |
+| Decide which language carries a module's *normative* text | TF KDS | The MII wiki is German; this template, like `kerndatensatz-basis` and the wider FHIR ecosystem, renders English by default and German as the translation. Which of the two is *normative* is a project-level call, not something a template settles silently. Nothing is blocked meanwhile — both languages render. |
 
 ## To raise upstream
 
@@ -58,8 +61,8 @@ should re-check them.
 
 ## Rendered pages never hard-code this repository's URL
 
-The two template repositories do not exist under `medizininformatik-initiative`
-yet — they move there once the drafts are approved. Until then any link to their
+The two template repositories exist under `medizininformatik-initiative` only
+as empty placeholders — the content moves there once the drafts are approved. Until then any link to their
 target-organisation URL resolves nowhere, and a built IG is read by people who
 cannot know that.
 

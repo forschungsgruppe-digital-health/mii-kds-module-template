@@ -11,14 +11,6 @@ machine. Everything runs inside a container that VS Code builds for you.
 > **Reopen in Container**. This follows the MII meta wiki page
 > ["Dev Container ‐ IG Publisher"](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Dev-Container-%E2%80%90-IG-Publisher).
 
-> **Why this dev container is identical to the one in
-> [`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds):**
-> the template package and the modules built from it must agree on the
-> toolchain. Two dev containers drifting apart (different Java, SUSHI, or
-> Jekyll versions) is a maintenance trap — a module would build in one
-> environment and fail in the other. The pins are kept byte-for-byte aligned
-> and are bumped in both repos in the same sweep.
-
 **Prerequisites.** Three things on your machine — plus `git` and network
 access (the first build downloads the base image and tools):
 
@@ -32,7 +24,7 @@ access (the first build downloads the base image and tools):
 ## Steps
 
 1. Create your module repository from this template: on
-   [the template's GitHub page](https://github.com/medizininformatik-initiative/mii-kds-module-template)
+   [the template's GitHub page](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template)
    click **"Use this template" → "Create a new repository"**.
    Mind the warning in the `README.md`: tick **"Include all branches"** (or
    run the first-run bootstrap afterwards) so your repository gets the `dev`
@@ -88,7 +80,15 @@ access (the first build downloads the base image and tools):
 
    Each command must print the version shown in the comment.
 
-7. Run SUSHI to compile the module's FSH sources into FHIR resources:
+7. **Replace the `{{PLACEHOLDER}}` values first — SUSHI cannot compile
+   them.** In a new module, work through the placeholder list in the
+   `sushi-config.yaml` header (`id: mii-ig-{{MODULE_SLUG}}` is not a valid id
+   until you do). On a clone of the template repo itself there is nothing to
+   replace permanently: substitute throwaway values locally and do not commit
+   them — CI does the same for its self-check build
+   (`.github/workflows/ig-publisher.yml`, workspace-only substitution).
+
+   Then run SUSHI to compile the module's FSH sources into FHIR resources:
 
    ```sh
    sushi .

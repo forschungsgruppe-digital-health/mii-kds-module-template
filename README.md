@@ -6,7 +6,7 @@ Implementation Guide**. Click *Use this template* and you get a working IG proje
 up — so you can start with profiles and content instead of setup.
 
 The MII look comes from the separate IG template
-[`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds),
+[`ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds),
 which this scaffold references (and keeps up to date automatically).
 
 > **Status: prototype.** Usable and released, but pending discussion in the MII
@@ -37,7 +37,8 @@ which this scaffold references (and keeps up to date automatically).
    counterparts in `input/translations/de/pagecontent/`).
    → [add a profile](docs/recipes/add-a-profile.md)
 6. **Build it**: `sushi .`, then run the IG Publisher, then read `output/qa.html`.
-   Or just push a branch — CI builds it and comments the preview URL on your PR.
+   Or push a branch — CI builds it and comments the preview URL on your PR
+   (one-time: enable GitHub Pages first — [publish the preview](docs/recipes/publish-the-preview-on-github-pages.md), else every preview URL 404s).
 7. **Release** with CalVer via the MII Module Release Workflow.
    → [cut a release](docs/recipes/cut-a-release.md)
 
@@ -58,22 +59,20 @@ Unfamiliar terms are in the [glossary](docs/glossary.md).
 | `docs/` | Guides and step-by-step recipes |
 | `tests/` | FHIR validation test cases the build runs — see [tests/README.md](tests/README.md) |
 | `scripts/` | Helper scripts (first-run bootstrap, template sync, convention check, …) — see [scripts/README.md](scripts/README.md) |
-| `skills/` | Vendor-neutral agent skills: `ig-analyze`, `ig-translate`, `wiki-consistency-check` — see [AGENTS.md](AGENTS.md#skills) |
+| `skills/` | Vendor-neutral agent skills: `docs-steward`, `ig-analyze`, `ig-translate`, `wiki-consistency-check` — see [AGENTS.md](AGENTS.md#skills) |
 | `.github/workflows/` | CI: build, preview, validation, release |
 
 ## Documentation
 
-- [Recipes](docs/recipes/) — step-by-step for the common tasks, including authoring guidance:
-  [render profiles](docs/recipes/render-profiles.md) ·
-  [describe examples](docs/recipes/describe-examples.md) ·
-  [UML diagrams](docs/recipes/add-uml-diagrams.md) ·
-  [information models](docs/recipes/model-information-models.md)
-- [Glossary](docs/glossary.md) · [Concepts](docs/concepts.md) — the vocabulary and the ideas behind it
-- [Page structure](docs/page-structure.md) — who owns the page set and the menu (your module, not the IG template)
-- [Workflows](docs/workflows.md) — what the CI does, and how releases work
-- [IG best-practices checklist](docs/ig-best-practices-checklist.md) — the official HL7 practices, and what you still need to fill in
-- [Secrets](docs/secrets.md) — optional: MII terminology server, release announcements
-- [Open tasks](docs/open-tasks.md) — what is unfinished, and why
+**[docs/](docs/README.md) is the index** — every guide, with a reading order for
+newcomers. The three you are most likely to want first:
+
+- [Recipes](docs/recipes/) — step-by-step for the common tasks
+- [Create a new module](docs/recipes/create-a-new-module.md) — the path from *Use this template* to a module that builds
+- [Project status](docs/project-status.md) — prototype; what that means in practice
+
+Contributing and policies: [CONTRIBUTING.md](CONTRIBUTING.md) ·
+[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) · [SECURITY.md](SECURITY.md)
 
 ## Getting help
 

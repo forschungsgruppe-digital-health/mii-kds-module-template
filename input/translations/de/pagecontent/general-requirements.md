@@ -6,9 +6,10 @@
      "Conformance" des MII-Meta-Wikis
      (https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance),
      aus der die Verb-Tabelle wörtlich stammt.
-     Die Verb-Tabelle und die MII-weiten Regeln gelten unverändert für JEDES
-     Modul — bitte nicht kürzen oder umformulieren. Ergänzen Sie darunter die
-     Anforderungen Ihres Moduls. -->
+     Die Verb-Tabelle und die MII-weiten Regeln wörtlich zu übernehmen ist der
+     sicherste Weg — eine umformulierte Konformitäts-Verbform ändert ihre
+     Verbindlichkeit —, prüfen Sie eine Änderung daher zuerst gegen das Wiki
+     (maßgeblich). Ergänzen Sie darunter die Anforderungen Ihres Moduls. -->
 
 ### Allgemeine Anforderungen
 

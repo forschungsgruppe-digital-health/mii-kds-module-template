@@ -1,4 +1,4 @@
-# Secrets & variables — enabling the gated features (F + G)
+# Secrets & variables — enabling the gated features
 
 A module built from this template builds and previews **without any secrets** (it
 uses the public HL7 terminology server; announcements skip cleanly). This page
@@ -34,14 +34,11 @@ all four — you never store the certificate twice.
 ### What kind of certificate is required
 
 SU-TermServ authenticates clients with **mutual TLS**. Verified against the live
-server on 2026-07-26 (`openssl s_client` to `ontoserver.mii-termserv.de:443`):
+server (`openssl s_client` to `ontoserver.mii-termserv.de:443`):
 
-- The server **requests** a client certificate and advertises the CAs it accepts.
-- That list includes the **German academic PKI** — DFN-Verein (Global Issuing CA,
-  Community Issuing/Root CA 2022), **GÉANT** (OV/EV/Personal, and
-  `GEANT S/MIME RSA 1` / `GEANT TLS RSA 1` via HARICA), Sectigo/USERTrust,
-  T-TeleSec — **and SU-TermServ's own CA** (`ca.mii-termserv.de`,
-  `intermediate.ca.mii-termserv.de`).
+- The server **requests** a client certificate and advertises the CAs it accepts
+  — the German academic PKI (DFN, GÉANT/HARICA) among them, and SU-TermServ's
+  own CA. Ask the server itself if you need the current list.
 - The certificate needs the **`TLS Web Client Authentication`** extended key
   usage.
 - Without a client certificate the endpoint answers **HTTP 400**.
@@ -122,8 +119,10 @@ Three traps that each cost a failed CI run — all handled by the helper script:
 ### Rotating or revoking
 
 Re-run the helper with the new certificate — `gh secret set` overwrites. To turn
-the integration off again, delete the three secrets; the build falls back to
-`tx.fhir.org` on the next run with a `::notice`. Note the expiry date: an expired
+the integration off again, delete the three secrets; the preview and publish
+builds fall back to `tx.fhir.org` on the next run with a `::notice`, and the
+HL7 Java validator job **skips** (its upstream workflow has no fallback —
+without the certificate it would fail, not fall back). Note the expiry date: an expired
 certificate fails the handshake, so rotate before `notAfter`.
 
 ## Simplifier login (the .NET validation job)
@@ -171,7 +170,7 @@ Both gates are *wired and fall back safely*, but until the credential exists the
 log of the terminology step. Enabled and working looks like
 `SU-TermServ client certificate present — starting a local client-cert nginx proxy`
 followed by a green build; not configured looks like
-`No SU-TermServ credential — falling back to the public HL7 terminology server`.
+`No SU-TermServ client certificate configured — falling back to the public HL7 terminology server https://tx.fhir.org`.
 If the proxy fails to start, the step fails loudly rather than silently
 mis-expanding value sets — re-check that the cert/key are **base64-encoded** and
 that the key password is correct.
@@ -181,36 +180,13 @@ without waiting for the next one, cut a throw-away pre-release in a scratch repo
 or check the job log of the most recent release run — it prints either the
 delivered message or the explicit skip notice naming what is missing.
 
-## CI toggles (variables — all default correctly when unset)
+## CI toggles
 
-| Variable | Default (unset) | Effect |
-| --- | --- | --- |
-| `ENABLE_PREVIEW` | on | IG build + preview + cleanup |
-| `ENABLE_VALIDATION` | on | MII reusable validation |
-| `ENABLE_CONVENTION_CHECK` | on | metadata-contract + wiki-drift check |
-| `ENABLE_TEMPLATE_SYNC` | on | vendored `ig-template/` sync + the PR-time drift check |
-| `ENABLE_MODULE_RELEASE` | on | CalVer release workflow |
-| `ENABLE_ZULIP_ANNOUNCE` | on | MII Zulip announcement (see above) |
-| `ANNOUNCE_PUBLIC_ZULIP` | off | public FHIR Zulip announcement — **template repo only** |
-| `FHIR_ZULIP_BOT_EMAIL` | unset | sender for the public FHIR Zulip — **template repo only** |
-| `MII_ZULIP_BOT_EMAIL` | `kds-github-bot@mii.zulipchat.com` | sender for the MII Zulip — **template repo only** |
-| `ENABLE_DEPENDENCY_CHECK` | on | weekly version-drift check |
-| `ENABLE_SECURITY_SCAN` | on | OSV + Trivy |
-| `PAGES_ACTIONS_ENABLED` | (gh-pages push mode) | switch preview deploy to the Actions Pages path |
-
-The [toggle summary](workflows.md#the-toggle-summary) lists one more,
-`ENABLE_RELEASE_PLEASE`. It belongs to the template repository only — the
-first-run bootstrap deletes `release-please.yml`, so it has no effect in a
-module. The three rows marked **template repo only** above are the same case:
-their only consumer is `notify-zulip.yml`, which the bootstrap also deletes, so
-a module's announcement is governed by `ZULIP_API_KEY` and
-`ENABLE_ZULIP_ANNOUNCE` alone. `IG_TEMPLATE_REPO_URL` is a plain variable, not a
-toggle; see
-[recipes/first-run-setup.md](recipes/first-run-setup.md) step 5. `SUSHI_VERSION`
-and `JAVA_VALIDATOR_VERSION` are likewise plain variables, not toggles — they
-override the versions `validation.yml` passes to the MII reusable workflows;
-unset means the pinned defaults in that workflow (see
-[maintenance.md](maintenance.md#where-each-pin-lives-single-source-of-truth)).
+The variables live in one place: the
+[toggle summary in workflows.md](workflows.md#the-toggle-summary), which lists
+every pipeline switch in both layers with its default. Only one of them
+interacts with a secret on this page — `ENABLE_ZULIP_ANNOUNCE=false` silences
+the announcement even when `ZULIP_API_KEY` is set.
 
 Production publication (`go-publish.yml`) always stays a **manual, gated**
 `workflow_dispatch` with `publish:false` (dry run) by default — never automatic.

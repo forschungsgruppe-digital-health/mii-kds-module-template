@@ -6,8 +6,8 @@
      (https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance).
      German mirror: input/translations/de/pagecontent/must-support.md — both
      files must say the same thing.
-     The expectations below are MII-wide and identical for every module. Change
-     them ONLY if your module deviates for a documented reason. -->
+     Read the wiki before changing the expectations below, and state the reason
+     for any deviation on the page itself. -->
 
 ### Must Support
 

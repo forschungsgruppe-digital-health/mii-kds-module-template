@@ -2,12 +2,12 @@
   "name": "de.medizininformatikinitiative.template",
   "type": "fhir.template",
   "license": "CC0-1.0",
-  "description": "MII IG template for Medizininformatik-Initiative KDS module Implementation Guides, derived from fhir2.base.template. fhir2.base.template is deliberately pinned to the fixed release 0.1.0 (never #current) for long-term reproducibility; version bumps arrive as reviewable PRs via the scheduled dependency checker.",
+  "description": "MII IG template for Medizininformatik-Initiative KDS module Implementation Guides, derived from fhir2.base.template. fhir2.base.template is deliberately pinned to the fixed release 0.1.0 (never #current) for long-term reproducibility; version bumps surface in the tracking issue maintained by the scheduled dependency checker.",
   "author": "Medizininformatik-Initiative (MII)",
   "canonical": "https://github.com/medizininformatik-initiative/ig-template-mii-kds",
   "base": "fhir2.base.template",
   "dependencies": {
     "fhir2.base.template": "0.1.0"
   },
-  "version": "0.2.0"
+  "version": "0.3.0"
 }

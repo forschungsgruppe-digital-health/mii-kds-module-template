@@ -8,8 +8,7 @@ This repo has **two lives**, and keeping them apart is essential:
   after "Use this template").
 
 Read both. A reader must never confuse "how this template repo releases itself" with
-"how a module I create releases itself." Details live in the linked docs; every
-non-obvious point carries a **Why**.
+"how a module I create releases itself." Details live in the linked docs.
 
 ## Branching (both layers)
 
@@ -48,10 +47,10 @@ Everything below **propagates** to a module (the bootstrap keeps it). This is ho
 
 | Workflow | Trigger | What it does | Output | Toggle (default) | Human-gated? |
 | --- | --- | --- | --- | --- | --- |
-| `ig-publisher.yml` | push to any branch except `main`/`gh-pages`; `workflow_dispatch` | Builds the IG (SUSHI + IG Publisher) and deploys a preview | `gh-pages/branches/<branch>/` + PR comment | `ENABLE_PREVIEW` (ON) | no |
+| `ig-publisher.yml` | push to any branch except `main`/`gh-pages`/`fsh-generated`; `workflow_dispatch` | Builds the IG (SUSHI + IG Publisher) and deploys a preview | `gh-pages/branches/<branch>/` + PR comment | `ENABLE_PREVIEW` (ON) | no |
 | `cleanup-gh-pages.yml` | schedule (Sun 00:00 UTC); `workflow_dispatch` | Prunes previews of deleted branches; keeps root + version paths | pruned `gh-pages` | `ENABLE_PREVIEW` (ON) | no |
 | `validation.yml` | push to `dev`/`main`; any pull request; `workflow_dispatch` | Runs the **MII reusable validation** workflows | validation report | `ENABLE_VALIDATION` (ON) | no (skips on the template repo itself) |
-| `convention-check.yml` | push/PR to `dev`/`main`/`release/**`; `workflow_dispatch` | The **single** convention checker: metadata-contract patterns (hard on release branches) + the language-model guard (`scripts/language-model-check.sh`) + the offline test suites (`scripts/*.test.mjs`, and on the template repo `scripts/*.template-test.mjs`) + wiki-drift (advisory) | check result | `ENABLE_CONVENTION_CHECK` (ON) | no |
+| `convention-check.yml` | push/PR to `dev`/`main`/`release/**`; `workflow_dispatch` | The **single** convention checker: metadata-contract patterns (hard on release branches) + the language-model guard (`scripts/language-model-check.sh`) + the offline test suites (`scripts/*.test.mjs`, and on the template repo `scripts/*.template-test.mjs`); the advisory wiki-drift review (Section 2 of the check matrix) is a human/agent job via the `wiki-consistency-check` skill, not part of this workflow | check result | `ENABLE_CONVENTION_CHECK` (ON) | no |
 | `module-release.yml` | push of a CalVer tag `vYYYY.n.n`; `release: published` (the announcement); `workflow_dispatch` (dry run) | Builds, creates the GitHub Release, announces to the MII Zulip (topic *Releases*), hands off to `go-publish` | release | `ENABLE_MODULE_RELEASE` (ON) · `ENABLE_ZULIP_ANNOUNCE` (ON) | production publish is gated |
 | `go-publish.yml` | `workflow_dispatch` **only** | Production `-go-publish`; `publish:false` = full dry run by default | published IG | — | **always human-triggered** |
 | `dependency-check.yml` | schedule (Mon 06:00 UTC); `workflow_dispatch` | Version drift (IG Publisher, SUSHI, Jekyll, both templates, FHIR deps) → one tracking issue | `dependencies` issue | `ENABLE_DEPENDENCY_CHECK` (ON) | proposals only |
@@ -81,9 +80,14 @@ Notes:
 
 ### The toggle summary
 
+The full inventory — every repository variable the workflows read, in both
+layers. All of them default correctly when unset; [secrets.md](secrets.md)
+covers the *secrets* that enable the gated features.
+
 | Pipeline | Variable | Default |
 | --- | --- | --- |
 | IG build + preview | `ENABLE_PREVIEW` | ON |
+| Preview deploy path | `PAGES_ACTIONS_ENABLED` | unset (gh-pages push mode) |
 | Reusable validation | `ENABLE_VALIDATION` | ON |
 | Convention check | `ENABLE_CONVENTION_CHECK` | ON |
 | Dependency check | `ENABLE_DEPENDENCY_CHECK` | ON |
@@ -92,8 +96,18 @@ Notes:
 | Module release (CalVer) | `ENABLE_MODULE_RELEASE` | ON |
 | Release Please (template only) | `ENABLE_RELEASE_PLEASE` | ON |
 | MII Zulip announcement | `ENABLE_ZULIP_ANNOUNCE` | ON |
-| Public FHIR Zulip announcement | `ANNOUNCE_PUBLIC_ZULIP` | OFF |
+| MII Zulip sender (template only) | `MII_ZULIP_BOT_EMAIL` | `kds-github-bot@mii.zulipchat.com` |
+| Public FHIR Zulip announcement (template only) | `ANNOUNCE_PUBLIC_ZULIP` | OFF |
+| Public FHIR Zulip sender (template only) | `FHIR_ZULIP_BOT_EMAIL` | unset |
 | Production `-go-publish` | manual `workflow_dispatch` + `publish:false` | OFF (gated) |
+
+The rows marked **template only** have no effect in a module: the bootstrap
+deletes `release-please.yml` and `notify-zulip.yml`, so a module's announcement
+is governed by `ZULIP_API_KEY` and `ENABLE_ZULIP_ANNOUNCE` alone.
+`IG_TEMPLATE_REPO_URL`, `SUSHI_VERSION` and `JAVA_VALIDATOR_VERSION` are plain
+variables, not toggles — the last two override the versions `validation.yml`
+passes to the MII reusable workflows, and unset means the pinned defaults there
+(see [maintenance.md](maintenance.md#where-each-pin-lives-single-source-of-truth)).
 
 ---
 
@@ -103,10 +117,6 @@ Notes:
 - **A module:** **CalVer** `YYYY.n.n` via the MII Module Release Workflow —
   see [release.md](release.md) and [recipes/cut-a-release.md](recipes/cut-a-release.md).
   A module has **no Release Please** after the bootstrap.
-
-> **Why one page with two layers:** post-2026 a new maintainer must be able to tell,
-> in one read, whether a given workflow maintains the template or ships in a module —
-> or the automation becomes an unowned black box.
 
 ## Secrets & enabling the gated features
 

@@ -95,9 +95,11 @@ function checkPrefixed(value, prefix, charClass) {
  * @param {string|null} inputs.igIni        raw ig.ini (or null)
  * @param {object|null} inputs.packageJson  parsed package/package.json (or null)
  * @param {boolean}     inputs.release      strict mode (placeholders fail)
+ * @param {boolean}     inputs.demoPagePresent  whether the scaffold's
+ *        demonstration page is still in the tree (release-mode failure)
  * @returns {{ findings: Array, ok: boolean }}
  */
-export function evaluate({ sushiConfig = null, igIni = null, packageJson = null, release = false } = {}) {
+export function evaluate({ sushiConfig = null, igIni = null, packageJson = null, release = false, demoPagePresent = false } = {}) {
   const findings = [];
   const add = (id, applies, status, observed, message) =>
     findings.push({ id, applies, status, observed, message });
@@ -171,6 +173,31 @@ export function evaluate({ sushiConfig = null, igIni = null, packageJson = null,
     add("Section 1a", "module", "skip", null, "no sushi-config.yaml found");
   }
 
+
+  // M8 — the scaffold's demonstration page must not reach a release. It is
+  // shipped so an author can see the artifact-rendering mechanisms working,
+  // and it renders THIS scaffold's starter artefacts, so publishing it in a
+  // real module ships someone else's example profile as if it were content.
+  // Development builds keep it: deleting it at creation would mean nobody
+  // ever reads it. Release is the moment it must be gone.
+  if (demoPagePresent) {
+    add(
+      "M8", "module", release ? "fail" : "pass",
+      "input/pagecontent/rendering-artifacts.md present",
+      release
+        ? "the demonstration page is still present on a release branch — remove all of: " +
+          "input/pagecontent/rendering-artifacts.md, " +
+          "input/translations/de/pagecontent/rendering-artifacts.md, " +
+          "the rendering-artifacts.md entry in sushi-config.yaml pages:, " +
+          "the menu entry in input/includes/menu.xml and " +
+          "input/translations/de/includes/menu.xml, " +
+          "the demo/ directory (its Liquid template), and the generator " +
+          "scripts/gen-rendering-demo.py with its demo-en.md, demo-de.md and " +
+          "rendering-demo-codes.json inputs"
+        : "demonstration page present — fine in development; it must be removed before a release",
+    );
+  }
+
   // ── Section 1b — template PACKAGE manifest (only when present) ──
   if (packageJson !== null) {
     const t1 = packageJson.name === "de.medizininformatikinitiative.template";
@@ -216,8 +243,13 @@ function main() {
   const igIni = readIfExists(join(args.root, "ig.ini"));
   const packageJsonRaw = readIfExists(join(args.root, "package", "package.json"));
   const packageJson = packageJsonRaw ? JSON.parse(packageJsonRaw) : null;
+  const demoPagePresent = existsSync(
+    join(args.root, "input", "pagecontent", "rendering-artifacts.md"),
+  );
 
-  const { findings, ok } = evaluate({ sushiConfig, igIni, packageJson, release: args.release });
+  const { findings, ok } = evaluate({
+    sushiConfig, igIni, packageJson, release: args.release, demoPagePresent,
+  });
 
   const mode = args.release ? "release (strict)" : "development (placeholder-tolerant)";
   const lines = [];

@@ -8,7 +8,7 @@
 #   exists only while the two template repositories still live outside the
 #   target organisation. A module created from this template inherits the
 #   workflow but not the variable, so scripts/sync-ig-template.sh falls back to
-#   the target-org URL — which does not exist yet — and the module's very first
+#   the target-org URL — which exists only as an empty placeholder — and the module's very first
 #   PR goes red for a reason its author cannot act on.
 #
 #   This script probes the URL instead and reports the outcome, so the workflow
@@ -36,7 +36,11 @@ reachable=false
 # Never let git open a credential prompt — an unreachable or private URL must
 # fail fast here, not hang the job waiting for input.
 export GIT_TERMINAL_PROMPT=0
-if git ls-remote --heads "${url}" >/dev/null 2>&1; then
+# `git ls-remote --heads` exits 0 on an EMPTY repository (the target-org repos
+# exist as empty placeholders since 2026-07), so the exit status alone is not
+# enough: require at least one ref, because an empty repo is not a usable
+# template source and the sync would die at `git rev-parse HEAD`.
+if [ -n "$(git ls-remote --heads "${url}" 2>/dev/null)" ]; then
   reachable=true
   echo "Template source (${from}): ${url}"
 else

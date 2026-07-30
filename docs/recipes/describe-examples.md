@@ -5,18 +5,20 @@ and that validate.
 
 **Prerequisites.** A profile to exemplify ([add a profile](add-a-profile.md)).
 
-## Rules that are not negotiable
+## One hard rule, and two strong recommendations
 
-- **Synthetic data only.** Never real, and never realistic-looking patient data —
-  not even "anonymised" data. Use obviously artificial names, e.g.
+- **Hard rule — synthetic data only.** Never real, and never realistic-looking
+  patient data — not even "anonymised" data. This one follows from data
+  protection, not from this repository. Use obviously artificial names, e.g.
   `Max Mustermann-Testpatient`.
-- **Tag examples as test data.** The shipped example inserts the MII test-data
-  label (`v3-ActReason#HTEST`) via `input/fsh/rulesets/test-data-label.fsh`. Do
-  the same for yours — it marks the instance as test health data wherever it
-  travels.
-- **Do not declare `meta.profile`** unless implementers are genuinely expected to
-  populate it in production. The publisher validates the example against the
-  profile anyway (via `Usage: #example` and the `profile-test-cases` harness).
+- **Recommended — tag examples as test data.** kerndatensatz-basis marks its
+  examples with the test-data label `v3-ActReason#HTEST`, and this scaffold
+  copies that via `input/fsh/rulesets/test-data-label.fsh`; it marks the
+  instance as test health data wherever it travels.
+- **Recommended — do not declare `meta.profile`** unless implementers are
+  genuinely expected to populate it in production (HL7's IG best-practice
+  guidance). The publisher validates the example against the profile anyway (via
+  `Usage: #example` and the `profile-test-cases` harness).
 
 ## Steps
 

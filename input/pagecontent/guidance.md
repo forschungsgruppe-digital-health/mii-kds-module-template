@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD041 -->
 <!-- Source: kerndatensatz-basis input/pagecontent/guidance.md (MII module page set).
      "Guidance" overview page. Replace the [TODO] prompts; the sub-page structure
-     follows the MII standard. German mirror:
+     follows kerndatensatz-basis. German mirror:
      input/translations/de/pagecontent/guidance.md — keep both in step. -->
 
 This section collects the domain guidance for implementing and using the

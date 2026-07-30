@@ -19,6 +19,11 @@ CI by `.github/workflows/convention-check.yml`.
 > **This section is the metadata contract.** It is deliberately a small,
 > fixed list. Do not grow it casually, and do not duplicate it in a second
 > linter — this matrix is the single source of truth.
+>
+> Rows marked *wiki* restate a rule from the MII meta wiki (that page is
+> authoritative — cite it, not this table). Rows marked *local* are this
+> project's own preference; a module that does otherwise is not violating an
+> MII rule.
 
 ### 1a. Assertions for MODULE IGs (do **not** apply to template package repos)
 
@@ -29,13 +34,14 @@ pin). Reference values verified against
 
 | # | Assertion | Where | Rule | Verified reference value |
 |---|-----------|-------|------|--------------------------|
-| M1 | `packageId` matches the MII KDS namespace | `sushi-config.yaml` → `packageId` | `^de\.medizininformatikinitiative\.kerndatensatz\.[a-z0-9-]+$` | `de.medizininformatikinitiative.kerndatensatz.base` |
-| M2 | `id` is kebab-case with the `mii-ig-` prefix | `sushi-config.yaml` → `id` | `^mii-ig-[a-z0-9-]+$`, ≤ 64 chars | `mii-ig-base` |
-| M3 | `name` is Upper_Snake_Case with the `MII_IG_` prefix | `sushi-config.yaml` → `name` | `^MII_IG_[A-Za-z0-9_]+$` | `MII_IG_Base` |
-| M4 | `title` follows the wiki title structure | `sushi-config.yaml` → `title` | Starts with `MII ` and names the module (wiki: `MII <Präfix> <Abkürzung Modulname> <Beschreibung>`) | `MII Implementation Guide Core Dataset Base` |
-| M5 | `canonical` is under the agreed MII path | `sushi-config.yaml` → `canonical` | `^https://www\.medizininformatik-initiative\.de/fhir/<technischer Modulname>$` — technical module name per the wiki table in "Namenskonventionen für FHIR‐Ressourcen in der MII" | `https://www.medizininformatik-initiative.de/fhir/modul-base` |
-| M6 | `version` is CalVer | `sushi-config.yaml` → `version` | `^\d{4}\.\d+\.\d+$` (`YYYY.n.n`; modules never use SemVer) | `2026.0.1` |
-| M7 | No dependency — including the IG template — pinned to a floating label | `sushi-config.yaml` → `dependencies`; `ig.ini` → `template` | No `current`, `#current`, `latest`, `dev`, or `cibuild` anywhere; every dependency and the template use a fixed version | `kerndatensatz-basis` itself floats `template = fhir2.base.template#current` — a known upstream practice this project deliberately does **not** follow. Do not copy it, and do not "correct" a fixed pin back to `#current`. |
+| M1 | *wiki* — `packageId` matches the MII KDS namespace | `sushi-config.yaml` → `packageId` | `^de\.medizininformatikinitiative\.kerndatensatz\.[a-z0-9-]+$` | `de.medizininformatikinitiative.kerndatensatz.base` |
+| M2 | *wiki* — `id` is kebab-case with the `mii-ig-` prefix | `sushi-config.yaml` → `id` | `^mii-ig-[a-z0-9-]+$`, ≤ 64 chars | `mii-ig-base` |
+| M3 | *wiki* — `name` is Upper_Snake_Case with the `MII_IG_` prefix | `sushi-config.yaml` → `name` | `^MII_IG_[A-Za-z0-9_]+$` | `MII_IG_Base` |
+| M4 | *wiki* — `title` follows the wiki title structure | `sushi-config.yaml` → `title` | Starts with `MII ` and names the module (wiki: `MII <Präfix> <Abkürzung Modulname> <Beschreibung>`) | `MII Implementation Guide Core Dataset Base` |
+| M5 | *wiki* — `canonical` is under the agreed MII path | `sushi-config.yaml` → `canonical` | `^https://www\.medizininformatik-initiative\.de/fhir/<technischer Modulname>$` — technical module name per the wiki table in "Namenskonventionen für FHIR‐Ressourcen in der MII" | `https://www.medizininformatik-initiative.de/fhir/modul-base` |
+| M6 | *wiki* — `version` is CalVer | `sushi-config.yaml` → `version` | `^\d{4}\.\d+\.\d+$` (`YYYY.n.n`; modules never use SemVer) | `2026.0.1` |
+| M7 | *local* — no dependency — including the IG template — pinned to a floating label | `sushi-config.yaml` → `dependencies`; `ig.ini` → `template` | No `current`, `#current`, `latest`, `dev`, or `cibuild` anywhere; every dependency and the template use a fixed version | `kerndatensatz-basis` itself floats `template = fhir2.base.template#current` — a known upstream practice this project deliberately does **not** follow. Do not copy it, and do not "correct" a fixed pin back to `#current`. |
+| M8 | *local* — the scaffold's demonstration page does not reach a release | `input/pagecontent/rendering-artifacts.md` | On a `release/**` branch (or `--release`) the page and its generator files must be gone; present = hard fail. In development the row passes with a reminder | The check's failure message enumerates every file to remove |
 
 ### Placeholder-aware evaluation (this scaffold)
 
@@ -71,7 +77,7 @@ Base-template facts verified against
 | T2 | Package type | `package/package.json` → `type` | Exactly `fhir.template` | `fhir.template` |
 | T3 | Version scheme is **SemVer** | `package/package.json` → `version` | `^\d+\.\d+\.\d+$` — template repos release with SemVer/Release Please, never CalVer | e.g. `0.1.0` |
 | T4 | Base template pinned to a fixed version | `package/package.json` → `dependencies` | `"fhir2.base.template": "0.1.0"` — a fixed version, **never** `#current` | `0.1.0` |
-| T5 | No floating version labels anywhere | whole repo (manifests, `ig.ini`, CI) | No `current`, `latest`, or `dev` as a version label | — |
+| T5 | No floating version labels anywhere | whole repo (manifests, `ig.ini`, CI) | No `current`, `latest`, or `dev` as a version label. **Human-checked** — `convention-check.mjs` implements M7's file set only, not a whole-repo sweep | — |
 
 > **Why templates and modules diverge (M6/M7 vs. T3/T4):** the template repos
 > are *tooling* whose consumers pin a version — SemVer communicates breaking
@@ -91,8 +97,8 @@ Base-template facts verified against
 | Naming conventions (id) | `input/fsh/*.fsh` | Namenskonventionen → Element id | `id` kebab-case, ≤ 64 chars, corresponds to `name`? | Module |
 | Naming conventions (title) | `input/fsh/*.fsh` | Namenskonventionen → Element title | Pattern `MII <Präfix> <ModulAbk> <Beschreibung>`? | Module |
 | Naming conventions (url) | `sushi-config.yaml` canonical + artifacts | Namenskonventionen → Element url | `<canonical>/<ResourceType>/<id>` structure? Established published URLs are never changed retroactively (Bestandsschutz). | Module |
-| Language (content) | `sushi-config.yaml` (`i18n-default-lang`), `input/fsh` | Namenskonventionen → Sprache | Guide leads in English (`i18n-default-lang: en`, as kerndatensatz-basis); resource `description`/`name`/`title` may be German, and then a translation extension is required on them? | Module |
-| Language (template mechanism) | `includes/*.html`, `content/assets/css/` | Namenskonventionen → Sprache | Header/footer/CSS overrides language-neutral (`site.data.stringsBase[include.lang]`, no hard-coded UI strings)? See the `ig-translate` skill. | Template repo |
+| Language (content) | `sushi-config.yaml` (`i18n-default-lang`), `input/fsh` | Namenskonventionen → Sprache | Resource `description`/`name`/`title` may be German, and then a translation extension is required on them? Whether the guide leads in English (`i18n-default-lang: en`, as kerndatensatz-basis) is this project's reading of § Sprache, not a stated wiki rule — report the setting, do not call another choice a deviation. | Module |
+| Language (template mechanism) | `includes/*.html`, `content/assets/css/` | Namenskonventionen → Sprache | Do the header/footer/CSS overrides render correct text in every offered language? `site.data.stringsBase[include.lang]` is the default route; the footer's hard-coded label branch is a recorded deviation (the template repo's `docs/design.md` §5–§6), not a finding. See the `ig-translate` skill. | Template repo |
 | Terminology (versions) | terminology documentation, `sushi-config.yaml` | Terminology Version Policy | Dated SNOMED INTERNATIONAL version per CalVer release? | Module |
 | Terminology (instance data) | profiles/documentation | Terminology Version Policy | `Coding.version` required for ICD-10-GM/OPS/ATC? | Module |
 | CI (validation) | `.github/workflows/` | GitHub Reusable Validation Workflows | Are `ci_dotnet_validation.yml` + `ci_java_validation.yml` consumed via `workflow_call` (pinned to a fixed ref) instead of reimplemented? | Module |

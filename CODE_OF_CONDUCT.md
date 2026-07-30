@@ -1,6 +1,16 @@
 
 # Contributor Covenant Code of Conduct
 
+> **Status of this document.** The MII publishes no code of conduct — not in
+> the [KDS governance](https://www.medizininformatik-initiative.de/en/medical-informatics-initiatives-core-data-set),
+> not in the [meta wiki](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki),
+> and not as an organisation-level default. This file is therefore **this
+> prototype repository's own house rule**, adopted because a public repository
+> benefits from having one. It is not an MII policy and does not preview one;
+> what applies once these repositories move to the MII organisation is for the
+> MII Taskforce Kerndatensatz to decide.
+
+
 ## Our Pledge
 
 We as members, contributors, and leaders pledge to make participation in our community a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, caste, color, religion, or sexual identity and orientation.
@@ -37,7 +47,7 @@ This Code of Conduct applies within all community spaces, and also applies when 
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the community leaders responsible for enforcement at marcel.susky@tu-dresden.de. All complaints will be reviewed and investigated promptly and fairly.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the repository maintainers. While these repositories are prototypes they have **no published enforcement contact**: no individual is named here, because no individual speaks for the MII, and reports must not be routed to the MII Geschäftsstelle, which does not own these repositories. Until an owning organisation and its contact are settled (see [docs/open-tasks.md](docs/open-tasks.md)), report through GitHub — open a private security advisory on the repository, or use GitHub's own [report abuse](https://github.com/contact/report-abuse) route. All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the reporter of any incident.
 

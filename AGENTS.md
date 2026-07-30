@@ -11,7 +11,7 @@ Implementation Guide (IG)**. A user clicks "Use this template" to start a
 module; the scaffold's `sushi-config.yaml`, `ig.ini`, and workflows carry
 `{{PLACEHOLDER}}` values the new module fills in. The scaffold **references**
 the MII IG template package
-[`ig-template-mii-kds`](https://github.com/medizininformatik-initiative/ig-template-mii-kds)
+[`ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds)
 (`de.medizininformatikinitiative.template`) in `ig.ini` — **today as the
 vendored local folder `template = #ig-template`**, because that package has no
 published release yet; it switches to
@@ -97,6 +97,12 @@ source of truth; consult them before doing the corresponding task by hand.
   IG Publisher expects them. Backed by
   [`scripts/ig-translate.sh`](scripts/ig-translate.sh). The template-side language
   *mechanism/policy* lives in `ig-template-mii-kds`.
+- [`skills/docs-steward/`](skills/docs-steward/SKILL.md) — audits, repairs and
+  trims this repository's documentation: verifies every link, path and factual
+  claim against the repo itself, removes AI decision-narration, reduces the docs
+  to what create/modify/maintain actually needs, and walks the documented path
+  as a first-time and an experienced reader. Report-only by default; writes a
+  dated report to [`docs/reports/`](docs/reports/).
 
 ### Discovery paths (symlinks, not copies)
 

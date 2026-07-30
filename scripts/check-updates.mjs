@@ -260,7 +260,10 @@ async function fetchJson(url, { github = false, allow404 = false } = {}) {
 }
 
 const TEMPLATE_PKG_ID = "de.medizininformatikinitiative.template";
-const TEMPLATE_REPO = "medizininformatik-initiative/ig-template-mii-kds";
+// The org that HOSTS the releases today; swept to the target org at transfer
+// (docs/project-status.md). The target-org repo exists only as an empty
+// placeholder — asking it reports "not yet published" forever.
+const TEMPLATE_REPO = "forschungsgruppe-digital-health/ig-template-mii-kds";
 
 // The FIXED FHIR package watch list: these always get a row, even
 // before sushi-config.yaml has landed. Extra pins found in sushi-config.yaml
