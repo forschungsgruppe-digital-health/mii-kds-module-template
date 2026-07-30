@@ -328,7 +328,9 @@ jobs:
         # report), on a feature branch the REAL delta against dev. The report
         # lands in output/comparison-demo/ and deploys with the preview.
         # Template repo only; skip-not-fail throughout.
-        if: ${{ endsWith(github.repository, '/mii-kds-module-template') && steps.build.outputs.mode == 'full' }}
+        # Toggle: repository variable ENABLE_COMPARISON_DEMO=false switches the
+        # demo off; unset/true = on (the repo's usual toggle convention).
+        if: ${{ endsWith(github.repository, '/mii-kds-module-template') && steps.build.outputs.mode == 'full' && vars.ENABLE_COMPARISON_DEMO != 'false' }}
         env:
           VALIDATOR_VERSION: "6.5.7"
           VALIDATOR_SHA256: "e9ee13966d5cef045adf946c3e4ecb57400eaaa459c889f4ec0f68ba23551bff"
@@ -336,7 +338,9 @@ jobs:
         run: |
           set -euo pipefail
           canonical="https://www.medizininformatik-initiative.de/fhir/modul-template/StructureDefinition/example-patient"
-          prev_url="https://forschungsgruppe-digital-health.github.io/mii-kds-module-template/branches/dev/package.tgz"
+          # Org-agnostic on purpose: survives the move to the target GitHub
+          # organisation without an edit.
+          prev_url="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/branches/dev/package.tgz"
           work="${RUNNER_TEMP}/comparison-demo"
           mkdir -p "${work}"
           if ! curl -fsSL "${prev_url}" --output "${work}/current-dev.tgz"; then
