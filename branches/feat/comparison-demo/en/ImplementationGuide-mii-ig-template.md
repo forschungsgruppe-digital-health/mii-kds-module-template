@@ -304,17 +304,6 @@
     {
       "extension" : [{
         "url" : "code",
-        "valueString" : "version-comparison"
-      },
-      {
-        "url" : "value",
-        "valueString" : "2027.0.0-draft.0"
-      }],
-      "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"
-    },
-    {
-      "extension" : [{
-        "url" : "code",
         "valueString" : "excludemap"
       },
       {
@@ -803,17 +792,6 @@
       {
         "url" : "value",
         "valueString" : "true"
-      }],
-      "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"
-    },
-    {
-      "extension" : [{
-        "url" : "code",
-        "valueCode" : "version-comparison"
-      },
-      {
-        "url" : "value",
-        "valueString" : "2027.0.0-draft.0"
       }],
       "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"
     },
