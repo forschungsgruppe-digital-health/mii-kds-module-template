@@ -76,8 +76,9 @@ previous package).
 the same kind of report before any formal publication exists: the build
 compares itself against the previous `dev` preview using the FHIR validator's
 `-compare` command and publishes the result at `comparison-demo/index.html`.
-Maintainers can switch the demonstration off with the repository variable
-`ENABLE_COMPARISON_DEMO=false`; a created module never renders it.
+The repository variable `ENABLE_VERSION_COMPARISON=false` switches the whole
+feature off — the publisher's comparison in every build workflow and this
+demonstration alike; a created module never renders the demonstration.
 
 > [TODO: If your module has a versioning policy of its own beyond the MII scheme
 > — for example a support window for older versions, or a deprecation policy for

@@ -81,9 +81,9 @@ Vorlagen-Repositories) zeigt dieselbe Art Bericht, bevor eine formale
 Publikation existiert: Der Build vergleicht sich mit der vorherigen
 `dev`-Vorschau über das `-compare`-Kommando des FHIR-Validators und
 veröffentlicht das Ergebnis unter `comparison-demo/index.html`.
-Betreiber:innen können die Demonstration über die Repository-Variable
-`ENABLE_COMPARISON_DEMO=false` abschalten; ein erstelltes Modul rendert sie
-nie.
+Die Repository-Variable `ENABLE_VERSION_COMPARISON=false` schaltet das
+gesamte Feature ab — den Publisher-Vergleich in allen Build-Workflows ebenso
+wie diese Demonstration; ein erstelltes Modul rendert die Demonstration nie.
 
 > [TODO: Falls Ihr Modul über das MII-Schema hinaus eine eigene
 > Versionierungs-Politik hat — etwa einen Unterstützungszeitraum für ältere

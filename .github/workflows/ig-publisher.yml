@@ -220,6 +220,17 @@ jobs:
           fi
           echo "::notice::Template-repo self-check: substituted self-check placeholders into WORKSPACE copies of sushi-config.yaml, ig.ini and the narrative pages (never committed). A created module replaces the placeholders for real and skips this step."
 
+      - name: Disable the version comparison when toggled off
+        # ENABLE_VERSION_COMPARISON=false switches the FEATURE off - the real
+        # publisher comparison (by deactivating the sushi-config parameter in
+        # the workspace copy before SUSHI reads it) AND the demo below.
+        if: ${{ vars.ENABLE_VERSION_COMPARISON == 'false' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          sed -i -E 's/^(  version-comparison(-master)?:)/  # (disabled by ENABLE_VERSION_COMPARISON) \1/' sushi-config.yaml
+          echo "::notice::version comparison disabled via ENABLE_VERSION_COMPARISON."
+
       - name: SUSHI compile and decide build mode
         id: build
         shell: bash
@@ -328,9 +339,10 @@ jobs:
         # report), on a feature branch the REAL delta against dev. The report
         # lands in output/comparison-demo/ and deploys with the preview.
         # Template repo only; skip-not-fail throughout.
-        # Toggle: repository variable ENABLE_COMPARISON_DEMO=false switches the
-        # demo off; unset/true = on (the repo's usual toggle convention).
-        if: ${{ endsWith(github.repository, '/mii-kds-module-template') && steps.build.outputs.mode == 'full' && vars.ENABLE_COMPARISON_DEMO != 'false' }}
+        # Toggle: ENABLE_VERSION_COMPARISON=false switches the whole feature
+        # off - this demo and the real publisher comparison alike; unset/true =
+        # on (the repo's usual toggle convention).
+        if: ${{ endsWith(github.repository, '/mii-kds-module-template') && steps.build.outputs.mode == 'full' && vars.ENABLE_VERSION_COMPARISON != 'false' }}
         env:
           VALIDATOR_VERSION: "6.5.7"
           VALIDATOR_SHA256: "e9ee13966d5cef045adf946c3e4ecb57400eaaa459c889f4ec0f68ba23551bff"
@@ -368,6 +380,23 @@ jobs:
           java -Xmx4g -jar "${work}/validator_cli.jar" -compare               -dest "$(pwd)/output/comparison-demo" -version 4.0.1 -tx n/a               -ig "${work}/prev.tgz" -ig output/package.tgz               -left "${canonical}|2027.0.0-draft.0"               -right "${canonical}|2027.0.0-draft.1" || true
           if [ -s output/comparison-demo/index.html ]; then
             echo "Comparison demo rendered to output/comparison-demo/ (deploys with the preview)."
+            # Link the demo from the QA report: qa.html already carries a
+            # "Previous Version Comparison:" row (here it reports that the
+            # canonical serves no version history - expected pre-publication);
+            # a sibling row right after it links the demo report.
+            python3 -c '
+          import re
+          p = "output/qa.html"
+          h = open(p, encoding="utf-8").read()
+          i = h.find("Previous Version Comparison:")
+          if i >= 0:
+              j = h.find("</tr>", i)
+              if j >= 0:
+                  row = "<tr><td>Version Comparison (demo):</td><td><a href=\"comparison-demo/index.html\">comparison-demo/index.html</a> - the previous dev preview (relabelled 2027.0.0-draft.0) vs this build</td></tr>"
+                  h = h[:j+5] + row + h[j+5:]
+                  open(p, "w", encoding="utf-8").write(h)
+                  print("comparison-demo link injected into qa.html")
+          '
             # Link the demo from the rendered Versioning pages (both languages)
             # - injected AFTER the build so the link exists only when the
             # report does: no dead link on a skipped demo, no effect on the QA

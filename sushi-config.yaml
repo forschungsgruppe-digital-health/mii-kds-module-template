@@ -385,6 +385,8 @@ parameters:
   #      package.tgz to every release for exactly this purpose).
   # Keep the value a released version; update it with every release; link the
   # report from the version's changelog section (see the Changelog page).
+  # Kill switch: the repository variable ENABLE_VERSION_COMPARISON=false
+  # deactivates these lines in the CI workspace before every build.
   # version-comparison: "2027.0.0"
   excludemap: false
   # ({current}/{last} forms are NOT usable here: they resolve by fetching
