@@ -56,12 +56,13 @@
   --link-color: #5773a2;
   --link-hover-color: #3473aa;
 
-  /* 3-4. Footer: outer band = MII slate #7a8495 (the site footer's
-        background-color AND the logo wordmark color; no text sits on it);
-        inner container (which carries the text) = slate-dark #6a7484 so the
-        white footer text reaches 4.73:1 (AA) - white on the site's own
-        #7a8495 would only be 3.78:1 */
-  --footer-bg-color: #7a8495;
+  /* 3-4. Footer: ONE uniform grey - MII slate-dark #6a7484 (palette:
+        the site-css main-menu link color and the logo-svg wordmark fill) for
+        both the outer band and the text container. Slate-dark rather than the
+        site footer's own slate #7a8495 because text sits on the footer here:
+        white on slate-dark is 4.73:1 (AA), on slate only 3.78:1. The earlier
+        two-tone (band #7a8495 / container #6a7484) read as a seam. */
+  --footer-bg-color: #6a7484;
   --footer-container-bg-color: #6a7484;
 
   /* 25-26. Footer links + highlight: white, like the MII site footer
