@@ -204,8 +204,13 @@ breadcrumb rows keep the English "Table of Contents" label. Translation
 supplements do not reach these fields on this toolchain (see the rendering
 table in the translation skill).
 
-Consequence: on `/de/` pages the breadcrumb line stays (partly) English. This
-is cosmetic, affects no content, and is **not** a defect of your module or of
-a migration — do not try to fix it with sibling pages or menu tricks (both
-break the i18n model). It needs an upstream IG-Publisher change; re-verify
-after each publisher version bump.
+This template therefore **remaps the breadcrumb itself** (an override of the
+base `fragment-pagebegin.html`): on `/de/` pages it renders
+"Inhaltsverzeichnis" for the toc label and applies the optional module file
+`input/includes/breadcrumb-titles-de.txt` — one `English Title => Deutscher
+Titel` line per page, best generated mechanically from your two `menu.xml`
+files (pair the `<a>` labels by `href`; the migration skill does exactly
+this). Without that file, page titles in `/de/` breadcrumbs stay English —
+cosmetic, and still not a defect of your module. Do not try sibling pages or
+menu tricks (both break the i18n model); the underlying publisher behavior
+needs an upstream change and should be re-verified per publisher bump.
