@@ -192,3 +192,25 @@ moves between them.
    and any resource `.po` files.
 3. Ask the template repo to vendor that language's base UI-string catalogs (§3),
    otherwise the footer/base labels render blank in the new language.
+
+## Known limitation: breadcrumbs and page titles of `pages:`-tree pages
+
+The IG Publisher (verified with 2.2.11) localizes the breadcrumbs of the pages
+it generates itself (e.g. `artifacts.html` → "Artefaktübersicht") but renders
+the pages defined in `sushi-config.yaml`'s `pages:` tree with their single
+(English) `title` in **every** language variant — the generated page data
+carries `titlelang: {en: "Guidance", de: "Guidance"}` — and even its localized
+breadcrumb rows keep the English "Table of Contents" label. Translation
+supplements do not reach these fields on this toolchain (see the rendering
+table in the translation skill).
+
+This template therefore **remaps the breadcrumb itself** (an override of the
+base `fragment-pagebegin.html`): on `/de/` pages it renders
+"Inhaltsverzeichnis" for the toc label and applies the optional module file
+`input/includes/breadcrumb-titles-de.txt` — one `English Title => Deutscher
+Titel` line per page, best generated mechanically from your two `menu.xml`
+files (pair the `<a>` labels by `href`; the migration skill does exactly
+this). Without that file, page titles in `/de/` breadcrumbs stay English —
+cosmetic, and still not a defect of your module. Do not try sibling pages or
+menu tricks (both break the i18n model); the underlying publisher behavior
+needs an upstream change and should be re-verified per publisher bump.
