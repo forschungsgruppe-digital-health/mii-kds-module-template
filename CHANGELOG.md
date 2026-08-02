@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.4.0...v0.5.0) (2026-08-02)
+
+
+### Features
+
+* **ig-template:** structure-tabs include + content-image CSS defaults (closes [#66](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/66)) ([#67](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/67)) ([f4e7f2f](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/f4e7f2fe01e9e342cf4505389417249d8b512acf))
+
 ## [0.4.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.3.0...v0.4.0) (2026-07-30)
 
 
