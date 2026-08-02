@@ -1,6 +1,6 @@
 # Profiles and Extensions - MII Implementation Guide Module Template v2026.0.0
 
-* [**Table of Contents**](toc.md)
+* [**Inhaltsverzeichnis**](toc.md)
 * **Profiles and Extensions**
 
 ## Profiles and Extensions

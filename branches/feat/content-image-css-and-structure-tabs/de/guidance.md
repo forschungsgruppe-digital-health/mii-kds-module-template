@@ -1,6 +1,6 @@
 # Guidance - MII Implementation Guide Module Template v2026.0.0
 
-* [**Table of Contents**](toc.md)
+* [**Inhaltsverzeichnis**](toc.md)
 * **Guidance**
 
 ## Guidance

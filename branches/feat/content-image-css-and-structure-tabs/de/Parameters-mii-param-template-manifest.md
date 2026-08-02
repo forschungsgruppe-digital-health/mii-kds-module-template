@@ -1,6 +1,6 @@
 # mii-param-template-manifest - MII Implementation Guide Module Template v2026.0.0
 
-* [**Table of Contents**](toc.md)
+* [**Inhaltsverzeichnis**](toc.md)
 * [**Artefaktübersicht**](artifacts.md)
 * **mii-param-template-manifest**
 

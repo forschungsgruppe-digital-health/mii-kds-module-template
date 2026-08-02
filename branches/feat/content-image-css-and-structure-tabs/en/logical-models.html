@@ -1,4 +1,9 @@
 
+<!-- MII KDS module template OVERRIDE of the base template's
+     fragment-pagebegin.html (copied verbatim from the staged base include,
+     publisher 2.2.11 era) with ONE change: the breadcrumb line localizes —
+     see the comment block at the breadcrumb. Re-diff against the base
+     fragment after base-template upgrades: this override SHADOWS it. -->
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE HTML>
 
@@ -193,8 +198,7 @@
 
     <div id="segment-breadcrumb" class="segment">  <!-- segment-breadcrumb -->
       <div class="container">  <!-- container -->
-        <ul class="breadcrumb">
-          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><b>Logical Models</b></li>
+        <ul class="breadcrumb"><li><a href='toc.html'><b>Table of Contents</b></a></li><li><b>Logical Models</b></li>
 
         </ul>
       </div>  <!-- /container -->
@@ -270,7 +274,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
           IG © 2026+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de/en">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2026.0.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Sun, Aug 2, 2026 19:12+0000">2026-08-02</span>
+          Generated <span title="Sun, Aug 2, 2026 19:43+0000">2026-08-02</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- MII branding override for the fhir2.base.template footer fragment.

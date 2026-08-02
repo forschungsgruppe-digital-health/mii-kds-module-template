@@ -1,6 +1,6 @@
 # Search Parameters and Operations - MII Implementation Guide Module Template v2026.0.0
 
-* [**Table of Contents**](toc.md)
+* [**Inhaltsverzeichnis**](toc.md)
 * **Search Parameters and Operations**
 
 ## Search Parameters and Operations
