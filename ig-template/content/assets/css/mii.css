@@ -8,7 +8,7 @@
    includes/fragment-css.html AFTER project.css, so this :root block wins the
    cascade at equal specificity.
 
-   Every value is derived from an MII source - see docs/design.md for the full
+   Every value is derived from an MII source - see docs/styleguide.md for the full
    palette table (exact source per color) and the WCAG contrast calculations.
    Sources, short form (retrieved 2026-07-22):
    - "logo"  = dominant pixel colors of the official MII logo
@@ -21,7 +21,7 @@
 
 :root {
   /* 1. IG title/status text: MII slate (site menu-link color #6a7484) —
-        contrast verified in docs/design.md § 7. It renders on the header
+        contrast verified in docs/styleguide.md §8. It renders on the header
         container, which vars 21-22 below make white. */
   --ig-status-text-color: #6a7484;
 
@@ -56,18 +56,19 @@
   --link-color: #5773a2;
   --link-hover-color: #3473aa;
 
-  /* 3-4. Footer: outer band = MII slate #7a8495 (the site footer's
-        background-color AND the logo wordmark color; no text sits on it);
-        inner container (which carries the text) = slate-dark #6a7484 so the
-        white footer text reaches 4.73:1 (AA) - white on the site's own
-        #7a8495 would only be 3.78:1 */
-  --footer-bg-color: #7a8495;
+  /* 3-4. Footer: ONE uniform grey - MII slate-dark #6a7484 (palette:
+        the site-css main-menu link color and the logo-svg wordmark fill) for
+        both the outer band and the text container. Slate-dark rather than the
+        site footer's own slate #7a8495 because text sits on the footer here:
+        white on slate-dark is 4.73:1 (AA), on slate only 3.78:1. The earlier
+        two-tone (band #7a8495 / container #6a7484) read as a seam. */
+  --footer-bg-color: #6a7484;
   --footer-container-bg-color: #6a7484;
 
   /* 25-26. Footer links + highlight: white, like the MII site footer
         (4.73:1 on #6a7484, AA). Note: this makes footer links the same color
         as surrounding footer text - see the accessibility notes in
-        docs/design.md (WCAG 1.4.1). */
+        docs/styleguide.md (WCAG 1.4.1). */
   --footer-hyperlink-text-color: #ffffff;
   --footer-highlight-text-color: #ffffff;
 
@@ -83,7 +84,7 @@
         white logo background and the white content area, so the header reads as
         one clean white surface. The green stripe and blue navbar provide the
         visual structure. Status text (var 1) stays AA on white — see
-        docs/design.md § 7. The breadcrumb keeps the MII light #ebedef as a
+        docs/styleguide.md §8. The breadcrumb keeps the MII light #ebedef as a
         subtle functional band below the navbar. */
   --ig-header-color: #ffffff;
   --ig-header-container-color: #ffffff;
@@ -93,6 +94,7 @@
    Reusable, purpose-neutral highlight-box classes the template provides for
    calling out content on a page. A page writes:
      <div class="mii-highlight mii-highlight-blue"><h5>…</h5><p>…</p></div>
+     Variants: -blue, -green, -orange (warning), -red (important), -grey (hint).
    The colours are the MII-aligned highlight backgrounds carried over from
    kerndatensatz-basis. These are STYLING only — the template attaches no
    semantics (e.g. "audience") to them; a module decides what each colour means. */
@@ -118,6 +120,33 @@
 }
 .mii-highlight-green h5 {
   color: #5a6b2f;
+}
+/* The three below were added on top of the kerndatensatz-basis pair, with the
+   conventional reading orange = warning, red = important, grey = hint. Like
+   blue/green they are styling only — a module may repurpose them. All three
+   pass WCAG: h5 on background >= 6.1:1 (AA text), border on background >= 3:1
+   (1.4.11 non-text; the inherited green border sits below that — recorded
+   upstream trade-off, kept for parity with kerndatensatz-basis). */
+.mii-highlight-orange {
+  background-color: #fdf3e7;
+  border-left-color: #c9721c;
+}
+.mii-highlight-orange h5 {
+  color: #8a4b12;
+}
+.mii-highlight-red {
+  background-color: #fbeaea;
+  border-left-color: #c0392b;
+}
+.mii-highlight-red h5 {
+  color: #8f2318;
+}
+.mii-highlight-grey {
+  background-color: #f2f3f5;
+  border-left-color: #7a8495; /* same slate as the narrative-table border */
+}
+.mii-highlight-grey h5 {
+  color: #4a5260;
 }
 
 /* ── Narrative tables ─────────────────────────────────────────────────────────
@@ -149,7 +178,7 @@
 
    Loaded after the base stylesheets (see includes/fragment-css.html), so no
    `!important` is needed. Colours are the documented MII palette (§3 of
-   docs/design.md); contrast is recorded in §7. */
+   docs/styleguide.md); contrast is recorded in §7. */
 :root {
   /* MII light background — the same site value as the breadcrumb fill. */
   --mii-table-header-bg-color: #ebedef;
@@ -173,31 +202,4 @@ table:not([class]):not([style]):not([border]):not([data-fhir]) th {
   background-color: var(--mii-table-header-bg-color);
   color: var(--mii-table-header-text-color);
   text-align: left;
-}
-
-/* ── Content images (issue #66) ──────────────────────────────────────────────
-   The base template floats every `p > img` (project.css: float + margins) and
-   caps no image width. For CONTENT images — diagrams, screenshots, the normal
-   Markdown image — that wraps body text beside the image and lets wide
-   diagrams overflow the column. Content images are therefore block-centered
-   and width-capped by default; a small inline image can opt back into the
-   base float with class="float" (raw HTML img). mii.css loads after the base
-   stylesheets, so these rules win the cascade. */
-#segment-content p > img:not(.float) {
-  float: none;
-  display: block;
-  margin: 0.5rem auto 1rem auto;
-}
-#segment-content img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* ── structure-tabs include ── spacing for the tabbed structure view ──────── */
-.structure-tabs { margin: 1rem 0; }
-.structure-tabs .tab-content {
-  border: 1px solid #ddd;
-  border-top: none;
-  padding: 0.75rem;
-  overflow-x: auto;
 }
