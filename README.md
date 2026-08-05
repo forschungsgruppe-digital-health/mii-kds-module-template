@@ -46,9 +46,9 @@ this template.
    → [add a profile](docs/recipes/add-a-profile.md)
 6. **Build it**: `sushi .`, then run the IG Publisher, then read `output/qa.html`.
    Or push a branch — CI builds it and comments the preview URL on your PR
-   (one-time: enable GitHub Pages and set `PAGES_ACTIONS_ENABLED=true` first —
-   [first-run setup](docs/recipes/first-run-setup.md), checklist item 2 — else
-   every preview URL 404s).
+   (one-time: enable GitHub Pages and set `PAGES_ACTIONS_ENABLED` to match the
+   Pages mode you chose — [first-run setup](docs/recipes/first-run-setup.md),
+   checklist item 2 — else every preview URL 404s).
 7. **Release** with CalVer via the MII Module Release Workflow.
    → [cut a release](docs/recipes/cut-a-release.md)
 
@@ -69,6 +69,7 @@ Unfamiliar terms are in the [glossary](docs/glossary.md).
 | `docs/` | Guides and step-by-step recipes |
 | `tests/` | FHIR validation test cases the build runs — see [tests/README.md](tests/README.md) |
 | `scripts/` | Helper scripts (first-run bootstrap, template sync, convention check, …) — see [scripts/README.md](scripts/README.md) |
+| `skills/` | Reusable instructions for recurring maintenance tasks — see [`AGENTS.md`](AGENTS.md) |
 | `.github/workflows/` | CI: build, preview, validation, release — see [docs/workflows.md](docs/workflows.md) |
 
 ## Documentation

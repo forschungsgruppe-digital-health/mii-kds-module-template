@@ -118,11 +118,21 @@
    also carries the current publisher pin and its checksum.
 
    Or push a `feature/*` branch and open the **CI preview URL** posted on the
-   pull request. One-time prerequisite: enable GitHub Pages (Settings → Pages →
-   Build and deployment → **GitHub Actions**) and set the repository variable
-   `PAGES_ACTIONS_ENABLED=true` — see
-   [first-run-setup.md](first-run-setup.md) checklist item 2. Without it every
-   preview URL 404s.
+   pull request. One-time prerequisite: enable GitHub Pages in one of the two
+   supported pairings, because `ig-publisher.yml` serves the preview either way:
+
+   - Settings → Pages → **Deploy from a branch → `gh-pages`**, with
+     `PAGES_ACTIONS_ENABLED` unset — the default. The workflow git-pushes the
+     build to `gh-pages/branches/<branch>/` and Pages serves it from there.
+   - Settings → Pages → **GitHub Actions**, with the repository variable
+     `PAGES_ACTIONS_ENABLED=true`. The workflow additionally uploads the
+     `gh-pages` tree as a Pages artifact and runs the deploy job.
+
+   The variable must match the Pages setting — set to `true` while Pages still
+   deploys from a branch, or unset while Pages is in Actions mode, nothing
+   serves the preview and the URL 404s. Formal publication
+   (`go-publish.yml` with `publish: true`) requires the second pairing. See
+   [first-run-setup.md](first-run-setup.md) checklist item 2.
 9. **Iterate** until `qa.html` shows 0 errors (a terminology-fallback notice is fine
    when SU-TermServ is not configured).
 
@@ -141,4 +151,4 @@ your profile, examples and pages. No Release Please anywhere.
 | German pages render with English titles, breadcrumbs and ToC | The IG-level translation catalogue was not renamed | Rename it to `ImplementationGuide-<your-ig-id>.po` (step 4) |
 | "template not found" | Published package not available yet | Keep the vendored `template = #ig-template` |
 | Convention check fails | id/name/canonical/version pattern wrong | Match the MII naming convention (the check message names the field) |
-| The preview URL on the PR 404s | GitHub Pages is not enabled, or `PAGES_ACTIONS_ENABLED` is unset | Enable Pages and set the variable (step 8) |
+| The preview URL on the PR 404s | GitHub Pages is not enabled, or the Pages setting and `PAGES_ACTIONS_ENABLED` do not match | Enable Pages and pair it with the variable (step 8) |

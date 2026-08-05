@@ -78,7 +78,11 @@ Notes:
 - **Terminology** is auto-selected, not a toggle: builds use **SU-TermServ** when the
   client-cert secrets are present, else fall back to HL7 `tx.fhir.org` with a notice.
 - **Pages mode** (`vars.PAGES_ACTIONS_ENABLED`) chooses the gh-pages push vs the
-  Actions deploy path; either serves the previews.
+  Actions deploy path; either serves the previews. Set it to match Settings →
+  Pages ("Deploy from a branch → `gh-pages`" ⇒ leave it unset; "GitHub Actions"
+  ⇒ set it to `true`); a mismatch is what makes a preview URL 404. Only
+  `go-publish.yml` with `publish: true` *requires* the value `true` — it hard-fails
+  without it.
 - **Dependabot** is switched by its config presence, not an `if:`.
 - **The vendored-template sync** needs the `IG_TEMPLATE_REPO_URL` variable while
   the template repos have not moved (see
