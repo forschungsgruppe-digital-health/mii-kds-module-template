@@ -3,10 +3,10 @@
 # │ parameterized from medizininformatik-initiative/kerndatensatz-basis (main).        │
 # │ The file does NOT build until every {{...}} placeholder is replaced.               │
 # │                                                                                    │
-# │ All 19 placeholders this repository uses are listed below. ACTIVE ones sit on      │
-# │ lines the build reads today — leaving one unreplaced ships a bogus artifact.       │
-# │ OPTIONAL ones sit inside commented-out blocks and matter only once you enable      │
-# │ that block.                                                                        │
+# │ All 19 placeholders this repository uses are listed below — 15 ACTIVE and 4        │
+# │ OPTIONAL. ACTIVE ones sit on lines the build reads today — leaving one             │
+# │ unreplaced ships a bogus artifact. OPTIONAL ones sit inside commented-out          │
+# │ blocks and matter only once you enable that block.                                 │
 # │                                                                                    │
 # │ They occur in: this file, ig.ini, publication-request.json,                        │
 # │ qc/custom.rules.yaml, .github/workflows/go-publish.yml, the narrative pages        │
@@ -17,8 +17,12 @@
 # │   {{MODULE_SLUG}}         lowercase module short name, e.g. `base`, `person`,      │
 # │                           `icu`. Drives packageId, id, and the canonical — and     │
 # │                           the resource id inside input/resources/Parameters-       │
-# │                           expansion-manifest.json. File NAMES are never            │
-# │                           placeholders; replace contents only.                     │
+# │                           expansion-manifest.json. It is also the ONE              │
+# │                           placeholder that appears in a FILE NAME:                 │
+# │                           input/translations/de/ImplementationGuide-mii-ig-        │
+# │                           {{MODULE_SLUG}}.po must be RENAMED as well as            │
+# │                           substituted, or the publisher ignores it silently        │
+# │                           (see docs/recipes/add-translation.md §5).                │
 # │   {{MODULE_NAME}}         CamelCase computable name part, e.g. `Base` →            │
 # │                           name: MII_IG_Base.                                       │
 # │   {{MODULE_TITLE}}        human-readable title part, e.g.                          │
@@ -260,11 +264,15 @@ dependencies:
 # with supported extensions (e.g., .md/.xml) will be treated as
 # sub-pages.
 #
-# This page tree is the standard MII module page set — for example,
-# kerndatensatz-basis lists the same thirteen pages plus a hand-authored
-# ImplementationGuide page this template deliberately omits (see the note below).
+# This page tree is the standard MII module page set — kerndatensatz-basis, for
+# example, lists the same pages plus a hand-authored ImplementationGuide page
+# this template deliberately omits (see the note below).
 # Every entry needs a matching file in input/pagecontent/ (starter pages are a
 # separate scaffolding step); trim entries your module does not need.
+# Every `title:` below is also a msgid in the IG-level translation catalogue
+# input/translations/de/ImplementationGuide-mii-ig-{{MODULE_SLUG}}.po — if you
+# add, rename or delete a page here, update that catalogue in the same commit,
+# or the German rendering falls back to the English title for that page.
 pages:
   index.md:
     title: Home
@@ -316,10 +324,9 @@ pages:
   # (ImplementationGuide-<id>.html) and adds it to the artifact list without an
   # entry here. kerndatensatz-basis, for example, lists it only because it ships
   # a hand-authored intro at input/pagecontent/ImplementationGuide-mii-ig-base.md. This template does NOT
-  # list it: an explicit `pages:` entry REQUIRES a matching source file, and the
-  # file name would carry the {{MODULE_SLUG}} placeholder — which the CI
-  # self-check substitutes only in this file and ig.ini, never in pagecontent
-  # file names, so the build would fail with "missing source file
+  # list it: an explicit `pages:` entry REQUIRES a matching source file whose
+  # name carries the module slug, and the scaffold has no slug yet — an entry
+  # here would fail the build with "missing source file
   # ImplementationGuide-mii-ig-<slug>.md". To add a custom intro, create
   # input/pagecontent/ImplementationGuide-mii-ig-<your-slug>.md AND re-add the
   # entry with your concrete slug.

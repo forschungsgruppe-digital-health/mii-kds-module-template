@@ -10,6 +10,11 @@ This repo has **two lives**, and keeping them apart is essential:
 Read both. A reader must never confuse "how this template repo releases itself" with
 "how a module I create releases itself." Details live in the linked docs.
 
+The two tables below cover **every** file in `.github/workflows/` — 11 workflows:
+two that belong to the template repository only (Layer 1) and nine that a created
+module inherits (Layer 2). If you add a workflow, add a row; a workflow that is
+not in one of these tables is undocumented, and that is a defect.
+
 ## Branching (both layers)
 
 Same model as described in [CONTRIBUTING.md](../CONTRIBUTING.md): `main` (stable,
@@ -17,6 +22,11 @@ default) · `dev` (integration) · short-lived `feature|change|fix/*` off `dev`;
 `dev → main` is a **merge commit**. A **new module starts with `main` only** unless
 you tick *Include all branches* or run the [first-run bootstrap](recipes/first-run-setup.md),
 which creates `dev` for you.
+
+In *this* repository the two branches have diverged, and anything landing on
+`main` directly has to be back-merged into `dev` —
+[project-status.md](project-status.md#branch-state--main-and-dev-have-diverged)
+has the state and the rule.
 
 ---
 
@@ -48,9 +58,9 @@ Everything below **propagates** to a module (the bootstrap keeps it). This is ho
 | Workflow | Trigger | What it does | Output | Toggle (default) | Human-gated? |
 | --- | --- | --- | --- | --- | --- |
 | `ig-publisher.yml` | push to any branch except `main`/`gh-pages`/`fsh-generated`; `workflow_dispatch` | Builds the IG (SUSHI + IG Publisher) and deploys a preview | `gh-pages/branches/<branch>/` + PR comment | `ENABLE_PREVIEW` (ON) | no |
-| `cleanup-gh-pages.yml` | schedule (Sun 00:00 UTC); `workflow_dispatch` | Prunes previews of deleted branches; keeps root + version paths | pruned `gh-pages` | `ENABLE_PREVIEW` (ON) | no |
+| `cleanup-gh-pages.yml` | schedule (Sun 00:00 UTC); `workflow_dispatch` (input `dry_run`: list stale previews without deleting) | Prunes previews of deleted branches; keeps root + version paths | pruned `gh-pages` | `ENABLE_PREVIEW` (ON) | no |
 | `validation.yml` | push to `dev`/`main`; any pull request; `workflow_dispatch` | Runs the **MII reusable validation** workflows | validation report | `ENABLE_VALIDATION` (ON) | no (skips on the template repo itself) |
-| `convention-check.yml` | push/PR to `dev`/`main`/`release/**`; `workflow_dispatch` | The **single** convention checker: metadata-contract patterns (hard on release branches) + the language-model guard (`scripts/language-model-check.sh`) + the offline test suites (`scripts/*.test.mjs`, and on the template repo `scripts/*.template-test.mjs`); the advisory wiki-drift review (Section 2 of the check matrix) is a human/agent job via the `wiki-consistency-check` skill, not part of this workflow | check result | `ENABLE_CONVENTION_CHECK` (ON) | no |
+| `convention-check.yml` | push/PR to `dev`/`main`/`release/**`; `workflow_dispatch` (input `strict`: force release mode) | The **single** convention checker: metadata-contract patterns (hard on release branches) + the language-model guard (`scripts/language-model-check.sh`) + the offline test suites (`scripts/*.test.mjs`, and on the template repo `scripts/*.template-test.mjs`); the advisory repo ↔ MII-wiki drift review is a manual review, not part of this workflow | check result | `ENABLE_CONVENTION_CHECK` (ON) | no |
 | `module-release.yml` | push of a CalVer tag `vYYYY.n.n`; `release: published` (the announcement); `workflow_dispatch` (dry run) | Builds, creates the GitHub Release, announces to the MII Zulip (topic *Releases*), hands off to `go-publish` | release | `ENABLE_MODULE_RELEASE` (ON) · `ENABLE_ZULIP_ANNOUNCE` (ON) | production publish is gated |
 | `go-publish.yml` | `workflow_dispatch` **only** | Production `-go-publish`; `publish:false` = full dry run by default | published IG | — | **always human-triggered** |
 | `dependency-check.yml` | schedule (Mon 06:00 UTC); `workflow_dispatch` | Version drift (IG Publisher, SUSHI, Jekyll, both templates, FHIR deps) → one tracking issue | `dependencies` issue | `ENABLE_DEPENDENCY_CHECK` (ON) | proposals only |
@@ -68,7 +78,11 @@ Notes:
 - **Terminology** is auto-selected, not a toggle: builds use **SU-TermServ** when the
   client-cert secrets are present, else fall back to HL7 `tx.fhir.org` with a notice.
 - **Pages mode** (`vars.PAGES_ACTIONS_ENABLED`) chooses the gh-pages push vs the
-  Actions deploy path; either serves the previews.
+  Actions deploy path; either serves the previews. Set it to match Settings →
+  Pages ("Deploy from a branch → `gh-pages`" ⇒ leave it unset; "GitHub Actions"
+  ⇒ set it to `true`); a mismatch is what makes a preview URL 404. Only
+  `go-publish.yml` with `publish: true` *requires* the value `true` — it hard-fails
+  without it.
 - **Dependabot** is switched by its config presence, not an `if:`.
 - **The vendored-template sync** needs the `IG_TEMPLATE_REPO_URL` variable while
   the template repos have not moved (see

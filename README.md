@@ -34,16 +34,21 @@ this template.
 4. **Fill in your module's values** — start in `sushi-config.yaml`, whose header
    lists all 19 placeholders and the files each one occurs in, then work through
    `ig.ini`, `publication-request.json`, `.github/workflows/go-publish.yml`,
-   `qc/custom.rules.yaml`, `tests/`, the pages and the FSH sources.
-   [Create a new module](docs/recipes/create-a-new-module.md) step 3 ends with
-   the `grep` that proves you missed none.
+   `qc/custom.rules.yaml`, `tests/`, the pages and the FSH sources. **Also rename
+   `input/translations/de/ImplementationGuide-mii-ig-{{MODULE_SLUG}}.po`** to your
+   IG's id — it is the one file *name* that carries a placeholder, and the
+   publisher ignores it silently if it does not match.
+   [Create a new module](docs/recipes/create-a-new-module.md) step 5 has the two
+   sweeps that prove you missed none.
 5. **Write a profile** in `input/fsh/` (an example is included to copy) and
    replace the English starter pages in `input/pagecontent/` (and their German
    counterparts in `input/translations/de/pagecontent/`).
    → [add a profile](docs/recipes/add-a-profile.md)
 6. **Build it**: `sushi .`, then run the IG Publisher, then read `output/qa.html`.
    Or push a branch — CI builds it and comments the preview URL on your PR
-   (one-time: enable GitHub Pages first — [publish the preview](docs/recipes/publish-the-preview-on-github-pages.md), else every preview URL 404s).
+   (one-time: enable GitHub Pages and set `PAGES_ACTIONS_ENABLED` to match the
+   Pages mode you chose — [first-run setup](docs/recipes/first-run-setup.md),
+   checklist item 2 — else every preview URL 404s).
 7. **Release** with CalVer via the MII Module Release Workflow.
    → [cut a release](docs/recipes/cut-a-release.md)
 
@@ -64,8 +69,8 @@ Unfamiliar terms are in the [glossary](docs/glossary.md).
 | `docs/` | Guides and step-by-step recipes |
 | `tests/` | FHIR validation test cases the build runs — see [tests/README.md](tests/README.md) |
 | `scripts/` | Helper scripts (first-run bootstrap, template sync, convention check, …) — see [scripts/README.md](scripts/README.md) |
-| `skills/` | Vendor-neutral agent skills: `docs-steward`, `ig-analyze`, `ig-translate`, `wiki-consistency-check` — see [AGENTS.md](AGENTS.md#skills) |
-| `.github/workflows/` | CI: build, preview, validation, release |
+| `skills/` | Reusable instructions for recurring maintenance tasks — see [`AGENTS.md`](AGENTS.md) |
+| `.github/workflows/` | CI: build, preview, validation, release — see [docs/workflows.md](docs/workflows.md) |
 
 ## Documentation
 

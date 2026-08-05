@@ -4,9 +4,9 @@
 // skills/wiki-consistency-check/references/check-matrix.md). This is THE single
 // metadata checker for the project — do NOT add a second linter beside it.
 //
-// It checks the fixed metadata contract only. The advisory wiki-drift findings
-// (Section 2 of the check matrix) are a human/agent job via the
-// wiki-consistency-check skill; they are never failed here.
+// It checks the fixed metadata contract only. The advisory repo ↔ MII-wiki
+// drift findings (Section 2 of the check matrix) are a manual review; they are
+// never failed here.
 //
 // Usage:
 //   node scripts/convention-check.mjs [--release] [--root <dir>]
@@ -265,7 +265,7 @@ function main() {
   lines.push("");
   lines.push(ok ? "Result: PASS — no hard violation." : "Result: FAIL — hard violation(s) above.");
   lines.push("");
-  lines.push("Advisory wiki-drift findings (Section 2 of the check matrix) are not evaluated here; run the wiki-consistency-check skill for those.");
+  lines.push("Advisory repo/wiki drift findings (Section 2 of the check matrix) are not evaluated here; they are reviewed by hand.");
   const report = lines.join("\n");
 
   console.log(report);

@@ -10,15 +10,16 @@ Nothing here blocks creating a module, building it, or releasing it.
 
 ## Waiting on a decision, not on work
 
-These are finished as far as this repository is concerned. Each needs someone to
-say "go" — none should be done by an agent.
+These are finished as far as this repository is concerned. Each needs a
+maintainer to say "go" — none of them should happen as a side effect of routine
+work.
 
 | Task | Blocked on | What unblocks it |
 | --- | --- | --- |
 | Register the IG template in [`FHIR/ig-registry`](https://github.com/FHIR/ig-registry) and name its owner | An explicit maintainer decision | A registry entry is a public, hard-to-retract commitment. While the approach is a proposal to the TF KDS, staying unregistered lets the design change without stranding consumers. |
 | Publish `de.medizininformatikinitiative.template` so modules can stop vendoring it | The same decision | Then a module follows [switch-template-to-published](recipes/switch-template-to-published.md) and deletes `ig-template/`. |
 | Move both repositories to the `medizininformatik-initiative` organisation | The same decision | All content already names the target org. **After the move, delete the `IG_TEMPLATE_REPO_URL` repository variable** — it exists only to bridge the gap, and `scripts/resolve-ig-template-source.sh` falls back correctly once the repos are where the content says they are. |
-| Run the first production `-go-publish` | A maintainer, deliberately | The workflow is manual-dispatch only and dry-run by default. **An agent must never trigger it.** See [cut-a-release](recipes/cut-a-release.md). |
+| Run the first production `-go-publish` | A maintainer, deliberately | The workflow is manual-dispatch only and dry-run by default. **It must never be triggered without that decision.** See [cut-a-release](recipes/cut-a-release.md). |
 | Store the SU-TermServ client certificate as repository secrets | A maintainer with the certificate | The procedure is written and the handshake was verified locally against the live server. See [secrets](secrets.md); run `scripts/set-su-termserv-secrets.sh`. Without it, builds fall back to `tx.fhir.org`. |
 | Store the Zulip announcement key | A maintainer | See [secrets](secrets.md). Release announcements stay silent until then. |
 | Decide how the Java-validation job gets its `package.json` | A maintainer (design decision) | The pinned upstream `ci_java_validation.yml` reads IG dependencies from a repo-root `package.json` this scaffold deliberately does not ship, so the job fails on a created module even with the certificate. Options: ship a parameterized `package.json` mirroring `sushi-config.yaml` `dependencies:` (adds a drift surface — it would join the release checklist), ask upstream to read `sushi-config.yaml`, or leave the job to the .NET QC only. Until decided, the job is gated on the SU-TermServ certificate and its failure mode is documented in `docs/release.md`. |
@@ -53,7 +54,7 @@ should re-check them.
   [HL7 ig-guidance](https://build.fhir.org/ig/FHIR/ig-guidance/conformance-statements.html)
   documents the `§…§` marker and the `§§§` table but names no Expectation
   column. To settle it, run one build with a German-marked statement and record
-  the resulting table in `docs/reports/`.
+  what the table shows in this file.
 - **The `de-DE` Translation extension on `^title` does not reach the artifacts
   index.** The German `^description` renders on the artifact's own page; the
   German `^title` renders nowhere, and `artifacts.html` keeps the
@@ -124,10 +125,9 @@ rather than assumed.
 
 ## Cross-repo consistency — decided, not pending
 
-This repository and the IG template share fourteen documentation filenames —
-re-measured 2026-07-27 with `comm -12` over `git ls-files docs` in both
-checkouts, excluding `docs/reports/` (those share no filenames). That was once
-real duplication; it is not any more. **No shared file is identical**, and the
+This repository and the IG template share a number of documentation filenames —
+compare them with `comm -12` over `git ls-files docs` in both checkouts. That was
+once real duplication; it is not any more. **No shared file is identical**, and the
 closest pairs differ for good reasons — `project-status.md` because each names
 the other repository, `glossary.md` because this scaffold defines nine terms the
 template repository has no use for, `further-reading.md` because Release Please
