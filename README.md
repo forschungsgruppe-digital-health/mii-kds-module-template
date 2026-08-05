@@ -9,6 +9,11 @@ The MII look comes from the separate IG template
 [`ig-template-mii-kds`](https://github.com/forschungsgruppe-digital-health/ig-template-mii-kds),
 which this scaffold references (and keeps up to date automatically).
 
+See what it renders as before you start:
+<https://forschungsgruppe-digital-health.github.io/mii-kds-module-template/> — the
+demo module of the current release, plus two real MII KDS modules migrated onto
+this template.
+
 > **Status: prototype.** Usable and released, but pending discussion in the MII
 > Taskforce Kerndatensatz — see [docs/project-status.md](docs/project-status.md).
 
