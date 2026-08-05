@@ -40,7 +40,12 @@ agent must follow:
   change per PR. PRs into `dev` are squash-merged after green CI and human
   review; the working branch is then deleted.
 - `dev` → `main` is the **release gate**: a human decision, merged as a merge
-  commit (not a squash). The agent never opens or merges it on its own.
+  commit (not a squash). Never open or merge it unprompted.
+- **Back-merge rule.** `main` and `dev` have diverged (see
+  [`docs/project-status.md`](docs/project-status.md)). If anything lands on
+  `main` without going through `dev`, `main` must be merged back into `dev`
+  before the next `dev → main` merge. Check `git log origin/dev..origin/main`
+  before branching.
 - **Conventional Commits** for every commit message and PR title
   (`feat`, `fix`, `docs`, `chore`, `ci`, `refactor`, `test`).
 
@@ -97,12 +102,12 @@ source of truth; consult them before doing the corresponding task by hand.
   IG Publisher expects them. Backed by
   [`scripts/ig-translate.sh`](scripts/ig-translate.sh). The template-side language
   *mechanism/policy* lives in `ig-template-mii-kds`.
-- [`skills/docs-steward/`](skills/docs-steward/SKILL.md) — audits, repairs and
-  trims this repository's documentation: verifies every link, path and factual
-  claim against the repo itself, removes AI decision-narration, reduces the docs
-  to what create/modify/maintain actually needs, and walks the documented path
-  as a first-time and an experienced reader. Report-only by default; writes a
-  dated report to [`docs/reports/`](docs/reports/).
+- [`skills/docs-steward/`](skills/docs-steward/SKILL.md) — checks and repairs
+  this repository's documentation: verifies every link, path and factual claim
+  against the repo itself, keeps the docs to what create/modify/maintain
+  actually needs, and walks the documented path as a first-time and an
+  experienced reader. Findings are reported for a human to decide on; any
+  resulting change is a pull request targeting `dev`.
 
 ### Discovery paths (symlinks, not copies)
 

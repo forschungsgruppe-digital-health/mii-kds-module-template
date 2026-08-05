@@ -101,9 +101,9 @@ Read the output. It prints, in order:
 > **Why a dry-run first:** you see exactly what will change before anything
 > happens. The `REMOVE=` line in `scripts/first-run-bootstrap.sh` is the single
 > source of truth for that list, and the bullets above are its transcript — if
-> it ever tried to touch module content or the workflows a module keeps
-> (previews, validation, monitoring, the convention check, the module release
-> workflow, the skills), the script hard-aborts.
+> it ever tried to touch module content, the helper scripts, or the workflows a
+> module keeps (previews, validation, monitoring, the convention check, the
+> module release workflow), the script hard-aborts.
 
 ### 3. Apply it
 
@@ -185,9 +185,9 @@ The bootstrap printed it; the essentials:
   rules).
 - The Release Please files (`release-please.yml`, `release-please-config.json`,
   `.release-please-manifest.json`), `notify-zulip.yml` and the template
-  `CHANGELOG.md` are gone; this recipe, `scripts/first-run-bootstrap.sh`, the
-  preview, validation, monitoring, convention-check and module-release
-  workflows and the `skills/` are still there.
+  `CHANGELOG.md` are gone; this recipe, `scripts/first-run-bootstrap.sh` and
+  the preview, validation, monitoring, convention-check and module-release
+  workflows are still there.
 - `node scripts/convention-check.mjs` runs green (placeholders count as
   "parameterized" until you resolve them).
 
