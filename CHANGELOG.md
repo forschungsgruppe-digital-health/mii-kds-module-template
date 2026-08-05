@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.2](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.5.1...v0.5.2) (2026-08-05)
+
+
+### Bug Fixes
+
+* **ci:** substitute and rename placeholders in the IG-level catalogue ([#74](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/74)) ([1f76b06](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/1f76b063ad685f13676fb8f8741eccdc2b05524b))
+
 ## [0.5.1](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.5.0...v0.5.1) (2026-08-05)
 
 
