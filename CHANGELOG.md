@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.5.0...v0.5.1) (2026-08-05)
+
+
+### Bug Fixes
+
+* **i18n:** retire the breadcrumb override for the IG-level catalogue ([#72](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/72)) ([f65df5e](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/f65df5e6997cd235fe9fc5e3a228de11f6144bda))
+
 ## [0.5.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.4.0...v0.5.0) (2026-08-02)
 
 
