@@ -196,10 +196,32 @@ jobs:
           # pages. FSH is compiled by SUSHI, so an unsubstituted {{...}} there is a
           # hard type error ("Cannot assign string value: ... does not match element
           # type: id"), and input/resources JSON is read by the publisher.
-          find input -type f \( -name '*.md' -o -name '*.xml' -o -name '*.fsh' -o -name '*.json' \) 2>/dev/null | while read -r page; do
+          find input -type f \( -name '*.md' -o -name '*.xml' -o -name '*.fsh' -o -name '*.json' -o -name '*.po' \) 2>/dev/null | while read -r page; do
             subst "${page}" < "${RUNNER_TEMP}/placeholders.txt"
           done
+          # Placeholders also appear in FILE NAMES, not only in contents: the
+          # IG-level translation catalogue is named after the IG resource
+          # (ImplementationGuide-mii-ig-{{MODULE_SLUG}}.po), and the publisher
+          # matches it to fsh-generated/resources/<Type>-<id>.json BY NAME. Left
+          # unrenamed it is silently ignored and the translated variant falls back
+          # to default-language page titles — visible as English breadcrumbs on a
+          # fully translated page. Rename after the content pass so both are done.
+          find input -depth -name '*{{*}}*' | while read -r placeheld; do
+            renamed="${placeheld}"
+            while IFS='|' read -r key val; do
+              [ -z "${key}" ] && continue
+              renamed="${renamed//\{\{${key}\}\}/${val}}"
+            done < "${RUNNER_TEMP}/placeholders.txt"
+            [ "${renamed}" = "${placeheld}" ] && continue
+            mv "${placeheld}" "${renamed}"
+            echo "renamed $(basename "${placeheld}") -> $(basename "${renamed}")"
+          done
           # Guard: no build input may still carry a placeholder after substitution.
+          if find input -name '*{{*}}*' | grep -q .; then
+            echo "::error::A build input still has an unsubstituted {{PLACEHOLDER}} in its FILE NAME after the self-check substitution."
+            find input -name '*{{*}}*'
+            exit 1
+          fi
           if grep -rl '{{[A-Z0-9_]\{2,\}}}' input 2>/dev/null | grep -qv '/README\.md$'; then
             echo "::error::A build input still contains an unsubstituted {{PLACEHOLDER}} after the self-check substitution."
             grep -rn '{{[A-Z0-9_]\{2,\}}}' input | grep -v '/README\.md:' | head -10
