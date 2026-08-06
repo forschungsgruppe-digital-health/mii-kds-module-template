@@ -7,7 +7,9 @@ break?" is answerable without reading Git history.
 Nothing on this list was withdrawn. Each entry was **moved to the organization's skill catalog**,
 [`forschungsgruppe-digital-health/agent-skills`](https://github.com/forschungsgruppe-digital-health/agent-skills),
 where it has since been developed further. The catalog is the single source of truth for those
-skills; this repository consumes them rather than carrying a second copy that drifts.
+skills. They are still invocable here, under their catalog names, as **pinned vendored copies** kept
+in step by `scripts/sync-skills.sh` and verified by CI ([`README.md`](README.md)) — so this
+repository consumes them instead of maintaining a second version that drifts.
 
 ## Tombstones
 
@@ -24,15 +26,24 @@ The helper scripts each skill owned went with it and are **no longer in `scripts
 `scripts/ig-translate.sh` is now `skills/fhir-ig-translation/scripts/ig-translate.sh`. No workflow
 in this repository ever invoked either of them; they were run by hand by a maintainer.
 
-## Getting them back
+## Where they are now
 
-Install from the catalog into whichever agent runtimes you use:
+Both are **vendored back into this repository under their catalog names** —
+[`fhir-ig-analysis/`](fhir-ig-analysis/SKILL.md) and
+[`fhir-ig-translation/`](fhir-ig-translation/SKILL.md) — at the ref pinned in
+[`../skills-lock.json`](../skills-lock.json). Nothing needs installing to use them here, in this
+repository or in a module created from it; that is the whole point of vendoring them (see
+[`README.md`](README.md)). Refresh or verify with `scripts/sync-skills.sh [--check]`; bump the pin
+with `scripts/sync-skills.sh --ref vX.Y.Z`.
+
+To install them **elsewhere** — globally, or into an unrelated checkout — use the catalog's own
+installer:
 
 ```bash
 CATALOG=https://github.com/forschungsgruppe-digital-health/agent-skills/tree/v0.12.0
 
 npx skills add "$CATALOG" --list
-npx skills add "$CATALOG" --skill fhir-ig-analysis fhir-ig-translation --agent claude-code codex --yes
+npx skills add "$CATALOG" --skill fhir-ig-analysis fhir-ig-translation --agent claude-code codex --global --yes
 ```
 
 **Pin the ref, and pin it the `/tree/<ref>` way.** The shorter `owner/repo@v0.12.0` form does *not*
@@ -41,10 +52,10 @@ branch. See the catalog's
 [`docs/consuming-skills.md`](https://github.com/forschungsgruppe-digital-health/agent-skills/blob/main/docs/consuming-skills.md),
 which also covers the pinned-sync-workflow and submodule paths.
 
-Installed skills land in `.claude/skills/` and `.agents/skills/` — the two directories this
-repository commits as **symlinks to `skills/`**. Installing into a checkout therefore writes into
-the canonical `skills/` folder; keep such an install out of a commit unless the intent really is to
-re-vendor the skill here.
+Do not run a bare `npx skills add` **inside this checkout**: `.claude/skills` and `.agents/skills`
+are symlinks to `skills/`, so it writes into the vendored tree at whatever ref you typed.
+`scripts/sync-skills.sh` runs the same installer at the pinned ref, with `--copy`, which is what the
+drift check compares against.
 
 ## What stays here
 

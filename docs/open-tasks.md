@@ -104,7 +104,10 @@ rather than assumed.
 - **The IG statistics report's German prose is no longer this repository's task.**
   The tool that writes it (`scripts/ig-stats.py`) and the skill that owned it
   (`skills/ig-analyze`) moved to the organization's skill catalog as
-  `fhir-ig-analysis` — see [`../skills/RETIRED.md`](../skills/RETIRED.md). The two
+  `fhir-ig-analysis` — see [`../skills/RETIRED.md`](../skills/RETIRED.md). A pinned
+  copy is vendored back into
+  [`../skills/fhir-ig-analysis/`](../skills/fhir-ig-analysis/SKILL.md) so the skill
+  stays invocable here, but its content is maintained in the catalog. The two
   items recorded here (report prose still German while every document here is
   English-source, and `recommendations` rows still framed as a migration) belong
   to that skill now and were carried over with it; track them there, not here.
