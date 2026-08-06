@@ -161,7 +161,13 @@ main() {
   # REMOVE: the template's own release automation, which must NOT live in a module. The
   # Release Please quartet + the template SemVer announcement are the set listed
   # by the header of .github/workflows/release-please.yml — honor it.
-  local REMOVE=".github/workflows/release-please.yml .github/workflows/notify-zulip.yml release-please-config.json .release-please-manifest.json CHANGELOG.md"
+  # release-demo.yml joins them: it renders the TEMPLATE's Pages demo from a
+  # SemVer tag Release Please cut. A module has no such demo (its Pages surface
+  # is the gated -go-publish output) and no SemVer tags, so the workflow would
+  # never fire — and if it somehow did, it would write to the module's gh-pages.
+  # Its own `endsWith(github.repository, …)` job guard is the second line of
+  # defence; this removal is the first.
+  local REMOVE=".github/workflows/release-please.yml .github/workflows/notify-zulip.yml .github/workflows/release-demo.yml release-please-config.json .release-please-manifest.json CHANGELOG.md"
   # NEVER: module content, build input, and PROPAGATED tooling that a
   # module keeps. A removal target colliding here is a bug → hard abort.
   local NEVER="input sushi-config.yaml ig.ini publication-request.json advisor.json qc scripts skills .claude .agents AGENTS.md LICENSE README.md CONTRIBUTING.md docs/recipes/first-run-setup.md .devcontainer .editorconfig .gitignore .github/dependabot.yml .github/CODEOWNERS .github/ISSUE_TEMPLATE .github/workflows/go-publish.yml .github/workflows/convention-check.yml .github/workflows/security-scan.yml .github/workflows/dependency-check.yml scripts/ig-stats.py scripts/ig-translate.sh scripts/convention-check.mjs scripts/convention-check.test.mjs scripts/language-model-check.sh"

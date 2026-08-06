@@ -145,95 +145,22 @@ jobs:
         run: gem install jekyll -v "${JEKYLL_VERSION}"
 
       - name: Template-repo self-check substitution (workspace only, never committed)
+        # WHY: this repo ships {{PLACEHOLDER}} values so a module author starts
+        # from a documented scaffold. To let CI still prove the pipeline builds,
+        # substitute the documented self-check values into WORKSPACE copies. The
+        # workflow never commits source, so nothing here reaches the repo. In a
+        # created module the placeholders are gone and this step does not run.
+        #
+        # The value table itself lives in scripts/self-check-substitute.sh rather
+        # than inline here, because release-demo.yml needs the SAME substitution
+        # to render the demo the Pages landing page advertises. Two copies of the
+        # table is how the two builds drift apart — exactly the class of bug
+        # release-demo.yml exists to end. Leaving SELF_CHECK_RELEASE_TAG unset
+        # keeps the fixed draft CALVER_VERSION that a preview should carry; the
+        # release demo sets it so the render names the tag it was built from.
         if: ${{ endsWith(github.repository, '/mii-kds-module-template') }}
         shell: bash
-        run: |
-          set -euo pipefail
-          # WHY: this repo ships {{PLACEHOLDER}} values so a module author starts
-          # from a documented scaffold. To let CI still prove the pipeline builds,
-          # substitute the documented self-check values into WORKSPACE copies. The
-          # workflow never commits source, so nothing here reaches the repo. In a
-          # created module the placeholders are gone and this step does not run.
-          subst() { # $1=file  (stdin: KEY|VALUE lines)
-            local file="$1" key val esc
-            while IFS='|' read -r key val; do
-              [ -z "${key}" ] && continue
-              esc="$(printf '%s' "${val}" | sed -e 's/[&/\]/\\&/g')"
-              sed -i "s/{{${key}}}/${esc}/g" "${file}"
-            done
-          }
-          # Self-check values are derived from the placeholder table at the top
-          # of sushi-config.yaml. These stand in only so the template repo's
-          # OWN CI can prove the pipeline builds; a real module replaces them. The
-          # rendered IG is the module template itself — NOT a "demo" (this scaffold
-          # is a starting point for a new MII KDS module IG, or a migration target
-          # for an existing Simplifier MII IG). MODULE_SLUG drives id/packageId/canonical.
-          # The SAME table is applied to sushi-config.yaml, ig.ini AND the narrative
-          # pages (input/pagecontent + input/translations) so the rendered self-check
-          # preview shows real text, not literal {{PLACEHOLDER}} markers.
-          cat > "${RUNNER_TEMP}/placeholders.txt" <<'PLACEHOLDERS'
-          MODULE_SLUG|template
-          MODULE_NAME|Template
-          MODULE_TITLE|Module Template
-          MODULE_DESCRIPTION|Self-check build of the mii-kds-module-template scaffold. This repository is a template for creating a new MII KDS module Implementation Guide, or a migration target for an existing Simplifier MII IG. Every value here is a placeholder — replace them all when you create a real module.
-          CALVER_VERSION|2027.0.0-draft.1
-          CALVER_YEAR|2027
-          RELEASE_DATE|2027-01-01
-          COPYRIGHT_START_YEAR|2027
-          APPROVAL_DATE|2027-01-01
-          MODULE_AUTHOR_EMAIL|noreply@example.org
-          TOPIC_NCI_CODE|C15607
-          GITHUB_ORG|medizininformatik-initiative
-          REPO_NAME|mii-kds-module-template
-          PLACEHOLDERS
-          # sushi-config.yaml + ig.ini (ig.ini's `ig =` line references
-          # ImplementationGuide-mii-ig-{{MODULE_SLUG}}.json; the `template =` line is
-          # left untouched — it already points at the vendored ig-template/).
-          subst sushi-config.yaml < "${RUNNER_TEMP}/placeholders.txt"
-          subst ig.ini < "${RUNNER_TEMP}/placeholders.txt"
-          # narrative pages (both languages), if present
-          # EVERY build input that may carry a placeholder — not just the narrative
-          # pages. FSH is compiled by SUSHI, so an unsubstituted {{...}} there is a
-          # hard type error ("Cannot assign string value: ... does not match element
-          # type: id"), and input/resources JSON is read by the publisher.
-          find input -type f \( -name '*.md' -o -name '*.xml' -o -name '*.fsh' -o -name '*.json' -o -name '*.po' \) 2>/dev/null | while read -r page; do
-            subst "${page}" < "${RUNNER_TEMP}/placeholders.txt"
-          done
-          # Placeholders also appear in FILE NAMES, not only in contents: the
-          # IG-level translation catalogue is named after the IG resource
-          # (ImplementationGuide-mii-ig-{{MODULE_SLUG}}.po), and the publisher
-          # matches it to fsh-generated/resources/<Type>-<id>.json BY NAME. Left
-          # unrenamed it is silently ignored and the translated variant falls back
-          # to default-language page titles — visible as English breadcrumbs on a
-          # fully translated page. Rename after the content pass so both are done.
-          find input -depth -name '*{{*}}*' | while read -r placeheld; do
-            renamed="${placeheld}"
-            while IFS='|' read -r key val; do
-              [ -z "${key}" ] && continue
-              renamed="${renamed//\{\{${key}\}\}/${val}}"
-            done < "${RUNNER_TEMP}/placeholders.txt"
-            [ "${renamed}" = "${placeheld}" ] && continue
-            mv "${placeheld}" "${renamed}"
-            echo "renamed $(basename "${placeheld}") -> $(basename "${renamed}")"
-          done
-          # Guard: no build input may still carry a placeholder after substitution.
-          if find input -name '*{{*}}*' | grep -q .; then
-            echo "::error::A build input still has an unsubstituted {{PLACEHOLDER}} in its FILE NAME after the self-check substitution."
-            find input -name '*{{*}}*'
-            exit 1
-          fi
-          if grep -rl '{{[A-Z0-9_]\{2,\}}}' input 2>/dev/null | grep -qv '/README\.md$'; then
-            echo "::error::A build input still contains an unsubstituted {{PLACEHOLDER}} after the self-check substitution."
-            grep -rn '{{[A-Z0-9_]\{2,\}}}' input | grep -v '/README\.md:' | head -10
-            exit 1
-          fi
-          # Guard: no ACTIVE (non-comment) placeholder may survive in sushi-config.yaml.
-          if grep -vE '^[[:space:]]*#' sushi-config.yaml | grep -q '{{[A-Za-z0-9_]*}}'; then
-            echo "::error::A self-check value is missing from the substitution table — an active {{PLACEHOLDER}} survives in sushi-config.yaml."
-            grep -nvE '^[[:space:]]*#' sushi-config.yaml | grep '{{[A-Za-z0-9_]*}}'
-            exit 1
-          fi
-          echo "::notice::Template-repo self-check: substituted self-check placeholders into WORKSPACE copies of sushi-config.yaml, ig.ini and the narrative pages (never committed). A created module replaces the placeholders for real and skips this step."
+        run: bash scripts/self-check-substitute.sh
 
       - name: Disable the version comparison when toggled off
         # ENABLE_VERSION_COMPARISON=false switches the FEATURE off - the real
