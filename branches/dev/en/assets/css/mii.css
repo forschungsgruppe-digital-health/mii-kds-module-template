@@ -1,12 +1,19 @@
 /* mii.css - MII branding for de.medizininformatikinitiative.template
    ====================================================================
 
-   This file overrides ONLY the CSS custom properties that fhir2.base.template
-   (0.1.0) declares in content/assets/css/project.css (":root" block, variables
-   1-32). No base rules are re-declared, so a later branding change stays a
-   one-file edit and base-template updates keep working. It is linked by
+   COLOUR is set exclusively through the CSS custom properties that
+   fhir2.base.template (0.1.0) declares in content/assets/css/project.css
+   (":root" block, variables 1-32), so a branding change stays a one-file edit
+   and base-template updates keep working. The file is linked by
    includes/fragment-css.html AFTER project.css, so this :root block wins the
    cascade at equal specificity.
+
+   Below the :root block the file also carries four rule blocks that are not
+   about colour: the highlight boxes, the narrative-table styling, the content-
+   image handling and the structure-tabs spacing. Three of them add NEW classes;
+   the content-image block deliberately overrides base rules. Each is explained
+   at its own block and listed in docs/styleguide.md sections 3, 5 and 5a. Keep
+   that list short - a base rule countermanded here stops receiving base fixes.
 
    Every value is derived from an MII source - see docs/styleguide.md for the full
    palette table (exact source per color) and the WCAG contrast calculations.
@@ -202,4 +209,31 @@ table:not([class]):not([style]):not([border]):not([data-fhir]) th {
   background-color: var(--mii-table-header-bg-color);
   color: var(--mii-table-header-text-color);
   text-align: left;
+}
+
+/* ── Content images (issue #66) ──────────────────────────────────────────────
+   The base template floats every `p > img` (project.css: float + margins) and
+   caps no image width. For CONTENT images — diagrams, screenshots, the normal
+   Markdown image — that wraps body text beside the image and lets wide
+   diagrams overflow the column. Content images are therefore block-centered
+   and width-capped by default; a small inline image can opt back into the
+   base float with class="float" (raw HTML img). mii.css loads after the base
+   stylesheets, so these rules win the cascade. */
+#segment-content p > img:not(.float) {
+  float: none;
+  display: block;
+  margin: 0.5rem auto 1rem auto;
+}
+#segment-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── structure-tabs include ── spacing for the tabbed structure view ──────── */
+.structure-tabs { margin: 1rem 0; }
+.structure-tabs .tab-content {
+  border: 1px solid #ddd;
+  border-top: none;
+  padding: 0.75rem;
+  overflow-x: auto;
 }
