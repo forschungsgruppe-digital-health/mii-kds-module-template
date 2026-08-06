@@ -79,8 +79,22 @@
 name: Release demo
 
 on:
-  release:
-    types: [published]
+  # NOT `release: types: [published]`. release-please publishes the release with
+  # the default GITHUB_TOKEN, and GitHub suppresses workflow triggers from events
+  # that token raises (loop prevention) — so a release trigger here never fires and
+  # the demo silently keeps serving the previous release. release-please.yml calls
+  # this workflow directly instead, inside the run that created the release.
+  workflow_call:
+    inputs:
+      tag:
+        description: "Release tag to render, e.g. v0.6.0"
+        required: true
+        type: string
+      update_landing_page:
+        description: "Repoint the gh-pages landing page at this tag"
+        required: false
+        default: true
+        type: boolean
   workflow_dispatch:
     inputs:
       tag:

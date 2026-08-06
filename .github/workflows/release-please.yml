@@ -48,6 +48,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        id: release
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+
+  # Render the demo for the release this run just created.
+  # WHY a call and not `on: release` in release-demo.yml: release-please publishes
+  # the release with the default GITHUB_TOKEN, and GitHub suppresses workflow
+  # triggers from events raised by that token, so a release trigger there never
+  # fires — the demo would silently keep serving the previous release. Calling it
+  # from inside this run sidesteps that, because no new event is involved.
+  release-demo:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    uses: ./.github/workflows/release-demo.yml
+    with:
+      tag: ${{ needs.release-please.outputs.tag_name }}
+      update_landing_page: true
+    permissions:
+      contents: write
+    secrets: inherit
