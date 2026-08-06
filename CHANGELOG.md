@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.5.2...v0.6.0) (2026-08-06)
+
+
+### Features
+
+* **ci:** build and publish the release demo from the released tag ([#79](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/79)) ([9b3e20c](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/9b3e20cfbf380f57a1df1d81021d7959833069d7))
+
 ## [0.5.2](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.5.1...v0.5.2) (2026-08-05)
 
 
