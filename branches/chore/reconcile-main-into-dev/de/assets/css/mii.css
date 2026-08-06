@@ -1,12 +1,19 @@
 /* mii.css - MII branding for de.medizininformatikinitiative.template
    ====================================================================
 
-   This file overrides ONLY the CSS custom properties that fhir2.base.template
-   (0.1.0) declares in content/assets/css/project.css (":root" block, variables
-   1-32). No base rules are re-declared, so a later branding change stays a
-   one-file edit and base-template updates keep working. It is linked by
+   COLOUR is set exclusively through the CSS custom properties that
+   fhir2.base.template (0.1.0) declares in content/assets/css/project.css
+   (":root" block, variables 1-32), so a branding change stays a one-file edit
+   and base-template updates keep working. The file is linked by
    includes/fragment-css.html AFTER project.css, so this :root block wins the
    cascade at equal specificity.
+
+   Below the :root block the file also carries four rule blocks that are not
+   about colour: the highlight boxes, the narrative-table styling, the content-
+   image handling and the structure-tabs spacing. Three of them add NEW classes;
+   the content-image block deliberately overrides base rules. Each is explained
+   at its own block and listed in docs/styleguide.md sections 3, 5 and 5a. Keep
+   that list short - a base rule countermanded here stops receiving base fixes.
 
    Every value is derived from an MII source - see docs/styleguide.md for the full
    palette table (exact source per color) and the WCAG contrast calculations.
