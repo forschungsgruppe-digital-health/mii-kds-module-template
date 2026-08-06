@@ -152,7 +152,7 @@ jobs:
           path: kerndatensatz-meta
 
       - name: Set up Java (temurin 17)
-        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95 # v5.6.0
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
         with:
           distribution: temurin
           java-version: "17"
@@ -230,6 +230,29 @@ jobs:
             echo "Terminology: public HL7 fallback (https://tx.fhir.org)" >> "${GITHUB_STEP_SUMMARY}"
           fi
 
+      - name: Seed the comparison cache (previous-version packages)
+        # No-op unless sushi-config.yaml activates `version-comparison`; then
+        # the previous release's package.tgz (a GitHub Release asset) is placed
+        # in ~/.fhir/packages so the publisher's PreviousVersionComparator can
+        # load it. Warn-not-fail: a missing historical asset must not break the
+        # build - the comparison page reports the gap instead.
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: bash scripts/seed-comparison-cache.sh
+
+      - name: Disable the version comparison when toggled off
+        if: ${{ vars.ENABLE_VERSION_COMPARISON == 'false' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Comment out any explicit versions, then set the publisher's NATIVE
+          # off-value: the ig-parameters registry documents that an ABSENT
+          # version-comparison defaults to {last} (the comparator still runs),
+          # while the value n/a means "don't do any comparison".
+          sed -i -E 's/^(  version-comparison(-master)?:)/  # (disabled by ENABLE_VERSION_COMPARISON) \1/' sushi-config.yaml
+          sed -i '/^parameters:/a\  version-comparison: n/a' sushi-config.yaml
+          echo "::notice::version comparison disabled via ENABLE_VERSION_COMPARISON (set to the publisher-native n/a)."
+
       - name: Build the IG (SUSHI + IG Publisher)
         shell: bash
         env:
@@ -299,10 +322,20 @@ jobs:
           version="${GITHUB_REF#refs/tags/}"
           echo "version=${version}" >> "${GITHUB_OUTPUT}"
 
+      - name: Download the build (package.tgz for the release assets)
+        # Attaching the package to every release is what makes the version
+        # comparison of FUTURE releases work: seed-comparison-cache.sh fetches
+        # the previous version's package.tgz from exactly this asset.
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: module-release-build
+          path: release-assets
+
       - name: Create the draft GitHub Release
         uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # v3.0.2
         with:
           name: "${{ steps.prep.outputs.version }}"
+          files: release-assets/package.tgz
           draft: true
           prerelease: ${{ contains(steps.prep.outputs.version, '-') }}
           generate_release_notes: true
@@ -310,10 +343,11 @@ jobs:
             ## MII KDS module release ${{ steps.prep.outputs.version }}
 
             <!-- DELETE START -->
-            This is a **draft** created automatically from the CalVer tag. Before
-            publishing (wiki step 7): edit these notes, remove the DELETE blocks,
-            and attach the module's FHIR package (`package.tgz`, available as the
-            `module-release-build` workflow artifact, or from Simplifier).
+            This is a **draft** created automatically from the CalVer tag. The
+            module's FHIR package (`package.tgz`) is already attached — future
+            releases' version comparison fetches the previous package from this
+            asset, so leave it in place. Before publishing (wiki step 7): edit
+            these notes and remove the DELETE blocks.
             <!-- DELETE END -->
 
             ### Changes

@@ -12,3 +12,4 @@ conventions).
 
 > [TODO: Describe your module's profiles and how they relate to each other. The
 > IG Publisher generates the technical detail pages automatically.]
+{: .mii-highlight .mii-highlight-grey}

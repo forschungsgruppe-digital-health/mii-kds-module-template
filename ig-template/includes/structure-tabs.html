@@ -19,6 +19,9 @@ Verify before use (ls temp/pages/_includes/ after a build): ONE missing include
 fails the entire Jekyll run. Prefer this include over pasting fragments below
 each other; prefer a plain link to the artifact page when the narrative does
 not need an inline rendering at all.
+
+Full recipe, with the parameter table and the failure modes:
+docs/recipes/tab-an-artifact-structure.md in the ig-template-mii-kds repository.
 {% endcomment %}
 {% assign st_id = include.id | default: include.artifact %}
 {% if include.lang == 'de' %}

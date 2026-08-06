@@ -6,3 +6,4 @@
 Detailed description of the data elements of the **{{MODULE_TITLE}}** module and how they map to the logical models.
 
 > [TODO: Describe the domain data elements; link them to the logical models.]
+{: .mii-highlight .mii-highlight-grey}

@@ -3,7 +3,7 @@
      renders "Links: Table of Contents | QA Report [| feedback dashboards]".
      The base uses site.data.stringsBase[include.lang][...] for the labels. The
      reason this override supplies its own is the Imprint label: the base ships no
-     stringsBase key for it and a child template cannot add one (docs/design.md
+     stringsBase key for it and a child template cannot add one (docs/styleguide.md
      section 6), and the same include.lang branch then has to carry the other
      labels too. (The blank-label problem that first motivated this is separately
      mitigated: this repo vendors the base's own German catalogs into

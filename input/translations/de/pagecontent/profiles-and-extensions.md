@@ -8,3 +8,4 @@ Repository, und die MII-Namenskonventionen).
 
 > [TODO: Beschreiben Sie die Profile Ihres Moduls und ihre Beziehungen. Der
 > IG-Publisher erzeugt die technischen Detailseiten automatisch.]
+{: .mii-highlight .mii-highlight-grey}

@@ -175,6 +175,7 @@ Identifier-Arten, sind nur die ausdrücklich gekennzeichneten Slices gefordert:
 > [TODO: Nur ergänzen, falls Ihr Modul zusätzliche oder abweichende
 > Must-Support-Regeln definiert — und die Abweichung begründen. Löschen Sie
 > diesen Hinweis anschließend.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Siehe auch
 

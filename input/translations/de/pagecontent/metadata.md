@@ -103,6 +103,7 @@ In diesem Gerüst nicht aktiviert, aber als auskommentierte Blöcke in
 > CodeSysteme und ValueSets anwendet — das Idiom aus `kerndatensatz-basis` ist
 > ein gemeinsames `RuleSet` in `input/fsh/rulesets/crmi.fsh` —, ergänzen Sie die
 > entsprechenden Zeilen.]
+{: .mii-highlight .mii-highlight-grey}
 
 ##### CodeSystem-Supplements
 
@@ -159,6 +160,7 @@ Paket-Pinnung einsehbar sind.
 > Blöcke in `sushi-config.yaml`) und verlinken Sie hier die erzeugte
 > `Parameters`-Seite — oder halten Sie ausdrücklich fest, dass dieses Modul
 > keine Expansions-Parameter pinnt.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Bezug zu FAIR
 
@@ -214,6 +216,7 @@ dauerhaft identifizierter FAIR-Datensatz behauptet.
 > Ihr Modul die vollständige Selbsteinschätzung will, ergänzen Sie die
 > Indikatoren der Prioritäten *Important* und *Useful* — `kerndatensatz-basis`
 > führt die vollständige Tabelle.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Praktische Nutzung
 

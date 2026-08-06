@@ -14,6 +14,7 @@ the current version — but their governance is not settled yet.
 | Is the package published to a FHIR package registry? | **No.** Modules consume the template as a vendored folder (`ig-template/`, kept current automatically — see `scripts/sync-ig-template.sh` in this repo). |
 | Which GitHub organisation will own these repos? | **`medizininformatik-initiative`** is the agreed TARGET organisation. Canonical URLs and package ids already name it; navigation links point at the current organisation so they resolve today, and are swept to the target organisation in one tracked pass at transfer time. |
 | Have they moved yet? | **No.** They still live in the pre-move organisation; the transfer happens on an explicit decision. Until then some links here point at the future location, and CI bridges the gap via the `IG_TEMPLATE_REPO_URL` repository variable (module template) — remove it after the move. |
+| What happens at the move? | The one-pass link sweep plus the file deletions and edits listed in [migration cleanup](migration-cleanup.md). |
 | Who owns the template after 2026? | **The MII**, for now. Revisit with the TF KDS. |
 
 > **Why registration is deliberately deferred:** an `ig-registry` entry and a
@@ -32,23 +33,24 @@ Everything about developing and reviewing the templates works today: builds,
 bilingual previews, releases (SemVer here, CalVer in modules), the vendored
 template flow, and creating a module from the module template.
 
-## Branch state — `main` and `dev` have diverged
+## Branch state — `main` and `dev` are reconciled
 
 [CONTRIBUTING.md](../CONTRIBUTING.md) describes the intended flow: work lands on
 `dev` via a short-lived branch, and `main` receives it as a `dev → main` merge
-commit. **That is the rule, but it is not what the history shows.** While the
-repository was being brought up, several fixes and one feature were merged
-straight into `main` as pull requests of their own, alongside the Release Please
-release commits that legitimately land there. `dev`, meanwhile, kept accumulating
-its own work.
+commit. **That is the rule, and for a while it is not what the history showed.**
+While the repository was being brought up, several fixes and one feature were
+merged straight into `main` as pull requests of their own, alongside the Release
+Please release commits that legitimately land there. `dev`, meanwhile, kept
+accumulating its own work, and the two branches ended up ahead of each other in
+both directions.
 
-The result: **the two branches are ahead of each other in both directions.**
-`dev` carries a substantial series of changes `main` has never seen, and `main`
-carries changes (the IG-level translation catalogue, its substitute-and-rename
-handling in CI, the structure-tabs include, the Pages demo link, and the release
-commits) that `dev` has never seen.
+**As of 2026-08-06 that is repaired:** `main` was back-merged into `dev` (the
+IG-level translation catalogue and its substitute-and-rename handling in CI, the
+structure-tabs include, the Pages demo link and the release commits), the
+overlapping edits were reconciled by hand, and `dev` was promoted to `main`. Both
+branches point at the same commit.
 
-Check the current state before you branch:
+Check the state before you branch — both commands should print nothing:
 
 ```sh
 git fetch origin
@@ -70,9 +72,8 @@ git push origin dev
 Doing this in a pull request is preferable, so CI runs on the merged result.
 The reason is mechanical: `dev → main` is a merge commit, so a `main`-only commit
 that was never back-merged shows up as a conflict — or, worse, is quietly
-reverted — the next time `dev` is merged forward. Until the two branches are
-reconciled, treat `main` (not `dev`) as the source of truth for the translation
-catalogue and the CI placeholder handling, and read `dev` for everything newer.
+reverted — the next time `dev` is merged forward. Back-merge each time it
+happens; letting it accumulate is what produced the 2026-08 divergence above.
 
 > **How to avoid repeating this:** target `dev` with every pull request. A direct
 > `main` pull request is only for a fix that must ship before the next release —

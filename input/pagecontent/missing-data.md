@@ -128,6 +128,7 @@ datatypes):
 > — for example an element whose ValueSet carries its own "unknown" concept, or
 > a data category for which the module prescribes a different representation.
 > Delete this prompt afterwards.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### See also
 

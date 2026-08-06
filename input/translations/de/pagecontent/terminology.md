@@ -24,3 +24,4 @@ vollständig).
 > auf die automatisch erzeugte Artefakt-Liste. Soll Ihr Modul Implementierenden
 > eine verbindliche Anforderung an Expansionen auferlegen, gehört sie auf die
 > Konformitätsseiten — diese Seite gehört nicht zum Konformitäts-Abschnitt.]
+{: .mii-highlight .mii-highlight-grey}

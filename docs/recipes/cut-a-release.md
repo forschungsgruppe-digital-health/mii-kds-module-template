@@ -8,7 +8,13 @@ for the step-by-step mapping to the MII wiki's Module Release Workflow.
 
 ## Steps
 
-1. **Pick the CalVer version** `YYYY.n.n` per the MII scheme (e.g. `2026.0.0`; the
+0. **From your second formal publication: point `version-comparison` in
+   `sushi-config.yaml` at the version you are superseding** — the build
+   publishes the technical delta at `comparison-v<previous>/index.html`;
+   link it from the new version's changelog section. (Needs the canonical to
+   serve `package-list.json`; the first formal publication provides it — the
+   commented block in `sushi-config.yaml` has the details.)
+1. **Pick the CalVer version** `YYYY.n.n` per the MII scheme (e.g. `2027.0.0`; the
    first number is the release-sequence year). Confirm against the
    [Module Release Workflow wiki page](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow).
 2. **Bump the version and the dates everywhere they appear** — the full file
@@ -17,7 +23,7 @@ for the step-by-step mapping to the MII wiki's Module Release Workflow.
    sequence year, the approval date), `publication-request.json`, the three
    `input/fsh/rulesets/` files, the `CRMIApprovalDate` call sites, and the
    narrative pages plus their German mirrors. Do this on a
-   `release/vYYYY.n.n` branch (e.g. `release/v2026.0.0`) → PR → `dev` — the
+   `release/vYYYY.n.n` branch (e.g. `release/v2027.0.0`) → PR → `dev` — the
    `release/**` name is what makes the convention check run in strict release
    mode (unresolved placeholders and the scaffold's demonstration page fail
    there, not on a `feature/*` branch). While you are in the pages, sweep
@@ -26,7 +32,7 @@ for the step-by-step mapping to the MII wiki's Module Release Workflow.
    must come back empty; the German pages render at `/de/` and ship whatever
    is left in them.
 3. **Promote `dev → main`** with a merge commit.
-4. **Tag** the release on `main`: `git tag v2026.0.0 && git push origin v2026.0.0`
+4. **Tag** the release on `main`: `git tag v2027.0.0 && git push origin v2027.0.0`
    (the tag pattern the `module-release.yml` workflow listens for).
 5. `module-release.yml` then **builds** and creates a **draft GitHub
    Release** with the package attached. **A human reviews and publishes the
@@ -38,7 +44,7 @@ for the step-by-step mapping to the MII wiki's Module Release Workflow.
 
 ## Expected result
 
-A `v2026.0.0` tag + a **draft** GitHub Release to publish by hand — the Zulip
+A `v2027.0.0` tag + a **draft** GitHub Release to publish by hand — the Zulip
 announcement (if the key is set) fires on publishing — and a dry-run
 publication ready for a human to promote. **No SemVer tag, no Release Please.**
 

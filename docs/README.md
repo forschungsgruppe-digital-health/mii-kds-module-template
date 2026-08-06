@@ -18,6 +18,7 @@ map of everything else.
 | Know who owns the page set and the menu | [page-structure.md](page-structure.md) |
 | Know whether this is production-ready | [project-status.md](project-status.md) |
 | Know what is unfinished, and why | [open-tasks.md](open-tasks.md) |
+| Prepare the move to the target organisation | [migration-cleanup.md](migration-cleanup.md) |
 | Translate the pages, menu and page titles | [recipes/add-translation.md](recipes/add-translation.md) |
 | Read the specifications this is built on | [further-reading.md](further-reading.md) |
 

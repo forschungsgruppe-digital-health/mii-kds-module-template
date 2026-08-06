@@ -39,9 +39,11 @@ which are **human-gated**.
 
 ### CalVer format
 
-`YYYY.n.n` — for example `2026.0.0`, then `2026.0.1` for a patch in the same
+`YYYY.n.n` — for example `2027.0.0`, then `2027.0.1` for a patch in the same
 sequence, then `2027.0.0` for the next annual sequence. A pre-release adds a
-suffix: `2026.0.0-rc.1`, `2026.0.0-alpha.1`.
+suffix: `2027.0.0-rc.1`, `2027.0.0-draft.1` (valid SemVer prerelease
+identifiers; the module-release workflow marks any tag containing `-` as a
+prerelease, and the preview build labels itself `2027.0.0-draft.1` this way).
 
 - **Tag** = the version prefixed with `v`: `v2026.0.1` (the basis precedent —
   `kerndatensatz-basis` tags `v2026.0.0` / `v2026.0.1` on `main`).
@@ -99,6 +101,20 @@ git checkout -b release/v2026.0.1   # release/** arms the strict convention chec
 > the branch names differ, the intent is identical.)
 
 ### 2. Update the version — *human*
+
+> **From the second formal publication on: enable the version comparison.**
+> Set `version-comparison: "<previous released version>"` in
+> `sushi-config.yaml` (the commented block explains the two prerequisites —
+> the canonical must serve `package-list.json`, which the first formal
+> publication provides, and the previous package must be loadable, which
+> `scripts/seed-comparison-cache.sh` covers from the GitHub Release assets).
+> The build then publishes a machine-generated delta at
+> `comparison-v<previous>/index.html` and annotates changed elements on the
+> artifact pages — link that report from the version's changelog section,
+> next to the prose explanation of any breaking change. Until the first
+> formal publication the comparator has no version history to read; this
+> template repo demonstrates the report anyway with the validator's compare
+> command on its preview (`comparison-demo/` — see `docs/workflows.md`).
 
 > **First release of a module: delete the scaffold's demonstration page
 > first.** The convention check hard-fails a `release/**` branch while it is

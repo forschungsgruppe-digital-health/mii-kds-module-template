@@ -26,3 +26,4 @@ ValueSets may not expand completely).
 > artifact list. If your module wants to place a binding requirement about
 > expansions on implementers, state it on the Conformance pages with an explicit
 > `§…§` marker — this page is not part of the Conformance section.]
+{: .mii-highlight .mii-highlight-grey}

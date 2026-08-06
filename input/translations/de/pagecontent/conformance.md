@@ -48,6 +48,7 @@ technischen Artefakte im Abschnitt [Artefakte](artifacts.html).
 > Halten Sie die Menge **kuratiert** — markieren Sie echte Verpflichtungen,
 > nicht jeden Satz mit einem fett gesetzten Verb — und formulieren Sie jeden
 > markierten Satz für sich verständlich: die Tabelle zeigt ihn ohne Kontext.]
+{: .mii-highlight .mii-highlight-grey}
 
 ---
 

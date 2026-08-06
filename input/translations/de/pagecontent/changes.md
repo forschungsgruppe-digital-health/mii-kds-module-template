@@ -34,6 +34,51 @@ Kategorien gruppierten Änderungen:
 Kategorien ohne Inhalt werden weggelassen. Geht eine Änderung auf ein Issue oder
 einen Pull-Request zurück, wird darauf verlinkt.
 
+<div class="mii-highlight mii-highlight-red">
+<h5>Breaking Changes MÜSSEN berichtet und erläutert werden</h5>
+<p>Ein Versionsabschnitt mit einer Breaking Change ist erst vollständig, wenn
+er ausdrücklich und in diesem Changelog beantwortet:</p>
+<ul>
+<li><b>Was genau sich geändert hat</b> zwischen den beiden Versionen — das
+Artefakt, das Element, die alte und die neue Einschränkung (nicht nur
+„Profil X wurde überarbeitet“).</li>
+<li><b>Was das für bestehende Daten bedeutet:</b> Validieren Daten, die der
+Vorversion entsprachen, weiterhin gegen die neue Version? Falls nein: welche
+Ressourcen und Elemente sind betroffen, und wie zeigt sich der Fehler?</li>
+<li><b>Was Implementierende tun sollten:</b> die Empfehlung der Autorinnen
+und Autoren zur Migration bestehender Daten auf die neue Version —
+Transformationsschritte, Standardwerte, Umkodierungs-Hinweise — oder die
+ausdrückliche Aussage, dass kein Migrationspfad bereitgestellt wird, und
+warum.</li>
+</ul>
+<p><b>Was als Breaking Change zählt</b> — behandeln Sie eine Änderung als
+Breaking Change, wenn sie eines der Folgenden tut, auch wenn sie klein wirkt:
+eine Kardinalität verschärft (<code>0..*</code> → <code>1..1</code>), eine
+Binding-Stärke erhöht (example → required), Codes aus einem required-ValueSet
+entfernt, ein Element oder einen Slice entfernt oder umbenennt, einen Typ
+einengt, eine Invariante oder eine Must-Support-Pflicht hinzufügt oder eine
+kanonische URL ändert. Im Zweifel: als Breaking Change berichten.</p>
+<p><b>Breaking für wen:</b> benennen Sie beide Perspektiven — <i>gespeicherte
+Daten</i> (Instanzen, die gegen die alte Version valide sind) und
+<i>Implementierungen</i> (Clients und Server, die dagegen gebaut wurden; ein
+entfernter Suchparameter bricht Implementierungen, während jede gespeicherte
+Instanz valide bleibt).</p>
+<p><b>Die Versionsnummer warnt niemanden.</b> Das MII-Kalender-Versionsschema
+(<code>JJJJ.n.n</code>) trägt kein Major-Signal wie SemVer — dieser
+Changelog-Abschnitt ist die <i>einzige</i> Warnung, die Lesende bekommen.</p>
+<p><b>Verlinken Sie das technische Delta.</b> Ab der zweiten formalen
+Publikation aktivieren Sie den Versionsvergleich des IG Publishers
+(<code>version-comparison</code> in <code>sushi-config.yaml</code> — siehe die
+Seite <a href="version-history.html">Versionierung</a> zur Einrichtung und
+ihren Voraussetzungen); er veröffentlicht einen maschinell erzeugten
+Vergleich unter <code>comparison-v&lt;Vorversion&gt;/index.html</code>.
+Verlinken Sie ihn aus dem Versionsabschnitt, damit die Erläuterung und der
+technische Diff nebeneinanderstehen.</p>
+<p>Kennzeichnen Sie solche Einträge deutlich (zum Beispiel mit dem Präfix
+<b>BREAKING:</b>), damit sie beim Überfliegen des Abschnitts nicht übersehen
+werden können.</p>
+</div>
+
 ---
 
 #### Version {{CALVER_VERSION}}
@@ -53,3 +98,4 @@ einen Pull-Request zurück, wird darauf verlinkt.
 > voran — nutzen Sie die für Ihr Modul passende der beiden Gruppierungen,
 > bleiben Sie dabei aber über alle Versionen hinweg und in beiden Sprachen
 > einheitlich.]
+{: .mii-highlight .mii-highlight-grey}

@@ -167,6 +167,7 @@ several identifier types, only the explicitly flagged slices are required:
 > [TODO: Only add anything here if YOUR module defines additional or deviating
 > Must Support rules — and state the reason for the deviation. Delete this
 > prompt afterwards.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### See also
 

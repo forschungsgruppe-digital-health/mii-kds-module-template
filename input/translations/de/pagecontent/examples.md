@@ -8,3 +8,4 @@ Vorlage enthält das synthetische Beispiel
 Patientendaten in Beispielen verwenden.
 
 > [TODO: Ergänzen Sie aussagekräftige Beispielinstanzen zu Ihren Profilen.]
+{: .mii-highlight .mii-highlight-grey}

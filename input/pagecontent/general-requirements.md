@@ -78,6 +78,7 @@ reason is given in prose on the profile page.
 > [TODO: Name the standards and specifications YOUR module actually aligns with
 > (they should match the `dependencies` in `sushi-config.yaml`), and delete the
 > entries above that do not apply.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### Claiming conformance
 
@@ -223,6 +224,7 @@ are modifiers and how they affect the interpretation of a resource.
 > [TODO: Add the general requirements that are specific to YOUR module — for
 > example additional expectations on the FHIR RESTful API, on search parameters,
 > or on the use of codes in your profiles. Delete this prompt afterwards.]
+{: .mii-highlight .mii-highlight-grey}
 
 #### See also
 

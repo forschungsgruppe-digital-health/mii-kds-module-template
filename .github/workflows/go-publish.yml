@@ -403,7 +403,7 @@ jobs:
           } >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Set up Java
-        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95 # v5.6.0
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
         with:
           distribution: temurin
           java-version: "17"
@@ -541,6 +541,27 @@ jobs:
             echo "tx_url=https://tx.fhir.org" >> "${GITHUB_OUTPUT}"
             echo "Terminology: public HL7 fallback (https://tx.fhir.org)" >> "${GITHUB_STEP_SUMMARY}"
           fi
+
+      - name: Seed the comparison cache (previous-version packages)
+        # No-op unless the module's sushi-config.yaml activates
+        # `version-comparison`. The go-publish checkout lives in source/;
+        # warn-not-fail like the build workflows.
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: bash source/scripts/seed-comparison-cache.sh
+
+      - name: Disable the version comparison when toggled off
+        if: ${{ vars.ENABLE_VERSION_COMPARISON == 'false' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Comment out any explicit versions, then set the publisher's NATIVE
+          # off-value: the ig-parameters registry documents that an ABSENT
+          # version-comparison defaults to {last} (the comparator still runs),
+          # while the value n/a means "don't do any comparison".
+          sed -i -E 's/^(  version-comparison(-master)?:)/  # (disabled by ENABLE_VERSION_COMPARISON) \1/' source/sushi-config.yaml
+          sed -i '/^parameters:/a\  version-comparison: n/a' source/sushi-config.yaml
+          echo "::notice::version comparison disabled via ENABLE_VERSION_COMPARISON (set to the publisher-native n/a)."
 
       - name: Run clean release build
         shell: bash
