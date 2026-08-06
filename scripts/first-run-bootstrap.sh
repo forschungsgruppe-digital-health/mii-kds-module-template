@@ -50,6 +50,8 @@ why() {
       echo "Release Please = SemVer automation for the TEMPLATE repo; a module releases via MII CalVer — two release systems on one repo corrupt the version history";;
     .github/workflows/notify-zulip.yml)
       echo "announces the TEMPLATE repo's SemVer releases; a module announces its own CalVer release via the module release workflow";;
+    .github/workflows/release-demo.yml)
+      echo "renders the TEMPLATE repo's Pages demo from a SemVer tag; a module has no demo — its Pages surface is the gated formal-publication output";;
     CHANGELOG.md)
       echo "the template's Release-Please-generated SemVer changelog; a module keeps its own release notes";;
     *) echo "conflicts with a module's own release process";;
