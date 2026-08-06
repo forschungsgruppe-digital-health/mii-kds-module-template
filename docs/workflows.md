@@ -41,6 +41,13 @@ Please, previews its own demo build, and monitors its own dependencies.
 | `notify-zulip.yml` | `release: published` | Announces the template release to the MII Zulip (topic *Template Releases*) | `ENABLE_ZULIP_ANNOUNCE` (ON) · `ANNOUNCE_PUBLIC_ZULIP` (OFF) | **REMOVED by bootstrap** |
 | `release-demo.yml` | `release: published`; `workflow_dispatch` (inputs `tag`, `update_landing_page`) | Rebuilds the Pages **demo from the released tag** with the same pinned toolchain, verifies the render carries that version, publishes it to `gh-pages/demo/<tag>/` and repoints the landing page at it. See [§ The published demo](#the-published-demo) | `ENABLE_RELEASE_DEMO` (ON) · `ENABLE_VERSION_COMPARISON` (ON) · `PAGES_ACTIONS_ENABLED` | **REMOVED by bootstrap** |
 
+> **How it is triggered.** Not by a `release` event: release-please publishes the
+> release with the default `GITHUB_TOKEN`, and GitHub suppresses workflow triggers
+> raised by that token, so a release trigger would never fire and the demo would
+> keep serving the previous release. `release-please.yml` calls this workflow
+> directly in the run that created the release; `workflow_dispatch` re-renders a
+> given tag by hand.
+
 Also removed by the bootstrap: `release-please-config.json`,
 `.release-please-manifest.json` and the template `CHANGELOG.md`. The bootstrap
 script and its recipe are **not** removed — a module's docs link to both. The
