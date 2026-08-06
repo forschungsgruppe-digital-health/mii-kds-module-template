@@ -94,20 +94,38 @@ source of truth; consult them before doing the corresponding task by hand.
   — **the single convention checker**: repo ↔ MII meta wiki drift plus the hard
   module-metadata contract; placeholder-aware; report-only, PRs target `dev`.
   Mechanized by [`scripts/convention-check.mjs`](scripts/convention-check.mjs).
-- [`skills/ig-analyze/`](skills/ig-analyze/SKILL.md) — read-only measurement of
-  a module IG (statistics, content hygiene) and objective comparison of several
-  IGs. Backed by [`scripts/ig-stats.py`](scripts/ig-stats.py).
-- [`skills/ig-translate/`](skills/ig-translate/SKILL.md) — the module-facing
-  en→de translation workflow (translate/harvest), placing supplements where the
-  IG Publisher expects them. Backed by
-  [`scripts/ig-translate.sh`](scripts/ig-translate.sh). The template-side language
-  *mechanism/policy* lives in `ig-template-mii-kds`.
 - [`skills/docs-steward/`](skills/docs-steward/SKILL.md) — checks and repairs
   this repository's documentation: verifies every link, path and factual claim
   against the repo itself, keeps the docs to what create/modify/maintain
   actually needs, and walks the documented path as a first-time and an
   experienced reader. Findings are reported for a human to decide on; any
   resulting change is a pull request targeting `dev`.
+
+### Skills this repository does not carry — install them from the org catalog
+
+Measuring an IG and translating one are **not** local skills here. Both were moved to the
+organization's skill catalog,
+[`forschungsgruppe-digital-health/agent-skills`](https://github.com/forschungsgruppe-digital-health/agent-skills),
+which is their single source of truth and where they have been developed further:
+
+| Task | Catalog skill | Was |
+| --- | --- | --- |
+| Measure / compare Implementation Guides (read-only statistics, hygiene, maturity) | `fhir-ig-analysis` | `skills/ig-analyze` + `scripts/ig-stats.py` |
+| Produce a guide's translation supplements (translate or harvest) | `fhir-ig-translation` | `skills/ig-translate` + `scripts/ig-translate.sh` |
+| Migrate a Simplifier/Forge-published KDS module onto this scaffold | `mii-ig-migration` | never local |
+
+```bash
+CATALOG=https://github.com/forschungsgruppe-digital-health/agent-skills/tree/v0.12.0
+npx skills add "$CATALOG" --skill fhir-ig-analysis fhir-ig-translation --agent claude-code codex --yes
+```
+
+Pin with the `/tree/<ref>` form — `owner/repo@v0.12.0` does *not* pin, it silently installs from the
+default branch. Details, and the full record of what moved when, are in
+[`skills/RETIRED.md`](skills/RETIRED.md).
+
+> **Do not re-vendor a catalog skill into `skills/`.** A second copy is exactly the drift this
+> removal was for. `.claude/skills` and `.agents/skills` are symlinks to `skills/`, so an install
+> into a checkout writes here — keep it out of the commit.
 
 ### Discovery paths (symlinks, not copies)
 
