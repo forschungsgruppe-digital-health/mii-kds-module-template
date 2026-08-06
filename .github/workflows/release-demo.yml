@@ -224,6 +224,25 @@ jobs:
           # tooling. Nothing is committed: this workflow never pushes source.
           bash ../scripts/self-check-substitute.sh
 
+      - name: Disable the version comparison when toggled off
+        # Same treatment as ig-publisher.yml. ENABLE_VERSION_COMPARISON=false is
+        # documented as switching the FEATURE off in every build workflow — a
+        # workflow that publishes must not quietly bypass a documented toggle,
+        # so the release demo honours it too. (The demo REPORT that
+        # ig-publisher.yml renders is preview-only and has no counterpart here.)
+        if: ${{ steps.tag.outputs.skip != 'true' && vars.ENABLE_VERSION_COMPARISON == 'false' }}
+        shell: bash
+        working-directory: release-src
+        run: |
+          set -euo pipefail
+          # Comment out any explicit versions, then set the publisher's NATIVE
+          # off-value: the ig-parameters registry documents that an ABSENT
+          # version-comparison defaults to {last} (the comparator still runs),
+          # while the value n/a means "don't do any comparison".
+          sed -i -E 's/^(  version-comparison(-master)?:)/  # (disabled by ENABLE_VERSION_COMPARISON) \1/' sushi-config.yaml
+          sed -i '/^parameters:/a\  version-comparison: n/a' sushi-config.yaml
+          echo "::notice::version comparison disabled via ENABLE_VERSION_COMPARISON (set to the publisher-native n/a)."
+
       - name: Install Graphviz
         if: ${{ steps.tag.outputs.skip != 'true' }}
         run: |
@@ -282,8 +301,18 @@ jobs:
         working-directory: release-src
         env:
           TX_URL: ${{ steps.tx.outputs.tx }}
+          # Read-only, for seed-comparison-cache.sh's GitHub Release-asset lookup.
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          # Seed the comparison cache exactly as the other build workflows do.
+          # Run the TAG's copy (not the workspace root's): the script resolves
+          # its repo root from its own location and must read the tree that is
+          # being built. No-op unless sushi-config.yaml activates
+          # `version-comparison`; warn-not-fail if a historical asset is gone.
+          if [ -f scripts/seed-comparison-cache.sh ]; then
+            bash scripts/seed-comparison-cache.sh
+          fi
           npm install --global "fsh-sushi@${SUSHI_VERSION}"
           sushi .
           test -d fsh-generated/resources
