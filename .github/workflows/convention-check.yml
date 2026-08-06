@@ -11,9 +11,8 @@
 #            offline test suites — the publication scripts everywhere, the
 #            template scaffold contract on the template repo only.
 #            This is the ONLY metadata linter — do not add a second one. The
-#            advisory wiki-drift findings (Section 2 of the check matrix) are a
-#            human/agent job via the wiki-consistency-check skill and are never
-#            failed here.
+#            advisory repo/MII-wiki drift findings (Section 2 of the check
+#            matrix) are reviewed by hand and are never failed here.
 #
 # Triggers:  push + pull_request to dev / main / release/** ; workflow_dispatch.
 #

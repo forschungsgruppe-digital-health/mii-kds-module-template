@@ -17,8 +17,7 @@
 #
 # Not scanned: input/translations/de/** (the German translation itself),
 # ig-template/** (the vendored mirror — fix it in ig-template-mii-kds and
-# re-sync), docs/reports/** (dated, immutable snapshots that may quote earlier
-# wording as evidence), and this file. Binary files are skipped by `git grep -I`.
+# re-sync), and this file. Binary files are skipped by `git grep -I`.
 #
 # Bash 3.2 compatible.
 set -u
@@ -60,7 +59,6 @@ done
 hits="$(git grep -n -I -i -E "${args[@]}" -- . \
   ':(exclude)input/translations/de' \
   ':(exclude)ig-template' \
-  ':(exclude)docs/reports' \
   ':(exclude)scripts/language-model-check.sh')"
 rc=$?
 

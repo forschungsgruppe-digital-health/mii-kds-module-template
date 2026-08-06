@@ -2,8 +2,8 @@
 # ig-translate — helper for translating an English-default module IG.
 # Deterministically determines the target files the IG PUBLISHER EXPECTS for
 # translations and validates the naming/placement conventions. It does NOT
-# translate itself (an agent/human does that) and creates nothing without being
-# asked.
+# translate the text itself — you write the translations — and it creates
+# nothing without being asked.
 #
 #   scripts/ig-translate.sh --scan de        # show the target path per page/resource
 #   scripts/ig-translate.sh --validate de    # check existing translation files

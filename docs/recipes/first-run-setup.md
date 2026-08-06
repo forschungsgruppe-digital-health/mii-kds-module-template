@@ -101,9 +101,9 @@ Read the output. It prints, in order:
 > **Why a dry-run first:** you see exactly what will change before anything
 > happens. The `REMOVE=` line in `scripts/first-run-bootstrap.sh` is the single
 > source of truth for that list, and the bullets above are its transcript — if
-> it ever tried to touch module content or the workflows a module keeps
-> (previews, validation, monitoring, the convention check, the module release
-> workflow, the skills), the script hard-aborts.
+> it ever tried to touch module content, the helper scripts, or the workflows a
+> module keeps (previews, validation, monitoring, the convention check, the
+> module release workflow), the script hard-aborts.
 
 ### 3. Apply it
 
@@ -149,7 +149,14 @@ The bootstrap printed it; the essentials:
    `node scripts/convention-check.mjs` — it must stay green.
 2. **Enable GitHub Pages:** Settings → Pages → Build and deployment →
    **"GitHub Actions"**. Then set the repository variable
-   `PAGES_ACTIONS_ENABLED=true`.
+   `PAGES_ACTIONS_ENABLED=true` — only once Pages actually uses "GitHub
+   Actions", because `go-publish.yml` refuses to publish otherwise.
+   *Branch mode works too:* **"Deploy from a branch" → `gh-pages`** with
+   `PAGES_ACTIONS_ENABLED` left unset also serves the CI previews (that is the
+   workflow default). What must not happen is a mismatch between the Pages
+   setting and the variable — then nothing serves the preview. Formal
+   publication requires the "GitHub Actions" pairing, so pick it if you intend
+   to publish. See [workflows.md](../workflows.md).
 3. **Terminology (optional):** add `SU_TERMSERV_CLIENT_CERT` /
    `SU_TERMSERV_CLIENT_KEY` / `SU_TERMSERV_CLIENT_PASSWORD` to build against
    the MII SU-TermServ; without them the build falls back to the public HL7
@@ -185,9 +192,9 @@ The bootstrap printed it; the essentials:
   rules).
 - The Release Please files (`release-please.yml`, `release-please-config.json`,
   `.release-please-manifest.json`), `notify-zulip.yml` and the template
-  `CHANGELOG.md` are gone; this recipe, `scripts/first-run-bootstrap.sh`, the
-  preview, validation, monitoring, convention-check and module-release
-  workflows and the `skills/` are still there.
+  `CHANGELOG.md` are gone; this recipe, `scripts/first-run-bootstrap.sh` and
+  the preview, validation, monitoring, convention-check and module-release
+  workflows are still there.
 - `node scripts/convention-check.mjs` runs green (placeholders count as
   "parameterized" until you resolve them).
 

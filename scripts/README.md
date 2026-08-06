@@ -39,7 +39,7 @@ list — not a glob, because this directory now holds unrelated helpers too.
 | `resolve-ig-template-source.sh` | Resolves which template repository the sync reads from, and whether it is reachable | `sync-ig-template.yml` (both jobs, before the sync step) |
 | `gen-rendering-demo.py` | Regenerates the demonstration page in both languages from `demo-en.md` / `demo-de.md` + `rendering-demo-codes.json` — run `python3 scripts/gen-rendering-demo.py .` after editing either source; never hand-edit the generated pages | a maintainer, after editing the demo sources |
 | `ig-translate.sh` | Scans and validates the German translation set against the English source | a maintainer |
-| `ig-stats.py` | Collects IG metrics for the `ig-analyze` skill | the skill, or manually |
+| `ig-stats.py` | Measures an IG (artifact counts, content hygiene) and writes a statistics report | a maintainer |
 | `set-su-termserv-secrets.sh` | Validates an SU-TermServ client certificate and uploads it as repository secrets | a maintainer, once |
 | `seed-comparison-cache.sh` | Places the previous release's `package.tgz` (a GitHub Release asset) into `~/.fhir/packages` so the publisher's `version-comparison` can load it; no-op while the parameter is commented out | `ig-publisher.yml`, `module-release.yml`, `go-publish.yml` (before the publisher) |
 

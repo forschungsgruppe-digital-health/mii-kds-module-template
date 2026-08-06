@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.5.2](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.5.1...v0.5.2) (2026-08-05)
+
+
+### Bug Fixes
+
+* **ci:** substitute and rename placeholders in the IG-level catalogue ([#74](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/74)) ([1f76b06](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/1f76b063ad685f13676fb8f8741eccdc2b05524b))
+
+## [0.5.1](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.5.0...v0.5.1) (2026-08-05)
+
+
+### Bug Fixes
+
+* **i18n:** retire the breadcrumb override for the IG-level catalogue ([#72](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/72)) ([f65df5e](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/f65df5e6997cd235fe9fc5e3a228de11f6144bda))
+
+## [0.5.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.4.0...v0.5.0) (2026-08-02)
+
+
+### Features
+
+* **ig-template:** structure-tabs include + content-image CSS defaults (closes [#66](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/66)) ([#67](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/67)) ([f4e7f2f](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/f4e7f2fe01e9e342cf4505389417249d8b512acf))
+
 ## [0.4.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.3.0...v0.4.0) (2026-07-30)
 
 

@@ -8,7 +8,8 @@ description: >-
   create, modify and maintain the project; checks the language is followable by
   someone new to the subject; and walks the documented path as both a first-time
   and an experienced user. Re-verifies every finding against the repository
-  before reporting it, writes a dated report, offers to open one tracked issue
+  before reporting it, returns the report to whoever ran it rather than
+  committing it, offers to open one tracked issue
   per finding a human must resolve, and in apply mode fixes what is verifiably
   safe. Activate after a refactor, before a release, before opening a
   repository to outside readers, or when the docs have been AI-assisted.
@@ -30,7 +31,7 @@ it discovers in step 0.
 
 | Mode | What it does | When |
 | --- | --- | --- |
-| **report** (default) | Changes nothing. Writes the report. | First run; any repo you do not own |
+| **report** (default) | Changes nothing in the repository. Returns the report to the person who ran it. | First run; any repo you do not own |
 | **apply** | Also fixes what is verifiably safe (see *What may be fixed automatically*) | Once you trust the report |
 
 Always run **report** first on a repository you have not stewarded before.
@@ -59,8 +60,9 @@ Violating any of these is a failure of the run, not a judgement call.
    commit. Report it; a human decides.
 2. **Never edit a published, dated artefact** — an existing audit report, a
    changelog entry for a released version, a decision record that has been
-   accepted. A later run writes a *new* one. If an old artefact contradicts
-   today's repository, that is expected; say so in the new report.
+   accepted. It records what was true then; a later run supersedes it with new
+   output instead of rewriting it. If an old artefact contradicts today's
+   repository, that is expected; say so in this run's report.
 3. **Never hand-edit generated or vendored files.** Fix the source, or report
    that the copy needs regenerating. Step 0 identifies which these are.
 4. **Never weaken a statement of mechanism.** If something genuinely fails a
@@ -396,9 +398,14 @@ tried, so a later run with better access can pick it up.
 
 ## Step 12 — The report
 
-Write a dated report where this project keeps them; if it keeps none, create one
-directory for them and say so in the report. Name it so the date is part of the
-identity, and **never overwrite an existing one**.
+**Deliver the report to whoever ran the skill; do not commit it.** It is a
+run output, not a repository artefact: return it in the response, and — if that
+is impractical for its size — write it outside the working tree (a scratch or
+temp directory) and say where. **Never add a report file to the repository** and
+never create a directory to hold one. A finding worth keeping is kept as a
+tracked issue (step 13) or as the fix itself, not as a file that ages in the
+docs. Date the report *inside* its own heading so a reader knows when it was
+produced.
 
 Structure:
 
@@ -435,8 +442,9 @@ and stop — the report still stands on its own.
 yes. If the run is not interactive, that is not a licence to proceed: put the
 proposed titles in the report and stop. On confirmation, create **one issue per
 finding**, each carrying: the
-evidence with file and line, why it matters, the concrete task, and a link to
-the report section it came from. Apply a consistent label so the set can be
+evidence with file and line, why it matters, the concrete task, and the report
+section it came from — named, not linked: the report is not committed, so the
+issue has to carry enough of it to stand alone. Apply a consistent label so the set can be
 found and closed together.
 
 **Do not create duplicates.** Before creating anything, search open *and* closed

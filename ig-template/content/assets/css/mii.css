@@ -203,3 +203,30 @@ table:not([class]):not([style]):not([border]):not([data-fhir]) th {
   color: var(--mii-table-header-text-color);
   text-align: left;
 }
+
+/* ── Content images (issue #66) ──────────────────────────────────────────────
+   The base template floats every `p > img` (project.css: float + margins) and
+   caps no image width. For CONTENT images — diagrams, screenshots, the normal
+   Markdown image — that wraps body text beside the image and lets wide
+   diagrams overflow the column. Content images are therefore block-centered
+   and width-capped by default; a small inline image can opt back into the
+   base float with class="float" (raw HTML img). mii.css loads after the base
+   stylesheets, so these rules win the cascade. */
+#segment-content p > img:not(.float) {
+  float: none;
+  display: block;
+  margin: 0.5rem auto 1rem auto;
+}
+#segment-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── structure-tabs include ── spacing for the tabbed structure view ──────── */
+.structure-tabs { margin: 1rem 0; }
+.structure-tabs .tab-content {
+  border: 1px solid #ddd;
+  border-top: none;
+  padding: 0.75rem;
+  overflow-x: auto;
+}

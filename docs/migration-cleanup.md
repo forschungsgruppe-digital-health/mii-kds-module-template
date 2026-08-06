@@ -15,7 +15,6 @@ The companion IG template repository carries its own copy of this checklist
 | --- | --- |
 | `docs/project-status.md` | The prototype/organisation status page. Its open questions dissolve at adoption + move; carry any surviving decision (e.g. ownership) into the README or an ADR-style note before deleting. |
 | `docs/open-tasks.md` | The pre-move task board. Move rows that are still open into GitHub issues of the target repository, then delete. |
-| `docs/reports/` (all dated reports + its README) | Internal audit snapshots from the drafting phase (docs-steward runs, the e2e module-creation report). They document the prototype's development, not the artifact. If the history is worth keeping, archive it in an issue before deleting. |
 | `docs/migration-cleanup.md` | This file — last, once every row above and below is done. |
 
 ## Edit in one pass after migration (do not delete)
