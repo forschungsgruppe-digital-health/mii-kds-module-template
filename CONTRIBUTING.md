@@ -28,6 +28,11 @@ Two long-lived branches, short-lived working branches:
 - **`dev` — integration branch, unstable.** Where reviewed changes accumulate
   between releases; may be temporarily broken. Protected: changes arrive only
   via pull request. CI preview builds run here.
+  > **Branch state:** `main` and `dev` diverged in both directions once, because
+  > some changes were merged straight into `main`. They were reconciled on
+  > 2026-08-06 and now point at the same commit. See
+  > [docs/project-status.md](docs/project-status.md#branch-state--main-and-dev-are-reconciled)
+  > for the back-merge rule that keeps it that way.
 - **`release/vYYYY.n.n` — release-preparation branches.** The `release/**`
   name arms the convention check's strict release mode (unresolved
   placeholders and the demonstration page fail there); see
@@ -98,8 +103,12 @@ the commit body — this triggers a major bump.
 ## Pull request expectations
 
 - One focused change per PR; keep diffs reviewable.
-- PRs target `dev` (never `main` directly; `main` only receives `dev` via the
-  release PR).
+- PRs target `dev`. `main` normally receives work only as the `dev → main`
+  release merge (plus the Release Please release commits).
+- **If something does have to go straight into `main`** — a fix that cannot wait
+  for the next release — the change is not finished until `main` has been merged
+  back into `dev`. Skipping the back-merge is what made the two branches diverge;
+  see [docs/project-status.md](docs/project-status.md#branch-state--main-and-dev-are-reconciled).
 - CI must be green before merge.
 - Please follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 

@@ -37,7 +37,7 @@
 #            of kerndatensatz-meta (not the moving @master the wiki shows).
 #            SUSHI + Java-validator versions are pinned with a repo-var override.
 #
-# Secrets (human prerequisites — an agent cannot obtain them):
+# Secrets (human prerequisites — CI cannot obtain them by itself):
 #            passed via `secrets: inherit` (the wiki's canonical pattern). A
 #            module maintainer must set, as repo secrets:
 #              - SIMPLIFIER_USERNAME / SIMPLIFIER_PASSWORD  (dotnet QC login)

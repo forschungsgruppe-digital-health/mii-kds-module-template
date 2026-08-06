@@ -77,3 +77,19 @@ reader having to ask you.
 > constrained. Nothing but your prose tells them *why*, and HL7's
 > [IG best-practice guidance](https://build.fhir.org/ig/FHIR/ig-guidance/best-practice.html)
 > asks for an intro on every artifact for exactly that reason.
+
+## Tabbed structure view on narrative pages
+
+To render a profile or extension inside a narrative page the way the official
+FHIR specification does — Structure / Differential / XML / JSON as tabs —
+use the template's `structure-tabs` include instead of pasting fragments
+below each other:
+
+    {% raw %}{% include structure-tabs.html artifact="StructureDefinition-<id>" %}{% endraw %}
+
+Pass `lang="de"` in the German mirror page so the tab labels localize. The
+four publisher fragments (`-snapshot`, `-diff`, `-xml-html`, `-json-html`)
+must exist for the artifact — check `temp/pages/_includes/` after a build;
+one missing include fails the whole Jekyll run. When the narrative does not
+need an inline rendering, a plain link to the artifact page (which carries
+the same views as tabs) is the better choice.

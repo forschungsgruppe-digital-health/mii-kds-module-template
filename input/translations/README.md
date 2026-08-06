@@ -25,6 +25,9 @@ input/
         │                            #   names as input/pagecontent/)
         ├── includes/                # Translated fragments (e.g. menu.xml)
         ├── intro-notes/             # Translated per-artifact intro/notes
+        ├── ImplementationGuide-<ig-id>.po
+        │                            # IG-level catalogue: page titles,
+        │                            #   breadcrumbs, table of contents
         └── *.po                     # Resource translations (PO format), e.g.
                                      #   StructureDefinition-<id>.po
 ```
@@ -46,6 +49,15 @@ input/
    matches it to the English source by file name.
 4. **Menu:** maintain the translated `menu.xml` under
    `input/translations/de/includes/`.
+5. **Page titles, breadcrumbs and the table of contents:** these come from the
+   ImplementationGuide resource, not from the pages, so they need the IG-level
+   catalogue `ImplementationGuide-<your-ig-id>.po`. This repository ships it as
+   `ImplementationGuide-mii-ig-{{MODULE_SLUG}}.po` — **rename it** to match your
+   IG's `id` when you replace the placeholders, or the publisher never finds it
+   and silently leaves those labels in English. Each `msgid` is the exact page
+   `title` from `sushi-config.yaml`, plus the generated root page
+   `"Table of Contents"`. See
+   [`docs/recipes/add-translation.md`](../../docs/recipes/add-translation.md) §5.
 
 Translations placed under `input/translations/de/` are preserved across
 rebuilds; everything under the repo-root `translations/` directory is

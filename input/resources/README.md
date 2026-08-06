@@ -59,9 +59,12 @@ Three places in `sushi-config.yaml` reference this file — all three are active
 1. **Replace `{{MODULE_SLUG}}` inside the file** — it appears in the resource
    `id` (`mii-param-{{MODULE_SLUG}}-manifest`). A `{{…}}` left in a FHIR `id` is
    not a valid id and the IG Publisher will reject it. **Do not rename the
-   file.** Its name is deliberately slug-free: `path-expansion-params` in
-   `sushi-config.yaml` hard-codes it, and the template's own CI substitutes
-   placeholders in file *contents*, never in file *names*.
+   file.** Its name is deliberately slug-free, so nothing has to be renamed per
+   module: `path-expansion-params` in `sushi-config.yaml` hard-codes the path.
+   (The one file in this repository whose *name* does carry a placeholder is the
+   IG-level translation catalogue
+   `input/translations/de/ImplementationGuide-mii-ig-{{MODULE_SLUG}}.po`, which
+   **must** be renamed — see `docs/recipes/add-translation.md` §5.)
 2. Check the SNOMED CT pin against the wiki table for your CalVer line.
 3. Add a `system-version` entry per further code system you bind.
 
