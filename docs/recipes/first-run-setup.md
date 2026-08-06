@@ -95,6 +95,9 @@ Read the output. It prints, in order:
     *template* repo.
   - `.github/workflows/notify-zulip.yml` — announces the *template's* SemVer
     releases (your module announces its own CalVer releases instead).
+  - `.github/workflows/release-demo.yml` — renders the *template's* Pages demo
+    from a SemVer tag. Your module has no such demo: its Pages surface is the
+    gated formal-publication output.
   - `CHANGELOG.md` — only if present (the template's SemVer changelog).
 - **Post-bootstrap checklist** — the manual steps below.
 
@@ -191,8 +194,8 @@ The bootstrap printed it; the essentials:
 - `main` and `dev` both exist and are protected (Settings → Branches shows the
   rules).
 - The Release Please files (`release-please.yml`, `release-please-config.json`,
-  `.release-please-manifest.json`), `notify-zulip.yml` and the template
-  `CHANGELOG.md` are gone; this recipe, `scripts/first-run-bootstrap.sh` and
+  `.release-please-manifest.json`), `notify-zulip.yml`, `release-demo.yml` and
+  the template `CHANGELOG.md` are gone; this recipe, `scripts/first-run-bootstrap.sh` and
   the preview, validation, monitoring, convention-check and module-release
   workflows are still there.
 - `node scripts/convention-check.mjs` runs green (placeholders count as

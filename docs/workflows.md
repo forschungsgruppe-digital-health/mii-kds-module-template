@@ -10,8 +10,8 @@ This repo has **two lives**, and keeping them apart is essential:
 Read both. A reader must never confuse "how this template repo releases itself" with
 "how a module I create releases itself." Details live in the linked docs.
 
-The two tables below cover **every** file in `.github/workflows/` — 11 workflows:
-two that belong to the template repository only (Layer 1) and nine that a created
+The two tables below cover **every** file in `.github/workflows/` — 12 workflows:
+three that belong to the template repository only (Layer 1) and nine that a created
 module inherits (Layer 2). If you add a workflow, add a row; a workflow that is
 not in one of these tables is undocumented, and that is a defect.
 
@@ -39,6 +39,7 @@ Please, previews its own demo build, and monitors its own dependencies.
 | --- | --- | --- | --- | --- |
 | `release-please.yml` | push to `main` | Opens the SemVer release PR (tag + changelog) | `ENABLE_RELEASE_PLEASE` (ON) | **REMOVED by bootstrap** |
 | `notify-zulip.yml` | `release: published` | Announces the template release to the MII Zulip (topic *Template Releases*) | `ENABLE_ZULIP_ANNOUNCE` (ON) · `ANNOUNCE_PUBLIC_ZULIP` (OFF) | **REMOVED by bootstrap** |
+| `release-demo.yml` | `release: published`; `workflow_dispatch` (inputs `tag`, `update_landing_page`) | Rebuilds the Pages **demo from the released tag** with the same pinned toolchain, verifies the render carries that version, publishes it to `gh-pages/demo/<tag>/` and repoints the landing page at it. See [§ The published demo](#the-published-demo) | `ENABLE_RELEASE_DEMO` (ON) · `ENABLE_VERSION_COMPARISON` (ON) · `PAGES_ACTIONS_ENABLED` | **REMOVED by bootstrap** |
 
 Also removed by the bootstrap: `release-please-config.json`,
 `.release-please-manifest.json` and the template `CHANGELOG.md`. The bootstrap
@@ -47,8 +48,9 @@ authoritative list is the `REMOVE=` line in `scripts/first-run-bootstrap.sh`,
 which the dry run prints; see
 [first-run-setup.md](recipes/first-run-setup.md).
 
-> **Why these go:** they version and announce *the template*. A module must not carry
-> SemVer automation that fights its own CalVer release process.
+> **Why these go:** they version, announce and showcase *the template*. A module
+> must not carry SemVer automation that fights its own CalVer release process,
+> and its Pages surface is the gated formal-publication output, not a demo.
 
 ## Layer 2 — what a created MODULE inherits and runs
 
@@ -57,7 +59,7 @@ Everything below **propagates** to a module (the bootstrap keeps it). This is ho
 
 | Workflow | Trigger | What it does | Output | Toggle (default) | Human-gated? |
 | --- | --- | --- | --- | --- | --- |
-| `ig-publisher.yml` | push to any branch except `main`/`gh-pages`/`fsh-generated`; `workflow_dispatch` | Builds the IG (SUSHI + IG Publisher) and deploys a preview. **On this template repo only**, the self-check build also demonstrates a version comparison at `comparison-demo/` in the preview, rendered with the FHIR validator's `-compare` (the publisher's own `version-comparison` needs a formal publication history at the canonical, which the scaffold never has): the last dev preview's package is relabelled `2027.0.0-draft.0` and compared to the build — on `dev` a self-comparison (what a no-changes report looks like), on a feature branch the real delta against `dev`. A created module enables `version-comparison` from its second formal publication | `gh-pages/branches/<branch>/` + PR comment | `ENABLE_PREVIEW` (ON) · `ENABLE_VERSION_COMPARISON` (ON; `false` disables the whole feature — the publisher's `version-comparison` in every build workflow *and* the template repo's demo) | no |
+| `ig-publisher.yml` | push to any branch except `main`/`gh-pages`/`fsh-generated`; `workflow_dispatch` | Builds the IG (SUSHI + IG Publisher) and deploys a preview. **On this template repo only**, the self-check build also demonstrates a version comparison at `comparison-demo/` in the preview, rendered with the FHIR validator's `-compare` (the publisher's own `version-comparison` needs a formal publication history at the canonical, which the scaffold never has): the last dev preview's package is relabelled `2027.0.0-draft.0` and compared to the build — on `dev` a self-comparison (what a no-changes report looks like), on a feature branch the real delta against `dev`. A created module enables `version-comparison` from its second formal publication | `gh-pages/branches/<branch>/` + PR comment | `ENABLE_PREVIEW` (ON) · `ENABLE_VERSION_COMPARISON` (ON; `false` disables the whole feature — the publisher's `version-comparison` in every build workflow, including `release-demo.yml`, *and* the template repo's demo report) | no |
 | `cleanup-gh-pages.yml` | schedule (Sun 00:00 UTC); `workflow_dispatch` (input `dry_run`: list stale previews without deleting) | Prunes previews of deleted branches; keeps root + version paths | pruned `gh-pages` | `ENABLE_PREVIEW` (ON) | no |
 | `validation.yml` | push to `dev`/`main`; any pull request; `workflow_dispatch` | Runs the **MII reusable validation** workflows | validation report | `ENABLE_VALIDATION` (ON) | no (skips on the template repo itself) |
 | `convention-check.yml` | push/PR to `dev`/`main`/`release/**`; `workflow_dispatch` (input `strict`: force release mode) | The **single** convention checker: metadata-contract patterns (hard on release branches) + the language-model guard (`scripts/language-model-check.sh`) + the offline test suites (`scripts/*.test.mjs`, and on the template repo `scripts/*.template-test.mjs`); the advisory repo ↔ MII-wiki drift review is a manual review, not part of this workflow | check result | `ENABLE_CONVENTION_CHECK` (ON) | no |
@@ -109,6 +111,7 @@ covers the *secrets* that enable the gated features.
 | Vendored template sync | `ENABLE_TEMPLATE_SYNC` | ON |
 | Module release (CalVer) | `ENABLE_MODULE_RELEASE` | ON |
 | Release Please (template only) | `ENABLE_RELEASE_PLEASE` | ON |
+| Released Pages demo (template only) | `ENABLE_RELEASE_DEMO` | ON |
 | MII Zulip announcement | `ENABLE_ZULIP_ANNOUNCE` | ON |
 | MII Zulip sender (template only) | `MII_ZULIP_BOT_EMAIL` | `kds-github-bot@mii.zulipchat.com` |
 | Public FHIR Zulip announcement (template only) | `ANNOUNCE_PUBLIC_ZULIP` | OFF |
@@ -116,8 +119,9 @@ covers the *secrets* that enable the gated features.
 | Production `-go-publish` | manual `workflow_dispatch` + `publish:false` | OFF (gated) |
 
 The rows marked **template only** have no effect in a module: the bootstrap
-deletes `release-please.yml` and `notify-zulip.yml`, so a module's announcement
-is governed by `ZULIP_API_KEY` and `ENABLE_ZULIP_ANNOUNCE` alone.
+deletes `release-please.yml`, `notify-zulip.yml` and `release-demo.yml`, so a
+module's announcement is governed by `ZULIP_API_KEY` and `ENABLE_ZULIP_ANNOUNCE`
+alone.
 `IG_TEMPLATE_REPO_URL`, `SUSHI_VERSION` and `JAVA_VALIDATOR_VERSION` are plain
 variables, not toggles — the last two override the versions `validation.yml`
 passes to the MII reusable workflows, and unset means the pinned defaults there
@@ -131,6 +135,92 @@ passes to the MII reusable workflows, and unset means the pinned defaults there
 - **A module:** **CalVer** `YYYY.n.n` via the MII Module Release Workflow —
   see [release.md](release.md) and [recipes/cut-a-release.md](recipes/cut-a-release.md).
   A module has **no Release Please** after the bootstrap.
+
+---
+
+## The published demo
+
+**Layer 1 only** — a module does not have one; skip this section if you are
+reading as a module author.
+
+The [Pages landing page](https://forschungsgruppe-digital-health.github.io/mii-kds-module-template/)
+advertises one rendering as *what a module built from this template renders as,
+out of the box*, for the current template release. **It tracks the latest
+release automatically** via `release-demo.yml`; there is no manual promotion
+step and there must not be one again.
+
+### What the automation guarantees
+
+| | |
+| --- | --- |
+| **Built from the tag** | The job checks the released tag out into `release-src/` and builds only that. The workspace root stays on the workflow's own ref, so the publishing tooling (`scripts/update-demo-links.mjs`, `scripts/self-check-substitute.sh`) is current even when re-rendering an old tag. |
+| **The render names its release** | The demo's `{{CALVER_VERSION}}` is substituted by `scripts/self-check-substitute.sh` with `SELF_CHECK_RELEASE_TAG` set, producing `2027.0.0-template.<tag without v>`. After the build the generated `ImplementationGuide` is read back and the job **fails** unless it carries exactly that value. |
+| **The links follow** | `gh-pages/index.html` is rewritten in the same commit as the demo it points at, so path, rendered content and link move together or not at all. |
+| **Same toolchain as every other build** | The pins are copied under the same names as `ig-publisher.yml` / `go-publish.yml` / `module-release.yml`, and `scripts/toolchain-pins.test.mjs` fails the build if they drift apart. |
+
+> **Why this exists.** The demo used to be copied by hand out of a
+> feature-branch preview built *before* Release Please bumped the version — the
+> path claimed one release, the content another
+> (`demo/v0.5.2/en/index.html` rendering `… Module Template v2026.0.0`), and the
+> QA report inside was the pre-release one.
+
+### Why the demo version looks like that
+
+The demo's version has to satisfy two things at once: it must keep the MII
+**CalVer `YYYY.n.n`** shape this scaffold teaches a module author, and it must
+name the template release it was rendered from. `2027.0.0-template.0.5.2` does
+both — a valid SemVer pre-release, so nothing downstream chokes on it, whose
+suffix is the tag. It is derived in exactly one place
+(`scripts/self-check-substitute.sh`), which also reports the value it wrote so
+`release-demo.yml` asserts against the source of truth instead of re-deriving
+the formula.
+
+The *preview* builds keep the fixed draft `2027.0.0-draft.1`: a branch preview
+is not a release and must not claim one.
+
+### How the landing page is edited
+
+`index.html` on `gh-pages` is **hand-authored** and never regenerated.
+`scripts/update-demo-links.mjs` changes four narrowly anchored things and
+nothing else: every `demo/<version>/` path segment, the version token in the
+`<h2>` that introduces the demo, the one-paragraph per-release note (replaced
+with a link to the actual release notes, which cannot go stale), and — once —
+an obsolete sentence about `dev` predating the release. The first two are
+**required**: a missing anchor exits non-zero and fails the job, because a page
+that silently keeps linking the previous release is the exact bug being fixed.
+Rewrites are idempotent. Dry-run it before changing the script:
+
+```bash
+curl -sSL -o /tmp/index.html \
+  https://forschungsgruppe-digital-health.github.io/mii-kds-module-template/index.html
+node scripts/update-demo-links.mjs --check --file /tmp/index.html \
+  --version v9.9.9 \
+  --repo-url https://github.com/forschungsgruppe-digital-health/mii-kds-module-template
+```
+
+### Retention and the reserved paths
+
+Previous `demo/<tag>/` directories are **never pruned** — they are permanent,
+externally linkable renderings, and removing one would break links this project
+does not control. `cleanup-gh-pages.yml` cannot sweep them either: it removes
+only directories carrying a `.branch-name` marker, and `release-demo.yml`
+deliberately writes none (a guard fails the job if one appears). Only the
+landing page's *current* links move; superseded demos stay reachable at their
+stable URLs. The job prints the accumulated `demo/` size and warns above the
+1 GB Pages limit — retiring a demo means updating every link to it in the same
+change.
+
+The site **root** and every version-like path stay reserved for the gated
+`-go-publish` output, as always; `demo/` is not one of them, and this workflow
+writes nowhere else.
+
+### Re-rendering a release by hand
+
+Dispatch `release-demo.yml` with the `tag` input — after a toolchain bump, or to
+publish the demo for a tag released before the workflow existed. Set
+`update_landing_page: false` to publish `demo/<tag>/` without moving the
+landing-page links. A **pre-release** is skipped on the `release: published`
+trigger; dispatch it manually if you want one rendered.
 
 ## Secrets & enabling the gated features
 

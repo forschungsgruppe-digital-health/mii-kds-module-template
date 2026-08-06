@@ -42,6 +42,8 @@ list — not a glob, because this directory now holds unrelated helpers too.
 | `ig-stats.py` | Measures an IG (artifact counts, content hygiene) and writes a statistics report | a maintainer |
 | `set-su-termserv-secrets.sh` | Validates an SU-TermServ client certificate and uploads it as repository secrets | a maintainer, once |
 | `seed-comparison-cache.sh` | Places the previous release's `package.tgz` (a GitHub Release asset) into `~/.fhir/packages` so the publisher's `version-comparison` can load it; no-op while the parameter is commented out | `ig-publisher.yml`, `module-release.yml`, `go-publish.yml` (before the publisher) |
+| `self-check-substitute.sh` | **Template repo only.** The single source of truth for the self-check placeholder values; substitutes them into workspace copies of `sushi-config.yaml`, `ig.ini` and `input/**` — contents *and* file names. With `SELF_CHECK_RELEASE_TAG=vX.Y.Z` the demo IG's CalVer is derived from the tag instead of the fixed draft value, and the value it wrote is reported as `demo_version` | `ig-publisher.yml` (preview), `release-demo.yml` (released demo) |
+| `update-demo-links.mjs` | **Template repo only.** Conservatively repoints the hand-authored `gh-pages/index.html` at a newly released demo; `--check` dry-runs it and prints the before/after diff | `release-demo.yml`, and manually |
 
 ## Tests
 
@@ -51,7 +53,9 @@ node --test scripts/*.template-test.mjs   # scaffold contract — template repo 
 ```
 
 Two of these test the repository rather than a script:
-`toolchain-pins.test.mjs` fails when the `env:` pin blocks of the three build
+`toolchain-pins.test.mjs` fails when the `env:` pin blocks of the four build
 workflows stop agreeing (they must be copies — a workflow cannot read another
-workflow's `env:`), and `publication-url-consistency.template-test.mjs` asserts
-the placeholder metadata contract.
+workflow's `env:`; `release-demo.yml` is tolerated as absent because the
+bootstrap removes it from a module), and
+`publication-url-consistency.template-test.mjs` asserts the placeholder metadata
+contract.
