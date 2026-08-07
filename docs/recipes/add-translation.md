@@ -153,7 +153,7 @@ msgstr "Minimales Beispielprofil …"
 - The file name must match the **generated** `resourceType` + `id`, not the FSH
   name.
 
-### What actually renders (verified on IG Publisher 2.2.11)
+### What actually renders (verified on IG Publisher 2.3.0)
 
 | Field | Translated by a `.po` supplement? |
 |---|---|
@@ -305,7 +305,7 @@ moves between them.
 
 ## Toolchain note
 
-The behaviour described in §5 was checked against IG Publisher 2.2.11: the
+The behaviour described in §5 was checked against IG Publisher 2.3.0: the
 publisher renders a `pages:`-tree page with its `ImplementationGuide.definition.
 page.title`, and the IG-level `.po` catalogue is what localizes that field. This
 is publisher behaviour rather than a documented FHIR rule, so re-check the German
