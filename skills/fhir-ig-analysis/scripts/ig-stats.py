@@ -19,10 +19,21 @@ try:
 except Exception:
     datetime = None
 
-SCHEMA_VERSION = "1.3"
-MANDATORY_PAGES = ["index", "use-cases", "data-sets", "uml", "conformance",
-                   "context", "references", "changes", "downloads",
-                   "security-privacy", "translationinfo"]
+SCHEMA_VERSION = "1.4"
+# Fallback only. The authoritative list lives in references/report-content.json
+# under "mandatory_pages" and is loaded by load_content() below, so a page set can
+# be corrected without touching this file.
+#
+# The names below are verified against the MII KDS module template's actual page
+# set. The list this was derived from named six pages that do not exist there
+# (use-cases, data-sets, uml, context, references, security-privacy), so every
+# measurement reported six false missing pages.
+DEFAULT_MANDATORY_PAGES = ["index", "guidance", "datasets-and-descriptions",
+                           "uml-diagrams", "conformance", "implementer-guidance",
+                           "researcher-guidance", "changes", "downloads",
+                           "security-and-privacy", "translationinfo"]
+# Mutated in place by load_content() so existing references stay valid.
+MANDATORY_PAGES = list(DEFAULT_MANDATORY_PAGES)
 SUPPLEMENT_TYPES = ("StructureDefinition", "CodeSystem", "Questionnaire")
 STUB_NAMES = ("hinweistemplate", "toc")
 STUB_MIN_WORDS = 20
@@ -62,12 +73,29 @@ def _slug(s):
     return s or 'ig'
 
 
-def load_content(toolroot):
-    path = os.path.join(toolroot, "skills", "ig-analyze", "references", "report-content.json")
+SKILL_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def load_content(_unused=None):
+    """Load references/report-content.json, anchored to this script's own location.
+
+    This used to be built from a computed repository root plus a hard-coded
+    "skills/ig-analyze/references/..." path, which broke twice when the skill
+    moved into a catalog: there is no repository root to compute, and the skill
+    directory was renamed. A skill is installed into repositories nobody
+    anticipated, so the only safe anchor is the script's own location.
+
+    Also applies the "mandatory_pages" override if the file supplies one.
+    """
+    path = os.path.join(SKILL_ROOT, "references", "report-content.json")
     try:
-        return json.load(open(path, encoding="utf-8"))
+        content = json.load(open(path, encoding="utf-8"))
     except Exception:
         return {}
+    pages = content.get("mandatory_pages")
+    if isinstance(pages, list) and all(isinstance(x, str) for x in pages) and pages:
+        MANDATORY_PAGES[:] = pages
+    return content
 
 
 def sushi_scalar(text, key):
@@ -78,7 +106,9 @@ def sushi_scalar(text, key):
 def sushi_dependencies(text):
     deps, in_block = {}, False
     for ln in text.splitlines():
-        if re.match(r'^dependencies:\s*$', ln):
+        # A trailing comment after the key ('dependencies: # note') is valid YAML
+        # and SUSHI-accepted; tolerating it keeps hand-annotated configs measurable.
+        if re.match(r'^dependencies:\s*(?:#.*)?$', ln):
             in_block = True
             continue
         if in_block:
@@ -91,7 +121,7 @@ def sushi_dependencies(text):
 
 
 def sushi_langs(text):
-    langs, m = [], re.search(r'^\s*i18n-lang:\s*$', text, re.M)
+    langs, m = [], re.search(r'^\s*i18n-lang:\s*(?:#.*)?$', text, re.M)
     if m:
         for ln in text[m.end():].splitlines():
             mm = re.match(r'\s+-\s*([A-Za-z-]+)\s*$', ln)
@@ -207,6 +237,14 @@ def narrative_detail(igdir):
         base = os.path.basename(f).lower()
         stub = w < STUB_MIN_WORDS or any(s in base for s in STUB_NAMES)
         out.append({"path": rel(igdir, f), "words": w, "kind": "source", "stub": stub})
+    # Translated narrative pages (input/translations/<lang>/pagecontent) are
+    # narrative too — carried as kind "translation". The pre-existing counts
+    # (pages, words, linguistics, mandatory pages) deliberately keep excluding
+    # them so metric series stay comparable; the same-module verification and
+    # the new translation_* fields read them.
+    for f in sorted(glob.glob(os.path.join(igdir, "input", "translations", "*", "pagecontent", "*.md"))):
+        w = len(read(f).split())
+        out.append({"path": rel(igdir, f), "words": w, "kind": "translation", "stub": w < STUB_MIN_WORDS})
     return out
 
 
@@ -319,13 +357,22 @@ def parse_qc(path):
 # ---------- Strategie/Reife/Risiko (Gruppen K–P) -------------------------------
 def git_stats(d):
     out = {"commits": None, "authors": None, "top_author_share": None, "days_since_last": None,
-           "commits_per_year": None, "tags": None, "first": None, "last": None}
+           "commits_per_year": None, "tags": None, "first": None, "last": None,
+           "history_complete": None}
+    # A shallow checkout (.git/shallow exists — including every clone resolve_input()
+    # makes itself, --depth 1) has a truncated history. Author shares, cadence and tag
+    # counts computed from it are fiction ("100 % top author" over 1 commit), not
+    # measurement — so per the skill's "a null is not a zero" rule they stay null.
+    if os.path.exists(os.path.join(d, ".git", "shallow")):
+        out["history_complete"] = False
+        return out
     try:
         r = subprocess.run(["git", "-C", d, "log", "--pretty=%an|%ae|%ad", "--date=short"],
                            capture_output=True, text=True, timeout=25)
         lines = [l for l in r.stdout.splitlines() if l.count("|") >= 2]
         if not lines:
             return out
+        out["history_complete"] = True
         authors, dates = {}, []
         for l in lines:
             a, email, dt = l.split("|", 2)
@@ -376,20 +423,16 @@ def compute_governance(igdir):
     return flags
 
 
-def compute_maturity(identity, doc_health_pct, cov_pct, gov_score):
-    status_score = {"active": 85, "release": 90, "draft": 45, "retired": 20}.get((identity.get("status") or "").lower(), 50)
-    parts = [("Status", status_score), ("Doku-Vollständigkeit", doc_health_pct),
-             ("Beispiel-Abdeckung", cov_pct), ("Governance", gov_score)]
-    avail = [v for _, v in parts if v is not None]
-    score = round(sum(avail) / len(avail)) if avail else None
-    st = (identity.get("status") or "").lower()
-    if (score or 0) >= 75:
-        band = "reif" if st in ("active", "release") else "technisch reif, Status Entwurf"
-    elif (score or 0) >= 55:
-        band = "fortgeschritten"
-    else:
-        band = "in Entwicklung"
-    return {"score": score, "band": band, "components": {k: v for k, v in parts}}
+def maturity_components(identity, doc_health_pct, cov_pct, gov_score):
+    # Counted/derived components only — deliberately NOT aggregated into a 0-100
+    # score. The earlier "Reifegrad"/"Freigabe-Indikator" averaged these with
+    # invented status weights (draft=45, active=85, ...), i.e. a readiness
+    # estimate, which the skill's scope explicitly excludes. The components are
+    # reported side by side; the judgement stays human.
+    return {"components": {"Status": identity.get("status"),
+                           "Doku-Vollständigkeit": doc_health_pct,
+                           "Beispiel-Abdeckung": cov_pct,
+                           "Governance": gov_score}}
 
 
 def compute_portfolio(fsh_text, decl_names, artifacts, directives, pages, identity, deps_items, gs):
@@ -460,7 +503,7 @@ def analyze(igdir, label, content):
         pkg = {}
 
     version = sushi_scalar(sushi, "version") or pkg.get("version")
-    mp = re.search(r'^publisher:\s*\n\s+name:\s*"?([^"#\n]+)', sushi, re.M)
+    mp = re.search(r'^publisher:\s*(?:#.*)?\n\s+name:\s*"?([^"#\n]+)', sushi, re.M)
     identity = {
         "id": sushi_scalar(sushi, "id"), "canonical": sushi_scalar(sushi, "canonical") or pkg.get("canonical"),
         "packageId": sushi_scalar(sushi, "packageId") or pkg.get("name"),
@@ -499,11 +542,14 @@ def analyze(igdir, label, content):
                     "items": deps, "floating_items": floating, "_source": "sushi-config.yaml: dependencies"}
 
     ndetail = narrative_detail(igdir)
-    content_pages = [x for x in ndetail if not x["stub"]]
-    has_target = any(x["kind"] == "target" and not x["stub"] for x in ndetail)
-    fmt = "target" if has_target else "source" if ndetail else "leer"
-    pc_base = {os.path.basename(x["path"])[:-3] for x in ndetail if x["kind"] == "target"}
-    narrative = {"format": fmt, "pages": len(content_pages), "pages_all": len(ndetail),
+    ntrans = [x for x in ndetail if x["kind"] == "translation"]
+    ndetail_core = [x for x in ndetail if x["kind"] != "translation"]
+    content_pages = [x for x in ndetail_core if not x["stub"]]
+    has_target = any(x["kind"] == "target" and not x["stub"] for x in ndetail_core)
+    fmt = "target" if has_target else "source" if ndetail_core else "leer"
+    pc_base = {os.path.basename(x["path"])[:-3] for x in ndetail_core if x["kind"] == "target"}
+    narrative = {"format": fmt, "pages": len(content_pages), "pages_all": len(ndetail_core),
+                 "translation_pages": len(ntrans), "translation_words": sum(x["words"] for x in ntrans),
                  "words": sum(x["words"] for x in content_pages),
                  "words_all_incl_stubs": sum(x["words"] for x in ndetail),
                  "images": len(glob.glob(os.path.join(igdir, "input", "images", "*")))
@@ -542,7 +588,7 @@ def analyze(igdir, label, content):
                "qc_violations": None, "suppressed_messages": suppressed, "qa_errors": None,
                "qa_warnings": None, "qa_hints": None, "broken_links": None, "qa_categories": None}
 
-    linguistics, duplication, hygiene = linguistics_hygiene(igdir, ndetail, artifact_list)
+    linguistics, duplication, hygiene = linguistics_hygiene(igdir, ndetail_core, artifact_list)
 
     # ---- Strategie / Reife / Risiko (Gruppen K–P) ----
     fsh_text = " ".join(read(f) for f in fsh_files)
@@ -551,7 +597,7 @@ def analyze(igdir, label, content):
     example_cov = compute_example_coverage(artifact_list)
     gov = compute_governance(igdir)
     doc_health_pct = round(narrative["pages"] / narrative["pages_all"] * 100) if narrative["pages_all"] else None
-    maturity = compute_maturity(identity, doc_health_pct, example_cov["coverage_pct"], gov["governance_score"])
+    maturity = maturity_components(identity, doc_health_pct, example_cov["coverage_pct"], gov["governance_score"])
     maturity.update({"example_coverage": example_cov, "governance": gov, "doc_health_pct": doc_health_pct})
     portfolio = compute_portfolio(fsh_text, decl_names, artifacts, directives, narrative["pages"], identity,
                                   dependencies["items"], gs)
@@ -712,15 +758,14 @@ def report(stats, content, out):
     ]))
     B.append("_%s_" % hy["note"])
 
-    # Reife & Freigabe
+    # Reife-Komponenten (gezählt, bewusst NICHT zu einem Score verdichtet)
     nz = lambda x: "—" if x is None else x
     mt = stats["maturity"]
     cov = mt["example_coverage"]
-    B.append("## Reife & Freigabe")
+    B.append("## Reife-Komponenten (gezählt)")
     if _intro(content, "reife"):
         B.append("_%s_" % _intro(content, "reife"))
     B.append(_table(["Komponente", "Wert"], [
-        ("**Reifegrad-Score**", "**%s/100 (%s)**" % (nz(mt["score"]), mt["band"])),
         ("Status", i.get("status")),
         ("Doku-Vollständigkeit (Inhalt vs. Stubs)", "%s %%" % nz(mt["doc_health_pct"])),
         ("Beispiel-Abdeckung Profile", "%s %% (%d/%d)" % (nz(cov["coverage_pct"]), cov["covered"], cov["profiles_total"])),
@@ -740,7 +785,9 @@ def report(stats, content, out):
         ("Wiederverwendung externer Profile (Parents)", "%s %% (%d von %d Profil-Parents extern; abstrakte LM-Basistypen ausgeschlossen)" % (nz(pf["canonical_reuse_ratio_pct"]), pf["external_parents"], pf["external_parents"] + pf["local_parents"])),
         ("FHIR-Version", "%s — %s" % (pf["fhir_version_label"], pf["fhir_version_note"])),
         ("Dependency-Veraltung", "%d veraltet (Heuristik)" % pf["dependency_stale_count"]),
-        ("Pflege-Kadenz", "%s Commits/Jahr · letzter Commit vor %s Tagen" % (nz(pf["release_cadence_per_year"]), nz(pf["days_since_last_commit"]))),
+        ("Pflege-Kadenz", ("nicht ermittelbar (shallow clone — unvollständige Git-Historie)"
+                           if (stats.get("git") or {}).get("history_complete") is False else
+                           "%s Commits/Jahr · letzter Commit vor %s Tagen" % (nz(pf["release_cadence_per_year"]), nz(pf["days_since_last_commit"])))),
     ]))
     B.append("_Lock-in und Standard-Terminologie-Anteil sind grobe Heuristiken aus Textvorkommen. %s_" % pf["dependency_staleness_note"])
 
@@ -755,12 +802,16 @@ def report(stats, content, out):
         ("Unterdrückte QA-Warnungen", "%d (davon %d breit) → %s" % (rk["suppressed_total"], rk["suppressed_broad"], rk["suppressed_warning_risk"])),
         ("Datenschutz-Seite (Substanz)", "%s (%d Wörter)" % ("vorhanden/substanziell" if rk["privacy_page_substantial"] else "fehlt/nur Stub", rk["privacy_page_words"])),
         ("PII-artige Beispieldaten", "ja – prüfen" if rk["examples_contain_pii_like"] else "keine erkannt"),
-        ("Bus-Faktor (Wissenskonzentration)", ("%s %% Top-Autor → %s" % (rk["bus_factor_top_author_pct"], rk["bus_factor_risk"])) if rk["bus_factor_top_author_pct"] is not None else "—"),
+        ("Bus-Faktor (Wissenskonzentration)", ("%s %% Top-Autor → %s" % (rk["bus_factor_top_author_pct"], rk["bus_factor_risk"])) if rk["bus_factor_top_author_pct"] is not None else
+         ("nicht ermittelbar (shallow clone — unvollständige Git-Historie)"
+          if (stats.get("git") or {}).get("history_complete") is False else "—")),
         ("Breaking-Change-Risiko ggü. Vorversion", "— (nur per Build/Vorversions-Diff)"),
     ]))
 
-    # Empfehlungen (neutral, generisch)
-    B.append("## Empfehlungen")
+    # Befunde & Einordnung (Messwerte + neutrale Erklärung; KEINE Handlungs-/
+    # Migrationsanweisungen — die frühere "Empfehlungen"-Fassung war Migrations-
+    # Scoping, das der Skill-Scope ausdrücklich ausschließt)
+    B.append("## Befunde & Einordnung")
     if _intro(content, "empfehlungen"):
         B.append("_%s_" % _intro(content, "empfehlungen"))
     fsh_present = str(a.get("_source") or "").startswith("input/fsh")
@@ -772,16 +823,17 @@ def report(stats, content, out):
         "Mehrsprachigkeit": "FSH-Übersetzung %s, Supplements %d" % ("ja" if ii["fsh_translation_ext"] else "nein", ii["translation_supplements"]),
         "Pflichtseiten": "%d/%d im Zielformat" % (len(n["mandatory_present"]), len(MANDATORY_PAGES)),
         "QC-Regeln": "%s definiert" % (q.get("qc_rules_defined") if q.get("qc_rules_defined") is not None else "—"),
-        "Metadaten/Config": "id %s, v%s" % (i.get("id"), i.get("version")),
-        "Arbeitsweise": "—"}
+        "Metadaten/Config": "id %s, v%s" % (i.get("id"), i.get("version"))}
     mrows = []
     for row in (content.get("mapping_rows") or []):
         b = row.get("bereich")
-        mrows.append((b, befund.get(b, "—"), row.get("empfehlung")))
+        if b not in befund:      # a row without a measured Befund has no place here
+            continue
+        mrows.append((b, befund[b], row.get("einordnung") or row.get("empfehlung")))
     if mrows:
-        B.append(_table(["Bereich", "Befund", "Empfehlung"], mrows))
+        B.append(_table(["Bereich", "Befund", "Einordnung"], mrows))
 
-    # Extra-Abschnitt: Direktiven-Mapping (unterhalb der Empfehlungen)
+    # Extra-Abschnitt: Direktiven-Mapping (Faktenreferenz, kein Arbeitsauftrag)
     if t["by_label"]:
         B.append("## Direktiven-Mapping (Detail)")
         if _intro(content, "direktiven_mapping"):
@@ -790,7 +842,7 @@ def report(stats, content, out):
         for lbl, cnt in sorted(t["by_label"].items(), key=lambda x: -x[1]):
             info = di.get(lbl, {})
             rows.append((lbl, cnt, info.get("what", ""), info.get("reco", "")))
-        B.append(_table(["Direktive", "Anzahl", "Was es tut", "Empfehlung (→ IG Publisher)"], rows))
+        B.append(_table(["Direktive", "Anzahl", "Was es tut", "Standard-Gegenstück (IG Publisher)"], rows))
         if t["unknown"]:
             B.append("> **%d unbekannte Treffer** ohne bekanntes Standard-Gegenstück – einzeln manuell prüfen "
                      "(Fundorte im Anhang)." % t["unknown"])
@@ -912,13 +964,111 @@ def compare(statslist, content, out):
 
     def lab(s):
         return s["analyzed"]["label"]
+    # Same-module detection (migration verification): every input carries the
+    # same non-empty packageId -> the inputs are versions/states of ONE module
+    # (typically: the Simplifier source vs its migrated copy). Aggregating a
+    # "Σ Gesamt" over the same module is meaningless, and the questions change:
+    # identity equality, artifact-set equality, canonical-URL equality and
+    # narrative coverage. All of it is counted, none of it forecast.
+    pkg_ids = {(s["identity"].get("packageId") or "") for s in statslist}
+    same_module = len(statslist) > 1 and len(pkg_ids) == 1 and "" not in pkg_ids
     B = []
     B.append("# IG-Vergleich (%d IGs)" % len(statslist))
-    B.append("_Objektiver Kennzahlen-Vergleich der analysierten IGs inkl. Linguistik. "
-             "Die Spalte „Σ Gesamt“ zeigt den aggregierten Gesamtumfang; "
-             "faire Einordnung über normalisierte Werte._")
+    if same_module:
+        B.append("_Same-Module-Vergleich: alle Eingaben tragen dieselbe packageId "
+                 "(`%s`) — der Report prüft **Migrations-/Zustandstreue** statt Portfolio-Umfang. "
+                 "Referenz ist die ERSTE Eingabe._" % next(iter(pkg_ids)))
+    else:
+        B.append("_Objektiver Kennzahlen-Vergleich der analysierten IGs inkl. Linguistik. "
+                 "Die Spalte „Σ Gesamt“ zeigt den aggregierten Gesamtumfang; "
+                 "faire Einordnung über normalisierte Werte._")
 
-    B.append("## Kennzahlen (je IG + Gesamt)")
+    if same_module:
+        B.append("## Same-Module-Verifikation")
+        if _intro(content, "same_module"):
+            B.append("_%s_" % _intro(content, "same_module"))
+        # -- identity equality --
+        ID_FIELDS = ("id", "canonical", "packageId", "name", "title", "version",
+                     "status", "fhirVersion", "license", "publisher")
+        id_rows, id_diff = [], 0
+        for f_ in ID_FIELDS:
+            vals = [s["identity"].get(f_) for s in statslist]
+            same = len({json.dumps(v, ensure_ascii=False) for v in vals}) == 1
+            if not same:
+                id_diff += 1
+            id_rows.append([f_] + [_nz(v) for v in vals] + ["✓ identisch" if same else "⚠ DIVERGIERT"])
+        B.append(_table(["Identitätsfeld"] + [lab(s) for s in statslist] + ["Befund"], id_rows))
+        # -- artifact-set equality (category+name from the FSH declarations) --
+        # Verdict on PUBLISHED artifacts only; internal FSH constructs (rulesets,
+        # invariants, mappings) are reported separately — a template adoption
+        # legitimately adds scaffold rulesets without changing the module.
+        sets = [{(x["category"], x["name"]) for x in s.get("artifacts_detail", [])
+                 if x["category"] in PUBLISHED_ARTIFACTS} for s in statslist]
+        isets = [{(x["category"], x["name"]) for x in s.get("artifacts_detail", [])
+                  if x["category"] in INTERNAL_ARTIFACTS} for s in statslist]
+        art_lines, art_diff, int_lines = [], 0, []
+        for i in range(1, len(statslist)):
+            missing, extra = sorted(sets[0] - sets[i]), sorted(sets[i] - sets[0])
+            art_diff += len(missing) + len(extra)
+            if missing:
+                art_lines.append("**Publizierte Artefakte, fehlend in %s:** %s" % (lab(statslist[i]), ", ".join("`%s/%s`" % m for m in missing)))
+            if extra:
+                art_lines.append("**Publizierte Artefakte, zusätzlich in %s:** %s" % (lab(statslist[i]), ", ".join("`%s/%s`" % e for e in extra)))
+            imiss, iextra = sorted(isets[0] - isets[i]), sorted(isets[i] - isets[0])
+            if imiss or iextra:
+                int_lines.append("_Interne FSH-Konstrukte (informativ, kein Befund): %s: %d fehlend, %d zusätzlich (z.B. Template-Rulesets)._"
+                                 % (lab(statslist[i]), len(imiss), len(iextra)))
+        # -- canonical-URL equality (opportunistic: read fsh-generated when present) --
+        def _urlset(s):
+            d_ = os.path.join(s["analyzed"].get("path") or "", "fsh-generated", "resources")
+            if not os.path.isdir(d_):
+                return None
+            out = set()
+            for f_ in glob.glob(os.path.join(d_, "*.json")):
+                try:
+                    j = json.load(open(f_, encoding="utf-8"))
+                except Exception:
+                    continue
+                if j.get("resourceType") != "ImplementationGuide" and j.get("url"):
+                    out.add(j["url"])
+            return out
+        urlsets = [_urlset(s) for s in statslist]
+        url_verdict, url_diff = "nicht ermittelbar (fsh-generated fehlt bei mindestens einer Eingabe)", 0
+        if all(u is not None for u in urlsets):
+            url_diff = sum(len(urlsets[0] ^ u) for u in urlsets[1:])
+            url_verdict = "✓ identisch (%d URLs)" % len(urlsets[0]) if url_diff == 0 else                 "⚠ %d abweichende URL(s): %s" % (url_diff, ", ".join(sorted(set().union(*[urlsets[0] ^ u for u in urlsets[1:]]))[:6]))
+        # -- narrative per language bucket + coverage --
+        def _buckets(s):
+            b = {"Default-Sprache (input/pagecontent)": [0, 0], "Übersetzungen (input/translations)": [0, 0],
+                 "Plattform-Quellseiten (verbleibend)": [0, 0], "sonstige": [0, 0]}
+            for f_ in s["narrative"]["files"]:
+                p_, w_ = f_["path"], f_["words"]
+                k = ("Übersetzungen (input/translations)" if p_.startswith("input/translations/") else
+                     "Default-Sprache (input/pagecontent)" if p_.startswith("input/pagecontent/") else
+                     "Plattform-Quellseiten (verbleibend)" if p_.startswith("implementation-guides/") else "sonstige")
+                b[k][0] += 1; b[k][1] += w_
+            return b
+        bks = [_buckets(s) for s in statslist]
+        B.append("### Narrative je Sprach-Ebene (Seiten / Wörter)")
+        B.append(_table(["Ebene"] + [lab(s) for s in statslist],
+                        [[k] + ["%d / %d" % tuple(b[k]) for b in bks] for k in bks[0]]))
+        ref_words = sum(v[1] for v in bks[0].values()) or 1
+        cov = ["_Wort-Abdeckung relativ zur Referenz (Heuristik; ein bilingualer Stand überschreitet 100 %):_ "]
+        for i in range(1, len(statslist)):
+            d_w = bks[i]["Default-Sprache (input/pagecontent)"][1]
+            t_w = bks[i]["Übersetzungen (input/translations)"][1]
+            cov.append("**%s: Default %d %% · Übersetzungen %d %%**"
+                       % (lab(statslist[i]), round(d_w / ref_words * 100), round(t_w / ref_words * 100)))
+        B.append(" ".join(cov))
+        # -- verdicts (counted, not forecast) --
+        B.append("### Befund")
+        B.append("\n".join([
+            "- Identität: %s" % ("**IDENTISCH**" if id_diff == 0 else "**⚠ %d Feld(er) DIVERGIEREN**" % id_diff),
+            "- Publizierter Artefakt-Satz (Kategorie+Name): %s" % ("**IDENTISCH** (%d Artefakte)" % len(sets[0]) if art_diff == 0 else "**⚠ %d Abweichung(en)**" % art_diff),
+            "- Canonical-URLs der Artefakte: %s" % url_verdict,
+        ] + art_lines + int_lines))
+
+    B.append("## Kennzahlen (je IG%s)" % ("" if same_module else " + Gesamt"))
     add_rows = [
         ("Artefakte gesamt", lambda s: s["artifacts"]["total"]),
         ("Profile", lambda s: s["artifacts"].get("profiles", 0)),
@@ -934,16 +1084,15 @@ def compare(statslist, content, out):
     krows = []
     for name, fn in add_rows:
         vals = [fn(s) for s in statslist]
-        krows.append([name] + vals + [sum(vals)])
+        krows.append([name] + vals + ([] if same_module else [sum(vals)]))
     for name, fn in [("Dependencies (floating)", lambda s: "%d (%d)" % (s["dependencies"]["count"], s["dependencies"]["floating"])),
                      ("Ø Wörter / Seite", lambda s: _de(s["linguistics"]["words_avg"])),
                      ("Median Wörter / Seite", lambda s: s["linguistics"]["words_median"]),
-                     ("Reifegrad /100", lambda s: _nz(s["maturity"]["score"])),
                      ("Hersteller-Lock-in /100", lambda s: s["portfolio"]["vendor_lockin_score"]),
                      ("Standard-Terminologie %", lambda s: _nz(s["portfolio"]["terminology_standard_share_pct"])),
                      ("Bus-Faktor % (Top-Autor)", lambda s: _nz(s["risk"]["bus_factor_top_author_pct"]))]:
-        krows.append([name] + [fn(s) for s in statslist] + ["—"])
-    B.append(_table(["Metrik"] + [lab(s) for s in statslist] + ["Σ Gesamt"], krows))
+        krows.append([name] + [fn(s) for s in statslist] + ([] if same_module else ["—"]))
+    B.append(_table(["Metrik"] + [lab(s) for s in statslist] + ([] if same_module else ["Σ Gesamt"]), krows))
 
     # Portfolio: Wiederverwendung & Konsolidierung (Cross-IG-Overlap, Skaleneffekt)
     name_to_igs = {}
@@ -951,13 +1100,14 @@ def compare(statslist, content, out):
         for x in s.get("artifacts_detail", []):
             if x["category"] in ("profiles", "extensions", "valuesets", "codesystems"):
                 name_to_igs.setdefault("%s|%s" % (x["category"], x["name"]), set()).add(lab(s))
-    shared = {k: v for k, v in name_to_igs.items() if len(v) > 1}
-    B.append("## Portfolio: Wiederverwendung & Konsolidierung")
+    shared = {} if same_module else {k: v for k, v in name_to_igs.items() if len(v) > 1}
+    if not same_module:
+        B.append("## Portfolio: Wiederverwendung & Konsolidierung")
     B.append("_Artefakte mit identischem Namen in mehreren IGs deuten auf Konsolidierungspotenzial (gemeinsames Basis-Modul) hin; senkt den Gesamt-Wartungsaufwand._")
     if shared:
         B.append(_table(["Geteiltes Artefakt (Typ)", "vorkommend in"],
                         [("%s (%s)" % (k.split("|", 1)[1], k.split("|", 1)[0]), " · ".join(sorted(v))) for k, v in sorted(shared.items())]))
-    else:
+    elif not same_module:
         B.append("_Keine namensgleichen Artefakte über die IGs gefunden — geringe direkte Überlappung._")
 
     B.append("## Normalisierte Kennzahlen (fairer Vergleich)")
@@ -1037,6 +1187,7 @@ def run(inputs, outdir, labels, content):
     os.makedirs(outdir, exist_ok=True)
     srcroot = os.path.join(outdir, "_sources")
     results = []
+    used_slugs = set()
     for idx, inp in enumerate(inputs):
         try:
             d, herkunft = resolve_input(inp, srcroot)
@@ -1048,6 +1199,17 @@ def run(inputs, outdir, labels, content):
         st["analyzed"]["input"] = inp
         st["analyzed"]["resolved_from"] = herkunft
         slug = _slug(st["identity"]["id"] or os.path.basename(d) or ("ig%d" % (idx + 1)))
+        # Same-id inputs (e.g. a module compared against its own migrated copy)
+        # must not overwrite each other's reports: disambiguate the slug with
+        # the label when given, else a counter — and say so on the console line.
+        if slug in used_slugs:
+            suffix = _slug(label) if label else None
+            cand = "%s-%s" % (slug, suffix) if suffix and suffix != slug else None
+            n = 2
+            while not cand or cand in used_slugs:
+                cand = "%s-%d" % (slug, n); n += 1
+            slug = cand
+        used_slugs.add(slug)
         sp, rp = os.path.join(outdir, slug + "-stats.json"), os.path.join(outdir, slug + "-report.md")
         open(sp, "w", encoding="utf-8").write(json.dumps(st, ensure_ascii=False, indent=2) + "\n")
         report(st, content, rp)
@@ -1068,13 +1230,14 @@ def run(inputs, outdir, labels, content):
 def main():
     ap = argparse.ArgumentParser(prog="ig-stats.py", description="FHIR-IG vermessen + Reporting")
     sub = ap.add_subparsers(dest="cmd", required=True)
-    pr_ = sub.add_parser("run"); pr_.add_argument("inputs", nargs="+"); pr_.add_argument("-o", default="ig-analyze-out"); pr_.add_argument("--label")
-    pa = sub.add_parser("analyze"); pa.add_argument("igdir"); pa.add_argument("-o"); pa.add_argument("--label")
+    LABEL_HELP = ("Anzeige-Label (bei run: Kommaliste je Eingabe) für Report-Überschrift und "
+                  "Vergleichs-Spalten; die DATEINAMEN folgen immer der IG-id")
+    pr_ = sub.add_parser("run"); pr_.add_argument("inputs", nargs="+"); pr_.add_argument("-o", default="ig-analyze-out"); pr_.add_argument("--label", help=LABEL_HELP)
+    pa = sub.add_parser("analyze"); pa.add_argument("igdir"); pa.add_argument("-o"); pa.add_argument("--label", help=LABEL_HELP)
     pr = sub.add_parser("report"); pr.add_argument("stats"); pr.add_argument("-o")
     pc = sub.add_parser("compare"); pc.add_argument("stats", nargs="+"); pc.add_argument("-o")
     args = ap.parse_args()
-    toolroot = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    content = load_content(toolroot)
+    content = load_content()
 
     if args.cmd == "run":
         labels = [x.strip() for x in args.label.split(",")] if args.label else None

@@ -101,20 +101,16 @@ rather than assumed.
   `medizininformatik-initiative/kerndatensatz-meta`). They are re-resolved by
   hand; the workflow comments say so rather than claiming automation that does
   not exist.
-- **`scripts/ig-stats.py` writes its report in German.** The tool is carried
-  over from the MII KDS sample IG and its report prose was never translated,
-  while every other document here is English-source. The measurements are
-  language-neutral; only the surrounding sentences and section headings are
-  German. Translating them means touching
-  `skills/ig-analyze/references/report-content.json` and the literals in the
-  script — worth doing, not urgent.
-- **The report's recommendation rows still read as a migration.** The
-  effort/planning forecaster is gone and the headings are neutral, but the
-  `recommendations` rows in `report-content.json` (and the *Quell-/Zielformat*
-  glossary entry) still describe moving an IG onto the IG-Publisher toolchain
-  ("werden übernommen", "ins Zielformat überführt"). The advice itself is sound
-  IG hygiene; only the framing is inherited. Reword it in the same pass as the
-  German prose above.
+- **The IG statistics report's German prose is no longer this repository's task.**
+  The tool that writes it (`scripts/ig-stats.py`) and the skill that owned it
+  (`skills/ig-analyze`) moved to the organization's skill catalog as
+  `fhir-ig-analysis` — see [`../skills/RETIRED.md`](../skills/RETIRED.md). A pinned
+  copy is vendored back into
+  [`../skills/fhir-ig-analysis/`](../skills/fhir-ig-analysis/SKILL.md) so the skill
+  stays invocable here, but its content is maintained in the catalog. The two
+  items recorded here (report prose still German while every document here is
+  English-source, and `recommendations` rows still framed as a migration) belong
+  to that skill now and were carried over with it; track them there, not here.
 - **Two pins in `validation.yml` are not watched by any layer.** The
   reusable-workflow inputs `SUSHI_VERSION` and `JAVA_VALIDATOR_VERSION` are
   written as `${{ vars.X || '<version>' }}`, which the checker's env parser
