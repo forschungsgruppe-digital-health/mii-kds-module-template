@@ -141,4 +141,4 @@ Generic: line 0, col 0, Warning - An HTML fragment from the set [expansion-param
 /home/runner/work/mii-kds-module-template/mii-kds-module-template/fsh-generated/resources/StructureDefinition-example-patient.json: line 0, col 0, Info - The resource StructureDefinition/example-patient could usefully have an OID assigned (OIDs are easy to assign - see https://build.fhir.org/ig/FHIR/fhir-tools-ig/CodeSystem-ig-parameters.html#ig-parameters-auto-oid-root) (BUSINESSRULE)
 
 err = 0, warn = 17, info = 121
-IG Publisher Version: 2.2.11
+IG Publisher Version: 2.3.0
