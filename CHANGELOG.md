@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.1](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.6.0...v0.6.1) (2026-08-07)
+
+
+### Bug Fixes
+
+* **ci:** grant the release-demo caller the permissions its deploy job needs ([#84](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/84)) ([d33b6f8](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/d33b6f84cb803408b0ad4d8b3eb7331db9a9b4bf))
+* **ci:** trigger the release demo from the release run, not a release event ([#82](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/82)) ([4669b12](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/4669b1258d8ebada3dd73adb6fefc0ed15701428))
+
 ## [0.6.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.5.2...v0.6.0) (2026-08-06)
 
 
