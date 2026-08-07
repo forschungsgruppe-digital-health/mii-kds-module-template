@@ -96,7 +96,7 @@ It is implemented at
 
 ## What is documented, and what only works
 
-Checked against the primary sources on 2026-07-29, IG Publisher 2.2.11. This
+Checked against the primary sources on 2026-07-29, IG Publisher 2.3.0. This
 matters: **no single exhaustive list of these mechanisms exists**, so anything
 you find quoted elsewhere is worth verifying.
 
@@ -152,7 +152,7 @@ This is worth re-checking after a Publisher bump; it may be a bug.
 
 **The fragment-code list is openly incomplete.** The Confluence page says so
 itself, above the list: *"Note: as of July 2023, this list is not
-comprehensive."* Measured against IG Publisher 2.2.11 by listing the `.xhtml`
+comprehensive."* Measured against IG Publisher 2.3.0 by listing the `.xhtml`
 files a real build writes: **96 codes** are emitted for a scaffold holding one
 profile and one instance, where the page documents 37. Undocumented but
 generated: `tree`, `grid`, `status`, `uses`, `crumbs`, `obligations`,
