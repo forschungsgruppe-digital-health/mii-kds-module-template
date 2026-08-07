@@ -110,7 +110,7 @@
    ```sh
    sushi .
    curl -L -o publisher.jar \
-     https://github.com/HL7/fhir-ig-publisher/releases/download/2.2.11/publisher.jar
+     https://github.com/HL7/fhir-ig-publisher/releases/download/2.3.0/publisher.jar
    java -Xmx6g -jar publisher.jar -ig ig.ini
    ```
 

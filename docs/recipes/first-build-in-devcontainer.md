@@ -101,7 +101,7 @@ access (the first build downloads the base image and tools):
 
    ```sh
    curl -L -o publisher.jar \
-     https://github.com/HL7/fhir-ig-publisher/releases/download/2.2.11/publisher.jar
+     https://github.com/HL7/fhir-ig-publisher/releases/download/2.3.0/publisher.jar
    echo "a981af86bca3f3a22ee15b9d4ee3c97d63219b7a14e49d0a525e10bbfc71a911  publisher.jar" | sha256sum --check
    java -Xmx6g -jar publisher.jar -ig ig.ini
    ```
@@ -113,7 +113,7 @@ access (the first build downloads the base image and tools):
    > publisher version is governed by the repository's CI pin and dependency
    > checker, not by the container image. Baking it in would mean rebuilding
    > and re-pinning the container for every publisher bump. Version
-   > `2.2.11` + its SHA-256 above were the latest release when this recipe
+   > `2.3.0` + its SHA-256 above were the latest release when this recipe
    > was written (2026-07-22). **The CI pins are the source of truth** (see
    > [`docs/maintenance.md`](../maintenance.md#where-each-pin-lives-single-source-of-truth))
    > — if they ever differ from the command above, CI wins.

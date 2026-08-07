@@ -63,7 +63,7 @@ curl -L https://github.com/HL7/fhir-ig-publisher/releases/download/<version>/pub
 ```
 
 (macOS: `shasum -a 256`; on Linux `sha256sum publisher.jar` is equivalent.
-The release tag is the plain version, e.g. `2.2.11` — no `v` prefix.)
+The release tag is the plain version, e.g. `2.3.0` — no `v` prefix.)
 
 Paste the printed hash next to the new version wherever the checksum is
 pinned. A mismatch later means the downloaded artifact changed — exactly what
