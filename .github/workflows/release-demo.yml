@@ -124,8 +124,8 @@ env:
   # module-release.yml. A workflow cannot read another workflow's env:, so the
   # blocks are copies; scripts/toolchain-pins.test.mjs fails the build if they
   # stop agreeing.
-  PUBLISHER_VERSION: "2.2.11"
-  PUBLISHER_SHA256: "a981af86bca3f3a22ee15b9d4ee3c97d63219b7a14e49d0a525e10bbfc71a911"
+  PUBLISHER_VERSION: "2.3.0"
+  PUBLISHER_SHA256: "e842f2186117d9e41be457949e6a13e69a8d8590a680b6f3cf48a20f87bdabbd"
   SUSHI_VERSION: "3.20.0"
   JEKYLL_VERSION: "4.4.1"
 
