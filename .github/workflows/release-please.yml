@@ -70,5 +70,10 @@ jobs:
       tag: ${{ needs.release-please.outputs.tag_name }}
       update_landing_page: true
     permissions:
+      # A caller's permissions CAP the called workflow's, so this must cover every
+      # job in release-demo.yml — its deploy job needs pages/id-token for the Pages
+      # deployment. Granting less makes the run fail at startup, before any step.
       contents: write
+      pages: write
+      id-token: write
     secrets: inherit
