@@ -36,7 +36,7 @@ Dieser Implementierungsleitfaden richtet sich an:
 <div class="mii-highlight mii-highlight-blue">
 <h5>Implementierende</h5>
 <p>Datenintegrationszentren (DIZ), Software-Entwickelnde und System-Architekt:innen, die FHIR-basierte Lösungen umsetzen.<br/>
-→ siehe <a href="profiles-and-extensions.html">Profile und Extensions</a> und <a href="logical-models.html">Logische Modelle</a>.</p>
+→ siehe <a href="profiles.html">Profile</a> und <a href="logical-models.html">Logische Modelle</a>.</p>
 </div>
 
 <div class="mii-highlight mii-highlight-green">
@@ -48,10 +48,14 @@ Dieser Implementierungsleitfaden richtet sich an:
 ### Inhalt dieses Leitfadens
 
 - **[Anleitung](guidance.html)** — Einstieg und fachliche Hinweise.
-- **[Konformität](conformance.html)** — verbindliche Anforderungen, Must-Support
-  und der Umgang mit fehlenden Daten.
-- **[Profile und Extensions](profiles-and-extensions.html)** und
-  **[Terminologie](terminology.html)** — die technischen Artefakte.
+- **Konformität** — die MII-weiten Konformitätsregeln (Anforderungssprache,
+  Must-Support, Umgang mit fehlenden Daten) pflegt zentral das
+  [MII-Meta-Modul](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance);
+  die modul-spezifischen Aspekte zu
+  [Sicherheit und Datenschutz](security-and-privacy.html) sind Teil dieses
+  Leitfadens.
+- **[Profile](profiles.html)** und die weiteren
+  **[Artefakt-Seiten](artifacts.html)** — die technischen Artefakte.
 - **[Beispiele](examples.html)** — Beispielinstanzen.
 
 ### Verwandte Leitfäden

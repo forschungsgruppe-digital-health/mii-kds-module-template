@@ -1,4 +1,7 @@
 <!-- markdownlint-disable MD041 -->
+<!-- Deutsche Übersetzung von input/pagecontent/search-parameters.md
+     (aufgeteilt aus der früheren Kombi-Seite
+     search-parameters-and-operations.md). -->
 <!-- OPTIONAL-PAGE (0..1) — Marker entfernen, wenn die Seite BLEIBT; andernfalls
      die Seite gemäß docs/optional-pages.md entfernen. Der Konventions-Check
      (M9) lässt ein Release mit diesem Marker fehlschlagen. -->
@@ -12,9 +15,12 @@
 > (Konventions-Check M9).
 {: .mii-highlight .mii-highlight-grey}
 
-### Anleitung für Forschende
+### Suchparameter
 
-Hinweise für Forschende, die die Daten des Moduls **{{MODULE_TITLE}}** für Forschungszwecke nutzen — z. B. welche Datenelemente für welche Fragestellungen relevant sind und wie sie interpretiert werden.
+Diese Seite listet die modul-spezifischen FHIR-Suchparameter des Moduls
+**{{MODULE_TITLE}}** (Namenskonvention `MII_SP_<Modul>_<Name>`), sofern
+definiert. Modulübergreifende Suchparameter definiert das MII-Meta-Modul.
 
-> [TODO: Beschreiben Sie die forschungsrelevanten Aspekte des Moduls.]
+> [TODO: Listen Sie die Suchparameter auf — oder entfernen Sie diese Seite,
+> wenn Ihr Modul keine definiert.]
 {: .mii-highlight .mii-highlight-grey}
