@@ -186,6 +186,12 @@ The bootstrap printed it; the essentials:
    live in the target organisation, or delete the whole workflow once `ig.ini`
    uses the published template package
    ([switch-template-to-published.md](switch-template-to-published.md)).
+6. **Decide the optional (0..1) menu pages** (can wait, but not past the first
+   release): the scaffold ships seven pages the MII menu structure marks
+   optional, each carrying a visible banner. Keep or remove each one per
+   [optional-pages.md](../optional-pages.md); the convention check lists the
+   undecided ones on every run and fails a `release/**` branch while any
+   remain (M9).
 
 ---
 

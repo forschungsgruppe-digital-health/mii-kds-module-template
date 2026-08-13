@@ -15,7 +15,8 @@ map of everything else.
 | Enable the terminology server or release announcements | [secrets.md](secrets.md) |
 | Keep the toolchain and dependencies current | [maintenance.md](maintenance.md) |
 | Check my IG against the published guidance | [ig-best-practices-checklist.md](ig-best-practices-checklist.md) |
-| Know who owns the page set and the menu | [page-structure.md](page-structure.md) |
+| Know who owns the page set and the menu, and what the agreed structure is | [page-structure.md](page-structure.md) |
+| Decide the optional (0..1) menu entries — keep or remove | [optional-pages.md](optional-pages.md) |
 | Know whether this is production-ready | [project-status.md](project-status.md) |
 | Know what is unfinished, and why | [open-tasks.md](open-tasks.md) |
 | Prepare the move to the target organisation | [migration-cleanup.md](migration-cleanup.md) |

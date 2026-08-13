@@ -70,7 +70,7 @@ reader having to ask you.
 | --- | --- | --- |
 | Intro/notes do not appear | File name uses the FSH `Profile:` name instead of the `Id:` | Rename to `StructureDefinition-<Id>-intro.md` |
 | The page shows constraints you did not intend | The parent profile already imposed them | Check the **Differential** tab — it shows only *your* changes |
-| Must Support is not visible | The element was constrained but not flagged `MS` | Add `MS` in the FSH; Must Support is not implied by cardinality (see [Must Support](../../input/pagecontent/must-support.md)) |
+| Must Support is not visible | The element was constrained but not flagged `MS` | Add `MS` in the FSH; Must Support is not implied by cardinality (see the [MII Must-Support rules](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance#must-support-ms)) |
 | Text renders raw in the built page | The file is a `.md` but contains HTML that Markdown swallowed | Keep intro/notes plain Markdown |
 
 > **Why this is worth the effort:** the generated tables tell a reader *what* is
