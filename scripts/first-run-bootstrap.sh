@@ -127,11 +127,18 @@ print_checklist() {
 4. Release announcements (optional): add ZULIP_API_KEY to announce your
    module's CalVer releases to the MII Zulip.
 
-5. CI pipeline toggles are ON by default. To require CI as a merge gate, add the
+5. Decide the seven optional (0..1) menu pages (can wait, but not past the
+   first release): each undecided entry shows "(optional)" in the rendered
+   menu and a banner on the page. Decision checklist: docs/optional-pages.md;
+   the complete keep/remove procedure: docs/recipes/remove-an-optional-page.md.
+   The convention check lists the undecided ones on every run and fails a
+   release/** branch while any remain (M9).
+
+6. CI pipeline toggles are ON by default. To require CI as a merge gate, add the
    relevant checks (e.g. convention-check, the IG preview build) as required
    status checks under Settings → Branches once they have run once.
 
-6. Verify the branch model: `main` (stable, default) and `dev` (integration)
+7. Verify the branch model: `main` (stable, default) and `dev` (integration)
    both exist and are protected. Open your first change as a PR into `dev`.
 EOF
   if [ "$applied" = 1 ]; then

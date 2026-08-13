@@ -188,10 +188,13 @@ The bootstrap printed it; the essentials:
    ([switch-template-to-published.md](switch-template-to-published.md)).
 6. **Decide the optional (0..1) menu pages** (can wait, but not past the first
    release): the scaffold ships seven pages the MII menu structure marks
-   optional, each carrying a visible banner. Keep or remove each one per
-   [optional-pages.md](../optional-pages.md); the convention check lists the
-   undecided ones on every run and fails a `release/**` branch while any
-   remain (M9).
+   optional — each shows a `(optional)` suffix in the rendered menu (both
+   languages) and a visible banner on the page. Decide each one with the
+   checklist in [optional-pages.md](../optional-pages.md) and execute the
+   decision per [remove-an-optional-page.md](remove-an-optional-page.md)
+   (keep = delete the suffix + banner in both languages; remove = the complete
+   one-pass removal). The convention check lists the undecided ones on every
+   run and fails a `release/**` branch while any remain (M9).
 
 ---
 

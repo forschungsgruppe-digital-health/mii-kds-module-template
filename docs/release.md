@@ -121,8 +121,10 @@ git checkout -b release/v2026.0.1   # release/** arms the strict convention chec
 > present (M8) and its message lists every file to remove; the same list is in
 > [render existing artifacts](recipes/render-existing-artifacts.md) step 4.
 > The same gate covers the **optional (0..1) pages**: any page still carrying
-> its `OPTIONAL-PAGE` banner fails the release check (M9) until you keep or
-> remove it per [optional-pages.md](optional-pages.md).
+> its `OPTIONAL-PAGE` banner — or any menu label still carrying the
+> `(optional)` suffix — fails the release check (M9) until you keep or remove
+> it per [recipes/remove-an-optional-page.md](recipes/remove-an-optional-page.md)
+> (decision checklist: [optional-pages.md](optional-pages.md)).
 
 Bump the CalVer version everywhere it appears **in this template**. The wiki's
 file list names Simplifier's `package.json` and `guide.yaml`, which are not

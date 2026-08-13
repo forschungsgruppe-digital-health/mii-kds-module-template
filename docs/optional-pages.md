@@ -3,32 +3,42 @@
 The MII-agreed module menu structure (see [page-structure.md](page-structure.md))
 gives every entry a cardinality: **(1..1)** entries are mandatory in every
 module, **(0..1)** entries are per-module decisions. This document is the
-decision checklist for the optional entries and the exact removal procedure per
-entry.
+**decision checklist** for the optional entries; the procedure for executing
+either decision lives in one canonical place —
+[recipes/remove-an-optional-page.md](recipes/remove-an-optional-page.md).
 
 ## How optional entries are marked
 
-Every optional page ships in **three visible forms**, chosen to fit the
+Every optional page ships in **four visible forms**, chosen to fit the
 scaffold's existing conventions (placeholder table, `[TODO]` banners, the
 convention check):
 
-1. **In the rendered preview** — a banner at the top of the page ("Optional
-   page (0..1)…", `mii-highlight` style, in both languages), so a module lead
-   reviewing the preview sees the open decision without reading source.
-2. **In the source** — an `OPTIONAL-PAGE` HTML comment in the page file (both
-   languages) and `OPTIONAL (0..1)` comments at the menu entries
-   (`input/includes/menu.xml`, `input/translations/de/includes/menu.xml`) and
-   in the `sushi-config.yaml` `pages:` tree.
-3. **In CI** — the convention check's rule **M9**
+1. **In the rendered menu** — the entry's label carries the suffix
+   **`(optional)`** in BOTH menu files (`input/includes/menu.xml`,
+   `input/translations/de/includes/menu.xml`; the word is identical in English
+   and German), so the open decision is visible in the navigation itself —
+   not only in source comments.
+2. **In the rendered page** — a banner at the top ("Optional page (0..1)…",
+   `mii-highlight` style, in both languages), so a module lead reviewing the
+   preview sees the open decision without reading source.
+3. **In the source** — an `OPTIONAL-PAGE` HTML comment in the page file (both
+   languages) and `OPTIONAL (0..1)` comments at the menu entries and in the
+   `sushi-config.yaml` `pages:` tree.
+4. **In CI** — the convention check's rule **M9**
    (`scripts/convention-check.mjs`): on development branches it *reports* the
-   pages still carrying the marker (green, visible in the job summary); on a
-   `release/**` branch an undecided marker **fails** the check, so an undecided
-   option cannot ship silently. A marker present in only one language fails on
-   every branch (a half-applied decision).
+   pages and menu entries still carrying a marker (green, visible in the job
+   summary); on a `release/**` branch an undecided marker — the `OPTIONAL-PAGE`
+   comment **or** an `(optional)` menu label — **fails** the check, so an
+   undecided option cannot ship silently. A marker present in only one
+   language (page or menu) fails on every branch (a half-applied decision).
+
+All four forms are **scaffold-only**: executing the decision deletes them — see
+the recipe.
 
 > **Why a marker string and not a file list:** the decision state lives in the
-> page itself, so deleting the banner *is* recording the decision — there is no
-> second registry to update, and the check can never disagree with the page.
+> page and the menu themselves, so deleting the banner and the label suffix
+> *is* recording the decision — there is no second registry to update, and the
+> check can never disagree with the page.
 
 ## The decision checklist
 
@@ -42,52 +52,17 @@ convention check):
 | Code Systems (Artifacts) | `code-systems.md` | the module defines CodeSystems | it defines none |
 | Metadata Overview (Metadata) | `metadata.md` | the module's profiles carry the CRMI metadata characteristics the page documents (e.g. the Base module) | the metadata story is fully told by [Versioning](../input/pagecontent/version-history.md) |
 
-## Decision A — KEEP the page (one step)
+## Executing the decision
 
-Delete the optional-page **banner block and the `OPTIONAL-PAGE` marker
-comment** from
-
-- `input/pagecontent/<page>.md` **and**
-- `input/translations/de/pagecontent/<page>.md`
-
-then fill in the page's `[TODO]` blocks as usual. (The `OPTIONAL (0..1)`
-comments in the menu files and `sushi-config.yaml` may stay or go — they are
-not checked; removing them keeps the source tidy.)
-
-## Decision B — REMOVE the page (one commit, five touches)
-
-For any optional page `<page>.md` remove, in the same commit:
-
-1. **both page files** —
-   `git rm input/pagecontent/<page>.md input/translations/de/pagecontent/<page>.md`
-2. **both menu entries** — the `<li>` (and its `OPTIONAL` comment line) in
-   `input/includes/menu.xml` **and**
-   `input/translations/de/includes/menu.xml`
-3. **the `pages:` entry** — the two lines (`<page>.md:` + `title:`) in
-   `sushi-config.yaml`
-4. **the `.po` unit** — the page's `msgid`/`msgstr` block in
-   `input/translations/de/ImplementationGuide-<your-ig-id>.po`
-5. **inbound links** — grep the remaining pages for `<page>.html` and reroute
-   (`git grep -n '<page>.html' input/`). The scaffold's known cross-links:
-   `profiles.md` ↔ `extensions.md` and `value-sets.md` ↔ `code-systems.md`
-   link each other in both languages — when you remove one of a pair, drop the
-   sentence that links it from its partner.
-
-Then build once (or push and let CI build): the publisher fails loudly on a
-menu entry without a page, and its link QA reports any link you missed — the
-five touches above are exactly the places a page is wired in.
-
-### Per-entry notes
-
-- **`metadata.md`**: the *Metadata* dropdown parent in both menu files already
-  points at `version-history.html` (the mandatory child) precisely so this
-  page can be removed without re-targeting the parent — no extra step.
-- **`researcher-guidance.md`**: `index.md` (both languages) points researchers
-  at this page from the *Target audience* box — reroute that link (e.g. to
-  `guidance.html`), step 5 catches it.
-- **`extensions.md` / `value-sets.md` / `code-systems.md` /
-  `search-parameters.md` / `operations.md`**: partner links per step 5; no
-  other wiring.
+Both procedures — **keep** (delete the `(optional)` label suffix in both menus
++ the banner and marker in both page files + the source comments) and
+**remove** (the complete one-pass removal: both page files, both menu entries,
+the `pages:` row, the `.po` title unit, inbound links) — are specified
+step-by-step, with the per-entry notes and how to satisfy the convention check
+afterwards, in
+**[recipes/remove-an-optional-page.md](recipes/remove-an-optional-page.md)**.
+That recipe is the single source of truth; do not work from memory or from a
+copy.
 
 ## Relationship to the demo page (M8)
 

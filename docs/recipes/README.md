@@ -14,6 +14,7 @@ single job from start to a checkable result.
 | [first-run setup of a new module](first-run-setup.md) | You just created your repository from the template |
 | [first build in the dev container](first-build-in-devcontainer.md) | You need a working toolchain without installing anything |
 | [create a new module](create-a-new-module.md) | You are filling in your module's metadata and first content |
+| [remove (or keep) an optional page](remove-an-optional-page.md) | You are deciding one of the seven "(optional)" menu entries — the decision checklist is [optional-pages.md](../optional-pages.md) |
 
 ## Authoring content
 
