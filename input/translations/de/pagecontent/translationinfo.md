@@ -2,7 +2,6 @@
 <!-- Deutsche Übersetzung der Quellseite input/pagecontent/translationinfo.md
      (Englisch ist die Standardsprache der IG). Mechanik: siehe
      docs/recipes/add-translation.md. -->
-### Übersetzungsinformationen
 
 Dieser Leitfaden ist **englischsprachig** (Standardsprache); **Deutsch** ist die
 Übersetzung. Englisch ist damit sowohl die Basis-Darstellung des Leitfadens als

@@ -11,12 +11,10 @@
      sushi-config.yaml). Die Links funktionieren nur in der veröffentlichten
      Ausgabe, nicht in einer lokalen Vorschau dieser Markdown-Datei. -->
 
-### Downloads
-
 Diese Seite verlinkt die herunterladbaren Artefakte des Moduls
 **{{MODULE_TITLE}}**.
 
-#### Paketdatei
+### Paketdatei
 
 Die Paketdatei ist ein FHIR-Paket im NPM-Format, wie es die meisten
 FHIR-Werkzeuge verwenden. Sie enthält alle ValueSets, Profile, Extensions sowie
@@ -29,20 +27,20 @@ um eine konforme Umsetzung zu bauen — siehe die FHIR-Dokumentation zur
 
 * [Paket (komprimierter Ordner)](../package.tgz){::download="true"}
 
-#### Herunterladbare Kopie dieses Leitfadens
+### Herunterladbare Kopie dieses Leitfadens
 
 Eine herunterladbare Fassung des gerenderten Leitfadens für den lokalen Betrieb:
 
 * [Herunterladbare Kopie (komprimierter Ordner)](../full-ig.zip)
 
-#### Beispiele
+### Beispiele
 
 Alle Beispiele dieses Leitfadens:
 
 * [XML (komprimierter Ordner)](../examples.xml.zip)
 * [JSON (komprimierter Ordner)](../examples.json.zip)
 
-#### Konsolidierte CSV- und Excel-Darstellungen der Profile
+### Konsolidierte CSV- und Excel-Darstellungen der Profile
 
 Die Profilinformationen des gesamten Leitfadens in einer einzigen CSV- oder
 Excel-Datei — nützlich für Testende und Analysierende, die Element-Eigenschaften
@@ -51,11 +49,11 @@ profilübergreifend in einer Tabelle sichten wollen:
 * [CSV (komprimierter Ordner)](../csvs.zip)
 * [Excel (komprimierter Ordner)](../excels.zip)
 
-#### Schematrons
+### Schematrons
 
 * [Schematrons (komprimierter Ordner)](../schematrons.zip)
 
-#### ImplementationGuide-Ressource
+### ImplementationGuide-Ressource
 
 Die `ImplementationGuide`-Ressource trägt die technischen Details dieser
 Veröffentlichung einschließlich ihrer Abhängigkeiten und
@@ -71,7 +69,7 @@ Veröffentlichungsparameter.
 > Dateinamen.]
 {: .mii-highlight .mii-highlight-grey}
 
-#### Versionshistorie
+### Versionshistorie
 
 Frühere Versionen und die ausführliche Änderungshistorie stehen auf den Seiten
 [Versionierung](version-history.html) und

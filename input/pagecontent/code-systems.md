@@ -15,8 +15,6 @@
 > check M9).
 {: .mii-highlight .mii-highlight-grey}
 
-### Code Systems
-
 This page describes the CodeSystems of the **{{MODULE_TITLE}}** module (naming
 convention `MII_CS_<Module>_<Name>`). The ValueSets built on them are described
 on the [Value Sets](value-sets.html) page.

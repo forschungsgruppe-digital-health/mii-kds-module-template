@@ -16,8 +16,6 @@
 > check M9).
 {: .mii-highlight .mii-highlight-grey}
 
-### Value Sets
-
 This page describes the ValueSets of the **{{MODULE_TITLE}}** module (naming
 convention `MII_VS_<Module>_<Name>`). For general guidance on using codes, see
 [FHIR Terminology](http://hl7.org/fhir/R4/terminologies.html); the code systems

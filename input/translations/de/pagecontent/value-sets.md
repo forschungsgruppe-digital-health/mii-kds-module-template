@@ -16,8 +16,6 @@
 > (Konventions-Check M9).
 {: .mii-highlight .mii-highlight-grey}
 
-### ValueSets
-
 Diese Seite beschreibt die ValueSets des Moduls **{{MODULE_TITLE}}**
 (Namenskonvention `MII_VS_<Modul>_<Name>`). Allgemeine Hinweise zur Verwendung
 von Codes: siehe

@@ -14,8 +14,6 @@
 > (Konventions-Check M9).
 {: .mii-highlight .mii-highlight-grey}
 
-### Extensions
-
 Diese Seite listet die FHIR-Extensions, die das Modul **{{MODULE_TITLE}}**
 definiert (Namenskonvention `MII_EX_<Modul>_<Name>`). Extensions transportieren
 Informationen, die die Basis-Ressourcen und Profile nicht ausdrücken können; die

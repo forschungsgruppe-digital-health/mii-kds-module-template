@@ -2,7 +2,6 @@
 <!-- Source: kerndatensatz-basis input/pagecontent/translationinfo.md; the
      mechanism is documented in docs/recipes/add-translation.md. German mirror:
      input/translations/de/pagecontent/translationinfo.md. -->
-### Translation Information
 
 This guide is written in **English** (the default language); **German** is the
 translation. English is therefore both the base rendering of the guide and the

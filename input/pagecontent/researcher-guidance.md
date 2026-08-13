@@ -13,8 +13,6 @@
 > check M9).
 {: .mii-highlight .mii-highlight-grey}
 
-### Guidance for Researchers
-
 Guidance for researchers using the data of the **{{MODULE_TITLE}}** module for research purposes — e.g. which data elements are relevant to which research questions, and how they are to be interpreted.
 
 > [TODO: Describe the research-relevant aspects of your module.]

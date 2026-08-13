@@ -7,11 +7,9 @@
      MII-IG-Modul--Modul/Release-notes.page.md), die "Keep a Changelog" vorgibt.
 
      Pflegeregel: Für jedes Release oben einen neuen Abschnitt
-     `#### Version <x>` ergänzen, in BEIDEN Sprachen, als Teil des
+     `### Version <x>` ergänzen, in BEIDEN Sprachen, als Teil des
      Release-Pull-Requests. Einen veröffentlichten Abschnitt danach nicht mehr
      ändern. -->
-
-### Änderungshistorie
 
 Diese Seite hält die Änderungen zwischen den veröffentlichten Versionen des
 Moduls **{{MODULE_TITLE}}** fest, die neueste Version zuerst. Sie folgt
@@ -81,11 +79,11 @@ werden können.</p>
 
 ---
 
-#### Version {{CALVER_VERSION}}
+### Version {{CALVER_VERSION}}
 
 **Datum:** {{RELEASE_DATE}}
 
-##### Hinzugefügt
+#### Hinzugefügt
 
 * Erstveröffentlichung des Moduls **{{MODULE_TITLE}}**.
 

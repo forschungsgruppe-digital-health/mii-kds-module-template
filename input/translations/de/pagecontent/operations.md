@@ -14,8 +14,6 @@
 > (Konventions-Check M9).
 {: .mii-highlight .mii-highlight-grey}
 
-### Operationen
-
 Diese Seite listet die FHIR-Operationen, die das Modul **{{MODULE_TITLE}}**
 definiert (Namenskonvention `MII_OD_<Modul>_<Name>`), sofern definiert.
 

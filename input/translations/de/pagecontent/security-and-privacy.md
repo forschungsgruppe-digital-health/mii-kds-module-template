@@ -6,8 +6,6 @@
      Inhalt — behalten; Stufe 3 füllt Ihr Modul aus. Beide Sprachfassungen
      müssen dasselbe aussagen. -->
 
-### Sicherheit und Datenschutz
-
 Dieser Abschnitt richtet sich an Sicherheits- und Datenschutz-Fachleute.
 Allgemeine Anforderungen stehen in der FHIR-Kernspezifikation —
 [Security & Privacy Module](https://build.fhir.org/secpriv-module.html) und die
@@ -15,7 +13,7 @@ Allgemeine Anforderungen stehen in der FHIR-Kernspezifikation —
 wiederholt sie nicht; sie verlinkt den MII-weiten Datenschutzrahmen und nennt,
 was **für dieses Modul spezifisch** ist.
 
-#### 1. Das Datenschutzkonzept der MII
+### 1. Das Datenschutzkonzept der MII
 
 Das
 [übergreifende Datenschutzkonzept der Medizininformatik-Initiative](https://www.medizininformatik-initiative.de/de/datenschutzkonzept)
@@ -27,7 +25,7 @@ Analysen, Daten- und Bioproben-Bereitstellung). Alles, was dieses Modul
 spezifiziert, bewegt sich innerhalb dieses Rahmens — dieser Leitfaden fügt
 keinen eigenen Verarbeitungszweck hinzu.
 
-#### 2. De-Identifikation, Minimierung und Pseudonymisierung (DIMP)
+### 2. De-Identifikation, Minimierung und Pseudonymisierung (DIMP)
 
 Wie Daten, die ein Datenintegrationszentrum verlassen, praktisch
 de-identifiziert werden, spezifiziert
@@ -40,7 +38,7 @@ Daten *vor* Anwendung von DIMP; welche Elemente eine konkrete
 Datenbereitstellung erreicht, entscheidet je Projekt die DIMP-Konfiguration,
 nicht dieser Leitfaden.
 
-#### 3. Modul-spezifische Aspekte
+### 3. Modul-spezifische Aspekte
 
 Dies ist der eigene Beitrag des Moduls: die Sicherheits- und
 Datenschutz-Eigenschaften, die aus der *Art der Daten dieses Moduls* folgen.

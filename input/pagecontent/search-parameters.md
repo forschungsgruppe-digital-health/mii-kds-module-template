@@ -14,8 +14,6 @@
 > check M9).
 {: .mii-highlight .mii-highlight-grey}
 
-### Search Parameters
-
 This page lists the module-specific FHIR search parameters of the
 **{{MODULE_TITLE}}** module (naming convention `MII_SP_<Module>_<Name>`), where
 defined. Cross-module search parameters are defined by the MII Meta module.

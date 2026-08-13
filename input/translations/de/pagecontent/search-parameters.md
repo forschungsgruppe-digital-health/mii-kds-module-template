@@ -15,8 +15,6 @@
 > (Konventions-Check M9).
 {: .mii-highlight .mii-highlight-grey}
 
-### Suchparameter
-
 Diese Seite listet die modul-spezifischen FHIR-Suchparameter des Moduls
 **{{MODULE_TITLE}}** (Namenskonvention `MII_SP_<Modul>_<Name>`), sofern
 definiert. Modulübergreifende Suchparameter definiert das MII-Meta-Modul.

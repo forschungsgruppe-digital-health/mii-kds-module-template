@@ -1,5 +1,4 @@
 <!-- markdownlint-disable MD041 -->
-### CapabilityStatements
 
 Die CapabilityStatements des Moduls **{{MODULE_TITLE}}** beschreiben die erwarteten Server-/Client-Fähigkeiten (unterstützte Ressourcen und Interaktionen).
 

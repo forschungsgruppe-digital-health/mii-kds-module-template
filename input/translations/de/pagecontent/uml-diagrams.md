@@ -1,5 +1,4 @@
 <!-- markdownlint-disable MD041 -->
-### UML-Diagramme
 
 UML-Übersichten der Datenmodelle des Moduls **{{MODULE_TITLE}}** und ihrer Beziehungen. Editierbare Quellen (z. B. PlantUML) gehören nach `input/images-source/`, die gerenderten Bilder nach `input/images/`.
 

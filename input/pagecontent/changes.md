@@ -7,11 +7,9 @@
      German mirror: input/translations/de/pagecontent/changes.md — both files
      must say the same thing.
 
-     Maintenance rule: add a new `#### Version <x>` section on top for every
+     Maintenance rule: add a new `### Version <x>` section on top for every
      release, in BOTH languages, as part of the release pull request. Never edit
      a released section afterwards. -->
-
-### Changelog
 
 This page records the changes between the released versions of the
 **{{MODULE_TITLE}}** module, newest version first. It follows
@@ -73,11 +71,11 @@ section, so the prose explanation and the technical diff sit side by side.</p>
 
 ---
 
-#### Version {{CALVER_VERSION}}
+### Version {{CALVER_VERSION}}
 
 **Date:** {{RELEASE_DATE}}
 
-##### Added
+#### Added
 
 * First publication of the **{{MODULE_TITLE}}** module.
 

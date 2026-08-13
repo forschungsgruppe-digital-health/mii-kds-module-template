@@ -7,8 +7,6 @@
      German mirror: input/translations/de/pagecontent/security-and-privacy.md —
      both files must say the same thing. -->
 
-### Security and Privacy
-
 This section addresses security and privacy experts. General requirements are in
 the FHIR core specification —
 [Security & Privacy Module](https://build.fhir.org/secpriv-module.html) and the
@@ -16,7 +14,7 @@ the FHIR core specification —
 repeat them; it links the MII-wide data protection framework and states what is
 **specific to this module**.
 
-#### 1. The MII data protection concept
+### 1. The MII data protection concept
 
 The
 [overarching data protection concept of the Medical Informatics Initiative](https://www.medizininformatik-initiative.de/en/data-protection-concept)
@@ -27,7 +25,7 @@ scenarios (feasibility queries, distributed analyses, data and biosample
 provision). Everything this module specifies operates inside that framework —
 this guide adds no processing purpose of its own.
 
-#### 2. De-identification, minimisation and pseudonymisation (DIMP)
+### 2. De-identification, minimisation and pseudonymisation (DIMP)
 
 How data leaving a Data Integration Center is de-identified in practice is
 specified by
@@ -39,7 +37,7 @@ configuration). The profiles of this module describe data *before* DIMP is
 applied; which elements survive a concrete data release is decided per project
 by the DIMP configuration, not by this guide.
 
-#### 3. Module-specific aspects
+### 3. Module-specific aspects
 
 This is the module's own contribution: the security and privacy properties
 that follow from the *kind of data this module carries*. Examples from other

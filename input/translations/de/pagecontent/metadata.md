@@ -24,8 +24,6 @@
 > (Konventions-Check M9).
 {: .mii-highlight .mii-highlight-grey}
 
-### Metadaten-Übersicht
-
 Diese Seite beschreibt die maschinenlesbaren Metadaten des Moduls
 **{{MODULE_TITLE}}**. Sie existieren, damit die Artefakte dieses Leitfadens
 auffindbar, bewertbar, validierbar, zitierbar, steuerbar und
@@ -44,7 +42,7 @@ Das Vorgehen ist vorläufig: Es hält den derzeit genutzten CRMI-Ansatz fest und
 kann angepasst werden, wenn CRMI reift, sich der MII-Veröffentlichungsprozess
 weiterentwickelt und die FAIR-Bewertung von FHIR-Leitfäden konkreter wird.
 
-#### Geltungsbereich
+### Geltungsbereich
 
 CRMI-Metadaten beschreiben die FHIR-Spezifikationsartefakte selbst. Sie sind
 überwiegend beschreibend und ändern die klinischen oder technischen
@@ -59,7 +57,7 @@ Die Metadaten sind in den erzeugten FHIR-Ressourcen einsehbar, insbesondere in
 den JSON- und XML-Darstellungen, die von jeder Artefaktseite verlinkt sind, sowie
 im [herunterladbaren Paket](downloads.html).
 
-#### Abdeckung des CRMI-Artefaktmanagements
+### Abdeckung des CRMI-Artefaktmanagements
 
 CRMI gliedert das Artefaktmanagement in Lebenszyklus-Phasen und begleitende
 Aspekte. Dieser Leitfaden setzt nicht jede CRMI-Fähigkeit um, sondern die Teile,
@@ -81,7 +79,7 @@ Veröffentlichung über ein Knowledge Artifact Repository, keine
 Syndication-Feeds und keine Artefakt-Signierung. Das kann künftige Arbeit am
 Release-Workflow aufgreifen.
 
-#### Von diesem Leitfaden deklarierte CRMI-Metadaten
+### Von diesem Leitfaden deklarierte CRMI-Metadaten
 
 Die folgenden CRMI-Metadaten werden in
 [`sushi-config.yaml`](https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/sushi-config.yaml)
@@ -119,7 +117,7 @@ In diesem Gerüst nicht aktiviert, aber als auskommentierte Blöcke in
 > entsprechenden Zeilen.]
 {: .mii-highlight .mii-highlight-grey}
 
-##### CodeSystem-Supplements
+#### CodeSystem-Supplements
 
 Veröffentlicht ein Modul CodeSystem-Supplements, ist zu beachten: Das
 CRMI-Profil *ShareableCodeSystem* verlangt `CodeSystem.caseSensitive`, während
@@ -129,7 +127,7 @@ angeben sollte, weil das dem ergänzten CodeSystem widersprechen könnte.
 beansprucht deshalb bei Supplements nur das *Publishable*-CRMI-Profil und lässt
 das Shareable-Profil weg.
 
-#### Versionierung und Paket-Provenienz
+### Versionierung und Paket-Provenienz
 
 Das menschenlesbare Versionsschema beschreibt die Seite
 [Versionierung](version-history.html). Dieser Abschnitt beschreibt, wie diese
@@ -156,7 +154,7 @@ Geltungszeitraum zusammen erlauben Lesenden und Werkzeugen die Entscheidung, ob
 ein Artefakt zum erwarteten Release gehört und ob seine Metadaten zur
 implementierten Version passen.
 
-#### Manifest und Reproduzierbarkeit
+### Manifest und Reproduzierbarkeit
 
 Kanonische Referenzen werden im gebauten Paket gepinnt (`pin-canonicals:
 pin-all` in `sushi-config.yaml`); das ist eine CRMI-Erwartung und macht die
@@ -176,7 +174,7 @@ Paket-Pinnung einsehbar sind.
 > keine Expansions-Parameter pinnt.]
 {: .mii-highlight .mii-highlight-grey}
 
-#### Bezug zu FAIR
+### Bezug zu FAIR
 
 Die [FAIR-Prinzipien](https://www.go-fair.org/fair-principles/) beschreiben
 Ziele dafür, digitale Objekte auffindbar (Findable), zugänglich (Accessible),
@@ -232,7 +230,7 @@ dauerhaft identifizierter FAIR-Datensatz behauptet.
 > führt die vollständige Tabelle.]
 {: .mii-highlight .mii-highlight-grey}
 
-#### Praktische Nutzung
+### Praktische Nutzung
 
 Implementierende können diese Metadaten nutzen, um
 

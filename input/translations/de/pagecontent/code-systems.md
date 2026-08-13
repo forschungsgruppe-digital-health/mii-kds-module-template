@@ -16,8 +16,6 @@
 > (Konventions-Check M9).
 {: .mii-highlight .mii-highlight-grey}
 
-### CodeSystems
-
 Diese Seite beschreibt die CodeSystems des Moduls **{{MODULE_TITLE}}**
 (Namenskonvention `MII_CS_<Modul>_<Name>`). Die darauf aufbauenden ValueSets
 beschreibt die Seite [ValueSets](value-sets.html).

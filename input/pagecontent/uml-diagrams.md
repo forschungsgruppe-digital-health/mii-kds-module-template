@@ -1,7 +1,6 @@
 <!-- markdownlint-disable MD041 -->
 <!-- Source: kerndatensatz-basis input/pagecontent/uml-diagrams.md.
      German mirror: input/translations/de/pagecontent/uml-diagrams.md. -->
-### UML Diagrams
 
 UML overviews of the data models of the **{{MODULE_TITLE}}** module and their relationships. Editable sources (e.g. PlantUML) belong in `input/images-source/`, the rendered images in `input/images/`.
 

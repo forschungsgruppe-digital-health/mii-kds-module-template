@@ -14,8 +14,6 @@
 > check M9).
 {: .mii-highlight .mii-highlight-grey}
 
-### Operations
-
 This page lists the FHIR operations defined by the **{{MODULE_TITLE}}** module
 (naming convention `MII_OD_<Module>_<Name>`), where defined.
 
