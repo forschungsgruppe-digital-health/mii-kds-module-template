@@ -5,6 +5,8 @@
 
 ## Metadata Overview
 
+> **Optional page (0..1).** The MII module menu lists this page as **optional** — keep it only when your module's profiles carry the metadata characteristics it documents (as, for example, the Base module does). Decide for your module: **keep** it — fill it in and delete this banner and the `OPTIONAL-PAGE` marker comment (in this file AND the German mirror) — or **remove** it, following the per-entry procedure in `docs/optional-pages.md` of this repository. A release must not ship with this banner (convention check M9).
+
 ### Metadata Overview
 
 This page documents the computable metadata of the **Module Template** module. The metadata exists so that the artifacts of this guide can be discovered, evaluated, validated, cited, governed and reused — by people and by software alike.

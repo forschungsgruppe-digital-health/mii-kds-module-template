@@ -9,7 +9,7 @@ Dieser Abschnitt bündelt die fachlichen Hinweise zur Umsetzung und Nutzung des 
 
 ### Allgemeine Umsetzungshinweise
 
-* **[Datensätze und Beschreibungen](datasets-and-descriptions.md)** — ausführliche Beschreibung der Datenelemente / logischen Modelle des Moduls.
+* **[Datensätze und Beschreibungen](artifacts.md#2)** — die Datenelemente des Moduls, beschrieben als logische Modelle in der Artefakt-Übersicht. (Dies ist ein Link in die generierte Artefakt-Liste, keine eigene Seite; der Anker ist positionsabhängig — siehe `docs/page-structure.md` in diesem Repository.)
 * **[UML-Diagramme](uml-diagrams.md)** — visuelle Darstellung der Datenmodelle und ihrer Beziehungen.
 
 ### Zielgruppenspezifische Hinweise
@@ -21,5 +21,5 @@ Dieser Abschnitt bündelt die fachlichen Hinweise zur Umsetzung und Nutzung des 
 
 -------
 
-Für Konformitätsanforderungen siehe [Konformität](conformance.md); für die technischen Artefakte siehe [Profile und Extensions](profiles-and-extensions.md).
+Für die MII-weiten Konformitätsanforderungen siehe die [Konformitätsregeln des MII-Meta-Moduls](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance); für die technischen Artefakte siehe [Profile](profiles.md).
 

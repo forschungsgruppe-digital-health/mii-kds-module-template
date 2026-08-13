@@ -28,7 +28,7 @@ This specification describes the FHIR representation of the Core Dataset (CDS) m
 ##### Implementers
 
 Data Integration Centers (DIC), software developers and system architects building FHIR-based solutions.
- → see [Profiles and Extensions](profiles-and-extensions.md) and [Logical Models](logical-models.md).
+ → see [Profiles](profiles.md) and [Logical Models](logical-models.md).
 
 ##### Researchers
 
@@ -38,8 +38,8 @@ Scientists using MII data for medical research.
 ### Contents
 
 * **[Guidance](guidance.md)** — getting started and domain notes.
-* **[Conformance](conformance.md)** — normative requirements, Must-Support and handling missing data.
-* **[Profiles and Extensions](profiles-and-extensions.md)** and **[Terminology](terminology.md)** — the technical artifacts.
+* **Conformance** — the MII-wide conformance rules (requirements language, Must Support, handling missing data) are maintained centrally by the [MII Meta module](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance); the module-specific [Security and Privacy](security-and-privacy.md) considerations are part of this guide.
+* **[Profiles](profiles.md)** and the further **[artifact pages](artifacts.md)** — the technical artifacts.
 * **[Examples](examples.md)** — example instances.
 
 ### Related guides

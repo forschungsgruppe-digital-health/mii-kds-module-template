@@ -30,7 +30,7 @@ Dieser Implementierungsleitfaden richtet sich an:
 ##### Implementierende
 
 Datenintegrationszentren (DIZ), Software-Entwickelnde und System-Architekt:innen, die FHIR-basierte Lösungen umsetzen.
- → siehe [Profile und Extensions](profiles-and-extensions.md) und [Logische Modelle](logical-models.md).
+ → siehe [Profile](profiles.md) und [Logische Modelle](logical-models.md).
 
 ##### Forschende
 
@@ -40,8 +40,8 @@ Wissenschaftler:innen, die MII-Daten für die medizinische Forschung nutzen.
 ### Inhalt dieses Leitfadens
 
 * **[Anleitung](guidance.md)** — Einstieg und fachliche Hinweise.
-* **[Konformität](conformance.md)** — verbindliche Anforderungen, Must-Support und der Umgang mit fehlenden Daten.
-* **[Profile und Extensions](profiles-and-extensions.md)** und **[Terminologie](terminology.md)** — die technischen Artefakte.
+* **Konformität** — die MII-weiten Konformitätsregeln (Anforderungssprache, Must-Support, Umgang mit fehlenden Daten) pflegt zentral das [MII-Meta-Modul](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance); die modul-spezifischen Aspekte zu [Sicherheit und Datenschutz](security-and-privacy.md) sind Teil dieses Leitfadens.
+* **[Profile](profiles.md)** und die weiteren **[Artefakt-Seiten](artifacts.md)** — die technischen Artefakte.
 * **[Beispiele](examples.md)** — Beispielinstanzen.
 
 ### Verwandte Leitfäden

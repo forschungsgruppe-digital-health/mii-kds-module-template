@@ -1375,28 +1375,6 @@
         {
           "extension" : [{
             "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-            "valueUrl" : "datasets-and-descriptions.html"
-          }],
-          "nameUrl" : "datasets-and-descriptions.html",
-          "title" : "Datasets and Descriptions",
-          "_title" : {
-            "extension" : [{
-              "extension" : [{
-                "url" : "lang",
-                "valueCode" : "de"
-              },
-              {
-                "url" : "content",
-                "valueString" : "Datensätze und Beschreibungen"
-              }],
-              "url" : "http://hl7.org/fhir/StructureDefinition/translation"
-            }]
-          },
-          "generation" : "markdown"
-        },
-        {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
             "valueUrl" : "uml-diagrams.html"
           }],
           "nameUrl" : "uml-diagrams.html",
@@ -1420,10 +1398,10 @@
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-          "valueUrl" : "conformance.html"
+          "valueUrl" : "security-and-privacy.html"
         }],
-        "nameUrl" : "conformance.html",
-        "title" : "Conformance",
+        "nameUrl" : "security-and-privacy.html",
+        "title" : "Security and Privacy",
         "_title" : {
           "extension" : [{
             "extension" : [{
@@ -1432,117 +1410,7 @@
             },
             {
               "url" : "content",
-              "valueString" : "Konformität"
-            }],
-            "url" : "http://hl7.org/fhir/StructureDefinition/translation"
-          }]
-        },
-        "generation" : "markdown",
-        "page" : [{
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-            "valueUrl" : "general-requirements.html"
-          }],
-          "nameUrl" : "general-requirements.html",
-          "title" : "General Requirements",
-          "_title" : {
-            "extension" : [{
-              "extension" : [{
-                "url" : "lang",
-                "valueCode" : "de"
-              },
-              {
-                "url" : "content",
-                "valueString" : "Allgemeine Anforderungen"
-              }],
-              "url" : "http://hl7.org/fhir/StructureDefinition/translation"
-            }]
-          },
-          "generation" : "markdown"
-        },
-        {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-            "valueUrl" : "must-support.html"
-          }],
-          "nameUrl" : "must-support.html",
-          "title" : "Must Support",
-          "_title" : {
-            "extension" : [{
-              "extension" : [{
-                "url" : "lang",
-                "valueCode" : "de"
-              },
-              {
-                "url" : "content",
-                "valueString" : "Must-Support"
-              }],
-              "url" : "http://hl7.org/fhir/StructureDefinition/translation"
-            }]
-          },
-          "generation" : "markdown"
-        },
-        {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-            "valueUrl" : "missing-data.html"
-          }],
-          "nameUrl" : "missing-data.html",
-          "title" : "Handling Missing Data",
-          "_title" : {
-            "extension" : [{
-              "extension" : [{
-                "url" : "lang",
-                "valueCode" : "de"
-              },
-              {
-                "url" : "content",
-                "valueString" : "Umgang mit fehlenden Daten"
-              }],
-              "url" : "http://hl7.org/fhir/StructureDefinition/translation"
-            }]
-          },
-          "generation" : "markdown"
-        },
-        {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-            "valueUrl" : "security-and-privacy.html"
-          }],
-          "nameUrl" : "security-and-privacy.html",
-          "title" : "Security and Privacy",
-          "_title" : {
-            "extension" : [{
-              "extension" : [{
-                "url" : "lang",
-                "valueCode" : "de"
-              },
-              {
-                "url" : "content",
-                "valueString" : "Sicherheit und Datenschutz"
-              }],
-              "url" : "http://hl7.org/fhir/StructureDefinition/translation"
-            }]
-          },
-          "generation" : "markdown"
-        }]
-      },
-      {
-        "extension" : [{
-          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-          "valueUrl" : "profiles-and-extensions.html"
-        }],
-        "nameUrl" : "profiles-and-extensions.html",
-        "title" : "Profiles and Extensions",
-        "_title" : {
-          "extension" : [{
-            "extension" : [{
-              "url" : "lang",
-              "valueCode" : "de"
-            },
-            {
-              "url" : "content",
-              "valueString" : "Profile und Extensions"
+              "valueString" : "Sicherheit und Datenschutz"
             }],
             "url" : "http://hl7.org/fhir/StructureDefinition/translation"
           }]
@@ -1552,10 +1420,10 @@
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-          "valueUrl" : "search-parameters-and-operations.html"
+          "valueUrl" : "profiles.html"
         }],
-        "nameUrl" : "search-parameters-and-operations.html",
-        "title" : "Search Parameters and Operations",
+        "nameUrl" : "profiles.html",
+        "title" : "Profiles",
         "_title" : {
           "extension" : [{
             "extension" : [{
@@ -1564,7 +1432,7 @@
             },
             {
               "url" : "content",
-              "valueString" : "Suchparameter und Operationen"
+              "valueString" : "Profile"
             }],
             "url" : "http://hl7.org/fhir/StructureDefinition/translation"
           }]
@@ -1574,10 +1442,10 @@
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-          "valueUrl" : "terminology.html"
+          "valueUrl" : "extensions.html"
         }],
-        "nameUrl" : "terminology.html",
-        "title" : "Terminology",
+        "nameUrl" : "extensions.html",
+        "title" : "Extensions",
         "_title" : {
           "extension" : [{
             "extension" : [{
@@ -1586,7 +1454,7 @@
             },
             {
               "url" : "content",
-              "valueString" : "Terminologie"
+              "valueString" : "Extensions"
             }],
             "url" : "http://hl7.org/fhir/StructureDefinition/translation"
           }]
@@ -1618,6 +1486,50 @@
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
+          "valueUrl" : "search-parameters.html"
+        }],
+        "nameUrl" : "search-parameters.html",
+        "title" : "Search Parameters",
+        "_title" : {
+          "extension" : [{
+            "extension" : [{
+              "url" : "lang",
+              "valueCode" : "de"
+            },
+            {
+              "url" : "content",
+              "valueString" : "Suchparameter"
+            }],
+            "url" : "http://hl7.org/fhir/StructureDefinition/translation"
+          }]
+        },
+        "generation" : "markdown"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
+          "valueUrl" : "operations.html"
+        }],
+        "nameUrl" : "operations.html",
+        "title" : "Operations",
+        "_title" : {
+          "extension" : [{
+            "extension" : [{
+              "url" : "lang",
+              "valueCode" : "de"
+            },
+            {
+              "url" : "content",
+              "valueString" : "Operationen"
+            }],
+            "url" : "http://hl7.org/fhir/StructureDefinition/translation"
+          }]
+        },
+        "generation" : "markdown"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
           "valueUrl" : "logical-models.html"
         }],
         "nameUrl" : "logical-models.html",
@@ -1631,6 +1543,50 @@
             {
               "url" : "content",
               "valueString" : "Logische Modelle"
+            }],
+            "url" : "http://hl7.org/fhir/StructureDefinition/translation"
+          }]
+        },
+        "generation" : "markdown"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
+          "valueUrl" : "value-sets.html"
+        }],
+        "nameUrl" : "value-sets.html",
+        "title" : "Value Sets",
+        "_title" : {
+          "extension" : [{
+            "extension" : [{
+              "url" : "lang",
+              "valueCode" : "de"
+            },
+            {
+              "url" : "content",
+              "valueString" : "ValueSets"
+            }],
+            "url" : "http://hl7.org/fhir/StructureDefinition/translation"
+          }]
+        },
+        "generation" : "markdown"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
+          "valueUrl" : "code-systems.html"
+        }],
+        "nameUrl" : "code-systems.html",
+        "title" : "Code Systems",
+        "_title" : {
+          "extension" : [{
+            "extension" : [{
+              "url" : "lang",
+              "valueCode" : "de"
+            },
+            {
+              "url" : "content",
+              "valueString" : "CodeSystems"
             }],
             "url" : "http://hl7.org/fhir/StructureDefinition/translation"
           }]
@@ -1684,10 +1640,10 @@
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-          "valueUrl" : "version-history.html"
+          "valueUrl" : "changes.html"
         }],
-        "nameUrl" : "version-history.html",
-        "title" : "Versioning",
+        "nameUrl" : "changes.html",
+        "title" : "Changelog",
         "_title" : {
           "extension" : [{
             "extension" : [{
@@ -1696,51 +1652,7 @@
             },
             {
               "url" : "content",
-              "valueString" : "Versionierung"
-            }],
-            "url" : "http://hl7.org/fhir/StructureDefinition/translation"
-          }]
-        },
-        "generation" : "markdown",
-        "page" : [{
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-            "valueUrl" : "changes.html"
-          }],
-          "nameUrl" : "changes.html",
-          "title" : "Changelog",
-          "_title" : {
-            "extension" : [{
-              "extension" : [{
-                "url" : "lang",
-                "valueCode" : "de"
-              },
-              {
-                "url" : "content",
-                "valueString" : "Änderungshistorie"
-              }],
-              "url" : "http://hl7.org/fhir/StructureDefinition/translation"
-            }]
-          },
-          "generation" : "markdown"
-        }]
-      },
-      {
-        "extension" : [{
-          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-          "valueUrl" : "translationinfo.html"
-        }],
-        "nameUrl" : "translationinfo.html",
-        "title" : "Translation Information",
-        "_title" : {
-          "extension" : [{
-            "extension" : [{
-              "url" : "lang",
-              "valueCode" : "de"
-            },
-            {
-              "url" : "content",
-              "valueString" : "Hinweise zur Übersetzung"
+              "valueString" : "Änderungshistorie"
             }],
             "url" : "http://hl7.org/fhir/StructureDefinition/translation"
           }]
@@ -1762,7 +1674,51 @@
             },
             {
               "url" : "content",
-              "valueString" : "Metadaten"
+              "valueString" : "Metadaten-Übersicht"
+            }],
+            "url" : "http://hl7.org/fhir/StructureDefinition/translation"
+          }]
+        },
+        "generation" : "markdown"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
+          "valueUrl" : "version-history.html"
+        }],
+        "nameUrl" : "version-history.html",
+        "title" : "Versioning",
+        "_title" : {
+          "extension" : [{
+            "extension" : [{
+              "url" : "lang",
+              "valueCode" : "de"
+            },
+            {
+              "url" : "content",
+              "valueString" : "Versionierung"
+            }],
+            "url" : "http://hl7.org/fhir/StructureDefinition/translation"
+          }]
+        },
+        "generation" : "markdown"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
+          "valueUrl" : "translationinfo.html"
+        }],
+        "nameUrl" : "translationinfo.html",
+        "title" : "Translation Information",
+        "_title" : {
+          "extension" : [{
+            "extension" : [{
+              "url" : "lang",
+              "valueCode" : "de"
+            },
+            {
+              "url" : "content",
+              "valueString" : "Hinweise zur Übersetzung"
             }],
             "url" : "http://hl7.org/fhir/StructureDefinition/translation"
           }]

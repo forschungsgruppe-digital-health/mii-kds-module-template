@@ -1,7 +1,6 @@
 # Änderungshistorie - MII Implementation Guide Module Template v2027.0.0-draft.1
 
 * [**Inhaltsverzeichnis**](toc.md)
-* [**Versionierung**](version-history.md)
 * **Änderungshistorie**
 
 ## Änderungshistorie

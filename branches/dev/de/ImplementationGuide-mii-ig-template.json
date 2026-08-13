@@ -1269,15 +1269,6 @@
         {
           "extension" : [{
             "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-            "valueUrl" : "datasets-and-descriptions.html"
-          }],
-          "nameUrl" : "datasets-and-descriptions.html",
-          "title" : "Datensätze und Beschreibungen",
-          "generation" : "markdown"
-        },
-        {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
             "valueUrl" : "uml-diagrams.html"
           }],
           "nameUrl" : "uml-diagrams.html",
@@ -1288,73 +1279,28 @@
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-          "valueUrl" : "conformance.html"
+          "valueUrl" : "security-and-privacy.html"
         }],
-        "nameUrl" : "conformance.html",
-        "title" : "Konformität",
-        "generation" : "markdown",
-        "page" : [{
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-            "valueUrl" : "general-requirements.html"
-          }],
-          "nameUrl" : "general-requirements.html",
-          "title" : "Allgemeine Anforderungen",
-          "generation" : "markdown"
-        },
-        {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-            "valueUrl" : "must-support.html"
-          }],
-          "nameUrl" : "must-support.html",
-          "title" : "Must-Support",
-          "generation" : "markdown"
-        },
-        {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-            "valueUrl" : "missing-data.html"
-          }],
-          "nameUrl" : "missing-data.html",
-          "title" : "Umgang mit fehlenden Daten",
-          "generation" : "markdown"
-        },
-        {
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-            "valueUrl" : "security-and-privacy.html"
-          }],
-          "nameUrl" : "security-and-privacy.html",
-          "title" : "Sicherheit und Datenschutz",
-          "generation" : "markdown"
-        }]
-      },
-      {
-        "extension" : [{
-          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-          "valueUrl" : "profiles-and-extensions.html"
-        }],
-        "nameUrl" : "profiles-and-extensions.html",
-        "title" : "Profile und Extensions",
+        "nameUrl" : "security-and-privacy.html",
+        "title" : "Sicherheit und Datenschutz",
         "generation" : "markdown"
       },
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-          "valueUrl" : "search-parameters-and-operations.html"
+          "valueUrl" : "profiles.html"
         }],
-        "nameUrl" : "search-parameters-and-operations.html",
-        "title" : "Suchparameter und Operationen",
+        "nameUrl" : "profiles.html",
+        "title" : "Profile",
         "generation" : "markdown"
       },
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-          "valueUrl" : "terminology.html"
+          "valueUrl" : "extensions.html"
         }],
-        "nameUrl" : "terminology.html",
-        "title" : "Terminologie",
+        "nameUrl" : "extensions.html",
+        "title" : "Extensions",
         "generation" : "markdown"
       },
       {
@@ -1369,10 +1315,46 @@
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
+          "valueUrl" : "search-parameters.html"
+        }],
+        "nameUrl" : "search-parameters.html",
+        "title" : "Suchparameter",
+        "generation" : "markdown"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
+          "valueUrl" : "operations.html"
+        }],
+        "nameUrl" : "operations.html",
+        "title" : "Operationen",
+        "generation" : "markdown"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
           "valueUrl" : "logical-models.html"
         }],
         "nameUrl" : "logical-models.html",
         "title" : "Logische Modelle",
+        "generation" : "markdown"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
+          "valueUrl" : "value-sets.html"
+        }],
+        "nameUrl" : "value-sets.html",
+        "title" : "ValueSets",
+        "generation" : "markdown"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
+          "valueUrl" : "code-systems.html"
+        }],
+        "nameUrl" : "code-systems.html",
+        "title" : "CodeSystems",
         "generation" : "markdown"
       },
       {
@@ -1396,28 +1378,10 @@
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-          "valueUrl" : "version-history.html"
+          "valueUrl" : "changes.html"
         }],
-        "nameUrl" : "version-history.html",
-        "title" : "Versionierung",
-        "generation" : "markdown",
-        "page" : [{
-          "extension" : [{
-            "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-            "valueUrl" : "changes.html"
-          }],
-          "nameUrl" : "changes.html",
-          "title" : "Änderungshistorie",
-          "generation" : "markdown"
-        }]
-      },
-      {
-        "extension" : [{
-          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
-          "valueUrl" : "translationinfo.html"
-        }],
-        "nameUrl" : "translationinfo.html",
-        "title" : "Hinweise zur Übersetzung",
+        "nameUrl" : "changes.html",
+        "title" : "Änderungshistorie",
         "generation" : "markdown"
       },
       {
@@ -1426,7 +1390,25 @@
           "valueUrl" : "metadata.html"
         }],
         "nameUrl" : "metadata.html",
-        "title" : "Metadaten",
+        "title" : "Metadaten-Übersicht",
+        "generation" : "markdown"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
+          "valueUrl" : "version-history.html"
+        }],
+        "nameUrl" : "version-history.html",
+        "title" : "Versionierung",
+        "generation" : "markdown"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
+          "valueUrl" : "translationinfo.html"
+        }],
+        "nameUrl" : "translationinfo.html",
+        "title" : "Hinweise zur Übersetzung",
         "generation" : "markdown"
       },
       {

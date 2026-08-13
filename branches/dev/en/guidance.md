@@ -9,7 +9,7 @@ This section collects the domain guidance for implementing and using the **Modul
 
 ### General Implementation Guidance
 
-* **[Datasets and Descriptions](datasets-and-descriptions.md)** — detailed description of the module's data elements / logical models.
+* **[Datasets and Descriptions](artifacts.md#2)** — the module's data elements, described as logical models in the Artifacts Summary. (This is a link into the generated artifact list, not a page of its own; the anchor is positional — see `docs/page-structure.md` in this repository.)
 * **[UML Diagrams](uml-diagrams.md)** — visual representation of the data models and their relationships.
 
 ### Audience-Specific Guidance
@@ -21,5 +21,5 @@ This section collects the domain guidance for implementing and using the **Modul
 
 -------
 
-For conformance requirements see [Conformance](conformance.md); for the technical artifacts see [Profiles and Extensions](profiles-and-extensions.md).
+For the MII-wide conformance requirements see the [Conformance rules of the MII Meta module](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance); for the technical artifacts see [Profiles](profiles.md).
 

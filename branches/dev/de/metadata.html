@@ -6,7 +6,7 @@
 <html xml:lang="de" xmlns="http://www.w3.org/1999/xhtml" lang="de" dir="ltr">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>Metadaten - MII Implementation Guide Module Template v2027.0.0-draft.1</title>
+    <title>Metadaten-Übersicht - MII Implementation Guide Module Template v2027.0.0-draft.1</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -56,8 +56,8 @@
 	  <script src="assets/js/prism.js"></script>
     <script type="text/javascript" src="assets/js/mermaid.js"></script>
     <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
-    <style type="text/css">h2{--heading-prefix:"13"}
-    h3,h4,h5,h6{--heading-prefix:"13"}</style>
+    <style type="text/css">h2{--heading-prefix:"15"}
+    h3,h4,h5,h6{--heading-prefix:"15"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
@@ -126,26 +126,34 @@
             <a class="navbar-brand hidden" href="http://hl7.org/fhir/R4/index.html">FHIR</a>
             <div class="nav-collapse collapse navbar-inverse-collapse">
               <!-- German translation of input/includes/menu.xml.
-     Keep the href targets IDENTICAL to the source menu; translate only labels. -->
+     Keep the href targets IDENTICAL to the source menu; translate only labels.
+     Structure notes (OPTIONAL entries, link-only entries, the interim
+     meta-wiki links) are documented in the source menu's header and in
+     docs/page-structure.md / docs/optional-pages.md. -->
 <ul xmlns="http://www.w3.org/1999/xhtml" class="nav navbar-nav">
   <li><a href="index.html">Startseite</a></li>
   <li class="dropdown">
     <a data-toggle="dropdown" href="guidance.html" class="dropdown-toggle">Anleitung<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="guidance.html">Anleitung</a></li>
+      <!-- OPTIONAL (0..1) — siehe docs/optional-pages.md -->
       <li><a href="researcher-guidance.html">Anleitung für Forschende</a></li>
       <li><a href="implementer-guidance.html">Anleitung für Implementierende</a></li>
-      <li><a href="datasets-and-descriptions.html">Datensätze und Beschreibungen</a></li>
+      <!-- Nur-Link-Eintrag: Abschnitt "Logische Modelle" der Artefakt-Übersicht -->
+      <li><a href="artifacts.html#2">Datensätze und Beschreibungen</a></li>
       <li><a href="uml-diagrams.html">UML-Diagramme</a></li>
     </ul>
   </li>
   <li class="dropdown">
-    <a data-toggle="dropdown" href="conformance.html" class="dropdown-toggle">Konformität<b class="caret"> </b></a>
+    <!-- Eltern-Eintrag und die ersten vier Einträge verlinken die MII-weiten
+         Konformitätsregeln des Meta-Moduls (INTERIM: Meta-Wiki; siehe
+         Quell-Menü). -->
+    <a data-toggle="dropdown" href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance" class="dropdown-toggle">Konformität<b class="caret"> </b></a>
     <ul class="dropdown-menu">
-      <li><a href="conformance.html">Konformität</a></li>
-      <li><a href="general-requirements.html">Allgemeine Anforderungen</a></li>
-      <li><a href="must-support.html">Must-Support</a></li>
-      <li><a href="missing-data.html">Umgang mit fehlenden Daten</a></li>
+      <li><a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">Konformität</a></li>
+      <li><a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance#anforderungsdokumentation">Allgemeine Anforderungen</a></li>
+      <li><a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance#must-support-ms">Must-Support</a></li>
+      <li><a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance#fehlende-daten">Umgang mit fehlenden Daten</a></li>
       <li><a href="security-and-privacy.html">Sicherheit und Datenschutz</a></li>
     </ul>
   </li>
@@ -153,24 +161,35 @@
     <a data-toggle="dropdown" href="artifacts.html" class="dropdown-toggle">Artefakte<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <li><a href="artifacts.html">Artefakt-Übersicht</a></li>
-      <li><a href="profiles-and-extensions.html">Profile und Extensions</a></li>
-      <li><a href="terminology.html">Terminologie</a></li>
+      <li><a href="profiles.html">Profile</a></li>
+      <!-- OPTIONAL (0..1) — siehe docs/optional-pages.md -->
+      <li><a href="extensions.html">Extensions</a></li>
       <li><a href="capability-statements.html">CapabilityStatements</a></li>
-      <li><a href="search-parameters-and-operations.html">Suchparameter und Operationen</a></li>
+      <!-- OPTIONAL (0..1) — siehe docs/optional-pages.md -->
+      <li><a href="search-parameters.html">Suchparameter</a></li>
+      <!-- OPTIONAL (0..1) — siehe docs/optional-pages.md -->
+      <li><a href="operations.html">Operationen</a></li>
       <li><a href="logical-models.html">Logische Modelle</a></li>
+      <!-- OPTIONAL (0..1) — siehe docs/optional-pages.md -->
+      <li><a href="value-sets.html">ValueSets</a></li>
+      <!-- OPTIONAL (0..1) — siehe docs/optional-pages.md -->
+      <li><a href="code-systems.html">CodeSystems</a></li>
       <li><a href="examples.html">Beispiele</a></li>
       <li><a href="rendering-artifacts.html">Artefakt-Rendering (Demo — bitte löschen)</a></li>
     </ul>
   </li>
   <li><a href="downloads.html">Downloads</a></li>
+  <li><a href="changes.html">Änderungshistorie</a></li>
   <li class="dropdown">
-    <a data-toggle="dropdown" href="version-history.html" class="dropdown-toggle">Versionierung<b class="caret"> </b></a>
+    <!-- Der Eltern-Eintrag verlinkt bewusst das PFLICHT-Kind (Versionierung):
+         die Metadaten-Übersicht ist optional. -->
+    <a data-toggle="dropdown" href="version-history.html" class="dropdown-toggle">Metadaten<b class="caret"> </b></a>
     <ul class="dropdown-menu">
+      <!-- OPTIONAL (0..1) — siehe docs/optional-pages.md -->
+      <li><a href="metadata.html">Metadaten-Übersicht</a></li>
       <li><a href="version-history.html">Versionierung</a></li>
-      <li><a href="changes.html">Änderungshistorie</a></li>
     </ul>
   </li>
-  <li><a href="metadata.html">Metadaten</a></li>
 </ul>
 
             </div>  <!-- /.nav-collapse -->
@@ -202,7 +221,7 @@
     <div id="segment-breadcrumb" class="segment">  <!-- segment-breadcrumb -->
       <div class="container">  <!-- container -->
         <ul class="breadcrumb">
-          <li><a href='toc.html'><b>Inhaltsverzeichnis</b></a></li><li><b>Metadaten</b></li>
+          <li><a href='toc.html'><b>Inhaltsverzeichnis</b></a></li><li><b>Metadaten-Übersicht</b></li>
 
         </ul>
       </div>  <!-- /container -->
@@ -223,7 +242,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 </style>
 <div class="col-12">
   <!--ReleaseHeader--><p id="publish-box">MII Implementation Guide Module Template - Local Development build (v2027.0.0-draft.1) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href='https://www.medizininformatik-initiative.de/fhir/modul-template/history.html'>Directory of published versions</a></p><!--EndReleaseHeader-->
-  <h2>Metadaten</h2>
+  <h2>Metadaten-Übersicht</h2>
   
 
 
@@ -259,6 +278,21 @@ Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfade
      nicht. Sobald sushi-config.yaml ein CRMI-Profil, eine artifact-*-Extension
      oder einen Manifest-Parameter gewinnt oder verliert, sind die Tabellen unten
      in BEIDEN Sprachen nachzuziehen. -->
+<!-- OPTIONAL-PAGE (0..1) — Marker entfernen, wenn die Seite BLEIBT; andernfalls
+     die Seite gemäß docs/optional-pages.md entfernen. Der Konventions-Check
+     (M9) lässt ein Release mit diesem Marker fehlschlagen. -->
+
+<blockquote class="mii-highlight mii-highlight-grey">
+  <p><strong>Optionale Seite (0..1).</strong> Das MII-Modulmenü führt diese Seite als
+<em>optional</em> — behalten Sie sie nur, wenn die Profile Ihres Moduls die hier
+dokumentierten Metadaten-Charakteristiken aufweisen (wie z. B. das
+Basis-Modul). Entscheiden Sie für Ihr Modul: Seite <strong>behalten</strong> — Inhalte
+ausfüllen und dieses Banner samt <code class="language-plaintext highlighter-rouge">OPTIONAL-PAGE</code>-Marker-Kommentar löschen (in
+dieser Datei UND in der englischen Quellseite) — oder Seite <strong>entfernen</strong>,
+nach der Schritt-für-Schritt-Anleitung in <code class="language-plaintext highlighter-rouge">docs/optional-pages.md</code> dieses
+Repositories. Ein Release darf dieses Banner nicht enthalten
+(Konventions-Check M9).</p>
+</blockquote>
 
 <h3 id="metadaten-übersicht">Metadaten-Übersicht</h3>
 
@@ -751,7 +785,7 @@ Ressourcen die vollständigen maschinenlesbaren Metadaten.</p>
 
           IG © 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Thu, Aug 13, 2026 19:18+0000">2026-08-13</span>
+          Erstellt <span title="Thu, Aug 13, 2026 19:24+0000">2026-08-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- Branding override for the fhir2.base.template footer fragment.
