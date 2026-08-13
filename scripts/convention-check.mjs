@@ -20,12 +20,18 @@
 // (see convention-check.test.mjs) without touching the file system.
 
 import { readFileSync, existsSync, appendFileSync, readdirSync } from "node:fs";
-import { join } from "node:path";
+import { join, relative } from "node:path";
 
 // The machine-readable marker an OPTIONAL (0..1) page carries until the module
 // decides to keep or remove it — see docs/optional-pages.md. Deleting the
 // banner + marker comment from a page removes every occurrence of this string.
 export const OPTIONAL_MARKER = "OPTIONAL-PAGE";
+
+// The VISIBLE marker an undecided OPTIONAL (0..1) menu entry carries in its
+// rendered label (both menu.xml files — the word is identical in English and
+// German). Scaffold-only: the module lead deletes either the suffix (keep) or
+// the whole entry (remove) — see docs/recipes/remove-an-optional-page.md.
+export const OPTIONAL_LABEL_SUFFIX = "(optional)";
 
 // ── value extraction (no YAML dependency; line-oriented, comment/quote aware) ──
 
@@ -68,6 +74,111 @@ export function readIgIniTemplate(igIni) {
   return m ? m[1].trim() : null;
 }
 
+// ── heading-duplication helpers (M10) ─────────────────────────────────────────
+// The IG Publisher renders the PAGE TITLE (ImplementationGuide.definition.page
+// .title — the `pages:` tree, translated via the IG-level .po catalogue) as the
+// page's numbered section heading. An in-page heading that repeats that title
+// renders as "3. Security and Privacy" immediately followed by
+// "3.1 Security and Privacy". The same defect shape one level down is a heading
+// that repeats its immediate parent heading. Both are mechanical, so both are
+// checked mechanically.
+
+/** Read the `pages:` tree of sushi-config.yaml → Map of "<file>.md" → title. */
+export function parsePageTitles(yaml) {
+  const titles = new Map();
+  const lines = yaml.split(/\r?\n/);
+  let inPages = false;
+  let current = null;
+  for (const line of lines) {
+    if (/^pages:\s*(#.*)?$/.test(line)) { inPages = true; continue; }
+    if (!inPages) continue;
+    if (/^\S/.test(line)) break; // dedent → block ended
+    const page = line.match(/^\s+([^\s:#]+\.md):/);
+    if (page) { current = page[1]; continue; }
+    const title = line.match(/^\s+title:\s*(.+?)\s*$/);
+    if (title && current) {
+      titles.set(current, title[1].replace(/^["']|["']$/g, ""));
+      current = null;
+    }
+  }
+  return titles;
+}
+
+/** Read a gettext .po catalogue → Map of msgid → msgstr (single-line units). */
+export function parsePoTitles(po) {
+  const map = new Map();
+  const re = /^msgid\s+"(.*)"\s*\r?\nmsgstr\s+"(.*)"\s*$/gm;
+  let m;
+  while ((m = re.exec(po)) !== null) {
+    if (m[1] !== "" && m[2] !== "") map.set(m[1], m[2]);
+  }
+  return map;
+}
+
+/** Extract ATX headings from Markdown, skipping fenced code blocks and
+ * multi-line HTML comments. Returns [{ level, text, line }] (line is 1-based). */
+export function extractHeadings(markdown) {
+  const headings = [];
+  const lines = markdown.split(/\r?\n/);
+  let fence = null; // the fence marker that opened the current code block
+  let inComment = false;
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+    if (inComment) {
+      const end = line.indexOf("-->");
+      if (end < 0) continue;
+      line = line.slice(end + 3);
+      inComment = false;
+    }
+    // Strip complete comments, then detect a comment that stays open.
+    line = line.replace(/<!--[\s\S]*?-->/g, "");
+    const open = line.indexOf("<!--");
+    if (open >= 0) { line = line.slice(0, open); inComment = true; }
+    const fenceMatch = line.match(/^\s{0,3}(`{3,}|~{3,})/);
+    if (fenceMatch) {
+      if (fence === null) fence = fenceMatch[1][0];
+      else if (fenceMatch[1][0] === fence) fence = null;
+      continue;
+    }
+    if (fence !== null) continue;
+    const h = line.match(/^(#{1,6})\s+(.*?)\s*#*\s*$/);
+    if (h) headings.push({ level: h[1].length, text: h[2], line: i + 1 });
+  }
+  return headings;
+}
+
+function normalizeHeading(text) {
+  return text.replace(/\s+/g, " ").trim().toLowerCase();
+}
+
+/**
+ * The two defect shapes, on one page.
+ * @param {Array<{level:number,text:string,line:number}>} headings
+ * @param {string|null} title the page's rendered title (null: no title known —
+ *        e.g. intro-notes fragments — so only the parent-dup shape applies)
+ * @returns {Array<{type:"title-dup"|"parent-dup", line:number, text:string, ref:string}>}
+ */
+export function findHeadingDefects(headings, title = null) {
+  const defects = [];
+  if (headings.length === 0) return defects;
+  // (a) the FIRST in-page heading repeats the page title.
+  if (title !== null && normalizeHeading(headings[0].text) === normalizeHeading(title)) {
+    defects.push({ type: "title-dup", line: headings[0].line, text: headings[0].text, ref: title });
+  }
+  // (b) a heading repeats its immediate parent heading (the nearest previous
+  // heading of a shallower level).
+  const stack = []; // ancestors, shallowest first
+  for (const h of headings) {
+    while (stack.length > 0 && stack[stack.length - 1].level >= h.level) stack.pop();
+    const parent = stack[stack.length - 1];
+    if (parent && normalizeHeading(parent.text) === normalizeHeading(h.text)) {
+      defects.push({ type: "parent-dup", line: h.line, text: h.text, ref: parent.text });
+    }
+    stack.push(h);
+  }
+  return defects;
+}
+
 const PLACEHOLDER = /\{\{[^}]+\}\}/;
 // The floating labels. Keep this set identical to the publication gate's ERE in
 // .github/workflows/go-publish.yml ("Formal publication requires a pinned IG
@@ -106,9 +217,16 @@ function checkPrefixed(value, prefix, charClass) {
  *        one entry per page name that carries the OPTIONAL-PAGE marker in at
  *        least one language; `en`/`de` are "marked" | "unmarked" | "absent"
  *        (null = the scan did not run, e.g. in unit tests without a tree)
+ * @param {Array<{href: string, en: string, de: string}>|null} inputs.optionalMenuLabels
+ *        one entry per menu href whose label carries the "(optional)" suffix in
+ *        at least one language's menu.xml; `en`/`de` are "marked" | "unmarked"
+ *        (null = the scan did not run)
+ * @param {Array<{file: string, type: string, line: number, text: string, ref: string}>|null}
+ *        inputs.headingDuplicates duplicated-heading defects found in the
+ *        pagecontent/intro-notes trees (null = the scan did not run)
  * @returns {{ findings: Array, ok: boolean }}
  */
-export function evaluate({ sushiConfig = null, igIni = null, packageJson = null, release = false, demoPagePresent = false, optionalPages = null } = {}) {
+export function evaluate({ sushiConfig = null, igIni = null, packageJson = null, release = false, demoPagePresent = false, optionalPages = null, optionalMenuLabels = null, headingDuplicates = null } = {}) {
   const findings = [];
   const add = (id, applies, status, observed, message) =>
     findings.push({ id, applies, status, observed, message });
@@ -234,10 +352,64 @@ export function evaluate({ sushiConfig = null, igIni = null, packageJson = null,
             "KEEP it (delete the banner + marker comment in input/pagecontent/<page> AND " +
             "input/translations/de/pagecontent/<page>) or REMOVE it (follow the per-entry procedure in " +
             "docs/optional-pages.md: delete both page files, the menu entry in both menu.xml files, " +
-            "the sushi-config.yaml pages: entry and the page's unit in the IG-level .po catalogue)"
+            "the sushi-config.yaml pages: entry and the page's unit in the IG-level .po catalogue — " +
+            "full one-pass procedure: docs/recipes/remove-an-optional-page.md)"
           : "optional pages awaiting a keep/remove decision — fine in development; decide each before a release (docs/optional-pages.md)");
     } else if (asymmetric.length === 0) {
       add("M9 optional pages", "module", "pass", "none undecided", "OK");
+    }
+  }
+
+  // M9 (menu labels) — the same decision, made visible in the RENDERED menu:
+  // an undecided OPTIONAL (0..1) entry's label carries the "(optional)" suffix
+  // in BOTH menu.xml files. A released module must not ship a menu that says
+  // "(optional)" to its readers; a suffix present in only one language's menu
+  // is a half-applied decision and fails every branch.
+  if (optionalMenuLabels !== null) {
+    const asymmetric = optionalMenuLabels.filter((e) => e.en !== e.de);
+    for (const e of asymmetric) {
+      add("M9 optional menu labels", "module", "fail",
+        `${e.href}: en=${e.en}, de=${e.de}`,
+        `the "(optional)" label suffix of the ${e.href} menu entry differs between ` +
+        "input/includes/menu.xml and input/translations/de/includes/menu.xml — " +
+        "apply the keep/remove decision to BOTH menus (see docs/recipes/remove-an-optional-page.md)");
+    }
+    const undecided = optionalMenuLabels.filter((e) => e.en === "marked" && e.de === "marked");
+    if (undecided.length > 0) {
+      add("M9 optional menu labels", "module", release ? "fail" : "pass",
+        undecided.map((e) => e.href).join(", "),
+        release
+          ? 'menu labels still carry the "(optional)" suffix on a release branch — decide each entry: ' +
+            "KEEP the page (delete the suffix from the label in BOTH menu.xml files) or REMOVE it " +
+            "(delete the whole entry per docs/recipes/remove-an-optional-page.md)"
+          : 'menu entries still labelled "(optional)" — fine in development; decide each before a release ' +
+            "(docs/optional-pages.md, docs/recipes/remove-an-optional-page.md)");
+    } else if (asymmetric.length === 0) {
+      add("M9 optional menu labels", "module", "pass", "none undecided", "OK");
+    }
+  }
+
+  // M10 — no duplicated headings, on ANY branch. The IG Publisher renders the
+  // page TITLE (pages: tree, translated via the .po catalogue) as the page's
+  // numbered section heading; an in-page heading repeating it renders as
+  // "3. Security and Privacy" followed by "3.1 Security and Privacy". The same
+  // shape one level down — a heading equal to its immediate parent — is just as
+  // redundant. Both are mechanical defects, never a decision, so they fail in
+  // development too.
+  if (headingDuplicates !== null) {
+    if (headingDuplicates.length === 0) {
+      add("M10 no duplicated headings", "module", "pass", "none", "OK");
+    } else {
+      for (const d of headingDuplicates) {
+        add("M10 no duplicated headings", "module", "fail",
+          `${d.file}:${d.line} "${d.text}"`,
+          d.type === "title-dup"
+            ? `the first in-page heading repeats the page title "${d.ref}" — the IG Publisher already ` +
+              "renders the title as the section heading, so delete the in-page heading (in BOTH languages; " +
+              "the page content starts with prose)"
+            : `the heading repeats its parent heading "${d.ref}" — merge or rename one of the two ` +
+              "(in BOTH languages)");
+      }
     }
   }
 
@@ -305,6 +477,75 @@ export function scanOptionalPages(root) {
     .sort((a, b) => a.page.localeCompare(b.page));
 }
 
+/** Scan the two menu.xml files for entry labels carrying the "(optional)"
+ * suffix and pair the languages per href. Exported for the unit test. */
+export function scanOptionalMenuLabels(root) {
+  const files = {
+    en: join(root, "input", "includes", "menu.xml"),
+    de: join(root, "input", "translations", "de", "includes", "menu.xml"),
+  };
+  const state = {}; // href → { en, de }
+  for (const [lang, file] of Object.entries(files)) {
+    if (!existsSync(file)) continue;
+    // Comments carry the words "optional" too — strip them so only RENDERED
+    // labels are scanned.
+    const xml = readFileSync(file, "utf8").replace(/<!--[\s\S]*?-->/g, "");
+    const re = /<a\b[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g;
+    let m;
+    while ((m = re.exec(xml)) !== null) {
+      const href = m[1];
+      const label = m[2].replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+      const marked = label.endsWith(OPTIONAL_LABEL_SUFFIX);
+      state[href] = state[href] || {};
+      // A href can appear as both dropdown parent and child; marked wins.
+      state[href][lang] = state[href][lang] === "marked" || marked ? "marked" : "unmarked";
+    }
+  }
+  return Object.entries(state)
+    .filter(([, s]) => s.en === "marked" || s.de === "marked")
+    .map(([href, s]) => ({ href, en: s.en || "absent", de: s.de || "absent" }))
+    .sort((a, b) => a.href.localeCompare(b.href));
+}
+
+/** Scan the pagecontent + intro-notes trees (both languages) for the two
+ * duplicated-heading defect shapes. Exported for the unit test. */
+export function scanHeadingDuplicates(root) {
+  const sushiConfig = readIfExists(join(root, "sushi-config.yaml"));
+  const enTitles = sushiConfig ? parsePageTitles(sushiConfig) : new Map();
+  // The IG-level .po catalogue translates the page titles for /de/.
+  const deDir = join(root, "input", "translations", "de");
+  let poTitles = new Map();
+  if (existsSync(deDir)) {
+    const po = readdirSync(deDir).find((n) => n.startsWith("ImplementationGuide-") && n.endsWith(".po"));
+    if (po) poTitles = parsePoTitles(readFileSync(join(deDir, po), "utf8"));
+  }
+  const trees = [
+    { dir: join(root, "input", "pagecontent"), lang: "en", titled: true },
+    { dir: join(root, "input", "translations", "de", "pagecontent"), lang: "de", titled: true },
+    // intro-notes fragments render under an artifact's own title, which is not
+    // in the pages: tree — only the parent-dup shape applies there.
+    { dir: join(root, "input", "intro-notes"), lang: "en", titled: false },
+    { dir: join(root, "input", "translations", "de", "intro-notes"), lang: "de", titled: false },
+  ];
+  const out = [];
+  for (const { dir, lang, titled } of trees) {
+    if (!existsSync(dir)) continue;
+    for (const name of readdirSync(dir).sort()) {
+      if (!name.endsWith(".md")) continue;
+      let title = null;
+      if (titled) {
+        const en = enTitles.get(name) ?? null;
+        title = lang === "de" && en !== null ? (poTitles.get(en) ?? en) : en;
+      }
+      const headings = extractHeadings(readFileSync(join(dir, name), "utf8"));
+      for (const d of findHeadingDefects(headings, title)) {
+        out.push({ file: relative(root, join(dir, name)), ...d });
+      }
+    }
+  }
+  return out;
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const sushiConfig = readIfExists(join(args.root, "sushi-config.yaml"));
@@ -315,9 +556,12 @@ function main() {
     join(args.root, "input", "pagecontent", "rendering-artifacts.md"),
   );
   const optionalPages = scanOptionalPages(args.root);
+  const optionalMenuLabels = scanOptionalMenuLabels(args.root);
+  const headingDuplicates = scanHeadingDuplicates(args.root);
 
   const { findings, ok } = evaluate({
     sushiConfig, igIni, packageJson, release: args.release, demoPagePresent, optionalPages,
+    optionalMenuLabels, headingDuplicates,
   });
 
   const mode = args.release ? "release (strict)" : "development (placeholder-tolerant)";

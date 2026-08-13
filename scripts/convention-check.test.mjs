@@ -1,7 +1,14 @@
 // Unit tests for the convention checker. Run with: node --test scripts/
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { evaluate, readTopLevel, readDependencies, readIgIniTemplate, scanOptionalPages } from "./convention-check.mjs";
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import {
+  evaluate, readTopLevel, readDependencies, readIgIniTemplate, scanOptionalPages,
+  scanOptionalMenuLabels, scanHeadingDuplicates,
+  parsePageTitles, parsePoTitles, extractHeadings, findHeadingDefects,
+} from "./convention-check.mjs";
 
 // A parameterized scaffold sushi-config, as this repo ships it.
 const SCAFFOLD = `id: mii-ig-{{MODULE_SLUG}}
@@ -206,6 +213,188 @@ test("M9 — decided everywhere (or no scan) yields pass / no finding", () => {
   // Unit-test callers that pass no tree scan get no M9 finding at all.
   const noScan = evaluate({ release: true });
   assert.equal(noScan.findings.find((f) => f.id === "M9 optional pages"), undefined);
+});
+
+test("M9 (menu labels) — an undecided \"(optional)\" label blocks a release, but not development", () => {
+  const undecided = [
+    { href: "extensions.html", en: "marked", de: "marked" },
+    { href: "metadata.html", en: "marked", de: "marked" },
+  ];
+  const dev = evaluate({ optionalMenuLabels: undecided, release: false });
+  const rel = evaluate({ optionalMenuLabels: undecided, release: true });
+
+  assert.equal(dev.findings.find((f) => f.id === "M9 optional menu labels")?.status, "pass");
+  assert.equal(dev.ok, true, "undecided menu labels must be green in development");
+  assert.equal(rel.findings.find((f) => f.id === "M9 optional menu labels")?.status, "fail");
+  assert.equal(rel.ok, false, 'a release with "(optional)" still in a menu label must fail');
+
+  // The failure message must teach both exits.
+  const msg = rel.findings.find((f) => f.id === "M9 optional menu labels").message;
+  for (const s of ["BOTH menu.xml files", "docs/recipes/remove-an-optional-page.md"]) {
+    assert.ok(msg.includes(s), `the failure message should mention ${s}`);
+  }
+});
+
+test("M9 (menu labels) — a suffix present in only one language's menu fails on every branch", () => {
+  for (const release of [false, true]) {
+    const { ok, findings } = evaluate({
+      optionalMenuLabels: [{ href: "operations.html", en: "marked", de: "unmarked" }],
+      release,
+    });
+    assert.equal(ok, false, `menu-label asymmetry must fail (release=${release})`);
+    const f = findings.find((x) => x.id === "M9 optional menu labels");
+    assert.equal(f.status, "fail");
+    assert.ok(f.message.includes("BOTH menus"));
+  }
+  // Decided everywhere (or no scan) → pass / no finding.
+  const decided = evaluate({ optionalMenuLabels: [], release: true });
+  assert.equal(decided.findings.find((f) => f.id === "M9 optional menu labels")?.status, "pass");
+  assert.equal(evaluate({ release: true }).findings.find((f) => f.id === "M9 optional menu labels"), undefined);
+});
+
+test("scanOptionalMenuLabels finds the scaffold's seven tagged entries in BOTH menus", () => {
+  const entries = scanOptionalMenuLabels(new URL("..", import.meta.url).pathname);
+  const hrefs = entries.map((e) => e.href);
+  for (const h of ["researcher-guidance.html", "extensions.html", "search-parameters.html",
+    "operations.html", "value-sets.html", "code-systems.html", "metadata.html"]) {
+    assert.ok(hrefs.includes(h), `${h} should carry the "(optional)" label suffix`);
+  }
+  assert.equal(entries.length, 7, "exactly the seven optional entries are tagged");
+  for (const e of entries) {
+    assert.equal(e.en, "marked", `${e.href} must be tagged in the English menu`);
+    assert.equal(e.de, "marked", `${e.href} must be tagged in the German menu`);
+  }
+});
+
+// ── M10 — duplicated headings ────────────────────────────────────────────────
+
+test("parsePageTitles reads the pages: tree (nested entries and comments included)", () => {
+  const yaml = `id: x
+pages:
+  index.md:
+    title: Home
+
+  guidance.md:
+    title: Guidance
+    researcher-guidance.md: # OPTIONAL (0..1)
+      title: Guidance for Researchers
+
+  security-and-privacy.md:
+    title: Security and Privacy
+parameters:
+  path-resource: x
+`;
+  const titles = parsePageTitles(yaml);
+  assert.equal(titles.get("index.md"), "Home");
+  assert.equal(titles.get("guidance.md"), "Guidance");
+  assert.equal(titles.get("researcher-guidance.md"), "Guidance for Researchers");
+  assert.equal(titles.get("security-and-privacy.md"), "Security and Privacy");
+  assert.equal(titles.has("parameters"), false);
+});
+
+test("parsePoTitles maps msgid to msgstr", () => {
+  const po = `# comment
+msgid "Security and Privacy"
+msgstr "Sicherheit und Datenschutz"
+
+msgid "Home"
+msgstr "Startseite"
+`;
+  const map = parsePoTitles(po);
+  assert.equal(map.get("Security and Privacy"), "Sicherheit und Datenschutz");
+  assert.equal(map.get("Home"), "Startseite");
+});
+
+test("extractHeadings skips fenced code blocks and HTML comments", () => {
+  const md = `<!-- markdownlint-disable MD041 -->
+<!-- a header comment
+### Not a heading (inside a comment)
+-->
+Intro prose.
+
+### Real Section
+
+\`\`\`markdown
+### Not a heading (inside a fence)
+\`\`\`
+
+#### Child
+`;
+  const headings = extractHeadings(md);
+  assert.deepEqual(headings.map((h) => [h.level, h.text]), [[3, "Real Section"], [4, "Child"]]);
+});
+
+test("findHeadingDefects flags the title-dup shape (defect a)", () => {
+  // The rendered page would show "3. Security and Privacy" immediately
+  // followed by "3.1 Security and Privacy" — the shape this rule ends.
+  const headings = extractHeadings("### Security and Privacy\n\nProse.\n\n#### 1. Concept\n");
+  const defects = findHeadingDefects(headings, "Security and Privacy");
+  assert.equal(defects.length, 1);
+  assert.equal(defects[0].type, "title-dup");
+  // Prose-first pages with distinct sections are clean.
+  assert.deepEqual(findHeadingDefects(extractHeadings("Prose.\n\n### Version scheme\n"), "Versioning"), []);
+  // A later (non-first) heading equal to the title is not this shape.
+  assert.deepEqual(
+    findHeadingDefects(extractHeadings("### Intro\n\n### Downloads\n"), "Downloads"), []);
+});
+
+test("findHeadingDefects flags a heading equal to its immediate parent (defect b)", () => {
+  const md = "### Downloads\n\n#### Downloads\n\nProse.\n\n#### Package file\n";
+  const defects = findHeadingDefects(extractHeadings(md), null);
+  assert.equal(defects.length, 1);
+  assert.equal(defects[0].type, "parent-dup");
+  assert.equal(defects[0].text, "Downloads");
+  // Siblings of the same text are not parent/child; uncles do not count either.
+  const clean = "### A\n\n#### B\n\n#### B2\n\n### C\n\n#### A\n";
+  assert.deepEqual(findHeadingDefects(extractHeadings(clean), null), []);
+});
+
+test("M10 — any duplicated heading fails on every branch", () => {
+  const dup = [{ file: "input/pagecontent/security-and-privacy.md", type: "title-dup", line: 10, text: "Security and Privacy", ref: "Security and Privacy" }];
+  for (const release of [false, true]) {
+    const { ok, findings } = evaluate({ headingDuplicates: dup, release });
+    assert.equal(ok, false, `a duplicated heading must fail (release=${release})`);
+    const f = findings.find((x) => x.id === "M10 no duplicated headings");
+    assert.equal(f.status, "fail");
+    assert.ok(f.message.includes("BOTH languages"));
+  }
+  const clean = evaluate({ headingDuplicates: [] });
+  assert.equal(clean.findings.find((f) => f.id === "M10 no duplicated headings")?.status, "pass");
+  assert.equal(evaluate({}).findings.find((f) => f.id === "M10 no duplicated headings"), undefined);
+});
+
+test("scanHeadingDuplicates — the committed tree is clean, a seeded duplicate is caught", () => {
+  const root = new URL("..", import.meta.url).pathname;
+  // The scaffold itself must be free of both defect shapes, in both languages.
+  assert.deepEqual(scanHeadingDuplicates(root), []);
+
+  // Negative control: seed a throwaway tree with the S&P defect in both
+  // languages (title via pages: in English, via the .po catalogue in German)
+  // and a parent-dup, and the scan must report all three.
+  const tmp = mkdtempSync(join(tmpdir(), "convention-check-m10-"));
+  try {
+    mkdirSync(join(tmp, "input", "pagecontent"), { recursive: true });
+    mkdirSync(join(tmp, "input", "translations", "de", "pagecontent"), { recursive: true });
+    writeFileSync(join(tmp, "sushi-config.yaml"),
+      "pages:\n  security-and-privacy.md:\n    title: Security and Privacy\n");
+    writeFileSync(join(tmp, "input", "translations", "de", "ImplementationGuide-mii-ig-x.po"),
+      'msgid "Security and Privacy"\nmsgstr "Sicherheit und Datenschutz"\n');
+    writeFileSync(join(tmp, "input", "pagecontent", "security-and-privacy.md"),
+      "### Security and Privacy\n\nProse.\n\n#### Concept\n\n##### Concept\n");
+    writeFileSync(join(tmp, "input", "translations", "de", "pagecontent", "security-and-privacy.md"),
+      "### Sicherheit und Datenschutz\n\nProsa.\n");
+    const defects = scanHeadingDuplicates(tmp);
+    assert.deepEqual(
+      defects.map((d) => [d.file, d.type]).sort(),
+      [
+        ["input/pagecontent/security-and-privacy.md", "parent-dup"],
+        ["input/pagecontent/security-and-privacy.md", "title-dup"],
+        ["input/translations/de/pagecontent/security-and-privacy.md", "title-dup"],
+      ],
+    );
+  } finally {
+    rmSync(tmp, { recursive: true, force: true });
+  }
 });
 
 test("scanOptionalPages pairs the languages of this repository's scaffold", () => {
