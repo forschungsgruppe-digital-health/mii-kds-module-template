@@ -101,10 +101,13 @@
 7. **Add content.** Replace the example profile in `input/fsh/` with your own
    ([add-a-profile.md](add-a-profile.md)) and the English starter pages in
    `input/pagecontent/` with your module's pages. Keep the German translations in
-   `input/translations/de/` in step with them. When you add, rename or remove a
-   page, update all four places that name it: the `pages:` tree in
-   `sushi-config.yaml`, both `menu.xml` files, and the IG-level catalogue from
-   step 4.
+   `input/translations/de/` in step with them. **Decide the optional (0..1)
+   pages** — keep or remove each one per
+   [../optional-pages.md](../optional-pages.md); the convention check reports
+   the undecided ones and fails a release while any remain. When you add,
+   rename or remove a page, update all four places that name it: the `pages:`
+   tree in `sushi-config.yaml`, both `menu.xml` files, and the IG-level
+   catalogue from step 4.
 8. **Build.** Locally, from the repository root:
 
    ```sh

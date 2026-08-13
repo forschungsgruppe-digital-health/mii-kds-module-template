@@ -1,6 +1,7 @@
 <!-- markdownlint-disable MD041 -->
-<!-- Source: kerndatensatz-basis input/pagecontent/researcher-guidance.md.
-     German mirror: input/translations/de/pagecontent/researcher-guidance.md. -->
+<!-- Split from the former combined search-parameters-and-operations.md per the
+     MII-agreed menu structure (one page per artifact type).
+     German mirror: input/translations/de/pagecontent/search-parameters.md. -->
 <!-- OPTIONAL-PAGE (0..1) — remove this marker when you KEEP the page; remove
      the page per docs/optional-pages.md when you don't. The convention check
      (M9) fails a release while this marker is present. -->
@@ -13,9 +14,12 @@
 > check M9).
 {: .mii-highlight .mii-highlight-grey}
 
-### Guidance for Researchers
+### Search Parameters
 
-Guidance for researchers using the data of the **{{MODULE_TITLE}}** module for research purposes — e.g. which data elements are relevant to which research questions, and how they are to be interpreted.
+This page lists the module-specific FHIR search parameters of the
+**{{MODULE_TITLE}}** module (naming convention `MII_SP_<Module>_<Name>`), where
+defined. Cross-module search parameters are defined by the MII Meta module.
 
-> [TODO: Describe the research-relevant aspects of your module.]
+> [TODO: List the search parameters — or remove this page if your module
+> defines none.]
 {: .mii-highlight .mii-highlight-grey}

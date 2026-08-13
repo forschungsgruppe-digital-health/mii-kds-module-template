@@ -33,7 +33,7 @@ standardized secondary use of routine clinical data for medical research.
 <div class="mii-highlight mii-highlight-blue">
 <h5>Implementers</h5>
 <p>Data Integration Centers (DIC), software developers and system architects building FHIR-based solutions.<br/>
-→ see <a href="profiles-and-extensions.html">Profiles and Extensions</a> and <a href="logical-models.html">Logical Models</a>.</p>
+→ see <a href="profiles.html">Profiles</a> and <a href="logical-models.html">Logical Models</a>.</p>
 </div>
 
 <div class="mii-highlight mii-highlight-green">
@@ -45,10 +45,13 @@ standardized secondary use of routine clinical data for medical research.
 ### Contents
 
 - **[Guidance](guidance.html)** — getting started and domain notes.
-- **[Conformance](conformance.html)** — normative requirements, Must-Support and
-  handling missing data.
-- **[Profiles and Extensions](profiles-and-extensions.html)** and
-  **[Terminology](terminology.html)** — the technical artifacts.
+- **Conformance** — the MII-wide conformance rules (requirements language,
+  Must Support, handling missing data) are maintained centrally by the
+  [MII Meta module](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance);
+  the module-specific [Security and Privacy](security-and-privacy.html)
+  considerations are part of this guide.
+- **[Profiles](profiles.html)** and the further
+  **[artifact pages](artifacts.html)** — the technical artifacts.
 - **[Examples](examples.html)** — example instances.
 
 ### Related guides

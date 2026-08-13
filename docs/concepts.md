@@ -63,7 +63,9 @@ still resolves — see [first-run-setup.md](recipes/first-run-setup.md).
 > different fate.
 
 The **page set and the menu** propagate too, and they stay the module's to edit —
-the IG template supplies presentation only. See
+the IG template supplies presentation only. The mandatory (1..1) entries follow
+the MII-agreed menu structure; the optional (0..1) entries are decided per
+module ([optional-pages.md](optional-pages.md)). See
 [page-structure.md](page-structure.md) for that boundary and why it was drawn
 there.
 

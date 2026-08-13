@@ -1,6 +1,7 @@
 <!-- markdownlint-disable MD041 -->
-<!-- Source: kerndatensatz-basis input/pagecontent/researcher-guidance.md.
-     German mirror: input/translations/de/pagecontent/researcher-guidance.md. -->
+<!-- Split from the former combined profiles-and-extensions.md per the MII-agreed
+     menu structure (one page per artifact type).
+     German mirror: input/translations/de/pagecontent/extensions.md. -->
 <!-- OPTIONAL-PAGE (0..1) — remove this marker when you KEEP the page; remove
      the page per docs/optional-pages.md when you don't. The convention check
      (M9) fails a release while this marker is present. -->
@@ -13,9 +14,13 @@
 > check M9).
 {: .mii-highlight .mii-highlight-grey}
 
-### Guidance for Researchers
+### Extensions
 
-Guidance for researchers using the data of the **{{MODULE_TITLE}}** module for research purposes — e.g. which data elements are relevant to which research questions, and how they are to be interpreted.
+This page lists the FHIR extensions defined by the **{{MODULE_TITLE}}** module
+(naming convention `MII_EX_<Module>_<Name>`). Extensions carry information the
+base resources and profiles cannot express; the profiles that use them are on
+the [Profiles](profiles.html) page.
 
-> [TODO: Describe the research-relevant aspects of your module.]
+> [TODO: List and describe your module's extensions — or remove this page if
+> your module defines none.]
 {: .mii-highlight .mii-highlight-grey}

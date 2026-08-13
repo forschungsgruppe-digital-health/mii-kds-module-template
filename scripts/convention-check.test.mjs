@@ -1,7 +1,7 @@
 // Unit tests for the convention checker. Run with: node --test scripts/
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { evaluate, readTopLevel, readDependencies, readIgIniTemplate } from "./convention-check.mjs";
+import { evaluate, readTopLevel, readDependencies, readIgIniTemplate, scanOptionalPages } from "./convention-check.mjs";
 
 // A parameterized scaffold sushi-config, as this repo ships it.
 const SCAFFOLD = `id: mii-ig-{{MODULE_SLUG}}
@@ -152,5 +152,74 @@ test("M8 — the demonstration page blocks a release, but not development", () =
     "input/translations/de/includes/menu.xml",
   ]) {
     assert.ok(msg.includes(f), `the failure message should name ${f}`);
+  }
+});
+
+test("M9 — undecided optional pages block a release, but not development", () => {
+  // The approved MII module menu marks some entries OPTIONAL (0..1). Each
+  // ships with an OPTIONAL-PAGE marker + banner; the gate is at release so the
+  // scaffold can present the choice without failing every PR.
+  const undecided = [
+    { page: "extensions.md", en: "marked", de: "marked" },
+    { page: "operations.md", en: "marked", de: "marked" },
+  ];
+  const dev = evaluate({ optionalPages: undecided, release: false });
+  const rel = evaluate({ optionalPages: undecided, release: true });
+
+  assert.equal(dev.findings.find((f) => f.id === "M9 optional pages")?.status, "pass");
+  assert.equal(dev.ok, true, "undecided optional pages must be green in development");
+  assert.equal(rel.findings.find((f) => f.id === "M9 optional pages")?.status, "fail");
+  assert.equal(rel.ok, false, "a release with undecided optional pages must fail");
+
+  // The failure message must teach both exits: keep (delete banner in both
+  // languages) and remove (the documented per-entry procedure).
+  const msg = rel.findings.find((f) => f.id === "M9 optional pages").message;
+  for (const s of ["docs/optional-pages.md", "input/translations/de/pagecontent", "menu.xml", ".po"]) {
+    assert.ok(msg.includes(s), `the failure message should mention ${s}`);
+  }
+});
+
+test("M9 — a half-applied decision (marker asymmetry) fails on every branch", () => {
+  for (const release of [false, true]) {
+    const { ok, findings } = evaluate({
+      optionalPages: [{ page: "value-sets.md", en: "unmarked", de: "marked" }],
+      release,
+    });
+    assert.equal(ok, false, `asymmetry must fail (release=${release})`);
+    const f = findings.find((x) => x.id === "M9 optional pages");
+    assert.equal(f.status, "fail");
+    assert.ok(f.message.includes("BOTH languages"));
+  }
+  // A page removed in one language only is asymmetric too.
+  const half = evaluate({
+    optionalPages: [{ page: "code-systems.md", en: "absent", de: "marked" }],
+    release: false,
+  });
+  assert.equal(half.ok, false);
+});
+
+test("M9 — decided everywhere (or no scan) yields pass / no finding", () => {
+  const decided = evaluate({ optionalPages: [], release: true });
+  assert.equal(decided.findings.find((f) => f.id === "M9 optional pages")?.status, "pass");
+  assert.equal(decided.ok, true);
+
+  // Unit-test callers that pass no tree scan get no M9 finding at all.
+  const noScan = evaluate({ release: true });
+  assert.equal(noScan.findings.find((f) => f.id === "M9 optional pages"), undefined);
+});
+
+test("scanOptionalPages pairs the languages of this repository's scaffold", () => {
+  // Run against the real tree: every optional page the scaffold ships must be
+  // marked in BOTH languages (the state the template itself is committed in).
+  const entries = scanOptionalPages(new URL("..", import.meta.url).pathname);
+  assert.ok(entries.length >= 7, "the scaffold ships at least 7 optional pages");
+  for (const e of entries) {
+    assert.equal(e.en, "marked", `${e.page} must carry the marker in English`);
+    assert.equal(e.de, "marked", `${e.page} must carry the marker in German`);
+  }
+  const names = entries.map((e) => e.page);
+  for (const p of ["researcher-guidance.md", "extensions.md", "search-parameters.md",
+    "operations.md", "value-sets.md", "code-systems.md", "metadata.md"]) {
+    assert.ok(names.includes(p), `${p} should be scanned as optional`);
   }
 });

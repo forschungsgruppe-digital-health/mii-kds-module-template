@@ -35,8 +35,10 @@ work.
   example. The defining URL is
   `http://terminology.hl7.org/CodeSystem/data-absent-reason`
   ([R4 spec](http://hl7.org/fhir/R4/codesystem-data-absent-reason.html)).
-  Fixed here; the defect was inherited, so it should be reported rather than
-  silently diverged from.
+  This scaffold carried a corrected copy until the agreed menu structure
+  retired the local `missing-data.md` in favour of the Meta-module link
+  ([page-structure.md](page-structure.md)); the upstream defect remains worth
+  reporting rather than silently diverging from.
 - **`HL7/ig-template-base2` — the `TRANS_HLP` string is inserted without
   `| markdownify`,** so every language catalog's markdown link renders
   literally. Worked around in the IG template repository; see its

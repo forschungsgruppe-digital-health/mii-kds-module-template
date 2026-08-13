@@ -30,9 +30,12 @@ and sign off, the profiles are what implementers build against.
    * element 1..1 string "Kurzbeschreibung"
    ```
 
-2. Describe the elements in prose on
-   [`datasets-and-descriptions.md`](../../input/pagecontent/datasets-and-descriptions.md) —
-   that page exists for exactly this and is where reviewers look.
+2. Describe the elements in prose in the logical model's own narrative — its
+   FSH `Description` and, for longer prose, an intro/notes page in
+   `input/intro-notes/` (`StructureDefinition-<id>-intro.md`). The menu entry
+   "Datasets and Descriptions" links straight to the Logical-Models section of
+   the generated Artifacts Summary, so that narrative is where reviewers land
+   (see `docs/page-structure.md`).
 3. Link model to profiles: say on the logical-models page which profile realises
    which part of the model, so a reader can cross over.
 4. If you draw the model, see [add UML diagrams](add-uml-diagrams.md).
@@ -46,8 +49,9 @@ years — ship one only if it is reviewed and used.
 
 ## Expected result
 
-`logical-models.md` lists the module's models, `datasets-and-descriptions.md`
-explains the elements in domain language, and profiles are traceable to the model.
+`logical-models.md` lists the module's models, each model's narrative explains
+its elements in domain language (surfaced via the "Datasets and Descriptions"
+menu link into the Artifacts Summary), and profiles are traceable to the model.
 
 ## Common errors & fixes
 
@@ -55,4 +59,4 @@ explains the elements in domain language, and profiles are traceable to the mode
 | --- | --- | --- |
 | The logical model does not appear | Wrong folder, or missing `Logical:` keyword | Put it in `input/fsh/logicals/` and check the FSH keyword |
 | Model and profiles drift apart | They are maintained separately with no cross-links | State the mapping on the logical-models page and review both together at release |
-| Reviewers cannot follow the model | Only the generated table exists | Write the domain description on `datasets-and-descriptions.md` |
+| Reviewers cannot follow the model | Only the generated table exists | Write the domain description into the model's narrative (`Description` / intro page) |
