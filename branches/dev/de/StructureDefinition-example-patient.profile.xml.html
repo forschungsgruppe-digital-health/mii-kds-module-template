@@ -27,10 +27,17 @@
   	<link href="assets/css/prism.css" rel="stylesheet" />
     <link href="assets/css/project.css" rel="stylesheet"/>
   	<link href="assets/css/cqf.css" rel="stylesheet" />
-    <!-- MII branding override for the fhir2.base.template CSS placeholder
+    <!-- Branding override for the fhir2.base.template CSS placeholder
      (base ships includes/fragment-css.html as a single comment; it is included
-     in <head> AFTER all base stylesheets, so mii.css wins the cascade). -->
+     in <head> AFTER all base stylesheets, so mii.css wins the cascade).
+     Brand switch: when the consuming IG ships input/data/brand.json with
+     { "design": "num-diz" } (read as site.data.brand.design via the base's
+     input/data -> _data pre-process), num-diz.css is linked AFTER mii.css and
+     re-themes the guide by overriding the same CSS custom properties. An
+     unset or unknown value loads mii.css alone - the MII design is the safe
+     default. See docs/styleguide.md §10. -->
 <link href="assets/css/mii.css" rel="stylesheet"/>
+
 
 
     <script type="text/javascript" src="fhir-table-scripts.js"> </script>
@@ -59,27 +66,35 @@
     <div id="segment-header" class="segment">  <!-- segment-header -->
       <div class="container">  <!-- container -->
 
-        <!-- MII branding override for the fhir2.base.template header placeholder
+        <!-- Branding override for the fhir2.base.template header placeholder
      (base ships includes/fragment-header.html as a single comment; it is included
      inside "#segment-header > .container", before the #ig-status block).
      Language handling: only the asset and its descriptive alt text switch on
      include.lang (the pattern kerndatensatz-basis uses); no translatable UI
      strings are hard-coded.
+     Brand handling: the project logo additionally switches on
+     site.data.brand.design (input/data/brand.json in the consuming IG, see
+     docs/styleguide.md §10). Only the exact value 'num-diz' selects the
+     NUM-DIZ logos - anything else, including no brand.json at all, falls
+     through to the MII default.
      Two logos, mirroring kerndatensatz-basis: the HL7 FHIR logo (links to the
-     FHIR spec) in #family-nav, and the MII logo in #project-nav. fhir-logo-www.png
-     is shipped by fhir2.base.template (content/assets/images/), so it resolves
-     from the inherited assets without shipping it here. -->
+     FHIR spec) in #family-nav, and the project logo in #project-nav.
+     fhir-logo-www.png is shipped by fhir2.base.template
+     (content/assets/images/), so it resolves from the inherited assets without
+     shipping it here. -->
 <div id="family-nav">
   <a id="family-logo" no-external="true" href="https://hl7.org/fhir">
     <img height="50" alt="HL7 FHIR" src="assets/images/fhir-logo-www.png"/>
   </a>
 </div>
 <div id="project-nav">
+
   <a id="project-logo" no-external="true" href="https://www.medizininformatik-initiative.de/">
 
     <img height="50" alt="Medizininformatik-Initiative (MII)" src="assets/images/logo-de.svg"/>
 
   </a>
+
 </div>
 
 
@@ -452,7 +467,7 @@
   &lt;<a href="http://hl7.org/fhir/R4/structuredefinition.html#StructureDefinition.title">title</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;Example Patient — template starter&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/structuredefinition.html#StructureDefinition.status">status</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;active&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/structuredefinition.html#StructureDefinition.experimental">experimental</a> <a href="http://hl7.org/fhir/R4/datatypes.html#boolean">value</a>=&quot;false&quot;/&gt;
-  &lt;<a href="http://hl7.org/fhir/R4/structuredefinition.html#StructureDefinition.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2026-08-13T13:00:52+00:00&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/structuredefinition.html#StructureDefinition.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2026-08-13T19:18:57+00:00&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/structuredefinition.html#StructureDefinition.publisher">publisher</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;Medizininformatik-Initiative (MII)&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/structuredefinition.html#StructureDefinition.contact">contact</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/metadatatypes.html#ContactDetail#ContactDetail.name">name</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;Medical Informatics Initiative (MII)&quot;/&gt;
@@ -2920,10 +2935,10 @@ Modifier extensions SHALL NOT change the meaning of any elements on Resource or 
 
           IG © 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Thu, Aug 13, 2026 13:00+0000">2026-08-13</span>
+          Erstellt <span title="Thu, Aug 13, 2026 19:18+0000">2026-08-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
-            <!-- MII branding override for the fhir2.base.template footer fragment.
+            <!-- Branding override for the fhir2.base.template footer fragment.
      Unlike header/css, the base footer fragment is NOT an empty placeholder: it
      renders "Links: Table of Contents | QA Report [| feedback dashboards]".
      The base uses site.data.stringsBase[include.lang][...] for the labels. The
@@ -2933,13 +2948,18 @@ Modifier extensions SHALL NOT change the meaning of any elements on Resource or 
      labels too. (The blank-label problem that first motivated this is separately
      mitigated: this repo vendors the base's own German catalogs into
      translations/ — see translations/README.md.) The override preserves the base
-     links (TOC, QA, feedback dashboards) and appends the MII information links.
+     links (TOC, QA, feedback dashboards) and appends the project information links.
+     NUM-DIZ takes over IG development and maintenance when MII funding ends
+     (end-2026), so the NUM-DIZ link renders BEFORE the MII link — in BOTH brand
+     designs and both languages; the MII links stay because the modules remain MII
+     content. "NUM-DIZ" is a proper name, hence language-neutral (styleguide §6).
      Imprint: the MII website has separate German (/de/impressum) and English
      (/en/legal-notice) imprint pages (both verified HTTP 200 on 2026-07-22). -->
 
           Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Inhaltsverzeichnis</a> |
                  <a style="color: var(--footer-hyperlink-text-color)" href="../qa.html">QA-Bericht</a>
                  
+                 | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="https://www.netzwerk-universitaetsmedizin.de/forschung/num-diz">NUM-DIZ</a>
                  | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="https://www.medizininformatik-initiative.de/">medizininformatik-initiative.de</a>
                  | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="https://www.medizininformatik-initiative.de/de/impressum">Impressum</a>
 
