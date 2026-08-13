@@ -1,52 +1,67 @@
 <!-- markdownlint-disable MD041 -->
-<!-- Sicherheit & Datenschutz. Diese Seite ist von den HL7-Best-Practices für
-     Implementation Guides ausdrücklich gefordert ("Security and Privacy
-     Considerations"). Sie richtet sich an Sicherheits- und
-     Datenschutz-Fachleute. Ersetzen Sie die [TODO]-Hinweise durch die Aussagen
-     Ihres Moduls; entfernen Sie die Seite NICHT. -->
+<!-- Deutsche Übersetzung von input/pagecontent/security-and-privacy.md.
+     Aufgebaut in den abgestimmten DREI Stufen: (1) das übergreifende
+     MII-Datenschutzkonzept, (2) DIMP im MII-Datenportal, (3) die
+     modul-spezifischen Aspekte. Stufen 1 und 2 sind statischer MII-weiter
+     Inhalt — behalten; Stufe 3 füllt Ihr Modul aus. Beide Sprachfassungen
+     müssen dasselbe aussagen. -->
 
 ### Sicherheit und Datenschutz
 
-Dieser Abschnitt richtet sich an Sicherheits- und Datenschutz-Fachleute. Er
-beschreibt, welche Angriffe und Risiken für das Modul **{{MODULE_TITLE}}**
-betrachtet wurden und welche Gegenmaßnahmen vorgesehen sind.
-
-Grundlagen und allgemeine Anforderungen stehen in der FHIR-Kernspezifikation:
+Dieser Abschnitt richtet sich an Sicherheits- und Datenschutz-Fachleute.
+Allgemeine Anforderungen stehen in der FHIR-Kernspezifikation —
 [Security & Privacy Module](https://build.fhir.org/secpriv-module.html) und die
-[Security-Checkliste](https://build.fhir.org/security.html). Dieser Abschnitt
-wiederholt sie nicht, sondern nennt nur die **modul-spezifischen** Aspekte.
+[Security-Checkliste](https://build.fhir.org/security.html). Diese Seite
+wiederholt sie nicht; sie verlinkt den MII-weiten Datenschutzrahmen und nennt,
+was **für dieses Modul spezifisch** ist.
 
-#### Datenschutzgrundsätze
+#### 1. Das Datenschutzkonzept der MII
 
-Für die Verarbeitung personenbezogener Daten gelten Transparenz, Zweckbindung,
-Datenminimierung, Richtigkeit, Speicherbegrenzung und Integrität/Vertraulichkeit
-(DSGVO Art. 5). Im MII-Kontext erfolgt die Nutzung auf Basis der
-MII-Broad-Consent-Regelungen.
+Das
+[übergreifende Datenschutzkonzept der Medizininformatik-Initiative](https://www.medizininformatik-initiative.de/de/datenschutzkonzept)
+regelt, wie Patientendaten MII-weit für die Forschung verarbeitet werden
+dürfen: die Rechtsgrundlage (der Broad Consent der MII), die Rollen der
+Datenintegrationszentren und der Use-&-Access-Committees sowie die
+standortübergreifenden Anwendungsszenarien (Machbarkeitsanfragen, verteilte
+Analysen, Daten- und Bioproben-Bereitstellung). Alles, was dieses Modul
+spezifiziert, bewegt sich innerhalb dieses Rahmens — dieser Leitfaden fügt
+keinen eigenen Verarbeitungszweck hinzu.
 
-> [TODO: Beschreiben Sie, welche Datenkategorien Ihr Modul führt und welche
-> Zweckbindung bzw. Rechtsgrundlage im MII-Kontext gilt.]
-{: .mii-highlight .mii-highlight-grey}
+#### 2. De-Identifikation, Minimierung und Pseudonymisierung (DIMP)
 
-#### Sicherheitsbetrachtung
+Wie Daten, die ein Datenintegrationszentrum verlassen, praktisch
+de-identifiziert werden, spezifiziert
+[DIMP (De-Identification — Minimisation — Pseudonymisation)](https://medizininformatik-initiative.github.io/dataportal/data-node/DIMP.html)
+in der Dokumentation des MII-Datenportals: direkte Identifikatoren werden
+entfernt, vom genehmigten Projekt nicht benötigte Datenelemente entfallen, und
+identifizierende Werte werden durch projektspezifische Pseudonyme ersetzt
+(FHIR-Pseudonymizer-Konfiguration). Die Profile dieses Moduls beschreiben die
+Daten *vor* Anwendung von DIMP; welche Elemente eine konkrete
+Datenbereitstellung erreicht, entscheidet je Projekt die DIMP-Konfiguration,
+nicht dieser Leitfaden.
 
-Sicherheit ist Risikomanagement bezüglich Vertraulichkeit, Integrität und
-Verfügbarkeit.
+#### 3. Modul-spezifische Aspekte
 
-> [TODO: Nennen Sie die betrachteten Angriffe/Risiken und die Gegenmaßnahmen —
-> z. B. Zugriffsschutz der FHIR-API, Pseudonymisierung, Transportverschlüsselung,
-> Protokollierung.]
-{: .mii-highlight .mii-highlight-grey}
+Dies ist der eigene Beitrag des Moduls: die Sicherheits- und
+Datenschutz-Eigenschaften, die aus der *Art der Daten dieses Moduls* folgen.
+Beispiele aus anderen KDS-Modulen, was hierher gehört:
 
-#### Modul-spezifische Konformitätsanforderungen
+* Modul *Dokument* — Dokumente werden Base64-kodiert eingebettet
+  (`DocumentReference.content.attachment.data`); ein eingebettetes Dokument
+  kann beliebige identifizierende Angaben enthalten (Briefköpfe, Freitext,
+  eingescannte Unterschriften), die eine Pseudonymisierung auf Profilebene
+  nicht erreicht — Dokumentinhalte brauchen daher vor der Bereitstellung einen
+  eigenen De-Identifikationsschritt.
+* Modul *Person* — die Patienten-Identifikatoren sind Pseudonyme der
+  Treuhandstelle; Systeme dürfen ein Record Linkage nicht zur
+  Re-Identifizierung führen lassen, und der Geltungsbereich eines Pseudonyms
+  (standortweit vs. projektspezifisch) ist beim Zusammenführen von Daten zu
+  respektieren.
 
-> [TODO: Falls Ihr Modul sicherheits- oder datenschutzbezogene
-> SHALL/SHOULD/MAY-Anforderungen definiert, führen Sie sie hier auf und benennen
-> Sie, welchem Risiko sie begegnen.]
-{: .mii-highlight .mii-highlight-grey}
-
-#### Verbleibende Risiken
-
-> [TODO: Nennen Sie Risiken, die NICHT durch diese Spezifikation adressiert
-> werden und daher im Systemdesign, im Betrieb oder per Policy behandelt werden
-> müssen.]
+> [TODO: Nennen Sie die spezifischen Aspekte Ihres Moduls — die geführten
+> Datenkategorien und ihre Sensibilität, Risiken, die eine Pseudonymisierung
+> auf Profilebene nicht abdeckt, sowie sicherheits- oder datenschutzbezogene
+> SHALL/SHOULD/MAY-Anforderungen dieses Moduls an Implementierende, jeweils mit
+> dem adressierten Risiko. Benennen Sie verbleibende Risiken, die im
+> Systemdesign, im Betrieb oder per Policy behandelt werden müssen.]
 {: .mii-highlight .mii-highlight-grey}

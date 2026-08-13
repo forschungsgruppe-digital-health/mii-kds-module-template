@@ -7,8 +7,10 @@ Moduls **{{MODULE_TITLE}}**.
 
 ### Allgemeine Umsetzungshinweise
 
-* **[Datensätze und Beschreibungen](datasets-and-descriptions.html)** —
-  ausführliche Beschreibung der Datenelemente / logischen Modelle des Moduls.
+* **[Datensätze und Beschreibungen](artifacts.html#2)** — die Datenelemente des
+  Moduls, beschrieben als logische Modelle in der Artefakt-Übersicht. (Dies ist
+  ein Link in die generierte Artefakt-Liste, keine eigene Seite; der Anker ist
+  positionsabhängig — siehe `docs/page-structure.md` in diesem Repository.)
 * **[UML-Diagramme](uml-diagrams.html)** — visuelle Darstellung der Datenmodelle
   und ihrer Beziehungen.
 
@@ -24,5 +26,6 @@ Moduls **{{MODULE_TITLE}}**.
 {: .mii-highlight .mii-highlight-grey}
 
 ---
-Für Konformitätsanforderungen siehe [Konformität](conformance.html); für die
-technischen Artefakte siehe [Profile und Extensions](profiles-and-extensions.html).
+Für die MII-weiten Konformitätsanforderungen siehe die
+[Konformitätsregeln des MII-Meta-Moduls](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance);
+für die technischen Artefakte siehe [Profile](profiles.html).

@@ -1,44 +1,63 @@
 <!-- markdownlint-disable MD041 -->
-<!-- English rendering of input/pagecontent/security-and-privacy.md. -->
+<!-- English rendering of input/pagecontent/security-and-privacy.md.
+     Structured in the MII-agreed THREE stages: (1) the MII overarching data
+     protection concept, (2) DIMP in the MII data portal, (3) the
+     module-specific aspects. Stages 1 and 2 are static MII-wide content —
+     keep them; stage 3 is where your module writes.
+     German mirror: input/translations/de/pagecontent/security-and-privacy.md —
+     both files must say the same thing. -->
 
 ### Security and Privacy
 
-This section addresses security and privacy experts. It explains which attacks
-and risks were considered for the **{{MODULE_TITLE}}** module and which
-countermeasures apply.
-
-General requirements are in the FHIR core specification —
+This section addresses security and privacy experts. General requirements are in
+the FHIR core specification —
 [Security & Privacy Module](https://build.fhir.org/secpriv-module.html) and the
-[security checklist](https://build.fhir.org/security.html). This section does not
-repeat them; it states only what is **specific to this module**.
+[security checklist](https://build.fhir.org/security.html). This page does not
+repeat them; it links the MII-wide data protection framework and states what is
+**specific to this module**.
 
-#### Privacy principles
+#### 1. The MII data protection concept
 
-Processing of personal data follows transparency, purpose limitation, data
-minimisation, accuracy, storage limitation and integrity/confidentiality
-(GDPR Art. 5). In the MII context, use is based on the MII Broad Consent.
+The
+[overarching data protection concept of the Medical Informatics Initiative](https://www.medizininformatik-initiative.de/en/data-protection-concept)
+governs how patient data may be processed for research across the MII: it
+covers the legal basis (the MII Broad Consent), the roles of the Data
+Integration Centers and Use & Access Committees, and the cross-site application
+scenarios (feasibility queries, distributed analyses, data and biosample
+provision). Everything this module specifies operates inside that framework —
+this guide adds no processing purpose of its own.
 
-> [TODO: Describe the data categories your module carries and the applicable
-> purpose limitation / legal basis in the MII context.]
-{: .mii-highlight .mii-highlight-grey}
+#### 2. De-identification, minimisation and pseudonymisation (DIMP)
 
-#### Security considerations
+How data leaving a Data Integration Center is de-identified in practice is
+specified by
+[DIMP (De-Identification — Minimisation — Pseudonymisation)](https://medizininformatik-initiative.github.io/dataportal/data-node/DIMP.html)
+in the MII data portal documentation: direct identifiers are removed,
+data elements not needed by the approved project are dropped, and identifying
+values are replaced by project-specific pseudonyms (FHIR Pseudonymizer
+configuration). The profiles of this module describe data *before* DIMP is
+applied; which elements survive a concrete data release is decided per project
+by the DIMP configuration, not by this guide.
 
-Security is risk management against risks to confidentiality, integrity and
-availability.
+#### 3. Module-specific aspects
 
-> [TODO: Name the attacks/risks considered and the countermeasures — e.g. FHIR
-> API access control, pseudonymisation, transport encryption, audit logging.]
-{: .mii-highlight .mii-highlight-grey}
+This is the module's own contribution: the security and privacy properties
+that follow from the *kind of data this module carries*. Examples from other
+KDS modules of what belongs here:
 
-#### Module-specific conformance requirements
+* *Document* module — documents are embedded Base64-encoded
+  (`DocumentReference.content.attachment.data`); an embedded document can
+  contain arbitrary identifying information (letterheads, free text, scanned
+  signatures) that profile-level pseudonymisation does not reach, so document
+  content needs its own de-identification step before provision.
+* *Person* module — the patient identifiers are pseudonyms from the trusted
+  third party; systems must not let record linkage re-identify a person, and
+  the pseudonym's scope (site-wide vs project-specific) must be respected when
+  data is combined.
 
-> [TODO: If your module defines security- or privacy-related SHALL/SHOULD/MAY
-> requirements, list them here and say which risk each one addresses.]
-{: .mii-highlight .mii-highlight-grey}
-
-#### Residual risks
-
-> [TODO: Name risks NOT addressed by this specification, which must therefore be
-> handled in system design, deployment or policy.]
+> [TODO: State your module's specific aspects — the data categories it carries
+> and their sensitivity, risks that profile-level pseudonymisation does not
+> cover, and any security- or privacy-related SHALL/SHOULD/MAY requirements
+> this module places on implementers, each with the risk it addresses. Name
+> residual risks that must be handled in system design, deployment or policy.]
 {: .mii-highlight .mii-highlight-grey}

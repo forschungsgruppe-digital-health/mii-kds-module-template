@@ -267,11 +267,18 @@ dependencies:
 # with supported extensions (e.g., .md/.xml) will be treated as
 # sub-pages.
 #
-# This page tree is the standard MII module page set — kerndatensatz-basis, for
-# example, lists the same pages plus a hand-authored ImplementationGuide page
-# this template deliberately omits (see the note below).
+# This page tree implements the MII-agreed module menu structure (see
+# docs/page-structure.md for the structure with cardinalities, and
+# docs/optional-pages.md for the OPTIONAL (0..1) entries and how to remove
+# one). kerndatensatz-basis still lists the older combined pages
+# (profiles-and-extensions, search-parameters-and-operations, terminology);
+# this template splits them into one page per artifact type per the agreed
+# structure. The MII-wide conformance topics (Conformance, General
+# Requirements, Must Support, Handling Missing Data) and "Datasets and
+# Descriptions" are MENU LINKS, not pages — they have no entry here.
 # Every entry needs a matching file in input/pagecontent/ (starter pages are a
-# separate scaffolding step); trim entries your module does not need.
+# separate scaffolding step); OPTIONAL entries your module does not need are
+# removed per docs/optional-pages.md.
 # Every `title:` below is also a msgid in the IG-level translation catalogue
 # input/translations/de/ImplementationGuide-mii-ig-{{MODULE_SLUG}}.po — if you
 # add, rename or delete a page here, update that catalogue in the same commit,
@@ -282,46 +289,47 @@ pages:
 
   guidance.md:
     title: Guidance
-    researcher-guidance.md:
+    researcher-guidance.md: # OPTIONAL (0..1) — see docs/optional-pages.md
       title: Guidance for Researchers
     implementer-guidance.md:
       title: Guidance for Implementers
-    datasets-and-descriptions.md:
-      title: Datasets and Descriptions
     uml-diagrams.md:
       title: UML Diagrams
 
-  conformance.md:
-    title: Conformance
-    general-requirements.md:
-      title: General Requirements
-    must-support.md:
-      title: Must Support
-    missing-data.md:
-      title: Handling Missing Data
-    security-and-privacy.md:
-      title: Security and Privacy
+  # The only Conformance-cluster PAGE of this guide; the MII-wide conformance
+  # topics are menu links to the Meta module (see input/includes/menu.xml).
+  security-and-privacy.md:
+    title: Security and Privacy
 
-  profiles-and-extensions.md:
-    title: Profiles and Extensions
-  search-parameters-and-operations.md:
-    title: Search Parameters and Operations
-  terminology.md:
-    title: Terminology
+  profiles.md:
+    title: Profiles
+  extensions.md: # OPTIONAL (0..1) — see docs/optional-pages.md
+    title: Extensions
   capability-statements.md:
     title: Capability Statements
+  search-parameters.md: # OPTIONAL (0..1) — see docs/optional-pages.md
+    title: Search Parameters
+  operations.md: # OPTIONAL (0..1) — see docs/optional-pages.md
+    title: Operations
   logical-models.md:
     title: Logical Models
+  value-sets.md: # OPTIONAL (0..1) — see docs/optional-pages.md
+    title: Value Sets
+  code-systems.md: # OPTIONAL (0..1) — see docs/optional-pages.md
+    title: Code Systems
   examples.md:
     title: Examples
 
   downloads.md:
     title: Downloads
 
+  changes.md:
+    title: Changelog
+
+  metadata.md: # OPTIONAL (0..1) — see docs/optional-pages.md
+    title: Metadata Overview
   version-history.md:
     title: Versioning
-    changes.md:
-      title: Changelog
 
   # NOTE: the IG Publisher AUTO-GENERATES the ImplementationGuide resource page
   # (ImplementationGuide-<id>.html) and adds it to the artifact list without an
@@ -336,9 +344,6 @@ pages:
 
   translationinfo.md:
     title: Translation Information
-
-  metadata.md:
-    title: Metadata Overview
 
   # DEMONSTRATION page shipped with the scaffold — delete this entry, the page
   # and its German mirror once you have taken what you need from it.

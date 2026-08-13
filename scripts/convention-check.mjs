@@ -19,8 +19,13 @@
 // (Node >= 18). The pure logic lives in `evaluate()` so it can be unit-tested
 // (see convention-check.test.mjs) without touching the file system.
 
-import { readFileSync, existsSync, appendFileSync } from "node:fs";
+import { readFileSync, existsSync, appendFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
+
+// The machine-readable marker an OPTIONAL (0..1) page carries until the module
+// decides to keep or remove it — see docs/optional-pages.md. Deleting the
+// banner + marker comment from a page removes every occurrence of this string.
+export const OPTIONAL_MARKER = "OPTIONAL-PAGE";
 
 // ── value extraction (no YAML dependency; line-oriented, comment/quote aware) ──
 
@@ -97,9 +102,13 @@ function checkPrefixed(value, prefix, charClass) {
  * @param {boolean}     inputs.release      strict mode (placeholders fail)
  * @param {boolean}     inputs.demoPagePresent  whether the scaffold's
  *        demonstration page is still in the tree (release-mode failure)
+ * @param {Array<{page: string, en: string, de: string}>|null} inputs.optionalPages
+ *        one entry per page name that carries the OPTIONAL-PAGE marker in at
+ *        least one language; `en`/`de` are "marked" | "unmarked" | "absent"
+ *        (null = the scan did not run, e.g. in unit tests without a tree)
  * @returns {{ findings: Array, ok: boolean }}
  */
-export function evaluate({ sushiConfig = null, igIni = null, packageJson = null, release = false, demoPagePresent = false } = {}) {
+export function evaluate({ sushiConfig = null, igIni = null, packageJson = null, release = false, demoPagePresent = false, optionalPages = null } = {}) {
   const findings = [];
   const add = (id, applies, status, observed, message) =>
     findings.push({ id, applies, status, observed, message });
@@ -198,6 +207,40 @@ export function evaluate({ sushiConfig = null, igIni = null, packageJson = null,
     );
   }
 
+  // M9 — OPTIONAL (0..1) menu entries must be DECIDED before a release. The
+  // approved MII module menu marks some pages optional (docs/optional-pages.md);
+  // each ships with an OPTIONAL-PAGE marker + a visible banner. Keeping the
+  // page = deleting the marker in BOTH languages; dropping it = removing the
+  // page per the documented procedure. Development builds tolerate undecided
+  // markers (that is what makes them visible to reviewers); a release must not
+  // ship a page that says "decide me" to its readers.
+  if (optionalPages !== null) {
+    // Symmetry first (both modes): a marker present in one language but not
+    // the other means the decision was executed halfway — the rendered
+    // languages would disagree about whether the page is settled.
+    const asymmetric = optionalPages.filter((p) => p.en !== p.de);
+    for (const p of asymmetric) {
+      add("M9 optional pages", "module", "fail",
+        `${p.page}: en=${p.en}, de=${p.de}`,
+        `the OPTIONAL-PAGE marker of ${p.page} differs between the English page and the German mirror — ` +
+        "apply the keep/remove decision to BOTH languages (see docs/optional-pages.md)");
+    }
+    const undecided = optionalPages.filter((p) => p.en === "marked" && p.de === "marked");
+    if (undecided.length > 0) {
+      add("M9 optional pages", "module", release ? "fail" : "pass",
+        undecided.map((p) => p.page).join(", "),
+        release
+          ? "optional pages still carry their OPTIONAL-PAGE marker on a release branch — decide each one: " +
+            "KEEP it (delete the banner + marker comment in input/pagecontent/<page> AND " +
+            "input/translations/de/pagecontent/<page>) or REMOVE it (follow the per-entry procedure in " +
+            "docs/optional-pages.md: delete both page files, the menu entry in both menu.xml files, " +
+            "the sushi-config.yaml pages: entry and the page's unit in the IG-level .po catalogue)"
+          : "optional pages awaiting a keep/remove decision — fine in development; decide each before a release (docs/optional-pages.md)");
+    } else if (asymmetric.length === 0) {
+      add("M9 optional pages", "module", "pass", "none undecided", "OK");
+    }
+  }
+
   // ── Section 1b — template PACKAGE manifest (only when present) ──
   if (packageJson !== null) {
     const t1 = packageJson.name === "de.medizininformatikinitiative.template";
@@ -237,6 +280,31 @@ function readIfExists(path) {
   return existsSync(path) ? readFileSync(path, "utf8") : null;
 }
 
+/** Scan the two pagecontent trees for OPTIONAL-PAGE markers and pair the
+ * languages per page name. Exported for the unit test. */
+export function scanOptionalPages(root) {
+  const dirs = {
+    en: join(root, "input", "pagecontent"),
+    de: join(root, "input", "translations", "de", "pagecontent"),
+  };
+  const state = {}; // page name → { en, de }
+  for (const [lang, dir] of Object.entries(dirs)) {
+    if (!existsSync(dir)) continue;
+    for (const name of readdirSync(dir)) {
+      if (!name.endsWith(".md")) continue;
+      const marked = readFileSync(join(dir, name), "utf8").includes(OPTIONAL_MARKER);
+      state[name] = state[name] || {};
+      state[name][lang] = marked ? "marked" : "unmarked";
+    }
+  }
+  // Only pages that carry a marker in at least one language concern M9; a page
+  // missing on one side counts as "absent" there.
+  return Object.entries(state)
+    .filter(([, s]) => s.en === "marked" || s.de === "marked")
+    .map(([page, s]) => ({ page, en: s.en || "absent", de: s.de || "absent" }))
+    .sort((a, b) => a.page.localeCompare(b.page));
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const sushiConfig = readIfExists(join(args.root, "sushi-config.yaml"));
@@ -246,9 +314,10 @@ function main() {
   const demoPagePresent = existsSync(
     join(args.root, "input", "pagecontent", "rendering-artifacts.md"),
   );
+  const optionalPages = scanOptionalPages(args.root);
 
   const { findings, ok } = evaluate({
-    sushiConfig, igIni, packageJson, release: args.release, demoPagePresent,
+    sushiConfig, igIni, packageJson, release: args.release, demoPagePresent, optionalPages,
   });
 
   const mode = args.release ? "release (strict)" : "development (placeholder-tolerant)";
