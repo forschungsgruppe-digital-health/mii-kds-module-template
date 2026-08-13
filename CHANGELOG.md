@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.6.1...v0.7.0) (2026-08-13)
+
+
+### Features
+
+* **pages:** implement the approved MII module menu structure ([#94](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/94)) ([0fea345](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/0fea345ff6da6d9b08a55bd64b7e18b5fdc62fcf))
+
 ## [0.6.1](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.6.0...v0.6.1) (2026-08-07)
 
 
