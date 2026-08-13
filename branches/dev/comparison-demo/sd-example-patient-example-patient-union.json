@@ -1,11 +1,11 @@
 {
   "resourceType" : "StructureDefinition",
-  "id" : "6ac23b4e-8b27-4ffb-bbb1-b08df9c22c8b-2",
-  "url" : "http://hl7.org/fhir/comparison/StructureDefinition/6ac23b4e-8b27-4ffb-bbb1-b08df9c22c8b-2",
+  "id" : "9e73e47e-a020-4fb7-8d93-bc1c65e240ac-2",
+  "url" : "http://hl7.org/fhir/comparison/StructureDefinition/9e73e47e-a020-4fb7-8d93-bc1c65e240ac-2",
   "name" : "UnionExamplePatientAndExamplePatient",
   "title" : "Union of Example Patient — template starter And Example Patient — template starter",
   "status" : "active",
-  "date" : "2026-08-07T06:54:59+00:00",
+  "date" : "2026-08-13T13:04:09+00:00",
   "jurisdiction" : [{
     "coding" : [{
       "system" : "urn:iso:std:iso:3166",
