@@ -9,7 +9,7 @@
 
 #### Version scheme
 
-The **{{MODULE_TITLE}}** module follows the MII calendar-versioning (CalVer)
+The **{{MODULE_TITLE}}** module follows the KDS calendar-versioning (CalVer)
 scheme in a SemVer-compatible numeric form:
 
 * format **`YYYY.MINOR.PATCH[-label]`** — the current version is
@@ -39,7 +39,7 @@ manifest parameters is described on the [Metadata Overview](metadata.html) page.
 #### Release process
 
 Releases follow the
-[MII Module Release Workflow](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow):
+[Module Release Workflow](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow):
 the version is raised in the release branch, the changelog entry is written, the
 validation workflows run on the release pull request, and the release is tagged
 after the merge.
@@ -82,7 +82,7 @@ The repository variable `ENABLE_VERSION_COMPARISON=false` switches the whole
 feature off — the publisher's comparison in every build workflow and this
 demonstration alike; a created module never renders the demonstration.
 
-> [TODO: If your module has a versioning policy of its own beyond the MII scheme
+> [TODO: If your module has a versioning policy of its own beyond the KDS scheme
 > — for example a support window for older versions, or a deprecation policy for
 > profiles — describe it here. Delete this prompt afterwards.]
 {: .ig-highlight .ig-highlight-grey}

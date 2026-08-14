@@ -15,7 +15,7 @@
 
 This page records the changes between the released versions of the
 **{{MODULE_TITLE}}** module, newest version first. It follows
-[Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the MII calendar
+[Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the KDS calendar
 versioning scheme described on the [Versioning](version-history.html) page.
 
 Each version gets its own section with the release date and the changes grouped
@@ -57,7 +57,7 @@ breaking.</p>
 (instances valid against the old version) and <i>implementations</i> (clients
 and servers built against it; a removed search parameter breaks
 implementations while every stored instance stays valid).</p>
-<p><b>The version number will not warn anyone.</b> The MII calendar versioning
+<p><b>The version number will not warn anyone.</b> The KDS calendar versioning
 scheme (<code>YYYY.n.n</code>) carries no major-version signal the way SemVer
 does — this changelog section is the <i>only</i> warning a reader gets.</p>
 <p><b>Link the technical delta.</b> From the second formal publication on,

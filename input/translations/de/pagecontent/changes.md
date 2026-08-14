@@ -16,7 +16,7 @@
 Diese Seite hält die Änderungen zwischen den veröffentlichten Versionen des
 Moduls **{{MODULE_TITLE}}** fest, die neueste Version zuerst. Sie folgt
 [Keep a Changelog](https://keepachangelog.com/de/1.1.0/) und dem
-MII-CalVer-Schema, das die Seite [Versionierung](version-history.html)
+KDS-CalVer-Schema, das die Seite [Versionierung](version-history.html)
 beschreibt.
 
 Jede Version erhält einen eigenen Abschnitt mit dem Release-Datum und den nach
@@ -63,7 +63,7 @@ Daten</i> (Instanzen, die gegen die alte Version valide sind) und
 <i>Implementierungen</i> (Clients und Server, die dagegen gebaut wurden; ein
 entfernter Suchparameter bricht Implementierungen, während jede gespeicherte
 Instanz valide bleibt).</p>
-<p><b>Die Versionsnummer warnt niemanden.</b> Das MII-Kalender-Versionsschema
+<p><b>Die Versionsnummer warnt niemanden.</b> Das KDS-Kalender-Versionsschema
 (<code>JJJJ.n.n</code>) trägt kein Major-Signal wie SemVer — dieser
 Changelog-Abschnitt ist die <i>einzige</i> Warnung, die Lesende bekommen.</p>
 <p><b>Verlinken Sie das technische Delta.</b> Ab der zweiten formalen
