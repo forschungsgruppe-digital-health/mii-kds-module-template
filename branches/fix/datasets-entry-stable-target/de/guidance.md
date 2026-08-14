@@ -9,7 +9,7 @@ Dieser Abschnitt bündelt die fachlichen Hinweise zur Umsetzung und Nutzung des 
 
 ### Allgemeine Umsetzungshinweise
 
-* **[Datensätze und Beschreibungen](logical-models.md)** — die Datenelemente des Moduls, beschrieben als logische Modelle. (Dieser Eintrag teilt sein Ziel mit **Artefakte → Logische Modelle**: die Datensätze des Moduls SIND seine logischen Modelle, und die Seite je Artefakt-Typ ist stabil — anders als die positionsabhängigen Abschnittsanker der generierten Artefakt-Übersicht; siehe [`docs/page-structure.md`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/page-structure.md) in diesem Repository.)
+* **[Datensätze und Beschreibungen](artifacts.md#strukturen-logische-modelle)** — die Datenelemente des Moduls, beschrieben als logische Modelle in der Artefakt-Übersicht. (Ein Link in die generierte Artefakt-Liste, keine eigene Seite. Der benannte Anker wird im Browser aus der Abschnittsüberschrift erzeugt — stabil gegenüber dem Artefakt-Mix, anders als die numerischen Positionsanker; siehe [`docs/page-structure.md`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/page-structure.md) in diesem Repository.)
 * **[UML-Diagramme](uml-diagrams.md)** — visuelle Darstellung der Datenmodelle und ihrer Beziehungen.
 
 ### Zielgruppenspezifische Hinweise
