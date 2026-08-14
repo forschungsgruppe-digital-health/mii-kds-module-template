@@ -39,7 +39,7 @@ for the decision checklist and the per-entry removal procedure.
 | — Guidance | 1..1 | `guidance.html` |
 | — Guidance for Researchers | 0..1 | `researcher-guidance.html` |
 | — Guidance for Implementers | 1..1 | `implementer-guidance.html` |
-| — Datasets and Descriptions | 1..1 | **link-only** → `artifacts.html#structures-logical-models` (DE: `#strukturen-logische-modelle`) — the Logical-Models section of the Artifacts Summary via the browser-generated NAMED anchor; deliberately not the positional `#2` — see below |
+| — Datasets and Descriptions | 1..1 | **link-only** → `logical-models.html` (same target as *Artifacts → Logical Models*; NEITHER Artifacts-Summary anchor is usable — see below) |
 | — UML Diagrams | 1..1 | `uml-diagrams.html` |
 | **Conformance** | 1..1 | dropdown (parent → Meta-module Conformance, external) |
 | — Conformance | 1..1 | **link-only** → Meta module (interim: meta wiki `Conformance`) |
@@ -70,33 +70,37 @@ translation banner).
 
 ## Link-only entries — the two mechanisms
 
-**Datasets and Descriptions → `artifacts.html#structures-logical-models`
-(DE: `#strukturen-logische-modelle`).** The TF-KDS instruction targets the
-Logical-Models section of the Artifacts Summary ("Sec. 15.0.2" in
-kerndatensatz-basis); the menu reaches it through the **named** anchor, not
-the numeric one. How the two anchor kinds come to exist:
+**Datasets and Descriptions → `logical-models.html`.** The module's datasets
+ARE its logical models, so the entry shares its target with *Artifacts →
+Logical Models* — two menu paths, one stable page. The TF-KDS instruction's
+literal target — the Logical-Models section of the Artifacts Summary
+("Sec. 15.0.2" in kerndatensatz-basis) — has **no usable link target** with
+the current tooling; both anchor kinds were tried and rejected:
 
-- **Build time:** the IG Publisher derives `IG.definition.grouping` from the
-  artifact categories present in the input; the base template's
-  `createArtifactSummary.xslt` renders one section per grouping — heading
-  text from the pinned `stringsArtifacts-<lang>.po` catalogs — and emits only
-  *numeric positional* `<a name="{position()}">` anchors. Jekyll adds no
-  heading ids (the artifacts body is a raw XHTML include).
-- **Runtime:** the base template ships AnchorJS (`anchor.min.js`,
-  `anchor-hover.js` → `anchors.add()`, selector `h2…h6`), which slugifies
-  each section heading into an `id` in the browser: "Structures: Logical
-  Models" → `structures-logical-models`, "Strukturen: Logische Modelle" →
-  `strukturen-logische-modelle`. Fragment navigation succeeds because the ids
-  exist before the page's load event completes.
+- **The numeric anchor `#2` is positional.** The IG Publisher derives
+  `IG.definition.grouping` from the artifact categories present in the input;
+  the base template's `createArtifactSummary.xslt` renders one section per
+  grouping (heading text from the pinned `stringsArtifacts-<lang>.po`
+  catalogs) and emits `<a name="{position()}">` — the grouping's index. `#2`
+  is the Logical-Models section only for the full standard artifact set: the
+  optional Operations/Search Parameters insert Behavior groupings before it,
+  a missing CapabilityStatement pulls it forward, explicit `groups:` reorder
+  freely. The scaffold's own preview rendered `#2` = Example Instances.
+- **The named anchor `#structures-logical-models` (DE:
+  `#strukturen-logische-modelle`) exists only at runtime.** The base template
+  ships AnchorJS (`anchor-hover.js` → `anchors.add()`), which slugifies the
+  section headings into ids **in the browser** — the fragment scrolls
+  correctly for a human. But the IG Publisher's link validator sees only the
+  build-time anchors: it flags the menu link as a **broken-link ERROR on
+  every page's QA report** (~40 repetitions) and injects a marker anchor
+  (`<a name="lNNN">`) into the menu `<li>`, which Bootstrap renders as an
+  **empty menu entry**. Shipped briefly in v0.10.2, reverted on review.
 
-The **named** anchor is therefore position-independent (immune to the
-artifact-mix problem that makes `#2` land on the wrong section — the
-scaffold's own preview renders `#2` = Example Instances), per-language, and
-its source strings are the template's own vendored, pinned catalogs. Its
-failure mode is benign: without JavaScript, or while a module ships no
-logical models yet (as on the scaffold preview), the page opens at the top —
-never at a wrong section. The numeric anchors remain what the generated
-in-page TOC uses; do not link them from menus.
+Should TF-KDS insist on the literal summary-section target, the durable
+route is upstream: `fhir2.base.template`'s XSLT emitting a build-time named
+anchor per grouping (e.g. `<a name="structures-logical-models">`) — then the
+validator knows it and the QA stays clean. This template must not override
+`scripts/` (styleguide §1), so that fix belongs in the base template.
 
 **The Conformance cluster → the Meta module (INTERIM meta-wiki links).** The
 KDS-wide conformance rules are maintained centrally in
