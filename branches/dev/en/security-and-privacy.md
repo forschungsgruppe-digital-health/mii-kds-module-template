@@ -17,10 +17,11 @@ How data leaving a Data Integration Center is de-identified in practice is speci
 
 #### 3. Module-specific aspects
 
-This is the module's own contribution: the security and privacy properties that follow from the **kind of data this module carries**. Examples from other KDS modules of what belongs here:
+This is the module's own contribution: the security and privacy properties that follow from the **kind of data this module carries**. **Its content is optional** — not every module has aspects of its own. If yours does not, the whole section body becomes the following default text (delete the example and TODO boxes below and adopt it verbatim):
 
-* **Document** module — documents are embedded Base64-encoded (`DocumentReference.content.attachment.data`); an embedded document can contain arbitrary identifying information (letterheads, free text, scanned signatures) that profile-level pseudonymisation does not reach, so document content needs its own de-identification step before provision.
-* **Person** module — the patient identifiers are pseudonyms from the trusted third party; systems must not let record linkage re-identify a person, and the pseudonym's scope (site-wide vs project-specific) must be respected when data is combined.
+> Beyond the MII-wide framework above — the overarching data protection concept, the Broad Consent it rests on, and DIMP — this module carries no data category that raises security or privacy aspects of its own, and it places no module-specific security or privacy requirements on implementers.
 
-> [TODO: State your module's specific aspects — the data categories it carries and their sensitivity, risks that profile-level pseudonymisation does not cover, and any security- or privacy-related SHALL/SHOULD/MAY requirements this module places on implementers, each with the risk it addresses. Name residual risks that must be handled in system design, deployment or policy.]
+> **Illustrative example — remove before the first release.** How another KDS module fills this section (**Person**): the patient identifiers are pseudonyms from the trusted third party; systems must not let record linkage re-identify a person, and the pseudonym's scope (site-wide vs project-specific) must be respected when data is combined.
+
+> [TODO: State your module's specific aspects — the data categories it carries and their sensitivity, risks that profile-level pseudonymisation does not cover, and any security- or privacy-related SHALL/SHOULD/MAY requirements this module places on implementers, each with the risk it addresses. Name residual risks that must be handled in system design, deployment or policy — or adopt the default text above if there are none.]
 

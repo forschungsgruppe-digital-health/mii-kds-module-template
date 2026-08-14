@@ -317,21 +317,31 @@ nicht dieser Leitfaden.</p>
 
 <p>Dies ist der eigene Beitrag des Moduls: die Sicherheits- und
 Datenschutz-Eigenschaften, die aus der <em>Art der Daten dieses Moduls</em> folgen.
-Beispiele aus anderen KDS-Modulen, was hierher gehört:</p>
+<strong>Der Inhalt dieses Abschnitts ist optional</strong> — nicht jedes Modul hat eigene
+Aspekte. Hat Ihres keine, besteht der gesamte Abschnitt aus dem folgenden
+Standardtext (löschen Sie die Beispiel- und TODO-Boxen unten und übernehmen
+Sie ihn wörtlich):</p>
 
-<ul>
-  <li>Modul <em>Dokument</em> — Dokumente werden Base64-kodiert eingebettet
-(<code class="language-plaintext highlighter-rouge">DocumentReference.content.attachment.data</code>); ein eingebettetes Dokument
-kann beliebige identifizierende Angaben enthalten (Briefköpfe, Freitext,
-eingescannte Unterschriften), die eine Pseudonymisierung auf Profilebene
-nicht erreicht — Dokumentinhalte brauchen daher vor der Bereitstellung einen
-eigenen De-Identifikationsschritt.</li>
-  <li>Modul <em>Person</em> — die Patienten-Identifikatoren sind Pseudonyme der
-Treuhandstelle; Systeme dürfen ein Record Linkage nicht zur
-Re-Identifizierung führen lassen, und der Geltungsbereich eines Pseudonyms
-(standortweit vs. projektspezifisch) ist beim Zusammenführen von Daten zu
-respektieren.</li>
-</ul>
+<blockquote>
+  <p>Über den oben verlinkten MII-weiten Rahmen hinaus — das übergreifende
+Datenschutzkonzept, den ihm zugrunde liegenden Broad Consent und DIMP —
+führt dieses Modul keine Datenkategorie, die eigene Sicherheits- oder
+Datenschutzaspekte aufwirft, und stellt keine modulspezifischen Sicherheits-
+oder Datenschutzanforderungen an Implementierende.</p>
+</blockquote>
+
+<!-- ILLUSTRATIVE-EXAMPLE — Abschnitt entscheiden und die Beispiel-Box unten
+     (in dieser Datei UND der englischen Quellseite) vor dem ersten Release
+     entfernen; der Konventions-Check (M11) lässt einen Release-Branch damit
+     fehlschlagen. -->
+<blockquote class="ig-highlight ig-highlight-orange">
+  <p><strong>Illustratives Beispiel — vor dem ersten Release entfernen.</strong> So füllt ein
+anderes KDS-Modul diesen Abschnitt (<em>Person</em>): die Patienten-Identifikatoren
+sind Pseudonyme der Treuhandstelle; Systeme dürfen ein Record Linkage nicht
+zur Re-Identifizierung führen lassen, und der Geltungsbereich eines
+Pseudonyms (standortweit vs. projektspezifisch) ist beim Zusammenführen von
+Daten zu respektieren.</p>
+</blockquote>
 
 <blockquote class="ig-highlight ig-highlight-grey">
   <p>[TODO: Nennen Sie die spezifischen Aspekte Ihres Moduls — die geführten
@@ -339,7 +349,8 @@ Datenkategorien und ihre Sensibilität, Risiken, die eine Pseudonymisierung
 auf Profilebene nicht abdeckt, sowie sicherheits- oder datenschutzbezogene
 SHALL/SHOULD/MAY-Anforderungen dieses Moduls an Implementierende, jeweils mit
 dem adressierten Risiko. Benennen Sie verbleibende Risiken, die im
-Systemdesign, im Betrieb oder per Policy behandelt werden müssen.]</p>
+Systemdesign, im Betrieb oder per Policy behandelt werden müssen — oder
+übernehmen Sie den Standardtext oben, wenn es keine gibt.]</p>
 </blockquote>
 
 
@@ -367,7 +378,7 @@ Systemdesign, im Betrieb oder per Policy behandelt werden müssen.]</p>
 
           IG © 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.netzwerk-universitaetsmedizin.de">NUM-DIZ</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Fri, Aug 14, 2026 09:53+0000">2026-08-14</span>
+          Erstellt <span title="Fri, Aug 14, 2026 10:20+0000">2026-08-14</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- Branding override for the fhir2.base.template footer fragment.
