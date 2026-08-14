@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.8.0...v0.8.1) (2026-08-14)
+
+
+### Bug Fixes
+
+* **ci:** give the release demo its own concurrency lane and a push retry ([#102](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/102)) ([789382b](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/789382baa8f0669fa4b1bdb67562b574bd2e1767))
+
 ## [0.8.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.7.0...v0.8.0) (2026-08-14)
 
 
