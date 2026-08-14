@@ -36,7 +36,7 @@ for the decision checklist and the per-entry removal procedure.
 | — General Requirements | 1..1 | **link-only** → Meta module (interim: `Conformance#anforderungsdokumentation`) |
 | — Must Support | 1..1 | **link-only** → Meta module (interim: `Conformance#must-support-ms`) |
 | — Handling Missing Data | 1..1 | **link-only** → Meta module (interim: `Conformance#fehlende-daten`) |
-| — Security and Privacy | 1..1 | `security-and-privacy.html` (three-stage static content: MII data protection concept → DIMP → module-specific aspects) |
+| — Security and Privacy | 1..1 | `security-and-privacy.html` (three-stage static content: MII data protection concept → DIMP → module-specific aspects; stage 3's CONTENT is optional — a module without own aspects adopts the section's default text, and the scaffold's highlighted *Person* example must be removed before the first release, gated by convention check M11) |
 | **Artifacts** | 1..1 | dropdown (parent → `artifacts.html`) |
 | — Artifacts Summary | 1..1 | `artifacts.html` (generated) |
 | — Profiles | 1..1 | `profiles.html` |
