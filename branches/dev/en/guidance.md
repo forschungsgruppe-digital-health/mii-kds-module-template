@@ -9,7 +9,7 @@ This section collects the domain guidance for implementing and using the **Modul
 
 ### General Implementation Guidance
 
-* **[Datasets and Descriptions](artifacts.md#structures-logical-models)** — the module's data elements, described as logical models in the Artifacts Summary. (A link into the generated artifact list, not a page of its own. The named anchor is browser-generated from the section heading — stable against the artifact mix, unlike the numeric positional anchors; see [`docs/page-structure.md`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/page-structure.md) in this repository.)
+* **[Datasets and Descriptions](logical-models.md)** — the module's data elements, described as logical models. (This entry shares its target with **Artifacts → Logical Models**; neither Artifacts-Summary anchor is usable as a link target — see [`docs/page-structure.md`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/page-structure.md) in this repository.)
 * **[UML Diagrams](uml-diagrams.md)** — visual representation of the data models and their relationships.
 
 ### Audience-Specific Guidance
