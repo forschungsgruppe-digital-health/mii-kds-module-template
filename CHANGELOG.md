@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.3](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.10.2...v0.10.3) (2026-08-14)
+
+
+### Bug Fixes
+
+* **menu:** 'Datasets and Descriptions' -&gt; logical-models.html; named anchor breaks publisher QA ([6712a02](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/6712a02a7d1bc8e63cf89785e7c5b5d75897a5c5))
+
 ## [0.10.2](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.10.1...v0.10.2) (2026-08-14)
 
 
