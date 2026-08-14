@@ -20,7 +20,7 @@ Routinedaten für die medizinische Forschung.
 
 > [TODO: Beschreiben Sie in ein bis zwei Sätzen den fachlichen Gegenstand Ihres
 > Moduls — welche Daten es abdeckt und wofür sie genutzt werden.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}
 
 | Veröffentlichung |               |
 |------------------|---------------|
@@ -33,13 +33,13 @@ Routinedaten für die medizinische Forschung.
 
 Dieser Implementierungsleitfaden richtet sich an:
 
-<div class="mii-highlight mii-highlight-blue">
+<div class="ig-highlight ig-highlight-blue">
 <h5>Implementierende</h5>
 <p>Datenintegrationszentren (DIZ), Software-Entwickelnde und System-Architekt:innen, die FHIR-basierte Lösungen umsetzen.<br/>
 → siehe <a href="profiles.html">Profile</a> und <a href="logical-models.html">Logische Modelle</a>.</p>
 </div>
 
-<div class="mii-highlight mii-highlight-green">
+<div class="ig-highlight ig-highlight-green">
 <h5>Forschende</h5>
 <p>Wissenschaftler:innen, die MII-Daten für die medizinische Forschung nutzen.<br/>
 → siehe <a href="researcher-guidance.html">Anleitung für Forschende</a>.</p>
@@ -67,7 +67,7 @@ beschrieben.
 
 > [TODO: Nennen Sie die formalen Abhängigkeiten (siehe `dependencies` in
 > `sushi-config.yaml`) und verwandte Leitfäden Ihres Moduls.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}
 
 Weitere FHIR-Implementierungsleitfäden finden Sie im offiziellen
 **[FHIR IG Registry](https://fhir.org/guides/registry/)** (Quelle:
@@ -89,12 +89,12 @@ Anmerkungen und Kritik werden als *Issues* auf
 [GitHub](https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/issues) entgegengenommen.
 
 > [TODO: Nennen Sie die fachlichen Ansprechpartner:innen Ihres Moduls.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}
 
 ### Autor:innen (in alphabetischer Reihenfolge)
 
 > [TODO: Listen Sie die Autor:innen des Moduls mit Institution auf.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}
 
 ### Urheberrecht und Lizenz
 

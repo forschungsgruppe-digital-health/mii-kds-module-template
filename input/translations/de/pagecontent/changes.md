@@ -34,7 +34,7 @@ Kategorien gruppierten Änderungen:
 Kategorien ohne Inhalt werden weggelassen. Geht eine Änderung auf ein Issue oder
 einen Pull-Request zurück, wird darauf verlinkt.
 
-<div class="mii-highlight mii-highlight-red">
+<div class="ig-highlight ig-highlight-red">
 <h5>Breaking Changes MÜSSEN berichtet und erläutert werden</h5>
 <p>Ein Versionsabschnitt mit einer Breaking Change ist erst vollständig, wenn
 er ausdrücklich und in diesem Changelog beantwortet:</p>
@@ -98,4 +98,4 @@ werden können.</p>
 > voran — nutzen Sie die für Ihr Modul passende der beiden Gruppierungen,
 > bleiben Sie dabei aber über alle Versionen hinweg und in beiden Sprachen
 > einheitlich.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}

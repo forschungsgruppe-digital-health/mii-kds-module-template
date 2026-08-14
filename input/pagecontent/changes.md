@@ -31,7 +31,7 @@ by category:
 Leave out the categories with nothing to report. Where a change is driven by an
 issue or a pull request, link it.
 
-<div class="mii-highlight mii-highlight-red">
+<div class="ig-highlight ig-highlight-red">
 <h5>Breaking changes MUST be reported and explained</h5>
 <p>A version section that contains a breaking change is not complete until it
 answers, explicitly and in this changelog:</p>
@@ -88,4 +88,4 @@ section, so the prose explanation and the technical diff sit side by side.</p>
 > sub-module) and prefixes each bullet with **Added:** / **Changed:** /
 > **Removed:** — use whichever of the two groupings suits your module, but keep
 > it the same across versions and identical in both languages.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}

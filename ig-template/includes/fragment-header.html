@@ -6,9 +6,9 @@
      strings are hard-coded.
      Brand handling: the project logo additionally switches on
      site.data.brand.design (input/data/brand.json in the consuming IG, see
-     docs/styleguide.md §10). Only the exact value 'num-diz' selects the
-     NUM-DIZ logos - anything else, including no brand.json at all, falls
-     through to the MII default.
+     docs/styleguide.md §10). Only the exact value 'mii' selects the MII
+     logos - anything else, including no brand.json at all, falls through to
+     the NUM-DIZ default.
      Two logos, mirroring kerndatensatz-basis: the HL7 FHIR logo (links to the
      FHIR spec) in #family-nav, and the project logo in #project-nav.
      fhir-logo-www.png is shipped by fhir2.base.template
@@ -20,20 +20,20 @@
   </a>
 </div>
 <div id="project-nav">
-{% if site.data.brand.design == 'num-diz' %}
-  <a id="project-logo" no-external="true" href="https://www.netzwerk-universitaetsmedizin.de/forschung/num-diz">
-{% if include.lang == 'de' %}
-    <img height="50" alt="NUM-DIZ (Netzwerk Universitätsmedizin — Datenintegrationszentrum)" src="{{site.data.info.assets}}assets/images/logo-num-diz-de.svg"/>
-{% else %}
-    <img height="50" alt="NUM-DIZ (Network of University Medicine — Data Integration Center)" src="{{site.data.info.assets}}assets/images/logo-num-diz-en.svg"/>
-{% endif %}
-  </a>
-{% else %}
+{% if site.data.brand.design == 'mii' %}
   <a id="project-logo" no-external="true" href="https://www.medizininformatik-initiative.de/">
 {% if include.lang == 'de' %}
     <img height="50" alt="Medizininformatik-Initiative (MII)" src="{{site.data.info.assets}}assets/images/logo-de.svg"/>
 {% else %}
     <img height="50" alt="Medical Informatics Initiative (MII)" src="{{site.data.info.assets}}assets/images/logo-en.svg"/>
+{% endif %}
+  </a>
+{% else %}
+  <a id="project-logo" no-external="true" href="https://www.netzwerk-universitaetsmedizin.de/forschung/num-diz">
+{% if include.lang == 'de' %}
+    <img height="50" alt="NUM-DIZ (Netzwerk Universitätsmedizin — Datenintegrationszentrum)" src="{{site.data.info.assets}}assets/images/logo-num-diz-de.svg"/>
+{% else %}
+    <img height="50" alt="NUM-DIZ (Network of University Medicine — Data Integration Center)" src="{{site.data.info.assets}}assets/images/logo-num-diz-en.svg"/>
 {% endif %}
   </a>
 {% endif %}

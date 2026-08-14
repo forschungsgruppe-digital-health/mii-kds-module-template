@@ -61,7 +61,7 @@ scaffold gives you the place and a prompt) · ➖ not applicable.
 | Check | State | Evidence / what to do |
 |---|---|---|
 | Diagram sources are checked in, tool is free/widely used | ✅ | `input/images-source/` exists for editable sources (e.g. PlantUML); rendered files go to `input/images/` |
-| Consistent colour scheme | ✅ | Provided by the MII IG template; use the `mii-highlight-*` classes for callouts |
+| Consistent colour scheme | ✅ | Provided by the MII IG template; use the `ig-highlight-*` classes for callouts |
 | Graphics are licence-clean | 📝 | Only add images you may redistribute under the IG's CC-BY-4.0 |
 
 ## 4. Artifacts and profiles (S1, S8)

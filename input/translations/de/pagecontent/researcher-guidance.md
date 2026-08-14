@@ -10,11 +10,11 @@
 > nach der Schritt-für-Schritt-Anleitung in `docs/optional-pages.md` dieses
 > Repositories. Ein Release darf dieses Banner nicht enthalten
 > (Konventions-Check M9).
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}
 
 ### Anleitung für Forschende
 
 Hinweise für Forschende, die die Daten des Moduls **{{MODULE_TITLE}}** für Forschungszwecke nutzen — z. B. welche Datenelemente für welche Fragestellungen relevant sind und wie sie interpretiert werden.
 
 > [TODO: Beschreiben Sie die forschungsrelevanten Aspekte des Moduls.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}

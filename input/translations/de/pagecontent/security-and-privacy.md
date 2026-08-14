@@ -6,7 +6,6 @@
      Inhalt — behalten; Stufe 3 füllt Ihr Modul aus. Beide Sprachfassungen
      müssen dasselbe aussagen. -->
 
-### Sicherheit und Datenschutz
 
 Dieser Abschnitt richtet sich an Sicherheits- und Datenschutz-Fachleute.
 Allgemeine Anforderungen stehen in der FHIR-Kernspezifikation —
@@ -64,4 +63,4 @@ Beispiele aus anderen KDS-Modulen, was hierher gehört:
 > SHALL/SHOULD/MAY-Anforderungen dieses Moduls an Implementierende, jeweils mit
 > dem adressierten Risiko. Benennen Sie verbleibende Risiken, die im
 > Systemdesign, im Betrieb oder per Policy behandelt werden müssen.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}

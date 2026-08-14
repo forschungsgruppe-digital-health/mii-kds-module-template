@@ -12,7 +12,7 @@
 > **remove** it, following the per-entry procedure in `docs/optional-pages.md`
 > of this repository. A release must not ship with this banner (convention
 > check M9).
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}
 
 ### Search Parameters
 
@@ -22,4 +22,4 @@ defined. Cross-module search parameters are defined by the MII Meta module.
 
 > [TODO: List the search parameters — or remove this page if your module
 > defines none.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}

@@ -14,7 +14,7 @@
 > nach der Schritt-für-Schritt-Anleitung in `docs/optional-pages.md` dieses
 > Repositories. Ein Release darf dieses Banner nicht enthalten
 > (Konventions-Check M9).
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}
 
 ### ValueSets
 
@@ -36,4 +36,4 @@ vollständig).
 > Edition/Version an. Listen Sie die modul-eigenen ValueSets auf oder verweisen
 > Sie auf die automatisch erzeugte Artefakt-Liste — oder entfernen Sie diese
 > Seite, wenn Ihr Modul keine definiert.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}

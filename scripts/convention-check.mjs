@@ -108,7 +108,7 @@ function checkPrefixed(value, prefix, charClass) {
  *        (null = the scan did not run, e.g. in unit tests without a tree)
  * @returns {{ findings: Array, ok: boolean }}
  */
-export function evaluate({ sushiConfig = null, igIni = null, packageJson = null, release = false, demoPagePresent = false, optionalPages = null } = {}) {
+export function evaluate({ sushiConfig = null, igIni = null, packageJson = null, release = false, demoPagePresent = false, optionalPages = null, duplicateHeadings = null } = {}) {
   const findings = [];
   const add = (id, applies, status, observed, message) =>
     findings.push({ id, applies, status, observed, message });
@@ -239,6 +239,15 @@ export function evaluate({ sushiConfig = null, igIni = null, packageJson = null,
     } else if (asymmetric.length === 0) {
       add("M9 optional pages", "module", "pass", "none undecided", "OK");
     }
+
+    // M10 — see scanDuplicateHeadings
+    {
+      const problems = duplicateHeadings || [];
+      if (problems.length)
+        add("M10 duplicate headings", "module", "fail", problems.join("; "),
+          "remove the redundant heading — the publisher already renders the page title as the section heading");
+      else add("M10 duplicate headings", "module", "pass", "no page repeats its title or a parent heading", "OK");
+    }
   }
 
   // ── Section 1b — template PACKAGE manifest (only when present) ──
@@ -305,6 +314,69 @@ export function scanOptionalPages(root) {
     .sort((a, b) => a.page.localeCompare(b.page));
 }
 
+
+// M10 — duplicated section headings. The publisher renders each page's title as
+// its section heading, so a first in-page heading REPEATING the title numbers as
+// "N." and "N.1" with identical text; likewise a heading repeating its parent.
+// Both shapes shipped once (security-and-privacy et al., fixed 2026-08-14).
+function scanDuplicateHeadings(root) {
+  const norm = (s) => s.replace(/^[0-9.]+\s*/, "").trim().toLowerCase();
+  // page titles: en from sushi-config pages:, de from the IG-level .po
+  const titlesEn = {};
+  const sushi = readIfExists(join(root, "sushi-config.yaml")) || "";
+  let inPages = false, cur = null;
+  for (const line of sushi.split("\n")) {
+    if (/^pages:\s*$/.test(line)) { inPages = true; continue; }
+    if (inPages && /^[a-zA-Z_-]+:/.test(line)) break;
+    let m = /^\s+([A-Za-z0-9._{}-]+)\.md:\s*$/.exec(line);
+    if (inPages && m) cur = m[1];
+    m = /^\s+title:\s*(.+)$/.exec(line);
+    if (inPages && m && cur) titlesEn[cur] = m[1].trim().replace(/^["']|["']$/g, "");
+  }
+  const titlesDe = {};
+  try {
+    const po = readdirSync(join(root, "input", "translations", "de"))
+      .find((f) => /^ImplementationGuide-.*\.po$/.test(f));
+    if (po) {
+      const raw = readFileSync(join(root, "input", "translations", "de", po), "utf8");
+      for (const m of raw.matchAll(/msgid "([^"]+)"\nmsgstr "([^"]+)"/g)) {
+        for (const [page, en] of Object.entries(titlesEn)) if (en === m[1]) titlesDe[page] = m[2];
+      }
+    }
+  } catch { /* no de catalogue: de pages checked for parent-duplicates only */ }
+  const dirs = [
+    ["input/pagecontent", titlesEn],
+    ["input/translations/de/pagecontent", titlesDe],
+    ["input/intro-notes", null],
+    ["input/translations/de/intro-notes", null],
+  ];
+  const problems = [];
+  for (const [dir, titles] of dirs) {
+    let files = [];
+    try { files = readdirSync(join(root, dir)).filter((f) => f.endsWith(".md")); } catch { continue; }
+    for (const f of files) {
+      const lines = readFileSync(join(root, dir, f), "utf8").split("\n");
+      const heads = [];
+      for (let i = 0; i < lines.length; i++) {
+        const m = /^(#{1,6})\s+(.*)$/.exec(lines[i]);
+        if (m) heads.push([i + 1, m[1].length, m[2].trim()]);
+      }
+      if (!heads.length) continue;
+      const title = titles ? titles[f.replace(/\.md$/, "")] : undefined;
+      if (title && norm(heads[0][2]) === norm(title))
+        problems.push(`${dir}/${f}:${heads[0][0]} first heading repeats the page title ("${heads[0][2]}")`);
+      const stack = [];
+      for (const [ln, lvl, txt] of heads) {
+        while (stack.length && stack[stack.length - 1][1] >= lvl) stack.pop();
+        if (stack.length && norm(stack[stack.length - 1][2]) === norm(txt))
+          problems.push(`${dir}/${f}:${ln} heading repeats its parent heading ("${txt}")`);
+        stack.push([ln, lvl, txt]);
+      }
+    }
+  }
+  return problems;
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const sushiConfig = readIfExists(join(args.root, "sushi-config.yaml"));
@@ -315,9 +387,10 @@ function main() {
     join(args.root, "input", "pagecontent", "rendering-artifacts.md"),
   );
   const optionalPages = scanOptionalPages(args.root);
+  const duplicateHeadings = scanDuplicateHeadings(args.root);
 
   const { findings, ok } = evaluate({
-    sushiConfig, igIni, packageJson, release: args.release, demoPagePresent, optionalPages,
+    sushiConfig, igIni, packageJson, release: args.release, demoPagePresent, optionalPages, duplicateHeadings,
   });
 
   const mode = args.release ? "release (strict)" : "development (placeholder-tolerant)";

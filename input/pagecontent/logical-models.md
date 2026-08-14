@@ -6,4 +6,4 @@
 The logical data models of the **{{MODULE_TITLE}}** module describe the domain dataset independently of its concrete FHIR representation.
 
 > [TODO: Add the logical models, or delete this page.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}
