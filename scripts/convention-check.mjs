@@ -26,6 +26,11 @@ import { join } from "node:path";
 // decides to keep or remove it — see docs/optional-pages.md. Deleting the
 // banner + marker comment from a page removes every occurrence of this string.
 export const OPTIONAL_MARKER = "OPTIONAL-PAGE";
+// Marks a scaffold-only illustrative example inside a page (e.g. the Person
+// example in security-and-privacy.md's module-specific section). Like the
+// optional-page banners it is a "decide me": fine in development, must be
+// removed (both languages) before a release — rule M11.
+export const ILLUSTRATIVE_MARKER = "ILLUSTRATIVE-EXAMPLE";
 
 // ── value extraction (no YAML dependency; line-oriented, comment/quote aware) ──
 
@@ -108,7 +113,7 @@ function checkPrefixed(value, prefix, charClass) {
  *        (null = the scan did not run, e.g. in unit tests without a tree)
  * @returns {{ findings: Array, ok: boolean }}
  */
-export function evaluate({ sushiConfig = null, igIni = null, packageJson = null, release = false, demoPagePresent = false, optionalPages = null, duplicateHeadings = null } = {}) {
+export function evaluate({ sushiConfig = null, igIni = null, packageJson = null, release = false, demoPagePresent = false, optionalPages = null, duplicateHeadings = null, illustrativeExamples = null } = {}) {
   const findings = [];
   const add = (id, applies, status, observed, message) =>
     findings.push({ id, applies, status, observed, message });
@@ -250,6 +255,34 @@ export function evaluate({ sushiConfig = null, igIni = null, packageJson = null,
     }
   }
 
+  // M11 — scaffold-only ILLUSTRATIVE-EXAMPLE blocks (e.g. the Person example
+  // in security-and-privacy.md's module-specific section) must be removed
+  // before a release, in BOTH languages. Same semantics as M9: development
+  // builds tolerate them (that is what makes them visible to reviewers); a
+  // release must not ship an example that says "remove me" to its readers.
+  if (illustrativeExamples !== null) {
+    const asymmetric = illustrativeExamples.filter((p) => p.en !== p.de);
+    for (const p of asymmetric) {
+      add("M11 illustrative examples", "module", "fail",
+        `${p.page}: en=${p.en}, de=${p.de}`,
+        `the ILLUSTRATIVE-EXAMPLE marker of ${p.page} differs between the English page and the German mirror — ` +
+        "remove the example box AND its marker comment from BOTH languages together");
+    }
+    const undecided = illustrativeExamples.filter((p) => p.en === "marked" && p.de === "marked");
+    if (undecided.length > 0) {
+      add("M11 illustrative examples", "module", release ? "fail" : "pass",
+        undecided.map((p) => p.page).join(", "),
+        release
+          ? "pages still carry a scaffold ILLUSTRATIVE-EXAMPLE block on a release branch — delete the " +
+            "example box and its marker comment in input/pagecontent/<page> AND " +
+            "input/translations/de/pagecontent/<page> (write the module's own content or adopt the " +
+            "documented default text)"
+          : "scaffold illustrative examples still present — fine in development; remove each before a release");
+    } else if (asymmetric.length === 0) {
+      add("M11 illustrative examples", "module", "pass", "none present", "OK");
+    }
+  }
+
   // ── Section 1b — template PACKAGE manifest (only when present) ──
   if (packageJson !== null) {
     const t1 = packageJson.name === "de.medizininformatikinitiative.template";
@@ -308,6 +341,28 @@ export function scanOptionalPages(root) {
   }
   // Only pages that carry a marker in at least one language concern M9; a page
   // missing on one side counts as "absent" there.
+  return Object.entries(state)
+    .filter(([, s]) => s.en === "marked" || s.de === "marked")
+    .map(([page, s]) => ({ page, en: s.en || "absent", de: s.de || "absent" }))
+    .sort((a, b) => a.page.localeCompare(b.page));
+}
+
+// Same shape as scanOptionalPages, for the ILLUSTRATIVE-EXAMPLE marker (M11).
+export function scanIllustrativeExamples(root) {
+  const dirs = {
+    en: join(root, "input", "pagecontent"),
+    de: join(root, "input", "translations", "de", "pagecontent"),
+  };
+  const state = {};
+  for (const [lang, dir] of Object.entries(dirs)) {
+    if (!existsSync(dir)) continue;
+    for (const name of readdirSync(dir)) {
+      if (!name.endsWith(".md")) continue;
+      const marked = readFileSync(join(dir, name), "utf8").includes(ILLUSTRATIVE_MARKER);
+      state[name] = state[name] || {};
+      state[name][lang] = marked ? "marked" : "unmarked";
+    }
+  }
   return Object.entries(state)
     .filter(([, s]) => s.en === "marked" || s.de === "marked")
     .map(([page, s]) => ({ page, en: s.en || "absent", de: s.de || "absent" }))
@@ -388,9 +443,10 @@ function main() {
   );
   const optionalPages = scanOptionalPages(args.root);
   const duplicateHeadings = scanDuplicateHeadings(args.root);
+  const illustrativeExamples = scanIllustrativeExamples(args.root);
 
   const { findings, ok } = evaluate({
-    sushiConfig, igIni, packageJson, release: args.release, demoPagePresent, optionalPages, duplicateHeadings,
+    sushiConfig, igIni, packageJson, release: args.release, demoPagePresent, optionalPages, duplicateHeadings, illustrativeExamples,
   });
 
   const mode = args.release ? "release (strict)" : "development (placeholder-tolerant)";

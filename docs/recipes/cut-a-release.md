@@ -55,6 +55,7 @@ publication ready for a human to promote. **No SemVer tag, no Release Please.**
 | Workflow did not trigger | Tag does not match `vYYYY.n.n` | Use the CalVer tag pattern |
 | `convention-check` red on the release branch: M8 | The scaffold's demonstration page is still present | Remove it — the check's message lists every file; the list is also in [render existing artifacts](render-existing-artifacts.md) step 4 |
 | `convention-check` red on the release branch: M9 | Optional (0..1) pages still carry their `OPTIONAL-PAGE` banner | Decide each one — keep (delete the banner in both languages) or remove per [optional-pages.md](../optional-pages.md) |
+| `convention-check` red on the release branch: M11 | A scaffold `ILLUSTRATIVE-EXAMPLE` block is still present (the *Person* example on `security-and-privacy.md`) | Delete the example box + its marker comment in both languages; write the module's own aspects or adopt the section's default text |
 | A SemVer release PR appeared | Release Please was not removed | Run the first-run bootstrap; `release-please-config.json` and `.github/workflows/release-please.yml` must be gone |
 | `go-publish` published for real unexpectedly | `publish:true` was set | Keep it `false`; only a human sets it true, once, deliberately |
 | Zulip not posted | `ZULIP_API_KEY` absent | Expected — the job skips with a notice; add the secret to enable |
