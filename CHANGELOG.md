@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.2](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.10.1...v0.10.2) (2026-08-14)
+
+
+### Bug Fixes
+
+* **menu:** route 'Datasets and Descriptions' via the NAMED Artifacts-Summary anchor ([0c98490](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/0c98490d68a8b6874a62887c94bda05fa9f25f97))
+
 ## [0.10.1](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.10.0...v0.10.1) (2026-08-14)
 
 
