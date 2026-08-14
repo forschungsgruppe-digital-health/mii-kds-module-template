@@ -12,10 +12,8 @@
       <!-- OPTIONAL (0..1) — siehe docs/optional-pages.md -->
       <li><a href="researcher-guidance.html">Anleitung für Forschende (optional)</a></li>
       <li><a href="implementer-guidance.html">Anleitung für Implementierende</a></li>
-      <!-- Nur-Link-Eintrag: Abschnitt "Logische Modelle" der Artefakt-Übersicht über
-           den BENANNTEN (AnchorJS-)Anker — Begründung im Quell-Menü; der Slug folgt
-           der deutschen Abschnittsüberschrift aus dem stringsArtifacts-Katalog. -->
-      <li><a href="artifacts.html#strukturen-logische-modelle">Datensätze und Beschreibungen</a></li>
+      <!-- Nur-Link-Eintrag: die Seite "Logische Modelle" (Begründung im Quell-Menü) -->
+      <li><a href="logical-models.html">Datensätze und Beschreibungen</a></li>
       <li><a href="uml-diagrams.html">UML-Diagramme</a></li>
     </ul>
   </li>

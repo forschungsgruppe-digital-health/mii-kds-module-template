@@ -15,18 +15,16 @@
      repository. Entries without a marker are mandatory (1..1).
 
      LINK-ONLY ENTRIES (no page of their own):
-     - "Datasets and Descriptions" points at the Logical-Models SECTION of the
-       Artifacts Summary via the NAMED anchor #structures-logical-models (the
-       TF-KDS instruction's "Sec. 15.0.2" target). The id is generated in the
-       BROWSER by the base template's AnchorJS (anchors.add() slugifies each
-       section heading, whose text comes from the pinned stringsArtifacts
-       catalogs) — stable against the artifact mix, per language (the German
-       menu uses #strukturen-logische-modelle), and degrading to page-top when
-       JS is off or the module ships no logical models yet (as on this
-       scaffold's own preview). Deliberately NOT the numeric anchor #2: that
-       one is positional and lands on the WRONG section whenever the artifact
-       mix differs from the full standard set. Details:
-       docs/page-structure.md, "Datasets and Descriptions".
+     - "Datasets and Descriptions" points at the Logical Models page
+       (logical-models.html) — the module's datasets ARE its logical models.
+       NEITHER Artifacts-Summary anchor is usable for the TF-KDS "Sec.
+       15.0.2" target: the numeric #2 is POSITIONAL (grouping index — wrong
+       section whenever the artifact mix differs from the full standard set),
+       and the browser-generated NAMED AnchorJS anchor
+       (#structures-logical-models) is invisible to the IG Publisher's link
+       validator — it injects a marker anchor into the menu (rendered as an
+       EMPTY menu entry) and logs a broken-link ERROR on every page's QA.
+       Full analysis: docs/page-structure.md, "Datasets and Descriptions".
      - The four Conformance entries point at the KDS-wide conformance rules of
        the Meta module (kerndatensatz-meta). INTERIM: the Meta module has no
        published IG rendering yet (only a CI build with no conformance pages),
@@ -43,7 +41,7 @@
       <li><a href="researcher-guidance.html">Guidance for Researchers (optional)</a></li>
       <li><a href="implementer-guidance.html">Guidance for Implementers</a></li>
       <!-- link-only entry: Logical-Models section of the Artifacts Summary (see header note) -->
-      <li><a href="artifacts.html#structures-logical-models">Datasets and Descriptions</a></li>
+      <li><a href="logical-models.html">Datasets and Descriptions</a></li>
       <li><a href="uml-diagrams.html">UML Diagrams</a></li>
     </ul>
   </li>
