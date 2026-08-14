@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.9.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.8.1...v0.9.0) (2026-08-14)
+
+
+### Features
+
+* **pages:** link scaffold file references via the placeholder mechanism ([853a36c](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/853a36cd1129646898ab9a3a7cf21ec25e1920ba))
+* **publisher:** NUM-DIZ as IG publisher (footer copyright line) ([52cd4dc](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/52cd4dc2b57a87bda359616b78e62a5d4b07d324))
+
 ## [0.8.1](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.8.0...v0.8.1) (2026-08-14)
 
 
