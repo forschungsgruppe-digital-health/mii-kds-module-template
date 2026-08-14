@@ -19,7 +19,7 @@
 > Basis-Modul). Entscheiden Sie für Ihr Modul: Seite **behalten** — Inhalte
 > ausfüllen und dieses Banner samt `OPTIONAL-PAGE`-Marker-Kommentar löschen (in
 > dieser Datei UND in der englischen Quellseite) — oder Seite **entfernen**,
-> nach der Schritt-für-Schritt-Anleitung in `docs/optional-pages.md` dieses
+> nach der Schritt-für-Schritt-Anleitung in [`docs/optional-pages.md`](https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/docs/optional-pages.md) dieses
 > Repositories. Ein Release darf dieses Banner nicht enthalten
 > (Konventions-Check M9).
 {: .ig-highlight .ig-highlight-grey}
@@ -115,7 +115,7 @@ In diesem Gerüst nicht aktiviert, aber als auskommentierte Blöcke in
 > Tabellen oben nach. Wenn Ihr Modul die CRMI-Shareable-/Publishable-Profile
 > zusätzlich auf seine eigenen StructureDefinitions, CapabilityStatements,
 > CodeSysteme und ValueSets anwendet — das Idiom aus `kerndatensatz-basis` ist
-> ein gemeinsames `RuleSet` in `input/fsh/rulesets/crmi.fsh` —, ergänzen Sie die
+> ein gemeinsames `RuleSet` in [`input/fsh/rulesets/crmi.fsh`](https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/input/fsh/rulesets/crmi.fsh) —, ergänzen Sie die
 > entsprechenden Zeilen.]
 {: .ig-highlight .ig-highlight-grey}
 

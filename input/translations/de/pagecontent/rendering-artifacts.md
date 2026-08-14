@@ -22,15 +22,15 @@ Diese Seite zeigt ein funktionierendes Beispiel für **jede Direktive, die in
 dieser Vorlage fehlerfrei läuft**. Jeder Block nennt zuerst die Quellzeile und
 zeigt dann das Ergebnis. Zeile kopieren, Artefaktnamen ändern, Seite löschen.
 
-<div class="ig-highlight ig-highlight-blue">
+<div class="mii-highlight mii-highlight-blue">
 <h5>Was diese Seite ist</h5>
 Eine mitgelieferte, lebende Demonstration der Modulvorlage. Lesen Sie den
 Quelltext dieser Seite neben ihrer Darstellung, übernehmen Sie, was Sie
 brauchen, und löschen Sie die Seite anschließend.
 <strong>Die Schritt-für-Schritt-Fassung ist</strong>
-<code>docs/recipes/render-existing-artifacts.md</code> in diesem Repository
+<a href="https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/docs/recipes/render-existing-artifacts.md"><code>docs/recipes/render-existing-artifacts.md</code></a> in diesem Repository
 (gerenderte Seiten verlinken bewusst keine Repository-URLs — siehe
-<code>docs/open-tasks.md</code>). Dort ist jede Datei aufgeführt, die beim
+<a href="https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/docs/open-tasks.md"><code>docs/open-tasks.md</code></a>). Dort ist jede Datei aufgeführt, die beim
 Löschen dieser Seite mit entfernt werden muss.
 </div>
 
@@ -1141,7 +1141,7 @@ Ergänzen Sie das jeweils benötigte Artefakt, und die Direktive funktioniert �
 keine davon ist abgekündigt. Das Rezept erläutert, wo die einzelnen Direktiven
 dokumentiert sind und welche überhaupt dokumentiert sind.
 
-<div class="ig-highlight ig-highlight-green">
+<div class="mii-highlight mii-highlight-green">
 <h5>Eine Direktive zeigen, ohne sie auszuführen</h5>
 Oben kommen zwei Maskierungen vor, weil zwei Engines nacheinander laufen. Der
 eigene Liquid-Durchlauf des Publishers läuft <em>vor</em> Jekyll und
@@ -1162,7 +1162,7 @@ richtige Maskierung — und das Ausrufezeichen ein Build-Fehler, weil der
 Publisher es unangetastet lässt und Jekyll es nicht parsen kann.
 </div>
 
-<div class="ig-highlight ig-highlight-green">
+<div class="mii-highlight mii-highlight-green">
 <h5>Bevor Sie sich darauf verlassen</h5>
 Die drei Familien in den Abschnitten 1 bis 3 sind dokumentiert und stabil.
 Mehrere benachbarte Mechanismen sind es nicht — manche sind implementiert,

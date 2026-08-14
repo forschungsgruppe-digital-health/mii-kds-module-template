@@ -8,10 +8,11 @@
    includes/fragment-css.html AFTER project.css, so this :root block wins the
    cascade at equal specificity.
 
-   Below the :root block the file also carries four rule blocks that are not
+   Below the :root block the file also carries five rule blocks that are not
    about colour: the highlight boxes, the narrative-table styling, the content-
-   image handling and the structure-tabs spacing. Three of them add NEW classes;
-   the content-image block deliberately overrides base rules. Each is explained
+   image handling, the structure-tabs spacing and the navbar link typography.
+   Three of them add NEW classes; the content-image and navbar blocks
+   deliberately override base rules. Each is explained
    at its own block and listed in docs/styleguide.md sections 3, 5 and 5a. Keep
    that list short - a base rule countermanded here stops receiving base fixes.
 
@@ -236,6 +237,24 @@ table:not([class]):not([style]):not([border]):not([data-fhir]) th {
   border-top: none;
   padding: 0.75rem;
   overflow-x: auto;
+}
+
+/* ── Navbar link typography (both brand designs) ─────────────────────────────
+   Top-level navbar links render as WCAG 2.1 "large text": >= 18.66px (14pt)
+   bold, at which 1.4.3 asks 3:1 instead of 4.5:1. This is what lets a brand
+   put a lighter corporate colour behind the navbar — the NUM-DIZ design uses
+   its coral #ea5167 (white on it = 3.58:1; TF-KDS feedback 2026-08-14) — while
+   dropdown ITEMS, which stay 14px, are excluded by the child combinator and
+   keep 4.5:1 surfaces (--btn-gradient-*). The horizontal padding drops
+   12px -> 10px to offset the wider glyphs so the longest top row (German:
+   Startseite … Änderungshistorie) still fits the 992-1199px container in one
+   row. Guarded by scripts/brand-switch.test.mjs, which ties the relaxed 3:1
+   navbar pair to this block's presence. */
+#segment-navbar .navbar-nav > li > a {
+  font-size: 19px;
+  font-weight: 700;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 /* DEPRECATED aliases (renamed 2026-08-14: brand-specific mii-* -> generic ig-*).

@@ -128,7 +128,10 @@ msgstr "Hinweise zur Übersetzung"
 msgid "Rendering Artifacts (demo)"
 msgstr "Artefakt-Rendering (Demo)"
 
-# ImplementationGuide.publisher — the footer's "IG © <year> <publisher>" line
+# ImplementationGuide.publisher — the footer's "IG © <year> <publisher>" line.
+# "NUM-DIZ" is a proper name and language-neutral, so the German "translation"
+# is identical; the unit stays so the catalogue keeps covering every
+# translatable IG field.
 #: ImplementationGuide.publisher
-msgid "Medical Informatics Initiative (MII)"
-msgstr "Medizininformatik-Initiative (MII)"
+msgid "NUM-DIZ"
+msgstr "NUM-DIZ"

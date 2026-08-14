@@ -28,9 +28,9 @@ Eine mitgelieferte, lebende Demonstration der Modulvorlage. Lesen Sie den
 Quelltext dieser Seite neben ihrer Darstellung, übernehmen Sie, was Sie
 brauchen, und löschen Sie die Seite anschließend.
 <strong>Die Schritt-für-Schritt-Fassung ist</strong>
-<code>docs/recipes/render-existing-artifacts.md</code> in diesem Repository
+<a href="https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/docs/recipes/render-existing-artifacts.md"><code>docs/recipes/render-existing-artifacts.md</code></a> in diesem Repository
 (gerenderte Seiten verlinken bewusst keine Repository-URLs — siehe
-<code>docs/open-tasks.md</code>). Dort ist jede Datei aufgeführt, die beim
+<a href="https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/docs/open-tasks.md"><code>docs/open-tasks.md</code></a>). Dort ist jede Datei aufgeführt, die beim
 Löschen dieser Seite mit entfernt werden muss.
 </div>
 
