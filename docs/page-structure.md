@@ -39,7 +39,7 @@ for the decision checklist and the per-entry removal procedure.
 | — Guidance | 1..1 | `guidance.html` |
 | — Guidance for Researchers | 0..1 | `researcher-guidance.html` |
 | — Guidance for Implementers | 1..1 | `implementer-guidance.html` |
-| — Datasets and Descriptions | 1..1 | **link-only** → `artifacts.html#2` (Logical-Models section of the Artifacts Summary) |
+| — Datasets and Descriptions | 1..1 | **link-only** → `artifacts.html#structures-logical-models` (DE: `#strukturen-logische-modelle`) — the Logical-Models section of the Artifacts Summary via the browser-generated NAMED anchor; deliberately not the positional `#2` — see below |
 | — UML Diagrams | 1..1 | `uml-diagrams.html` |
 | **Conformance** | 1..1 | dropdown (parent → Meta-module Conformance, external) |
 | — Conformance | 1..1 | **link-only** → Meta module (interim: meta wiki `Conformance`) |
@@ -70,22 +70,33 @@ translation banner).
 
 ## Link-only entries — the two mechanisms
 
-**Datasets and Descriptions → `artifacts.html#2` (positional anchor).** The IG
-Publisher emits *numeric* per-section anchors on the generated Artifacts
-Summary (`<a name="1">`, `<a name="2">`, …), one per artifact-type section in a
-fixed order. With the standard MII module artifact set the sections are
-`1` = Behavior: Capability Statements, `2` = Structures: Logical Models — the
-section kerndatensatz-basis renders as **Sec. 15.0.2**, which is where the
-module's datasets (logical models) are listed. Two consequences:
+**Datasets and Descriptions → `artifacts.html#structures-logical-models`
+(DE: `#strukturen-logische-modelle`).** The TF-KDS instruction targets the
+Logical-Models section of the Artifacts Summary ("Sec. 15.0.2" in
+kerndatensatz-basis); the menu reaches it through the **named** anchor, not
+the numeric one. How the two anchor kinds come to exist:
 
-- On the **scaffold's own preview** the anchor lands elsewhere (the scaffold
-  ships no CapabilityStatement/LogicalModel artifacts yet, so the section
-  numbering differs). This is accepted for the scaffold.
-- In **your module**, re-check the anchor once the artifact set is real: build,
-  open `artifacts.html`, and confirm `#2` is the Logical-Models section (it is,
-  whenever the module ships CapabilityStatements and Logical Models — both
-  mandatory menu entries). If your artifact mix differs, adjust the number in
-  BOTH menu files and on `guidance.md`/its German mirror.
+- **Build time:** the IG Publisher derives `IG.definition.grouping` from the
+  artifact categories present in the input; the base template's
+  `createArtifactSummary.xslt` renders one section per grouping — heading
+  text from the pinned `stringsArtifacts-<lang>.po` catalogs — and emits only
+  *numeric positional* `<a name="{position()}">` anchors. Jekyll adds no
+  heading ids (the artifacts body is a raw XHTML include).
+- **Runtime:** the base template ships AnchorJS (`anchor.min.js`,
+  `anchor-hover.js` → `anchors.add()`, selector `h2…h6`), which slugifies
+  each section heading into an `id` in the browser: "Structures: Logical
+  Models" → `structures-logical-models`, "Strukturen: Logische Modelle" →
+  `strukturen-logische-modelle`. Fragment navigation succeeds because the ids
+  exist before the page's load event completes.
+
+The **named** anchor is therefore position-independent (immune to the
+artifact-mix problem that makes `#2` land on the wrong section — the
+scaffold's own preview renders `#2` = Example Instances), per-language, and
+its source strings are the template's own vendored, pinned catalogs. Its
+failure mode is benign: without JavaScript, or while a module ships no
+logical models yet (as on the scaffold preview), the page opens at the top —
+never at a wrong section. The numeric anchors remain what the generated
+in-page TOC uses; do not link them from menus.
 
 **The Conformance cluster → the Meta module (INTERIM meta-wiki links).** The
 KDS-wide conformance rules are maintained centrally in
@@ -124,7 +135,7 @@ the new page set.
 | `profiles-and-extensions.md` | split → `profiles.md` + `extensions.md` |
 | `search-parameters-and-operations.md` | split → `search-parameters.md` + `operations.md` |
 | `terminology.md` | split → `value-sets.md` + `code-systems.md` (SU-TermServ note → Code Systems, expansion note → Value Sets) |
-| `datasets-and-descriptions.md` | page removed → menu **link** to `artifacts.html#2` (describe the data elements in the Logical Models' own narrative/intros) |
+| `datasets-and-descriptions.md` | page removed → menu **link** to the Artifacts Summary's Logical-Models section (describe the data elements in the Logical Models' own narrative/intros) |
 | `conformance.md` | page removed → menu **link** to the Meta module |
 | `general-requirements.md` | page removed → menu **link** to the Meta module |
 | `must-support.md` | page removed → menu **link** to the Meta module |

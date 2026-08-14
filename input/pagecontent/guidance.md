@@ -9,10 +9,12 @@ This section collects the domain guidance for implementing and using the
 
 ### General Implementation Guidance
 
-* **[Datasets and Descriptions](artifacts.html#2)** — the module's data
-  elements, described as logical models in the Artifacts Summary. (This is a
-  link into the generated artifact list, not a page of its own; the anchor is
-  positional — see [`docs/page-structure.md`](https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/docs/page-structure.md) in this repository.)
+* **[Datasets and Descriptions](artifacts.html#structures-logical-models)** —
+  the module's data elements, described as logical models in the Artifacts
+  Summary. (A link into the generated artifact list, not a page of its own.
+  The named anchor is browser-generated from the section heading — stable
+  against the artifact mix, unlike the numeric positional anchors; see
+  [`docs/page-structure.md`](https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/docs/page-structure.md) in this repository.)
 * **[UML Diagrams](uml-diagrams.html)** — visual representation of the data
   models and their relationships.
 
