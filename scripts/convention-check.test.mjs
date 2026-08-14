@@ -208,6 +208,49 @@ test("M9 — decided everywhere (or no scan) yields pass / no finding", () => {
   assert.equal(noScan.findings.find((f) => f.id === "M9 optional pages"), undefined);
 });
 
+test("M11 — scaffold illustrative examples block a release, but not development", () => {
+  // security-and-privacy.md ships a highlighted Person example in its
+  // module-specific section, marked ILLUSTRATIVE-EXAMPLE; like the M9
+  // banners it is a visible "decide me" that must not survive into a release.
+  const present = [{ page: "security-and-privacy.md", en: "marked", de: "marked" }];
+  const dev = evaluate({ illustrativeExamples: present, release: false });
+  const rel = evaluate({ illustrativeExamples: present, release: true });
+
+  assert.equal(dev.findings.find((f) => f.id === "M11 illustrative examples")?.status, "pass");
+  assert.equal(dev.ok, true, "a scaffold example must be green in development");
+  assert.equal(rel.findings.find((f) => f.id === "M11 illustrative examples")?.status, "fail");
+  assert.equal(rel.ok, false, "a release shipping a scaffold example must fail");
+
+  // The failure message must teach the exit: delete the box + marker in both
+  // languages, then write own content or adopt the default text.
+  const msg = rel.findings.find((f) => f.id === "M11 illustrative examples").message;
+  for (const s of ["input/pagecontent", "input/translations/de/pagecontent", "default text"]) {
+    assert.ok(msg.includes(s), `the failure message should mention ${s}`);
+  }
+});
+
+test("M11 — a half-removed example (marker asymmetry) fails on every branch", () => {
+  for (const release of [false, true]) {
+    const { ok, findings } = evaluate({
+      illustrativeExamples: [{ page: "security-and-privacy.md", en: "unmarked", de: "marked" }],
+      release,
+    });
+    assert.equal(ok, false, `asymmetry must fail (release=${release})`);
+    const f = findings.find((x) => x.id === "M11 illustrative examples");
+    assert.equal(f.status, "fail");
+    assert.ok(f.message.includes("BOTH languages"));
+  }
+});
+
+test("M11 — removed everywhere (or no scan) yields pass / no finding", () => {
+  const removed = evaluate({ illustrativeExamples: [], release: true });
+  assert.equal(removed.findings.find((f) => f.id === "M11 illustrative examples")?.status, "pass");
+  assert.equal(removed.ok, true);
+
+  const noScan = evaluate({ release: true });
+  assert.equal(noScan.findings.find((f) => f.id === "M11 illustrative examples"), undefined);
+});
+
 test("scanOptionalPages pairs the languages of this repository's scaffold", () => {
   // Run against the real tree: every optional page the scaffold ships must be
   // marked in BOTH languages (the state the template itself is committed in).
