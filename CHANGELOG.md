@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.9.0...v0.9.1) (2026-08-14)
+
+
+### Bug Fixes
+
+* re-vendor ig-template at v1.2.0 (TF-KDS demo-review fixes) ([92506cf](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/92506cfdb427ca014f7bb15340acabbf788880c9))
+
 ## [0.9.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.8.1...v0.9.0) (2026-08-14)
 
 
