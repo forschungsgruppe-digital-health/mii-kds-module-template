@@ -1,32 +1,155 @@
 {
-  "date" : "Fri, 14 Aug, 2026 07:36:22 +0000",
+  "date" : "Fri, 14 Aug, 2026 07:48:14 +0000",
   "doco" : "For each file: start is seconds after start activity occurred. Length = milliseconds activity took",
   "files" : [{
     "name" : "/fsh-generated/resources/ImplementationGuide-mii-ig-template.json",
     "size" : 12785,
     "processes" : [{
       "activity" : "load",
+      "start" : 49,
+      "length" : 401
+    },
+    {
+      "activity" : "load-configure",
       "start" : 50,
-      "length" : 429
+      "length" : 1
     },
     {
       "activity" : "checkR4R4B",
-      "start" : 52,
-      "length" : 20
+      "start" : 50,
+      "length" : 21
     },
     {
       "activity" : "generateNarratives",
-      "start" : 52,
-      "length" : 163
+      "start" : 50,
+      "length" : 207
     },
     {
       "activity" : "validate",
-      "start" : 57,
-      "length" : 13789
+      "start" : 56,
+      "length" : 14926
     },
     {
       "activity" : "scanForUsageStats",
+      "start" : 70,
+      "length" : 1
+    },
+    {
+      "activity" : "validate",
+      "start" : 70,
+      "length" : 1
+    },
+    {
+      "activity" : "translate",
       "start" : 71,
+      "length" : 25
+    },
+    {
+      "activity" : "generate1",
+      "start" : 71,
+      "length" : 186
+    },
+    {
+      "activity" : "generate2",
+      "start" : 75,
+      "length" : 261
+    },
+    {
+      "activity" : "generateValidationPack",
+      "start" : 99,
+      "length" : 5
+    },
+    {
+      "activity" : "scanExamplesForR5",
+      "start" : 110,
+      "length" : 1
+    }]
+  },
+  {
+    "name" : "fsh-generated/resources/Patient-ExamplePatientInstance.json",
+    "size" : 1091,
+    "processes" : [{
+      "activity" : "loadResources",
+      "start" : 49,
+      "length" : 7
+    },
+    {
+      "activity" : "load-configure",
+      "start" : 50,
+      "length" : 2
+    },
+    {
+      "activity" : "generateNarratives",
+      "start" : 51,
+      "length" : 38
+    },
+    {
+      "activity" : "validate",
+      "start" : 70,
+      "length" : 38
+    },
+    {
+      "activity" : "translate",
+      "start" : 71,
+      "length" : 12
+    },
+    {
+      "activity" : "generate1",
+      "start" : 71,
+      "length" : 12
+    },
+    {
+      "activity" : "generate2",
+      "start" : 75,
+      "length" : 34
+    }]
+  },
+  {
+    "name" : "fsh-generated/resources/StructureDefinition-example-patient.json",
+    "size" : 7222,
+    "processes" : [{
+      "activity" : "loadResources",
+      "start" : 49,
+      "length" : 9
+    },
+    {
+      "activity" : "load",
+      "start" : 49,
+      "length" : 33
+    },
+    {
+      "activity" : "generateSnapshots",
+      "start" : 49,
+      "length" : 78
+    },
+    {
+      "activity" : "load-configure",
+      "start" : 50,
+      "length" : 1
+    },
+    {
+      "activity" : "checkR4R4B",
+      "start" : 50,
+      "length" : 1
+    },
+    {
+      "activity" : "generateNarratives",
+      "start" : 51,
+      "length" : 524
+    },
+    {
+      "activity" : "validate",
+      "start" : 51,
+      "length" : 4385
+    },
+    {
+      "activity" : "checkConformanceResources",
+      "start" : 70,
+      "length" : 1
+    },
+    {
+      "activity" : "scanForUsageStats",
+      "start" : 70,
       "length" : 1
     },
     {
@@ -37,51 +160,51 @@
     {
       "activity" : "translate",
       "start" : 71,
-      "length" : 16
+      "length" : 1
     },
     {
       "activity" : "generate1",
       "start" : 71,
-      "length" : 173
+      "length" : 273
     },
     {
       "activity" : "generate2",
-      "start" : 74,
-      "length" : 266
+      "start" : 75,
+      "length" : 1949
+    },
+    {
+      "activity" : "generate2",
+      "start" : 81,
+      "length" : 2000
     },
     {
       "activity" : "generateValidationPack",
-      "start" : 96,
-      "length" : 5
+      "start" : 99,
+      "length" : 11
     },
     {
       "activity" : "scanExamplesForR5",
-      "start" : 107,
+      "start" : 110,
       "length" : 1
     }]
   },
   {
-    "name" : "fsh-generated/resources/Patient-ExamplePatientInstance.json",
-    "size" : 1091,
+    "name" : "input/resources/Parameters-expansion-manifest.json",
+    "size" : 513,
     "processes" : [{
       "activity" : "loadResources",
-      "start" : 50,
-      "length" : 6
-    },
-    {
-      "activity" : "load-configure",
-      "start" : 52,
-      "length" : 2
+      "start" : 49,
+      "length" : 4
     },
     {
       "activity" : "generateNarratives",
-      "start" : 52,
-      "length" : 94
+      "start" : 51,
+      "length" : 1
     },
     {
       "activity" : "validate",
       "start" : 71,
-      "length" : 29
+      "length" : 37
     },
     {
       "activity" : "translate",
@@ -91,138 +214,44 @@
     {
       "activity" : "generate1",
       "start" : 71,
-      "length" : 11
+      "length" : 9
     },
     {
       "activity" : "generate2",
-      "start" : 74,
-      "length" : 29
-    }]
-  },
-  {
-    "name" : "fsh-generated/resources/StructureDefinition-example-patient.json",
-    "size" : 7222,
-    "processes" : [{
-      "activity" : "loadResources",
-      "start" : 50,
-      "length" : 6
-    },
-    {
-      "activity" : "load",
-      "start" : 50,
-      "length" : 13
-    },
-    {
-      "activity" : "generateSnapshots",
-      "start" : 51,
-      "length" : 89
-    },
-    {
-      "activity" : "checkR4R4B",
-      "start" : 52,
-      "length" : 1
-    },
-    {
-      "activity" : "generateNarratives",
-      "start" : 52,
-      "length" : 577
-    },
-    {
-      "activity" : "validate",
-      "start" : 52,
-      "length" : 4258
-    },
-    {
-      "activity" : "scanForUsageStats",
-      "start" : 71,
-      "length" : 2
-    },
-    {
-      "activity" : "validate",
-      "start" : 71,
-      "length" : 1
-    },
-    {
-      "activity" : "translate",
-      "start" : 71,
-      "length" : 1
-    },
-    {
-      "activity" : "generate1",
-      "start" : 71,
-      "length" : 272
-    },
-    {
-      "activity" : "generate2",
-      "start" : 74,
-      "length" : 1809
-    },
-    {
-      "activity" : "generate2",
-      "start" : 80,
-      "length" : 1188
-    },
-    {
-      "activity" : "generateValidationPack",
-      "start" : 96,
-      "length" : 10
-    },
-    {
-      "activity" : "scanProfilesForR5",
-      "start" : 107,
-      "length" : 1
-    },
-    {
-      "activity" : "scanExamplesForR5",
-      "start" : 107,
-      "length" : 1
-    }]
-  },
-  {
-    "name" : "input/resources/Parameters-expansion-manifest.json",
-    "size" : 513,
-    "processes" : [{
-      "activity" : "loadResources",
-      "start" : 50,
-      "length" : 4
-    },
-    {
-      "activity" : "validate",
-      "start" : 71,
-      "length" : 19
-    },
-    {
-      "activity" : "translate",
-      "start" : 71,
-      "length" : 5
-    },
-    {
-      "activity" : "generate1",
-      "start" : 71,
-      "length" : 10
-    },
-    {
-      "activity" : "generate2",
-      "start" : 76,
-      "length" : 3837
+      "start" : 77,
+      "length" : 4124
     }]
   },
   {
     "name" : "/input/includes/menu.xml",
     "size" : 5903,
     "processes" : [{
+      "activity" : "validate",
+      "start" : 71,
+      "length" : 1
+    },
+    {
       "activity" : "generate2",
-      "start" : 80,
+      "start" : 81,
       "length" : 2
     }]
   },
   {
     "name" : "/fsh-generated/includes/fsh-link-references.md",
-    "size" : 195
+    "size" : 195,
+    "processes" : [{
+      "activity" : "validate",
+      "start" : 71,
+      "length" : 1
+    }]
   },
   {
     "name" : "/input/pagecontent/researcher-guidance.md",
-    "size" : 1301,
+    "size" : 1301
+  },
+  {
+    "name" : "/input/pagecontent/changes.md",
+    "size" : 4833,
     "processes" : [{
       "activity" : "validate",
       "start" : 71,
@@ -230,16 +259,7 @@
     },
     {
       "activity" : "generate2",
-      "start" : 80,
-      "length" : 1
-    }]
-  },
-  {
-    "name" : "/input/pagecontent/changes.md",
-    "size" : 4833,
-    "processes" : [{
-      "activity" : "generate2",
-      "start" : 80,
+      "start" : 81,
       "length" : 1
     }]
   },
@@ -253,31 +273,17 @@
     },
     {
       "activity" : "generate2",
-      "start" : 80,
-      "length" : 1
+      "start" : 81,
+      "length" : 2
     }]
   },
   {
     "name" : "/input/pagecontent/value-sets.md",
-    "size" : 2061,
-    "processes" : [{
-      "activity" : "validate",
-      "start" : 71,
-      "length" : 1
-    },
-    {
-      "activity" : "generate2",
-      "start" : 80,
-      "length" : 1
-    }]
+    "size" : 2061
   },
   {
     "name" : "/input/pagecontent/translationinfo.md",
-    "size" : 981
-  },
-  {
-    "name" : "/input/pagecontent/capability-statements.md",
-    "size" : 487,
+    "size" : 981,
     "processes" : [{
       "activity" : "validate",
       "start" : 71,
@@ -285,25 +291,39 @@
     },
     {
       "activity" : "generate2",
-      "start" : 80,
+      "start" : 81,
       "length" : 1
     }]
   },
   {
+    "name" : "/input/pagecontent/capability-statements.md",
+    "size" : 487
+  },
+  {
     "name" : "/input/pagecontent/guidance.md",
-    "size" : 1642
+    "size" : 1642,
+    "processes" : [{
+      "activity" : "validate",
+      "start" : 71,
+      "length" : 1
+    },
+    {
+      "activity" : "generate2",
+      "start" : 81,
+      "length" : 1
+    }]
   },
   {
     "name" : "/input/pagecontent/version-history.md",
     "size" : 4523,
     "processes" : [{
-      "activity" : "validate",
-      "start" : 71,
+      "activity" : "scan",
+      "start" : 50,
       "length" : 1
     },
     {
       "activity" : "generate2",
-      "start" : 80,
+      "start" : 81,
       "length" : 1
     }]
   },
@@ -311,8 +331,13 @@
     "name" : "/input/pagecontent/code-systems.md",
     "size" : 1793,
     "processes" : [{
+      "activity" : "validate",
+      "start" : 71,
+      "length" : 1
+    },
+    {
       "activity" : "generate2",
-      "start" : 80,
+      "start" : 81,
       "length" : 1
     }]
   },
@@ -322,6 +347,11 @@
     "processes" : [{
       "activity" : "validate",
       "start" : 71,
+      "length" : 1
+    },
+    {
+      "activity" : "generate2",
+      "start" : 81,
       "length" : 1
     }]
   },
@@ -339,7 +369,7 @@
     },
     {
       "activity" : "generate2",
-      "start" : 80,
+      "start" : 81,
       "length" : 1
     }]
   },
@@ -357,13 +387,18 @@
     },
     {
       "activity" : "generate2",
-      "start" : 80,
+      "start" : 81,
       "length" : 1
     }]
   },
   {
     "name" : "/input/pagecontent/downloads.md",
-    "size" : 3292
+    "size" : 3292,
+    "processes" : [{
+      "activity" : "generate2",
+      "start" : 81,
+      "length" : 1
+    }]
   },
   {
     "name" : "/input/pagecontent/uml-diagrams.md",
@@ -372,51 +407,46 @@
       "activity" : "validate",
       "start" : 71,
       "length" : 1
-    },
-    {
-      "activity" : "generate2",
-      "start" : 80,
-      "length" : 1
     }]
   },
   {
     "name" : "/input/pagecontent/metadata.md",
     "size" : 21843,
     "processes" : [{
+      "activity" : "validate",
+      "start" : 71,
+      "length" : 1
+    },
+    {
       "activity" : "generate2",
-      "start" : 80,
-      "length" : 2
+      "start" : 81,
+      "length" : 4
     }]
   },
   {
     "name" : "/input/pagecontent/search-parameters.md",
     "size" : 1403,
     "processes" : [{
-      "activity" : "validate",
-      "start" : 71,
-      "length" : 1
-    },
-    {
       "activity" : "generate2",
-      "start" : 80,
+      "start" : 81,
       "length" : 1
     }]
   },
   {
     "name" : "/input/pagecontent/examples.md",
-    "size" : 558
+    "size" : 558,
+    "processes" : [{
+      "activity" : "validate",
+      "start" : 71,
+      "length" : 1
+    }]
   },
   {
     "name" : "/input/pagecontent/index.md",
     "size" : 4701,
     "processes" : [{
-      "activity" : "validate",
-      "start" : 71,
-      "length" : 1
-    },
-    {
       "activity" : "generate2",
-      "start" : 80,
+      "start" : 81,
       "length" : 1
     }]
   },
@@ -424,26 +454,26 @@
     "name" : "/input/pagecontent/rendering-artifacts.md",
     "size" : 42208,
     "processes" : [{
+      "activity" : "validate",
+      "start" : 71,
+      "length" : 1
+    },
+    {
       "activity" : "generate2",
-      "start" : 80,
-      "length" : 34
+      "start" : 81,
+      "length" : 49
     }]
   },
   {
     "name" : "/input/intro-notes",
-    "size" : 0,
-    "processes" : [{
-      "activity" : "validate",
-      "start" : 71,
-      "length" : 1
-    }]
+    "size" : 0
   },
   {
     "name" : "/template/config",
     "size" : 0,
     "processes" : [{
-      "activity" : "generate2",
-      "start" : 80,
+      "activity" : "validate",
+      "start" : 71,
       "length" : 1
     }]
   },
@@ -462,6 +492,11 @@
   },
   {
     "name" : "/temp/pages/_includes/artifacts.xml",
-    "size" : 3531
+    "size" : 3531,
+    "processes" : [{
+      "activity" : "generate2",
+      "start" : 81,
+      "length" : 1
+    }]
   }]
 }
