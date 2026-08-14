@@ -14,7 +14,7 @@
 > **remove** it, following the per-entry procedure in `docs/optional-pages.md`
 > of this repository. A release must not ship with this banner (convention
 > check M9).
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}
 
 ### Value Sets
 
@@ -32,4 +32,4 @@ ValueSets may not expand completely).
 > [TODO: If your module uses SNOMED CT, state the edition/version used. List
 > the module's own ValueSets, or refer to the automatically generated artifact
 > list — or remove this page if your module defines none.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}

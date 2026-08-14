@@ -6,7 +6,6 @@
      German mirror: input/translations/de/pagecontent/version-history.md — both
      files must say the same thing. -->
 
-### Versioning
 
 #### Version scheme
 
@@ -86,4 +85,4 @@ demonstration alike; a created module never renders the demonstration.
 > [TODO: If your module has a versioning policy of its own beyond the MII scheme
 > — for example a support window for older versions, or a deprecation policy for
 > profiles — describe it here. Delete this prompt afterwards.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}

@@ -16,4 +16,4 @@ unter `input/translations/de/`. Details:
 
 > [TODO: Vermerken Sie, welche Teile des Moduls bereits ins Deutsche übersetzt
 > sind.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}

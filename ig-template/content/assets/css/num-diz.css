@@ -1,15 +1,16 @@
 /* num-diz.css - NUM-DIZ branding for de.medizininformatikinitiative.template
    ==========================================================================
 
-   SECOND corporate design of the template (the default stays MII). This file
-   is linked by includes/fragment-css.html AFTER mii.css, and ONLY when the
-   consuming IG opts in with the brand switch:
+   DEFAULT corporate design of the template. This file is linked by
+   includes/fragment-css.html AFTER mii.css on every build UNLESS the
+   consuming IG switches back to the MII design with:
 
-       input/data/brand.json  ->  { "design": "num-diz" }
+       input/data/brand.json  ->  { "design": "mii" }
 
    (the base template's pre-process copies input/data/ into Jekyll's _data,
-   so the fragments read the value as site.data.brand.design; an unset or
-   unknown value keeps the MII design). Like mii.css, colour is set
+   so the fragments read the value as site.data.brand.design; only the exact
+   value 'mii' suppresses this file - an unset or unknown value renders the
+   NUM-DIZ default). Like mii.css, colour is set
    EXCLUSIVELY through CSS custom properties: the fhir2.base.template (0.1.0)
    variables that mii.css already overrides, plus mii.css's own three
    narrative-table variables. Because this file loads after mii.css at equal
@@ -97,7 +98,7 @@
      grey fill, slate header text (6.93:1), site mid-grey border #706f6f
      (non-text contrast 5.01:1 on white, 4.27:1 on the header fill - both
      above the 3:1 of WCAG 1.4.11). */
-  --mii-table-header-bg-color: #ecedee;
-  --mii-table-border-color: #706f6f;
-  --mii-table-header-text-color: #485156;
+  --ig-table-header-bg-color: #ecedee;
+  --ig-table-border-color: #706f6f;
+  --ig-table-header-text-color: #485156;
 }

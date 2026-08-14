@@ -6,7 +6,6 @@
      des MII-Meta-Wikis
      (https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow). -->
 
-### Versionierung
 
 #### Versionsschema
 
@@ -92,4 +91,4 @@ wie diese Demonstration; ein erstelltes Modul rendert die Demonstration nie.
 > Versionierungs-Politik hat — etwa einen Unterstützungszeitraum für ältere
 > Versionen oder eine Abkündigungs-Politik für Profile —, beschreiben Sie sie
 > hier. Löschen Sie diesen Hinweis anschließend.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}

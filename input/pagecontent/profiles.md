@@ -13,4 +13,4 @@ conventions). The module's extensions are listed on the
 
 > [TODO: Describe your module's profiles and how they relate to each other. The
 > IG Publisher generates the technical detail pages automatically.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}

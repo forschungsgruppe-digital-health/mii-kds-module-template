@@ -100,32 +100,32 @@
 /* ── MII highlight boxes (background-colour highlight) ────────────────────────
    Reusable, purpose-neutral highlight-box classes the template provides for
    calling out content on a page. A page writes:
-     <div class="mii-highlight mii-highlight-blue"><h5>…</h5><p>…</p></div>
+     <div class="ig-highlight ig-highlight-blue"><h5>…</h5><p>…</p></div>
      Variants: -blue, -green, -orange (warning), -red (important), -grey (hint).
    The colours are the MII-aligned highlight backgrounds carried over from
    kerndatensatz-basis. These are STYLING only — the template attaches no
    semantics (e.g. "audience") to them; a module decides what each colour means. */
-.mii-highlight {
+.ig-highlight, .mii-highlight {
   padding: 15px;
   margin: 10px 0;
   border-left: 5px solid;
   border-radius: 3px;
 }
-.mii-highlight h5 {
+.ig-highlight h5, .mii-highlight h5 {
   margin-top: 0;
 }
-.mii-highlight-blue {
+.ig-highlight-blue, .mii-highlight-blue {
   background-color: #e8f4f8;
   border-left-color: #5c8db3;
 }
-.mii-highlight-blue h5 {
+.ig-highlight-blue h5, .mii-highlight-blue h5 {
   color: #406a99;
 }
-.mii-highlight-green {
+.ig-highlight-green, .mii-highlight-green {
   background-color: #f0f8e8;
   border-left-color: #91bc3d;
 }
-.mii-highlight-green h5 {
+.ig-highlight-green h5, .mii-highlight-green h5 {
   color: #5a6b2f;
 }
 /* The three below were added on top of the kerndatensatz-basis pair, with the
@@ -134,25 +134,25 @@
    pass WCAG: h5 on background >= 6.1:1 (AA text), border on background >= 3:1
    (1.4.11 non-text; the inherited green border sits below that — recorded
    upstream trade-off, kept for parity with kerndatensatz-basis). */
-.mii-highlight-orange {
+.ig-highlight-orange, .mii-highlight-orange {
   background-color: #fdf3e7;
   border-left-color: #c9721c;
 }
-.mii-highlight-orange h5 {
+.ig-highlight-orange h5, .mii-highlight-orange h5 {
   color: #8a4b12;
 }
-.mii-highlight-red {
+.ig-highlight-red, .mii-highlight-red {
   background-color: #fbeaea;
   border-left-color: #c0392b;
 }
-.mii-highlight-red h5 {
+.ig-highlight-red h5, .mii-highlight-red h5 {
   color: #8f2318;
 }
-.mii-highlight-grey {
+.ig-highlight-grey, .mii-highlight-grey {
   background-color: #f2f3f5;
   border-left-color: #7a8495; /* same slate as the narrative-table border */
 }
-.mii-highlight-grey h5 {
+.ig-highlight-grey h5, .mii-highlight-grey h5 {
   color: #4a5260;
 }
 
@@ -188,12 +188,12 @@
    docs/styleguide.md); contrast is recorded in §7. */
 :root {
   /* MII light background — the same site value as the breadcrumb fill. */
-  --mii-table-header-bg-color: #ebedef;
+  --ig-table-header-bg-color: #ebedef;
   /* MII slate. Non-text contrast (WCAG 1.4.11) 3.78:1 on white and 3.22:1 on
      the header fill — both above the 3:1 the guideline asks of a boundary. */
-  --mii-table-border-color: #7a8495;
+  --ig-table-border-color: #7a8495;
   /* MII body text: 10.77:1 on the header fill. */
-  --mii-table-header-text-color: #333333;
+  --ig-table-header-text-color: #333333;
 }
 table:not([class]):not([style]):not([border]):not([data-fhir]) {
   border-collapse: collapse;
@@ -201,13 +201,13 @@ table:not([class]):not([style]):not([border]):not([data-fhir]) {
 }
 table:not([class]):not([style]):not([border]):not([data-fhir]) th,
 table:not([class]):not([style]):not([border]):not([data-fhir]) td {
-  border: 1px solid var(--mii-table-border-color);
+  border: 1px solid var(--ig-table-border-color);
   padding: 6px 10px;
   vertical-align: top;
 }
 table:not([class]):not([style]):not([border]):not([data-fhir]) th {
-  background-color: var(--mii-table-header-bg-color);
-  color: var(--mii-table-header-text-color);
+  background-color: var(--ig-table-header-bg-color);
+  color: var(--ig-table-header-text-color);
   text-align: left;
 }
 
@@ -236,4 +236,15 @@ table:not([class]):not([style]):not([border]):not([data-fhir]) th {
   border-top: none;
   padding: 0.75rem;
   overflow-x: auto;
+}
+
+/* DEPRECATED aliases (renamed 2026-08-14: brand-specific mii-* -> generic ig-*).
+   The --mii-table-* variables resolve to their --ig-table-* successors and the
+   .mii-highlight* selectors above remain as aliases so existing module content
+   keeps rendering for one deprecation window. New content uses ig-* only.
+   Remove the aliases in the next major. */
+:root {
+  --mii-table-border-color: var(--ig-table-border-color);
+  --mii-table-header-bg-color: var(--ig-table-header-bg-color);
+  --mii-table-header-text-color: var(--ig-table-header-text-color);
 }

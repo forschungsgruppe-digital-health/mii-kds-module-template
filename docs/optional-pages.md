@@ -1,5 +1,8 @@
 # Optional pages — the (0..1) menu entries and how to decide them
 
+> **How-to:** the step-by-step removal/keep procedure lives in
+> [docs/recipes/remove-an-optional-page.md](recipes/remove-an-optional-page.md).
+
 The MII-agreed module menu structure (see [page-structure.md](page-structure.md))
 gives every entry a cardinality: **(1..1)** entries are mandatory in every
 module, **(0..1)** entries are per-module decisions. This document is the
@@ -13,7 +16,7 @@ scaffold's existing conventions (placeholder table, `[TODO]` banners, the
 convention check):
 
 1. **In the rendered preview** — a banner at the top of the page ("Optional
-   page (0..1)…", `mii-highlight` style, in both languages), so a module lead
+   page (0..1)…", `ig-highlight` style, in both languages), so a module lead
    reviewing the preview sees the open decision without reading source.
 2. **In the source** — an `OPTIONAL-PAGE` HTML comment in the page file (both
    languages) and `OPTIONAL (0..1)` comments at the menu entries
