@@ -151,7 +151,7 @@
     </ul>
   </li>
   <li class="dropdown">
-    <!-- Eltern-Eintrag und die ersten vier Einträge verlinken die MII-weiten
+    <!-- Eltern-Eintrag und die ersten vier Einträge verlinken die KDS-weiten
          Konformitätsregeln des Meta-Moduls (INTERIM: Meta-Wiki; siehe
          Quell-Menü). -->
     <a data-toggle="dropdown" href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance" class="dropdown-toggle">Konformität<b class="caret"> </b></a>
@@ -289,7 +289,7 @@ Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfade
      (M9) lässt ein Release mit diesem Marker fehlschlagen. -->
 
 <blockquote class="ig-highlight ig-highlight-grey">
-  <p><strong>Optionale Seite (0..1).</strong> Das MII-Modulmenü führt diese Seite als
+  <p><strong>Optionale Seite (0..1).</strong> Das KDS-Modulmenü führt diese Seite als
 <em>optional</em> — behalten Sie sie nur, wenn die Profile Ihres Moduls die hier
 dokumentierten Metadaten-Charakteristiken aufweisen (wie z. B. das
 Basis-Modul). Entscheiden Sie für Ihr Modul: Seite <strong>behalten</strong> — Inhalte
@@ -317,7 +317,7 @@ Veröffentlichung eines MII-Kerndatensatz-Moduls als versionierter
 FHIR-Implementierungsleitfaden nützlich sind.</p>
 
 <p>Das Vorgehen ist vorläufig: Es hält den derzeit genutzten CRMI-Ansatz fest und
-kann angepasst werden, wenn CRMI reift, sich der MII-Veröffentlichungsprozess
+kann angepasst werden, wenn CRMI reift, sich der KDS-Veröffentlichungsprozess
 weiterentwickelt und die FAIR-Bewertung von FHIR-Leitfäden konkreter wird.</p>
 
 <h4 id="geltungsbereich">Geltungsbereich</h4>
@@ -339,7 +339,7 @@ im <a href="downloads.html">herunterladbaren Paket</a>.</p>
 
 <p>CRMI gliedert das Artefaktmanagement in Lebenszyklus-Phasen und begleitende
 Aspekte. Dieser Leitfaden setzt nicht jede CRMI-Fähigkeit um, sondern die Teile,
-die für die Veröffentlichung eines MII-Moduls unmittelbar nützlich sind.</p>
+die für die Veröffentlichung eines KDS-Moduls unmittelbar nützlich sind.</p>
 
 <table>
   <thead>
@@ -474,7 +474,7 @@ gesetzt und landen in der erzeugten <code class="language-plaintext highlighter-
       <td><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-author.html">Artifact Author</a><br /><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-editor.html">Artifact Editor</a><br /><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-reviewer.html">Artifact Reviewer</a><br /><a href="http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-endorser.html">Artifact Endorser</a></td>
       <td>Veröffentlichung; Governance; Provenienz</td>
       <td><code class="language-plaintext highlighter-rouge">ImplementationGuide.extension</code></td>
-      <td>Hält Autorenschaft, die für die innere Stimmigkeit verantwortliche Redaktion, die Reviewer und die offiziell befürwortenden Gremien fest. Bei einem MII-Modul sind Redaktion, Reviewer und befürwortende Gremien die MII-Governance-Gremien.</td>
+      <td>Hält Autorenschaft, die für die innere Stimmigkeit verantwortliche Redaktion, die Reviewer und die offiziell befürwortenden Gremien fest. Bei einem KDS-Modul sind Redaktion, Reviewer und befürwortende Gremien die Governance-Gremien des Kerndatensatz-Prozesses.</td>
     </tr>
   </tbody>
 </table>
@@ -631,7 +631,7 @@ dauerhaft identifizierter FAIR-Datensatz behauptet.</p>
       <td>F1</td>
       <td>RDA-F1-02M</td>
       <td>Metadaten sind über einen global eindeutigen Identifikator identifiziert</td>
-      <td>Global gültige kanonische <code class="language-plaintext highlighter-rouge">url</code>-Werte und die Paket-Id innerhalb der kontrollierten MII-Namensräume.</td>
+      <td>Global gültige kanonische <code class="language-plaintext highlighter-rouge">url</code>-Werte und die Paket-Id innerhalb der kontrollierten KDS-Namensräume.</td>
     </tr>
     <tr>
       <td>F1</td>
@@ -721,7 +721,7 @@ dauerhaft identifizierter FAIR-Datensatz behauptet.</p>
       <td>R1.3</td>
       <td>RDA-R1.3-01M</td>
       <td>Metadaten entsprechen einem Community-Standard</td>
-      <td>FHIR R4, die CRMI-Profile, die MII-Veröffentlichungskonventionen und die Metadaten kanonischer Ressourcen.</td>
+      <td>FHIR R4, die CRMI-Profile, die KDS-Veröffentlichungskonventionen und die Metadaten kanonischer Ressourcen.</td>
     </tr>
     <tr>
       <td>R1.3</td>
@@ -791,7 +791,7 @@ Ressourcen die vollständigen maschinenlesbaren Metadaten.</p>
 
           IG © 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.netzwerk-universitaetsmedizin.de">NUM-DIZ</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Fri, Aug 14, 2026 10:36+0000">2026-08-14</span>
+          Erstellt <span title="Fri, Aug 14, 2026 11:08+0000">2026-08-14</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- Branding override for the fhir2.base.template footer fragment.

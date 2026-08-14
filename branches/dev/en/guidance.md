@@ -21,5 +21,5 @@ This section collects the domain guidance for implementing and using the **Modul
 
 -------
 
-For the MII-wide conformance requirements see the [Conformance rules of the MII Meta module](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance); for the technical artifacts see [Profiles](profiles.md).
+For the KDS-wide conformance requirements see the [Conformance rules of the Meta module](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance); for the technical artifacts see [Profiles](profiles.md).
 

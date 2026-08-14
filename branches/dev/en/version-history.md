@@ -7,7 +7,7 @@
 
 #### Version scheme
 
-The **Module Template** module follows the MII calendar-versioning (CalVer) scheme in a SemVer-compatible numeric form:
+The **Module Template** module follows the KDS calendar-versioning (CalVer) scheme in a SemVer-compatible numeric form:
 
 * format **`YYYY.MINOR.PATCH[-label]`** — the current version is `2027.0.0-draft.1`;
 * **`YYYY`** — the year in which the guide applies and is intended to be used; it takes the place of the major version;
@@ -25,7 +25,7 @@ All released FHIR artifacts in the package carry the same version as the guide a
 
 #### Release process
 
-Releases follow the [MII Module Release Workflow](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow): the version is raised in the release branch, the changelog entry is written, the validation workflows run on the release pull request, and the release is tagged after the merge.
+Releases follow the [Module Release Workflow](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow): the version is raised in the release branch, the changelog entry is written, the validation workflows run on the release pull request, and the release is tagged after the merge.
 
 #### Version history and changes
 
@@ -41,5 +41,5 @@ From the second **formal publication** on, this guide also publishes a **machine
 
 **The demonstration below** (this template repository's preview only) shows the same kind of report before any formal publication exists: the build compares itself against the previous `dev` preview using the FHIR validator's `-compare` command and publishes the result at `comparison-demo/index.html`. The repository variable `ENABLE_VERSION_COMPARISON=false` switches the whole feature off — the publisher's comparison in every build workflow and this demonstration alike; a created module never renders the demonstration.
 
-> [TODO: If your module has a versioning policy of its own beyond the MII scheme — for example a support window for older versions, or a deprecation policy for profiles — describe it here. Delete this prompt afterwards.]
+> [TODO: If your module has a versioning policy of its own beyond the KDS scheme — for example a support window for older versions, or a deprecation policy for profiles — describe it here. Delete this prompt afterwards.]
 

@@ -34,13 +34,13 @@ Datenintegrationszentren (DIZ), Software-Entwickelnde und System-Architekt:innen
 
 ##### Forschende
 
-Wissenschaftler:innen, die MII-Daten für die medizinische Forschung nutzen.
+Wissenschaftler:innen, die KDS-Daten für die medizinische Forschung nutzen.
  → siehe [Anleitung für Forschende](researcher-guidance.md).
 
 ### Inhalt dieses Leitfadens
 
 * **[Anleitung](guidance.md)** — Einstieg und fachliche Hinweise.
-* **Konformität** — die MII-weiten Konformitätsregeln (Anforderungssprache, Must-Support, Umgang mit fehlenden Daten) pflegt zentral das [MII-Meta-Modul](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance); die modul-spezifischen Aspekte zu [Sicherheit und Datenschutz](security-and-privacy.md) sind Teil dieses Leitfadens.
+* **Konformität** — die KDS-weiten Konformitätsregeln (Anforderungssprache, Must-Support, Umgang mit fehlenden Daten) pflegt zentral das [Meta-Modul](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance); die modul-spezifischen Aspekte zu [Sicherheit und Datenschutz](security-and-privacy.md) sind Teil dieses Leitfadens.
 * **[Profile](profiles.md)** und die weiteren **[Artefakt-Seiten](artifacts.md)** — die technischen Artefakte.
 * **[Beispiele](examples.md)** — Beispielinstanzen.
 

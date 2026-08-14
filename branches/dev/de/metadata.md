@@ -7,7 +7,7 @@
 
  Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfaden verfasst wurde. Informationen zu diesen Übersetzungen und Anweisungen zum Abgeben von Feedback zu den Übersetzungen finden Sie [hier](translationinfo.md). 
 
-> **Optionale Seite (0..1).** Das MII-Modulmenü führt diese Seite als **optional** — behalten Sie sie nur, wenn die Profile Ihres Moduls die hier dokumentierten Metadaten-Charakteristiken aufweisen (wie z. B. das Basis-Modul). Entscheiden Sie für Ihr Modul: Seite **behalten** — Inhalte ausfüllen und dieses Banner samt `OPTIONAL-PAGE`-Marker-Kommentar löschen (in dieser Datei UND in der englischen Quellseite) — oder Seite **entfernen**, nach der Schritt-für-Schritt-Anleitung in [`docs/optional-pages.md`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/optional-pages.md) dieses Repositories. Ein Release darf dieses Banner nicht enthalten (Konventions-Check M9).
+> **Optionale Seite (0..1).** Das KDS-Modulmenü führt diese Seite als **optional** — behalten Sie sie nur, wenn die Profile Ihres Moduls die hier dokumentierten Metadaten-Charakteristiken aufweisen (wie z. B. das Basis-Modul). Entscheiden Sie für Ihr Modul: Seite **behalten** — Inhalte ausfüllen und dieses Banner samt `OPTIONAL-PAGE`-Marker-Kommentar löschen (in dieser Datei UND in der englischen Quellseite) — oder Seite **entfernen**, nach der Schritt-für-Schritt-Anleitung in [`docs/optional-pages.md`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/optional-pages.md) dieses Repositories. Ein Release darf dieses Banner nicht enthalten (Konventions-Check M9).
 
 ### Metadaten-Übersicht
 
@@ -15,7 +15,7 @@ Diese Seite beschreibt die maschinenlesbaren Metadaten des Moduls **Module Templ
 
 Das Metadatenmodell folgt dem [Canonical Resource Management Infrastructure Implementation Guide](https://hl7.org/fhir/uv/crmi/STU2/en/index.html) (CRMI). CRMI beschreibt, wie Wissensartefakte über ihren gesamten Lebenszyklus hinweg konsistent ausgetauscht werden — von der Autorenschaft über Veröffentlichung und Verteilung bis zur Implementierung. Dieser Leitfaden verwendet die CRMI-Profile, -Extensions und -Manifest-Mechanismen, die für die Veröffentlichung eines MII-Kerndatensatz-Moduls als versionierter FHIR-Implementierungsleitfaden nützlich sind.
 
-Das Vorgehen ist vorläufig: Es hält den derzeit genutzten CRMI-Ansatz fest und kann angepasst werden, wenn CRMI reift, sich der MII-Veröffentlichungsprozess weiterentwickelt und die FAIR-Bewertung von FHIR-Leitfäden konkreter wird.
+Das Vorgehen ist vorläufig: Es hält den derzeit genutzten CRMI-Ansatz fest und kann angepasst werden, wenn CRMI reift, sich der KDS-Veröffentlichungsprozess weiterentwickelt und die FAIR-Bewertung von FHIR-Leitfäden konkreter wird.
 
 #### Geltungsbereich
 
@@ -25,7 +25,7 @@ Die Metadaten sind in den erzeugten FHIR-Ressourcen einsehbar, insbesondere in d
 
 #### Abdeckung des CRMI-Artefaktmanagements
 
-CRMI gliedert das Artefaktmanagement in Lebenszyklus-Phasen und begleitende Aspekte. Dieser Leitfaden setzt nicht jede CRMI-Fähigkeit um, sondern die Teile, die für die Veröffentlichung eines MII-Moduls unmittelbar nützlich sind.
+CRMI gliedert das Artefaktmanagement in Lebenszyklus-Phasen und begleitende Aspekte. Dieser Leitfaden setzt nicht jede CRMI-Fähigkeit um, sondern die Teile, die für die Veröffentlichung eines KDS-Moduls unmittelbar nützlich sind.
 
 | | | |
 | :--- | :--- | :--- |
@@ -55,7 +55,7 @@ Die folgenden CRMI-Metadaten werden in [`sushi-config.yaml`](https://github.com/
 | [Package Source](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-package-source.html) | Versions-Manifest; Paketierung; Verteilung | `ImplementationGuide.extension`(packageId, version, uri) | Deklariert das Paket, in dem ein Artefakt definiert ist, damit Auswertungsumgebungen Namensräume und Abhängigkeiten im vorgesehenen Kontext auflösen. |
 | [Resource Approval Date](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-resource-approvalDate.html) | Lebenszyklus; Veröffentlichung; Governance | `ImplementationGuide.extension`(`2027-01-01`) | Hält fest, wann der Herausgeber den Inhalt offiziell zur Nutzung freigegeben hat. |
 | [Resource Effective Period](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-resource-effectivePeriod.html) | Lebenszyklus; Veröffentlichung; Implementierung | `ImplementationGuide.extension`(Beginn`2027`) | Hält fest, für welchen Zeitraum der Inhalt gelten soll oder gegolten hat. |
-| [Artifact Author](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-author.html)[Artifact Editor](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-editor.html)[Artifact Reviewer](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-reviewer.html)[Artifact Endorser](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-endorser.html) | Veröffentlichung; Governance; Provenienz | `ImplementationGuide.extension` | Hält Autorenschaft, die für die innere Stimmigkeit verantwortliche Redaktion, die Reviewer und die offiziell befürwortenden Gremien fest. Bei einem MII-Modul sind Redaktion, Reviewer und befürwortende Gremien die MII-Governance-Gremien. |
+| [Artifact Author](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-author.html)[Artifact Editor](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-editor.html)[Artifact Reviewer](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-reviewer.html)[Artifact Endorser](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-endorser.html) | Veröffentlichung; Governance; Provenienz | `ImplementationGuide.extension` | Hält Autorenschaft, die für die innere Stimmigkeit verantwortliche Redaktion, die Reviewer und die offiziell befürwortenden Gremien fest. Bei einem KDS-Modul sind Redaktion, Reviewer und befürwortende Gremien die Governance-Gremien des Kerndatensatz-Prozesses. |
 
 In diesem Gerüst nicht aktiviert, aber als auskommentierte Blöcke in `sushi-config.yaml` vorbereitet:
 
@@ -103,7 +103,7 @@ Die mitgelieferten Beispielinstanzen zeigen FAIR-relevante FHIR-Strukturen für 
 | :--- | :--- | :--- | :--- |
 | F1 | RDA-F1-01M | Metadaten sind über einen persistenten Identifikator identifiziert | Kanonische`url`-Werte, die Paket-Id`de.medizininformatikinitiative.kerndatensatz.template`, die Paketversion und`package-source`. Die Persistenz hängt von der Veröffentlichungs-Governance ab. |
 | F1 | RDA-F1-01D | Daten sind über einen persistenten Identifikator identifiziert | Bei den Beispielen:`Resource.id`,`Bundle.identifier`,`identifier`-Elemente und`Bundle.entry.fullUrl`zeigen das Muster, sind aber keine persistenten Daten-PIDs. Produktive Daten benötigen persistente fachliche Identifikatoren aus den implementierenden Systemen. |
-| F1 | RDA-F1-02M | Metadaten sind über einen global eindeutigen Identifikator identifiziert | Global gültige kanonische`url`-Werte und die Paket-Id innerhalb der kontrollierten MII-Namensräume. |
+| F1 | RDA-F1-02M | Metadaten sind über einen global eindeutigen Identifikator identifiziert | Global gültige kanonische`url`-Werte und die Paket-Id innerhalb der kontrollierten KDS-Namensräume. |
 | F1 | RDA-F1-02D | Daten sind über einen global eindeutigen Identifikator identifiziert | Bei den Beispielen:`identifier.system`+`identifier.value`zeigen die global eindeutige Identifikation. Produktiv hängt sie von kontrollierten Namensräumen und lokaler Governance ab. |
 | F2 | RDA-F2-01M | Reichhaltige Metadaten ermöglichen das Auffinden | CRMI-Shareable-/Publishable-Profile,`purpose`,`artifact-usage`,`artifact-topic`,`resource-approvalDate`,`resource-effectivePeriod`, Beitragende und`package-source`. |
 | F3 | RDA-F3-01M | Metadaten enthalten den Identifikator der Daten | Artefakt-Metadaten und Artefakt-Identifikatoren stehen gemeinsam in denselben FHIR-Ressourcen und im Paket. |
@@ -118,7 +118,7 @@ Die mitgelieferten Beispielinstanzen zeigen FAIR-relevante FHIR-Strukturen für 
 | A2 | RDA-A2-01M | Metadaten bleiben verfügbar, auch wenn die Daten es nicht mehr sind | Versionierte Veröffentlichung, herunterladbares Paket, Versionshistorie und kanonische Artefakte. Langfristige Zusagen hängen von der Veröffentlichungs-Governance ab. |
 | R1 | RDA-R1-01M | Eine Vielzahl zutreffender, relevanter Attribute ermöglicht die Nachnutzung | CRMI-Profile,`purpose`,`artifact-usage`,`artifact-topic`,`resource-approvalDate`,`resource-effectivePeriod`,`artifact-versionPolicy`,`package-source`und Beitragende. |
 | R1.1 | RDA-R1.1-01M | Metadaten enthalten Lizenzinformationen | Die Lizenz`CC-BY-4.0`auf Leitfaden-Ebene, der Copyright-Hinweis und die Paket-Metadaten. Nutzungsbedingungen produktiver klinischer Daten kommen von den Datenhaltenden. |
-| R1.3 | RDA-R1.3-01M | Metadaten entsprechen einem Community-Standard | FHIR R4, die CRMI-Profile, die MII-Veröffentlichungskonventionen und die Metadaten kanonischer Ressourcen. |
+| R1.3 | RDA-R1.3-01M | Metadaten entsprechen einem Community-Standard | FHIR R4, die CRMI-Profile, die KDS-Veröffentlichungskonventionen und die Metadaten kanonischer Ressourcen. |
 | R1.3 | RDA-R1.3-01D | Daten entsprechen einem Community-Standard | Die Beispiele deklarieren die Profile dieses Moduls. Produktiv muss die Konformität gegen Profile, Bindings und CapabilityStatement-Erwartungen validiert werden. |
 | R1.3 | RDA-R1.3-02M | Metadaten sind gemäß einem Community-Standard maschinenverständlich | CRMI-konforme FHIR-Metadaten als JSON/XML und als FHIR-Paket im NPM-Format des IG-Publisher-Ökosystems. |
 

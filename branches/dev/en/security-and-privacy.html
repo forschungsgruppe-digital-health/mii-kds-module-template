@@ -141,7 +141,7 @@
      must link to a REAL page (href="#" is rejected by the template's menu QA);
      only one sub-menu level is supported.
 
-     STRUCTURE: this menu implements the MII-agreed module menu (see
+     STRUCTURE: this menu implements the TF-KDS-agreed module menu (see
      docs/page-structure.md for the full structure with cardinalities).
      Entries marked OPTIONAL (0..1) below may be removed per module — the
      removal procedure per entry is in docs/optional-pages.md in this
@@ -156,7 +156,7 @@
        Model artifacts yet, so on the scaffold preview #2 lands on the nearest
        following section — re-check the anchor once your module's artifact set
        is real (docs/page-structure.md, "Positional anchor").
-     - The four Conformance entries point at the MII-wide conformance rules of
+     - The four Conformance entries point at the KDS-wide conformance rules of
        the Meta module (kerndatensatz-meta). INTERIM: the Meta module has no
        published IG rendering yet (only a CI build with no conformance pages),
        so these link to the authoritative meta-wiki sections; switch them to
@@ -177,7 +177,7 @@
     </ul>
   </li>
   <li class="dropdown">
-    <!-- The parent and the first four entries link to the MII-wide conformance
+    <!-- The parent and the first four entries link to the KDS-wide conformance
          rules of the Meta module (INTERIM: meta-wiki; see header note). -->
     <a data-toggle="dropdown" href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance" class="dropdown-toggle">Conformance<b class="caret"> </b></a>
     <ul class="dropdown-menu">
@@ -295,9 +295,9 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
 <!-- markdownlint-disable MD041 -->
 <!-- English rendering of input/pagecontent/security-and-privacy.md.
-     Structured in the MII-agreed THREE stages: (1) the MII overarching data
-     protection concept, (2) DIMP in the MII data portal, (3) the
-     module-specific aspects. Stages 1 and 2 are static MII-wide content —
+     Structured in the TF-KDS-agreed THREE stages: (1) the overarching data
+     protection concept, (2) DIMP in the data portal, (3) the
+     module-specific aspects. Stages 1 and 2 are static overarching content —
      keep them; stage 3 is where your module writes. Stage 3's CONTENT is
      optional: a module with no aspects of its own adopts the default text in
      the section. The Person example box is illustrative only and MUST be
@@ -310,14 +310,15 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 the FHIR core specification —
 <a href="https://build.fhir.org/secpriv-module.html">Security &amp; Privacy Module</a> and the
 <a href="https://build.fhir.org/security.html">security checklist</a>. This page does not
-repeat them; it links the MII-wide data protection framework and states what is
+repeat them; it links the overarching data protection framework and states what is
 <strong>specific to this module</strong>.</p>
 
-<h4 id="1-the-mii-data-protection-concept">1. The MII data protection concept</h4>
+<h4 id="1-the-overarching-data-protection-concept">1. The overarching data protection concept</h4>
 
 <p>The
 <a href="https://www.medizininformatik-initiative.de/en/data-protection-concept">overarching data protection concept of the Medical Informatics Initiative</a>
-governs how patient data may be processed for research across the MII: it
+governs how patient data may be processed for research across the network of
+Data Integration Centers: it
 covers the legal basis (the MII Broad Consent), the roles of the Data
 Integration Centers and Use &amp; Access Committees, and the cross-site application
 scenarios (feasibility queries, distributed analyses, data and biosample
@@ -329,7 +330,7 @@ this guide adds no processing purpose of its own.</p>
 <p>How data leaving a Data Integration Center is de-identified in practice is
 specified by
 <a href="https://medizininformatik-initiative.github.io/dataportal/data-node/DIMP.html">DIMP (De-Identification — Minimisation — Pseudonymisation)</a>
-in the MII data portal documentation: direct identifiers are removed,
+in the data portal documentation: direct identifiers are removed,
 data elements not needed by the approved project are dropped, and identifying
 values are replaced by project-specific pseudonyms (FHIR Pseudonymizer
 configuration). The profiles of this module describe data <em>before</em> DIMP is
@@ -345,7 +346,7 @@ whole section body becomes the following default text (delete the example and
 TODO boxes below and adopt it verbatim):</p>
 
 <blockquote>
-  <p>Beyond the MII-wide framework above — the overarching data protection
+  <p>Beyond the overarching framework above — the overarching data protection
 concept, the Broad Consent it rests on, and DIMP — this module carries no
 data category that raises security or privacy aspects of its own, and it
 places no module-specific security or privacy requirements on implementers.</p>
@@ -396,7 +397,7 @@ or adopt the default text above if there are none.]</p>
 
           IG © 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.netzwerk-universitaetsmedizin.de">NUM-DIZ</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Fri, Aug 14, 2026 10:36+0000">2026-08-14</span>
+          Generated <span title="Fri, Aug 14, 2026 11:08+0000">2026-08-14</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- Branding override for the fhir2.base.template footer fragment.

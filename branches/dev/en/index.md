@@ -32,13 +32,13 @@ Data Integration Centers (DIC), software developers and system architects buildi
 
 ##### Researchers
 
-Scientists using MII data for medical research.
+Scientists using KDS data for medical research.
  → see [Guidance for Researchers](researcher-guidance.md).
 
 ### Contents
 
 * **[Guidance](guidance.md)** — getting started and domain notes.
-* **Conformance** — the MII-wide conformance rules (requirements language, Must Support, handling missing data) are maintained centrally by the [MII Meta module](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance); the module-specific [Security and Privacy](security-and-privacy.md) considerations are part of this guide.
+* **Conformance** — the KDS-wide conformance rules (requirements language, Must Support, handling missing data) are maintained centrally by the [Meta module](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance); the module-specific [Security and Privacy](security-and-privacy.md) considerations are part of this guide.
 * **[Profiles](profiles.md)** and the further **[artifact pages](artifacts.md)** — the technical artifacts.
 * **[Examples](examples.md)** — example instances.
 

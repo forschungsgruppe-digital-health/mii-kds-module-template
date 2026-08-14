@@ -172,7 +172,7 @@ This material derives from the HL7 Terminology (THO). THO is copyright &copy;198
         </td>
         <td>
 
-              <!-- Eltern-Eintrag und die ersten vier Einträge verlinken die MII-weiten
+              <!-- Eltern-Eintrag und die ersten vier Einträge verlinken die KDS-weiten
          Konformitätsregeln des Meta-Moduls (INTERIM: Meta-Wiki; siehe
          Quell-Menü). -->
 
@@ -267,7 +267,7 @@ Konformität<b class="caret"> </b>          </a>
 .  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 basiert auf           <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>
 .
-          Erstellt           <span title="Fri, Aug 14, 2026 10:36+0000">2026-08-14</span>
+          Erstellt           <span title="Fri, Aug 14, 2026 11:08+0000">2026-08-14</span>
 
                     <br/>
 
@@ -474,7 +474,7 @@ Moduls           <strong>Module Template</strong>
  fest, die neueste Version zuerst. Sie folgt
           <a href="https://keepachangelog.com/de/1.1.0/">Keep a Changelog</a>
  und dem
-MII-CalVer-Schema, das die Seite           <a href="version-history.html">Versionierung</a>
+KDS-CalVer-Schema, das die Seite           <a href="version-history.html">Versionierung</a>
 
 beschreibt.
         </td>
@@ -488,7 +488,7 @@ beschreibt.
         </td>
         <td>
           <strong>Optionale Seite (0..1).</strong>
- Das MII-Modulmenü führt diese Seite als
+ Das KDS-Modulmenü führt diese Seite als
           <em>optional</em>
 . Entscheiden Sie für Ihr Modul: Seite           <strong>behalten</strong>
  — Inhalte
@@ -515,7 +515,7 @@ Repositories. Ein Release darf dieses Banner nicht enthalten
  CodeSystem-Ressourcen externer Terminologien (z. B. ICD-10-GM, OPS,
 SNOMED CT) werden in diesem Modul           <strong>nicht</strong>
  publiziert, sondern über den
-MII-Terminologieserver (SU-TermServ) bezogen:
+zentralen KDS-Terminologieserver (SU-TermServ) bezogen:
           <a href="https://mii-termserv.de/">https://mii-termserv.de/</a>
 .
         </td>
@@ -546,8 +546,8 @@ positionsabhängig — siehe           <a href="https://github.com/medizininform
           <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">github.com</a>
         </td>
         <td>
-Für die MII-weiten Konformitätsanforderungen siehe die
-          <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">Konformitätsregeln des MII-Meta-Moduls</a>
+Für die KDS-weiten Konformitätsanforderungen siehe die
+          <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">Konformitätsregeln des Meta-Moduls</a>
 ;
 für die technischen Artefakte siehe           <a href="profiles.html">Profile</a>
 .
@@ -562,9 +562,9 @@ für die technischen Artefakte siehe           <a href="profiles.html">Profile</
         </td>
         <td>
           <strong>Konformität</strong>
- — die MII-weiten Konformitätsregeln (Anforderungssprache,
+ — die KDS-weiten Konformitätsregeln (Anforderungssprache,
 Must-Support, Umgang mit fehlenden Daten) pflegt zentral das
-          <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">MII-Meta-Modul</a>
+          <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">Meta-Modul</a>
 ;
 die modul-spezifischen Aspekte zu
           <a href="security-and-privacy.html">Sicherheit und Datenschutz</a>
@@ -670,7 +670,7 @@ Dieses Werk ist lizenziert unter der
         </td>
         <td>
           <strong>Optionale Seite (0..1).</strong>
- Das MII-Modulmenü führt diese Seite als
+ Das KDS-Modulmenü führt diese Seite als
           <em>optional</em>
  — behalten Sie sie nur, wenn die Profile Ihres Moduls die hier
 dokumentierten Metadaten-Charakteristiken aufweisen (wie z. B. das
@@ -885,7 +885,8 @@ NUM-DIZ.           <a href="https://www.netzwerk-universitaetsmedizin.de">NUM-DI
 Das
           <a href="https://www.medizininformatik-initiative.de/de/datenschutzkonzept">übergreifende Datenschutzkonzept der Medizininformatik-Initiative</a>
 
-regelt, wie Patientendaten MII-weit für die Forschung verarbeitet werden
+regelt, wie Patientendaten über das Netz der Datenintegrationszentren hinweg
+für die Forschung verarbeitet werden
 dürfen: die Rechtsgrundlage (der Broad Consent der MII), die Rollen der
 Datenintegrationszentren und der Use-&amp;-Access-Committees sowie die
 standortübergreifenden Anwendungsszenarien (Machbarkeitsanfragen, verteilte
@@ -906,7 +907,7 @@ Wie Daten, die ein Datenintegrationszentrum verlassen, praktisch
 de-identifiziert werden, spezifiziert
           <a href="https://medizininformatik-initiative.github.io/dataportal/data-node/DIMP.html">DIMP (De-Identification — Minimisation — Pseudonymisation)</a>
 
-in der Dokumentation des MII-Datenportals: direkte Identifikatoren werden
+in der Dokumentation des Datenportals: direkte Identifikatoren werden
 entfernt, vom genehmigten Projekt nicht benötigte Datenelemente entfallen, und
 identifizierende Werte werden durch projektspezifische Pseudonyme ersetzt
 (FHIR-Pseudonymizer-Konfiguration). Die Profile dieses Moduls beschreiben die
@@ -944,7 +945,7 @@ unter           <code class="language-plaintext highlighter-rouge">input/transla
         </td>
         <td>
 Releases folgen dem
-          <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow">MII Module Release Workflow</a>
+          <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow">Module Release Workflow</a>
 :
 Die Version wird im Release-Branch angehoben, der Changelog-Eintrag geschrieben,
 die Validierungs-Workflows laufen auf dem Release-Pull-Request, und nach dem
@@ -982,7 +983,7 @@ Merge wird das Release getaggt.
         </td>
         <td>
 
-              <!-- The parent and the first four entries link to the MII-wide conformance
+              <!-- The parent and the first four entries link to the KDS-wide conformance
          rules of the Meta module (INTERIM: meta-wiki; see header note). -->
 
               <a data-toggle="dropdown" href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance" class="dropdown-toggle">
@@ -1076,7 +1077,7 @@ Conformance<b class="caret"> </b>          </a>
 .  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 based on           <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>
 .
-          Generated           <span title="Fri, Aug 14, 2026 10:36+0000">2026-08-14</span>
+          Generated           <span title="Fri, Aug 14, 2026 11:08+0000">2026-08-14</span>
 
                     <br/>
 
@@ -1270,7 +1271,7 @@ This page records the changes between the released versions of the
           <strong>Module Template</strong>
  module, newest version first. It follows
           <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a>
- and the MII calendar
+ and the KDS calendar
 versioning scheme described on the           <a href="version-history.html">Versioning</a>
  page.
         </td>
@@ -1284,7 +1285,7 @@ versioning scheme described on the           <a href="version-history.html">Vers
         </td>
         <td>
           <strong>Optional page (0..1).</strong>
- The MII module menu lists this page as           <em>optional</em>
+ The KDS module menu lists this page as           <em>optional</em>
 .
 Decide for your module:           <strong>keep</strong>
  it — fill it in and delete this banner and
@@ -1310,7 +1311,7 @@ check M9).
  CodeSystem resources of external terminologies (e.g. ICD-10-GM,
 OPS, SNOMED CT) are           <strong>not</strong>
  published in this module; they are obtained from the
-MII terminology service (SU-TermServ):
+central KDS terminology service (SU-TermServ):
           <a href="https://mii-termserv.de/">https://mii-termserv.de/</a>
 .
         </td>
@@ -1341,8 +1342,8 @@ positional — see           <a href="https://github.com/medizininformatik-initi
           <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">github.com</a>
         </td>
         <td>
-For the MII-wide conformance requirements see the
-          <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">Conformance rules of the MII Meta module</a>
+For the KDS-wide conformance requirements see the
+          <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">Conformance rules of the Meta module</a>
 ;
 for the technical artifacts see           <a href="profiles.html">Profiles</a>
 .
@@ -1357,9 +1358,9 @@ for the technical artifacts see           <a href="profiles.html">Profiles</a>
         </td>
         <td>
           <strong>Conformance</strong>
- — the MII-wide conformance rules (requirements language,
+ — the KDS-wide conformance rules (requirements language,
 Must Support, handling missing data) are maintained centrally by the
-          <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">MII Meta module</a>
+          <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">Meta module</a>
 ;
 the module-specific           <a href="security-and-privacy.html">Security and Privacy</a>
 
@@ -1463,7 +1464,7 @@ This work is licensed under the
         </td>
         <td>
           <strong>Optional page (0..1).</strong>
- The MII module menu lists this page as           <em>optional</em>
+ The KDS module menu lists this page as           <em>optional</em>
  —
 keep it only when your module's profiles carry the metadata characteristics
 it documents (as, for example, the Base module does). Decide for your module:
@@ -1636,7 +1637,8 @@ this page.
 The
           <a href="https://www.medizininformatik-initiative.de/en/data-protection-concept">overarching data protection concept of the Medical Informatics Initiative</a>
 
-governs how patient data may be processed for research across the MII: it
+governs how patient data may be processed for research across the network of
+Data Integration Centers: it
 covers the legal basis (the MII Broad Consent), the roles of the Data
 Integration Centers and Use &amp; Access Committees, and the cross-site application
 scenarios (feasibility queries, distributed analyses, data and biosample
@@ -1656,7 +1658,7 @@ How data leaving a Data Integration Center is de-identified in practice is
 specified by
           <a href="https://medizininformatik-initiative.github.io/dataportal/data-node/DIMP.html">DIMP (De-Identification — Minimisation — Pseudonymisation)</a>
 
-in the MII data portal documentation: direct identifiers are removed,
+in the data portal documentation: direct identifiers are removed,
 data elements not needed by the approved project are dropped, and identifying
 values are replaced by project-specific pseudonyms (FHIR Pseudonymizer
 configuration). The profiles of this module describe data           <em>before</em>
@@ -1693,7 +1695,7 @@ as the English page); resource translations are           <code class="language-
         </td>
         <td>
 Releases follow the
-          <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow">MII Module Release Workflow</a>
+          <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow">Module Release Workflow</a>
 :
 the version is raised in the release branch, the changelog entry is written, the
 validation workflows run on the release pull request, and the release is tagged

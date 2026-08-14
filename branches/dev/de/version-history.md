@@ -9,7 +9,7 @@
 
 #### Versionsschema
 
-Das Modul **Module Template** folgt dem MII-Schema der Kalender-Versionierung (CalVer) in einer SemVer-kompatiblen numerischen Form:
+Das Modul **Module Template** folgt dem KDS-Schema der Kalender-Versionierung (CalVer) in einer SemVer-kompatiblen numerischen Form:
 
 * Format **`JJJJ.MINOR.PATCH[-label]`** — die aktuelle Version ist `2027.0.0-draft.1`;
 * **`JJJJ`** — das Jahr, in dem der Leitfaden gilt und genutzt werden soll; es tritt an die Stelle der Major-Version;
@@ -27,7 +27,7 @@ Alle veröffentlichten FHIR-Artefakte im Paket tragen dieselbe Version wie der L
 
 #### Release-Prozess
 
-Releases folgen dem [MII Module Release Workflow](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow): Die Version wird im Release-Branch angehoben, der Changelog-Eintrag geschrieben, die Validierungs-Workflows laufen auf dem Release-Pull-Request, und nach dem Merge wird das Release getaggt.
+Releases folgen dem [Module Release Workflow](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow): Die Version wird im Release-Branch angehoben, der Changelog-Eintrag geschrieben, die Validierungs-Workflows laufen auf dem Release-Pull-Request, und nach dem Merge wird das Release getaggt.
 
 #### Versionshistorie und Änderungen
 
@@ -43,5 +43,5 @@ Ab der zweiten **formalen Publikation** veröffentlicht dieser Leitfaden zusätz
 
 **Die Demonstration unten** (nur in der Vorschau dieses Vorlagen-Repositories) zeigt dieselbe Art Bericht, bevor eine formale Publikation existiert: Der Build vergleicht sich mit der vorherigen `dev`-Vorschau über das `-compare`-Kommando des FHIR-Validators und veröffentlicht das Ergebnis unter `comparison-demo/index.html`. Die Repository-Variable `ENABLE_VERSION_COMPARISON=false` schaltet das gesamte Feature ab — den Publisher-Vergleich in allen Build-Workflows ebenso wie diese Demonstration; ein erstelltes Modul rendert die Demonstration nie.
 
-> [TODO: Falls Ihr Modul über das MII-Schema hinaus eine eigene Versionierungs-Politik hat — etwa einen Unterstützungszeitraum für ältere Versionen oder eine Abkündigungs-Politik für Profile —, beschreiben Sie sie hier. Löschen Sie diesen Hinweis anschließend.]
+> [TODO: Falls Ihr Modul über das KDS-Schema hinaus eine eigene Versionierungs-Politik hat — etwa einen Unterstützungszeitraum für ältere Versionen oder eine Abkündigungs-Politik für Profile —, beschreiben Sie sie hier. Löschen Sie diesen Hinweis anschließend.]
 
