@@ -7,10 +7,12 @@ Moduls **{{MODULE_TITLE}}**.
 
 ### Allgemeine Umsetzungshinweise
 
-* **[Datensätze und Beschreibungen](artifacts.html#2)** — die Datenelemente des
-  Moduls, beschrieben als logische Modelle in der Artefakt-Übersicht. (Dies ist
-  ein Link in die generierte Artefakt-Liste, keine eigene Seite; der Anker ist
-  positionsabhängig — siehe [`docs/page-structure.md`](https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/docs/page-structure.md) in diesem Repository.)
+* **[Datensätze und Beschreibungen](artifacts.html#strukturen-logische-modelle)**
+  — die Datenelemente des Moduls, beschrieben als logische Modelle in der
+  Artefakt-Übersicht. (Ein Link in die generierte Artefakt-Liste, keine eigene
+  Seite. Der benannte Anker wird im Browser aus der Abschnittsüberschrift
+  erzeugt — stabil gegenüber dem Artefakt-Mix, anders als die numerischen
+  Positionsanker; siehe [`docs/page-structure.md`](https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/docs/page-structure.md) in diesem Repository.)
 * **[UML-Diagramme](uml-diagrams.html)** — visuelle Darstellung der Datenmodelle
   und ihrer Beziehungen.
 
