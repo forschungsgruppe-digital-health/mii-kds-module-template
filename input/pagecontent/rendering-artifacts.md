@@ -19,14 +19,14 @@ This page shows a working example of **every directive that runs without error
 in this scaffold**. Each block gives the source line first, then what it
 produces. Copy the line, change the artifact name, delete the page.
 
-<div class="ig-highlight ig-highlight-blue">
+<div class="mii-highlight mii-highlight-blue">
 <h5>What this page is</h5>
 A live demonstration shipped with the module scaffold. Read the source of this
 page next to the rendering, copy what you need, then delete the page.
 <strong>The step-by-step version is</strong>
-<code>docs/recipes/render-existing-artifacts.md</code> in this repository
+<a href="https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/docs/recipes/render-existing-artifacts.md"><code>docs/recipes/render-existing-artifacts.md</code></a> in this repository
 (rendered pages deliberately do not link repository URLs — see
-<code>docs/open-tasks.md</code>). It lists every file to remove when you delete
+<a href="https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/docs/open-tasks.md"><code>docs/open-tasks.md</code></a>). It lists every file to remove when you delete
 this page.
 </div>
 
@@ -1122,7 +1122,7 @@ Add the artifact each one needs and the directive starts working — none of the
 is deprecated. The recipe explains where each is documented, and which are
 documented at all.
 
-<div class="ig-highlight ig-highlight-green">
+<div class="mii-highlight mii-highlight-green">
 <h5>Showing a directive without running it</h5>
 Two escapes appear above, because two engines run in sequence. The Publisher's
 own Liquid pass runs <em>before</em> Jekyll and claims eight keywords:
@@ -1143,7 +1143,7 @@ exclamation mark is a build error, because the Publisher leaves it alone and
 Jekyll cannot parse it.
 </div>
 
-<div class="ig-highlight ig-highlight-green">
+<div class="mii-highlight mii-highlight-green">
 <h5>Before you rely on any of this</h5>
 The three families in sections 1 to 3 are documented and stable. Several
 neighbouring mechanisms are not — some are implemented but appear in no

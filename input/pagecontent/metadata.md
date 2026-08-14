@@ -18,7 +18,7 @@
 > it documents (as, for example, the Base module does). Decide for your module:
 > **keep** it — fill it in and delete this banner and the `OPTIONAL-PAGE`
 > marker comment (in this file AND the German mirror) — or **remove** it,
-> following the per-entry procedure in `docs/optional-pages.md` of this
+> following the per-entry procedure in [`docs/optional-pages.md`](https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/docs/optional-pages.md) of this
 > repository. A release must not ship with this banner (convention check M9).
 {: .ig-highlight .ig-highlight-grey}
 
@@ -110,7 +110,7 @@ Not enabled in this scaffold, but prepared as commented blocks in
 > If your module also applies the CRMI shareable/publishable profiles to its own
 > StructureDefinitions, CapabilityStatements, CodeSystems and ValueSets — the
 > `kerndatensatz-basis` idiom is a shared `RuleSet` in
-> `input/fsh/rulesets/crmi.fsh` — add the corresponding rows here.]
+> [`input/fsh/rulesets/crmi.fsh`](https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/input/fsh/rulesets/crmi.fsh) — add the corresponding rows here.]
 {: .ig-highlight .ig-highlight-grey}
 
 ##### CodeSystem supplements

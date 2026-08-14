@@ -12,7 +12,7 @@ This section collects the domain guidance for implementing and using the
 * **[Datasets and Descriptions](artifacts.html#2)** — the module's data
   elements, described as logical models in the Artifacts Summary. (This is a
   link into the generated artifact list, not a page of its own; the anchor is
-  positional — see `docs/page-structure.md` in this repository.)
+  positional — see [`docs/page-structure.md`](https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/docs/page-structure.md) in this repository.)
 * **[UML Diagrams](uml-diagrams.html)** — visual representation of the data
   models and their relationships.
 
