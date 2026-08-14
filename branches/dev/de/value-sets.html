@@ -24,17 +24,18 @@
   	<link href="assets/css/cqf.css" rel="stylesheet" />
     <!-- Branding override for the fhir2.base.template CSS placeholder
      (base ships includes/fragment-css.html as a single comment; it is included
-     in <head> AFTER all base stylesheets, so the linked palettes win the
+     in <head> AFTER all base stylesheets, so the linked files win the
      cascade).
-     Brand switch: NUM-DIZ is the DEFAULT design. num-diz.css is linked AFTER
-     mii.css - re-theming the guide by overriding the same CSS custom
-     properties - unless the consuming IG ships input/data/brand.json with
-     { "design": "mii" } (read as site.data.brand.design via the base's
-     input/data -> _data pre-process). Only the exact value 'mii' selects the
+     Load model (docs/styleguide.md §1/§10): template-base.css carries the
+     brand-INDEPENDENT rule blocks and always loads; then EXACTLY ONE palette
+     file follows - num-diz.css, the DEFAULT design, unless the consuming IG
+     ships input/data/brand.json with { "design": "mii" } (read as
+     site.data.brand.design via the base's input/data -> _data pre-process),
+     which selects mii.css instead. Only the exact value 'mii' selects the
      MII design; anything else - including no brand.json at all and unknown
-     values - renders NUM-DIZ. mii.css stays unconditionally linked as the
-     variable base the NUM-DIZ palette overrides. See docs/styleguide.md §10. -->
-<link href="assets/css/mii.css" rel="stylesheet"/>
+     values - renders NUM-DIZ. Both palettes declare the same variable set
+     (scripts/brand-switch.test.mjs). -->
+<link href="assets/css/template-base.css" rel="stylesheet"/>
 
 <link href="assets/css/num-diz.css" rel="stylesheet"/>
 
@@ -338,7 +339,7 @@ Seite, wenn Ihr Modul keine definiert.]</p>
 
           IG © 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.netzwerk-universitaetsmedizin.de">NUM-DIZ</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Fri, Aug 14, 2026 08:42+0000">2026-08-14</span>
+          Erstellt <span title="Fri, Aug 14, 2026 09:44+0000">2026-08-14</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- Branding override for the fhir2.base.template footer fragment.
@@ -358,15 +359,17 @@ Seite, wenn Ihr Modul keine definiert.]</p>
      modules remain MII content. Both anchors are the SITE ROOTS with the bare
      domain as anchor text (TF-KDS feedback 2026-08-14: aligned anchor style;
      domains are language-neutral, styleguide §6).
-     Imprint: the MII website has separate German (/de/impressum) and English
-     (/en/legal-notice) imprint pages (both verified HTTP 200 on 2026-07-22). -->
+     Imprint: points at the NUM-DIZ website's legal pages since 2026-08-14
+     (TF-KDS: NUM-DIZ takes over from MII in 2027, so legal-aspect links use
+     the NUM-DIZ counterpart where one exists) - German /impressum and English
+     /en/legal-notice (both verified HTTP 200 on 2026-08-14). -->
 
           Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Inhaltsverzeichnis</a> |
                  <a style="color: var(--footer-hyperlink-text-color)" href="../qa.html">QA-Bericht</a>
                  
                  | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="https://www.netzwerk-universitaetsmedizin.de/">netzwerk-universitaetsmedizin.de</a>
                  | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="https://www.medizininformatik-initiative.de/">medizininformatik-initiative.de</a>
-                 | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="https://www.medizininformatik-initiative.de/de/impressum">Impressum</a>
+                 | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="https://www.netzwerk-universitaetsmedizin.de/impressum">Impressum</a>
 
           </span>
         </p>
