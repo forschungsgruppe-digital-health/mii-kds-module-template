@@ -9,7 +9,7 @@ Dieser Abschnitt bündelt die fachlichen Hinweise zur Umsetzung und Nutzung des 
 
 ### Allgemeine Umsetzungshinweise
 
-* **[Datensätze und Beschreibungen](artifacts.md#2)** — die Datenelemente des Moduls, beschrieben als logische Modelle in der Artefakt-Übersicht. (Dies ist ein Link in die generierte Artefakt-Liste, keine eigene Seite; der Anker ist positionsabhängig — siehe `docs/page-structure.md` in diesem Repository.)
+* **[Datensätze und Beschreibungen](artifacts.md#2)** — die Datenelemente des Moduls, beschrieben als logische Modelle in der Artefakt-Übersicht. (Dies ist ein Link in die generierte Artefakt-Liste, keine eigene Seite; der Anker ist positionsabhängig — siehe [`docs/page-structure.md`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/page-structure.md) in diesem Repository.)
 * **[UML-Diagramme](uml-diagrams.md)** — visuelle Darstellung der Datenmodelle und ihrer Beziehungen.
 
 ### Zielgruppenspezifische Hinweise

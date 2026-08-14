@@ -36,22 +36,29 @@
         8.12:1 on the white header container - AAA) */
   --ig-status-text-color: #485156;
 
-  /* 2. Navbar: NUM-DIZ slate #485156 (the dominant site color; white text
-        on it = 8.12:1, AAA). The site's own nav uses coral #ea5167, but
-        white on coral is 3.58:1 - fails AA - so coral stays decorative
-        (styleguide §10). */
-  --navbar-bg-color: #485156;
+  /* 2. Navbar: NUM-DIZ coral #ea5167 - the color the site's own nav carries
+        (TF-KDS feedback 2026-08-14: the menu shall pick up the coral of the
+        header stripe instead of the slate grey). White text on coral is
+        3.58:1, which meets WCAG AA as LARGE text (>= 3:1): mii.css renders
+        the top-level navbar links 19px bold for exactly this reason (shared
+        typography block, styleguide §5a/§10). Dropdown items stay 14px and
+        never sit on coral - their surfaces (vars 6-12) all hold >= 4.5:1. */
+  --navbar-bg-color: #ea5167;
 
   /* 5. Decorative 8px top stripe: NUM-DIZ coral #ea5167 (site accent color;
-        carries no text) */
+        carries no text). Same coral as the navbar below it since 2026-08-14 -
+        stripe and menu deliberately merge into one coral band under the white
+        header. */
   --stripe-bg-color: #ea5167;
 
-  /* 6-8. Menu buttons: hover = slate-blue #5c6f7e (the combo logo's wordmark
-        fill, class .st1 of logo-num-diz-de.svg; white on it = 5.21:1, AA);
-        active = site mid grey #706f6f (white on it = 5.01:1, AA); button
-        text white (base #e6e6e6 would drop below AA on hover/active). */
-  --btn-hover-color: #5c6f7e;
-  --btn-active-color: #706f6f;
+  /* 6-8. Menu buttons: hover = NUM-DIZ slate #485156 (the dominant site
+        color; white on it = 8.12:1, AAA); active = slate-blue #5c6f7e (the
+        combo logo's wordmark fill, class .st1 of logo-num-diz-de.svg; white
+        on it = 5.21:1, AA). Both darken decisively against the coral bar -
+        the site's own mid grey #706f6f read muddy on coral and was dropped.
+        Button text white (base #e6e6e6 would drop below AA on hover/active). */
+  --btn-hover-color: #485156;
+  --btn-active-color: #5c6f7e;
   --btn-text-color: #ffffff;
 
   /* 9-12. Selected/hovered dropdown-item gradient: slate-blue -> slate (both

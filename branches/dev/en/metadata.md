@@ -5,7 +5,7 @@
 
 ## Metadata Overview
 
-> **Optional page (0..1).** The MII module menu lists this page as **optional** — keep it only when your module's profiles carry the metadata characteristics it documents (as, for example, the Base module does). Decide for your module: **keep** it — fill it in and delete this banner and the `OPTIONAL-PAGE` marker comment (in this file AND the German mirror) — or **remove** it, following the per-entry procedure in `docs/optional-pages.md` of this repository. A release must not ship with this banner (convention check M9).
+> **Optional page (0..1).** The MII module menu lists this page as **optional** — keep it only when your module's profiles carry the metadata characteristics it documents (as, for example, the Base module does). Decide for your module: **keep** it — fill it in and delete this banner and the `OPTIONAL-PAGE` marker comment (in this file AND the German mirror) — or **remove** it, following the per-entry procedure in [`docs/optional-pages.md`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/optional-pages.md) of this repository. A release must not ship with this banner (convention check M9).
 
 ### Metadata Overview
 
@@ -60,7 +60,7 @@ Not enabled in this scaffold, but prepared as commented blocks in `sushi-config.
 * [Artifact Related Artifact](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-relatedArtifact.html) — a literature citation for the module.
 * [CQF Expansion Parameters](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-cqf-expansionParameters.html) together with a [CRMI Manifest Parameters](https://hl7.org/fhir/uv/crmi/STU2/en/StructureDefinition-crmi-manifestparameters.html) resource and the `path-expansion-params` / `pin-manifest` parameters.
 
-> [TODO: Enable the blocks your module needs and then update the tables above. If your module also applies the CRMI shareable/publishable profiles to its own StructureDefinitions, CapabilityStatements, CodeSystems and ValueSets — the `kerndatensatz-basis` idiom is a shared `RuleSet` in `input/fsh/rulesets/crmi.fsh` — add the corresponding rows here.]
+> [TODO: Enable the blocks your module needs and then update the tables above. If your module also applies the CRMI shareable/publishable profiles to its own StructureDefinitions, CapabilityStatements, CodeSystems and ValueSets — the `kerndatensatz-basis` idiom is a shared `RuleSet` in [`input/fsh/rulesets/crmi.fsh`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/input/fsh/rulesets/crmi.fsh) — add the corresponding rows here.]
 
 ##### CodeSystem supplements
 

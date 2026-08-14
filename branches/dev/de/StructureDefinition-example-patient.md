@@ -228,8 +228,8 @@ Weitere Repräsentationen des Profils: [CSV](../StructureDefinition-example-pati
   },
   "status" : "active",
   "experimental" : false,
-  "date" : "2026-08-14T05:35:38+00:00",
-  "publisher" : "Medical Informatics Initiative (MII)",
+  "date" : "2026-08-14T08:34:32+00:00",
+  "publisher" : "NUM-DIZ",
   "_publisher" : {
     "extension" : [{
       "extension" : [{
@@ -238,16 +238,16 @@ Weitere Repräsentationen des Profils: [CSV](../StructureDefinition-example-pati
       },
       {
         "url" : "content",
-        "valueString" : "Medizininformatik-Initiative (MII)"
+        "valueString" : "NUM-DIZ"
       }],
       "url" : "http://hl7.org/fhir/StructureDefinition/translation"
     }]
   },
   "contact" : [{
-    "name" : "Medical Informatics Initiative (MII)",
+    "name" : "NUM-DIZ",
     "telecom" : [{
       "system" : "url",
-      "value" : "https://www.medizininformatik-initiative.de"
+      "value" : "https://www.netzwerk-universitaetsmedizin.de"
     }]
   }],
   "description" : "Minimal example profile shipped with the template so that a newly created module renders a complete IG immediately. Not an MII artifact — replace it with your module's profiles.",

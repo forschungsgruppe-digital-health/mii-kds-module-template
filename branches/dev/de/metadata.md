@@ -7,7 +7,7 @@
 
  Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfaden verfasst wurde. Informationen zu diesen Übersetzungen und Anweisungen zum Abgeben von Feedback zu den Übersetzungen finden Sie [hier](translationinfo.md). 
 
-> **Optionale Seite (0..1).** Das MII-Modulmenü führt diese Seite als **optional** — behalten Sie sie nur, wenn die Profile Ihres Moduls die hier dokumentierten Metadaten-Charakteristiken aufweisen (wie z. B. das Basis-Modul). Entscheiden Sie für Ihr Modul: Seite **behalten** — Inhalte ausfüllen und dieses Banner samt `OPTIONAL-PAGE`-Marker-Kommentar löschen (in dieser Datei UND in der englischen Quellseite) — oder Seite **entfernen**, nach der Schritt-für-Schritt-Anleitung in `docs/optional-pages.md` dieses Repositories. Ein Release darf dieses Banner nicht enthalten (Konventions-Check M9).
+> **Optionale Seite (0..1).** Das MII-Modulmenü führt diese Seite als **optional** — behalten Sie sie nur, wenn die Profile Ihres Moduls die hier dokumentierten Metadaten-Charakteristiken aufweisen (wie z. B. das Basis-Modul). Entscheiden Sie für Ihr Modul: Seite **behalten** — Inhalte ausfüllen und dieses Banner samt `OPTIONAL-PAGE`-Marker-Kommentar löschen (in dieser Datei UND in der englischen Quellseite) — oder Seite **entfernen**, nach der Schritt-für-Schritt-Anleitung in [`docs/optional-pages.md`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/optional-pages.md) dieses Repositories. Ein Release darf dieses Banner nicht enthalten (Konventions-Check M9).
 
 ### Metadaten-Übersicht
 
@@ -62,7 +62,7 @@ In diesem Gerüst nicht aktiviert, aber als auskommentierte Blöcke in `sushi-co
 * [Artifact Related Artifact](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-relatedArtifact.html) — eine Literaturangabe zum Modul.
 * [CQF Expansion Parameters](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-cqf-expansionParameters.html) zusammen mit einer [CRMI-Manifest-Parameters](https://hl7.org/fhir/uv/crmi/STU2/en/StructureDefinition-crmi-manifestparameters.html)-Ressource und den Parametern `path-expansion-params` / `pin-manifest`.
 
-> [TODO: Aktivieren Sie die für Ihr Modul nötigen Blöcke und ziehen Sie die Tabellen oben nach. Wenn Ihr Modul die CRMI-Shareable-/Publishable-Profile zusätzlich auf seine eigenen StructureDefinitions, CapabilityStatements, CodeSysteme und ValueSets anwendet — das Idiom aus `kerndatensatz-basis` ist ein gemeinsames `RuleSet` in `input/fsh/rulesets/crmi.fsh` —, ergänzen Sie die entsprechenden Zeilen.]
+> [TODO: Aktivieren Sie die für Ihr Modul nötigen Blöcke und ziehen Sie die Tabellen oben nach. Wenn Ihr Modul die CRMI-Shareable-/Publishable-Profile zusätzlich auf seine eigenen StructureDefinitions, CapabilityStatements, CodeSysteme und ValueSets anwendet — das Idiom aus `kerndatensatz-basis` ist ein gemeinsames `RuleSet` in [`input/fsh/rulesets/crmi.fsh`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/input/fsh/rulesets/crmi.fsh) —, ergänzen Sie die entsprechenden Zeilen.]
 
 ##### CodeSystem-Supplements
 

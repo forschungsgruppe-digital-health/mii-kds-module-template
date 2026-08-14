@@ -162,7 +162,7 @@
   "status" : "active",
   "experimental" : false,
   "date" : "2027-01-01",
-  "publisher" : "Medical Informatics Initiative (MII)",
+  "publisher" : "NUM-DIZ",
   "_publisher" : {
     "extension" : [{
       "extension" : [{
@@ -171,16 +171,16 @@
       },
       {
         "url" : "content",
-        "valueString" : "Medizininformatik-Initiative (MII)"
+        "valueString" : "NUM-DIZ"
       }],
       "url" : "http://hl7.org/fhir/StructureDefinition/translation"
     }]
   },
   "contact" : [{
-    "name" : "Medical Informatics Initiative (MII)",
+    "name" : "NUM-DIZ",
     "telecom" : [{
       "system" : "url",
-      "value" : "https://www.medizininformatik-initiative.de"
+      "value" : "https://www.netzwerk-universitaetsmedizin.de"
     }]
   }],
   "description" : "Self-check build of the mii-kds-module-template scaffold. This repository is a template for creating a new MII KDS module Implementation Guide, or a migration target for an existing Simplifier MII IG. Every value here is a placeholder — replace them all when you create a real module.",
