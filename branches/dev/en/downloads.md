@@ -5,8 +5,6 @@
 
 ## Downloads
 
-### Downloads
-
 This page links the downloadable artifacts of the **Module Template** module.
 
 #### Package file

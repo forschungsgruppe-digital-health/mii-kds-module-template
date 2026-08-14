@@ -5,8 +5,6 @@
 
 ## Versioning
 
-### Versioning
-
 #### Version scheme
 
 The **Module Template** module follows the MII calendar-versioning (CalVer) scheme in a SemVer-compatible numeric form:

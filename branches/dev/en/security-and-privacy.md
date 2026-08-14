@@ -5,8 +5,6 @@
 
 ## Security and Privacy
 
-### Security and Privacy
-
 This section addresses security and privacy experts. General requirements are in the FHIR core specification — [Security & Privacy Module](https://build.fhir.org/secpriv-module.html) and the [security checklist](https://build.fhir.org/security.html). This page does not repeat them; it links the MII-wide data protection framework and states what is **specific to this module**.
 
 #### 1. The MII data protection concept

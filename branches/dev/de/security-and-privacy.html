@@ -24,14 +24,19 @@
   	<link href="assets/css/cqf.css" rel="stylesheet" />
     <!-- Branding override for the fhir2.base.template CSS placeholder
      (base ships includes/fragment-css.html as a single comment; it is included
-     in <head> AFTER all base stylesheets, so mii.css wins the cascade).
-     Brand switch: when the consuming IG ships input/data/brand.json with
-     { "design": "num-diz" } (read as site.data.brand.design via the base's
-     input/data -> _data pre-process), num-diz.css is linked AFTER mii.css and
-     re-themes the guide by overriding the same CSS custom properties. An
-     unset or unknown value loads mii.css alone - the MII design is the safe
-     default. See docs/styleguide.md §10. -->
+     in <head> AFTER all base stylesheets, so the linked palettes win the
+     cascade).
+     Brand switch: NUM-DIZ is the DEFAULT design. num-diz.css is linked AFTER
+     mii.css - re-theming the guide by overriding the same CSS custom
+     properties - unless the consuming IG ships input/data/brand.json with
+     { "design": "mii" } (read as site.data.brand.design via the base's
+     input/data -> _data pre-process). Only the exact value 'mii' selects the
+     MII design; anything else - including no brand.json at all and unknown
+     values - renders NUM-DIZ. mii.css stays unconditionally linked as the
+     variable base the NUM-DIZ palette overrides. See docs/styleguide.md §10. -->
 <link href="assets/css/mii.css" rel="stylesheet"/>
+
+<link href="assets/css/num-diz.css" rel="stylesheet"/>
 
 
 
@@ -69,9 +74,9 @@
      strings are hard-coded.
      Brand handling: the project logo additionally switches on
      site.data.brand.design (input/data/brand.json in the consuming IG, see
-     docs/styleguide.md §10). Only the exact value 'num-diz' selects the
-     NUM-DIZ logos - anything else, including no brand.json at all, falls
-     through to the MII default.
+     docs/styleguide.md §10). Only the exact value 'mii' selects the MII
+     logos - anything else, including no brand.json at all, falls through to
+     the NUM-DIZ default.
      Two logos, mirroring kerndatensatz-basis: the HL7 FHIR logo (links to the
      FHIR spec) in #family-nav, and the project logo in #project-nav.
      fhir-logo-www.png is shipped by fhir2.base.template
@@ -84,9 +89,9 @@
 </div>
 <div id="project-nav">
 
-  <a id="project-logo" no-external="true" href="https://www.medizininformatik-initiative.de/">
+  <a id="project-logo" no-external="true" href="https://www.netzwerk-universitaetsmedizin.de/forschung/num-diz">
 
-    <img height="50" alt="Medizininformatik-Initiative (MII)" src="assets/images/logo-de.svg"/>
+    <img height="50" alt="NUM-DIZ (Netzwerk Universitätsmedizin — Datenintegrationszentrum)" src="assets/images/logo-num-diz-de.svg"/>
 
   </a>
 
@@ -137,7 +142,7 @@
     <ul class="dropdown-menu">
       <li><a href="guidance.html">Anleitung</a></li>
       <!-- OPTIONAL (0..1) — siehe docs/optional-pages.md -->
-      <li><a href="researcher-guidance.html">Anleitung für Forschende</a></li>
+      <li><a href="researcher-guidance.html">Anleitung für Forschende (optional)</a></li>
       <li><a href="implementer-guidance.html">Anleitung für Implementierende</a></li>
       <!-- Nur-Link-Eintrag: Abschnitt "Logische Modelle" der Artefakt-Übersicht -->
       <li><a href="artifacts.html#2">Datensätze und Beschreibungen</a></li>
@@ -163,17 +168,17 @@
       <li><a href="artifacts.html">Artefakt-Übersicht</a></li>
       <li><a href="profiles.html">Profile</a></li>
       <!-- OPTIONAL (0..1) — siehe docs/optional-pages.md -->
-      <li><a href="extensions.html">Extensions</a></li>
+      <li><a href="extensions.html">Extensions (optional)</a></li>
       <li><a href="capability-statements.html">CapabilityStatements</a></li>
       <!-- OPTIONAL (0..1) — siehe docs/optional-pages.md -->
-      <li><a href="search-parameters.html">Suchparameter</a></li>
+      <li><a href="search-parameters.html">Suchparameter (optional)</a></li>
       <!-- OPTIONAL (0..1) — siehe docs/optional-pages.md -->
-      <li><a href="operations.html">Operationen</a></li>
+      <li><a href="operations.html">Operationen (optional)</a></li>
       <li><a href="logical-models.html">Logische Modelle</a></li>
       <!-- OPTIONAL (0..1) — siehe docs/optional-pages.md -->
-      <li><a href="value-sets.html">ValueSets</a></li>
+      <li><a href="value-sets.html">ValueSets (optional)</a></li>
       <!-- OPTIONAL (0..1) — siehe docs/optional-pages.md -->
-      <li><a href="code-systems.html">CodeSystems</a></li>
+      <li><a href="code-systems.html">CodeSystems (optional)</a></li>
       <li><a href="examples.html">Beispiele</a></li>
       <li><a href="rendering-artifacts.html">Artefakt-Rendering (Demo — bitte löschen)</a></li>
     </ul>
@@ -186,7 +191,7 @@
     <a data-toggle="dropdown" href="version-history.html" class="dropdown-toggle">Metadaten<b class="caret"> </b></a>
     <ul class="dropdown-menu">
       <!-- OPTIONAL (0..1) — siehe docs/optional-pages.md -->
-      <li><a href="metadata.html">Metadaten-Übersicht</a></li>
+      <li><a href="metadata.html">Metadaten-Übersicht (optional)</a></li>
       <li><a href="version-history.html">Versionierung</a></li>
     </ul>
   </li>
@@ -275,8 +280,6 @@ Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfade
      Inhalt — behalten; Stufe 3 füllt Ihr Modul aus. Beide Sprachfassungen
      müssen dasselbe aussagen. -->
 
-<h3 id="sicherheit-und-datenschutz">Sicherheit und Datenschutz</h3>
-
 <p>Dieser Abschnitt richtet sich an Sicherheits- und Datenschutz-Fachleute.
 Allgemeine Anforderungen stehen in der FHIR-Kernspezifikation —
 <a href="https://build.fhir.org/secpriv-module.html">Security &amp; Privacy Module</a> und die
@@ -329,7 +332,7 @@ Re-Identifizierung führen lassen, und der Geltungsbereich eines Pseudonyms
 respektieren.</li>
 </ul>
 
-<blockquote class="mii-highlight mii-highlight-grey">
+<blockquote class="ig-highlight ig-highlight-grey">
   <p>[TODO: Nennen Sie die spezifischen Aspekte Ihres Moduls — die geführten
 Datenkategorien und ihre Sensibilität, Risiken, die eine Pseudonymisierung
 auf Profilebene nicht abdeckt, sowie sicherheits- oder datenschutzbezogene
@@ -363,7 +366,7 @@ Systemdesign, im Betrieb oder per Policy behandelt werden müssen.]</p>
 
           IG © 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.medizininformatik-initiative.de">Medical Informatics Initiative (MII)</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Thu, Aug 13, 2026 19:50+0000">2026-08-13</span>
+          Erstellt <span title="Fri, Aug 14, 2026 02:40+0000">2026-08-14</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- Branding override for the fhir2.base.template footer fragment.

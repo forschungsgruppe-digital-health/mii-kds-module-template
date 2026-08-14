@@ -6,8 +6,6 @@
 
 ## Guidance for Implementers
 
-### Guidance for Implementers
-
 Technical guidance for DIC implementers on implementing the profiles of the **Module Template** module (ETL from primary systems, FHIR API, validation).
 
 > [TODO: Describe the technical implementation steps for your module.]
