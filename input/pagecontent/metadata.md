@@ -13,7 +13,7 @@
      the page per docs/optional-pages.md when you don't. The convention check
      (M9) fails a release while this marker is present. -->
 
-> **Optional page (0..1).** The MII module menu lists this page as *optional* —
+> **Optional page (0..1).** The KDS module menu lists this page as *optional* —
 > keep it only when your module's profiles carry the metadata characteristics
 > it documents (as, for example, the Base module does). Decide for your module:
 > **keep** it — fill it in and delete this banner and the `OPTIONAL-PAGE`
@@ -38,7 +38,7 @@ extensions and manifest mechanisms that are useful for publishing an MII core
 dataset module as a versioned FHIR implementation guide.
 
 The approach is preliminary: it records the CRMI-based metadata currently used
-and may be refined as CRMI matures, as the MII publication process evolves, and
+and may be refined as CRMI matures, as the KDS publication process evolves, and
 as FAIR assessment of FHIR implementation guides becomes more concrete.
 
 #### Scope
@@ -59,7 +59,7 @@ the JSON and XML representations linked from each artifact page and in the
 
 CRMI organises artifact management into lifecycle phases and supporting
 concerns. This guide does not implement every CRMI capability; it applies the
-parts that are directly useful for publishing an MII module.
+parts that are directly useful for publishing a KDS module.
 
 | CRMI area | Used in this guide | Purpose |
 | --- | --- | --- |
@@ -94,7 +94,7 @@ and ends up in the generated `ImplementationGuide` resource.
 | [Package Source](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-package-source.html) | Version manifest; packaging; distribution | `ImplementationGuide.extension` (packageId, version, uri) | Declares the package in which an artifact is defined, so evaluation environments resolve namespaces and dependencies in the intended scope. |
 | [Resource Approval Date](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-resource-approvalDate.html) | Artifact lifecycle; publishing; governance | `ImplementationGuide.extension` (`{{APPROVAL_DATE}}`) | Records the date on which the publisher officially approved the content for use. |
 | [Resource Effective Period](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-resource-effectivePeriod.html) | Artifact lifecycle; publishing; implementation | `ImplementationGuide.extension` (start `{{CALVER_YEAR}}`) | Records the period during which the content is planned to be, or has been, effective. |
-| [Artifact Author](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-author.html)<br/>[Artifact Editor](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-editor.html)<br/>[Artifact Reviewer](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-reviewer.html)<br/>[Artifact Endorser](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-endorser.html) | Publishing; governance; provenance | `ImplementationGuide.extension` | Records the author, the editor responsible for internal coherence, the reviewers, and the bodies that officially endorse the release. For an MII module the editor, reviewers and endorsers are the MII governance bodies. |
+| [Artifact Author](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-author.html)<br/>[Artifact Editor](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-editor.html)<br/>[Artifact Reviewer](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-reviewer.html)<br/>[Artifact Endorser](http://hl7.org/fhir/extensions/5.3.0/StructureDefinition-artifact-endorser.html) | Publishing; governance; provenance | `ImplementationGuide.extension` | Records the author, the editor responsible for internal coherence, the reviewers, and the bodies that officially endorse the release. For a KDS module the editor, reviewers and endorsers are the governance bodies of the core-dataset process. |
 
 Not enabled in this scaffold, but prepared as commented blocks in
 `sushi-config.yaml`:
@@ -198,7 +198,7 @@ asserted to be a persistently identified FAIR dataset.
 | --- | --- | --- | --- |
 | F1 | RDA-F1-01M | Metadata is identified by a persistent identifier | Canonical `url` values, the package id `de.medizininformatikinitiative.kerndatensatz.{{MODULE_SLUG}}`, the package version and `package-source`. Persistence depends on publication governance. |
 | F1 | RDA-F1-01D | Data is identified by a persistent identifier | For the examples: `Resource.id`, `Bundle.identifier`, resource `identifier` elements and `Bundle.entry.fullUrl` demonstrate the pattern; they are not asserted as persistent data PIDs. Production data must be given persistent business identifiers by the implementing systems. |
-| F1 | RDA-F1-02M | Metadata is identified by a globally unique identifier | Globally scoped canonical `url` values and the package id, within the controlled MII namespaces. |
+| F1 | RDA-F1-02M | Metadata is identified by a globally unique identifier | Globally scoped canonical `url` values and the package id, within the controlled KDS namespaces. |
 | F1 | RDA-F1-02D | Data is identified by a globally unique identifier | For the examples: `identifier.system` + `identifier.value` demonstrate globally scoped identification. In production this depends on controlled identifier namespaces and local governance. |
 | F2 | RDA-F2-01M | Rich metadata is provided to allow discovery | CRMI shareable/publishable profiles, `purpose`, `artifact-usage`, `artifact-topic`, `resource-approvalDate`, `resource-effectivePeriod`, contributors and `package-source`. |
 | F3 | RDA-F3-01M | Metadata includes the identifier for the data | Artifact metadata and artifact identifiers travel together in the same FHIR resources and in the package. |
@@ -213,7 +213,7 @@ asserted to be a persistently identified FAIR dataset.
 | A2 | RDA-A2-01M | Metadata remains available after the data is gone | Versioned publication, downloadable package, version history and canonical artifacts. Long-term guarantees depend on publication governance. |
 | R1 | RDA-R1-01M | A plurality of accurate, relevant attributes is provided | CRMI profiles, `purpose`, `artifact-usage`, `artifact-topic`, `resource-approvalDate`, `resource-effectivePeriod`, `artifact-versionPolicy`, `package-source` and contributors. |
 | R1.1 | RDA-R1.1-01M | Metadata includes licence information | The guide-level `license: CC-BY-4.0`, the copyright notice and the package metadata. Reuse conditions for production clinical data must come from the data providers. |
-| R1.3 | RDA-R1.3-01M | Metadata complies with a community standard | FHIR R4, the CRMI profiles, the MII publication conventions and canonical resource metadata. |
+| R1.3 | RDA-R1.3-01M | Metadata complies with a community standard | FHIR R4, the CRMI profiles, the KDS publication conventions and canonical resource metadata. |
 | R1.3 | RDA-R1.3-01D | Data complies with a community standard | The examples declare this module's profiles. In production, conformance must be validated against the profiles, bindings and CapabilityStatement expectations. |
 | R1.3 | RDA-R1.3-02M | Metadata is machine-understandable per a community standard | CRMI-conformant FHIR metadata as JSON/XML and as a FHIR package in the NPM package format used by the IG Publisher ecosystem. |
 

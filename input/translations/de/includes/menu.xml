@@ -18,7 +18,7 @@
     </ul>
   </li>
   <li class="dropdown">
-    <!-- Eltern-Eintrag und die ersten vier Einträge verlinken die MII-weiten
+    <!-- Eltern-Eintrag und die ersten vier Einträge verlinken die KDS-weiten
          Konformitätsregeln des Meta-Moduls (INTERIM: Meta-Wiki; siehe
          Quell-Menü). -->
     <a data-toggle="dropdown" href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance" class="dropdown-toggle">Konformität<b class="caret"> </b></a>

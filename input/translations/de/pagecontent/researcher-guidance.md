@@ -3,7 +3,7 @@
      die Seite gemäß docs/optional-pages.md entfernen. Der Konventions-Check
      (M9) lässt ein Release mit diesem Marker fehlschlagen. -->
 
-> **Optionale Seite (0..1).** Das MII-Modulmenü führt diese Seite als
+> **Optionale Seite (0..1).** Das KDS-Modulmenü führt diese Seite als
 > *optional*. Entscheiden Sie für Ihr Modul: Seite **behalten** — Inhalte
 > ausfüllen und dieses Banner samt `OPTIONAL-PAGE`-Marker-Kommentar löschen (in
 > dieser Datei UND in der englischen Quellseite) — oder Seite **entfernen**,

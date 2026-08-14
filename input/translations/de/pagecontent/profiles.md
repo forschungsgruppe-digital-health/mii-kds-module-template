@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD041 -->
 <!-- Deutsche Übersetzung von input/pagecontent/profiles.md (aufgeteilt aus der
      früheren Kombi-Seite profiles-and-extensions.md gemäß der abgestimmten
-     MII-Menüstruktur — eine Seite je Artefakt-Typ). -->
+     TF-KDS-Menüstruktur — eine Seite je Artefakt-Typ). -->
 Diese Seite listet die FHIR-Profile des Moduls **{{MODULE_TITLE}}**. Als
 Ausgangspunkt liefert die Vorlage ein minimales Beispielprofil,
 [Example Patient](StructureDefinition-example-patient.html) — ersetzen Sie es

@@ -9,7 +9,7 @@
 
 #### Versionsschema
 
-Das Modul **{{MODULE_TITLE}}** folgt dem MII-Schema der Kalender-Versionierung
+Das Modul **{{MODULE_TITLE}}** folgt dem KDS-Schema der Kalender-Versionierung
 (CalVer) in einer SemVer-kompatiblen numerischen Form:
 
 * Format **`JJJJ.MINOR.PATCH[-label]`** — die aktuelle Version ist
@@ -40,7 +40,7 @@ Manifest-Parameter deklarieren, beschreibt die Seite
 #### Release-Prozess
 
 Releases folgen dem
-[MII Module Release Workflow](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow):
+[Module Release Workflow](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Module-Release-Workflow):
 Die Version wird im Release-Branch angehoben, der Changelog-Eintrag geschrieben,
 die Validierungs-Workflows laufen auf dem Release-Pull-Request, und nach dem
 Merge wird das Release getaggt.
@@ -87,7 +87,7 @@ Die Repository-Variable `ENABLE_VERSION_COMPARISON=false` schaltet das
 gesamte Feature ab — den Publisher-Vergleich in allen Build-Workflows ebenso
 wie diese Demonstration; ein erstelltes Modul rendert die Demonstration nie.
 
-> [TODO: Falls Ihr Modul über das MII-Schema hinaus eine eigene
+> [TODO: Falls Ihr Modul über das KDS-Schema hinaus eine eigene
 > Versionierungs-Politik hat — etwa einen Unterstützungszeitraum für ältere
 > Versionen oder eine Abkündigungs-Politik für Profile —, beschreiben Sie sie
 > hier. Löschen Sie diesen Hinweis anschließend.]
