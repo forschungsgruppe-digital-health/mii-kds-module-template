@@ -28,6 +28,6 @@ This section collects the domain guidance for implementing and using the
 {: .ig-highlight .ig-highlight-grey}
 
 ---
-For the MII-wide conformance requirements see the
-[Conformance rules of the MII Meta module](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance);
+For the KDS-wide conformance requirements see the
+[Conformance rules of the Meta module](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance);
 for the technical artifacts see [Profiles](profiles.html).

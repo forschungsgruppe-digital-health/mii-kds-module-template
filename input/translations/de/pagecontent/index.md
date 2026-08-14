@@ -41,16 +41,16 @@ Dieser Implementierungsleitfaden richtet sich an:
 
 <div class="ig-highlight ig-highlight-green">
 <h5>Forschende</h5>
-<p>Wissenschaftler:innen, die MII-Daten für die medizinische Forschung nutzen.<br/>
+<p>Wissenschaftler:innen, die KDS-Daten für die medizinische Forschung nutzen.<br/>
 → siehe <a href="researcher-guidance.html">Anleitung für Forschende</a>.</p>
 </div>
 
 ### Inhalt dieses Leitfadens
 
 - **[Anleitung](guidance.html)** — Einstieg und fachliche Hinweise.
-- **Konformität** — die MII-weiten Konformitätsregeln (Anforderungssprache,
+- **Konformität** — die KDS-weiten Konformitätsregeln (Anforderungssprache,
   Must-Support, Umgang mit fehlenden Daten) pflegt zentral das
-  [MII-Meta-Modul](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance);
+  [Meta-Modul](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance);
   die modul-spezifischen Aspekte zu
   [Sicherheit und Datenschutz](security-and-privacy.html) sind Teil dieses
   Leitfadens.

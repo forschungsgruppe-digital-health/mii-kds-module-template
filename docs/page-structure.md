@@ -1,6 +1,16 @@
-# Page structure — the agreed MII module menu (and who owns it)
+# Page structure — the agreed KDS module menu (and who owns it)
 
-**Ownership (Option A).** The MII module IG **page structure** — which pages
+> **"MII" naming policy.** MII funding ends 2026 and NUM-DIZ takes over, so
+> every MII mention may be re-evaluated. In page content, "MII" appears only
+> in **proper names and identifiers** (the *MII Core Dataset /
+> MII-Kerndatensatz*, the *MII Broad Consent*, the `MII_*` naming
+> conventions, package ids, canonical URLs, org/site links) and **past-tense
+> provenance**. Ongoing processes, scope and governance are phrased
+> time-robustly: "KDS-wide", "the Meta module", "the governance bodies of the
+> core-dataset process". Do not write MII as the acting institution of a
+> present-tense sentence. (Same rule in the IG template's styleguide §6.)
+
+**Ownership (Option A).** The KDS module IG **page structure** — which pages
 exist and the navigation menu — lives **here, in the module template**,
 alongside the page content. The IG template (`ig-template-mii-kds`) is
 **presentation-only** (header, footer, CSS, logo); it does not define or own
@@ -17,7 +27,7 @@ the page set.
 
 ## The agreed structure
 
-The menu implements the MII-agreed module menu structure (agreed in the
+The menu implements the TF-KDS-agreed module menu structure (agreed in the
 template discussion, 2026). **(1..1)** = mandatory in every module; **(0..1)**
 = optional, decided per module — see [optional-pages.md](optional-pages.md)
 for the decision checklist and the per-entry removal procedure.
@@ -36,7 +46,7 @@ for the decision checklist and the per-entry removal procedure.
 | — General Requirements | 1..1 | **link-only** → Meta module (interim: `Conformance#anforderungsdokumentation`) |
 | — Must Support | 1..1 | **link-only** → Meta module (interim: `Conformance#must-support-ms`) |
 | — Handling Missing Data | 1..1 | **link-only** → Meta module (interim: `Conformance#fehlende-daten`) |
-| — Security and Privacy | 1..1 | `security-and-privacy.html` (three-stage static content: MII data protection concept → DIMP → module-specific aspects; stage 3's CONTENT is optional — a module without own aspects adopts the section's default text, and the scaffold's highlighted *Person* example must be removed before the first release, gated by convention check M11) |
+| — Security and Privacy | 1..1 | `security-and-privacy.html` (three-stage static content: overarching data protection concept → DIMP → module-specific aspects; stage 3's CONTENT is optional — a module without own aspects adopts the section's default text, and the scaffold's highlighted *Person* example must be removed before the first release, gated by convention check M11) |
 | **Artifacts** | 1..1 | dropdown (parent → `artifacts.html`) |
 | — Artifacts Summary | 1..1 | `artifacts.html` (generated) |
 | — Profiles | 1..1 | `profiles.html` |
@@ -78,7 +88,7 @@ module's datasets (logical models) are listed. Two consequences:
   BOTH menu files and on `guidance.md`/its German mirror.
 
 **The Conformance cluster → the Meta module (INTERIM meta-wiki links).** The
-MII-wide conformance rules are maintained centrally in
+KDS-wide conformance rules are maintained centrally in
 [`kerndatensatz-meta`](https://github.com/medizininformatik-initiative/kerndatensatz-meta);
 per the agreed structure, modules link them instead of restating them. The Meta
 module currently has **no published IG rendering** (only a CI build without

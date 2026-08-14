@@ -38,16 +38,16 @@ standardized secondary use of routine clinical data for medical research.
 
 <div class="ig-highlight ig-highlight-green">
 <h5>Researchers</h5>
-<p>Scientists using MII data for medical research.<br/>
+<p>Scientists using KDS data for medical research.<br/>
 → see <a href="researcher-guidance.html">Guidance for Researchers</a>.</p>
 </div>
 
 ### Contents
 
 - **[Guidance](guidance.html)** — getting started and domain notes.
-- **Conformance** — the MII-wide conformance rules (requirements language,
+- **Conformance** — the KDS-wide conformance rules (requirements language,
   Must Support, handling missing data) are maintained centrally by the
-  [MII Meta module](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance);
+  [Meta module](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance);
   the module-specific [Security and Privacy](security-and-privacy.html)
   considerations are part of this guide.
 - **[Profiles](profiles.html)** and the further

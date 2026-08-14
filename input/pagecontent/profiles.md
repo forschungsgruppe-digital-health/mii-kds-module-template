@@ -1,5 +1,5 @@
 <!-- markdownlint-disable MD041 -->
-<!-- Split from the former combined profiles-and-extensions.md per the MII-agreed
+<!-- Split from the former combined profiles-and-extensions.md per the TF-KDS-agreed
      menu structure (one page per artifact type); naming convention from the
      meta wiki page "Namenskonventionen für FHIR-Ressourcen in der MII".
      German mirror: input/translations/de/pagecontent/profiles.md. -->
