@@ -113,10 +113,13 @@ permissions:
   id-token: write # deploy-pages OIDC
 
 concurrency:
-  # Serialize every writer of the gh-pages branch (previews, cleanup, the formal
-  # go-publish and this) so they never race. Queue, never cancel — a cancelled
-  # run mid-write could leave gh-pages half-updated.
-  group: gh-pages-writes
+  # OWN lane, not the shared gh-pages-writes group. In a shared group GitHub
+  # REPLACES a still-queued run whenever a newer one arrives (cancel-in-progress
+  # only protects running jobs) — measured three times: the post-release dev
+  # push enqueued an IG-preview run into gh-pages-writes and evicted the queued
+  # release demo. One demo at a time still holds via this group; write races on
+  # the gh-pages BRANCH are handled by the push retry below.
+  group: release-demo
   cancel-in-progress: false
 
 env:
@@ -454,7 +457,14 @@ jobs:
             echo "No demo changes to publish for ${TAG}."
           else
             git commit -m "chore: publish rendered demo for ${TAG}"
-            git push origin gh-pages
+            # gh-pages is written by several workflows in separate lanes now, so a
+            # concurrent push is possible: retry with a rebase pull, bounded.
+            for attempt in 1 2 3 4 5; do
+              if git push origin gh-pages; then break; fi
+              [ "$attempt" = "5" ] && { echo "::error::gh-pages push failed after 5 attempts"; exit 1; }
+              git pull --rebase origin gh-pages
+              sleep $(( attempt * 5 ))
+            done
           fi
 
           url="https://${GITHUB_REPOSITORY_OWNER}.github.io/${REPO#*/}/demo/${TAG}/"
