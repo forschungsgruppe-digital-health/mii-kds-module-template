@@ -15,12 +15,14 @@
      modules remain MII content. Both anchors are the SITE ROOTS with the bare
      domain as anchor text (TF-KDS feedback 2026-08-14: aligned anchor style;
      domains are language-neutral, styleguide §6).
-     Imprint: the MII website has separate German (/de/impressum) and English
-     (/en/legal-notice) imprint pages (both verified HTTP 200 on 2026-07-22). -->
-{% if include.lang == 'de' %}{% assign lbl_links = 'Links' %}{% assign lbl_toc = 'Inhaltsverzeichnis' %}{% assign lbl_qa = 'QA-Bericht' %}{% assign miiimprint = 'https://www.medizininformatik-initiative.de/de/impressum' %}{% assign lbl_imprint = 'Impressum' %}{% else %}{% assign lbl_links = 'Links' %}{% assign lbl_toc = 'Table of Contents' %}{% assign lbl_qa = 'QA Report' %}{% assign miiimprint = 'https://www.medizininformatik-initiative.de/en/legal-notice' %}{% assign lbl_imprint = 'Legal notice' %}{% endif %}
+     Imprint: points at the NUM-DIZ website's legal pages since 2026-08-14
+     (TF-KDS: NUM-DIZ takes over from MII in 2027, so legal-aspect links use
+     the NUM-DIZ counterpart where one exists) - German /impressum and English
+     /en/legal-notice (both verified HTTP 200 on 2026-08-14). -->
+{% if include.lang == 'de' %}{% assign lbl_links = 'Links' %}{% assign lbl_toc = 'Inhaltsverzeichnis' %}{% assign lbl_qa = 'QA-Bericht' %}{% assign imprinturl = 'https://www.netzwerk-universitaetsmedizin.de/impressum' %}{% assign lbl_imprint = 'Impressum' %}{% else %}{% assign lbl_links = 'Links' %}{% assign lbl_toc = 'Table of Contents' %}{% assign lbl_qa = 'QA Report' %}{% assign imprinturl = 'https://www.netzwerk-universitaetsmedizin.de/en/legal-notice' %}{% assign lbl_imprint = 'Legal notice' %}{% endif %}
           {{ lbl_links }}: <a style="color: var(--footer-hyperlink-text-color)" href="{{site.data.info.assets}}toc.html">{{ lbl_toc }}</a> |
                  <a style="color: var(--footer-hyperlink-text-color)" href="../qa.html">{{ lbl_qa }}</a>
                  {% for feedbacklink in site.data.features.feedback %}{% if feedbacklink.dashboard %} | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="{{feedbacklink.dashboard.url}}">{{feedbacklink.dashboard.label}}</a>{% endif %}{% endfor %}
                  | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="https://www.netzwerk-universitaetsmedizin.de/">netzwerk-universitaetsmedizin.de</a>
                  | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="https://www.medizininformatik-initiative.de/">medizininformatik-initiative.de</a>
-                 | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="{{ miiimprint }}">{{ lbl_imprint }}</a>
+                 | <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="{{ imprinturl }}">{{ lbl_imprint }}</a>

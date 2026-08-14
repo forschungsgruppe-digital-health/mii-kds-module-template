@@ -1,20 +1,16 @@
-/* mii.css - MII branding for de.medizininformatikinitiative.template
-   ====================================================================
+/* mii.css - the MII palette for de.medizininformatikinitiative.template
+   ======================================================================
 
-   COLOUR is set exclusively through the CSS custom properties that
-   fhir2.base.template (0.1.0) declares in content/assets/css/project.css
-   (":root" block, variables 1-32), so a branding change stays a one-file edit
-   and base-template updates keep working. The file is linked by
-   includes/fragment-css.html AFTER project.css, so this :root block wins the
-   cascade at equal specificity.
-
-   Below the :root block the file also carries five rule blocks that are not
-   about colour: the highlight boxes, the narrative-table styling, the content-
-   image handling, the structure-tabs spacing and the navbar link typography.
-   Three of them add NEW classes; the content-image and navbar blocks
-   deliberately override base rules. Each is explained
-   at its own block and listed in docs/styleguide.md sections 3, 5 and 5a. Keep
-   that list short - a base rule countermanded here stops receiving base fixes.
+   PALETTE FILE ONLY. This file declares CSS custom properties and nothing
+   else: the fhir2.base.template (0.1.0) variables from project.css (":root"
+   block, variables 1-32) plus the template's own --ig-table-* and
+   --ig-highlight-* variables consumed by the brand-independent rule blocks in
+   template-base.css. It is linked by includes/fragment-css.html ONLY when the
+   consuming IG selects the MII design with input/data/brand.json
+   { "design": "mii" }; the default build links num-diz.css instead - exactly
+   one palette per build (docs/styleguide.md §1/§10). Linked AFTER project.css
+   and template-base.css, so this :root block wins the cascade at equal
+   specificity.
 
    Every value is derived from an MII source - see docs/styleguide.md for the full
    palette table (exact source per color) and the WCAG contrast calculations.
@@ -96,98 +92,8 @@
         subtle functional band below the navbar. */
   --ig-header-color: #ffffff;
   --ig-header-container-color: #ffffff;
-}
 
-/* ── MII highlight boxes (background-colour highlight) ────────────────────────
-   Reusable, purpose-neutral highlight-box classes the template provides for
-   calling out content on a page. A page writes:
-     <div class="ig-highlight ig-highlight-blue"><h5>…</h5><p>…</p></div>
-     Variants: -blue, -green, -orange (warning), -red (important), -grey (hint).
-   The colours are the MII-aligned highlight backgrounds carried over from
-   kerndatensatz-basis. These are STYLING only — the template attaches no
-   semantics (e.g. "audience") to them; a module decides what each colour means. */
-.ig-highlight, .mii-highlight {
-  padding: 15px;
-  margin: 10px 0;
-  border-left: 5px solid;
-  border-radius: 3px;
-}
-.ig-highlight h5, .mii-highlight h5 {
-  margin-top: 0;
-}
-.ig-highlight-blue, .mii-highlight-blue {
-  background-color: #e8f4f8;
-  border-left-color: #5c8db3;
-}
-.ig-highlight-blue h5, .mii-highlight-blue h5 {
-  color: #406a99;
-}
-.ig-highlight-green, .mii-highlight-green {
-  background-color: #f0f8e8;
-  border-left-color: #91bc3d;
-}
-.ig-highlight-green h5, .mii-highlight-green h5 {
-  color: #5a6b2f;
-}
-/* The three below were added on top of the kerndatensatz-basis pair, with the
-   conventional reading orange = warning, red = important, grey = hint. Like
-   blue/green they are styling only — a module may repurpose them. All three
-   pass WCAG: h5 on background >= 6.1:1 (AA text), border on background >= 3:1
-   (1.4.11 non-text; the inherited green border sits below that — recorded
-   upstream trade-off, kept for parity with kerndatensatz-basis). */
-.ig-highlight-orange, .mii-highlight-orange {
-  background-color: #fdf3e7;
-  border-left-color: #c9721c;
-}
-.ig-highlight-orange h5, .mii-highlight-orange h5 {
-  color: #8a4b12;
-}
-.ig-highlight-red, .mii-highlight-red {
-  background-color: #fbeaea;
-  border-left-color: #c0392b;
-}
-.ig-highlight-red h5, .mii-highlight-red h5 {
-  color: #8f2318;
-}
-.ig-highlight-grey, .mii-highlight-grey {
-  background-color: #f2f3f5;
-  border-left-color: #7a8495; /* same slate as the narrative-table border */
-}
-.ig-highlight-grey h5, .mii-highlight-grey h5 {
-  color: #4a5260;
-}
-
-/* ── Narrative tables ─────────────────────────────────────────────────────────
-   The base template styles the IG Publisher's own tables (profile trees,
-   artifact indices, binding tables) but leaves markdown tables in page content
-   completely unstyled: no border, no header fill. kerndatensatz-basis works
-   around this per page with an inline <style> block, which is why its
-   /en/metadata.html has borders while its profile pages do not. Styling it here
-   instead means every module built from this template gets it, once.
-
-   WHY THE LONG `:not(...)` CHAIN — this is the load-bearing part, and the
-   obvious short version is wrong. `table:not([class])` alone is NOT safe: the
-   IG Publisher emits its profile snapshot/differential trees as tables that
-   carry NO class, only presentation attributes:
-
-     <table border="0" fhir="generated-heirarchy" cellpadding="0"
-            cellspacing="0" style="..." id="..." data-fhir="...">
-
-   Their inline `style` sits on the <table>, so it does not stop a stylesheet
-   rule from bordering their <td>s — which boxes every cell of the hierarchy
-   tree. What actually separates the two is that a markdown table has NO
-   attributes at all, while every generated one carries at least `style`.
-
-   Measured over every page of both built sites: the chain below matches 14
-   markdown tables and 0 generated tables; `:not([class])` alone would have hit
-   34 generated ones. Verified by simulating the selector against the built
-   HTML, not by reading the markup — see scripts/narrative-table-styles.test.mjs,
-   which re-runs that check against fixtures.
-
-   Loaded after the base stylesheets (see includes/fragment-css.html), so no
-   `!important` is needed. Colours are the documented MII palette (§3 of
-   docs/styleguide.md); contrast is recorded in §7. */
-:root {
+  /* Narrative tables (template-base.css, styleguide §5). */
   /* MII light background — the same site value as the breadcrumb fill. */
   --ig-table-header-bg-color: #ebedef;
   /* MII slate. Non-text contrast (WCAG 1.4.11) 3.78:1 on white and 3.22:1 on
@@ -195,75 +101,26 @@
   --ig-table-border-color: #7a8495;
   /* MII body text: 10.77:1 on the header fill. */
   --ig-table-header-text-color: #333333;
-}
-table:not([class]):not([style]):not([border]):not([data-fhir]) {
-  border-collapse: collapse;
-  margin-bottom: 10px;
-}
-table:not([class]):not([style]):not([border]):not([data-fhir]) th,
-table:not([class]):not([style]):not([border]):not([data-fhir]) td {
-  border: 1px solid var(--ig-table-border-color);
-  padding: 6px 10px;
-  vertical-align: top;
-}
-table:not([class]):not([style]):not([border]):not([data-fhir]) th {
-  background-color: var(--ig-table-header-bg-color);
-  color: var(--ig-table-header-text-color);
-  text-align: left;
-}
 
-/* ── Content images (issue #66) ──────────────────────────────────────────────
-   The base template floats every `p > img` (project.css: float + margins) and
-   caps no image width. For CONTENT images — diagrams, screenshots, the normal
-   Markdown image — that wraps body text beside the image and lets wide
-   diagrams overflow the column. Content images are therefore block-centered
-   and width-capped by default; a small inline image can opt back into the
-   base float with class="float" (raw HTML img). mii.css loads after the base
-   stylesheets, so these rules win the cascade. */
-#segment-content p > img:not(.float) {
-  float: none;
-  display: block;
-  margin: 0.5rem auto 1rem auto;
-}
-#segment-content img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* ── structure-tabs include ── spacing for the tabbed structure view ──────── */
-.structure-tabs { margin: 1rem 0; }
-.structure-tabs .tab-content {
-  border: 1px solid #ddd;
-  border-top: none;
-  padding: 0.75rem;
-  overflow-x: auto;
-}
-
-/* ── Navbar link typography (both brand designs) ─────────────────────────────
-   Top-level navbar links render as WCAG 2.1 "large text": >= 18.66px (14pt)
-   bold, at which 1.4.3 asks 3:1 instead of 4.5:1. This is what lets a brand
-   put a lighter corporate colour behind the navbar — the NUM-DIZ design uses
-   its coral #ea5167 (white on it = 3.58:1; TF-KDS feedback 2026-08-14) — while
-   dropdown ITEMS, which stay 14px, are excluded by the child combinator and
-   keep 4.5:1 surfaces (--btn-gradient-*). The horizontal padding drops
-   12px -> 10px to offset the wider glyphs so the longest top row (German:
-   Startseite … Änderungshistorie) still fits the 992-1199px container in one
-   row. Guarded by scripts/brand-switch.test.mjs, which ties the relaxed 3:1
-   navbar pair to this block's presence. */
-#segment-navbar .navbar-nav > li > a {
-  font-size: 19px;
-  font-weight: 700;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-/* DEPRECATED aliases (renamed 2026-08-14: brand-specific mii-* -> generic ig-*).
-   The --mii-table-* variables resolve to their --ig-table-* successors and the
-   .mii-highlight* selectors above remain as aliases so existing module content
-   keeps rendering for one deprecation window. New content uses ig-* only.
-   Remove the aliases in the next major. */
-:root {
-  --mii-table-border-color: var(--ig-table-border-color);
-  --mii-table-header-bg-color: var(--ig-table-header-bg-color);
-  --mii-table-header-text-color: var(--ig-table-header-text-color);
+  /* Highlight boxes (template-base.css, styleguide §3): the MII-aligned
+     values carried over from kerndatensatz-basis. Headings on their
+     backgrounds are >= 6.1:1 (AA); orange/red/grey borders >= 3.2:1 (WCAG
+     1.4.11 non-text). The inherited green border sits below the 3:1 non-text
+     bar — recorded upstream trade-off, kept for parity with
+     kerndatensatz-basis; do not copy that compromise into new variants. */
+  --ig-highlight-blue-bg-color: #e8f4f8;
+  --ig-highlight-blue-border-color: #5c8db3;
+  --ig-highlight-blue-heading-color: #406a99;
+  --ig-highlight-green-bg-color: #f0f8e8;
+  --ig-highlight-green-border-color: #91bc3d;
+  --ig-highlight-green-heading-color: #5a6b2f;
+  --ig-highlight-orange-bg-color: #fdf3e7;
+  --ig-highlight-orange-border-color: #c9721c;
+  --ig-highlight-orange-heading-color: #8a4b12;
+  --ig-highlight-red-bg-color: #fbeaea;
+  --ig-highlight-red-border-color: #c0392b;
+  --ig-highlight-red-heading-color: #8f2318;
+  --ig-highlight-grey-bg-color: #f2f3f5;
+  --ig-highlight-grey-border-color: #7a8495; /* same slate as the narrative-table border */
+  --ig-highlight-grey-heading-color: #4a5260;
 }
