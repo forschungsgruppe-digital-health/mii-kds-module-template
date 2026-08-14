@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.7.0...v0.8.0) (2026-08-14)
+
+
+### Features
+
+* **pages:** visible optional tags, duplicate-heading fix + M10 guard, ig-* prefix ([#98](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/98)) ([db797f3](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/db797f3b1dfb02a89bdfb55d5ed996348eab48c0))
+
 ## [0.7.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.6.1...v0.7.0) (2026-08-13)
 
 
