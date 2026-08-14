@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.1](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.10.0...v0.10.1) (2026-08-14)
+
+
+### Bug Fixes
+
+* **pages:** time-robust MII wording across all rendered pages; recorded naming policy ([c959b2e](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/c959b2eac5dd7338ae569153614a5fdb5011e53f))
+
 ## [0.10.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.9.1...v0.10.0) (2026-08-14)
 
 
