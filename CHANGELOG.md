@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.9.1...v0.10.0) (2026-08-14)
+
+
+### Features
+
+* **pages:** optional module-specific security section with default text; single highlighted example gated by M11 ([86fb1c1](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/86fb1c1f3ca074fff8d082a09880028f4c3c65e2))
+
 ## [0.9.1](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.9.0...v0.9.1) (2026-08-14)
 
 
