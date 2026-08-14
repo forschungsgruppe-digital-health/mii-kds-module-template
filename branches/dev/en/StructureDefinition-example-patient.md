@@ -182,7 +182,7 @@ Other representations of profile: [CSV](../StructureDefinition-example-patient.c
   },
   "status" : "active",
   "experimental" : false,
-  "date" : "2026-08-14T05:30:16+00:00",
+  "date" : "2026-08-14T05:35:38+00:00",
   "publisher" : "Medical Informatics Initiative (MII)",
   "_publisher" : {
     "extension" : [{
