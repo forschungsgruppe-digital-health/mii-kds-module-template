@@ -13,4 +13,4 @@ MII-Namenskonventionen). Die Extensions des Moduls stehen auf der Seite
 > [TODO: Beschreiben Sie die Profile Ihres Moduls und ihre Beziehungen
 > zueinander. Die technischen Detailseiten erzeugt der IG-Publisher
 > automatisch.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}

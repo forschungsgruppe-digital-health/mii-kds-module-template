@@ -1,13 +1,16 @@
 <!-- Branding override for the fhir2.base.template CSS placeholder
      (base ships includes/fragment-css.html as a single comment; it is included
-     in <head> AFTER all base stylesheets, so mii.css wins the cascade).
-     Brand switch: when the consuming IG ships input/data/brand.json with
-     { "design": "num-diz" } (read as site.data.brand.design via the base's
-     input/data -> _data pre-process), num-diz.css is linked AFTER mii.css and
-     re-themes the guide by overriding the same CSS custom properties. An
-     unset or unknown value loads mii.css alone - the MII design is the safe
-     default. See docs/styleguide.md §10. -->
+     in <head> AFTER all base stylesheets, so the linked palettes win the
+     cascade).
+     Brand switch: NUM-DIZ is the DEFAULT design. num-diz.css is linked AFTER
+     mii.css - re-theming the guide by overriding the same CSS custom
+     properties - unless the consuming IG ships input/data/brand.json with
+     { "design": "mii" } (read as site.data.brand.design via the base's
+     input/data -> _data pre-process). Only the exact value 'mii' selects the
+     MII design; anything else - including no brand.json at all and unknown
+     values - renders NUM-DIZ. mii.css stays unconditionally linked as the
+     variable base the NUM-DIZ palette overrides. See docs/styleguide.md §10. -->
 <link href="{{site.data.info.assets}}assets/css/mii.css" rel="stylesheet"/>
-{% if site.data.brand.design == 'num-diz' %}
+{% unless site.data.brand.design == 'mii' %}
 <link href="{{site.data.info.assets}}assets/css/num-diz.css" rel="stylesheet"/>
-{% endif %}
+{% endunless %}

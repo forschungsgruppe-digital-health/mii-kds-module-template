@@ -12,7 +12,7 @@
 > nach der Schritt-für-Schritt-Anleitung in `docs/optional-pages.md` dieses
 > Repositories. Ein Release darf dieses Banner nicht enthalten
 > (Konventions-Check M9).
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}
 
 ### Extensions
 
@@ -23,4 +23,4 @@ Profile, die sie verwenden, stehen auf der Seite [Profile](profiles.html).
 
 > [TODO: Listen und beschreiben Sie die Extensions Ihres Moduls — oder
 > entfernen Sie diese Seite, wenn Ihr Modul keine definiert.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}

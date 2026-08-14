@@ -12,7 +12,7 @@
 > **remove** it, following the per-entry procedure in `docs/optional-pages.md`
 > of this repository. A release must not ship with this banner (convention
 > check M9).
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}
 
 ### Operations
 
@@ -21,4 +21,4 @@ This page lists the FHIR operations defined by the **{{MODULE_TITLE}}** module
 
 > [TODO: List the operations with their invocation contexts — or remove this
 > page if your module defines none.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}

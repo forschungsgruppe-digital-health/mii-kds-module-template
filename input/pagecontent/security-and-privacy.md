@@ -7,7 +7,6 @@
      German mirror: input/translations/de/pagecontent/security-and-privacy.md —
      both files must say the same thing. -->
 
-### Security and Privacy
 
 This section addresses security and privacy experts. General requirements are in
 the FHIR core specification —
@@ -60,4 +59,4 @@ KDS modules of what belongs here:
 > cover, and any security- or privacy-related SHALL/SHOULD/MAY requirements
 > this module places on implementers, each with the risk it addresses. Name
 > residual risks that must be handled in system design, deployment or policy.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}

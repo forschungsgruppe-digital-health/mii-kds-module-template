@@ -14,6 +14,7 @@ single job from start to a checkable result.
 | [first-run setup of a new module](first-run-setup.md) | You just created your repository from the template |
 | [first build in the dev container](first-build-in-devcontainer.md) | You need a working toolchain without installing anything |
 | [create a new module](create-a-new-module.md) | You are filling in your module's metadata and first content |
+| [decide an optional page](remove-an-optional-page.md) | You are keeping or removing one of the seven optional (0..1) menu entries |
 
 ## Authoring content
 
@@ -26,6 +27,7 @@ single job from start to a checkable result.
 | [render existing artifacts in a page](render-existing-artifacts.md) | You want a profile, example or artifact table inline in your prose |
 | [add UML diagrams and other images](add-uml-diagrams.md) | A picture would explain it better |
 | [extend the translations](add-translation.md) | Menu, pages, footer or resource text needs a second language |
+
 
 ## Build, release and upkeep
 

@@ -12,7 +12,7 @@
 > **remove** it, following the per-entry procedure in `docs/optional-pages.md`
 > of this repository. A release must not ship with this banner (convention
 > check M9).
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}
 
 ### Extensions
 
@@ -23,4 +23,4 @@ the [Profiles](profiles.html) page.
 
 > [TODO: List and describe your module's extensions — or remove this page if
 > your module defines none.]
-{: .mii-highlight .mii-highlight-grey}
+{: .ig-highlight .ig-highlight-grey}
