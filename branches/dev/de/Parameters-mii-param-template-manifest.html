@@ -97,6 +97,20 @@
   </a>
 
 </div>
+<!-- Font-size control (A / A+ / A++): three reader-selectable levels; level A
+     is the untouched default. Logic in assets/js/font-size-control.js, the
+     zoom mapping + button styling in template-base.css ("font-size control"
+     block). Labels A/A+/A++ are language-neutral; only the aria texts switch
+     on include.lang. REMOVAL: delete this block, the js file and the CSS
+     block - one commit, styleguide §5a. -->
+
+<div class="ig-fontsize" role="group" aria-label="Schriftgröße">
+  <button type="button" data-level="0" aria-pressed="true" aria-label="Schriftgröße: Standard">A</button>
+  <button type="button" data-level="1" aria-pressed="false" aria-label="Schriftgröße: größer">A+</button>
+  <button type="button" data-level="2" aria-pressed="false" aria-label="Schriftgröße: am größten">A++</button>
+</div>
+
+<script src="assets/js/font-size-control.js" defer></script>
 
 
         <div id="ig-status">
@@ -203,11 +217,13 @@
               
 
 
+
+
 <div style="float: var(--ig-right);padding: 8px 0px;" id="language">
   <div id="select_flg" class="flaglist" style="background-image: url(assets/images/icon_arrow_down.png);background-position: 133px 3px;">
     <div><img class="flag" alt="flag en" src="assets/images/lang-de.png"/>Deutsch</div>
   </div>
-  <div style="float: var(--ig-right); margin: 2px 0px; padding: 1px 0;color: var(--btn-text-color);font-size:12px">Language:</div>
+  <div style="float: var(--ig-right); margin: 2px 0px; padding: 1px 0;color: var(--btn-text-color);font-size:12px">Sprache:</div>
  	<div id="flaglist" class="flaglist" style="display: none;position: absolute;right: 0;z-index: 100;background-image: url(assets/images/icon_arrow_up.png);background-position: 133px 3px;">
     <div><img class="flag" alt="flag de" src="assets/images/lang-de.png"/>Deutsch</div>
 
@@ -215,6 +231,7 @@
 
   </div>
 </div>
+
 
 
           </div>  <!-- /.container -->
@@ -327,7 +344,7 @@
 
           IG © 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.netzwerk-universitaetsmedizin.de">NUM-DIZ</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Sat, Aug 15, 2026 07:35+0000">2026-08-15</span>
+          Erstellt <span title="Sat, Aug 15, 2026 21:56+0000">2026-08-15</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- Branding override for the fhir2.base.template footer fragment.

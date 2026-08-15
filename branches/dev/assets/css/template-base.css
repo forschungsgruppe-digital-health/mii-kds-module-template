@@ -141,6 +141,63 @@ table:not([class]):not([style]):not([border]):not([data-fhir]) th {
   overflow-x: auto;
 }
 
+/* ── Font-size control (A / A+ / A++) ────────────────────────────────────────
+   Three reader-selectable levels wired by assets/js/font-size-control.js and
+   the .ig-fontsize block in includes/fragment-header.html.
+
+   LEVEL A IS THE UNTOUCHED DEFAULT: no data-fontsize attribute -> NO rule
+   fires and the page renders byte-identical to a build without this feature —
+   the per-reader revert. `zoom` (standardized in CSS Viewport; supported by
+   all current browsers incl. Firefox >= 126) is used instead of font-size
+   because the publisher-generated artifact tables carry INLINE px font sizes
+   (style="font-size: 11px") that no stylesheet font-size rule can reach —
+   zoom multiplies the computed rendering, inline styles included, and
+   reflows like browser zoom. Scaling is scoped to #segment-content so the
+   header/navbar/footer chrome keeps its fitted layout (incl. the German
+   menu's one-line constraint). Exactly ONE ancestor carries the zoom —
+   nested zooms would multiply. Print always renders at 100 %.
+
+   Button colors are palette variables, so both corporate designs style the
+   control from their own sourced values (resting: slate text on the white
+   header, >= 4.5:1 in both palettes; active: the status color under
+   --btn-text-color, 8.12:1 NUM-DIZ / 4.73:1 MII — both AA, styleguide §8).
+
+   REMOVAL (one commit): delete this block, assets/js/font-size-control.js
+   and the .ig-fontsize block in includes/fragment-header.html (§5a). */
+.ig-fontsize {
+  float: var(--ig-right);
+  display: flex;
+  gap: 3px;
+  margin: 4px 0 0 10px;
+}
+.ig-fontsize button {
+  font-family: inherit;
+  line-height: 1;
+  padding: 4px 7px;
+  background: transparent;
+  border: 1px solid var(--ig-status-text-color);
+  border-radius: 3px;
+  color: var(--ig-status-text-color);
+  cursor: pointer;
+}
+.ig-fontsize button[data-level="0"] { font-size: 12px; }
+.ig-fontsize button[data-level="1"] { font-size: 14px; }
+.ig-fontsize button[data-level="2"] { font-size: 16px; }
+.ig-fontsize button[aria-pressed="true"] {
+  background: var(--ig-status-text-color);
+  color: var(--btn-text-color);
+}
+.ig-fontsize button:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 1px;
+}
+html[data-fontsize="1"] #segment-content { zoom: 1.125; }
+html[data-fontsize="2"] #segment-content { zoom: 1.25; }
+@media print {
+  #segment-content { zoom: 1 !important; }
+  .ig-fontsize { display: none; }
+}
+
 /* DEPRECATED aliases (renamed 2026-08-14: brand-specific mii-* -> generic ig-*).
    The --mii-table-* variables resolve to their --ig-table-* successors and the
    .mii-highlight* selectors above remain as aliases so existing module content
