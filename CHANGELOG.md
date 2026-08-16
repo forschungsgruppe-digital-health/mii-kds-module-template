@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.4](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.10.3...v0.10.4) (2026-08-16)
+
+
+### Bug Fixes
+
+* re-vendor ig-template at v1.3.0 (accessibility set + HL7 attribution) ([0d95883](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/0d95883619e0bb193e8c5bf38cfcae5c15c1614c))
+
 ## [0.10.3](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.10.2...v0.10.3) (2026-08-14)
 
 
