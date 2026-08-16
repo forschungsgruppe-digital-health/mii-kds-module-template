@@ -114,3 +114,85 @@ recorded here so the reasoning survives the alert.
 | Date | Finding (CVE/GHSA + artifact) | Why accepted | Review by |
 |---|---|---|---|
 | _none yet_ | | | |
+
+## Recorded limits and decisions
+
+<!-- Moved here from docs/open-tasks.md when the task board moved to the
+     issue tracker (2026-08-16). DECIDED records and observed-behavior claims,
+     not open tasks. -->
+
+### Verified by observation, not by specification
+
+Both are load-bearing claims this repository makes. They match what the pinned
+IG Publisher does today, but neither is documented by HL7, so a toolchain bump
+should re-check them.
+
+- **The conformance summary table's *Expectation* column is derived from the
+  English keywords SHALL/SHOULD/MAY.** This is the reason the statement list is
+  English-only.
+  [HL7 ig-guidance](https://build.fhir.org/ig/FHIR/ig-guidance/conformance-statements.html)
+  documents the `§…§` marker and the `§§§` table but names no Expectation
+  column. To settle it, run one build with a German-marked statement and record
+  what the table shows in this file.
+- **The `de-DE` Translation extension on `^title` does not reach the artifacts
+  index.** The German `^description` renders on the artifact's own page; the
+  German `^title` renders nowhere, and `artifacts.html` keeps the
+  default-language text. Recorded where the mechanism is documented.
+
+### Known limits of the guards
+
+The guards are worth more than the drift they catch, so their reach is stated
+rather than assumed.
+
+- **The `SU_TERMSERV_CLIENT_CERT_PASSWORD` anti-drift assertion runs on the
+  template repository only.** It lives in
+  `scripts/publication-url-consistency.template-test.mjs`, which asserts
+  un-replaced placeholders and therefore cannot run in a created module. A
+  re-introduction of the wrong secret name *inside a module* would not be
+  caught.
+- **`qc/custom.rules.yaml` is not verified end to end.** The MII reusable
+  validation that reads it only runs on created modules, never here, so its
+  `parse` glob has not been observed against a real run. The .NET job is
+  configured upstream to pass regardless, so the worst case is log noise.
+- **`scripts/language-model-check.sh` is curated, not exhaustive.** It matches
+  line by line, so a claim split across a line break passes. It was tested
+  against 20 phrasings and catches every wording that has actually occurred
+  here. If you add a phrasing, add the pattern; do not weaken the existing ones.
+- **Three SHA-pinned support repositories are not watched by the dependency
+  checker** (`HL7/fhir-ig-history-template`, `HL7/fhir-web-templates`,
+  `medizininformatik-initiative/kerndatensatz-meta`). They are re-resolved by
+  hand; the workflow comments say so rather than claiming automation that does
+  not exist.
+- **The IG statistics report's German prose is no longer this repository's task.**
+  The tool that writes it (`scripts/ig-stats.py`) and the skill that owned it
+  (`skills/ig-analyze`) moved to the organization's skill catalog as
+  `fhir-ig-analysis` — see [`../skills/RETIRED.md`](../skills/RETIRED.md). A pinned
+  copy is vendored back into
+  [`../skills/fhir-ig-analysis/`](../skills/fhir-ig-analysis/SKILL.md) so the skill
+  stays invocable here, but its content is maintained in the catalog. The two
+  items recorded here (report prose still German while every document here is
+  English-source, and `recommendations` rows still framed as a migration) belong
+  to that skill now and were carried over with it; track them there, not here.
+- **Two pins in `validation.yml` are not watched by any layer.** The
+  reusable-workflow inputs `SUSHI_VERSION` and `JAVA_VALIDATOR_VERSION` are
+  written as `${{ vars.X || '<version>' }}`, which the checker's env parser
+  cannot read. `scripts/toolchain-pins.test.mjs` at least holds the SUSHI
+  fallback equal to the three build workflows; nothing compares
+  `JAVA_VALIDATOR_VERSION` against upstream — re-check it whenever the
+  `kerndatensatz-meta` SHA is re-resolved.
+
+### Cross-repo consistency — decided, not pending
+
+This repository and the IG template share a number of documentation filenames —
+compare them with `comm -12` over `git ls-files docs` in both checkouts. That was
+once real duplication; it is not any more. **No shared file is identical**, and the
+closest pairs differ for good reasons — `project-status.md` because each names
+the other repository, `glossary.md` because this scaffold defines nine terms the
+template repository has no use for, `further-reading.md` because Release Please
+is a template-repo entry a module must not follow.
+
+No sync mechanism is planned. A module created from this template must be
+self-contained: replacing its copy of `glossary.md` or `maintenance.md` with a
+link back to the template would break the moment the module is developed
+independently, which is the whole point of a template.
+

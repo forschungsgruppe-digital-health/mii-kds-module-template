@@ -10,4 +10,4 @@
 #
 # A team also survives personnel changes and holidays; an individual owner
 # blocks reviews whenever they are unavailable. Until then, reviews are
-# requested by hand. Tracked in docs/open-tasks.md.
+# requested by hand. Tracked in issue #143.

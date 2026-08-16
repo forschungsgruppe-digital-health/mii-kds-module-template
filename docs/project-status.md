@@ -23,9 +23,9 @@ the current version — but their governance is not settled yet.
 > TF KDS, keeping it unregistered lets the design change freely without stranding
 > consumers or squatting an identifier.
 
-> The concrete backlog — what is unfinished, what is waiting on a decision,
-> and what is a known limit rather than a defect — is in
-> [open-tasks.md](open-tasks.md).
+> The concrete backlog — what is unfinished and what is waiting on a
+> decision — lives in the [issue tracker](../../../issues); recorded limits
+> and decided non-fixes are in [maintenance.md](maintenance.md).
 
 ## What is NOT blocked by this
 

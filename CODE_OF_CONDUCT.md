@@ -47,7 +47,7 @@ This Code of Conduct applies within all community spaces, and also applies when 
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the repository maintainers. While these repositories are prototypes they have **no published enforcement contact**: no individual is named here, because no individual speaks for the MII, and reports must not be routed to the MII Geschäftsstelle, which does not own these repositories. Until an owning organisation and its contact are settled (see [docs/open-tasks.md](docs/open-tasks.md)), report through GitHub — open a private security advisory on the repository, or use GitHub's own [report abuse](https://github.com/contact/report-abuse) route. All complaints will be reviewed and investigated promptly and fairly.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the repository maintainers. While these repositories are prototypes they have **no published enforcement contact**: no individual is named here, because no individual speaks for the MII, and reports must not be routed to the MII Geschäftsstelle, which does not own these repositories. Until an owning organisation and its contact are settled (see [issue #143](../../issues/143)), report through GitHub — open a private security advisory on the repository, or use GitHub's own [report abuse](https://github.com/contact/report-abuse) route. All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the reporter of any incident.
 

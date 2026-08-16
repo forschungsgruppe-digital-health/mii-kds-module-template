@@ -17,7 +17,7 @@ vendored local folder `template = #ig-template`**, because that package has no
 published release yet; it switches to
 `template = de.medizininformatikinitiative.template#<version>` once it does (see
 [`docs/recipes/switch-template-to-published.md`](docs/recipes/switch-template-to-published.md)
-and [`docs/open-tasks.md`](docs/open-tasks.md)). See [`README.md`](README.md)
+and [issue #136](../../issues/136)). See [`README.md`](README.md)
 for the full picture.
 
 **Two layers — do not confuse them:**
