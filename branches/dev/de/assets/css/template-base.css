@@ -219,6 +219,45 @@ html[data-fontsize="2"] #segment-footer { zoom: 1.25; }
   .ig-fontsize { display: none; }
 }
 
+/* ── Back-to-top button ──────────────────────────────────────────────────────
+   Fixed bottom-right, hidden until the reader has scrolled about one
+   viewport (assets/js/back-to-top.js toggles .visible). The markup lives in
+   fragment-header.html inside #segment-header - OUTSIDE the data-fontsize
+   zoom regions, so the button keeps its size at every level. Colors are the
+   same palette pair as the font-size control (slate on the white page is
+   8.12:1 NUM-DIZ / 4.73:1 MII under --btn-text-color - AA in both).
+   Hidden-by-default also removes it from the tab order until it is useful.
+   REMOVAL (one commit): this block, assets/js/back-to-top.js and the
+   .ig-back-to-top block in includes/fragment-header.html (§8). */
+.ig-back-to-top {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 200;
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--ig-status-text-color);
+  color: var(--btn-text-color);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+.ig-back-to-top.visible {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ig-back-to-top:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+}
+@media print {
+  .ig-back-to-top { display: none !important; }
+}
+
 /* DEPRECATED aliases (renamed 2026-08-14: brand-specific mii-* -> generic ig-*).
    The --mii-table-* variables resolve to their --ig-table-* successors and the
    .mii-highlight* selectors above remain as aliases so existing module content
