@@ -12,8 +12,7 @@ This page shows a working example of **every directive that runs without error i
 ##### What this page is
 A live demonstration shipped with the module scaffold. Read the source of this page next to the rendering, copy what you need, then delete the page.
 **The step-by-step version is**
-[`docs/recipes/render-existing-artifacts.md`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/recipes/render-existing-artifacts.md)in this repository (rendered pages deliberately do not link repository URLs — see
-[`docs/open-tasks.md`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/open-tasks.md)). It lists every file to remove when you delete this page.
+[`docs/recipes/render-existing-artifacts.md`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/recipes/render-existing-artifacts.md)in this repository. It lists every file to remove when you delete this page.
 
 ### 1. Include a generated fragment
 

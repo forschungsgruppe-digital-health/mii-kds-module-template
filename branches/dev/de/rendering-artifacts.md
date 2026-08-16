@@ -12,8 +12,7 @@ Diese Seite zeigt ein funktionierendes Beispiel für **jede Direktive, die in di
 ##### Was diese Seite ist
 Eine mitgelieferte, lebende Demonstration der Modulvorlage. Lesen Sie den Quelltext dieser Seite neben ihrer Darstellung, übernehmen Sie, was Sie brauchen, und löschen Sie die Seite anschließend.
 **Die Schritt-für-Schritt-Fassung ist**
-[`docs/recipes/render-existing-artifacts.md`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/recipes/render-existing-artifacts.md)in diesem Repository (gerenderte Seiten verlinken bewusst keine Repository-URLs — siehe
-[`docs/open-tasks.md`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/open-tasks.md)). Dort ist jede Datei aufgeführt, die beim Löschen dieser Seite mit entfernt werden muss.
+[`docs/recipes/render-existing-artifacts.md`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/docs/recipes/render-existing-artifacts.md)in diesem Repository. Dort ist jede Datei aufgeführt, die beim Löschen dieser Seite mit entfernt werden muss.
 
 ### 1. Ein erzeugtes Fragment einbinden
 
