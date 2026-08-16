@@ -195,6 +195,15 @@ table:not([class]):not([style]):not([border]):not([data-fhir]) th {
 .ig-fontsize button[data-level="0"] { font-size: 12px; }
 .ig-fontsize button[data-level="1"] { font-size: 14px; }
 .ig-fontsize button[data-level="2"] { font-size: 16px; }
+/* ONE hover convention for both chrome controls (this and .ig-back-to-top):
+   fill with the palette's menu-hover color under --btn-text-color (8.12:1
+   NUM-DIZ / 4.80:1 MII - AA). Declared BEFORE the aria-pressed rule at equal
+   specificity, so a pressed button keeps its own fill while hovered. */
+.ig-fontsize button:hover {
+  background: var(--btn-hover-color);
+  border-color: var(--btn-hover-color);
+  color: var(--btn-text-color);
+}
 .ig-fontsize button[aria-pressed="true"] {
   background: var(--ig-status-text-color);
   color: var(--btn-text-color);
@@ -254,7 +263,9 @@ html[data-fontsize="2"] #segment-footer { zoom: 1.25; }
   cursor: pointer;
 }
 .ig-back-to-top:hover {
-  background: var(--ig-status-text-color);
+  /* same hover convention as .ig-fontsize (WCAG 3.2.4 consistency) */
+  background: var(--btn-hover-color);
+  border-color: var(--btn-hover-color);
   color: var(--btn-text-color);
 }
 .ig-back-to-top.visible {
