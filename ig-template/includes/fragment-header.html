@@ -69,3 +69,14 @@
      site-specific tab tweaks). REMOVAL: delete this tag, both vendored
      assets and the fragment-css link - guard test pins the hashes. -->
 <script src="{{site.data.info.assets}}assets/js/bootstrap-accessibility.min.js" defer></script>
+<!-- Back-to-top button: appears after one viewport of scrolling (logic in
+     assets/js/back-to-top.js, styling in template-base.css "back-to-top"
+     block). Rendered here inside #segment-header, which is OUTSIDE the
+     data-fontsize zoom regions, so the fixed button never scales. REMOVAL:
+     this block, the js file and the CSS block - one commit, styleguide §8. -->
+{% if include.lang == 'de' %}
+<button type="button" class="ig-back-to-top" aria-label="Zurück zum Seitenanfang">↑</button>
+{% else %}
+<button type="button" class="ig-back-to-top" aria-label="Back to top">↑</button>
+{% endif %}
+<script src="{{site.data.info.assets}}assets/js/back-to-top.js" defer></script>
