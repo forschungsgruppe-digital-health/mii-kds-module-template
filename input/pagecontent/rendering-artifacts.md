@@ -24,9 +24,7 @@ produces. Copy the line, change the artifact name, delete the page.
 A live demonstration shipped with the module scaffold. Read the source of this
 page next to the rendering, copy what you need, then delete the page.
 <strong>The step-by-step version is</strong>
-<a href="https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/docs/recipes/render-existing-artifacts.md"><code>docs/recipes/render-existing-artifacts.md</code></a> in this repository
-(rendered pages deliberately do not link repository URLs — see
-<a href="https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/docs/open-tasks.md"><code>docs/open-tasks.md</code></a>). It lists every file to remove when you delete
+<a href="https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/docs/recipes/render-existing-artifacts.md"><code>docs/recipes/render-existing-artifacts.md</code></a> in this repository. It lists every file to remove when you delete
 this page.
 </div>
 

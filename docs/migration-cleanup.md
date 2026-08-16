@@ -14,7 +14,6 @@ The companion IG template repository carries its own copy of this checklist
 | File | Why it can go |
 | --- | --- |
 | `docs/project-status.md` | The prototype/organisation status page. Its open questions dissolve at adoption + move; carry any surviving decision (e.g. ownership) into the README or an ADR-style note before deleting. |
-| `docs/open-tasks.md` | The pre-move task board. Move rows that are still open into GitHub issues of the target repository, then delete. |
 | `docs/migration-cleanup.md` | This file — last, once every row above and below is done. |
 
 ## Edit in one pass after migration (do not delete)
@@ -25,7 +24,7 @@ The companion IG template repository carries its own copy of this checklist
 | `IG_TEMPLATE_REPO_URL` repository variable | Delete it — the sync's default (target-org URL) resolves once the template repository is populated there. Recorded in `scripts/resolve-ig-template-source.sh` and `.github/workflows/sync-ig-template.yml`. |
 | `scripts/check-updates.mjs` | `TEMPLATE_REPO` constant → target org (the comment above it says so). |
 | `.github/CODEOWNERS` | Holds no active rule by design (no individual is named pre-adoption). Add the owning team of the target organisation. |
-| `SECURITY.md`, `CODE_OF_CONDUCT.md` | Fill the deliberately-unset contacts/routes with the target organisation's (security contact, conduct-report contact — listed in `docs/open-tasks.md` as "Name a code owner, a security contact and a conduct-report contact"). |
+| `SECURITY.md`, `CODE_OF_CONDUCT.md` | Fill the deliberately-unset contacts/routes with the target organisation's (security contact, conduct-report contact — [issue #143](../../../issues/143)). |
 | `docs/recipes/switch-template-to-published.md` sample URLs | Release-page links currently point at the hosting org; the sweep above covers them. |
 
 ## Not migration business (different lifecycle)

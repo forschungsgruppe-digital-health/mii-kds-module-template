@@ -23,7 +23,7 @@ Do **not** open a public issue for a security problem.
 If you cannot use GitHub, report through the organisation that owns the
 repository. These repositories are prototypes and have no published security
 contact of their own yet — one is set when they move to the
-medizininformatik-initiative organisation (tracked in docs/open-tasks.md).
+medizininformatik-initiative organisation (tracked in [issue #143](../../issues/143)).
 Please do not open a public issue for a vulnerability in the meantime.
 
 ## Scope

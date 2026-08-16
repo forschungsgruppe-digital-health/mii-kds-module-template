@@ -75,7 +75,7 @@ prerelease, and the preview build labels itself `2027.0.0-draft.1` this way).
 > reusable validation workflow, which runs on every PR. **Known gap:** its
 > Java job reads a repo-root `package.json` this scaffold does not ship, so on
 > a created module that job currently fails until the `package.json` decision
-> in [open-tasks](open-tasks.md) is made; the .NET QC job is unaffected.
+> in [issue #141](../../../issues/141) is made; the .NET QC job is unaffected.
 
 ---
 
