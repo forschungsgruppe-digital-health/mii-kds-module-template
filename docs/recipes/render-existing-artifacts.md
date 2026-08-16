@@ -92,7 +92,7 @@ tags — see the source of
 [`sql.xml`](https://github.com/FHIR/ig-guidance/blob/HEAD/input/pagecontent/sql.xml)
 and [`uml.md`](https://github.com/FHIR/ig-guidance/blob/HEAD/input/pagecontent/uml.md).
 It is implemented at
-[`PublisherGenerator.java:6118`](https://github.com/HL7/fhir-ig-publisher/blob/ae30f97e5b6a06207b099e2fb8c17e57eb03b872/org.hl7.fhir.publisher.core/src/main/java/org/hl7/fhir/igtools/publisher/PublisherGenerator.java#L6118).
+[`PublisherGenerator.java:6115`](https://github.com/HL7/fhir-ig-publisher/blob/1521577ee46cd28950e6416987f9a2b2eaa55fc3/org.hl7.fhir.publisher.core/src/main/java/org/hl7/fhir/igtools/publisher/PublisherGenerator.java#L6115).
 
 ## What is documented, and what only works
 
@@ -110,7 +110,7 @@ you find quoted elsewhere is worth verifying.
 - `-intro.md` / `-notes.md` files, which inject your prose into a generated artifact page
 
 **The complete set of Publisher keywords** is a single array in the source —
-[`PublisherGenerator.java:6051`](https://github.com/HL7/fhir-ig-publisher/blob/ae30f97e5b6a06207b099e2fb8c17e57eb03b872/org.hl7.fhir.publisher.core/src/main/java/org/hl7/fhir/igtools/publisher/PublisherGenerator.java#L6051):
+[`PublisherGenerator.java:6067`](https://github.com/HL7/fhir-ig-publisher/blob/1521577ee46cd28950e6416987f9a2b2eaa55fc3/org.hl7.fhir.publisher.core/src/main/java/org/hl7/fhir/igtools/publisher/PublisherGenerator.java#L6067):
 
 ```java
 String[] keywords = {"sql", "fragment", "json", "class-diagram", "uml",
@@ -119,7 +119,7 @@ String[] keywords = {"sql", "fragment", "json", "class-diagram", "uml",
 
 There are eight, and no ninth. `[[[ … ]]]`, which auto-links a canonical URL or
 artifact name, is handled separately a few lines below, at
-[line 6129](https://github.com/HL7/fhir-ig-publisher/blob/ae30f97e5b6a06207b099e2fb8c17e57eb03b872/org.hl7.fhir.publisher.core/src/main/java/org/hl7/fhir/igtools/publisher/PublisherGenerator.java#L6129).
+[line 6145](https://github.com/HL7/fhir-ig-publisher/blob/1521577ee46cd28950e6416987f9a2b2eaa55fc3/org.hl7.fhir.publisher.core/src/main/java/org/hl7/fhir/igtools/publisher/PublisherGenerator.java#L6145).
 Four of the eight have a guidance page: `sql`, `fragment`, `json` and
 `multi-map`. Three appear in no guidance page at all — `class-diagram`,
 `lang-fragment` and `dataset` are implemented but undocumented. The eighth is
