@@ -54,7 +54,7 @@ scaffold gives you the place and a prompt) · ➖ not applicable.
 | Uses the defined narrative styles where appropriate (`stu-note`, `dragon`, …) | 📝 | Available from the template; use `{:.stu-note}` / `{:.dragon}` for open issues and warnings |
 | Intros/notes on artifacts | 📝 | Put `StructureDefinition-<id>-intro.md` / `-notes.md` in `input/intro-notes/` (wired via `path-pages`) |
 | Rationale for controversial design decisions is captured | 📝 | Record it in the artifact's notes or in `guidance.md` |
-| Normative sentences are machine-readably marked | 📝 | The `§<page>-<n>:…§` marker + `§§§` table mechanism (an IG-Publisher feature) is available for the module's OWN normative sentences; the scaffold ships none since the MII-wide rules moved to the Meta module. How to use it: [page-structure.md](page-structure.md) § "Where module-specific conformance statements go now". Markers are English-only — [why](open-tasks.md#verified-by-observation-not-by-specification) |
+| Normative sentences are machine-readably marked | 📝 | The `§<page>-<n>:…§` marker + `§§§` table mechanism (an IG-Publisher feature) is available for the module's OWN normative sentences; the scaffold ships none since the MII-wide rules moved to the Meta module. How to use it: [page-structure.md](page-structure.md) § "Where module-specific conformance statements go now". Markers are English-only — [why](maintenance.md#verified-by-observation-not-by-specification) |
 
 ## 3. Images and diagrams (S1)
 

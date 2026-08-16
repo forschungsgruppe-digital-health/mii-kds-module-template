@@ -10,6 +10,15 @@
 > core-dataset process". Do not write MII as the acting institution of a
 > present-tense sentence. (Same rule in the IG template's styleguide §6.)
 
+> **Repository links in pages.** Rendered pages link repository files through
+> the `{{GITHUB_ORG}}/{{REPO_NAME}}` placeholders (a created module links its
+> own repository from day one; the template's own demo substitutes the
+> documented self-check values, which name the target organisation — those
+> links resolve only after the move, and the IG Publisher reports them under
+> broken links in `qa.html`; CI deliberately does not gate on that count).
+> Links to `kerndatensatz-meta`/`kerndatensatz-basis` are plain URLs — those
+> repos exist today.
+
 **Ownership (Option A).** The KDS module IG **page structure** — which pages
 exist and the navigation menu — lives **here, in the module template**,
 alongside the page content. The IG template (`ig-template-mii-kds`) is
@@ -155,7 +164,7 @@ live in the Meta module now. A module that states its *own* normative
 requirements (typically on `security-and-privacy.md` or an artifact page) may
 still mark them with `§<page>-<n>:…§` on the **English** page and render a
 table with a `§§§` paragraph; the Expectation column derives from the English
-SHALL/SHOULD/MAY keywords (see `docs/open-tasks.md`, "Verified by
+SHALL/SHOULD/MAY keywords (see [maintenance.md](maintenance.md), "Verified by
 observation").
 
 ## What this means in practice
