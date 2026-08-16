@@ -170,14 +170,17 @@ table:not([class]):not([style]):not([border]):not([data-fhir]) th {
 .ig-fontsize {
   float: var(--ig-right);
   display: flex;
-  align-items: center;  /* centers the differently-sized A buttons on one axis */
-  height: 50px;         /* the logo band's height */
-  /* Same vertical metrics as the base's #project-nav (margin-top 8px + 50px
-     band -> middle at 33px): the logos sit at 4-8px margin (middles 29-33px)
-     and the two-line #ig-status at 17px (middle ~37px), so 8px puts the
-     control on the header's imaginary middle line instead of hugging the
-     container top (middle 25px), which read visibly too high. */
-  margin: 8px 0 8px 10px;
+  /* The three A glyphs share ONE TEXT BASELINE (all-caps "A" has no
+     descender, so the letters sit on a common line and the boxes grow
+     upward with the level) while the GROUP is middle-aligned on the
+     header's line: the tallest button is 26px (16px glyph + 2x4px padding
+     + 2x1px border), so margin-top 20px puts its middle at 33px - the same
+     middle as the base's #project-nav (margin-top 8px + 50px band) between
+     the FHIR logo (middle 29px) and the two-line #ig-status (~37px).
+     16px right margin separates the group from the FHIR logo. */
+  align-items: baseline;
+  gap: 3px;
+  margin: 20px 16px 0 10px;
 }
 .ig-fontsize button {
   font-family: inherit;
