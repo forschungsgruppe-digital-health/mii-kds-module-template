@@ -224,8 +224,15 @@ html[data-fontsize="2"] #segment-footer { zoom: 1.25; }
    viewport (assets/js/back-to-top.js toggles .visible). The markup lives in
    fragment-header.html inside #segment-header - OUTSIDE the data-fontsize
    zoom regions, so the button keeps its size at every level. Colors are the
-   same palette pair as the font-size control (slate on the white page is
-   8.12:1 NUM-DIZ / 4.73:1 MII under --btn-text-color - AA in both).
+   font-size control's INACTIVE pair inverted to a SOLID light ground: the
+   filled slate first shipped was the same variable value as the footer
+   (--footer-bg-color = --ig-status-text-color in the NUM-DIZ palette), so
+   the button vanished when it crossed the footer. A solid
+   --ig-header-container-color ground (white in both palettes) with slate
+   border/glyph stays visible on the white page AND on the slate footer
+   (8.12:1 NUM-DIZ / 4.73:1 MII, both directions); hover fills slate like
+   the control's active state. padding:0 keeps the flex-centered glyph
+   actually centered (the UA's default button padding shifted it).
    Hidden-by-default also removes it from the tab order until it is useful.
    REMOVAL (one commit): this block, assets/js/back-to-top.js and the
    .ig-back-to-top block in includes/fragment-header.html (§8). */
@@ -237,13 +244,18 @@ html[data-fontsize="2"] #segment-footer { zoom: 1.25; }
   display: none;
   width: 40px;
   height: 40px;
-  border: none;
+  padding: 0;
+  border: 1px solid var(--ig-status-text-color);
   border-radius: 50%;
-  background: var(--ig-status-text-color);
-  color: var(--btn-text-color);
+  background: var(--ig-header-container-color);
+  color: var(--ig-status-text-color);
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
+}
+.ig-back-to-top:hover {
+  background: var(--ig-status-text-color);
+  color: var(--btn-text-color);
 }
 .ig-back-to-top.visible {
   display: flex;
