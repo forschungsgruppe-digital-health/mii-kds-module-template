@@ -26,7 +26,11 @@
      (base ships includes/fragment-css.html as a single comment; it is included
      in <head> AFTER all base stylesheets, so the linked files win the
      cascade).
-     Load model (docs/styleguide.md §1/§10): template-base.css carries the
+     Load model (docs/styleguide.md §1/§10): bootstrap-accessibility.css
+     (PayPal Bootstrap Accessibility Plugin v1.0.7, vendored + pinned - §8)
+     patches Bootstrap-3 component styling for accessibility (focus outlines,
+     alert contrast) and loads FIRST so the template's own rules can override;
+     then template-base.css carries the
      brand-INDEPENDENT rule blocks and always loads; then EXACTLY ONE palette
      file follows - num-diz.css, the DEFAULT design, unless the consuming IG
      ships input/data/brand.json with { "design": "mii" } (read as
@@ -35,6 +39,7 @@
      MII design; anything else - including no brand.json at all and unknown
      values - renders NUM-DIZ. Both palettes declare the same variable set
      (scripts/brand-switch.test.mjs). -->
+<link href="assets/css/bootstrap-accessibility.css" rel="stylesheet"/>
 <link href="assets/css/template-base.css" rel="stylesheet"/>
 
 <link href="assets/css/num-diz.css" rel="stylesheet"/>
@@ -111,6 +116,17 @@
 </div>
 
 <script src="assets/js/font-size-control.js" defer></script>
+<!-- PayPal Bootstrap Accessibility Plugin v1.0.7 (vendored + pinned, §8):
+     patches the Bootstrap-3 components the publisher renders - navbar
+     dropdowns gain ARIA menu semantics + arrow-key navigation, tab panels
+     (structure-tabs) the full ARIA tabs pattern, alerts live-region
+     announcements. `defer` guarantees it executes AFTER the parser-inserted
+     bootstrap.min.js at the end of the body. Vendored from
+     paypal/bootstrap-accessibility-plugin @ v1.0.7 (the admin-ch fork was
+     evaluated and rejected: 151 commits behind upstream, its 6 deltas are
+     site-specific tab tweaks). REMOVAL: delete this tag, both vendored
+     assets and the fragment-css link - guard test pins the hashes. -->
+<script src="assets/js/bootstrap-accessibility.min.js" defer></script>
 
 
         <div id="ig-status">
@@ -361,7 +377,7 @@ check M9).</p>
 
           IG © 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.netzwerk-universitaetsmedizin.de">NUM-DIZ</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Generated <span title="Sun, Aug 16, 2026 09:39+0000">2026-08-16</span>
+          Generated <span title="Sun, Aug 16, 2026 10:07+0000">2026-08-16</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- Branding override for the fhir2.base.template footer fragment.
