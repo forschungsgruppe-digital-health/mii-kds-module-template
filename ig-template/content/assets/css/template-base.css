@@ -9,10 +9,10 @@
    and docs/styleguide.md §1/§10.
 
    Linked AFTER the base template's stylesheets (project.css et al.), so no
-   rule here needs !important. Four rule blocks live here; three add NEW
+   rule here needs !important. Six rule blocks live here; five add NEW
    classes, the content-image block deliberately overrides base rules. Each is
-   explained at its own block and listed in docs/styleguide.md sections 3, 5
-   and 5a. Keep that list short - a base rule countermanded here stops
+   explained at its own block and listed in docs/styleguide.md sections 3, 5,
+   5a and 8. Keep that list short - a base rule countermanded here stops
    receiving base fixes. */
 
 /* ── Highlight boxes (background-colour highlight) ────────────────────────────
