@@ -152,11 +152,13 @@ table:not([class]):not([style]):not([border]):not([data-fhir]) th {
    because the publisher-generated artifact tables carry INLINE px font sizes
    (style="font-size: 11px") that no stylesheet font-size rule can reach —
    zoom multiplies the computed rendering, inline styles included, and
-   reflows like browser zoom. Scaling covers #segment-content AND the menu
-   (#segment-navbar) — two SIBLING regions, so the factors do not multiply;
-   at level 2 a long menu row may wrap onto a second line, exactly as under
-   browser zoom. The header band and footer keep their fitted layout. Print
-   always renders at 100 %.
+   reflows like browser zoom. Scaling covers the four reading regions —
+   #segment-content, the menu (#segment-navbar), the breadcrumb
+   (#segment-breadcrumb) and the footer (#segment-footer) — all SIBLINGS, so
+   the factors never multiply; a long menu row may wrap onto a second line
+   at level 2, exactly as under browser zoom. Only the header band (logos,
+   IG heading, this control) keeps its fitted layout. Print always renders
+   at 100 %.
 
    Button colors are palette variables, so both corporate designs style the
    control from their own sourced values (resting: slate text on the white
@@ -169,9 +171,13 @@ table:not([class]):not([style]):not([border]):not([data-fhir]) th {
   float: var(--ig-right);
   display: flex;
   align-items: center;  /* centers the differently-sized A buttons on one axis */
-  height: 50px;         /* the logo band's height -> vertically centered in the header */
-  gap: 3px;
-  margin: 0 0 0 10px;
+  height: 50px;         /* the logo band's height */
+  /* Same vertical metrics as the base's #project-nav (margin-top 8px + 50px
+     band -> middle at 33px): the logos sit at 4-8px margin (middles 29-33px)
+     and the two-line #ig-status at 17px (middle ~37px), so 8px puts the
+     control on the header's imaginary middle line instead of hugging the
+     container top (middle 25px), which read visibly too high. */
+  margin: 8px 0 8px 10px;
 }
 .ig-fontsize button {
   font-family: inherit;
@@ -195,12 +201,18 @@ table:not([class]):not([style]):not([border]):not([data-fhir]) th {
   outline-offset: 1px;
 }
 html[data-fontsize="1"] #segment-content,
-html[data-fontsize="1"] #segment-navbar { zoom: 1.125; }
+html[data-fontsize="1"] #segment-navbar,
+html[data-fontsize="1"] #segment-breadcrumb,
+html[data-fontsize="1"] #segment-footer { zoom: 1.125; }
 html[data-fontsize="2"] #segment-content,
-html[data-fontsize="2"] #segment-navbar { zoom: 1.25; }
+html[data-fontsize="2"] #segment-navbar,
+html[data-fontsize="2"] #segment-breadcrumb,
+html[data-fontsize="2"] #segment-footer { zoom: 1.25; }
 @media print {
   #segment-content,
-  #segment-navbar { zoom: 1 !important; }
+  #segment-navbar,
+  #segment-breadcrumb,
+  #segment-footer { zoom: 1 !important; }
   .ig-fontsize { display: none; }
 }
 
