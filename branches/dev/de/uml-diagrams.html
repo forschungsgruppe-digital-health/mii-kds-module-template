@@ -100,14 +100,14 @@
 <!-- Font-size control (A / A+ / A++): three reader-selectable levels; level A
      is the untouched default. Logic in assets/js/font-size-control.js, the
      zoom mapping + button styling in template-base.css ("font-size control"
-     block). Labels A/A+/A++ are language-neutral; only the aria texts switch
+     block). All three buttons read "A" — the button's own font size shows the level; labels are language-neutral; only the aria texts switch
      on include.lang. REMOVAL: delete this block, the js file and the CSS
      block - one commit, styleguide §5a. -->
 
 <div class="ig-fontsize" role="group" aria-label="Schriftgröße">
   <button type="button" data-level="0" aria-pressed="true" aria-label="Schriftgröße: Standard">A</button>
-  <button type="button" data-level="1" aria-pressed="false" aria-label="Schriftgröße: größer">A+</button>
-  <button type="button" data-level="2" aria-pressed="false" aria-label="Schriftgröße: am größten">A++</button>
+  <button type="button" data-level="1" aria-pressed="false" aria-label="Schriftgröße: größer">A</button>
+  <button type="button" data-level="2" aria-pressed="false" aria-label="Schriftgröße: am größten">A</button>
 </div>
 
 <script src="assets/js/font-size-control.js" defer></script>
@@ -323,7 +323,7 @@ Diese Seite enthält Übersetzungen aus der Originalsprache, in der der Leitfade
 
           IG © 2027+ <a style="color:var(--footer-hyperlink-text-color)" href="https://www.netzwerk-universitaetsmedizin.de">NUM-DIZ</a>.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 basiert auf <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>.
-          Erstellt <span title="Sat, Aug 15, 2026 21:56+0000">2026-08-15</span>
+          Erstellt <span title="Sun, Aug 16, 2026 07:31+0000">2026-08-16</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
             <!-- Branding override for the fhir2.base.template footer fragment.
