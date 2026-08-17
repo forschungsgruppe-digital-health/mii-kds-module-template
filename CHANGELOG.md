@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.10.5](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.10.4...v0.10.5) (2026-08-17)
+
+
+### Bug Fixes
+
+* promote dev to main (template v1.3.1 re-vendor) ([933764c](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/933764cc386f720535d1435118e3b00adb684d80))
+* **template:** re-vendor ig-template v1.3.1 (official English NUM-DIZ logo) ([#152](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/152)) ([dabec85](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/dabec858348afbf50d521ffd6b2f3c318d55f639))
+
 ## [0.10.4](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.10.3...v0.10.4) (2026-08-16)
 
 
