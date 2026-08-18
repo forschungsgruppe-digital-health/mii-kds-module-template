@@ -270,24 +270,25 @@ Konformität<b class="caret"> </b>          </a>
         </td>
         <td>
           <strong>Woher die Versionen kommen.</strong>
- Die Tabelle zeigt die in
+ Jedes Paket der Tabelle ist direkt in
           <a href="https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/sushi-config.yaml">
 <code class="language-plaintext highlighter-rouge">sushi-config.yaml</code>          </a>
 
 (          <code class="language-plaintext highlighter-rouge">dependencies:</code>
-) gepinnten Pakete samt allem, was der IG Publisher mit ihnen
-lädt.           <code class="language-plaintext highlighter-rouge">hl7.terminology.r4</code>
- (THO) und           <code class="language-plaintext highlighter-rouge">hl7.fhir.uv.extensions.r4</code>
- sind dort
-bewusst           <strong>nicht</strong>
- gepinnt: Der Publisher
-          <a href="https://build.fhir.org/ig/FHIR/ig-guidance/versions.html#automatic-packages">lädt beide immer</a>
+) gepinnt — auch           <code class="language-plaintext highlighter-rouge">hl7.terminology.r4</code>
+ (THO) und
+          <code class="language-plaintext highlighter-rouge">hl7.fhir.uv.extensions.r4</code>
+, und diese beiden mit Bedacht: Die
+          <a href="https://build.fhir.org/ig/FHIR/ig-guidance/versions.html#automatic-packages">Automatik des IG Publishers</a>
 
-und injiziert nur dann deren aktuellstes Full Release, wenn der
-Abhängigkeitsbaum sie nicht bereits mitbringt — eine von einer Abhängigkeit
-(in der KDS-Familie: dem MII-Meta-Paket) gepinnte Version hat damit
-automatisch Vorrang. Die von einem konkreten Build verwendeten Versionen
-stehen in dessen           <code class="language-plaintext highlighter-rouge">qa-versions.json</code>
+liest ausschließlich die           <strong>eigene</strong>
+ Abhängigkeitsliste dieses Leitfadens;
+ohne direkten Pin würde jeder Build stillschweigend das jeweils aktuellste
+THO-/Extensions-Release injizieren — eine allein im MII-Meta-Paket gepinnte
+Version kann den Build nicht steuern (verifiziert im Publisher-Quellcode des
+gepinnten Release). Eine wöchentliche Prüfung warnt, wenn diese beiden Pins
+von den Vorgaben des gepinnten Meta-Pakets abweichen; die von einem
+konkreten Build verwendeten Versionen stehen in dessen           <code class="language-plaintext highlighter-rouge">qa-versions.json</code>
 .
         </td>
       </tr>
@@ -337,7 +338,7 @@ behält).
 .  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 basiert auf           <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>
 .
-          Erstellt           <span title="Tue, Aug 18, 2026 12:38+0000">2026-08-18</span>
+          Erstellt           <span title="Tue, Aug 18, 2026 19:06+0000">2026-08-18</span>
 
                     <br/>
 
@@ -1148,25 +1149,28 @@ Conformance<b class="caret"> </b>          </a>
         </td>
         <td>
           <strong>Where the versions come from.</strong>
- The table lists the packages pinned in
+ Every package in the table is pinned
+directly in
           <a href="https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/sushi-config.yaml">
 <code class="language-plaintext highlighter-rouge">sushi-config.yaml</code>          </a>
 
 (          <code class="language-plaintext highlighter-rouge">dependencies:</code>
-) together with everything the IG Publisher loads alongside
-them.           <code class="language-plaintext highlighter-rouge">hl7.terminology.r4</code>
- (THO) and           <code class="language-plaintext highlighter-rouge">hl7.fhir.uv.extensions.r4</code>
- are
-deliberately           <strong>not</strong>
- pinned there: the Publisher
-          <a href="https://build.fhir.org/ig/FHIR/ig-guidance/versions.html#automatic-packages">always loads both</a>
+) — including           <code class="language-plaintext highlighter-rouge">hl7.terminology.r4</code>
+ (THO) and
+          <code class="language-plaintext highlighter-rouge">hl7.fhir.uv.extensions.r4</code>
+, and those two deliberately so: the IG
+Publisher's
+          <a href="https://build.fhir.org/ig/FHIR/ig-guidance/versions.html#automatic-packages">automatic-packages rule</a>
 
-and injects their most recent full release only when the dependency tree does
-not already carry them — a version pinned by a dependency (for the KDS
-family: the MII meta package) therefore takes precedence automatically. The
-exact versions a concrete build used are recorded in its           <code class="language-plaintext highlighter-rouge">qa-versions.json</code>
-
-output.
+consults only this guide's           <strong>own</strong>
+ dependency list, so without a direct pin
+every build would silently inject the latest THO/extensions release — a
+version pinned by the MII meta package alone cannot control the build
+(verified in the publisher source at the pinned release). A weekly check
+warns when these two pins drift from what the pinned meta package ships,
+and the exact versions a concrete build used are recorded in its
+          <code class="language-plaintext highlighter-rouge">qa-versions.json</code>
+ output.
         </td>
       </tr>
       <tr>
@@ -1213,7 +1217,7 @@ page, if the module keeps it).
 .  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 based on           <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>
 .
-          Generated           <span title="Tue, Aug 18, 2026 12:38+0000">2026-08-18</span>
+          Generated           <span title="Tue, Aug 18, 2026 19:06+0000">2026-08-18</span>
 
                     <br/>
 

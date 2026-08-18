@@ -25,7 +25,7 @@ Dieser IG enthält die folgenden Abhängigkeiten von anderen IGs.
 
 
 
-> **Woher die Versionen kommen.** Die Tabelle zeigt die in [`sushi-config.yaml`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/sushi-config.yaml) (`dependencies:`) gepinnten Pakete samt allem, was der IG Publisher mit ihnen lädt. `hl7.terminology.r4` (THO) und `hl7.fhir.uv.extensions.r4` sind dort bewusst **nicht** gepinnt: Der Publisher [lädt beide immer](https://build.fhir.org/ig/FHIR/ig-guidance/versions.html#automatic-packages) und injiziert nur dann deren aktuellstes Full Release, wenn der Abhängigkeitsbaum sie nicht bereits mitbringt — eine von einer Abhängigkeit (in der KDS-Familie: dem MII-Meta-Paket) gepinnte Version hat damit automatisch Vorrang. Die von einem konkreten Build verwendeten Versionen stehen in dessen `qa-versions.json`.
+> **Woher die Versionen kommen.** Jedes Paket der Tabelle ist direkt in [`sushi-config.yaml`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/sushi-config.yaml) (`dependencies:`) gepinnt — auch `hl7.terminology.r4` (THO) und `hl7.fhir.uv.extensions.r4`, und diese beiden mit Bedacht: Die [Automatik des IG Publishers](https://build.fhir.org/ig/FHIR/ig-guidance/versions.html#automatic-packages) liest ausschließlich die **eigene** Abhängigkeitsliste dieses Leitfadens; ohne direkten Pin würde jeder Build stillschweigend das jeweils aktuellste THO-/Extensions-Release injizieren — eine allein im MII-Meta-Paket gepinnte Version kann den Build nicht steuern (verifiziert im Publisher-Quellcode des gepinnten Release). Eine wöchentliche Prüfung warnt, wenn diese beiden Pins von den Vorgaben des gepinnten Meta-Pakets abweichen; die von einem konkreten Build verwendeten Versionen stehen in dessen `qa-versions.json`.
 
 ### Globale Profile
 
@@ -241,26 +241,6 @@ Expansionsparameter sind Query-Parameter, die an eine `ValueSet`- `$expand`-Oper
   "license" : "CC-BY-4.0",
   "fhirVersion" : ["4.0.1"],
   "dependsOn" : [{
-    "id" : "hl7tx",
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/tools/StructureDefinition/implementationguide-dependency-comment",
-      "valueMarkdown" : "Automatically added as a dependency - all IGs depend on HL7 Terminology"
-    }],
-    "uri" : "http://terminology.hl7.org/ImplementationGuide/hl7.terminology",
-    "packageId" : "hl7.terminology.r4",
-    "version" : "7.3.0"
-  },
-  {
-    "id" : "hl7ext",
-    "extension" : [{
-      "url" : "http://hl7.org/fhir/tools/StructureDefinition/implementationguide-dependency-comment",
-      "valueMarkdown" : "Automatically added as a dependency - all IGs depend on the HL7 Extension Pack"
-    }],
-    "uri" : "http://hl7.org/fhir/extensions/ImplementationGuide/hl7.fhir.uv.extensions",
-    "packageId" : "hl7.fhir.uv.extensions.r4",
-    "version" : "5.3.0"
-  },
-  {
     "id" : "de_basisprofil_r4",
     "uri" : "http://fhir.org/packages/de.basisprofil.r4/ImplementationGuide/de.basisprofil.r4",
     "packageId" : "de.basisprofil.r4",
@@ -283,6 +263,18 @@ Expansionsparameter sind Query-Parameter, die an eine `ValueSet`- `$expand`-Oper
     "uri" : "http://hl7.org/fhir/uv/crmi/ImplementationGuide/hl7.fhir.uv.crmi",
     "packageId" : "hl7.fhir.uv.crmi",
     "version" : "2.0.0"
+  },
+  {
+    "id" : "hl7_terminology_r4",
+    "uri" : "http://terminology.hl7.org/ImplementationGuide/hl7.terminology",
+    "packageId" : "hl7.terminology.r4",
+    "version" : "7.3.0"
+  },
+  {
+    "id" : "hl7_fhir_uv_extensions_r4",
+    "uri" : "http://hl7.org/fhir/extensions/ImplementationGuide/hl7.fhir.uv.extensions",
+    "packageId" : "hl7.fhir.uv.extensions.r4",
+    "version" : "5.3.0"
   }],
   "definition" : {
     "extension" : [{

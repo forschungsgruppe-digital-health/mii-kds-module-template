@@ -43,6 +43,7 @@ Wissenschaftler:innen, die KDS-Daten für die medizinische Forschung nutzen.
 * **Konformität** — die KDS-weiten Konformitätsregeln (Anforderungssprache, Must-Support, Umgang mit fehlenden Daten) pflegt zentral das [Meta-Modul](https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance); die modul-spezifischen Aspekte zu [Sicherheit und Datenschutz](security-and-privacy.md) sind Teil dieses Leitfadens.
 * **[Profile](profiles.md)** und die weiteren **[Artefakt-Seiten](artifacts.md)** — die technischen Artefakte.
 * **[Beispiele](examples.md)** — Beispielinstanzen.
+* **[Abhängigkeiten](ImplementationGuide-mii-ig-template.md)** — die ImplementationGuide-Ressource mit Abhängigkeitstabelle, versionsübergreifender Analyse und Urheberrechtshinweisen.
 
 ### Verwandte Leitfäden
 
