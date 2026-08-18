@@ -1405,6 +1405,15 @@
       {
         "extension" : [{
           "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
+          "valueUrl" : "ImplementationGuide-mii-ig-template.html"
+        }],
+        "nameUrl" : "ImplementationGuide-mii-ig-template.html",
+        "title" : "MII ImplementationGuide Resource",
+        "generation" : "markdown"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
           "valueUrl" : "translationinfo.html"
         }],
         "nameUrl" : "translationinfo.html",

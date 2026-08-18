@@ -17,8 +17,8 @@
       </li>
     </ul>
     <h2>Copyright Fragment</h2>
-    <p style="color: maroon">
-      <b>This fragment is not visible to the reader</b>
+    <p>
+This fragment is available on       <a href="en/ImplementationGuide-mii-ig-template.html">en/ImplementationGuide-mii-ig-template.html</a>
     </p>
     <div>
       <p>This publication includes IP covered under the following statements.</p>
@@ -60,7 +60,7 @@ This material derives from the HL7 Terminology (THO). THO is copyright &copy;198
 
           IG &copy; 2027+ NUM-DIZ.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 based on FHIR 4.0.1.
-          Generated 2026-08-17
+          Generated 2026-08-18
           
           
             
@@ -86,7 +86,7 @@ This material derives from the HL7 Terminology (THO). THO is copyright &copy;198
 
           IG &copy; 2027+ NUM-DIZ.  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 basiert auf FHIR 4.0.1.
-          Erstellt 2026-08-17
+          Erstellt 2026-08-18
           
           
             
@@ -153,7 +153,7 @@ This material derives from the HL7 Terminology (THO). THO is copyright &copy;198
       </tr>
       <tr>
         <td>
-          <a href="de/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="de/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://www.netzwerk-universitaetsmedizin.de/forschung/num-diz">www.netzwerk-universitaetsmedizin.de</a>
@@ -175,7 +175,7 @@ This material derives from the HL7 Terminology (THO). THO is copyright &copy;198
       </tr>
       <tr>
         <td>
-          <a href="de/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="de/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">github.com</a>
@@ -219,7 +219,7 @@ Konformität<b class="caret"> </b>          </a>
       </tr>
       <tr>
         <td>
-          <a href="de/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="de/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">github.com</a>
@@ -230,7 +230,7 @@ Konformität<b class="caret"> </b>          </a>
       </tr>
       <tr>
         <td>
-          <a href="de/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="de/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance#anforderungsdokumentation">github.com</a>
@@ -241,7 +241,7 @@ Konformität<b class="caret"> </b>          </a>
       </tr>
       <tr>
         <td>
-          <a href="de/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="de/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance#must-support-ms">github.com</a>
@@ -252,7 +252,7 @@ Konformität<b class="caret"> </b>          </a>
       </tr>
       <tr>
         <td>
-          <a href="de/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="de/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance#fehlende-daten">github.com</a>
@@ -263,7 +263,67 @@ Konformität<b class="caret"> </b>          </a>
       </tr>
       <tr>
         <td>
-          <a href="de/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="de/ImplementationGuide-mii-ig-template.html">web</a>
+        </td>
+        <td>
+          <a href="https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/sushi-config.yaml">github.com</a>
+        </td>
+        <td>
+          <strong>Woher die Versionen kommen.</strong>
+ Die Tabelle zeigt die in
+          <a href="https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/sushi-config.yaml">
+<code class="language-plaintext highlighter-rouge">sushi-config.yaml</code>          </a>
+
+(          <code class="language-plaintext highlighter-rouge">dependencies:</code>
+) gepinnten Pakete samt allem, was der IG Publisher mit ihnen
+lädt.           <code class="language-plaintext highlighter-rouge">hl7.terminology.r4</code>
+ (THO) und           <code class="language-plaintext highlighter-rouge">hl7.fhir.uv.extensions.r4</code>
+ sind dort
+bewusst           <strong>nicht</strong>
+ gepinnt: Der Publisher
+          <a href="https://build.fhir.org/ig/FHIR/ig-guidance/versions.html#automatic-packages">lädt beide immer</a>
+
+und injiziert nur dann deren aktuellstes Full Release, wenn der
+Abhängigkeitsbaum sie nicht bereits mitbringt — eine von einer Abhängigkeit
+(in der KDS-Familie: dem MII-Meta-Paket) gepinnte Version hat damit
+automatisch Vorrang. Die von einem konkreten Build verwendeten Versionen
+stehen in dessen           <code class="language-plaintext highlighter-rouge">qa-versions.json</code>
+.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="de/ImplementationGuide-mii-ig-template.html">web</a>
+        </td>
+        <td>
+          <a href="https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/sushi-config.yaml">github.com</a>
+        </td>
+        <td>
+Expansionsparameter sind Query-Parameter, die an eine           <code class="language-plaintext highlighter-rouge">ValueSet</code>
+-
+          <code class="language-plaintext highlighter-rouge">$expand</code>
+-Operation übergeben werden können, um zu steuern, wie das ValueSet
+expandiert wird — also wie die vollständige Liste der Codes aus der
+ValueSet-Definition erzeugt wird. Die für diesen IG verwendeten
+          <a href="https://hl7.org/fhir/tools/en/CodeSystem-ig-parameters.html">IG-Parameter</a>
+
+sind in
+          <a href="https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/sushi-config.yaml">
+<code class="language-plaintext highlighter-rouge">sushi-config.yaml</code>          </a>
+
+(          <code class="language-plaintext highlighter-rouge">parameters:</code>
+) deklariert. Ein Modul, das seine Expansionsparameter über ein
+CRMI-Manifest pinnt, verlinkt hier zusätzlich die generierte
+          <code class="language-plaintext highlighter-rouge">Parameters</code>
+-Ressource (siehe die auskommentierten Manifest-Blöcke in
+          <code class="language-plaintext highlighter-rouge">sushi-config.yaml</code>
+ und die Seite Metadata Overview, sofern das Modul sie
+behält).
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="de/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://www.netzwerk-universitaetsmedizin.de">www.netzwerk-universitaetsmedizin.de</a>
@@ -277,7 +337,7 @@ Konformität<b class="caret"> </b>          </a>
 .  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 basiert auf           <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>
 .
-          Erstellt           <span title="Mon, Aug 17, 2026 20:05+0000">2026-08-17</span>
+          Erstellt           <span title="Tue, Aug 18, 2026 12:38+0000">2026-08-18</span>
 
                     <br/>
 
@@ -327,7 +387,7 @@ Konformität<b class="caret"> </b>          </a>
       </tr>
       <tr>
         <td>
-          <a href="de/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="de/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://www.netzwerk-universitaetsmedizin.de/">www.netzwerk-universitaetsmedizin.de</a>
@@ -384,7 +444,7 @@ Konformität<b class="caret"> </b>          </a>
       </tr>
       <tr>
         <td>
-          <a href="de/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="de/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://www.medizininformatik-initiative.de/">www.medizininformatik-initiative.de</a>
@@ -441,7 +501,7 @@ Konformität<b class="caret"> </b>          </a>
       </tr>
       <tr>
         <td>
-          <a href="de/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="de/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://www.netzwerk-universitaetsmedizin.de/impressum">www.netzwerk-universitaetsmedizin.de</a>
@@ -972,7 +1032,7 @@ Merge wird das Release getaggt.
       </tr>
       <tr>
         <td>
-          <a href="en/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="en/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://www.netzwerk-universitaetsmedizin.de/forschung/num-diz">www.netzwerk-universitaetsmedizin.de</a>
@@ -994,7 +1054,7 @@ Merge wird das Release getaggt.
       </tr>
       <tr>
         <td>
-          <a href="en/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="en/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">github.com</a>
@@ -1037,7 +1097,7 @@ Conformance<b class="caret"> </b>          </a>
       </tr>
       <tr>
         <td>
-          <a href="en/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="en/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance">github.com</a>
@@ -1048,7 +1108,7 @@ Conformance<b class="caret"> </b>          </a>
       </tr>
       <tr>
         <td>
-          <a href="en/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="en/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance#anforderungsdokumentation">github.com</a>
@@ -1059,7 +1119,7 @@ Conformance<b class="caret"> </b>          </a>
       </tr>
       <tr>
         <td>
-          <a href="en/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="en/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance#must-support-ms">github.com</a>
@@ -1070,7 +1130,7 @@ Conformance<b class="caret"> </b>          </a>
       </tr>
       <tr>
         <td>
-          <a href="en/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="en/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://github.com/medizininformatik-initiative/kerndatensatz-meta/wiki/Conformance#fehlende-daten">github.com</a>
@@ -1081,7 +1141,65 @@ Conformance<b class="caret"> </b>          </a>
       </tr>
       <tr>
         <td>
-          <a href="en/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="en/ImplementationGuide-mii-ig-template.html">web</a>
+        </td>
+        <td>
+          <a href="https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/sushi-config.yaml">github.com</a>
+        </td>
+        <td>
+          <strong>Where the versions come from.</strong>
+ The table lists the packages pinned in
+          <a href="https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/sushi-config.yaml">
+<code class="language-plaintext highlighter-rouge">sushi-config.yaml</code>          </a>
+
+(          <code class="language-plaintext highlighter-rouge">dependencies:</code>
+) together with everything the IG Publisher loads alongside
+them.           <code class="language-plaintext highlighter-rouge">hl7.terminology.r4</code>
+ (THO) and           <code class="language-plaintext highlighter-rouge">hl7.fhir.uv.extensions.r4</code>
+ are
+deliberately           <strong>not</strong>
+ pinned there: the Publisher
+          <a href="https://build.fhir.org/ig/FHIR/ig-guidance/versions.html#automatic-packages">always loads both</a>
+
+and injects their most recent full release only when the dependency tree does
+not already carry them — a version pinned by a dependency (for the KDS
+family: the MII meta package) therefore takes precedence automatically. The
+exact versions a concrete build used are recorded in its           <code class="language-plaintext highlighter-rouge">qa-versions.json</code>
+
+output.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="en/ImplementationGuide-mii-ig-template.html">web</a>
+        </td>
+        <td>
+          <a href="https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/sushi-config.yaml">github.com</a>
+        </td>
+        <td>
+Expansion parameters are query parameters that can be passed to a           <code class="language-plaintext highlighter-rouge">ValueSet</code>
+
+          <code class="language-plaintext highlighter-rouge">$expand</code>
+ operation to control how the ValueSet is expanded — that is, how the
+full list of codes is generated from the ValueSet definition. The
+          <a href="https://hl7.org/fhir/tools/en/CodeSystem-ig-parameters.html">IG Parameters</a>
+
+used for this IG are declared in
+          <a href="https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/sushi-config.yaml">
+<code class="language-plaintext highlighter-rouge">sushi-config.yaml</code>          </a>
+
+(          <code class="language-plaintext highlighter-rouge">parameters:</code>
+). A module that pins its expansion parameters through a CRMI
+manifest additionally links the generated           <code class="language-plaintext highlighter-rouge">Parameters</code>
+ resource from here (see
+the commented manifest blocks in           <code class="language-plaintext highlighter-rouge">sushi-config.yaml</code>
+ and the Metadata Overview
+page, if the module keeps it).
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="en/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://www.netzwerk-universitaetsmedizin.de">www.netzwerk-universitaetsmedizin.de</a>
@@ -1095,7 +1213,7 @@ Conformance<b class="caret"> </b>          </a>
 .  
           Package de.medizininformatikinitiative.kerndatensatz.template#2027.0.0-draft.1 based on           <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>
 .
-          Generated           <span title="Mon, Aug 17, 2026 20:05+0000">2026-08-17</span>
+          Generated           <span title="Tue, Aug 18, 2026 12:38+0000">2026-08-18</span>
 
                     <br/>
 
@@ -1145,7 +1263,7 @@ Conformance<b class="caret"> </b>          </a>
       </tr>
       <tr>
         <td>
-          <a href="en/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="en/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://www.netzwerk-universitaetsmedizin.de/">www.netzwerk-universitaetsmedizin.de</a>
@@ -1202,7 +1320,7 @@ Conformance<b class="caret"> </b>          </a>
       </tr>
       <tr>
         <td>
-          <a href="en/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="en/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://www.medizininformatik-initiative.de/">www.medizininformatik-initiative.de</a>
@@ -1259,7 +1377,7 @@ Conformance<b class="caret"> </b>          </a>
       </tr>
       <tr>
         <td>
-          <a href="en/Parameters-mii-param-template-manifest.change.history.html">web</a>
+          <a href="en/ImplementationGuide-mii-ig-template.html">web</a>
         </td>
         <td>
           <a href="https://www.netzwerk-universitaetsmedizin.de/en/legal-notice">www.netzwerk-universitaetsmedizin.de</a>

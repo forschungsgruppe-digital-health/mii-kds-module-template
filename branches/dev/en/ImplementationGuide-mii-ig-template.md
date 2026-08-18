@@ -1,4 +1,50 @@
-# Resource MII Implementation Guide Module Template
+# MII ImplementationGuide Resource - MII Implementation Guide Module Template v2027.0.0-draft.1
+
+* [**Table of Contents**](toc.md)
+* **MII ImplementationGuide Resource**
+
+## MII ImplementationGuide Resource
+
+This ImplementationGuide resource defines the technical details of this publication, including dependencies and publishing parameters.
+
+* [XML](../ImplementationGuide-mii-ig-template.xml)
+* [JSON](../ImplementationGuide-mii-ig-template.json)
+
+### Cross Version Analysis
+
+This is an R4 IG. None of the features it uses are changed in R4B, so it can be used as is with R4B systems. Packages for both [R4 (de.medizininformatikinitiative.kerndatensatz.template.r4)](../package.r4.tgz) and [R4B (de.medizininformatikinitiative.kerndatensatz.template.r4b)](../package.r4b.tgz) are available.
+
+### IG Dependencies
+
+This IG contains the following dependencies on other IGs.
+
+
+
+
+
+
+
+
+> **Where the versions come from.** The table lists the packages pinned in [`sushi-config.yaml`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/sushi-config.yaml) (`dependencies:`) together with everything the IG Publisher loads alongside them. `hl7.terminology.r4` (THO) and `hl7.fhir.uv.extensions.r4` are deliberately **not** pinned there: the Publisher [always loads both](https://build.fhir.org/ig/FHIR/ig-guidance/versions.html#automatic-packages) and injects their most recent full release only when the dependency tree does not already carry them — a version pinned by a dependency (for the KDS family: the MII meta package) therefore takes precedence automatically. The exact versions a concrete build used are recorded in its `qa-versions.json` output.
+
+### Global Profiles
+
+This IG declares the following global profiles — profiles that apply to every instance of their resource type exchanged under this guide. An empty table means this module declares none.
+
+*There are no Global profiles defined*
+
+### Copyrights
+
+This publication includes IP covered under the following statements.
+
+* This material derives from the HL7 Terminology (THO). THO is copyright ©1989+ Health Level Seven International and is made available under the CC0 designation. For more licensing information see: [https://terminology.hl7.org/license.html](https://terminology.hl7.org/license.html)
+
+* [ActReason](http://terminology.hl7.org/7.3.0/CodeSystem-v3-ActReason.html): [Patient/ExamplePatientInstance](Patient-ExamplePatientInstance.md)
+
+
+### IG Parameter Settings and Expansion Parameters
+
+Expansion parameters are query parameters that can be passed to a `ValueSet` `$expand` operation to control how the ValueSet is expanded — that is, how the full list of codes is generated from the ValueSet definition. The [IG Parameters](https://hl7.org/fhir/tools/en/CodeSystem-ig-parameters.html) used for this IG are declared in [`sushi-config.yaml`](https://github.com/medizininformatik-initiative/mii-kds-module-template/blob/main/sushi-config.yaml) (`parameters:`). A module that pins its expansion parameters through a CRMI manifest additionally links the generated `Parameters` resource from here (see the commented manifest blocks in `sushi-config.yaml` and the Metadata Overview page, if the module keeps it).
 
 
 
@@ -1697,6 +1743,28 @@
             {
               "url" : "content",
               "valueString" : "Versionierung"
+            }],
+            "url" : "http://hl7.org/fhir/StructureDefinition/translation"
+          }]
+        },
+        "generation" : "markdown"
+      },
+      {
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name",
+          "valueUrl" : "ImplementationGuide-mii-ig-template.html"
+        }],
+        "nameUrl" : "ImplementationGuide-mii-ig-template.html",
+        "title" : "MII ImplementationGuide Resource",
+        "_title" : {
+          "extension" : [{
+            "extension" : [{
+              "url" : "lang",
+              "valueCode" : "de"
+            },
+            {
+              "url" : "content",
+              "valueString" : "MII ImplementationGuide Ressource"
             }],
             "url" : "http://hl7.org/fhir/StructureDefinition/translation"
           }]

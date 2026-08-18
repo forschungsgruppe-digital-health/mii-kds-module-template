@@ -1287,6 +1287,23 @@
       </page>
       <page>
         <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-page-name">
+          <valueUrl value="ImplementationGuide-mii-ig-template.html"/>
+        </extension>
+        <nameUrl value="ImplementationGuide-mii-ig-template.html"/>
+        <title value="MII ImplementationGuide Resource">
+          <extension url="http://hl7.org/fhir/StructureDefinition/translation">
+            <extension url="lang">
+              <valueCode value="de"/>
+            </extension>
+            <extension url="content">
+              <valueString value="MII ImplementationGuide Ressource"/>
+            </extension>
+          </extension>
+        </title>
+        <generation value="markdown"/>
+      </page>
+      <page>
+        <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-page-name">
           <valueUrl value="translationinfo.html"/>
         </extension>
         <nameUrl value="translationinfo.html"/>

@@ -4,8 +4,8 @@
   "tool-version" : "5.0.0",
   "tool-build" : "3",
   "webUrl" : "https://www.medizininformatik-initiative.de/fhir/modul-template",
-  "date" : "2026-08-17",
-  "date-time" : "20260817080521+0000",
+  "date" : "2026-08-18",
+  "date-time" : "20260818123844+0000",
   "paths" : {
     "https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template|2027.0.0-draft.1" : "index.html",
     "https://www.medizininformatik-initiative.de/fhir/modul-template/ImplementationGuide/mii-ig-template" : "index.html",
@@ -18,6 +18,7 @@
   },
   "targets" : ["StructureDefinition-example-patient.profile.xml.html",
   "examples.html",
+  "ImplementationGuide-mii-ig-template.html",
   "rendering-artifacts.html",
   "Parameters-mii-param-template-manifest.xml.html",
   "toc.html",
