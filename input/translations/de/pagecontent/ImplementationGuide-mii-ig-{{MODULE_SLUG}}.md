@@ -1,9 +1,10 @@
 <!-- markdownlint-disable MD041 -->
 <!-- German mirror of input/pagecontent/ImplementationGuide-mii-ig-{{MODULE_SLUG}}.md —
-     both files must say the same thing. The cross-version include uses the
-     publisher's TRANSLATED fragment name for the /de/ tree
-     (versionsuebergreifende-analyse.html — the kerndatensatz-basis idiom);
-     the xhtml fragments are language-selected via {% raw %}{% lang-fragment %}{% endraw %}.
+     both files must say the same thing. ALL generated fragments (cross-version
+     analysis included) are language-selected via lang-fragment: the pinned
+     publisher writes _includes/<name>-<lang>.xhtml plus a bare default-language
+     alias, and no .html variant — kerndatensatz-basis' .html include names
+     belong to a different publisher version, do not copy them here.
      FILE NAME CARRIES THE IG ID — rename together with the English page and
      the IG-level .po catalogue (docs/recipes/create-a-new-module.md step 4). -->
 Diese ImplementationGuide-Ressource definiert die technischen Details dieser
@@ -14,7 +15,7 @@ Publikation, einschließlich Abhängigkeiten und Veröffentlichungsparametern.
 
 ### Versionsübergreifende Analyse
 
-{% include versionsuebergreifende-analyse.html %}
+{% lang-fragment cross-version-analysis.xhtml %}
 
 ### IG-Abhängigkeiten
 

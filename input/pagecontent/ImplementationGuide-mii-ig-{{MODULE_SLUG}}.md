@@ -20,7 +20,7 @@ publication, including dependencies and publishing parameters.
 
 ### Cross Version Analysis
 
-{% include cross-version-analysis.html %}
+{% lang-fragment cross-version-analysis.xhtml %}
 
 ### IG Dependencies
 
