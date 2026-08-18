@@ -34,10 +34,13 @@ this template.
 4. **Fill in your module's values** — start in `sushi-config.yaml`, whose header
    lists all 19 placeholders and the files each one occurs in, then work through
    `ig.ini`, `publication-request.json`, `.github/workflows/go-publish.yml`,
-   `qc/custom.rules.yaml`, `tests/`, the pages and the FSH sources. **Also rename
-   `input/translations/de/ImplementationGuide-mii-ig-{{MODULE_SLUG}}.po`** to your
-   IG's id — it is the one file *name* that carries a placeholder, and the
-   publisher ignores it silently if it does not match.
+   `qc/custom.rules.yaml`, `tests/`, the pages and the FSH sources. **Also rename the three
+   placeholder-NAMED files** to your IG's id — the IG-level catalogue
+   `input/translations/de/ImplementationGuide-mii-ig-{{MODULE_SLUG}}.po` (the
+   publisher ignores it silently if it does not match) and the
+   ImplementationGuide intro page `ImplementationGuide-mii-ig-{{MODULE_SLUG}}.md`
+   in `input/pagecontent/` and its German mirror (the build fails on the
+   `pages:` entry if they do not match).
    [Create a new module](docs/recipes/create-a-new-module.md) step 5 has the two
    sweeps that prove you missed none.
 5. **Write a profile** in `input/fsh/` (an example is included to copy) and
