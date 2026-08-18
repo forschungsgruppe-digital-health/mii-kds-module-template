@@ -23,17 +23,18 @@ Dieser IG enthält die folgenden Abhängigkeiten von anderen IGs.
 
 {% lang-fragment dependency-table.xhtml %}
 
-> **Woher die Versionen kommen.** Die Tabelle zeigt die in
+> **Woher die Versionen kommen.** Jedes Paket der Tabelle ist direkt in
 > [`sushi-config.yaml`](https://github.com/{{GITHUB_ORG}}/{{REPO_NAME}}/blob/main/sushi-config.yaml)
-> (`dependencies:`) gepinnten Pakete samt allem, was der IG Publisher mit ihnen
-> lädt. `hl7.terminology.r4` (THO) und `hl7.fhir.uv.extensions.r4` sind dort
-> bewusst **nicht** gepinnt: Der Publisher
-> [lädt beide immer](https://build.fhir.org/ig/FHIR/ig-guidance/versions.html#automatic-packages)
-> und injiziert nur dann deren aktuellstes Full Release, wenn der
-> Abhängigkeitsbaum sie nicht bereits mitbringt — eine von einer Abhängigkeit
-> (in der KDS-Familie: dem MII-Meta-Paket) gepinnte Version hat damit
-> automatisch Vorrang. Die von einem konkreten Build verwendeten Versionen
-> stehen in dessen `qa-versions.json`.
+> (`dependencies:`) gepinnt — auch `hl7.terminology.r4` (THO) und
+> `hl7.fhir.uv.extensions.r4`, und diese beiden mit Bedacht: Die
+> [Automatik des IG Publishers](https://build.fhir.org/ig/FHIR/ig-guidance/versions.html#automatic-packages)
+> liest ausschließlich die **eigene** Abhängigkeitsliste dieses Leitfadens;
+> ohne direkten Pin würde jeder Build stillschweigend das jeweils aktuellste
+> THO-/Extensions-Release injizieren — eine allein im MII-Meta-Paket gepinnte
+> Version kann den Build nicht steuern (verifiziert im Publisher-Quellcode des
+> gepinnten Release). Eine wöchentliche Prüfung warnt, wenn diese beiden Pins
+> von den Vorgaben des gepinnten Meta-Pakets abweichen; die von einem
+> konkreten Build verwendeten Versionen stehen in dessen `qa-versions.json`.
 {: .ig-highlight .ig-highlight-grey}
 
 ### Globale Profile

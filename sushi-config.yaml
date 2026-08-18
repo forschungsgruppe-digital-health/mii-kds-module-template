@@ -17,12 +17,15 @@
 # │   {{MODULE_SLUG}}         lowercase module short name, e.g. `base`, `person`,      │
 # │                           `icu`. Drives packageId, id, and the canonical — and     │
 # │                           the resource id inside input/resources/Parameters-       │
-# │                           expansion-manifest.json. It is also the ONE              │
-# │                           placeholder that appears in a FILE NAME:                 │
+# │                           expansion-manifest.json. It is also the only             │
+# │                           placeholder that appears in FILE NAMES — three:          │
 # │                           input/translations/de/ImplementationGuide-mii-ig-        │
-# │                           {{MODULE_SLUG}}.po must be RENAMED as well as            │
-# │                           substituted, or the publisher ignores it silently        │
-# │                           (see docs/recipes/add-translation.md §5).                │
+# │                           {{MODULE_SLUG}}.po and the IG intro page                 │
+# │                           ImplementationGuide-mii-ig-{{MODULE_SLUG}}.md in         │
+# │                           input/pagecontent/ + its German mirror. All three        │
+# │                           must be RENAMED as well as substituted                   │
+# │                           (docs/recipes/create-a-new-module.md step 4; .po         │
+# │                           details: docs/recipes/add-translation.md §5).            │
 # │   {{MODULE_NAME}}         CamelCase computable name part, e.g. `Base` →            │
 # │                           name: MII_IG_Base.                                       │
 # │   {{MODULE_TITLE}}        human-readable title part, e.g.                          │
@@ -61,11 +64,6 @@
 # │   {{CITATION_URL}}        citation, its URL, and its publication date              │
 # │   {{CITATION_PUBLICATION_DATE}}  (ISO YYYY-MM-DD).                                 │
 # ╰────────────────────────────────────────────────────────────────────────────────────╯
-# ╭─────────────────────────Commonly Used ImplementationGuide Properties───────────────────────────╮
-# │  The properties below are used to create the ImplementationGuide resource. The most commonly   │
-# │  used properties are included. For a list of all supported properties and their functions,     │
-# │  see: https://fshschool.org/docs/sushi/configuration/.                                         │
-# ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 # ABOUT THE kerndatensatz-basis CITATIONS BELOW
 # `kerndatensatz-basis` is the MII reference module. Wherever a comment quotes
 # one of its values, that value is an EXAMPLE of the convention in force — not a
@@ -116,7 +114,6 @@ publisher:
   # Language-neutral URL: the footer's publisher link is the same on every
   # language's pages, so it must not pin one language's site.
   url: https://www.netzwerk-universitaetsmedizin.de
-  # email: test@example.org
 
 # CRMI conformance: the IG resource claims the CRMI shareable, publishable and
 # computable ImplementationGuide profiles (for example, kerndatensatz-basis
@@ -231,7 +228,7 @@ extension:
     valueMarkdown: "Provide the computable publication unit for the MII Core Dataset {{MODULE_TITLE}} module, enabling implementers to discover, validate, version, and apply the specification consistently."
   # Module topic(s), coded with the NCI Thesaurus (for example,
   # kerndatensatz-basis declares seven: C15607, C154624, C25218, C16960,
-    # C25190, C81239, C25717 — verified against its main branch). Replace the
+  # C25190, C81239, C25717 — verified against its main branch). Replace the
   # code with your module's topic(s); repeat the block for each topic.
   - url: http://hl7.org/fhir/StructureDefinition/artifact-topic
     valueCodeableConcept:
@@ -240,8 +237,8 @@ extension:
           code: "{{TOPIC_NCI_CODE}}"
 
 # The dependencies property corresponds to IG.dependsOn. The key is the
-# package id and the value is the version (or dev/current). For advanced
-# use cases, the value can be an object with keys for id, uri, and version.
+# package id and the value is the version (for advanced use cases the value
+# can be an object with keys for id, uri, and version).
 #
 # Pinned to the exact versions the reference module kerndatensatz-basis pins on
 # `main`. Fixed versions only — never `current`/`dev` (the go-publish workflow and the convention
@@ -259,6 +256,18 @@ dependencies:
   # profiles claimed under meta.profile above (kerndatensatz-basis pins the
   # same 2.0.0).
   hl7.fhir.uv.crmi: 2.0.0
+  # HL7 Terminology (THO) — pinned DIRECTLY on purpose. The IG Publisher's
+  # auto-add guard reads only THIS IG's own dependsOn (PublisherIGLoader,
+  # verified at the pinned 2.2.11): without a direct pin every build silently
+  # injects the LATEST THO release; a transitive pin (e.g. in the meta
+  # package) cannot control the version. scripts/meta-pin-drift.mjs warns
+  # when this pin drifts from what the pinned meta package ships (meta
+  # 2026.0.0 pins none yet), and the Monday dependency check proposes newer
+  # releases like for every other pin.
+  hl7.terminology.r4: 7.3.0
+  # HL7 Extensions Pack — same rationale and same drift watch as
+  # hl7.terminology.r4 above.
+  hl7.fhir.uv.extensions.r4: 5.3.0
 #
 #
 # The pages property corresponds to IG.definition.page. SUSHI can
@@ -454,17 +463,6 @@ parameters:
   # then uncomment:
   # profile-test-cases: tests/profiles/profiles.json
 
-#   excludettl: true
-#   validation: [allow-any-extensions, no-broken-links]
-#
-# ╭────────────────────────────────────────────menu.xml────────────────────────────────────────────╮
-# │ The menu property will be used to generate the input/menu.xml file. The menu is represented    │
-# │ as a simple structure where the YAML key is the menu item name and the value is the URL.       │
-# │ The IG publisher currently only supports one level deep on sub-menus. To provide a             │
-# │ custom menu.xml file, do not include this property and include a `menu.xml` file in            │
-# │ input/includes. To use a provided input/includes/menu.xml file, delete the "menu"              │
-# │ property below.                                                                                │
-# ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 # ── MENU (translatable — maintained as menu.xml, NOT the `menu:` property) ────
 # The menu lives in input/includes/menu.xml (English = the default language) with
 # a German translation at input/translations/de/includes/menu.xml. That is

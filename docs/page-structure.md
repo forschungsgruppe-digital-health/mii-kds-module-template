@@ -79,7 +79,7 @@ translation banner) and `ImplementationGuide-mii-ig-<slug>.md` — the
 hand-authored intro of the generated ImplementationGuide resource page
 (dependency table via `{% lang-fragment dependency-table.xhtml %}`,
 cross-version analysis, global profiles, copyright statements — the
-kerndatensatz-basis idiom; reachable from the Artifacts Summary).
+kerndatensatz-basis idiom; linked from the Home page's Contents list).
 
 ## Link-only entries — the two mechanisms
 
