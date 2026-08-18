@@ -58,20 +58,28 @@
    Update `ig.ini`'s `ig =` line to match your `id`, then
    `publication-request.json`, `.github/workflows/go-publish.yml`,
    `qc/custom.rules.yaml`, `tests/`, the pages and the FSH sources.
-4. **Rename the IG-level translation catalogue.** One file name — and only this
-   one — carries a placeholder, and substituting the contents is not enough:
+4. **Rename the three placeholder-NAMED files.** Three file names carry a
+   placeholder, and substituting the contents is not enough:
 
    ```sh
    # if your sushi-config.yaml says  id: mii-ig-person
    git mv 'input/translations/de/ImplementationGuide-mii-ig-{{MODULE_SLUG}}.po' \
           'input/translations/de/ImplementationGuide-mii-ig-person.po'
+   git mv 'input/pagecontent/ImplementationGuide-mii-ig-{{MODULE_SLUG}}.md' \
+          'input/pagecontent/ImplementationGuide-mii-ig-person.md'
+   git mv 'input/translations/de/pagecontent/ImplementationGuide-mii-ig-{{MODULE_SLUG}}.md' \
+          'input/translations/de/pagecontent/ImplementationGuide-mii-ig-person.md'
    ```
 
-   The publisher matches this catalogue to your ImplementationGuide resource **by
-   file name**. Left unrenamed it is ignored without any warning, and the German
-   rendering silently keeps English page titles, breadcrumbs and table of
-   contents. Details, and the `msgid` rules, in
-   [add-translation.md](add-translation.md) §5.
+   The publisher matches the `.po` catalogue to your ImplementationGuide
+   resource **by file name** — left unrenamed it is ignored without any
+   warning, and the German rendering silently keeps English page titles,
+   breadcrumbs and table of contents (details, and the `msgid` rules, in
+   [add-translation.md](add-translation.md) §5). The two `.md` files are the
+   intro of the ImplementationGuide resource page (dependency table,
+   cross-version analysis, copyrights); their `pages:` entry in
+   `sushi-config.yaml` references them by the substituted name, so an
+   unrenamed file fails the build with "missing source file".
 5. **Sweep for leftovers.** Two checks — one for file *contents*, one for file
    *names*:
 

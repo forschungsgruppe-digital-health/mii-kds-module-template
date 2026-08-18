@@ -336,16 +336,18 @@ pages:
   version-history.md:
     title: Versioning
 
-  # NOTE: the IG Publisher AUTO-GENERATES the ImplementationGuide resource page
-  # (ImplementationGuide-<id>.html) and adds it to the artifact list without an
-  # entry here. kerndatensatz-basis, for example, lists it only because it ships
-  # a hand-authored intro at input/pagecontent/ImplementationGuide-mii-ig-base.md. This template does NOT
-  # list it: an explicit `pages:` entry REQUIRES a matching source file whose
-  # name carries the module slug, and the scaffold has no slug yet — an entry
-  # here would fail the build with "missing source file
-  # ImplementationGuide-mii-ig-<slug>.md". To add a custom intro, create
-  # input/pagecontent/ImplementationGuide-mii-ig-<your-slug>.md AND re-add the
-  # entry with your concrete slug.
+  # The IG Publisher AUTO-GENERATES the ImplementationGuide resource page
+  # (ImplementationGuide-<id>.html); this entry gives it a hand-authored intro
+  # — dependency table, cross-version analysis, global profiles, copyrights —
+  # the kerndatensatz-basis idiom (ImplementationGuide-mii-ig-base.md there).
+  # BOTH this entry's key and the two source files carry {{MODULE_SLUG}} in
+  # their NAME: like the IG-level .po catalogue, rename
+  # input/pagecontent/ImplementationGuide-mii-ig-{{MODULE_SLUG}}.md and its
+  # German mirror under input/translations/de/pagecontent/ when you set your
+  # slug (docs/recipes/create-a-new-module.md step 4). The CI self-check
+  # substitutes and renames all of them for the template repo's own preview.
+  ImplementationGuide-mii-ig-{{MODULE_SLUG}}.md:
+    title: MII ImplementationGuide Resource
 
   translationinfo.md:
     title: Translation Information

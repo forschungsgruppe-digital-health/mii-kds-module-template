@@ -36,9 +36,19 @@ function fixture() {
     ].join("\n"),
   );
   writeFileSync(join(root, "ig.ini"), "[IG]\nig = fsh-generated/resources/ImplementationGuide-mii-ig-{{MODULE_SLUG}}.json\ntemplate = #ig-template\n");
-  mkdirSync(join(root, "input", "translations", "de"), { recursive: true });
+  mkdirSync(join(root, "input", "translations", "de", "pagecontent"), { recursive: true });
+  mkdirSync(join(root, "input", "pagecontent"), { recursive: true });
   writeFileSync(join(root, "input", "index.md"), "Version {{CALVER_VERSION}}, year {{CALVER_YEAR}}.\n");
   writeFileSync(join(root, "input", "translations", "de", "ImplementationGuide-mii-ig-{{MODULE_SLUG}}.po"), 'msgid "x"\n');
+  // the IG-resource intro pages: placeholder in the NAME and liquid in the body
+  writeFileSync(
+    join(root, "input", "pagecontent", "ImplementationGuide-mii-ig-{{MODULE_SLUG}}.md"),
+    "- [XML](../ImplementationGuide-mii-ig-{{MODULE_SLUG}}.xml)\n\n{% lang-fragment dependency-table.xhtml %}\n",
+  );
+  writeFileSync(
+    join(root, "input", "translations", "de", "pagecontent", "ImplementationGuide-mii-ig-{{MODULE_SLUG}}.md"),
+    "- [XML](../ImplementationGuide-mii-ig-{{MODULE_SLUG}}.xml)\n\n{% lang-fragment dependency-table.xhtml %}\n",
+  );
   return root;
 }
 
@@ -98,7 +108,16 @@ test("a placeholder in a FILE NAME is renamed, not just substituted", () => {
     const names = readdirSync(join(root, "input", "translations", "de"));
     // Left unrenamed the publisher silently ignores the catalogue and German
     // pages fall back to English titles.
-    assert.deepEqual(names, ["ImplementationGuide-mii-ig-template.po"]);
+    assert.deepEqual(names.sort(), ["ImplementationGuide-mii-ig-template.po", "pagecontent"]);
+    // The IG-resource intro pages (EN + DE mirror) are renamed too — their
+    // sushi-config pages: key substitutes to the same name, so an unrenamed
+    // file is a hard "missing source file" build failure.
+    for (const dir of [join(root, "input", "pagecontent"), join(root, "input", "translations", "de", "pagecontent")]) {
+      assert.deepEqual(readdirSync(dir), ["ImplementationGuide-mii-ig-template.md"]);
+      const body = readFileSync(join(dir, "ImplementationGuide-mii-ig-template.md"), "utf8");
+      assert.match(body, /ImplementationGuide-mii-ig-template\.xml/, "contents substituted");
+      assert.match(body, /{% lang-fragment dependency-table\.xhtml %}/, "liquid left untouched");
+    }
   } finally {
     rmSync(root, { recursive: true, force: true });
   }

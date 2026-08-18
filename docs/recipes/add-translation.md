@@ -184,7 +184,7 @@ contents on `/de/`. Without it, a page whose prose is fully German still renders
 `Guidance` as its title, `Home > Guidance` as its breadcrumb and `Guidance` in
 the ToC.
 
-#### ⚠️ Rename the shipped catalogue — it is the one file name that carries a placeholder
+#### ⚠️ Rename the shipped catalogue — a file name that carries a placeholder
 
 The scaffold ships the catalogue as:
 
@@ -206,8 +206,12 @@ git mv 'input/translations/de/ImplementationGuide-mii-ig-{{MODULE_SLUG}}.po' \
 > **Why this bites:** a catalogue whose name does not match an IG resource id is
 > **silently ignored** — no warning, no QA error, a green build. The only symptom
 > is that page titles, breadcrumbs and the ToC stay in the default language, which
-> is easy to mistake for "the publisher cannot do this". Every other placeholder
-> in this repository lives in file *contents* only; this is the exception.
+> is easy to mistake for "the publisher cannot do this". Besides this catalogue, only the two
+> ImplementationGuide intro pages (`ImplementationGuide-mii-ig-{{MODULE_SLUG}}.md`
+> in `input/pagecontent/` and its German mirror) carry a placeholder in their
+> file *name* — those fail the build loudly when unrenamed
+> ([create-a-new-module.md](create-a-new-module.md) step 4 renames all three);
+> every other placeholder in this repository lives in file *contents* only.
 
 #### The `msgid` rule
 
