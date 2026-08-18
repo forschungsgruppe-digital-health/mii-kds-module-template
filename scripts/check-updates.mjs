@@ -302,6 +302,10 @@ const WATCHED_FHIR_DEPS = [
   "de.medizininformatikinitiative.kerndatensatz.meta",
   "hl7.fhir.uv.crmi",
   "hl7.fhir.uv.xver-r5.r4",
+  // Pinned DIRECTLY by design — the publisher injects the latest release
+  // when an IG does not declare them itself (see scripts/meta-pin-drift.mjs).
+  "hl7.terminology.r4",
+  "hl7.fhir.uv.extensions.r4",
 ];
 
 const LINKS = {
