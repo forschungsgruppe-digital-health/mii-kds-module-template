@@ -40,13 +40,13 @@ To install them **elsewhere** — globally, or into an unrelated checkout — us
 installer:
 
 ```bash
-CATALOG=https://github.com/forschungsgruppe-digital-health/agent-skills/tree/v0.12.0
+CATALOG=https://github.com/forschungsgruppe-digital-health/agent-skills/tree/v0.15.1
 
 npx skills add "$CATALOG" --list
 npx skills add "$CATALOG" --skill fhir-ig-analysis fhir-ig-translation --agent claude-code codex --global --yes
 ```
 
-**Pin the ref, and pin it the `/tree/<ref>` way.** The shorter `owner/repo@v0.12.0` form does *not*
+**Pin the ref, and pin it the `/tree/<ref>` way.** The shorter `owner/repo@v0.15.1` form does *not*
 pin — in that CLI `@` introduces a skill *name*, and the install silently comes from the default
 branch. See the catalog's
 [`docs/consuming-skills.md`](https://github.com/forschungsgruppe-digital-health/agent-skills/blob/main/docs/consuming-skills.md),

@@ -95,13 +95,14 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # Pinned toolchain — identical to go-publish.yml and module-release.yml, and
-  # the names docs/maintenance.md tells the maintainer to edit. A workflow
-  # cannot read another workflow's env:, so the three blocks are copies;
-  # scripts/toolchain-pins.test.mjs fails the build if they drift apart.
-  PUBLISHER_VERSION: "2.3.0"
-  PUBLISHER_SHA256: "e842f2186117d9e41be457949e6a13e69a8d8590a680b6f3cf48a20f87bdabbd"
-  SUSHI_VERSION: "3.20.0"
+  # Pinned toolchain — identical to go-publish.yml, module-release.yml and
+  # (template repo only) release-demo.yml, and the names docs/maintenance.md
+  # tells the maintainer to edit. A workflow cannot read another workflow's
+  # env:, so the four blocks are copies; scripts/toolchain-pins.test.mjs
+  # fails the build if they drift apart.
+  PUBLISHER_VERSION: "2.3.2"
+  PUBLISHER_SHA256: "07c576024df917cc1f879b6b5a64147cd0222d5b4129688e8f0ad9ccce58b1d5"
+  SUSHI_VERSION: "3.20.1"
   JEKYLL_VERSION: "4.4.1"
 
 jobs:
@@ -124,8 +125,10 @@ jobs:
 
       # The IG Publisher is a Java program; pin the JDK instead of inheriting
       # whatever `ubuntu-latest` preinstalls. Same distribution/version as
-      # go-publish.yml, module-release.yml and the ig-template-mii-kds preview,
-      # and as the digest-pinned dev container (.devcontainer/devcontainer.json).
+      # go-publish.yml, module-release.yml and the ig-template-mii-kds preview.
+      # The digest-pinned dev container ships the same MAJOR (17) but the
+      # Microsoft Build of OpenJDK (the base image's default) — fine for a Java
+      # program the container merely runs; CI (Temurin) is the reference.
       - name: Set up Java (for the IG Publisher)
         uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
         with:

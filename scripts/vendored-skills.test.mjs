@@ -11,7 +11,7 @@
 // Run with:  node --test scripts/vendored-skills.test.mjs
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync, statSync, lstatSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -60,6 +60,12 @@ test("the documented install command pins the same ref as the lock", () => {
       const p = path.join(dir, name);
       const rel = path.relative(repository, p);
       if (skipDirs.has(name)) continue;
+      // Never follow directory symlinks: .agents/skills and .claude/skills
+      // point back into skills/, and following them would re-visit vendored
+      // catalog content under a rel-path that dodges the skills/ exclusion
+      // below (exactly how a catalog-internal cross-skill ref once produced
+      // false offenders). The canonical path is walked anyway.
+      if (lstatSync(p).isSymbolicLink()) continue;
       if (statSync(p).isDirectory()) {
         if (rel.startsWith("skills/") && vendored.has(name)) continue;
         walk(p);

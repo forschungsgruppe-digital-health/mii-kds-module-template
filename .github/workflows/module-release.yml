@@ -91,9 +91,9 @@ env:
   # Pinned toolchain — identical to go-publish.yml and ig-publisher.yml; a
   # workflow cannot read another workflow's env:, so these are copies and
   # scripts/toolchain-pins.test.mjs fails the build if they drift apart.
-  PUBLISHER_VERSION: "2.3.0"
-  PUBLISHER_SHA256: "e842f2186117d9e41be457949e6a13e69a8d8590a680b6f3cf48a20f87bdabbd"
-  SUSHI_VERSION: "3.20.0"
+  PUBLISHER_VERSION: "2.3.2"
+  PUBLISHER_SHA256: "07c576024df917cc1f879b6b5a64147cd0222d5b4129688e8f0ad9ccce58b1d5"
+  SUSHI_VERSION: "3.20.1"
   JEKYLL_VERSION: "4.4.1"
 
 jobs:
@@ -161,6 +161,19 @@ jobs:
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "22"
+
+      # The IG Publisher shells out to `jekyll` to render the HTML pages, and it
+      # is NOT pre-installed on the runner — without it the build dies with
+      # `Cannot run program "jekyll"`. Mirrors ig-publisher.yml; this also makes
+      # the JEKYLL_VERSION pin above real (it was previously declared but never
+      # installed in this workflow).
+      - name: Set up Ruby (for Jekyll)
+        uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
+        with:
+          ruby-version: "3.3"
+
+      - name: Install Jekyll (pinned — the IG template renders via Jekyll)
+        run: gem install jekyll -v "${JEKYLL_VERSION}"
 
       - name: Install pinned build tools
         shell: bash
