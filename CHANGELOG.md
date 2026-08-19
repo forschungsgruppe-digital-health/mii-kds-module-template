@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.11.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.10.5...v0.11.0) (2026-08-19)
+
+
+### Features
+
+* **deps:** pin THO + Extensions Pack directly; add the meta lockstep drift check ([#156](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/156)) ([520219a](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/520219a13da7e31c816c94a6429da6ea5e506c03))
+* **pages:** hand-authored intro for the ImplementationGuide resource page ([#155](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/155)) ([805c5bf](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/805c5bf6bc02aef9ac757f70ac6b86fe45dc6312))
+* promote dev to main (IG intro page, THO/extensions pins, toolchain 2.3.2) ([7019ba1](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/7019ba1f8419626fc557c378bc2f89734b3bfa38))
+
 ## [0.10.5](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.10.4...v0.10.5) (2026-08-17)
 
 
