@@ -193,8 +193,9 @@ export function latestFromPackageList(packageList) {
  * (de.medizininformatikinitiative.template) from the two possible sources:
  * the FHIR package registry metadata (null when packages.fhir.org 404s —
  * i.e. not yet published there) and, as fallback, the GitHub releases of
- * medizininformatik-initiative/ig-template-mii-kds (null when the repo
- * has no release yet). Returns { latest, source }; when neither source has
+ * the repo named by TEMPLATE_REPO (currently
+ * forschungsgruppe-digital-health/ig-template-mii-kds; swept to the target
+ * org at transfer — null when the repo has no release yet). Returns { latest, source }; when neither source has
  * a version: { latest: null, source: "not yet published" } — graceful, not
  * an error.
  */
@@ -302,6 +303,10 @@ const WATCHED_FHIR_DEPS = [
   "de.medizininformatikinitiative.kerndatensatz.meta",
   "hl7.fhir.uv.crmi",
   "hl7.fhir.uv.xver-r5.r4",
+  // Pinned DIRECTLY by design — the publisher injects the latest release
+  // when an IG does not declare them itself (see scripts/meta-pin-drift.mjs).
+  "hl7.terminology.r4",
+  "hl7.fhir.uv.extensions.r4",
 ];
 
 const LINKS = {

@@ -135,3 +135,8 @@ msgstr "Artefakt-Rendering (Demo)"
 #: ImplementationGuide.publisher
 msgid "NUM-DIZ"
 msgstr "NUM-DIZ"
+
+# ImplementationGuide.definition.page.title
+#: ImplementationGuide.definition.page.title
+msgid "MII ImplementationGuide Resource"
+msgstr "MII ImplementationGuide Ressource"

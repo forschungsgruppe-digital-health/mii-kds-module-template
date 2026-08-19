@@ -73,7 +73,7 @@ jobs:
     with:
       ref: ${{ github.event.pull_request.head.ref || github.ref }}
       # Pinned SUSHI (fixed versions); overridable via the repo variable.
-      SUSHI_VERSION: ${{ vars.SUSHI_VERSION || '3.20.0' }}
+      SUSHI_VERSION: ${{ vars.SUSHI_VERSION || '3.20.1' }}
     secrets: inherit
 
   # The upstream Java-validation workflow has NO terminology fallback: it
@@ -115,6 +115,12 @@ jobs:
       # Pinned Java validator (fixed versions); mirrors the reusable workflow's
       # own default at the pinned SHA. Overridable via the repo variable.
       JAVA_VALIDATOR_VERSION: ${{ vars.JAVA_VALIDATOR_VERSION || '6.5.7' }}
+      # Wire the repo's advisor file into the validator CLI. The reusable
+      # workflow passes JAVA_VALIDATION_OPTIONS verbatim to validator_cli.jar
+      # (verified at the pinned SHA); without this the advisor.json shipped at
+      # the repo root would be read by NOTHING and the "suppressed via
+      # advisor.json" contract in this file's header would be false.
+      JAVA_VALIDATION_OPTIONS: "-advisor-file advisor.json"
       VALIDATION_REPORT_FILTERS: |
         filename | messageId | detailsWildcard | location
     # Secret-name reconciliation: the MII reusable workflow declares

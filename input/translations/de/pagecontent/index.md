@@ -57,6 +57,9 @@ Dieser Implementierungsleitfaden richtet sich an:
 - **[Profile](profiles.html)** und die weiteren
   **[Artefakt-Seiten](artifacts.html)** — die technischen Artefakte.
 - **[Beispiele](examples.html)** — Beispielinstanzen.
+- **[Abhängigkeiten](ImplementationGuide-mii-ig-{{MODULE_SLUG}}.html)** — die
+  ImplementationGuide-Ressource mit Abhängigkeitstabelle, versionsübergreifender
+  Analyse und Urheberrechtshinweisen.
 
 ### Verwandte Leitfäden
 

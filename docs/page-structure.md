@@ -75,7 +75,11 @@ for the decision checklist and the per-entry removal procedure.
 | — Versioning | 1..1 | `version-history.html` |
 
 Not in the menu but in the `pages:` tree: `translationinfo.md` (linked from the
-translation banner).
+translation banner) and `ImplementationGuide-mii-ig-<slug>.md` — the
+hand-authored intro of the generated ImplementationGuide resource page
+(dependency table via `{% lang-fragment dependency-table.xhtml %}`,
+cross-version analysis, global profiles, copyright statements — the
+kerndatensatz-basis idiom; linked from the Home page's Contents list).
 
 ## Link-only entries — the two mechanisms
 
