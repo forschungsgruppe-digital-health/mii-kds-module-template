@@ -43,12 +43,12 @@ the capability from every module created from this template.
 ## Installing catalog skills elsewhere
 
 ```bash
-CATALOG=https://github.com/forschungsgruppe-digital-health/agent-skills/tree/v0.12.0
+CATALOG=https://github.com/forschungsgruppe-digital-health/agent-skills/tree/v0.15.1
 npx skills add "$CATALOG" --list
 npx skills add "$CATALOG" --skill mii-ig-migration --agent claude-code codex --global --yes
 ```
 
-Pin with the `/tree/<ref>` form — `owner/repo@v0.12.0` does *not* pin: in that CLI `@` introduces a
+Pin with the `/tree/<ref>` form — `owner/repo@v0.15.1` does *not* pin: in that CLI `@` introduces a
 skill *name*, and the install silently comes from the default branch. Inside this checkout use
 `scripts/sync-skills.sh` instead, which runs the same installer at the pinned ref with `--copy`.
 

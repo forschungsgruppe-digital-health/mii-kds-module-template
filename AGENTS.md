@@ -149,12 +149,12 @@ To install a catalog skill **outside this repository** (globally, or into anothe
 catalog's own installer:
 
 ```bash
-CATALOG=https://github.com/forschungsgruppe-digital-health/agent-skills/tree/v0.12.0
+CATALOG=https://github.com/forschungsgruppe-digital-health/agent-skills/tree/v0.15.1
 npx skills add "$CATALOG" --list
 npx skills add "$CATALOG" --skill mii-ig-migration --agent claude-code codex --global --yes
 ```
 
-Pin with the `/tree/<ref>` form — `owner/repo@v0.12.0` does *not* pin: in that CLI `@` introduces a
+Pin with the `/tree/<ref>` form — `owner/repo@v0.15.1` does *not* pin: in that CLI `@` introduces a
 skill *name*, and the install silently comes from the default branch. Inside this checkout, run
 `scripts/sync-skills.sh` instead of `npx skills add`: `.claude/skills` and `.agents/skills` are
 symlinks to `skills/`, so a hand-run install writes into the vendored tree — the script does that

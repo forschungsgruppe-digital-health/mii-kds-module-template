@@ -117,6 +117,8 @@ covers the *secrets* that enable the gated features.
 | Dependency check | `ENABLE_DEPENDENCY_CHECK` | ON |
 | Security scan | `ENABLE_SECURITY_SCAN` | ON |
 | Vendored template sync | `ENABLE_TEMPLATE_SYNC` | ON |
+| Vendored skills sync | `ENABLE_SKILLS_SYNC` | ON |
+| Publisher version comparison | `ENABLE_VERSION_COMPARISON` | ON (no-op while `version-comparison` is commented out) |
 | Module release (CalVer) | `ENABLE_MODULE_RELEASE` | ON |
 | Release Please (template only) | `ENABLE_RELEASE_PLEASE` | ON |
 | Released Pages demo (template only) | `ENABLE_RELEASE_DEMO` | ON |

@@ -8,8 +8,9 @@
 // TEMPLATE REPO ONLY — that is why the file name ends in `.template-test.mjs`
 // and not `.test.mjs`: a created module has replaced every {{PLACEHOLDER}},
 // so these assertions would fail there. The `scripts/*.test.mjs` glob (run by
-// go-publish.yml and convention-check.yml, in the template AND in every
-// module) must therefore not pick it up. convention-check.yml runs this file
+// convention-check.yml, in the template AND in every module; go-publish.yml
+// runs an explicit test list instead of the glob for exactly this reason)
+// must therefore not pick it up. convention-check.yml runs this file
 // explicitly, gated to the template repository. Runs offline via
 // `node --test scripts/*.template-test.mjs`.
 import assert from "node:assert/strict";
