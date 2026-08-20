@@ -9,7 +9,7 @@
    and docs/styleguide.md §1/§10.
 
    Linked AFTER the base template's stylesheets (project.css et al.), so no
-   rule here needs !important. Six rule blocks live here; five add NEW
+   rule here needs !important. Seven rule blocks live here; six add NEW
    classes, the content-image block deliberately overrides base rules. Each is
    explained at its own block and listed in docs/styleguide.md sections 3, 5,
    5a and 8. Keep that list short - a base rule countermanded here stops
@@ -139,6 +139,19 @@ table:not([class]):not([style]):not([border]):not([data-fhir]) th {
   border-top: none;
   padding: 0.75rem;
   overflow-x: auto;
+}
+
+/* ── Long-title header fix ── the base's #ig-status pins height:50px, sized
+   for a two-line title + version line; a longer module title (e.g. three
+   lines: "MII Implementation Guide Medizinisches Forschungsvorhaben")
+   overflows the box and renders BEHIND the following navbar segment, hiding
+   the tail of the title and the version/flag line. Let the block grow with
+   its content instead - the header container and everything after it move
+   down; the one- and two-line cases keep their exact geometry via
+   min-height. */
+#ig-status {
+  height: auto;
+  min-height: 50px;
 }
 
 /* ── Font-size control (A / A+ / A++) ────────────────────────────────────────
