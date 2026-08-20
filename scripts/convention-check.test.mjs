@@ -1,5 +1,6 @@
 // Unit tests for the convention checker. Run with: node --test scripts/
 import { test } from "node:test";
+import { readFileSync } from "node:fs";
 import assert from "node:assert/strict";
 import { evaluate, readTopLevel, readDependencies, readIgIniTemplate, scanOptionalPages } from "./convention-check.mjs";
 
@@ -252,17 +253,31 @@ test("M11 — removed everywhere (or no scan) yields pass / no finding", () => {
 });
 
 test("scanOptionalPages pairs the languages of this repository's scaffold", () => {
-  // Run against the real tree: every optional page the scaffold ships must be
-  // marked in BOTH languages (the state the template itself is committed in).
-  const entries = scanOptionalPages(new URL("..", import.meta.url).pathname);
-  assert.ok(entries.length >= 7, "the scaffold ships at least 7 optional pages");
+  const root = new URL("..", import.meta.url).pathname;
+  const entries = scanOptionalPages(root);
+  // TEMPLATE REPO vs CREATED MODULE: a created module legitimately REMOVES
+  // optional pages and deletes the markers of KEPT ones (the M9 decision), so
+  // the full-scaffold state below holds only where the placeholders do —
+  // detected the same way the self-check does, by an unreplaced
+  // {{MODULE_SLUG}} in sushi-config.yaml (this test ships into created
+  // modules; asserting the template's committed state there broke a real
+  // migration's CI). In every repository, whatever optional pages DO exist
+  // must agree across the two languages.
+  const sushi = readFileSync(`${root}/sushi-config.yaml`, "utf8");
+  const isTemplateRepo = sushi.includes("{{MODULE_SLUG}}");
   for (const e of entries) {
-    assert.equal(e.en, "marked", `${e.page} must carry the marker in English`);
-    assert.equal(e.de, "marked", `${e.page} must carry the marker in German`);
+    assert.equal(e.en, e.de,
+      `${e.page}: the EN and DE copies must agree on the OPTIONAL-PAGE marker (undecided in both, or decided in both)`);
   }
-  const names = entries.map((e) => e.page);
-  for (const p of ["researcher-guidance.md", "extensions.md", "search-parameters.md",
-    "operations.md", "value-sets.md", "code-systems.md", "metadata.md"]) {
-    assert.ok(names.includes(p), `${p} should be scanned as optional`);
+  if (isTemplateRepo) {
+    assert.ok(entries.length >= 7, "the scaffold ships at least 7 optional pages");
+    for (const e of entries) {
+      assert.equal(e.en, "marked", `${e.page} must carry the marker in English`);
+    }
+    const names = entries.map((e) => e.page);
+    for (const p of ["researcher-guidance.md", "extensions.md", "search-parameters.md",
+      "operations.md", "value-sets.md", "code-systems.md", "metadata.md"]) {
+      assert.ok(names.includes(p), `${p} should be scanned as optional`);
+    }
   }
 });
