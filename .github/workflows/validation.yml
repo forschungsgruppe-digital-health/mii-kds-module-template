@@ -64,11 +64,38 @@ permissions:
   pull-requests: write
 
 jobs:
+  # The upstream dotnet workflow declares SIMPLIFIER_USERNAME/SIMPLIFIER_PASSWORD
+  # as REQUIRED secrets — calling it without them fails at workflow evaluation
+  # with zero steps ("Secret SIMPLIFIER_USERNAME is required, but not
+  # provided"; observed in every created module since 2026-08-06). Job-level
+  # `if:` cannot read secrets, so this guard computes their presence (same
+  # pattern as the SU-TermServ certificate guard below).
+  dotnet-validation-guard:
+    name: Simplifier credentials present?
+    if: ${{ vars.ENABLE_VALIDATION != 'false' && !endsWith(github.repository, '/mii-kds-module-template') }}
+    runs-on: ubuntu-latest
+    outputs:
+      has_creds: ${{ steps.probe.outputs.has_creds }}
+    steps:
+      - name: Probe
+        id: probe
+        env:
+          U: ${{ secrets.SIMPLIFIER_USERNAME }}
+          P: ${{ secrets.SIMPLIFIER_PASSWORD }}
+        run: |
+          if [ -n "${U}" ] && [ -n "${P}" ]; then
+            echo "has_creds=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "has_creds=false" >> "${GITHUB_OUTPUT}"
+            echo "::notice::Simplifier credentials not configured — skipping the SUSHI + Simplifier QC (.NET) job (the upstream workflow requires SIMPLIFIER_USERNAME/SIMPLIFIER_PASSWORD). The IG preview build still compiles and validates the IG."
+          fi
+
   dotnet-validation:
     name: SUSHI + Simplifier QC (.NET)
+    needs: dotnet-validation-guard
     # ON by default, and only on created modules — the placeholder
     # template repo cannot produce clean SUSHI output for validation.
-    if: ${{ vars.ENABLE_VALIDATION != 'false' && !endsWith(github.repository, '/mii-kds-module-template') }}
+    if: ${{ vars.ENABLE_VALIDATION != 'false' && !endsWith(github.repository, '/mii-kds-module-template') && needs.dotnet-validation-guard.outputs.has_creds == 'true' }}
     uses: medizininformatik-initiative/kerndatensatz-meta/.github/workflows/ci_dotnet_validation.yml@1db2e534704d92e5ee0cde663ce3e7ccd8825fa7 # kerndatensatz-meta master @ 2026-07-15
     with:
       ref: ${{ github.event.pull_request.head.ref || github.ref }}
