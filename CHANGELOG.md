@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.11.1](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.11.0...v0.11.1) (2026-08-20)
+
+
+### Bug Fixes
+
+* promote dev to main (dotnet guard, tolerant test, ig-template v1.3.2) ([b1469d7](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/b1469d75a6c3fccbf27054b7591aecdba0201f2f))
+* **validation:** guard the dotnet QC on Simplifier credentials; created-module-tolerant optional-pages test; re-vendor ig-template v1.3.2 ([#161](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/issues/161)) ([ee99221](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/commit/ee9922116dfdc103da0ce32ec9fac740e990978d))
+
 ## [0.11.0](https://github.com/forschungsgruppe-digital-health/mii-kds-module-template/compare/v0.10.5...v0.11.0) (2026-08-19)
 
 
