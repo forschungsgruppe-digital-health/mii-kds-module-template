@@ -305,7 +305,15 @@ test("scanOptionalPages pairs the languages of this repository's scaffold", () =
   // migration's CI). In every repository, whatever optional pages DO exist
   // must agree across the two languages.
   const sushi = readFileSync(`${root}/sushi-config.yaml`, "utf8");
-  const isTemplateRepo = sushi.includes("{{MODULE_SLUG}}");
+  // Detected by the PARSED id value, never by a substring of the whole file:
+  // a module that keeps the placeholder documentation as COMMENTS still
+  // contains "{{MODULE_SLUG}}" textually, and the substring test forced the
+  // full-scaffold assertions below onto a real module that had legitimately
+  // removed optional pages per its M9 decision (issue #165, measured on the
+  // Onkologie migration). The full-scaffold pins further down are DELIBERATE
+  // for the template repository itself — they catch scanner regressions — and
+  // with this detection they can no longer reach a created module.
+  const isTemplateRepo = String(readTopLevel(sushi, "id") ?? "").includes("{{");
   for (const e of entries) {
     assert.equal(e.en, e.de,
       `${e.page}: the EN and DE copies must agree on the OPTIONAL-PAGE marker (undecided in both, or decided in both)`);
