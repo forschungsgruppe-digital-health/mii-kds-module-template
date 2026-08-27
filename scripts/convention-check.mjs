@@ -155,8 +155,16 @@ export function evaluate({ sushiConfig = null, igIni = null, packageJson = null,
       return { ok: true, parameterized: isPlaceholder(v) };
     });
 
-    field("M5 canonical", readTopLevel(sushiConfig, "canonical"), (v) =>
-      checkPrefixed(v, "https://www.medizininformatik-initiative.de/fhir/", "[a-z0-9-]"));
+    field("M5 canonical", readTopLevel(sushiConfig, "canonical"), (v) => {
+      // Core modules publish directly under …/fhir/<slug>; the MII
+      // Erweiterungsmodule publish under the ext namespace
+      // (…/fhir/ext/modul-<slug>, e.g. the Onkologie module). Both are
+      // published identity a migration must not change (see
+      // mii-ig-migration guardrail 1), so both pass M5.
+      const base = "https://www.medizininformatik-initiative.de/fhir/";
+      const prefix = v.startsWith(base + "ext/") ? base + "ext/" : base;
+      return checkPrefixed(v, prefix, "[a-z0-9-]");
+    });
 
     field("M6 version", readTopLevel(sushiConfig, "version"), (v) => {
       if (isPlaceholder(v)) return { ok: true, parameterized: true };
